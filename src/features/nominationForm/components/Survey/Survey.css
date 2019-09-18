@@ -1,4 +1,12 @@
 .card{
     width: 60% !important;
-    margin: 0 auto;
+    margin: 2% auto;
+}
+.basic-single{
+    width:30%;
+
+}
+.CardTable{
+    margin: 2% 0 !important;
+    width: 52% !important;
 }
