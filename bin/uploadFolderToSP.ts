@@ -104,7 +104,6 @@ const uploadFolderToSP = async (sourceGlob: string, targetBasePath: string): Pro
       continue;
     }
 
-    // Upload the file
     try {
       if (fileData.byteLength <= 10485760) {
         await folder.files.add(path.basename(f), fileData, true);
