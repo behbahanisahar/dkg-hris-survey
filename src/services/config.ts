@@ -1,5 +1,5 @@
 export default class Config{
-    public golrangEndpoint:string = "https://portal.golrang.com/_vti_bin/SPService.svc";
+    public golrangEndpoint:string = "http://hq-spsrv03:90/_layouts/api";
     public headers = {'Content-Type': 'application/json'};
     public PDFheaders = {'Content-Type': 'application/PDF'};
 }

@@ -4,7 +4,6 @@ import ISurveyState from "./Survey-state";
 import {
   MDBCard,
   MDBCol,
-  MDBCardImage,
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
@@ -18,17 +17,21 @@ import SPLists from "./../../../../entities/lists";
 import ReactSelect from "react-select";
 import Add from "@material-ui/icons/Add";
 import Delete from "@material-ui/icons/Delete";
-import { Table, TableHead, TableRow, TableBody, TableCell, Fab, Card } from "@material-ui/core";
+import { Table, TableHead, TableRow, TableBody, TableCell, Fab, Card, Chip, Avatar, Stepper, StepLabel, Step, Typography } from "@material-ui/core";
 import ITableHeader from "../../../../entities/table-headers";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
-
+import Util from "../../../../utilities/utilities";
+import NominationData from "../../../../entities/nomination";
+import FaceIcon from '@material-ui/icons/Face';
 export default class Survey extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
+  private util: Util;
   private tableHeaders: ITableHeader[];
   public constructor(props: ISurveyProps) {
     super(props);
     this.ListService = new ListServices();
+    this.util = new Util();
     this.tableHeaders = [
       { id: "Row", label: "Row" },
       { id: "Selected", label: "Selected Person" },
@@ -46,71 +49,107 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
       showSnackbarMessage: false,
       snackbarMessage: "",
       snackbarType: SnackBarMode.Info,
+      UsersIsLoading: true,
+      itemId: 0,
+      activeStep:0,
+      NominationData: {
+        Status: "",
+        Subordinates: [],
+        User: {
+          AvatarUrl: "test",
+          Id: 0,
+          ItemId: 894,
+          SPLatinFullName: "Abdolhossin Mohammad Hashemi",
+        },
+        LineManager:  {
+          AvatarUrl: "test",
+          Id: 0,
+          ItemId: 894,
+          SPLatinFullName: "Abdolhossin Mohammad Hashemi",
+        },
+      },
     };
   }
 
   public async componentDidMount() {
-    const UserInfo = await this.ListService.getUserInfo(SPLists.UserInfo);
+    const itemId = this.util.getQueryStringValue("itemid");
+    await this.loadUsers();
+    const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
 
     this.setState(prevState => {
       return {
         ...prevState,
-        UserInfo,
+        itemId: Number(itemId),
+        NominationData,
       };
     });
-    console.log(this.state.UserInfo);
   }
 
   public render() {
-    const option = [
-      {
-        label: "test1",
-        value: 1,
-        icon: <Add />,
-      },
-      {
-        label: "test2",
-        value: 2,
-        icon: <Add />,
-      },
-      {
-        label: "test3",
-        value: 3,
-        icon: <Add />,
-      },
-    ];
     const SelectedUsers = this.state.SelectedUsers;
+  const steps = this.getSteps();
     return (
       <div>
         <MDBCol>
           <MDBCard style={{ width: "22rem" }}>
-            <MDBCardImage
+            {/* <MDBCardImage
               className="img-fluid"
               src="http://hq-spsrv01:90/SiteAssets/Pics/PM/Artboard%209nps.png"
               waves
-            />
+            /> */}
+            <div >
+      <Stepper activeStep={this.state.activeStep} alternativeLabel>
+        {steps.map((label:any) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <div>
+        {this.state.activeStep === steps.length ? (
+          <div>
+            <Typography >All steps completed</Typography>
+          </div>
+        ) : (
+          <div>
+            <Typography >{this.getStepContent(this.state.activeStep)}</Typography>
+            <div>
+             
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
             <MDBCardBody>
-              <MDBCardTitle>Sahar Behbahani</MDBCardTitle>
+              <MDBCardTitle>{this.state.NominationData.User.SPLatinFullName}</MDBCardTitle>
               <MDBCardText>
                 <MDBContainer>
                   <MDBRow>
-                    <label htmlFor="formGroupExampleInput">Default input</label>
+                    <Chip
+                      avatar={
+                        <Avatar>
+                          <FaceIcon />
+                        </Avatar>
+                      }
+                      label={this.state.NominationData.LineManager.SPLatinFullName}
+                    />
                   </MDBRow>
                   <MDBRow>
-                    <label htmlFor="formGroupExampleInput">Default input</label>
+                    <label htmlFor="formGroupExampleInput">{this.state.NominationData.LineManager.SPLatinFullName}</label>
                   </MDBRow>
                   <MDBRow>
                     <ReactSelect
                       className="basic-single"
                       classNamePrefix="select"
                       isDisabled={false}
-                      isLoading={false}
                       isClearable={true}
                       isRtl={false}
                       isSearchable={true}
                       name="SelectedUser"
+                      isLoading={this.state.UsersIsLoading}
                       onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedUser")}
-                      options={option}
+                      options={this.state.UserInfo}
+                      // loadOptions={this.promiseOptions}
                       placeholder="select..."
                     />
                     <Fab size="small" color="primary" aria-label="add">
@@ -169,6 +208,21 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
     });
     //this.state.SelectedUsers.push(this.state.SelectedUser);
   };
+  /*************************************************************************************************** */
+  public loadUsers = async () => {
+    let UserInfo: any[];
+
+    await this.ListService.getUserInfo(SPLists.UserInfo).then(response => {
+      UserInfo = response;
+    });
+    this.setState(prevstate => {
+      return {
+        ...prevstate,
+        UserInfo,
+        UsersIsLoading: false,
+      };
+    });
+  };
   /*********************************add item to table****************************************************** */
   private AddItem = () => {
     const NewItem: any[] = this.state.SelectedUsers;
@@ -213,16 +267,6 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
       this,
     );
   };
-  /**************************sorting functions*********************************************** */
-  private desc(a: any, b: any, orderBy: any) {
-    if (b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-      return 1;
-    }
-    return 0;
-  }
 
   /**************************** SnackBar ****************************** */
   private handleCloseMessage = () => {
@@ -237,4 +281,21 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
       });
     }
   };
+  /****************************************************************** */
+  private getSteps() {
+    return ['User', 'Bp', 'C-level'];
+  }
+  
+  private getStepContent(stepIndex: number) {
+    switch (stepIndex) {
+      case 0:
+        return '';
+      case 1:
+        return '';
+      case 2:
+        return '';
+      default:
+        return '';
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import { sp } from '@pnp/sp';
 import ServiceBase from './service-base';
 import MockData from './mock-data';
+import NominationData from '../entities/nomination';
 
 
 
@@ -13,11 +14,15 @@ class ListServices extends ServiceBase {
         if (process.env.NODE_ENV === 'production') {
             const result: any[] = await sp.web.lists.getByTitle(listName).items
             .select('LatinFullName', 'EmailAddress', 'SPLatinFullName','Department','Id')
+            .top(4900)
             .get();
-            return Promise.resolve(result.map(({ LatinFullName: label, Id }) => {
+            return Promise.resolve(result.map(({ SPLatinFullName: label, Id,EmailAddress,SPLatinFullName,Department }) => {
                 return ({
                     label,
-                    value: String(Id)
+                    value: String(Id),
+                    Department,
+                    SPLatinFullName,
+                    EmailAddress
                 });
             }));
           
@@ -26,6 +31,14 @@ class ListServices extends ServiceBase {
         return Promise.resolve(MockData.getUserInfo);
 
     }
-
+    /****************get nomination form data*****************************************************8 */
+    public async getNominationData(itemId:number): Promise<NominationData> {
+        if (process.env.NODE_ENV === 'production') {
+        const items: any = await this.get("/survey/nomination?itemId="+itemId+"");
+        console.log(items);
+        return Promise.resolve(items.data);
+        }
+        return Promise.resolve(MockData.NominationData);
+      }
 }
 export default ListServices;
