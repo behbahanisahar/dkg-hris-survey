@@ -34,10 +34,7 @@ const ensureSPPath = async (web: Web, targetPath: string): Promise<Folder | unde
     try {
       lastFolder = currentFolder;
       currentFolder = web.getFolderByServerRelativeUrl(currentPath);
-
-      // var current = await currentFolder.get();
-      // if (current._url == "http://hq-spsrv01:90/_api/web/getFolderByServerRelativeUrl('SiteAssets/profile')")
-      //   currentFolder.delete();
+      await currentFolder.get();
     } catch (err) {
       if (err.response.status === 500 || err.response.status === 404) {
         if (lastFolder) {
