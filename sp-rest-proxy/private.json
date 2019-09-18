@@ -1,0 +1,7 @@
+{
+  "siteUrl": "http://hq-spsrv01:90",
+  "strategy": "OnpremiseUserCredentials",
+  "username": "a.nooshabadi",
+  "domain": "digikala",
+  "password": "a9ea321a504b5a0922b34a81b7b044ba9625131e5b61593c03b3c612c51e597b1fe6c4160fa421768e59828e5f367371Q5YT/knRaFF4egdt/kqVnw=="
+}

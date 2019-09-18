@@ -15,8 +15,7 @@ import "./../Survey/Survey.css";
 import ListServices from "../../../../services/list-services";
 import SPLists from "./../../../../entities/lists";
 import ReactSelect from "react-select";
-import { SelectComponents } from "react-select/src/components";
-import Add from '@material-ui/icons/Add';
+import Add from "@material-ui/icons/Add";
 
 export default class Survey extends React.Component<
   ISurveyProps,
@@ -35,7 +34,7 @@ export default class Survey extends React.Component<
 
   public async componentDidMount() {
     const UserInfo = await this.ListService.getUserInfo(SPLists.UserInfo);
- 
+
     this.setState(prevState => {
       return {
         ...prevState,
@@ -48,7 +47,12 @@ export default class Survey extends React.Component<
   public render() {
     const option = [
       {
-        label: <div ><Add/>test sahar</div>,
+        label: (
+          <div>
+            <Add />
+            test sahar
+          </div>
+        ),
         value: "1"
       },
       {
@@ -80,7 +84,7 @@ export default class Survey extends React.Component<
                   <ReactSelect
                     className="basic-single"
                     classNamePrefix="select"
-                    style={{width:'500px'}}
+                    style={{ width: "500px" }}
                     // defaultValue={colourOptions[0]}
                     isDisabled={false}
                     defaultMenuIsOpen={false}
@@ -91,9 +95,8 @@ export default class Survey extends React.Component<
                     name="Users"
                     options={option}
                     placeholder="select..."
-                  //  styles={colourStyles}
+                    //  styles={colourStyles}
                   />
-                
                 </MDBRow>
               </MDBCardText>
               <MDBBtn href="#">Save</MDBBtn>
