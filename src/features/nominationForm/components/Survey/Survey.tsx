@@ -31,14 +31,6 @@ import ITableHeader from "../../../../entities/table-headers";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
 
-const customSingleValue = (data: any) => (
-  <div className="input-select">
-    <div className="input-select__single-value">
-      {data.icon && <span className="input-select__icon">{data.icon}</span>}
-      <span>{data.label}</span>
-    </div>
-  </div>
-);
 
 export default class Survey extends React.Component<
   ISurveyProps,
@@ -99,13 +91,6 @@ export default class Survey extends React.Component<
         icon: <Add />
       }
     ];
-    const emptyRows =
-      this.state.rowsPerPage -
-      Math.min(
-        this.state.rowsPerPage,
-        this.state.SelectedUsers.length -
-          this.state.page * this.state.rowsPerPage
-      );
     const SelectedUsers = this.state.SelectedUsers;
     return (
       <div>
@@ -163,7 +148,7 @@ export default class Survey extends React.Component<
             <TableRow key={index}>
               <TableCell align="center">{index+1}</TableCell>
               <TableCell align="center">{n}</TableCell>
-              <TableCell align="center"  onClick={(event: any) => this.DeleteItem(n)}><Delete/></TableCell>
+              <TableCell align="center"  onClick={() => this.DeleteItem(n)}><Delete/></TableCell>
               
             </TableRow>
            );
@@ -262,23 +247,7 @@ export default class Survey extends React.Component<
     }
     return 0;
   }
-  private stableSort(array: any, cmp: any) {
-    const stabilizedThis = array.map((el: any, index: any) => [el, index]);
-    stabilizedThis.sort((a: any, b: any) => {
-      const order = cmp(a[0], b[0]);
-      if (order !== 0) {
-        return order;
-      }
-      return a[1] - b[1];
-    });
-    return stabilizedThis.map((el: any) => el[0]);
-  }
 
-  private getSorting(order: any, orderBy: any) {
-    return order === "desc"
-      ? (a: any, b: any) => this.desc(a, b, orderBy)
-      : (a: any, b: any) => -this.desc(a, b, orderBy);
-  }
 
      /**************************** SnackBar ****************************** */
      private handleCloseMessage = () => {

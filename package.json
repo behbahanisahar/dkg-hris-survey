@@ -1,8 +1,48 @@
 {
-  "name": "survey",
+  "name": "dkg-hris-survey",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "start-dev-server": "craco start",
+    "build": "craco build",
+    "test": "node ./bin/sp-rest-proxy.js test-interactive",
+    "test-debug": "node ./bin/sp-rest-proxy.js test-non-interactive",
+    "test-interactive": "craco test",
+    "test-non-interactive": "cross-env CI=true craco --inspect test --no-cache --runInBand",
+    "test-coverage": "node ./bin/sp-rest-proxy.js test-ci",
+    "test-vscode": "craco test --ci --coverage --reporters=default",
+    "test-ci": "craco test --ci --coverage --reporters=default --reporters=jest-junit && node ./bin/inlineCoverageReportCSS.js",
+    "analyze": "source-map-explorer build/static/js/main*",
+    "analyze-vendor": "source-map-explorer build/static/js/1*",
+    "eject": "craco eject",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
+    "pre-commit-prettier": "pretty-quick --staged",
+    "eslint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
+    "deploy": "run-s build deploy-build",
+    "deploy-build-debug": "node --inspect ./node_modules/.bin/ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./build/**\" \"/Apps/Survey\"",
+    "deploy-build": "ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./build/**\" \"/Apps/Survey\"",
+    "deploy-api": "ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./src/api/**\" \"/Apps/Survey\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "dependencies": {
+    "@navikt/craco-plugins": "^1.0.1",
+    "@baristalabs/craco-raw-loader": "^1.0.4",
+    "@craco/craco": "^5.2.4",
     "@atlaskit/tooltip": "^15.0.14",
     "@material-ui/core": "^4.4.2",
     "@material-ui/icons": "^4.4.1",
@@ -22,27 +62,13 @@
     "react-scripts": "3.1.1",
     "react-select": "^3.0.4",
     "react-super-select": "^1.0.22",
-    "typescript": "3.6.3"
+    "typescript": "3.5.3",
+    "lodash": "^4.17.14"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^8.3.0",
+    "fs-jetpack": "^2.2.2",
+    "sp-pnp-node": "^2.1.6"
   }
 }

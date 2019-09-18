@@ -1,5 +1,4 @@
 import UserInfoItem from "../../../../entities/user-info";
-import IUser from "../../../../entities/user";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 
 export default interface ISurveyState {
