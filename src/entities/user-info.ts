@@ -45,4 +45,5 @@ export default interface UserInfoItem
       LatinFullName: string;
       SPLatinFullName: string;
       DirectManager: UserInfoItem;
+      ItemId:number;
 }

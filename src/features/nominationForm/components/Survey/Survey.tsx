@@ -23,6 +23,8 @@ import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
 import Util from "../../../../utilities/utilities";
 import NominationData from "../../../../entities/nomination";
+import IUser from "../../../../entities/user";
+import IUpdatedData from "../../../../entities/updatedNominationItem";
 export default class Survey extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
   private util: Util;
@@ -170,8 +172,8 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                             return (
                               <TableRow key={index}>
                                 <TableCell align="center">{index + 1}</TableCell>
-                                <TableCell align="center">{n}</TableCell>
-                                <TableCell align="center" onClick={() => this.DeleteItem(n,"SelectedPeer")}>
+                                <TableCell align="center">{n.SPLatinFullName}</TableCell>
+                                <TableCell align="center" onClick={() => this.DeleteItem(n.SPLatinFullName,"SelectedPeer")}>
                                   <Delete />
                                 </TableCell>
                               </TableRow>
@@ -217,8 +219,8 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                             return (
                               <TableRow key={index}>
                                 <TableCell align="center">{index + 1}</TableCell>
-                                <TableCell align="center">{n}</TableCell>
-                                <TableCell align="center" onClick={() => this.DeleteItem(n,"SelectedOther")}>
+                                <TableCell align="center">{n.SPLatinFullName}</TableCell>
+                                <TableCell align="center" onClick={() => this.DeleteItem(n.SPLatinFullName,"SelectedOther")}>
                                   <Delete />
                                 </TableCell>
                               </TableRow>
@@ -232,8 +234,8 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
 
                 </MDBContainer>
               </MDBCardText>
-              <MDBBtn href="#">Save</MDBBtn>
-              <MDBBtn href="#">Cancel</MDBBtn>
+              <MDBBtn onClick={this.SubmitForm}>Save</MDBBtn>
+              <MDBBtn >Cancel</MDBBtn>
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
@@ -276,8 +278,9 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName:string) => {
     if(FieldName==="SelectedOther"){
-      const NewItem: any[] = this.state.SelectedOthers;
-      if (NewItem.indexOf(this.state.SelectedOther) > -1) {
+      const NewItem: IUser[] = this.state.SelectedOthers;
+     const index = NewItem.findIndex(x => x.SPLatinFullName ===this.state.SelectedOther);
+      if (index > -1) {
         this.setState(prevState => {
           return {
             ...prevState,
@@ -287,7 +290,7 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
           };
         });
       } else {
-        NewItem.push(this.state.SelectedOther);
+       NewItem.push({SPLatinFullName:this.state.SelectedOther,ItemId:this.state.SelectedOtherID});
         this.setState(prevState => {
           return {
             ...prevState,
@@ -297,8 +300,9 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
       }
     }
     else{
-      const NewItem: any[] = this.state.SelectedPeers;
-      if (NewItem.indexOf(this.state.SelectedPeer) > -1) {
+      const NewItem: IUser[] = this.state.SelectedPeers;
+      const index = NewItem.findIndex(x => x.SPLatinFullName ===this.state.SelectedPeer);
+      if (index > -1) {
         this.setState(prevState => {
           return {
             ...prevState,
@@ -308,7 +312,7 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
           };
         });
       } else {
-        NewItem.push(this.state.SelectedPeer);
+        NewItem.push({SPLatinFullName:this.state.SelectedPeer,ItemId:this.state.SelectedPeerID});
         this.setState(prevState => {
           return {
             ...prevState,
@@ -320,11 +324,11 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
    
   };
   /******************************delete item from table***************************************************** */
-  private DeleteItem = (currentItem: string,SelectedField:string) => {
+  private DeleteItem = (currentItem: any,SelectedField:string) => {
     if(SelectedField==="SelectedOther"){
       this.setState(prevState => {
         const prevValues = prevState.SelectedOthers || [];
-        const newValue = prevValues.filter(el => el !== currentItem);
+        const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
         return {
           ...prevState,
           SelectedOthers: newValue,
@@ -335,7 +339,7 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
     if(SelectedField==="SelectedPeer"){
       this.setState(prevState => {
         const prevValues = prevState.SelectedPeers || [];
-        const newValue = prevValues.filter(el => el !== currentItem);
+        const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
         return {
           ...prevState,
           SelectedPeers: newValue,
@@ -401,4 +405,17 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
       />;
     });
 }
+/****************************on form submited*************************************/
+private SubmitForm = () => {
+ const UpdateItem:IUpdatedData={
+   ItemId:this.state.itemId,
+   peer:this.state.SelectedPeers,
+   other:this.state.SelectedOthers,
+   
+ }
+this.ListService.updateNominationData(UpdateItem);
+
+}
+
+
 }

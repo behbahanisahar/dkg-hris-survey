@@ -1,6 +1,7 @@
 import UserInfoItem from "../../../../entities/user-info";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import NominationData from "../../../../entities/nomination";
+import IUser from "../../../../entities/user";
 
 export default interface ISurveyState {
     UserInfo: UserInfoItem[];
@@ -12,8 +13,8 @@ export default interface ISurveyState {
     orderBy: string;
     page: number;
     rowsPerPage: number;
-    SelectedPeers: any[];
-    SelectedOthers: any[];
+    SelectedPeers: IUser[];
+    SelectedOthers: IUser[];
     UsersIsLoading:boolean;
     itemId:number;
     NominationData:NominationData;
