@@ -17,7 +17,7 @@ import SPLists from "./../../../../entities/lists";
 import ReactSelect from "react-select";
 import Add from "@material-ui/icons/Add";
 import Delete from "@material-ui/icons/Delete";
-import { Table, TableHead, TableRow, TableBody, TableCell, Fab, Card, Chip, Avatar, Stepper, StepLabel, Step, Typography } from "@material-ui/core";
+import { Table, TableHead, TableRow, TableBody, TableCell, Fab, Card, Chip, Avatar, Stepper, StepLabel, Step, Typography, Tooltip } from "@material-ui/core";
 import ITableHeader from "../../../../entities/table-headers";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
@@ -38,13 +38,16 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
     ];
     this.state = {
       UserInfo: [],
-      SelectedUserID: 0,
-      SelectedUser: "",
+      SelectedPeerID: 0,
+      SelectedPeer: "",
+      SelectedOtherID: 0,
+      SelectedOther: "",
       order: "asc",
       orderBy: "Id",
       page: 0,
       rowsPerPage: 15,
-      SelectedUsers: [],
+      SelectedPeers: [],
+      SelectedOthers: [],
       showSnackbarMessage: false,
       snackbarMessage: "",
       snackbarType: SnackBarMode.Info,
@@ -85,7 +88,8 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
   }
 
   public render() {
-    const SelectedUsers = this.state.SelectedUsers;
+    const SelectedPeers = this.state.SelectedPeers;
+    const SelectedOthers = this.state.SelectedOthers;
   const steps = this.getSteps();
     return (
       <div>
@@ -139,16 +143,19 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                       isClearable={true}
                       isRtl={false}
                       isSearchable={true}
-                      name="SelectedUser"
+                      name="SelectedPeer"
                       isLoading={this.state.UsersIsLoading}
-                      onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedUser")}
+                      onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
                       options={this.state.UserInfo}
                       // loadOptions={this.promiseOptions}
                       placeholder="select..."
                     />
+                      <Tooltip title="Add" aria-label="add">
                     <Fab size="small" color="primary" aria-label="add">
-                      <Add onClick={this.AddItem} />
+                 
+                    <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
                     </Fab>
+                    </Tooltip>
                   </MDBRow>
 
                   <MDBRow>
@@ -159,12 +166,12 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                         </TableHead>
 
                         <TableBody>
-                          {SelectedUsers.map((n: any, index: any) => {
+                          {SelectedPeers.map((n: any, index: any) => {
                             return (
                               <TableRow key={index}>
                                 <TableCell align="center">{index + 1}</TableCell>
                                 <TableCell align="center">{n}</TableCell>
-                                <TableCell align="center" onClick={() => this.DeleteItem(n)}>
+                                <TableCell align="center" onClick={() => this.DeleteItem(n,"SelectedPeer")}>
                                   <Delete />
                                 </TableCell>
                               </TableRow>
@@ -174,6 +181,55 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                       </Table>
                     </Card>
                   </MDBRow>
+
+
+                  <MDBRow>
+                    <ReactSelect
+                      className="basic-single"
+                      classNamePrefix="select"
+                      isDisabled={false}
+                      isClearable={true}
+                      isRtl={false}
+                      isSearchable={true}
+                      name="SelectedOther"
+                      isLoading={this.state.UsersIsLoading}
+                      onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
+                      options={this.state.UserInfo}
+                      // loadOptions={this.promiseOptions}
+                      placeholder="select..."
+                    />
+                       <Tooltip title="Add" aria-label="add">
+                    <Fab size="small" color="primary" aria-label="add">
+                      <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
+                    </Fab>
+                    </Tooltip>
+                  </MDBRow>
+
+                  <MDBRow>
+                    <Card className="CardTable">
+                      <Table aria-labelledby="tableTitle">
+                        <TableHead>
+                          <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                        </TableHead>
+
+                        <TableBody>
+                          {SelectedOthers.map((n: any, index: any) => {
+                            return (
+                              <TableRow key={index}>
+                                <TableCell align="center">{index + 1}</TableCell>
+                                <TableCell align="center">{n}</TableCell>
+                                <TableCell align="center" onClick={() => this.DeleteItem(n,"SelectedOther")}>
+                                  <Delete />
+                                </TableCell>
+                              </TableRow>
+                            );
+                          })}
+                        </TableBody>
+                      </Table>
+                    </Card>
+                  </MDBRow>
+
+
                 </MDBContainer>
               </MDBCardText>
               <MDBBtn href="#">Save</MDBBtn>
@@ -218,37 +274,75 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
     });
   };
   /*********************************add item to table****************************************************** */
-  private AddItem = () => {
-    const NewItem: any[] = this.state.SelectedUsers;
-    if (NewItem.indexOf(this.state.SelectedUser) > -1) {
+  private AddItem = (FieldName:string) => {
+    if(FieldName==="SelectedOther"){
+      const NewItem: any[] = this.state.SelectedOthers;
+      if (NewItem.indexOf(this.state.SelectedOther) > -1) {
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            snackbarMessage: "User Exist!",
+            showSnackbarMessage: true,
+            snackbarType: SnackBarMode.Error,
+          };
+        });
+      } else {
+        NewItem.push(this.state.SelectedOther);
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            SelectedOthers: NewItem,
+          };
+        });
+      }
+    }
+    else{
+      const NewItem: any[] = this.state.SelectedPeers;
+      if (NewItem.indexOf(this.state.SelectedPeer) > -1) {
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            snackbarMessage: "User Exist!",
+            showSnackbarMessage: true,
+            snackbarType: SnackBarMode.Error,
+          };
+        });
+      } else {
+        NewItem.push(this.state.SelectedPeer);
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            SelectedPeers: NewItem,
+          };
+        });
+      }
+    }
+   
+  };
+  /******************************delete item from table***************************************************** */
+  private DeleteItem = (currentItem: string,SelectedField:string) => {
+    if(SelectedField==="SelectedOther"){
       this.setState(prevState => {
+        const prevValues = prevState.SelectedOthers || [];
+        const newValue = prevValues.filter(el => el !== currentItem);
         return {
           ...prevState,
-          snackbarMessage: "User Exist!",
-          showSnackbarMessage: true,
-          snackbarType: SnackBarMode.Error,
-        };
-      });
-    } else {
-      NewItem.push(this.state.SelectedUser);
-      this.setState(prevState => {
-        return {
-          ...prevState,
-          SelectedUsers: NewItem,
+          SelectedOthers: newValue,
         };
       });
     }
-  };
-  /******************************delete item from table***************************************************** */
-  private DeleteItem = (currentItem: string) => {
-    this.setState(prevState => {
-      const prevValues = prevState.SelectedUsers || [];
-      const newValue = prevValues.filter(el => el !== currentItem);
-      return {
-        ...prevState,
-        SelectedUsers: newValue,
-      };
-    });
+
+    if(SelectedField==="SelectedPeer"){
+      this.setState(prevState => {
+        const prevValues = prevState.SelectedPeers || [];
+        const newValue = prevValues.filter(el => el !== currentItem);
+        return {
+          ...prevState,
+          SelectedPeers: newValue,
+        };
+      });
+    }
+    
   };
   /******************************render table header******************************************************** */
   private renderHeader = (columnDetail: any[]) => {

@@ -4,13 +4,16 @@ import NominationData from "../../../../entities/nomination";
 
 export default interface ISurveyState {
     UserInfo: UserInfoItem[];
-    SelectedUserID:number;
-    SelectedUser:string;
+    SelectedPeerID:number;
+    SelectedPeer:string;
+    SelectedOtherID:number;
+    SelectedOther:string;
     order: string;
     orderBy: string;
     page: number;
     rowsPerPage: number;
-    SelectedUsers: any[];
+    SelectedPeers: any[];
+    SelectedOthers: any[];
     UsersIsLoading:boolean;
     itemId:number;
     NominationData:NominationData;
