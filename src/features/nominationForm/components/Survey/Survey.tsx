@@ -23,7 +23,6 @@ import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
 import Util from "../../../../utilities/utilities";
 import NominationData from "../../../../entities/nomination";
-import FaceIcon from '@material-ui/icons/Face';
 export default class Survey extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
   private util: Util;
@@ -56,16 +55,16 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
         Status: "",
         Subordinates: [],
         User: {
-          AvatarUrl: "test",
+          AvatarUrl: "",
           Id: 0,
           ItemId: 894,
-          SPLatinFullName: "Abdolhossin Mohammad Hashemi",
+          SPLatinFullName: "",
         },
         LineManager:  {
-          AvatarUrl: "test",
+          AvatarUrl: "",
           Id: 0,
           ItemId: 894,
-          SPLatinFullName: "Abdolhossin Mohammad Hashemi",
+          SPLatinFullName: "",
         },
       },
     };
@@ -121,22 +120,17 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
       </div>
     </div>
             <MDBCardBody>
-              <MDBCardTitle>{this.state.NominationData.User.SPLatinFullName}</MDBCardTitle>
+              <MDBCardTitle> { this.state.NominationData.User!.SPLatinFullName}</MDBCardTitle>
               <MDBCardText>
                 <MDBContainer>
+              <MDBRow>
+              {this.renderMultiValues(this.state.NominationData.Subordinates)}
+              </MDBRow>
+                   {this.state.NominationData.LineManager !== null &&
                   <MDBRow>
-                    <Chip
-                      avatar={
-                        <Avatar>
-                          <FaceIcon />
-                        </Avatar>
-                      }
-                      label={this.state.NominationData.LineManager.SPLatinFullName}
-                    />
+                    <label htmlFor="formGroupExampleInput">{this.state.NominationData.LineManager!.SPLatinFullName}</label>
                   </MDBRow>
-                  <MDBRow>
-                    <label htmlFor="formGroupExampleInput">{this.state.NominationData.LineManager.SPLatinFullName}</label>
-                  </MDBRow>
+                   }
                   <MDBRow>
                     <ReactSelect
                       className="basic-single"
@@ -298,4 +292,19 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
         return '';
     }
   }
+  /**********************render multi values************************************* */
+  private renderMultiValues = (Subordinates: any[]) => {
+    return Subordinates.map((item: any) => {
+        return  <Chip
+        style={{marginRight:'1%',marginBottom:'2%'}}
+      
+        avatar={
+          <Avatar>
+          <img src={item.AvatarUrl} style={{width:'inherit',height:'auto'}}/>
+          </Avatar>
+        }
+        label={item.SPLatinFullName}
+      />;
+    });
+}
 }

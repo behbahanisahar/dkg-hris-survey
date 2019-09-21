@@ -2,7 +2,13 @@ import React from "react";
 import "./App.css";
 import Survey from "./features/nominationForm/components/Survey/Survey";
 import Util from "../src/utilities/utilities";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#ef5661' },
+  },
+});
 
 interface IAppState {
   itemId: number;
@@ -35,7 +41,9 @@ class App extends React.Component<{}, IAppState> {
   public render() {
     return (
       <div className="App">
+          <MuiThemeProvider theme={theme}  >
         <Survey itemId={this.state.itemId} />
+        </MuiThemeProvider>
       </div>
     );
   }
