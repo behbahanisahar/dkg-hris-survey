@@ -1,7 +1,7 @@
 {
   "siteUrl": "http://hq-spsrv03:90",
   "strategy": "OnpremiseUserCredentials",
-  "username": "sa.behbahani",
+  "username": "a.nooshabadi",
   "domain": "digikala",
-  "password": "9b3fb126c2d9fdbfd4e203c5b94cad744b3c999dc07a231b640369ad46e0d423a6e1cee7187cfa341d385e6720dae8a76nLmjlAYWSUSCt3e8IDZ5w=="
+  "password": "f2238691704e64e7cff2d80890826358fd41d491967b3939bde972805ca479d9fce4fcdc929cd4468df56351a44f0e0dYxsAumgNBwL2qwiLqSYlKw=="
 }

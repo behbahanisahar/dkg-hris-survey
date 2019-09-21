@@ -21,9 +21,9 @@
     "pre-commit-prettier": "pretty-quick --staged",
     "eslint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
     "deploy": "run-s build deploy-build",
-    "deploy-build-debug": "node --inspect ./node_modules/.bin/ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./build/**\" \"/Apps/Survey\"",
-    "deploy-build": "ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./build/**\" \"/Apps/Survey\"",
-    "deploy-api": "ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./src/api/**\" \"/Apps/Survey\""
+    "deploy-build-debug": "node --inspect ./node_modules/.bin/ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./build/**\" \"/Apps/Test\"",
+    "deploy-build": "ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./build/**\" \"/Apps/Test\"",
+    "deploy-api": "ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./src/api/**\" \"/Apps/Test\""
   },
   "eslintConfig": {
     "extends": "react-app"

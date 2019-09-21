@@ -6,7 +6,7 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#ef5661' },
+    primary: { main: "#ef5661" },
   },
 });
 
@@ -41,8 +41,8 @@ class App extends React.Component<{}, IAppState> {
   public render() {
     return (
       <div className="App">
-          <MuiThemeProvider theme={theme}  >
-        <Survey itemId={this.state.itemId} />
+        <MuiThemeProvider theme={theme}>
+          <Survey itemId={this.state.itemId} />
         </MuiThemeProvider>
       </div>
     );

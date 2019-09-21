@@ -1,12 +1,20 @@
-.card{
+/* .card{
     width: 60% !important;
     margin: 2% auto;
-}
-.basic-single{
-    width:40%;
+} */
 
+.category {
+  color: #76787a;
+  font-size: 1.2rem;
+  font-weight: 100 !important;
 }
-.CardTable{
-    margin: 2% 0 !important;
-    width: 52% !important;
+.MuiChip-root {
+  background-color: #eeeeee;
+}
+.basic-single {
+  width: 40%;
+}
+.CardTable {
+  margin: 2% 0 !important;
+  width: 52% !important;
 }
