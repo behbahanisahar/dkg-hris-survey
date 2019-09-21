@@ -2,6 +2,7 @@ import { sp } from '@pnp/sp';
 import ServiceBase from './service-base';
 import MockData from './mock-data';
 import NominationData from '../entities/nomination';
+import IUpdatedData from '../entities/updatedNominationItem';
 
 
 
@@ -40,5 +41,12 @@ class ListServices extends ServiceBase {
         }
         return Promise.resolve(MockData.NominationData);
       }
+      /*******************put nomination form data************************************************** */
+      public async updateNominationData(param:IUpdatedData):Promise<IUpdatedData>{                  
+        const items: any = await this.put("/survey/nomination",param);
+        // console.log(items);
+         return Promise.resolve(items.data);  
+         
+    }
 }
 export default ListServices;

@@ -27,6 +27,14 @@ export default class ServiceBase {
                 headers: this.config.headers
             });
     }
+    protected put = async (operation: string, params: any) => {
+        
+        return await axios.put(`${this.config.golrangEndpoint}/${operation}`, JSON.parse(JSON.stringify( params)),
+            {
+                headers: this.config.headers
+            });
+    }
+
     
     protected postPDF = async (operation: string, params: any) => {
         return await axios.post(`${this.config.golrangEndpoint}/${operation}`, JSON.parse(JSON.stringify( params)),
