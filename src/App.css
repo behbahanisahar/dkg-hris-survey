@@ -1,7 +1,28 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+}
+a:visited {
+  color: inherit !important;
 }
 
+.card-header {
+  position: relative;
+  word-break: break-word;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 3rem 4rem;
+  background: linear-gradient(135deg, rgb(253, 121, 116), rgb(252, 57, 51));
+  color: rgb(255, 255, 255);
+}
+
+.card-header .user {
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.page-header {
+  font-size: 21px;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;

@@ -1,23 +1,29 @@
 import * as React from "react";
 import ISurveyProps from "./Survey-props";
 import ISurveyState from "./Survey-state";
-import {
-  MDBCard,
-  MDBCol,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBBtn,
-  MDBRow,
-  MDBContainer,
-} from "mdbreact";
+import { MDBCard, MDBCol, MDBCardBody, MDBBtn, MDBRow, MDBContainer } from "mdbreact";
 import "./../Survey/Survey.css";
 import ListServices from "../../../../services/list-services";
 import SPLists from "./../../../../entities/lists";
 import ReactSelect from "react-select";
 import Add from "@material-ui/icons/Add";
 import Delete from "@material-ui/icons/Delete";
-import { Table, TableHead, TableRow, TableBody, TableCell, Fab, Card, Chip, Avatar, Stepper, StepLabel, Step, Typography, Tooltip } from "@material-ui/core";
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableBody,
+  TableCell,
+  Fab,
+  Card,
+  Chip,
+  Avatar,
+  Stepper,
+  StepLabel,
+  Step,
+  Typography,
+} from "@material-ui/core";
+
 import ITableHeader from "../../../../entities/table-headers";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
@@ -55,7 +61,7 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
       snackbarType: SnackBarMode.Info,
       UsersIsLoading: true,
       itemId: 0,
-      activeStep:0,
+      activeStep: 0,
       NominationData: {
         Status: "",
         Subordinates: [],
@@ -65,7 +71,7 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
           ItemId: 894,
           SPLatinFullName: "",
         },
-        LineManager:  {
+        LineManager: {
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
@@ -90,37 +96,50 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
   }
 
   public render() {
+
     const SelectedPeers = this.state.SelectedPeers;
     const SelectedOthers = this.state.SelectedOthers;
   const steps = this.getSteps();
+
     return (
       <div>
         <MDBCol>
-          <MDBCard style={{ width: "22rem" }}>
+          <div className="card-header mt-2">
+            <div className="content">
+              <p className="user">
+                <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
+              </p>
+              <div className="page-header">Nomination Form</div>
+            </div>
+          </div>
+          <MDBCard className="w-auto">
             {/* <MDBCardImage
               className="img-fluid"
               src="http://hq-spsrv01:90/SiteAssets/Pics/PM/Artboard%209nps.png"
               waves
             /> */}
-            <div >
-      <Stepper activeStep={this.state.activeStep} alternativeLabel>
-        {steps.map((label:any) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
-      <div>
-        {this.state.activeStep === steps.length ? (
-          <div>
-            <Typography >All steps completed</Typography>
-          </div>
-        ) : (
-          <div>
-            <Typography >{this.getStepContent(this.state.activeStep)}</Typography>
             <div>
-             
+              <Stepper activeStep={this.state.activeStep} alternativeLabel>
+                {steps.map((label: any) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+              <div>
+                {this.state.activeStep === steps.length ? (
+                  <div>
+                    <Typography>All steps completed</Typography>
+                  </div>
+                ) : (
+                  <div>
+                    <Typography>{this.getStepContent(this.state.activeStep)}</Typography>
+                    <div></div>
+                  </div>
+                )}
+              </div>
             </div>
+
           </div>
         )}
       </div>
@@ -160,12 +179,14 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                     </Tooltip>
                   </MDBRow>
 
-                  <MDBRow>
-                    <Card className="CardTable">
-                      <Table aria-labelledby="tableTitle">
-                        <TableHead>
-                          <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                        </TableHead>
+
+                <MDBRow>
+                  <Card className="CardTable">
+                    <Table aria-labelledby="tableTitle">
+                      <TableHead>
+                        <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                      </TableHead>
+
 
                         <TableBody>
                           {SelectedPeers.map((n: any, index: any) => {
@@ -234,9 +255,10 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
 
                 </MDBContainer>
               </MDBCardText>
-              <MDBBtn onClick={this.SubmitForm}>Save</MDBBtn>
+              <MDBBtn onClick={this.SubmitForm}>Submit</MDBBtn>
               <MDBBtn >Cancel</MDBBtn>
             </MDBCardBody>
+
           </MDBCard>
         </MDBCol>
         <SnackBarMessage
@@ -375,35 +397,39 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
   };
   /****************************************************************** */
   private getSteps() {
+
     return ['User','Line Manager' ,'Bp', 'C-level'];
+
   }
-  
+
   private getStepContent(stepIndex: number) {
     switch (stepIndex) {
       case 0:
-        return '';
+        return "";
       case 1:
-        return '';
+        return "";
       case 2:
-        return '';
+        return "";
       default:
-        return '';
+        return "";
     }
   }
   /**********************render multi values************************************* */
   private renderMultiValues = (Subordinates: any[]) => {
     return Subordinates.map((item: any) => {
-        return  <Chip
-        style={{marginRight:'1%',marginBottom:'2%'}}
-      
-        avatar={
-          <Avatar>
-          <img src={item.AvatarUrl} style={{width:'inherit',height:'auto'}}/>
-          </Avatar>
-        }
-        label={item.SPLatinFullName}
-      />;
+      return (
+        <Chip
+          style={{ marginRight: "1%", marginBottom: "2%" }}
+          avatar={
+            <Avatar>
+              <img src={item.AvatarUrl} style={{ width: "inherit", height: "auto" }} />
+            </Avatar>
+          }
+          label={item.SPLatinFullName}
+        />
+      );
     });
+
 }
 /****************************on form submited*************************************/
 private SubmitForm = () => {
@@ -416,6 +442,7 @@ private SubmitForm = () => {
 this.ListService.updateNominationData(UpdateItem);
 
 }
+
 
 
 }
