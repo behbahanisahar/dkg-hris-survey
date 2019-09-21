@@ -375,7 +375,7 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
   };
   /****************************************************************** */
   private getSteps() {
-    return ['User', 'Bp', 'C-level'];
+    return ['User','Line Manager' ,'Bp', 'C-level'];
   }
   
   private getStepContent(stepIndex: number) {
