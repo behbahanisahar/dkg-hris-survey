@@ -1,8 +1,8 @@
 import * as React from "react";
-import ISurveyProps from "./survey-props";
-import ISurveyState from "./survey-state";
+import ISurveyProps from "./self-survey-props";
+import ISurveyState from "./self-survey-state";
 import { MDBCard, MDBCol, MDBCardBody, MDBBtn, MDBRow, MDBContainer, MDBCardText } from "mdbreact";
-import "./survey.css";
+import "./self-survey.css";
 import ListServices from "../../../../services/list-services";
 import SPLists from "../../../../entities/lists";
 import ReactSelect from "react-select";
@@ -28,7 +28,7 @@ import MYStepper from "../stepper/stepper";
 import ReapitingTable from "../reapiting-table/reapiting-table";
 import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
-export default class FlowSurvey extends React.Component<ISurveyProps, ISurveyState> {
+export default class SelfServuy extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
   private tableHeaders: ITableHeader[];
   private util: Util;
@@ -84,33 +84,12 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
     const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
-    let activeStep:number =0;
-    switch (NominationData.Status) {
-      case "LineManagerApproval": {
-         activeStep=1;
-         break;
-      }
-      case "BPApproval": {
-         activeStep=2;
-         break;
-      }
-      case "CXOApproval": {
-         activeStep=3;
-         break;
-      }
-      default :activeStep=0;
-    }
-     
-    // if(NominationData.Status=="BPApproval"){
-    //   activeStep=1;
-    // }
 
     this.setState(prevState => {
       return {
         ...prevState,
         itemId: Number(itemId),
         NominationData,
-        activeStep
       };
     });
   }
@@ -118,7 +97,6 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   public render() {
     const SelectedPeers = this.state.SelectedPeers;
     const SelectedOthers = this.state.SelectedOthers;
-    console.log(this.state.activeStep);
    // const Subordinates = this.state.NominationData.Subordinates;
     return (
       <div>
@@ -397,10 +375,9 @@ private onRenderRows = () => {
             <TableCell align="center">{n.SPLatinFullName}</TableCell>
             <TableCell
               align="center"
-             
               onClick={() => this.DeleteItem(n.SPLatinFullName)}
             >
-              <Delete cursor="pointer" color="primary"/>
+              <Delete />
             </TableCell>
           </TableRow>
         );

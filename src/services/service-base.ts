@@ -15,21 +15,21 @@ export default class ServiceBase {
     }
 
     protected get = async (operation: string) => {
-        return await axios.get(`${this.config.golrangEndpoint}/${operation}`,
+        return await axios.get(`${this.config.Endpoint}/${operation}`,
             {
                 headers: this.config.headers
             });
     }
 
     protected post = async (operation: string, params: any) => {
-        return await axios.post(`${this.config.golrangEndpoint}/${operation}`, JSON.parse(JSON.stringify( params)),
+        return await axios.post(`${this.config.Endpoint}/${operation}`, JSON.parse(JSON.stringify( params)),
             {
                 headers: this.config.headers
             });
     }
     protected put = async (operation: string, params: any) => {
         
-        return await axios.put(`${this.config.golrangEndpoint}/${operation}`, JSON.parse(JSON.stringify( params)),
+        return await axios.put(`${this.config.Endpoint}/${operation}`, JSON.parse(JSON.stringify( params)),
             {
                 headers: this.config.headers
             });
@@ -37,7 +37,7 @@ export default class ServiceBase {
 
     
     protected postPDF = async (operation: string, params: any) => {
-        return await axios.post(`${this.config.golrangEndpoint}/${operation}`, JSON.parse(JSON.stringify( params)),
+        return await axios.post(`${this.config.Endpoint}/${operation}`, JSON.parse(JSON.stringify( params)),
         {
         headers: this.config.headers,
         method: 'POST',
