@@ -1,7 +1,7 @@
 import * as React from "react";
 import ISurveyProps from "./Survey-props";
 import ISurveyState from "./Survey-state";
-import { MDBCard, MDBCol, MDBCardBody, MDBBtn, MDBRow, MDBContainer } from "mdbreact";
+import { MDBCard, MDBCol, MDBCardBody, MDBBtn, MDBRow, MDBContainer, MDBCardText } from "mdbreact";
 import "./../Survey/Survey.css";
 import ListServices from "../../../../services/list-services";
 import SPLists from "./../../../../entities/lists";
@@ -22,6 +22,7 @@ import {
   StepLabel,
   Step,
   Typography,
+  Tooltip,
 } from "@material-ui/core";
 
 import ITableHeader from "../../../../entities/table-headers";
@@ -96,10 +97,9 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
   }
 
   public render() {
-
     const SelectedPeers = this.state.SelectedPeers;
     const SelectedOthers = this.state.SelectedOthers;
-  const steps = this.getSteps();
+    const steps = this.getSteps();
 
     return (
       <div>
@@ -140,22 +140,21 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
               </div>
             </div>
 
-          </div>
-        )}
-      </div>
-    </div>
             <MDBCardBody>
-              <MDBCardTitle> { this.state.NominationData.User!.SPLatinFullName}</MDBCardTitle>
               <MDBCardText>
                 <MDBContainer>
-              <MDBRow>
-              {this.renderMultiValues(this.state.NominationData.Subordinates)}
-              </MDBRow>
-                   {this.state.NominationData.LineManager !== null &&
-                  <MDBRow>
-                    <label htmlFor="formGroupExampleInput">{this.state.NominationData.LineManager!.SPLatinFullName}</label>
-                  </MDBRow>
-                   }
+                  <h3 className="pt-3 category">Subordinates</h3>
+                  <MDBRow>{this.renderMultiValues(this.state.NominationData.Subordinates)}</MDBRow>
+                  {this.state.NominationData.LineManager !== null && (
+                    <MDBRow>
+                      <label htmlFor="formGroupExampleInput">
+                        {this.state.NominationData.LineManager!.SPLatinFullName}
+                      </label>
+                    </MDBRow>
+                  )}
+
+                  <h3 className="pt-3 category">Peer</h3>
+
                   <MDBRow>
                     <ReactSelect
                       className="basic-single"
@@ -171,22 +170,19 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                       // loadOptions={this.promiseOptions}
                       placeholder="select..."
                     />
-                      <Tooltip title="Add" aria-label="add">
-                    <Fab size="small" color="primary" aria-label="add">
-                 
-                    <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
-                    </Fab>
+                    <Tooltip title="Add" aria-label="add">
+                      <Fab size="small" color="primary" className="ml-3" aria-label="add">
+                        <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
+                      </Fab>
                     </Tooltip>
                   </MDBRow>
 
-
-                <MDBRow>
-                  <Card className="CardTable">
-                    <Table aria-labelledby="tableTitle">
-                      <TableHead>
-                        <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                      </TableHead>
-
+                  <MDBRow>
+                    <Card className="CardTable">
+                      <Table aria-labelledby="tableTitle">
+                        <TableHead>
+                          <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                        </TableHead>
 
                         <TableBody>
                           {SelectedPeers.map((n: any, index: any) => {
@@ -194,7 +190,10 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                               <TableRow key={index}>
                                 <TableCell align="center">{index + 1}</TableCell>
                                 <TableCell align="center">{n.SPLatinFullName}</TableCell>
-                                <TableCell align="center" onClick={() => this.DeleteItem(n.SPLatinFullName,"SelectedPeer")}>
+                                <TableCell
+                                  align="center"
+                                  onClick={() => this.DeleteItem(n.SPLatinFullName, "SelectedPeer")}
+                                >
                                   <Delete />
                                 </TableCell>
                               </TableRow>
@@ -205,6 +204,7 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                     </Card>
                   </MDBRow>
 
+                  <h3 className="pt-3 category">Other</h3>
 
                   <MDBRow>
                     <ReactSelect
@@ -221,10 +221,10 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                       // loadOptions={this.promiseOptions}
                       placeholder="select..."
                     />
-                       <Tooltip title="Add" aria-label="add">
-                    <Fab size="small" color="primary" aria-label="add">
-                      <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
-                    </Fab>
+                    <Tooltip title="Add" aria-label="add">
+                      <Fab size="small" className="ml-3" color="primary" aria-label="add">
+                        <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
+                      </Fab>
                     </Tooltip>
                   </MDBRow>
 
@@ -241,7 +241,10 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                               <TableRow key={index}>
                                 <TableCell align="center">{index + 1}</TableCell>
                                 <TableCell align="center">{n.SPLatinFullName}</TableCell>
-                                <TableCell align="center" onClick={() => this.DeleteItem(n.SPLatinFullName,"SelectedOther")}>
+                                <TableCell
+                                  align="center"
+                                  onClick={() => this.DeleteItem(n.SPLatinFullName, "SelectedOther")}
+                                >
                                   <Delete />
                                 </TableCell>
                               </TableRow>
@@ -251,14 +254,15 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
                       </Table>
                     </Card>
                   </MDBRow>
-
-
                 </MDBContainer>
               </MDBCardText>
-              <MDBBtn onClick={this.SubmitForm}>Submit</MDBBtn>
-              <MDBBtn >Cancel</MDBBtn>
+              <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
+                Submit
+              </MDBBtn>
+              <MDBBtn size="sm" color="grey lighten-3">
+                Cancel
+              </MDBBtn>
             </MDBCardBody>
-
           </MDBCard>
         </MDBCol>
         <SnackBarMessage
@@ -298,10 +302,10 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
     });
   };
   /*********************************add item to table****************************************************** */
-  private AddItem = (FieldName:string) => {
-    if(FieldName==="SelectedOther"){
+  private AddItem = (FieldName: string) => {
+    if (FieldName === "SelectedOther") {
       const NewItem: IUser[] = this.state.SelectedOthers;
-     const index = NewItem.findIndex(x => x.SPLatinFullName ===this.state.SelectedOther);
+      const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
       if (index > -1) {
         this.setState(prevState => {
           return {
@@ -312,7 +316,7 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
           };
         });
       } else {
-       NewItem.push({SPLatinFullName:this.state.SelectedOther,ItemId:this.state.SelectedOtherID});
+        NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
         this.setState(prevState => {
           return {
             ...prevState,
@@ -320,10 +324,9 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
           };
         });
       }
-    }
-    else{
+    } else {
       const NewItem: IUser[] = this.state.SelectedPeers;
-      const index = NewItem.findIndex(x => x.SPLatinFullName ===this.state.SelectedPeer);
+      const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
       if (index > -1) {
         this.setState(prevState => {
           return {
@@ -334,7 +337,7 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
           };
         });
       } else {
-        NewItem.push({SPLatinFullName:this.state.SelectedPeer,ItemId:this.state.SelectedPeerID});
+        NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
         this.setState(prevState => {
           return {
             ...prevState,
@@ -343,11 +346,10 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
         });
       }
     }
-   
   };
   /******************************delete item from table***************************************************** */
-  private DeleteItem = (currentItem: any,SelectedField:string) => {
-    if(SelectedField==="SelectedOther"){
+  private DeleteItem = (currentItem: any, SelectedField: string) => {
+    if (SelectedField === "SelectedOther") {
       this.setState(prevState => {
         const prevValues = prevState.SelectedOthers || [];
         const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
@@ -358,7 +360,7 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
       });
     }
 
-    if(SelectedField==="SelectedPeer"){
+    if (SelectedField === "SelectedPeer") {
       this.setState(prevState => {
         const prevValues = prevState.SelectedPeers || [];
         const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
@@ -368,7 +370,6 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
         };
       });
     }
-    
   };
   /******************************render table header******************************************************** */
   private renderHeader = (columnDetail: any[]) => {
@@ -397,9 +398,7 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
   };
   /****************************************************************** */
   private getSteps() {
-
-    return ['User','Line Manager' ,'Bp', 'C-level'];
-
+    return ["Self", "Line Manager Approval", "BP Approval", "CXO Approval"];
   }
 
   private getStepContent(stepIndex: number) {
@@ -429,20 +428,14 @@ export default class Survey extends React.Component<ISurveyProps, ISurveyState> 
         />
       );
     });
-
-}
-/****************************on form submited*************************************/
-private SubmitForm = () => {
- const UpdateItem:IUpdatedData={
-   ItemId:this.state.itemId,
-   peer:this.state.SelectedPeers,
-   other:this.state.SelectedOthers,
-   
- }
-this.ListService.updateNominationData(UpdateItem);
-
-}
-
-
-
+  };
+  /****************************on form submited*************************************/
+  private SubmitForm = () => {
+    const UpdateItem: IUpdatedData = {
+      ItemId: this.state.itemId,
+      peer: this.state.SelectedPeers,
+      other: this.state.SelectedOthers,
+    };
+    this.ListService.updateNominationData(UpdateItem);
+  };
 }
