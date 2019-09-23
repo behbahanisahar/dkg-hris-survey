@@ -28,6 +28,7 @@ import MYStepper from "../stepper/stepper";
 import ReapitingTable from "../reapiting-table/reapiting-table";
 import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
+import Spinner from "../../../../spinner/spinner";
 export default class SelfServuy extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
   private tableHeaders: ITableHeader[];
@@ -64,6 +65,8 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
       NominationData: {
         Status: "",
         Subordinates: [],
+        Others:[],
+        Peers:[],
         User: {
           AvatarUrl: "",
           Id: 0,
@@ -99,7 +102,9 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
     const SelectedOthers = this.state.SelectedOthers;
    // const Subordinates = this.state.NominationData.Subordinates;
     return (
+      
       <div>
+        <Spinner/>
         <MDBCol>
           <div className="card-header mt-2">
             <div className="content">
@@ -371,13 +376,14 @@ private onRenderRows = () => {
       return   this.state.NominationData.Subordinates.map((n: any, index: any) => {
         return (
           <TableRow key={index}>
-            <TableCell align="center">{index + 1}</TableCell>
+            <TableCell style={{width:'1%'}} align="center">{index + 1}</TableCell>
             <TableCell align="center">{n.SPLatinFullName}</TableCell>
             <TableCell
               align="center"
               onClick={() => this.DeleteItem(n.SPLatinFullName)}
+              style={{width:'3%'}}
             >
-              <Delete />
+              <Delete  />
             </TableCell>
           </TableRow>
         );

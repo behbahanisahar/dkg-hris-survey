@@ -78,10 +78,11 @@ export default class ReapitingTable extends React.Component<ITableProps, ITableS
           return   this.state.logItems.map((n: any, index: any) => {
             return (
               <TableRow key={index}>
-                <TableCell align="center">{index + 1}</TableCell>
+                <TableCell  style={{ width: '1%' }} align="center">{index + 1}</TableCell>
                 <TableCell align="center">{n.SPLatinFullName}</TableCell>
                 <TableCell
                   align="center"
+                  style={{ width: '25%' }}
                   onClick={() => this.DeleteItem(n.SPLatinFullName, this.props.tableName,this.state.logItems)}
                 >
                   <Delete cursor="pointer" color="primary" />
@@ -95,13 +96,14 @@ export default class ReapitingTable extends React.Component<ITableProps, ITableS
           return   this.state.logItems.map((n: any, index: any) => {
             return (
               <TableRow key={index}>
-                <TableCell align="center">{index + 1}</TableCell>
+                <TableCell  style={{ width: '1%' }} align="center">{index + 1}</TableCell>
                 <TableCell align="center">{n.SPLatinFullName}</TableCell>
                 <TableCell
                   align="center"
                   onClick={() => this.DeleteItem(n.SPLatinFullName, this.props.tableName,this.state.logItems)}
+                  style={{ width: '3%' }}
                 >
-                  <Delete cursor="pointer" color="primary" />
+                  <Delete   cursor="pointer" color="primary" />
                 </TableCell>
               </TableRow>
             );

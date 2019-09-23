@@ -7,16 +7,7 @@ import ListServices from "../../../../services/list-services";
 import SPLists from "../../../../entities/lists";
 import ReactSelect from "react-select";
 import Add from "@material-ui/icons/Add";
-import {
-  Fab,
-  Card,
-  Tooltip,
-  Table,
-  TableHead,
-  TableRow,
-  TableBody,
-  TableCell,
-} from "@material-ui/core";
+import { Fab, Card, Tooltip, Table, TableHead, TableRow, TableBody, TableCell } from "@material-ui/core";
 
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
@@ -25,12 +16,14 @@ import NominationData from "../../../../entities/nomination";
 import IUser from "../../../../entities/user";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
 import MYStepper from "../stepper/stepper";
-import ReapitingTable from "../reapiting-table/reapiting-table";
 import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
+import IHistory from "../../../../entities/history";
+import Spinner from "../../../../spinner/spinner";
 export default class FlowSurvey extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
   private tableHeaders: ITableHeader[];
+  private HistorytableHeaders: ITableHeader[];
   private util: Util;
   public constructor(props: ISurveyProps) {
     super(props);
@@ -41,14 +34,22 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
       { id: "Selected", label: "Selected Person" },
       { id: "Action", label: "Delete" },
     ];
+    this.HistorytableHeaders = [
+      { id: "Row", label: "Row" },
+      { id: "ModifiedBy", label: "ModifiedBy" },
+      { id: "ModifiedDate", label: "ModifiedDate" },
+      { id: "Added", label: "Added" },
+      { id: "Deleted", label: "Deleted" },
+    ];
     this.state = {
+      showSpinner: true,
       UserInfo: [],
       SelectedPeerID: 0,
       SelectedPeer: "",
       SelectedOtherID: 0,
       SelectedOther: "",
-      SelectedSubOrdinate:"",
-      SelectedSubOrdinateID:0,
+      SelectedSubOrdinate: "",
+      SelectedSubOrdinateID: 0,
       order: "asc",
       orderBy: "Id",
       page: 0,
@@ -64,6 +65,8 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
       NominationData: {
         Status: "",
         Subordinates: [],
+        Others: [],
+        Peers: [],
         User: {
           AvatarUrl: "",
           Id: 0,
@@ -77,6 +80,12 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
           SPLatinFullName: "",
         },
       },
+      NominationHistory: [
+        {
+          Changes: [],
+          Field:""
+        },
+      ],
     };
   }
 
@@ -84,172 +93,212 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
     const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
-    let activeStep:number =0;
+    const NominationHistory: IHistory[] = await this.ListService.getNominationHistory(Number(itemId));
+    // let Deleted: string = "";
+    // let Added: string = "";
+    // for (let i = 0; i < NominationHistory.length; ++i) {
+    //   for (let c = 0; c < NominationHistory[i].Changes.length; ++c) {
+    //     if (NominationHistory[i].Changes[c].Deleted !== null && NominationHistory[i].Changes[c].Added)
+    //       Deleted = NominationHistory[i].Changes[c].Deleted.join();
+    //     Added = NominationHistory[i].Changes[c].Added.join();
+    //   }
+    // }
+    // console.log(Deleted);
+    //  console.log(Added);
+    let activeStep: number = 0;
     switch (NominationData.Status) {
       case "LineManagerApproval": {
-         activeStep=1;
-         break;
+        activeStep = 1;
+        break;
       }
       case "BPApproval": {
-         activeStep=2;
-         break;
+        activeStep = 2;
+        break;
       }
       case "CXOApproval": {
-         activeStep=3;
-         break;
+        activeStep = 3;
+        break;
       }
-      default :activeStep=0;
+      default:
+        activeStep = 0;
     }
-     
-    // if(NominationData.Status=="BPApproval"){
-    //   activeStep=1;
-    // }
 
     this.setState(prevState => {
       return {
         ...prevState,
         itemId: Number(itemId),
         NominationData,
-        activeStep
+        activeStep,
+        NominationHistory,
+        showSpinner: false,
       };
     });
   }
 
   public render() {
-    const SelectedPeers = this.state.SelectedPeers;
-    const SelectedOthers = this.state.SelectedOthers;
-    console.log(this.state.activeStep);
-   // const Subordinates = this.state.NominationData.Subordinates;
+    //  const NominationHistory=this.state.NominationHistory;
     return (
       <div>
-        <MDBCol>
-          <div className="card-header mt-2">
-            <div className="content">
-              <p className="user">
-                <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
-              </p>
-              <div className="page-header">Nomination Form</div>
+        {this.state.showSpinner && <Spinner />}
+        {!this.state.showSpinner && (
+          <MDBCol>
+            <div className="card-header mt-2">
+              <div className="content">
+                <p className="user">
+                  <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
+                </p>
+                <div className="page-header">Nomination Form</div>
+              </div>
             </div>
-          </div>
-          <MDBCard className="w-auto">
-           
-            <div>
-              <MYStepper activeStep={this.state.activeStep}/>
-            </div>
+            <MDBCard className="w-auto">
+              <div>
+                <MYStepper activeStep={this.state.activeStep} />
+              </div>
 
-            <MDBCardBody>
-              <MDBCardText>
-                <MDBContainer>
-                  <h3 className="pt-3 category">Subordinates</h3>
-                  <MDBRow>
-                    <ReactSelect
-                      className="basic-single"
-                      classNamePrefix="select"
-                      isDisabled={false}
-                      isClearable={true}
-                      isRtl={false}
-                      isSearchable={true}
-                      name="SelectedPeer"
-                      isLoading={this.state.UsersIsLoading}
-                      onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
-                      options={this.state.UserInfo}
-                      // loadOptions={this.promiseOptions}
-                      placeholder="select..."
-                    />
-                    <Tooltip title="Add" aria-label="add">
-                      <Fab size="small" color="primary" className="ml-3" aria-label="add">
-                        <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
-                      </Fab>
-                    </Tooltip>
-                  </MDBRow>
-                  <MDBRow>
-                  <Card className="CardTable">
-                  <Table className="table" >
-                    <TableHead>
-                        <TableRow>
-                            {this.renderHeader(this.tableHeaders)}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.onRenderRows()}
-                    </TableBody>
-                </Table>
+              <MDBCardBody>
+                <MDBCardText>
+                  <MDBContainer>
+                    <MDBRow>
+                      <MDBCol>
+                        <h3 className="pt-3 category">Subordinates</h3>
+                        <MDBRow>
+                          <ReactSelect
+                            className="basic-single"
+                            classNamePrefix="select"
+                            isDisabled={false}
+                            isClearable={true}
+                            isRtl={false}
+                            isSearchable={true}
+                            name="SelectedPeer"
+                            isLoading={this.state.UsersIsLoading}
+                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
+                            options={this.state.UserInfo}
+                            // loadOptions={this.promiseOptions}
+                            placeholder="select..."
+                          />
 
-                  </Card>
-                  
-                  </MDBRow>
-                
-                  <h3 className="pt-3 category">Peer</h3>
+                          <Tooltip title="Add" aria-label="add">
+                            <Fab size="small" color="primary" className="ml-3" aria-label="add">
+                              <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
+                            </Fab>
+                          </Tooltip>
+                        </MDBRow>
+                        <MDBRow>
+                          <Card className="CardTable">
+                            <Table className="table">
+                              <TableHead>
+                                <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                              </TableHead>
+                              <TableBody>{this.onRenderRows("SubOrdinate")}</TableBody>
+                            </Table>
+                          </Card>
+                        </MDBRow>
+                      </MDBCol>
+                      <MDBCol>
+                        <MDBRow/>
+                        <h3 className="pt-3 category">History</h3>
+                        <Card className="CardTable">
+                          <Table className="table">
+                            <TableHead>
+                              <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
+                            </TableHead>
+                            <TableBody>{this.onRenderHistoryRows()}</TableBody>
+                          </Table>
+                        </Card>
+                      </MDBCol>
+                    </MDBRow>
 
-                  <MDBRow>
-                    <ReactSelect
-                      className="basic-single"
-                      classNamePrefix="select"
-                      isDisabled={false}
-                      isClearable={true}
-                      isRtl={false}
-                      isSearchable={true}
-                      name="SelectedPeer"
-                      isLoading={this.state.UsersIsLoading}
-                      onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
-                      options={this.state.UserInfo}
-                      // loadOptions={this.promiseOptions}
-                      placeholder="select..."
-                    />
-                    <Tooltip title="Add" aria-label="add">
-                      <Fab size="small" color="primary" className="ml-3" aria-label="add">
-                        <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
-                      </Fab>
-                    </Tooltip>
-                  </MDBRow>
+                    <MDBRow>
+                      <MDBCol>
+                        <h3 className="pt-3 category">Peer</h3>
 
-                  <MDBRow>
-                    <Card className="CardTable">
-                    
-                      <ReapitingTable tableName="SelectedPeer" Items={SelectedPeers}/>
-                    </Card>
-                  </MDBRow>
+                        <MDBRow>
+                          <ReactSelect
+                            className="basic-single"
+                            classNamePrefix="select"
+                            isDisabled={false}
+                            isClearable={true}
+                            isRtl={false}
+                            isSearchable={true}
+                            name="SelectedPeer"
+                            isLoading={this.state.UsersIsLoading}
+                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
+                            options={this.state.UserInfo}
+                            // loadOptions={this.promiseOptions}
+                            placeholder="select..."
+                          />
+                          <Tooltip title="Add" aria-label="add">
+                            <Fab size="small" color="primary" className="ml-3" aria-label="add">
+                              <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
+                            </Fab>
+                          </Tooltip>
+                        </MDBRow>
 
-                  <h3 className="pt-3 category">Other</h3>
+                        <MDBRow>
+                          <Card className="CardTable">
+                            <Table className="table">
+                              <TableHead>
+                                <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                              </TableHead>
+                              <TableBody>{this.onRenderRows("Peer")}</TableBody>
+                            </Table>
+                          </Card>
+                        </MDBRow>
+                      </MDBCol>
+                      <MDBCol />
+                    </MDBRow>
 
-                  <MDBRow>
-                    <ReactSelect
-                      className="basic-single"
-                      classNamePrefix="select"
-                      isDisabled={false}
-                      isClearable={true}
-                      isRtl={false}
-                      isSearchable={true}
-                      name="SelectedOther"
-                      isLoading={this.state.UsersIsLoading}
-                      onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
-                      options={this.state.UserInfo}
-                      // loadOptions={this.promiseOptions}
-                      placeholder="select..."
-                    />
-                    <Tooltip title="Add" aria-label="add">
-                      <Fab size="small" className="ml-3" color="primary" aria-label="add">
-                        <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
-                      </Fab>
-                    </Tooltip>
-                  </MDBRow>
+                    <MDBRow>
+                      <MDBCol>
+                        <h3 className="pt-3 category">Other</h3>
 
-                  <MDBRow>
-                    <Card className="CardTable">
-                      <ReapitingTable tableName="SelectedOther" Items={SelectedOthers}/>
-                    </Card>
-                  </MDBRow>
-                </MDBContainer>
-              </MDBCardText>
-              <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
-                Submit
-              </MDBBtn>
-              <MDBBtn size="sm" color="grey lighten-3">
-                Cancel
-              </MDBBtn>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
+                        <MDBRow>
+                          <ReactSelect
+                            className="basic-single"
+                            classNamePrefix="select"
+                            isDisabled={false}
+                            isClearable={true}
+                            isRtl={false}
+                            isSearchable={true}
+                            name="SelectedOther"
+                            isLoading={this.state.UsersIsLoading}
+                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
+                            options={this.state.UserInfo}
+                            // loadOptions={this.promiseOptions}
+                            placeholder="select..."
+                          />
+                          <Tooltip title="Add" aria-label="add">
+                            <Fab size="small" className="ml-3" color="primary" aria-label="add">
+                              <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
+                            </Fab>
+                          </Tooltip>
+                        </MDBRow>
+
+                        <MDBRow>
+                          <Card className="CardTable">
+                            <Table className="table">
+                              <TableHead>
+                                <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                              </TableHead>
+                              <TableBody>{this.onRenderRows("Other")}</TableBody>
+                            </Table>
+                          </Card>
+                        </MDBRow>
+                      </MDBCol>
+                      <MDBCol />
+                    </MDBRow>
+                  </MDBContainer>
+                </MDBCardText>
+                <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
+                  Submit
+                </MDBBtn>
+                <MDBBtn size="sm" color="grey lighten-3">
+                  Cancel
+                </MDBBtn>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        )}
         <SnackBarMessage
           type={this.state.snackbarType}
           message={this.state.snackbarMessage}
@@ -288,7 +337,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName: string) => {
     if (FieldName === "SelectedOther") {
-      const NewItem: IUser[] = this.state.SelectedOthers;
+      const NewItem: IUser[] = this.state.NominationData.Others;
       const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
       if (index > -1) {
         this.setState(prevState => {
@@ -308,9 +357,8 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
           };
         });
       }
-    } 
-    else if(FieldName === "SelectedPeer"){
-      const NewItem: IUser[] = this.state.SelectedPeers;
+    } else if (FieldName === "SelectedPeer") {
+      const NewItem: IUser[] = this.state.NominationData.Peers;
       const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
       if (index > -1) {
         this.setState(prevState => {
@@ -330,8 +378,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
           };
         });
       }
-    }
-    else{
+    } else {
       const NewItem: IUser[] = this.state.NominationData.Subordinates;
       const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
       if (index > -1) {
@@ -354,7 +401,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
       }
     }
   };
- 
+
   /**************************** SnackBar ****************************** */
   private handleCloseMessage = () => {
     if (this.state.snackbarType === SnackBarMode.Success) {
@@ -369,58 +416,102 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
     }
   };
 
-
-   /**************************** Repeat Table ****************************** */
-   private renderHeader = (columnDetail: any[]) => {
+  /**************************** Repeat Table ****************************** */
+  private renderHeader = (columnDetail: any[]) => {
     return columnDetail.map(
-        row => (
-            <TableCell
-            className="LogPadding" 
-                key={row.id}
-                align="center"
-                padding='none'
-                sortDirection='desc'
-            >
-                {row.label}
-            </TableCell>
-        ),
-        this,
+      row => (
+        <TableCell className="LogPadding" key={row.id} align="center" padding="none" sortDirection="desc">
+          {row.label}
+        </TableCell>
+      ),
+      this,
     );
-}
+  };
 
-private onRenderRows = () => {
+  private onRenderRows = (TableName: string) => {
+    let items: any[] = [];
+    switch (TableName) {
+      case "SubOrdinate": {
+        items = this.state.NominationData.Subordinates;
+        break;
+      }
+      case "Peer": {
+        items = this.state.NominationData.Subordinates;
+        break;
+      }
+      case "Other": {
+        items = this.state.NominationData.Subordinates;
+        break;
+      }
+      default:
+        items = this.state.NominationData.Subordinates;
+    }
 
-      return   this.state.NominationData.Subordinates.map((n: any, index: any) => {
-        return (
-          <TableRow key={index}>
-            <TableCell align="center">{index + 1}</TableCell>
-            <TableCell align="center">{n.SPLatinFullName}</TableCell>
-            <TableCell
-              align="center"
-             
-              onClick={() => this.DeleteItem(n.SPLatinFullName)}
-            >
-              <Delete cursor="pointer" color="primary"/>
-            </TableCell>
-          </TableRow>
-        );
-      })
-
-}
+    return items.map((n: any, index: any) => {
+      return (
+        <TableRow key={index}>
+          <TableCell style={{ width: "3%" }} align="center">
+            {index + 1}
+          </TableCell>
+          <TableCell align="center">{n.SPLatinFullName}</TableCell>
+          <TableCell style={{ width: "3%" }} align="center" onClick={() => this.DeleteItem(n.SPLatinFullName)}>
+            <Delete cursor="pointer" color="primary" />
+          </TableCell>
+        </TableRow>
+      );
+    });
+  };
   /******************************delete item from table***************************************************** */
   private DeleteItem = (currentItem: string) => {
-      this.setState(prevState => {
-     // const prevValues=items;
-     const prevValues = prevState.NominationData.Subordinates || [];
-        const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
-        return {
-          ...prevState,
-          NominationData:{
-            ...prevState.NominationData,
-            Subordinates:newValue
-          },
-        };
-      });
+    this.setState(prevState => {
+      // const prevValues=items;
+      const prevValues = prevState.NominationData.Subordinates || [];
+      const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
+      return {
+        ...prevState,
+        NominationData: {
+          ...prevState.NominationData,
+          Subordinates: newValue,
+        },
+      };
+    });
+  };
+  /**************************** Repeat Table ****************************** */
+  private renderHistoryHeader = (columnDetail: any[]) => {
+    return columnDetail.map(
+      row => (
+        <TableCell className="LogPadding" key={row.id} align="center" padding="none" sortDirection="desc">
+          {row.label}
+        </TableCell>
+      ),
+      this,
+    );
+  };
+
+  private onRenderHistoryRows = () => {
+
+    const Subordinates=this.state.NominationHistory.filter(el=> el.Field ==="Subordinate");
+    for (let i = 0; i < Subordinates.length; ++i) {
+    return Subordinates[i].Changes.map((n: any, index: any) => {
+      let DeletedStr: string = "";
+      let AddedStr: string = "";
+      if (n.Added !== null) {
+       AddedStr = n.Added.join();
+      }
+      if (n.Deleted !== null) {
+       DeletedStr = n.Deleted.join();
+      }
+     
+      return (
+        <TableRow key={index}>
+           <TableCell align="center">{index+1}</TableCell>
+          <TableCell align="center">{n.ModifiedBy}</TableCell>
+          <TableCell align="center">{n.ModifiedDateShamsi}</TableCell>
+          <TableCell align="center">{AddedStr}</TableCell>
+          <TableCell align="center">{DeletedStr}</TableCell>
+        </TableRow>
+      );
+    });}
   };
   /****************************on form submited*************************************/
   private SubmitForm = () => {

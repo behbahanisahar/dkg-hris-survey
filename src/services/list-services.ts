@@ -3,6 +3,7 @@ import ServiceBase from './service-base';
 import MockData from './mock-data';
 import NominationData from '../entities/nomination';
 import IUpdatedData from '../entities/updatedNominationItem';
+import IHistory from '../entities/history';
 
 
 
@@ -36,15 +37,23 @@ class ListServices extends ServiceBase {
     public async getNominationData(itemId:number): Promise<NominationData> {
         if (process.env.NODE_ENV === 'production') {
         const items: any = await this.get("/survey/nomination?itemId="+itemId+"");
-        console.log(items);
         return Promise.resolve(items.data);
         }
         return Promise.resolve(MockData.NominationData);
       }
+      /**********************get nomination form history******************************************* */
+      public async getNominationHistory(itemId:number): Promise<IHistory[]> {
+        if (process.env.NODE_ENV === 'production') {
+        const items: any = await this.get("/survey/nomination/history?itemId="+itemId+"");
+        console.log(items);
+        return Promise.resolve(items.data);
+        }
+       
+        return Promise.resolve(MockData.NominationHistory);
+      }
       /*******************put nomination form data************************************************** */
       public async updateNominationData(param:IUpdatedData):Promise<IUpdatedData>{                  
         const items: any = await this.put("/survey/nomination",param);
-        // console.log(items);
          return Promise.resolve(items.data);  
          
     }

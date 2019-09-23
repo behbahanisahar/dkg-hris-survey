@@ -43,6 +43,10 @@ a:visited {
 .App-link {
   color: #61dafb;
 }
+.MuiStepIcon-root.MuiStepIcon-completed{
+  color:#388e3c!important;
+ 
+}
 
 @keyframes App-logo-spin {
   from {

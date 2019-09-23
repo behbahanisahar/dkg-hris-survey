@@ -1,6 +1,6 @@
 import React from "react";
 import { Stepper, Step, StepLabel } from "@material-ui/core";
-
+import   "../../../../App.css";
 interface IStepperProps {
     activeStep:number;
 }
@@ -22,6 +22,7 @@ class MYStepper extends React.Component<IStepperProps, {}> {
           </Step>
         ))}
       </Stepper>
+
     );
   }
   private getSteps() {
