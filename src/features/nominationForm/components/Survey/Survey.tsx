@@ -23,7 +23,6 @@ import Spinner from "../../../../spinner/spinner";
 
 const RenderOption = (option: any) => (
   <div>
-    {console.log(option)}
     <strong>{option.label}</strong>
     <div>
       <small>
@@ -84,12 +83,18 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
           Id: 0,
           ItemId: 894,
           SPLatinFullName: "",
+          Department: "",
+          EmailAddress: "",
+          JobGrade: "",
         },
         LineManager: {
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
           SPLatinFullName: "",
+          Department: "",
+          EmailAddress: "",
+          JobGrade: "",
         },
       },
       NominationHistory: [
@@ -106,17 +111,6 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
     await this.loadUsers();
     const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
     const NominationHistory: IHistory[] = await this.ListService.getNominationHistory(Number(itemId));
-    // let Deleted: string = "";
-    // let Added: string = "";
-    // for (let i = 0; i < NominationHistory.length; ++i) {
-    //   for (let c = 0; c < NominationHistory[i].Changes.length; ++c) {
-    //     if (NominationHistory[i].Changes[c].Deleted !== null && NominationHistory[i].Changes[c].Added)
-    //       Deleted = NominationHistory[i].Changes[c].Deleted.join();
-    //     Added = NominationHistory[i].Changes[c].Added.join();
-    //   }
-    // }
-    // console.log(Deleted);
-    //  console.log(Added);
     let activeStep: number = 0;
     switch (NominationData.Status) {
       case "LineManagerApproval": {
@@ -161,7 +155,12 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
               <div className="content">
                 <p className="user">
                   <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
+                  <h6>
+                    {this.state.NominationData.User!.EmailAddress} | {this.state.NominationData.User!.Department} |{" "}
+                    {this.state.NominationData.User!.JobGrade}{" "}
+                  </h6>
                 </p>
+
                 <div className="page-header">Nomination Form</div>
               </div>
             </div>
@@ -350,67 +349,76 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName: string) => {
     if (FieldName === "SelectedOther") {
-      const NewItem: IUser[] = this.state.NominationData.Others;
-      const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
-      if (index > -1) {
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            snackbarMessage: "User Exist!",
-            showSnackbarMessage: true,
-            snackbarType: SnackBarMode.Error,
-          };
-        });
-      } else {
-        NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            SelectedOthers: NewItem,
-          };
-        });
+      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Others);
+      if (ValidTableLength === false) {
+        const NewItem: IUser[] = this.state.NominationData.Others;
+        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
+        if (index > -1) {
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              snackbarMessage: "User Exist!",
+              showSnackbarMessage: true,
+              snackbarType: SnackBarMode.Error,
+            };
+          });
+        } else {
+          NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              SelectedOthers: NewItem,
+            };
+          });
+        }
       }
     } else if (FieldName === "SelectedPeer") {
-      const NewItem: IUser[] = this.state.NominationData.Peers;
-      const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
-      if (index > -1) {
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            snackbarMessage: "User Exist!",
-            showSnackbarMessage: true,
-            snackbarType: SnackBarMode.Error,
-          };
-        });
-      } else {
-        NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            SelectedPeers: NewItem,
-          };
-        });
+      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Peers);
+      if (ValidTableLength === false) {
+        const NewItem: IUser[] = this.state.NominationData.Peers;
+        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
+        if (index > -1) {
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              snackbarMessage: "User Exist!",
+              showSnackbarMessage: true,
+              snackbarType: SnackBarMode.Error,
+            };
+          });
+        } else {
+          NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              SelectedPeers: NewItem,
+            };
+          });
+        }
       }
     } else {
-      const NewItem: IUser[] = this.state.NominationData.Subordinates;
-      const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
-      if (index > -1) {
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            snackbarMessage: "User Exist!",
-            showSnackbarMessage: true,
-            snackbarType: SnackBarMode.Error,
-          };
-        });
-      } else {
-        NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            SelectedPeers: NewItem,
-          };
-        });
+      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Subordinates);
+      if (ValidTableLength === false) {
+        const NewItem: IUser[] = this.state.NominationData.Subordinates;
+        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
+        if (index > -1) {
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              snackbarMessage: "User Exist!",
+              showSnackbarMessage: true,
+              snackbarType: SnackBarMode.Error,
+            };
+          });
+        } else {
+          NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              SelectedPeers: NewItem,
+            };
+          });
+        }
       }
     }
   };
@@ -525,6 +533,21 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
         );
       });
     }
+  };
+  /*********************table length validation**************************************** */
+  private TableLengthValidation = (FieldName: any[]) => {
+    if (FieldName.length >= 15) {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          snackbarMessage: "you should select between 3 to 15 users!",
+          showSnackbarMessage: true,
+          snackbarType: SnackBarMode.Error,
+        };
+      });
+      return true;
+    }
+    return false;
   };
   /****************************on form submited*************************************/
   private SubmitForm = () => {

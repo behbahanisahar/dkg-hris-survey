@@ -7,16 +7,7 @@ import ListServices from "../../../../services/list-services";
 import SPLists from "../../../../entities/lists";
 import ReactSelect from "react-select";
 import Add from "@material-ui/icons/Add";
-import {
-  Fab,
-  Card,
-  Tooltip,
-  Table,
-  TableHead,
-  TableRow,
-  TableBody,
-  TableCell,
-} from "@material-ui/core";
+import { Fab, Card, Tooltip, Table, TableHead, TableRow, TableBody, TableCell } from "@material-ui/core";
 
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
@@ -48,8 +39,8 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
       SelectedPeer: "",
       SelectedOtherID: 0,
       SelectedOther: "",
-      SelectedSubOrdinate:"",
-      SelectedSubOrdinateID:0,
+      SelectedSubOrdinate: "",
+      SelectedSubOrdinateID: 0,
       order: "asc",
       orderBy: "Id",
       page: 0,
@@ -65,19 +56,25 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
       NominationData: {
         Status: "",
         Subordinates: [],
-        Others:[],
-        Peers:[],
+        Others: [],
+        Peers: [],
         User: {
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
           SPLatinFullName: "",
+          Department: "",
+          EmailAddress: "",
+          JobGrade: "",
         },
         LineManager: {
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
           SPLatinFullName: "",
+          Department: "",
+          EmailAddress: "",
+          JobGrade: "",
         },
       },
     };
@@ -100,24 +97,26 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
   public render() {
     const SelectedPeers = this.state.SelectedPeers;
     const SelectedOthers = this.state.SelectedOthers;
-   // const Subordinates = this.state.NominationData.Subordinates;
+    // const Subordinates = this.state.NominationData.Subordinates;
     return (
-      
       <div>
-        <Spinner/>
+        <Spinner />
         <MDBCol>
           <div className="card-header mt-2">
             <div className="content">
               <p className="user">
                 <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
+                <h6>
+                  {this.state.NominationData.User!.EmailAddress} | {this.state.NominationData.User!.Department} |{" "}
+                  {this.state.NominationData.User!.JobGrade}{" "}
+                </h6>
               </p>
               <div className="page-header">Nomination Form</div>
             </div>
           </div>
           <MDBCard className="w-auto">
-           
             <div>
-              <MYStepper activeStep={this.state.activeStep}/>
+              <MYStepper activeStep={this.state.activeStep} />
             </div>
 
             <MDBCardBody>
@@ -146,22 +145,16 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                     </Tooltip>
                   </MDBRow>
                   <MDBRow>
-                  <Card className="CardTable">
-                  <Table className="table" >
-                    <TableHead>
-                        <TableRow>
-                            {this.renderHeader(this.tableHeaders)}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.onRenderRows()}
-                    </TableBody>
-                </Table>
-
-                  </Card>
-                  
+                    <Card className="CardTable">
+                      <Table className="table">
+                        <TableHead>
+                          <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                        </TableHead>
+                        <TableBody>{this.onRenderRows()}</TableBody>
+                      </Table>
+                    </Card>
                   </MDBRow>
-                
+
                   <h3 className="pt-3 category">Peer</h3>
 
                   <MDBRow>
@@ -188,8 +181,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
 
                   <MDBRow>
                     <Card className="CardTable">
-                    
-                      <ReapitingTable tableName="SelectedPeer" Items={SelectedPeers}/>
+                      <ReapitingTable tableName="SelectedPeer" Items={SelectedPeers} />
                     </Card>
                   </MDBRow>
 
@@ -219,7 +211,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
 
                   <MDBRow>
                     <Card className="CardTable">
-                      <ReapitingTable tableName="SelectedOther" Items={SelectedOthers}/>
+                      <ReapitingTable tableName="SelectedOther" Items={SelectedOthers} />
                     </Card>
                   </MDBRow>
                 </MDBContainer>
@@ -271,73 +263,104 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName: string) => {
     if (FieldName === "SelectedOther") {
-      const NewItem: IUser[] = this.state.SelectedOthers;
-      const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
-      if (index > -1) {
+      if (this.state.SelectedOthers.length >= 15) {
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "User Exist!",
+            snackbarMessage: "you should select between 3 to 15 users!",
             showSnackbarMessage: true,
             snackbarType: SnackBarMode.Error,
           };
         });
       } else {
-        NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            SelectedOthers: NewItem,
-          };
-        });
+        const NewItem: IUser[] = this.state.SelectedOthers;
+        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
+        if (index > -1) {
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              snackbarMessage: "User Exist!",
+              showSnackbarMessage: true,
+              snackbarType: SnackBarMode.Error,
+            };
+          });
+        } else {
+          NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              SelectedOthers: NewItem,
+            };
+          });
+        }
       }
-    } 
-    else if(FieldName === "SelectedPeer"){
-      const NewItem: IUser[] = this.state.SelectedPeers;
-      const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
-      if (index > -1) {
+    } else if (FieldName === "SelectedPeer") {
+      if (this.state.SelectedPeers.length >= 15) {
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "User Exist!",
+            snackbarMessage: "you should select between 3 to 15 users!",
             showSnackbarMessage: true,
             snackbarType: SnackBarMode.Error,
           };
         });
       } else {
-        NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            SelectedPeers: NewItem,
-          };
-        });
+        const NewItem: IUser[] = this.state.SelectedPeers;
+        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
+        if (index > -1) {
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              snackbarMessage: "User Exist!",
+              showSnackbarMessage: true,
+              snackbarType: SnackBarMode.Error,
+            };
+          });
+        } else {
+          NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              SelectedPeers: NewItem,
+            };
+          });
+        }
       }
-    }
-    else{
-      const NewItem: IUser[] = this.state.NominationData.Subordinates;
-      const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
-      if (index > -1) {
+    } else {
+      if (this.state.NominationData.Subordinates.length >= 15) {
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "User Exist!",
+            snackbarMessage: "you should select between 3 to 15 users!",
             showSnackbarMessage: true,
             snackbarType: SnackBarMode.Error,
           };
         });
       } else {
-        NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            SelectedPeers: NewItem,
-          };
-        });
+        const NewItem: IUser[] = this.state.NominationData.Subordinates;
+        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
+        if (index > -1) {
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              snackbarMessage: "User Exist!",
+              showSnackbarMessage: true,
+              snackbarType: SnackBarMode.Error,
+            };
+          });
+        } else {
+          NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              SelectedPeers: NewItem,
+            };
+          });
+        }
       }
     }
   };
- 
+
   /**************************** SnackBar ****************************** */
   private handleCloseMessage = () => {
     if (this.state.snackbarType === SnackBarMode.Success) {
@@ -352,58 +375,47 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
     }
   };
 
-
-   /**************************** Repeat Table ****************************** */
-   private renderHeader = (columnDetail: any[]) => {
+  /**************************** Repeat Table ****************************** */
+  private renderHeader = (columnDetail: any[]) => {
     return columnDetail.map(
-        row => (
-            <TableCell
-            className="LogPadding" 
-                key={row.id}
-                align="center"
-                padding='none'
-                sortDirection='desc'
-            >
-                {row.label}
-            </TableCell>
-        ),
-        this,
+      row => (
+        <TableCell className="LogPadding" key={row.id} align="center" padding="none" sortDirection="desc">
+          {row.label}
+        </TableCell>
+      ),
+      this,
     );
-}
+  };
 
-private onRenderRows = () => {
-
-      return   this.state.NominationData.Subordinates.map((n: any, index: any) => {
-        return (
-          <TableRow key={index}>
-            <TableCell style={{width:'1%'}} align="center">{index + 1}</TableCell>
-            <TableCell align="center">{n.SPLatinFullName}</TableCell>
-            <TableCell
-              align="center"
-              onClick={() => this.DeleteItem(n.SPLatinFullName)}
-              style={{width:'3%'}}
-            >
-              <Delete  />
-            </TableCell>
-          </TableRow>
-        );
-      })
-
-}
+  private onRenderRows = () => {
+    return this.state.NominationData.Subordinates.map((n: any, index: any) => {
+      return (
+        <TableRow key={index}>
+          <TableCell style={{ width: "1%" }} align="center">
+            {index + 1}
+          </TableCell>
+          <TableCell align="center">{n.SPLatinFullName}</TableCell>
+          <TableCell align="center" onClick={() => this.DeleteItem(n.SPLatinFullName)} style={{ width: "3%" }}>
+            <Delete />
+          </TableCell>
+        </TableRow>
+      );
+    });
+  };
   /******************************delete item from table***************************************************** */
   private DeleteItem = (currentItem: string) => {
-      this.setState(prevState => {
-     // const prevValues=items;
-     const prevValues = prevState.NominationData.Subordinates || [];
-        const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
-        return {
-          ...prevState,
-          NominationData:{
-            ...prevState.NominationData,
-            Subordinates:newValue
-          },
-        };
-      });
+    this.setState(prevState => {
+      // const prevValues=items;
+      const prevValues = prevState.NominationData.Subordinates || [];
+      const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
+      return {
+        ...prevState,
+        NominationData: {
+          ...prevState.NominationData,
+          Subordinates: newValue,
+        },
+      };
+    });
   };
   /****************************on form submited*************************************/
   private SubmitForm = () => {
