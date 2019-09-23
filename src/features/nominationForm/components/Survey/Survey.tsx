@@ -474,7 +474,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
           <TableCell style={{ width: "3%" }} align="center">
             {index + 1}
           </TableCell>
-          <TableCell align="center">{n.SPLatinFullName}</TableCell>
+          <TableCell>{n.SPLatinFullName}</TableCell>
           <TableCell style={{ width: "3%" }} align="center" onClick={() => this.DeleteItem(n.SPLatinFullName)}>
             <Delete cursor="pointer" color="primary" />
           </TableCell>
