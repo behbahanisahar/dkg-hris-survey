@@ -20,6 +20,18 @@ import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
 import IHistory from "../../../../entities/history";
 import Spinner from "../../../../spinner/spinner";
+
+const RenderOption = (option: any) => (
+  <div>
+    {console.log(option)}
+    <strong>{option.label}</strong>
+    <div>
+      <small>
+        <i>{option.EmailAddress}</i> | <span>{option.Department}</span>
+      </small>
+    </div>
+  </div>
+);
 export default class FlowSurvey extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
   private tableHeaders: ITableHeader[];
@@ -167,11 +179,9 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                         <MDBRow>
                           <AsyncSelect
                             defaultOptions
+                            getOptionLabel={RenderOption as any}
                             className="basic-single"
                             classNamePrefix="select"
-                            isDisabled={false}
-                            isClearable={true}
-                            isRtl={false}
                             loadOptions={inputValue => this.loadOptions(inputValue)}
                             isSearchable={true}
                             name="SelectedSubOrdinate"
@@ -326,7 +336,6 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   /*************************************************************************************************** */
   public loadUsers = async () => {
     let UserInfo: any[];
-
     await this.ListService.getUserInfo("").then(response => {
       UserInfo = response;
     });
