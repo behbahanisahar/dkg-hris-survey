@@ -83,7 +83,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
       NominationHistory: [
         {
           Changes: [],
-          Field:""
+          Field: "",
         },
       ],
     };
@@ -195,7 +195,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                         </MDBRow>
                       </MDBCol>
                       <MDBCol>
-                        <MDBRow/>
+                        <MDBRow />
                         <h3 className="pt-3 category">History</h3>
                         <Card className="CardTable">
                           <Table className="table">
@@ -489,29 +489,29 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   };
 
   private onRenderHistoryRows = () => {
-
-    const Subordinates=this.state.NominationHistory.filter(el=> el.Field ==="Subordinate");
+    const Subordinates = this.state.NominationHistory.filter(el => el.Field === "Subordinate");
     for (let i = 0; i < Subordinates.length; ++i) {
-    return Subordinates[i].Changes.map((n: any, index: any) => {
-      let DeletedStr: string = "";
-      let AddedStr: string = "";
-      if (n.Added !== null) {
-       AddedStr = n.Added.join();
-      }
-      if (n.Deleted !== null) {
-       DeletedStr = n.Deleted.join();
-      }
-     
-      return (
-        <TableRow key={index}>
-           <TableCell align="center">{index+1}</TableCell>
-          <TableCell align="center">{n.ModifiedBy}</TableCell>
-          <TableCell align="center">{n.ModifiedDateShamsi}</TableCell>
-          <TableCell align="center">{AddedStr}</TableCell>
-          <TableCell align="center">{DeletedStr}</TableCell>
-        </TableRow>
-      );
-    });}
+      return Subordinates[i].Changes.map((n: any, index: any) => {
+        let DeletedStr: string = "";
+        let AddedStr: string = "";
+        if (n.Added !== null) {
+          AddedStr = n.Added.join();
+        }
+        if (n.Deleted !== null) {
+          DeletedStr = n.Deleted.join();
+        }
+
+        return (
+          <TableRow key={index}>
+            <TableCell align="center">{index + 1}</TableCell>
+            <TableCell align="center">{n.ModifiedBy}</TableCell>
+            <TableCell align="center">{n.ModifiedDateShamsi}</TableCell>
+            <TableCell align="center">{AddedStr}</TableCell>
+            <TableCell align="center">{DeletedStr}</TableCell>
+          </TableRow>
+        );
+      });
+    }
   };
   /****************************on form submited*************************************/
   private SubmitForm = () => {
