@@ -63,12 +63,18 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
           Id: 0,
           ItemId: 894,
           SPLatinFullName: "",
+          Department: "",
+          EmailAddress: "",
+          JobGrade: "",
         },
         LineManager: {
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
           SPLatinFullName: "",
+          Department: "",
+          EmailAddress: "",
+          JobGrade: "",
         },
       },
     };
@@ -100,6 +106,10 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
             <div className="content">
               <p className="user">
                 <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
+                <h6>
+                  {this.state.NominationData.User!.EmailAddress} | {this.state.NominationData.User!.Department} |{" "}
+                  {this.state.NominationData.User!.JobGrade}{" "}
+                </h6>
               </p>
               <div className="page-header">Nomination Form</div>
             </div>
@@ -253,67 +263,100 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName: string) => {
     if (FieldName === "SelectedOther") {
-      const NewItem: IUser[] = this.state.SelectedOthers;
-      const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
-      if (index > -1) {
+      if (this.state.SelectedOthers.length >= 15) {
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "User Exist!",
+            snackbarMessage: "you should select between 3 to 15 users!",
             showSnackbarMessage: true,
             snackbarType: SnackBarMode.Error,
           };
         });
       } else {
-        NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            SelectedOthers: NewItem,
-          };
-        });
+        const NewItem: IUser[] = this.state.SelectedOthers;
+        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
+        if (index > -1) {
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              snackbarMessage: "User Exist!",
+              showSnackbarMessage: true,
+              snackbarType: SnackBarMode.Error,
+            };
+          });
+        } else {
+          NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              SelectedOthers: NewItem,
+            };
+          });
+        }
       }
     } else if (FieldName === "SelectedPeer") {
-      const NewItem: IUser[] = this.state.SelectedPeers;
-      const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
-      if (index > -1) {
+      if (this.state.SelectedPeers.length >= 15) {
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "User Exist!",
+            snackbarMessage: "you should select between 3 to 15 users!",
             showSnackbarMessage: true,
             snackbarType: SnackBarMode.Error,
           };
         });
       } else {
-        NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            SelectedPeers: NewItem,
-          };
-        });
+        const NewItem: IUser[] = this.state.SelectedPeers;
+        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
+        if (index > -1) {
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              snackbarMessage: "User Exist!",
+              showSnackbarMessage: true,
+              snackbarType: SnackBarMode.Error,
+            };
+          });
+        } else {
+          NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              SelectedPeers: NewItem,
+            };
+          });
+        }
       }
     } else {
-      const NewItem: IUser[] = this.state.NominationData.Subordinates;
-      const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
-      if (index > -1) {
+      if (this.state.NominationData.Subordinates.length >= 15) {
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "User Exist!",
+            snackbarMessage: "you should select between 3 to 15 users!",
             showSnackbarMessage: true,
             snackbarType: SnackBarMode.Error,
           };
         });
       } else {
-        NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            SelectedPeers: NewItem,
-          };
-        });
+        const NewItem: IUser[] = this.state.NominationData.Subordinates;
+        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
+        if (index > -1) {
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              snackbarMessage: "User Exist!",
+              showSnackbarMessage: true,
+              snackbarType: SnackBarMode.Error,
+            };
+          });
+        } else {
+          NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              SelectedPeers: NewItem,
+            };
+          });
+        }
       }
     }
   };
