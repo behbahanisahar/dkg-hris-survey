@@ -175,7 +175,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                   <MDBContainer>
                     <MDBRow>
                       <MDBCol>
-                        <h3 className="pt-3 category">Subordinates</h3>
+                        <h3 className="pt-5 category">Subordinates</h3>
                         <MDBRow>
                           <AsyncSelect
                             defaultOptions
@@ -210,7 +210,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       </MDBCol>
                       <MDBCol>
                         <MDBRow />
-                        <h3 className="pt-3 category">History</h3>
+                        <h3 className="pt-5 category">History</h3>
                         <Card className="CardTable">
                           <Table className="table">
                             <TableHead>
@@ -264,7 +264,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
 
                     <MDBRow>
                       <MDBCol>
-                        <h3 className="pt-3 category">Other</h3>
+                        <h3 className="pt-5 category">Other</h3>
 
                         <MDBRow>
                           <ReactSelect
