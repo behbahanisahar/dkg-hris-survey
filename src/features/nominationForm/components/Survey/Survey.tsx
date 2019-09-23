@@ -4,8 +4,8 @@ import ISurveyState from "./survey-state";
 import { MDBCard, MDBCol, MDBCardBody, MDBBtn, MDBRow, MDBContainer, MDBCardText } from "mdbreact";
 import "./survey.css";
 import ListServices from "../../../../services/list-services";
-import SPLists from "../../../../entities/lists";
 import ReactSelect from "react-select";
+import AsyncSelect from "react-select/async";
 import Add from "@material-ui/icons/Add";
 import { Fab, Card, Tooltip, Table, TableHead, TableRow, TableBody, TableCell } from "@material-ui/core";
 
@@ -135,8 +135,11 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
     });
   }
 
+  private async loadOptions(inputValue: string) {
+    return await this.ListService.getUserInfo(inputValue);
+  }
+
   public render() {
-    //  const NominationHistory=this.state.NominationHistory;
     return (
       <div>
         {this.state.showSpinner && <Spinner />}
@@ -162,18 +165,19 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       <MDBCol>
                         <h3 className="pt-3 category">Subordinates</h3>
                         <MDBRow>
-                          <ReactSelect
+                          <AsyncSelect
+                            defaultOptions
                             className="basic-single"
                             classNamePrefix="select"
                             isDisabled={false}
                             isClearable={true}
                             isRtl={false}
+                            loadOptions={inputValue => this.loadOptions(inputValue)}
                             isSearchable={true}
-                            name="SelectedPeer"
+                            name="SelectedSubOrdinate"
                             isLoading={this.state.UsersIsLoading}
                             onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
                             options={this.state.UserInfo}
-                            // loadOptions={this.promiseOptions}
                             placeholder="select..."
                           />
 
@@ -323,7 +327,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   public loadUsers = async () => {
     let UserInfo: any[];
 
-    await this.ListService.getUserInfo(SPLists.UserInfo).then(response => {
+    await this.ListService.getUserInfo("").then(response => {
       UserInfo = response;
     });
     this.setState(prevstate => {
