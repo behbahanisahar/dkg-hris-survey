@@ -4,18 +4,25 @@ import MockData from "./mock-data";
 import NominationData from "../entities/nomination";
 import IUpdatedData from "../entities/updatedNominationItem";
 import IHistory from "../entities/history";
+import SPLists from "../entities/lists";
 
 class ListServices extends ServiceBase {
   public constructor() {
     super();
   }
 
-  public async getUserInfo(listName: string): Promise<any> {
+  public async getUserInfo(searchTerm: string): Promise<any> {
     if (process.env.NODE_ENV === "production") {
+      var filter =
+        searchTerm.length > 0
+          ? "JobStatus eq 'شاغل' and SPLatinFullName ne '' and substringof('" + searchTerm + "',SPLatinFullName)"
+          : "JobStatus eq 'شاغل' and SPLatinFullName ne ''";
       const result: any[] = await sp.web.lists
-        .getByTitle(listName)
-        .items.filter("JobStatus eq 'شاغل'")
-        .select("LatinFullName", "EmailAddress", "SPLatinFullName", "Department", "Id")
+        .getByTitle(SPLists.UserInfo)
+        .items.filter(filter)
+        .select("EmailAddress", "SPLatinFullName", "Department", "Id")
+        .orderBy("SPLatinFullName", true)
+        .top(20)
         .get();
       return Promise.resolve(
         result.map(({ SPLatinFullName: label, Id, EmailAddress, SPLatinFullName, Department }) => {
