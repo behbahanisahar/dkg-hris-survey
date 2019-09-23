@@ -84,6 +84,6 @@ typings/
 
 #test/build artifacts
 dist/
-
+sp-rest-proxy/
 junit.xml
 
