@@ -88,6 +88,9 @@ export default class MockData {
       Id: 0,
       ItemId: 10,
       SPLatinFullName: "Abdolhossin Mohammbgnhnad Hashemi",
+      Department: "HR",
+      EmailAddress: "sa.behbahani@digikala.com",
+      JobGrade: "specialist",
     },
 
     LineManager: {
@@ -95,33 +98,38 @@ export default class MockData {
       Id: 0,
       ItemId: 14,
       SPLatinFullName: "Abdolhossin Mohvfvfammad Hashemi",
+      Department: "HR",
+      EmailAddress: "sa.behbahani@digikala.com",
+      JobGrade: "specialist",
     },
   };
-  public static NominationHistory:IHistory[]=[
+  public static NominationHistory: IHistory[] = [
     {
       Field: "Other",
 
-    Changes:[
-      {Added: [" Shahbazi"],
-      Deleted: [""],
-      Id: 20,
-      ModifiedBy: "Ali Nooshabadi",
-      ModifiedDate: "/Date(1569016495000-0000)/",
-      ModifiedDateShamsi: "1398/06/30 02:24",
-     }
-    ]
-  },
-  {
-    Field: "Subordinate",
-    Changes:[
-      {Added: ["gholami"],
-      Deleted: ["nooshabadi"],
-      Id: 22,
-      ModifiedBy: "sahar behbahani",
-      ModifiedDate: "/Date(1569016495000-0000)/",
-      ModifiedDateShamsi: "1398/06/31 02:24",
-}
-    ]
-  }
-  ] 
+      Changes: [
+        {
+          Added: [" Shahbazi"],
+          Deleted: [""],
+          Id: 20,
+          ModifiedBy: "Ali Nooshabadi",
+          ModifiedDate: "/Date(1569016495000-0000)/",
+          ModifiedDateShamsi: "1398/06/30 02:24",
+        },
+      ],
+    },
+    {
+      Field: "Subordinate",
+      Changes: [
+        {
+          Added: ["gholami"],
+          Deleted: ["nooshabadi"],
+          Id: 22,
+          ModifiedBy: "sahar behbahani",
+          ModifiedDate: "/Date(1569016495000-0000)/",
+          ModifiedDateShamsi: "1398/06/31 02:24",
+        },
+      ],
+    },
+  ];
 }

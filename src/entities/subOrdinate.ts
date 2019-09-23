@@ -3,4 +3,7 @@ export default interface SubOrdinate {
   Id: number;
   ItemId: number;
   SPLatinFullName: string;
+  Department: string;
+  EmailAddress: string;
+  JobGrade: string;
 }
