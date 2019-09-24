@@ -1,28 +1,22 @@
 import React from "react";
 import { Stepper, Step, StepLabel } from "@material-ui/core";
-import   "../../../../App.css";
+import "../../../../App.css";
 interface IStepperProps {
-    activeStep:number;
+  activeStep: number;
 }
 
 class MYStepper extends React.Component<IStepperProps, {}> {
-
-  constructor(props: any) {
-    super(props);
-  }
-
   public render() {
     const steps = this.getSteps();
     console.log(this.props.activeStep);
     return (
-        <Stepper activeStep={this.props.activeStep} alternativeLabel>
+      <Stepper activeStep={this.props.activeStep} alternativeLabel>
         {steps.map((label: any) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
-
     );
   }
   private getSteps() {
