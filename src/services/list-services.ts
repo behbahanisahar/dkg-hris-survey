@@ -5,6 +5,7 @@ import NominationData from "../entities/nomination";
 import IUpdatedData from "../entities/updatedNominationItem";
 import IHistory from "../entities/history";
 import SPLists from "../entities/lists";
+import Isurvey from "../entities/survey";
 
 class ListServices extends ServiceBase {
   public constructor() {
@@ -50,7 +51,6 @@ class ListServices extends ServiceBase {
   public async getNominationHistory(itemId: number): Promise<IHistory[]> {
     if (process.env.NODE_ENV === "production") {
       const items: any = await this.get("/survey/nomination/history?itemId=" + itemId + "");
-      console.log(items);
       return Promise.resolve(items.data);
     }
 
@@ -60,6 +60,16 @@ class ListServices extends ServiceBase {
   public async updateNominationData(param: IUpdatedData): Promise<IUpdatedData> {
     const items: any = await this.put("/survey/nomination", param);
     return Promise.resolve(items.data);
+  }
+  /********************get survey form ***************************************************************** */
+  public async getSurveyFormData(): Promise<Isurvey[]> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("/survey");
+      console.log(items);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockData.SurveyFormData);
   }
 }
 export default ListServices;

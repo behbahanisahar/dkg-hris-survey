@@ -6,6 +6,7 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import ListServices from "./services/list-services";
 import NominationData from "../src/entities/nomination";
 import FlowSurvey from "./features/nominationForm/components/survey/survey";
+import FormSurvey from "./features/nominationForm/components/survey-form/survey-form";
 
 const theme = createMuiTheme({
   palette: {
@@ -17,6 +18,7 @@ const theme = createMuiTheme({
 
 interface IAppState {
   itemId: number;
+  page: string;
   NominationData: any;
 }
 
@@ -30,10 +32,12 @@ class App extends React.Component<{}, IAppState> {
     this.state = {
       itemId: 0,
       NominationData: {},
+      page: "",
     };
   }
   public async componentDidMount() {
     const itemId = this.util.getQueryStringValue("itemid");
+    const page = this.util.getQueryStringValue("page");
     const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
 
     this.setState(prevState => {
@@ -41,13 +45,7 @@ class App extends React.Component<{}, IAppState> {
         ...prevState,
         itemId: Number(itemId),
         NominationData,
-      };
-    });
-
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        itemId: Number(itemId),
+        page,
       };
     });
   }
@@ -56,8 +54,13 @@ class App extends React.Component<{}, IAppState> {
     return (
       <div className="App">
         <MuiThemeProvider theme={theme}>
-          {this.state.NominationData.Status === "NotStarted" && <SelfSurvey itemId={this.state.itemId} />}
-          <FlowSurvey itemId={this.state.itemId} />
+          {this.state.page === "NominationForm" && (
+            <div>
+              {this.state.NominationData.Status === "NotStarted" && <SelfSurvey itemId={this.state.itemId} />}
+              <FlowSurvey itemId={this.state.itemId} />
+            </div>
+          )}
+          {this.state.page === "SurveyForm" && <FormSurvey />}
         </MuiThemeProvider>
       </div>
     );

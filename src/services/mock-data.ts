@@ -1,5 +1,6 @@
 import NominationData from "../entities/nomination";
 import IHistory from "../entities/history";
+import Isurvey from "../entities/survey";
 
 export default class MockData {
   public static getUserInfo: any[] = [
@@ -128,6 +129,44 @@ export default class MockData {
           ModifiedBy: "sahar behbahani",
           ModifiedDate: "/Date(1569016495000-0000)/",
           ModifiedDateShamsi: "1398/06/31 02:24",
+        },
+      ],
+    },
+  ];
+
+  public static SurveyFormData: Isurvey[] = [
+    {
+      Title: "Builder Approach & Result Oriented",
+      SignUrl: "",
+      Questions: [
+        {
+          ItemId: 1,
+          Question:
+            "Focusing self and others on providing a prompt, professional and timely service to enhance customer experience",
+          QuestionFa:
+            "بر ارائه خدمات به صورت سریع، حرفه ای و به موقع در راستای ایجاد بهترین تجربه برای مشتریان، توجه دارد و دیگران را نیز در این راستا تشویق می کند.",
+          Field: "Cat1",
+          Category: "",
+        },
+        {
+          ItemId: 3,
+          Question: "ss",
+          QuestionFa: "ss",
+          Field: "ss",
+          Category: "",
+        },
+      ],
+    },
+    {
+      Title: "Customer Centric",
+      SignUrl: "",
+      Questions: [
+        {
+          ItemId: 2,
+          Question: "Persisting to see things through, regardless of challenges and barriers faced\t",
+          QuestionFa: "در پیگیری امور بدون توجه به چالش ها و موانع پیش رو، پافشاری می کند.\t",
+          Field: "null",
+          Category: "",
         },
       ],
     },
