@@ -4,7 +4,6 @@ import ISurveyState from "./survey-state";
 import { MDBCard, MDBCol, MDBCardBody, MDBBtn, MDBRow, MDBContainer, MDBCardText } from "mdbreact";
 import "./survey.css";
 import ListServices from "../../../../services/list-services";
-import ReactSelect from "react-select";
 import AsyncSelect from "react-select/async";
 import Add from "@material-ui/icons/Add";
 import { Fab, Card, Tooltip, Table, TableHead, TableRow, TableBody, TableCell } from "@material-ui/core";
@@ -20,6 +19,7 @@ import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
 import IHistory from "../../../../entities/history";
 import Spinner from "../../../../spinner/spinner";
+import Forward from "@material-ui/icons/Forward";
 
 const RenderOption = (option: any) => (
   <div>
@@ -76,8 +76,8 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
       NominationData: {
         Status: "",
         Subordinates: [],
-        Others: [],
-        Peers: [],
+        Other: [],
+        Peer: [],
         User: {
           AvatarUrl: "",
           Id: 0,
@@ -103,6 +103,9 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
           Field: "",
         },
       ],
+      HideSubordinateHistory: true,
+      HideOtherHistory: true,
+      HidePeerHistory: true,
     };
   }
 
@@ -175,7 +178,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                     <MDBRow>
                       <MDBCol>
                         <h3 className="pt-3 category">Subordinates</h3>
-                        <MDBRow>
+                        <div className="inline-items">
                           <AsyncSelect
                             defaultOptions
                             getOptionLabel={RenderOption as any}
@@ -189,14 +192,19 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                             options={this.state.UserInfo}
                             placeholder="select..."
                           />
-
                           <Tooltip title="Add" aria-label="add">
                             <Fab size="small" color="primary" className="ml-3" aria-label="add">
                               <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
                             </Fab>
                           </Tooltip>
-                        </MDBRow>
-                        <MDBRow>
+                        </div>
+                      </MDBCol>
+                      <MDBCol />
+                    </MDBRow>
+
+                    <MDBRow>
+                      <MDBCol>
+                        <div className="inline-items">
                           <Card className="CardTable">
                             <Table className="table">
                               <TableHead>
@@ -205,49 +213,67 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                               <TableBody>{this.onRenderRows("SubOrdinate")}</TableBody>
                             </Table>
                           </Card>
-                        </MDBRow>
+                          <Tooltip
+                            style={{ marginTop: "16%" }}
+                            title="show history table"
+                            aria-label="show history table"
+                          >
+                            <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
+                              <Forward
+                                style={{ color: "white" }}
+                                onClick={(ev: any) => this.HideHistory("Subordinate")}
+                              />
+                            </Fab>
+                          </Tooltip>
+                        </div>
                       </MDBCol>
                       <MDBCol>
-                        <MDBRow />
-                        <h3 className="pt-3 category">History</h3>
-                        <Card className="CardTable">
-                          <Table className="table">
-                            <TableHead>
-                              <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
-                            </TableHead>
-                            <TableBody>{this.onRenderHistoryRows()}</TableBody>
-                          </Table>
-                        </Card>
+                        {this.state.HideSubordinateHistory === false && (
+                          <div>
+                            <h3 className="pt-3 category">History</h3>
+                            <Card className="CardTable">
+                              <Table className="table">
+                                <TableHead>
+                                  <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
+                                </TableHead>
+                                <TableBody>{this.onRenderHistoryRows("Subordinate")}</TableBody>
+                              </Table>
+                            </Card>
+                          </div>
+                        )}
                       </MDBCol>
                     </MDBRow>
-
+                    <hr />
                     <MDBRow>
                       <MDBCol>
-                        <h3 className="pt-3 category">Peer</h3>
-
-                        <MDBRow>
-                          <ReactSelect
+                        <h3 className="pt-5 category">Peer</h3>
+                        <div className="inline-items">
+                          <AsyncSelect
+                            defaultOptions
+                            getOptionLabel={RenderOption as any}
                             className="basic-single"
                             classNamePrefix="select"
-                            isDisabled={false}
-                            isClearable={true}
-                            isRtl={false}
+                            loadOptions={inputValue => this.loadOptions(inputValue)}
                             isSearchable={true}
                             name="SelectedPeer"
                             isLoading={this.state.UsersIsLoading}
                             onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
                             options={this.state.UserInfo}
-                            // loadOptions={this.promiseOptions}
                             placeholder="select..."
                           />
+
                           <Tooltip title="Add" aria-label="add">
                             <Fab size="small" color="primary" className="ml-3" aria-label="add">
                               <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
                             </Fab>
                           </Tooltip>
-                        </MDBRow>
-
-                        <MDBRow>
+                        </div>
+                      </MDBCol>
+                      <MDBCol />
+                    </MDBRow>
+                    <MDBRow>
+                      <MDBCol>
+                        <div className="inline-items">
                           <Card className="CardTable">
                             <Table className="table">
                               <TableHead>
@@ -256,28 +282,49 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                               <TableBody>{this.onRenderRows("Peer")}</TableBody>
                             </Table>
                           </Card>
-                        </MDBRow>
+                          <Tooltip
+                            style={{ marginTop: "16%" }}
+                            title="show history table"
+                            aria-label="show history table"
+                          >
+                            <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
+                              <Forward style={{ color: "white" }} onClick={(ev: any) => this.HideHistory("Peer")} />
+                            </Fab>
+                          </Tooltip>
+                        </div>
                       </MDBCol>
-                      <MDBCol />
+                      <MDBCol>
+                        {this.state.HidePeerHistory === false && (
+                          <div>
+                            <h3 className="pt-3 category">History</h3>
+                            <Card className="CardTable">
+                              <Table className="table">
+                                <TableHead>
+                                  <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
+                                </TableHead>
+                                <TableBody>{this.onRenderHistoryRows("Peer")}</TableBody>
+                              </Table>
+                            </Card>
+                          </div>
+                        )}
+                      </MDBCol>
                     </MDBRow>
-
+                    <hr />
                     <MDBRow>
                       <MDBCol>
-                        <h3 className="pt-3 category">Other</h3>
-
-                        <MDBRow>
-                          <ReactSelect
+                        <h3 className="pt-5 category">Other</h3>
+                        <div className="inline-items">
+                          <AsyncSelect
+                            defaultOptions
+                            getOptionLabel={RenderOption as any}
                             className="basic-single"
                             classNamePrefix="select"
-                            isDisabled={false}
-                            isClearable={true}
-                            isRtl={false}
+                            loadOptions={inputValue => this.loadOptions(inputValue)}
                             isSearchable={true}
                             name="SelectedOther"
                             isLoading={this.state.UsersIsLoading}
                             onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
                             options={this.state.UserInfo}
-                            // loadOptions={this.promiseOptions}
                             placeholder="select..."
                           />
                           <Tooltip title="Add" aria-label="add">
@@ -285,9 +332,14 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                               <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
                             </Fab>
                           </Tooltip>
-                        </MDBRow>
+                        </div>
+                      </MDBCol>
+                      <MDBCol />
+                    </MDBRow>
 
-                        <MDBRow>
+                    <MDBRow>
+                      <MDBCol>
+                        <div className="inline-items">
                           <Card className="CardTable">
                             <Table className="table">
                               <TableHead>
@@ -296,9 +348,32 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                               <TableBody>{this.onRenderRows("Other")}</TableBody>
                             </Table>
                           </Card>
-                        </MDBRow>
+                          <Tooltip
+                            style={{ marginTop: "16%" }}
+                            title="show history table"
+                            aria-label="show history table"
+                          >
+                            <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
+                              <Forward style={{ color: "white" }} onClick={(ev: any) => this.HideHistory("Other")} />
+                            </Fab>
+                          </Tooltip>
+                        </div>
                       </MDBCol>
-                      <MDBCol />
+                      <MDBCol>
+                        {this.state.HideOtherHistory === false && (
+                          <div>
+                            <h3 className="pt-3 category">History</h3>
+                            <Card className="CardTable">
+                              <Table className="table">
+                                <TableHead>
+                                  <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
+                                </TableHead>
+                                <TableBody>{this.onRenderHistoryRows("Other")}</TableBody>
+                              </Table>
+                            </Card>
+                          </div>
+                        )}
+                      </MDBCol>
                     </MDBRow>
                   </MDBContainer>
                 </MDBCardText>
@@ -349,9 +424,9 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName: string) => {
     if (FieldName === "SelectedOther") {
-      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Others);
+      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Other);
       if (ValidTableLength === false) {
-        const NewItem: IUser[] = this.state.NominationData.Others;
+        const NewItem: IUser[] = this.state.NominationData.Other;
         const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
         if (index > -1) {
           this.setState(prevState => {
@@ -373,9 +448,9 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
         }
       }
     } else if (FieldName === "SelectedPeer") {
-      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Peers);
+      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Peer);
       if (ValidTableLength === false) {
-        const NewItem: IUser[] = this.state.NominationData.Peers;
+        const NewItem: IUser[] = this.state.NominationData.Peer;
         const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
         if (index > -1) {
           this.setState(prevState => {
@@ -422,6 +497,33 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
       }
     }
   };
+  /****************************hide history table***************************** */
+  private HideHistory = (FieldName: string) => {
+    if (FieldName === "Subordinate") {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          HideSubordinateHistory: !this.state.HideSubordinateHistory,
+        };
+      });
+    }
+    if (FieldName === "Peer") {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          HidePeerHistory: !this.state.HidePeerHistory,
+        };
+      });
+    }
+    if (FieldName === "Other") {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          HideOtherHistory: !this.state.HideOtherHistory,
+        };
+      });
+    }
+  };
 
   /**************************** SnackBar ****************************** */
   private handleCloseMessage = () => {
@@ -451,17 +553,18 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
 
   private onRenderRows = (TableName: string) => {
     let items: any[] = [];
+    console.log(this.state.NominationData);
     switch (TableName) {
       case "SubOrdinate": {
         items = this.state.NominationData.Subordinates;
         break;
       }
       case "Peer": {
-        items = this.state.NominationData.Subordinates;
+        items = this.state.NominationData.Peer;
         break;
       }
       case "Other": {
-        items = this.state.NominationData.Subordinates;
+        items = this.state.NominationData.Other;
         break;
       }
       default:
@@ -509,10 +612,30 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
     );
   };
 
-  private onRenderHistoryRows = () => {
+  private onRenderHistoryRows = (tableName: string) => {
     const Subordinates = this.state.NominationHistory.filter(el => el.Field === "Subordinate");
-    for (let i = 0; i < Subordinates.length; ++i) {
-      return Subordinates[i].Changes.map((n: any, index: any) => {
+    const Peer = this.state.NominationHistory.filter(el => el.Field === "Peer");
+    const Other = this.state.NominationHistory.filter(el => el.Field === "Other");
+    let items: any[] = [];
+    switch (tableName) {
+      case "Subordinate": {
+        items = Subordinates;
+        break;
+      }
+      case "Other": {
+        items = Other;
+        break;
+      }
+      case "Peer": {
+        items = Peer;
+        break;
+      }
+      default:
+        items = Subordinates;
+    }
+
+    for (let i = 0; i < items.length; ++i) {
+      return items[i].Changes.map((n: any, index: any) => {
         let DeletedStr: string = "";
         let AddedStr: string = "";
         if (n.Added !== null) {

@@ -24,6 +24,9 @@ export default interface ISurveyState {
   NominationData: NominationData;
   NominationHistory: IHistory[];
   activeStep: number;
+  HideSubordinateHistory: boolean;
+  HideOtherHistory: boolean;
+  HidePeerHistory: boolean;
   /****** Snackbar message ********* */
   showSnackbarMessage: boolean;
   snackbarType: SnackBarMode;

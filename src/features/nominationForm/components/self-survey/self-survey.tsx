@@ -56,8 +56,8 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
       NominationData: {
         Status: "",
         Subordinates: [],
-        Others: [],
-        Peers: [],
+        Other: [],
+        Peer: [],
         User: {
           AvatarUrl: "",
           Id: 0,
@@ -263,99 +263,108 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName: string) => {
     if (FieldName === "SelectedOther") {
-      if (this.state.SelectedOthers.length >= 15) {
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            snackbarMessage: "you should select between 3 to 15 users!",
-            showSnackbarMessage: true,
-            snackbarType: SnackBarMode.Error,
-          };
-        });
-      } else {
-        const NewItem: IUser[] = this.state.SelectedOthers;
-        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
-        if (index > -1) {
+      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Other);
+      if (ValidTableLength === false) {
+        if (this.state.SelectedOthers.length >= 15) {
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "User Exist!",
+              snackbarMessage: "you should select between 3 to 15 users!",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Error,
             };
           });
         } else {
-          NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
-          this.setState(prevState => {
-            return {
-              ...prevState,
-              SelectedOthers: NewItem,
-            };
-          });
+          const NewItem: IUser[] = this.state.SelectedOthers;
+          const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
+          if (index > -1) {
+            this.setState(prevState => {
+              return {
+                ...prevState,
+                snackbarMessage: "User Exist!",
+                showSnackbarMessage: true,
+                snackbarType: SnackBarMode.Error,
+              };
+            });
+          } else {
+            NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
+            this.setState(prevState => {
+              return {
+                ...prevState,
+                SelectedOthers: NewItem,
+              };
+            });
+          }
         }
       }
     } else if (FieldName === "SelectedPeer") {
-      if (this.state.SelectedPeers.length >= 15) {
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            snackbarMessage: "you should select between 3 to 15 users!",
-            showSnackbarMessage: true,
-            snackbarType: SnackBarMode.Error,
-          };
-        });
-      } else {
-        const NewItem: IUser[] = this.state.SelectedPeers;
-        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
-        if (index > -1) {
+      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Peer);
+      if (ValidTableLength === false) {
+        if (this.state.SelectedPeers.length >= 15) {
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "User Exist!",
+              snackbarMessage: "you should select between 3 to 15 users!",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Error,
             };
           });
         } else {
-          NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
-          this.setState(prevState => {
-            return {
-              ...prevState,
-              SelectedPeers: NewItem,
-            };
-          });
+          const NewItem: IUser[] = this.state.SelectedPeers;
+          const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
+          if (index > -1) {
+            this.setState(prevState => {
+              return {
+                ...prevState,
+                snackbarMessage: "User Exist!",
+                showSnackbarMessage: true,
+                snackbarType: SnackBarMode.Error,
+              };
+            });
+          } else {
+            NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
+            this.setState(prevState => {
+              return {
+                ...prevState,
+                SelectedPeers: NewItem,
+              };
+            });
+          }
         }
       }
     } else {
-      if (this.state.NominationData.Subordinates.length >= 15) {
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            snackbarMessage: "you should select between 3 to 15 users!",
-            showSnackbarMessage: true,
-            snackbarType: SnackBarMode.Error,
-          };
-        });
-      } else {
-        const NewItem: IUser[] = this.state.NominationData.Subordinates;
-        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
-        if (index > -1) {
+      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Subordinates);
+      if (ValidTableLength === false) {
+        if (this.state.NominationData.Subordinates.length >= 15) {
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "User Exist!",
+              snackbarMessage: "you should select between 3 to 15 users!",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Error,
             };
           });
         } else {
-          NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
-          this.setState(prevState => {
-            return {
-              ...prevState,
-              SelectedPeers: NewItem,
-            };
-          });
+          const NewItem: IUser[] = this.state.NominationData.Subordinates;
+          const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
+          if (index > -1) {
+            this.setState(prevState => {
+              return {
+                ...prevState,
+                snackbarMessage: "User Exist!",
+                showSnackbarMessage: true,
+                snackbarType: SnackBarMode.Error,
+              };
+            });
+          } else {
+            NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
+            this.setState(prevState => {
+              return {
+                ...prevState,
+                SelectedPeers: NewItem,
+              };
+            });
+          }
         }
       }
     }
@@ -416,6 +425,21 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
         },
       };
     });
+  };
+  /*********************table length validation**************************************** */
+  private TableLengthValidation = (FieldName: any[]) => {
+    if (FieldName.length >= 15) {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          snackbarMessage: "you should select between 3 to 15 users!",
+          showSnackbarMessage: true,
+          snackbarType: SnackBarMode.Error,
+        };
+      });
+      return true;
+    }
+    return false;
   };
   /****************************on form submited*************************************/
   private SubmitForm = () => {

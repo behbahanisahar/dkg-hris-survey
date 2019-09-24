@@ -7,10 +7,11 @@ import ListServices from "./services/list-services";
 import NominationData from "../src/entities/nomination";
 import FlowSurvey from "./features/nominationForm/components/survey/survey";
 
-
 const theme = createMuiTheme({
   palette: {
     primary: { main: "#ef5661" },
+    // secondary: { main: "#00A998" },
+    secondary: { main: "#00A998" },
   },
 });
 
@@ -56,7 +57,7 @@ class App extends React.Component<{}, IAppState> {
       <div className="App">
         <MuiThemeProvider theme={theme}>
           {this.state.NominationData.Status === "NotStarted" && <SelfSurvey itemId={this.state.itemId} />}
-          <FlowSurvey itemId={this.state.itemId}/>
+          <FlowSurvey itemId={this.state.itemId} />
         </MuiThemeProvider>
       </div>
     );

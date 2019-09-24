@@ -55,7 +55,7 @@ export default class MockData {
         SPLatinFullName: "Vahid nhnhnDadkhah",
       },
     ],
-    Peers: [
+    Peer: [
       {
         AvatarUrl: "/PublishingImages/760674.png",
         Id: 0,
@@ -69,7 +69,7 @@ export default class MockData {
         SPLatinFullName: "Vahid nhnhnDadkhah",
       },
     ],
-    Others: [
+    Other: [
       {
         AvatarUrl: "/PublishingImages/760674.png",
         Id: 0,

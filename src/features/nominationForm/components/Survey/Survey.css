@@ -18,3 +18,6 @@
   margin: 2% 0 !important;
   width: 85% !important;
 }
+.inline-items {
+  display: flex !important;
+}
