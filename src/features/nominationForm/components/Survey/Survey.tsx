@@ -229,9 +229,9 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       </MDBCol>
                       <MDBCol>
                         {this.state.HideSubordinateHistory === false && (
-                          <div>
+                          <div className="History">
                             <h3 className="pt-3 category">History</h3>
-                            <Card className="CardTable">
+                            <Card className="HistoryTable">
                               <Table className="table">
                                 <TableHead>
                                   <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
@@ -295,9 +295,9 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       </MDBCol>
                       <MDBCol>
                         {this.state.HidePeerHistory === false && (
-                          <div>
+                          <div className="History">
                             <h3 className="pt-3 category">History</h3>
-                            <Card className="CardTable">
+                            <Card className="HistoryTable">
                               <Table className="table">
                                 <TableHead>
                                   <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
@@ -361,9 +361,9 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       </MDBCol>
                       <MDBCol>
                         {this.state.HideOtherHistory === false && (
-                          <div>
+                          <div className="History">
                             <h3 className="pt-3 category">History</h3>
-                            <Card className="CardTable">
+                            <Card className="HistoryTable">
                               <Table className="table">
                                 <TableHead>
                                   <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
@@ -438,7 +438,8 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
             };
           });
         } else {
-          NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
+          if (this.state.SelectedOther !== "")
+            NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
           this.setState(prevState => {
             return {
               ...prevState,
@@ -462,7 +463,8 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
             };
           });
         } else {
-          NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
+          if (this.state.SelectedPeer !== "")
+            NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
           this.setState(prevState => {
             return {
               ...prevState,
@@ -486,7 +488,8 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
             };
           });
         } else {
-          NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
+          if (this.state.SelectedSubOrdinate !== "")
+            NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
           this.setState(prevState => {
             return {
               ...prevState,
@@ -543,7 +546,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   private renderHeader = (columnDetail: any[]) => {
     return columnDetail.map(
       row => (
-        <TableCell className="LogPadding" key={row.id} align="center" padding="none" sortDirection="desc">
+        <TableCell className="LogPadding" key={row.id} sortDirection="desc">
           {row.label}
         </TableCell>
       ),
@@ -604,7 +607,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   private renderHistoryHeader = (columnDetail: any[]) => {
     return columnDetail.map(
       row => (
-        <TableCell className="LogPadding" key={row.id} align="center" padding="none" sortDirection="desc">
+        <TableCell className="LogPadding" key={row.id} sortDirection="desc">
           {row.label}
         </TableCell>
       ),
@@ -674,11 +677,25 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   };
   /****************************on form submited*************************************/
   private SubmitForm = () => {
-    const UpdateItem: IUpdatedData = {
-      ItemId: this.state.itemId,
-      peer: this.state.SelectedPeers,
-      other: this.state.SelectedOthers,
-    };
-    this.ListService.updateNominationData(UpdateItem);
+    const subordinateLength = this.state.NominationData.Subordinates.length;
+    const Other = this.state.NominationData.Other.length;
+    const Peer = this.state.NominationData.Peer.length;
+    if (subordinateLength <= 2 || Other <= 2 || Peer <= 2) {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          snackbarMessage: "you should select between 3 to 15 users!",
+          showSnackbarMessage: true,
+          snackbarType: SnackBarMode.Error,
+        };
+      });
+    } else {
+      const UpdateItem: IUpdatedData = {
+        ItemId: this.state.itemId,
+        peer: this.state.SelectedPeers,
+        other: this.state.SelectedOthers,
+      };
+      this.ListService.updateNominationData(UpdateItem);
+    }
   };
 }

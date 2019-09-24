@@ -19,9 +19,17 @@
   margin: 2% 0;
   width: 90%;
 }
+.HistoryTable {
+  width: 100%;
+  margin: 2% 0;
+}
+
 .table {
   margin-bottom: 0;
 }
 .inline-items {
   display: flex !important;
+}
+.History {
+  margin-top: -16%;
 }
