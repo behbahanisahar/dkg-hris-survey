@@ -6,7 +6,7 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import ListServices from "./services/list-services";
 import NominationData from "../src/entities/nomination";
 import FlowSurvey from "./features/nominationForm/components/survey/survey";
-import FormSurvey from "./features/nominationForm/components/survey-form/survey-form";
+import FormSurvey from "./features/survey-form/components/main-form/survey-form";
 
 const theme = createMuiTheme({
   palette: {

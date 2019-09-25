@@ -1,0 +1,29 @@
+.Image {
+  border-radius: 50% !important;
+  margin-top: -6%;
+  max-width: 10%;
+  height: auto;
+  margin-left: 45%;
+}
+.Container {
+  background-color: white;
+  margin-top: 10% !important;
+}
+
+.li-class {
+  display: block;
+  direction: rtl;
+  text-align: right;
+  list-style: none;
+}
+.ul-class {
+  direction: rtl;
+  text-align: right;
+}
+.row {
+  text-align: right;
+  display: inline-block !important;
+}
+.slider {
+  width: 15% !important;
+}
