@@ -8,7 +8,7 @@ import NominationData from "../src/entities/nomination";
 import FlowSurvey from "./features/nominationForm/components/survey/survey";
 import SurveyIntroPage from "./features/survey-form/components/survey-intro/survey-intro";
 import FormSurvey from "./features/survey-form/components/main-form/survey-form";
-import SurveyIntroPage from "./features/survey-form/components/survey-intro/survey-intro";
+import NominationIntroPage from "./features/nominationForm/components/nomination-Intro/nomination-intro";
 
 const theme = createMuiTheme({
   palette: {
@@ -56,14 +56,17 @@ class App extends React.Component<{}, IAppState> {
     return (
       <div className="App">
         <MuiThemeProvider theme={theme}>
-          {this.state.page.toLowerCase() === "NominationForm" && (
+          {this.state.page.toLowerCase() === "nominationform" && (
             <div>
-              {this.state.NominationData.Status === "NotStarted" && <SelfSurvey itemId={this.state.itemId} />}
+              {this.state.NominationData.Status.toLowerCase() === "notstarted" && (
+                <SelfSurvey itemId={this.state.itemId} />
+              )}
               <FlowSurvey itemId={this.state.itemId} />
             </div>
           )}
-          {this.state.page === "SurveyForm" && <FormSurvey />}
-          {this.state.page === "SurveyIntro" && <SurveyIntroPage />}
+          {this.state.page.toLowerCase() === "surveyform" && <FormSurvey />}
+          {this.state.page.toLowerCase() === "surveyintro" && <SurveyIntroPage />}
+          {this.state.page.toLowerCase() === "nominationintro" && <NominationIntroPage />}
         </MuiThemeProvider>
       </div>
     );
