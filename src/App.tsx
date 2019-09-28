@@ -8,7 +8,6 @@ import NominationData from "../src/entities/nomination";
 import FlowSurvey from "./features/nominationForm/components/survey/survey";
 import SurveyIntroPage from "./features/survey-form/components/survey-intro/survey-intro";
 import FormSurvey from "./features/survey-form/components/main-form/survey-form";
-import SurveyIntroPage from "./features/survey-form/components/survey-intro/survey-intro";
 
 const theme = createMuiTheme({
   palette: {

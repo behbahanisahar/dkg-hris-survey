@@ -6,6 +6,7 @@ import IUpdatedData from "../entities/updatedNominationItem";
 import IHistory from "../entities/history";
 import SPLists from "../entities/lists";
 import Isurvey from "../entities/survey";
+import { ISurveyData } from "../entities/survey-data";
 
 class ListServices extends ServiceBase {
   public constructor() {
@@ -91,6 +92,11 @@ class ListServices extends ServiceBase {
     }
 
     return Promise.resolve(MockData.Appraisee);
+  }
+  /**************************submit form***************************************************** */
+  public async SubmitForm(param: ISurveyData): Promise<any> {
+    const items: any = await this.post("/survey", param);
+    return Promise.resolve(items);
   }
 }
 export default ListServices;
