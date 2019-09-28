@@ -43,9 +43,12 @@ a:visited {
 .App-link {
   color: #61dafb;
 }
-.MuiStepIcon-root.MuiStepIcon-completed{
-  color:#388e3c!important;
- 
+.MuiStepIcon-root.MuiStepIcon-completed {
+  color: #388e3c !important;
+}
+
+.MuiTableCell-root {
+  font-family: IranSans, tahoma;
 }
 
 @keyframes App-logo-spin {

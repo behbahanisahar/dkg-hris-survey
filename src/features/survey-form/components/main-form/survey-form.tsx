@@ -28,6 +28,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       radio: 1,
       marks: [],
       selectedValue: 0,
+      answers: [],
       itemid: 0,
     };
   }
@@ -114,7 +115,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       return (
         <div>
           <MDBCard className="Container mx-4">
-            <img src={ProfilePhoto} className="Image"></img>
+            <img src={ProfilePhoto} alt="badge" className="Image"></img>
             <MDBRow>
               <MDBCol md="4"></MDBCol>
               <MDBCol style={{ textAlign: "center" }}>
@@ -123,14 +124,14 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
               <MDBCol md="4" />
             </MDBRow>
 
-            <MDBRow>{this.onRenderQuestion(n.Questions)}</MDBRow>
+            <MDBRow>{this.onRenderQuestion(n.Questions, index)}</MDBRow>
           </MDBCard>
         </div>
       );
     });
   };
   /********************render questions****************************** */
-  private onRenderQuestion = (Questions: IQuestion[]) => {
+  private onRenderQuestion = (Questions: IQuestion[], cardIndex: Number) => {
     return Questions.map((item: IQuestion, index: any) => {
       return (
         <ul key={index} className="ul-class">
@@ -140,8 +141,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
             <div className="slider-Style">
               <Slider
                 key={index}
-                id={index}
-                title={index}
+                id={item.Field}
                 className="slider"
                 //  defaultValue={this.state.selectedValue}
                 getAriaValueText={this.valuetext}
@@ -170,7 +170,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   /************************************* */
 
   private changedValue = (event: any, value: any) => {
-    console.log(event.target.title);
+    console.log(event.target.id);
     this.setState(prevState => {
       return {
         ...prevState,
