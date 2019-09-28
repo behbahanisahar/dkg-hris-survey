@@ -170,11 +170,17 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   /************************************* */
 
   private changedValue = (event: any, value: any) => {
-    console.log(event.target.id);
     this.setState(prevState => {
+      if (event.target != null && event.target.Id != "") {
+        if (prevState.answers.some(x => x.QuestionId == event.target.id)) {
+          prevState.answers.filter(x => x.QuestionId == event.target.id)[0].Value = value;
+        } else prevState.answers.push({ QuestionId: event.target.id, Value: value });
+        console.log(prevState.answers);
+      }
       return {
         ...prevState,
         selectedValue: value,
+        answers: prevState.answers,
       };
     });
   };
