@@ -27,7 +27,6 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
   }
   public async componentDidMount() {
     await this.ListService.getAppraisee().then(appraisee => {
-      console.log(appraisee);
       this.setState(prevState => {
         return {
           ...prevState,
@@ -110,8 +109,8 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
     });
   };
   /************************************************************* */
-  private onShowItem = (itemId: number) => {
-    window.location.href = "?itemid=" + itemId + "&page=SurveyForm";
+  private onShowItem = (ItemId: number) => {
+    window.location.href = "?itemid=" + ItemId + "&page=SurveyForm";
   };
   /*********************************************************** */
 }

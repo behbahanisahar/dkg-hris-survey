@@ -2,6 +2,7 @@ import NominationData from "../entities/nomination";
 import IHistory from "../entities/history";
 import Isurvey from "../entities/survey";
 import { IAppraisee } from "../entities/appraisee";
+import UserTasks from "../entities/user-task";
 
 export default class MockData {
   public static getUserInfo: any[] = [
@@ -190,6 +191,7 @@ export default class MockData {
       },
     ],
   };
+
   public static Appraisee: IAppraisee[] = [
     {
       NominationItemId: 2,
@@ -211,6 +213,13 @@ export default class MockData {
       Relation: "Self",
       Status: "Not Completed",
       Title: "Sahar Behbahani",
+    },
+  ];
+  public static NominationTaks: UserTasks[] = [
+    {
+      ItemId: 5,
+      Title: "Sahar Behbahani",
+      Status: "Approved",
     },
   ];
 }

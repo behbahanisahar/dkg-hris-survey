@@ -7,6 +7,7 @@ import IHistory from "../entities/history";
 import SPLists from "../entities/lists";
 import Isurvey from "../entities/survey";
 import { ISurveyData } from "../entities/survey-data";
+import UserTasks from "../entities/user-task";
 
 class ListServices extends ServiceBase {
   public constructor() {
@@ -93,10 +94,20 @@ class ListServices extends ServiceBase {
 
     return Promise.resolve(MockData.Appraisee);
   }
+  /************************get nomination task*********************************************** */
+  public async getNominationTasks(): Promise<UserTasks[]> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("/tasks");
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockData.NominationTaks);
+  }
   /**************************submit form***************************************************** */
   public async SubmitForm(param: ISurveyData): Promise<any> {
     const items: any = await this.post("/survey", param);
     return Promise.resolve(items);
   }
+  /************************************************************** */
 }
 export default ListServices;
