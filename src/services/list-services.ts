@@ -62,14 +62,35 @@ class ListServices extends ServiceBase {
     return Promise.resolve(items.data);
   }
   /********************get survey form ***************************************************************** */
-  public async getSurveyFormData(): Promise<Isurvey[]> {
+  public async getSurveyFormData(itemId: number): Promise<Isurvey> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("/survey");
-      console.log(items);
+      const items: any = await this.get("/survey?nominationItemId=" + itemId + "");
       return Promise.resolve(items.data);
     }
 
     return Promise.resolve(MockData.SurveyFormData);
+  }
+  /*****************************get appraisee***************************************************** */
+  public async getAppraisee(): Promise<any[]> {
+    if (process.env.NODE_ENV === "production") {
+      const result: any = await this.get("/Appraisee");
+      const items: any[] = [];
+      result.data.forEach(async (el: any) => {
+        //    const res: any = await this.getSurveyFormData(el.NominationItemId);
+        items.push({
+          Title: el.Title,
+          Progress: el.Progress,
+          NominationItemId: el.NominationItemId,
+          Relation: el.Relation,
+          Status: " res.Status",
+        });
+      });
+      console.log(items);
+
+      return Promise.resolve(items);
+    }
+
+    return Promise.resolve(MockData.Appraisee);
   }
 }
 export default ListServices;

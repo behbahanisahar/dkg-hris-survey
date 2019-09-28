@@ -1,7 +1,7 @@
-import IQuestion from "./survey-questions";
+import ICategory from "./categories";
 
 export default interface Isurvey {
-  Title: string;
-  SignUrl: string;
-  Questions: IQuestion[];
+  UserDisplayName: string;
+  SurveyAnswerId: number;
+  Categories: ICategory[];
 }

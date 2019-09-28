@@ -1,6 +1,7 @@
 import NominationData from "../entities/nomination";
 import IHistory from "../entities/history";
 import Isurvey from "../entities/survey";
+import { IAppraisee } from "../entities/appraisee";
 
 export default class MockData {
   public static getUserInfo: any[] = [
@@ -134,41 +135,82 @@ export default class MockData {
     },
   ];
 
-  public static SurveyFormData: Isurvey[] = [
+  public static SurveyFormData: Isurvey = {
+    UserDisplayName: "Sahar Behbahani",
+    SurveyAnswerId: 0,
+    Categories: [
+      {
+        Title: "Builder Approach & Result Oriented",
+        SignUrl: "",
+        Questions: [
+          {
+            ItemId: 1,
+            Question:
+              "Focusing self and others on providing a prompt, professional and timely service to enhance customer experience",
+            QuestionFa:
+              "بر ارائه خدمات به صورت سریع، حرفه ای و به موقع در راستای ایجاد بهترین تجربه برای مشتریان، توجه دارد و دیگران را نیز در این راستا تشویق می کند.",
+            Field: "Cat1",
+            Category: "",
+            Value: 0,
+          },
+          {
+            ItemId: 3,
+            Question: "ss",
+            QuestionFa: "ss",
+            Field: "ss",
+            Category: "",
+            Value: 0,
+          },
+        ],
+      },
+
+      {
+        Title: "Builder Approach & Result Oriented",
+        SignUrl: "",
+        Questions: [
+          {
+            ItemId: 2,
+            Question:
+              "Focusing self and others on providing a prompt, professional and timely service to enhance customer experience",
+            QuestionFa:
+              "بر ارائه خدمات به صورت سریع، حرفه ای و به موقع در راستای ایجاد بهترین تجربه برای مشتریان، توجه دارد و دیگران را نیز در این راستا تشویق می کند.",
+            Field: "Cat1",
+            Category: "",
+            Value: 0,
+          },
+          {
+            ItemId: 3,
+            Question: "ss",
+            QuestionFa: "ss",
+            Field: "ss",
+            Category: "",
+            Value: 0,
+          },
+        ],
+      },
+    ],
+  };
+  public static Appraisee: IAppraisee[] = [
     {
-      Title: "Builder Approach & Result Oriented",
-      SignUrl: "",
-      Questions: [
-        {
-          ItemId: 1,
-          Question:
-            "Focusing self and others on providing a prompt, professional and timely service to enhance customer experience",
-          QuestionFa:
-            "بر ارائه خدمات به صورت سریع، حرفه ای و به موقع در راستای ایجاد بهترین تجربه برای مشتریان، توجه دارد و دیگران را نیز در این راستا تشویق می کند.",
-          Field: "Cat1",
-          Category: "",
-        },
-        {
-          ItemId: 3,
-          Question: "ss",
-          QuestionFa: "ss",
-          Field: "ss",
-          Category: "",
-        },
-      ],
+      NominationItemId: 2,
+      Progress: 64,
+      Relation: "Peer",
+      Status: "Not Completed",
+      Title: "Atria KhodaRahmi",
     },
     {
-      Title: "Customer Centric",
-      SignUrl: "",
-      Questions: [
-        {
-          ItemId: 2,
-          Question: "Persisting to see things through, regardless of challenges and barriers faced\t",
-          QuestionFa: "در پیگیری امور بدون توجه به چالش ها و موانع پیش رو، پافشاری می کند.\t",
-          Field: "null",
-          Category: "",
-        },
-      ],
+      NominationItemId: 4,
+      Progress: 64,
+      Relation: "Line Manager",
+      Status: "Not Completed",
+      Title: "Ali Nooshabadi",
+    },
+    {
+      NominationItemId: 5,
+      Progress: 64,
+      Relation: "Self",
+      Status: "Not Completed",
+      Title: "Sahar Behbahani",
     },
   ];
 }

@@ -13,8 +13,8 @@
 .li-class {
   display: block;
   direction: rtl;
-  text-align: right;
   list-style: none;
+  text-align: right;
 }
 .ul-class {
   direction: rtl;
@@ -25,5 +25,12 @@
   display: inline-block !important;
 }
 .slider {
-  width: 15% !important;
+  width: 85% !important;
+  margin: 4% auto;
+}
+.MuiSlider-markLabel {
+  font-family: "iransans" !important;
+}
+.slider-Style {
+  text-align: center !important;
 }

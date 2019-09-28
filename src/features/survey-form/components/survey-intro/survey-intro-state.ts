@@ -1,1 +1,5 @@
-export default interface ISurveyIntroState {}
+import { IAppraisee } from "../../../../entities/appraisee";
+
+export default interface ISurveyIntroState {
+  appraisee: IAppraisee[];
+}

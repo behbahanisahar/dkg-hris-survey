@@ -6,6 +6,7 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import ListServices from "./services/list-services";
 import NominationData from "../src/entities/nomination";
 import FlowSurvey from "./features/nominationForm/components/survey/survey";
+import SurveyIntroPage from "./features/survey-form/components/survey-intro/survey-intro";
 import FormSurvey from "./features/survey-form/components/main-form/survey-form";
 
 const theme = createMuiTheme({
@@ -61,6 +62,7 @@ class App extends React.Component<{}, IAppState> {
             </div>
           )}
           {this.state.page === "SurveyForm" && <FormSurvey />}
+          {this.state.page === "SurveyIntro" && <SurveyIntroPage />}
         </MuiThemeProvider>
       </div>
     );

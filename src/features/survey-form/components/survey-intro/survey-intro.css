@@ -1,0 +1,22 @@
+.intro {
+  white-space: pre !important;
+  text-align: right;
+  width: 95%;
+  margin: 1% 1%;
+  direction: rtl;
+}
+.intro-card {
+  margin: 2% auto;
+  width: 90%;
+}
+.CardTable {
+  width: 90%;
+  margin: 1% auto;
+  direction: rtl;
+}
+.completed {
+  background-color: #acd591;
+}
+.not-completed {
+  background-color: #f3736c;
+}
