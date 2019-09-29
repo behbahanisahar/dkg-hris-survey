@@ -15,7 +15,6 @@ import NominationData from "../../../../entities/nomination";
 import IUser from "../../../../entities/user";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
 import MYStepper from "../stepper/stepper";
-import ReapitingTable from "../reapiting-table/reapiting-table";
 import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
 import Spinner from "../../../../spinner/spinner";
@@ -56,6 +55,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
       rowsPerPage: 15,
       SelectedPeers: [],
       SelectedOthers: [],
+      SelectedSubOrdinates: [],
       showSnackbarMessage: false,
       snackbarMessage: "",
       snackbarType: SnackBarMode.Info,
@@ -106,8 +106,6 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
   }
 
   public render() {
-    const SelectedPeers = this.state.SelectedPeers;
-    const SelectedOthers = this.state.SelectedOthers;
     // const Subordinates = this.state.NominationData.Subordinates;
     return (
       <div>
@@ -169,7 +167,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                             <TableHead>
                               <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
                             </TableHead>
-                            <TableBody>{this.onRenderRows()}</TableBody>
+                            <TableBody>{this.onRenderRows("Subordinates")}</TableBody>
                           </Table>
                         </Card>
                       </MDBCol>
@@ -208,7 +206,12 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                     <MDBRow>
                       <MDBCol>
                         <Card className="Card">
-                          <ReapitingTable tableName="SelectedPeer" Items={SelectedPeers} />
+                          <Table className="table">
+                            <TableHead>
+                              <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                            </TableHead>
+                            <TableBody>{this.onRenderRows("Peer")}</TableBody>
+                          </Table>
                         </Card>
                       </MDBCol>
                       <MDBCol />
@@ -245,7 +248,14 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                     <MDBRow>
                       <MDBCol>
                         <Card className="Card">
-                          <ReapitingTable tableName="SelectedOther" Items={SelectedOthers} />
+                          <Card className="Card">
+                            <Table className="table">
+                              <TableHead>
+                                <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                              </TableHead>
+                              <TableBody>{this.onRenderRows("Other")}</TableBody>
+                            </Table>
+                          </Card>
                         </Card>
                       </MDBCol>
                       <MDBCol />
@@ -302,7 +312,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
     if (FieldName === "SelectedOther") {
       const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Other);
       if (ValidTableLength === false) {
-        const NewItem: IUser[] = this.state.SelectedOthers;
+        const NewItem: IUser[] = this.state.NominationData.Other;
         const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
         if (index > -1) {
           this.setState(prevState => {
@@ -327,7 +337,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
     } else if (FieldName === "SelectedPeer") {
       const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Peer);
       if (ValidTableLength === false) {
-        const NewItem: IUser[] = this.state.SelectedPeers;
+        const NewItem: IUser[] = this.state.NominationData.Peer;
         const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
         if (index > -1) {
           this.setState(prevState => {
@@ -369,7 +379,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
           this.setState(prevState => {
             return {
               ...prevState,
-              SelectedPeers: NewItem,
+              SelectedSubOrdinates: NewItem,
             };
           });
         }
@@ -380,7 +390,6 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
   /**************************** SnackBar ****************************** */
   private handleCloseMessage = () => {
     if (this.state.snackbarType === SnackBarMode.Success) {
-      alert("success");
     } else {
       this.setState(prevState => {
         return {
@@ -403,32 +412,80 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
     );
   };
 
-  private onRenderRows = () => {
-    return this.state.NominationData.Subordinates.map((n: any, index: any) => {
+  private onRenderRows = (TableName: string) => {
+    let items: any[] = [];
+    switch (TableName) {
+      case "Subordinates": {
+        items = this.state.NominationData.Subordinates;
+        break;
+      }
+      case "Peer": {
+        items = this.state.NominationData.Peer;
+        break;
+      }
+      case "Other": {
+        items = this.state.NominationData.Other;
+        break;
+      }
+      default:
+        items = this.state.NominationData.Subordinates;
+    }
+
+    if (items.length === 0) {
       return (
-        <TableRow key={index}>
-          <TableCell style={{ width: "1%" }} align="center">
-            {index + 1}
-          </TableCell>
-          <TableCell align="center">{n.SPLatinFullName}</TableCell>
-          <TableCell align="center" onClick={() => this.DeleteItem(n.SPLatinFullName)} style={{ width: "3%" }}>
-            <Delete />
+        <TableRow>
+          <TableCell align="center" colSpan={3} className="emptyRowLog">
+            There is no data to display!
           </TableCell>
         </TableRow>
       );
-    });
+    } else {
+      return items.map((n: any, index: any) => {
+        return (
+          <TableRow key={index}>
+            <TableCell style={{ width: "1%" }} align="center">
+              {index + 1}
+            </TableCell>
+            <TableCell align="center">{n.SPLatinFullName}</TableCell>
+            <TableCell
+              align="center"
+              onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
+              style={{ width: "3%" }}
+            >
+              <Delete color="primary" />
+            </TableCell>
+          </TableRow>
+        );
+      });
+    }
   };
   /******************************delete item from table***************************************************** */
-  private DeleteItem = (currentItem: string) => {
+  private DeleteItem = (currentItem: string, TableName: string) => {
     this.setState(prevState => {
-      // const prevValues=items;
-      const prevValues = prevState.NominationData.Subordinates || [];
+      let prevValues = [];
+      switch (TableName) {
+        case "Subordinates": {
+          prevValues = prevState.NominationData.Subordinates || [];
+          break;
+        }
+        case "Peer": {
+          prevValues = prevState.NominationData.Peer || [];
+          break;
+        }
+        case "Other": {
+          prevValues = prevState.NominationData.Other || [];
+          break;
+        }
+        default:
+          prevValues = prevState.NominationData.Subordinates || [];
+      }
+
       const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
       return {
         ...prevState,
         NominationData: {
           ...prevState.NominationData,
-          Subordinates: newValue,
+          [TableName]: newValue,
         },
       };
     });
@@ -465,10 +522,20 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
     } else {
       const UpdateItem: IUpdatedData = {
         ItemId: this.state.itemId,
-        peer: this.state.SelectedPeers,
-        other: this.state.SelectedOthers,
+        peer: this.state.NominationData.Peer,
+        other: this.state.NominationData.Other,
+        subordinate: this.state.NominationData.Subordinates,
       };
       this.ListService.updateNominationData(UpdateItem);
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          snackbarMessage: "successfully submitted!",
+          showSnackbarMessage: true,
+          snackbarType: SnackBarMode.Success,
+        };
+      });
+      window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
     }
   };
   /************************************************************** */

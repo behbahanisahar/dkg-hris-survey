@@ -12,6 +12,7 @@ export default interface ISurveyState {
   SelectedOther: string;
   SelectedSubOrdinateID: number;
   SelectedSubOrdinate: string;
+  SelectedSubOrdinates: IUser[];
   order: string;
   orderBy: string;
   page: number;

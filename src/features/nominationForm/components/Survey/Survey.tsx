@@ -67,6 +67,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
       rowsPerPage: 15,
       SelectedPeers: [],
       SelectedOthers: [],
+      SelectedSubOrdinates: [],
       showSnackbarMessage: false,
       snackbarMessage: "",
       snackbarType: SnackBarMode.Info,
@@ -210,7 +211,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                               <TableHead>
                                 <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
                               </TableHead>
-                              <TableBody>{this.onRenderRows("SubOrdinates")}</TableBody>
+                              <TableBody>{this.onRenderRows("Subordinates")}</TableBody>
                             </Table>
                           </Card>
                           <Tooltip
@@ -499,7 +500,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
           this.setState(prevState => {
             return {
               ...prevState,
-              SelectedPeers: NewItem,
+              SelectedSubOrdinates: NewItem,
             };
           });
         }
@@ -563,7 +564,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   private onRenderRows = (TableName: string) => {
     let items: any[] = [];
     switch (TableName) {
-      case "SubOrdinates": {
+      case "Subordinates": {
         items = this.state.NominationData.Subordinates;
         break;
       }
@@ -578,31 +579,40 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
       default:
         items = this.state.NominationData.Subordinates;
     }
-
-    return items.map((n: any, index: any) => {
+    if (items.length === 0) {
       return (
-        <TableRow key={index}>
-          <TableCell style={{ width: "3%" }} align="center">
-            {index + 1}
-          </TableCell>
-          <TableCell>{n.SPLatinFullName}</TableCell>
-          <TableCell
-            style={{ width: "3%" }}
-            align="center"
-            onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
-          >
-            <Delete cursor="pointer" color="primary" />
+        <TableRow>
+          <TableCell align="center" colSpan={3} className="emptyRowLog">
+            There is no data to display!
           </TableCell>
         </TableRow>
       );
-    });
+    } else {
+      return items.map((n: any, index: any) => {
+        return (
+          <TableRow key={index}>
+            <TableCell style={{ width: "3%" }} align="center">
+              {index + 1}
+            </TableCell>
+            <TableCell>{n.SPLatinFullName}</TableCell>
+            <TableCell
+              style={{ width: "3%" }}
+              align="center"
+              onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
+            >
+              <Delete cursor="pointer" color="primary" />
+            </TableCell>
+          </TableRow>
+        );
+      });
+    }
   };
   /******************************delete item from table***************************************************** */
   private DeleteItem = (currentItem: string, TableName: string) => {
     this.setState(prevState => {
       let prevValues = [];
       switch (TableName) {
-        case "SubOrdinates": {
+        case "Subordinates": {
           prevValues = prevState.NominationData.Subordinates || [];
           break;
         }
@@ -678,8 +688,12 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
             <TableCell align="center">{index + 1}</TableCell>
             <TableCell align="center">{n.ModifiedBy}</TableCell>
             <TableCell align="center">{n.ModifiedDateShamsi}</TableCell>
-            <TableCell align="center">{AddedStr}</TableCell>
-            <TableCell align="center">{DeletedStr}</TableCell>
+            <TableCell align="center" className={AddedStr !== "" ? "added-items" : ""}>
+              {AddedStr}
+            </TableCell>
+            <TableCell align="center" className={DeletedStr !== "" ? "deleted-items" : ""}>
+              {DeletedStr}
+            </TableCell>
           </TableRow>
         );
       });
@@ -717,10 +731,20 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
     } else {
       const UpdateItem: IUpdatedData = {
         ItemId: this.state.itemId,
-        peer: this.state.SelectedPeers,
-        other: this.state.SelectedOthers,
+        peer: this.state.NominationData.Peer,
+        other: this.state.NominationData.Other,
+        subordinate: this.state.NominationData.Subordinates,
       };
       this.ListService.updateNominationData(UpdateItem);
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          snackbarMessage: "successfully submitted!",
+          showSnackbarMessage: true,
+          snackbarType: SnackBarMode.Success,
+        };
+      });
+      window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
     }
   };
 }

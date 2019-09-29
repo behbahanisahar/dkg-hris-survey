@@ -17,6 +17,7 @@ export default interface ISurveyState {
   rowsPerPage: number;
   SelectedPeers: IUser[];
   SelectedOthers: IUser[];
+  SelectedSubOrdinates: IUser[];
   UsersIsLoading: boolean;
   itemId: number;
   NominationData: NominationData;

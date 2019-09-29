@@ -33,3 +33,9 @@
 .History {
   margin-top: -16%;
 }
+.added-items {
+  background-color: #acd591;
+}
+.deleted-items {
+  background-color: #f3736c;
+}

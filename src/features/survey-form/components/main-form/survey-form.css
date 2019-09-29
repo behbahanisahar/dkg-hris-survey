@@ -20,9 +20,9 @@
   direction: rtl;
   text-align: right;
 }
-.row {
+.question-row {
   text-align: right;
-  display: flex !important;
+  display: block !important;
 }
 .slider {
   width: 85% !important;
@@ -33,4 +33,8 @@
 }
 .slider-Style {
   text-align: center !important;
+}
+.buttons {
+  text-align: right;
+  margin: 2%;
 }

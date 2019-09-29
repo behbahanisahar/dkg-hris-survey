@@ -4,12 +4,23 @@ import ListServices from "../../../../services/list-services";
 import { MDBCard, MDBRow, MDBCol, MDBBtn } from "mdbreact";
 import "./survey-form.css";
 import IQuestion from "../../../../entities/survey-questions";
-import { Slider } from "@material-ui/core";
+import { Slider, Tooltip, withStyles, Theme, Typography } from "@material-ui/core";
 import ICategory from "../../../../entities/categories";
 import Isurvey from "../../../../entities/survey";
 import Util from "../../../../utilities/utilities";
 import { ISurveyData } from "../../../../entities/survey-data";
 import Context from "../../../../utilities/context";
+import Info from "@material-ui/icons/Info";
+
+const HtmlTooltip = withStyles((theme: Theme) => ({
+  tooltip: {
+    backgroundColor: "#87D3E1",
+    color: "#fff",
+    maxWidth: 300,
+    fontSize: "6px",
+    border: "1px solid #dadde9",
+  },
+}))(Tooltip);
 class FormSurvey extends React.Component<{}, ISurveyFromState> {
   private ListService: ListServices;
   private util: Util;
@@ -28,7 +39,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       radio: 1,
       marks: [],
       selectedValue: 0,
-      answers: [],
+      answers: [{ QuestionId: 0, Value: 0 }],
       itemid: 0,
     };
   }
@@ -96,15 +107,17 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     return (
       <div>
         <div>{this.onRenderCard()}</div>
-        <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Not Completed")}>
-          ذخیره
-        </MDBBtn>
-        <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Completed")}>
-          ثبت نهایی
-        </MDBBtn>
-        <MDBBtn size="sm" color="grey lighten-3">
-          Cancel
-        </MDBBtn>
+        <div className="buttons">
+          <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Not Completed")}>
+            ذخیره
+          </MDBBtn>
+          <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Completed")}>
+            ثبت نهایی
+          </MDBBtn>
+          <MDBBtn size="sm" color="grey lighten-3">
+            انصراف
+          </MDBBtn>
+        </div>
       </div>
     );
   }
@@ -113,10 +126,10 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     const ProfilePhoto = "http://hq-spsrv03:90/SiteAssets/pic.png";
     return this.state.SurveyFormData.Categories.map((n: ICategory, index: any) => {
       return (
-        <div>
+        <div key={index}>
           <MDBCard className="Container mx-4">
             <img src={ProfilePhoto} alt="badge" className="Image"></img>
-            <MDBRow>
+            <MDBRow className="question-row">
               <MDBCol md="4"></MDBCol>
               <MDBCol style={{ textAlign: "center" }}>
                 <h5>{n.Title}</h5>
@@ -124,7 +137,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
               <MDBCol md="4" />
             </MDBRow>
 
-            <MDBRow>{this.onRenderQuestion(n.Questions, index)}</MDBRow>
+            <MDBRow className="question-row">{this.onRenderQuestion(n.Questions, index)}</MDBRow>
           </MDBCard>
         </div>
       );
@@ -137,7 +150,15 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
         <ul key={index} className="ul-class">
           <li className="li-class">
             {item.QuestionFa}
-
+            <HtmlTooltip
+              title={
+                <React.Fragment>
+                  <Typography color="inherit"> {item.Question}</Typography>
+                </React.Fragment>
+              }
+            >
+              <Info color="primary" />
+            </HtmlTooltip>
             <div className="slider-Style">
               <Slider
                 key={index}
@@ -149,11 +170,12 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                 step={1}
                 valueLabelDisplay="auto"
                 value={this.state.selectedValue}
+                // value={this.state.answers[index].QuestionId}
                 //  valueLabelDisplay={this.showLabel(marks)}
                 //  valueLabelFormat={this.valueLabelFormat}
                 marks={this.state.marks}
                 // onChange={(event: any) => this.changedValue(event, value)}
-                onChange={this.changedValue}
+                onChange={this.changedValue("slider1")}
                 max={10}
                 min={0}
               />
@@ -169,20 +191,36 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   }
   /************************************* */
 
-  private changedValue = (event: any, value: any) => {
-    this.setState(prevState => {
-      if (event.target != null && event.target.Id != "") {
-        if (prevState.answers.some(x => x.QuestionId == event.target.id)) {
-          prevState.answers.filter(x => x.QuestionId == event.target.id)[0].Value = value;
-        } else prevState.answers.push({ QuestionId: event.target.id, Value: value });
-        console.log(prevState.answers);
-      }
-      return {
-        ...prevState,
-        selectedValue: value,
-        answers: prevState.answers,
-      };
-    });
+  private changedValue = (name: string) => (event: any, value: any) => {
+    console.log(name);
+    //   this.setState(prevState => {
+    //     if (event.target !== null && event.target.Id !== "") {
+    //       if (prevState.answers.some(x => x.QuestionId === event.target.id)) {
+    //         prevState.answers.filter(x => x.QuestionId === event.target.id)[0].Value = value;
+    //       } else prevState.answers.push({ QuestionId: event.target.id, Value: value });
+    //       console.log(prevState.answers);
+    //     }
+    //     return {
+    //       ...prevState,
+    //       selectedValue: value,
+    //       answers: prevState.answers,
+    //     };
+    //   });
+    // };
+    // private changedValue = (event: any, value: any) => {
+    //   this.setState(prevState => {
+    //     if (event.target != null && event.target.Id !== "") {
+    //       if (prevState.answers.findIndex(x => x.QuestionId === event.target.id) > -1) {
+    //         prevState.answers.filter(x => x.QuestionId === event.target.id)[0].Value = value;
+    //       } else prevState.answers.push({ QuestionId: event.target.id, Value: value });
+    //       console.log(prevState.answers);
+    //     }
+    //     return {
+    //       ...prevState,
+    //       selectedValue: value,
+    //       answers: prevState.answers,
+    //     };
+    //   });
   };
   /*****************submit form *********************************** */
   private onSubmitForm = async (status: string) => {

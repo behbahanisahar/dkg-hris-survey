@@ -53,9 +53,6 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public render() {
-    console.log(this.state.itemId);
-    console.log(this.state.page);
-
     return (
       <div className="App">
         <MuiThemeProvider theme={theme}>

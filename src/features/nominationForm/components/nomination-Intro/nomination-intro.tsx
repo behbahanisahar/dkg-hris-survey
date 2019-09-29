@@ -92,14 +92,14 @@ export default class NominationIntroPage extends React.Component<{}, INomination
           </TableCell>
           <TableCell align="center">{n.Title}</TableCell>
           <TableCell style={{ width: "3%" }} align="center">
-            <Pageview cursor="pointer" color="primary" onClick={() => this.onShowItem(n.ItemId, n.Status)} />
+            <Pageview cursor="pointer" color="primary" onClick={() => this.onShowItem(n.ItemId)} />
           </TableCell>
         </TableRow>
       );
     });
   };
   /************************************************************* */
-  private onShowItem = (ItemId: number, Status: string) => {
+  private onShowItem = (ItemId: number) => {
     window.location.href = "?itemid=" + ItemId + "&page=SurveyForm";
   };
 }
