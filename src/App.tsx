@@ -53,6 +53,9 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public render() {
+    console.log(this.state.itemId);
+    console.log(this.state.page);
+
     return (
       <div className="App">
         <MuiThemeProvider theme={theme}>
@@ -61,7 +64,9 @@ class App extends React.Component<{}, IAppState> {
               {this.state.NominationData.Status.toLowerCase() === "notstarted" && (
                 <SelfSurvey itemId={this.state.itemId} />
               )}
-              <FlowSurvey itemId={this.state.itemId} />
+              {this.state.NominationData.Status.toLowerCase() !== "notstarted" && (
+                <FlowSurvey itemId={this.state.itemId} />
+              )}
             </div>
           )}
           {this.state.page.toLowerCase() === "surveyform" && <FormSurvey />}

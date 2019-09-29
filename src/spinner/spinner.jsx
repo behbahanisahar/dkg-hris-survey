@@ -6,16 +6,10 @@ import "./spinner.css";
 const InnerSpinner = props => {
   // tslint:disable-next-line:no-console
   let size = "80";
-  let spinnerType = "Oval";
-  if (props.Type !== null) {
-    spinnerType = props.Type;
-  }
-  if (props.height !== null) {
-    size = props.height;
-  }
+
   return (
     <div className="spinner">
-      <Loader type={spinnerType} color="#ef5661" height={size} width={size} style={{ margin: "14% 0%" }} />
+      <Loader type="Oval" color="#ef5661" height={size} width={size} style={{ margin: "14% 0%" }} />
     </div>
   );
 };

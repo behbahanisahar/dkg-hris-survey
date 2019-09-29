@@ -22,7 +22,7 @@
 }
 .row {
   text-align: right;
-  display: inline-block !important;
+  display: flex !important;
 }
 .slider {
   width: 85% !important;

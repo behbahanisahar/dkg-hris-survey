@@ -5,10 +5,9 @@ import { MDBCard, MDBCol, MDBCardBody, MDBBtn, MDBRow, MDBContainer, MDBCardText
 import "./self-survey.css";
 import ListServices from "../../../../services/list-services";
 import SPLists from "../../../../entities/lists";
-import ReactSelect from "react-select";
 import Add from "@material-ui/icons/Add";
 import { Fab, Card, Tooltip, Table, TableHead, TableRow, TableBody, TableCell } from "@material-ui/core";
-
+import AsyncSelect from "react-select/async";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
 import Util from "../../../../utilities/utilities";
@@ -20,6 +19,16 @@ import ReapitingTable from "../reapiting-table/reapiting-table";
 import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
 import Spinner from "../../../../spinner/spinner";
+const RenderOption = (option: any) => (
+  <div>
+    <strong>{option.label}</strong>
+    <div>
+      <small>
+        <i>{option.EmailAddress}</i> | <span>{option.Department}</span>
+      </small>
+    </div>
+  </div>
+);
 export default class SelfServuy extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
   private tableHeaders: ITableHeader[];
@@ -53,6 +62,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
       UsersIsLoading: true,
       itemId: 0,
       activeStep: 0,
+      showSpinner: true,
       NominationData: {
         Status: "",
         Subordinates: [],
@@ -90,6 +100,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
         ...prevState,
         itemId: Number(itemId),
         NominationData,
+        showSpinner: false,
       };
     });
   }
@@ -100,131 +111,157 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
     // const Subordinates = this.state.NominationData.Subordinates;
     return (
       <div>
-        <Spinner />
-        <MDBCol>
-          <div className="card-header mt-2">
-            <div className="content">
-              <p className="user">
-                <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
-                <h6>
-                  {this.state.NominationData.User!.EmailAddress} | {this.state.NominationData.User!.Department} |{" "}
-                  {this.state.NominationData.User!.JobGrade}{" "}
-                </h6>
-              </p>
-              <div className="page-header">Nomination Form</div>
+        {this.state.showSpinner && <Spinner />}
+        {!this.state.showSpinner && (
+          <MDBCol>
+            <div className="card-header mt-2">
+              <div className="content">
+                <p className="user">
+                  <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
+                  <h6>
+                    {this.state.NominationData.User!.EmailAddress} | {this.state.NominationData.User!.Department} |{" "}
+                    {this.state.NominationData.User!.JobGrade}{" "}
+                  </h6>
+                </p>
+                <div className="page-header">Nomination Form</div>
+              </div>
             </div>
-          </div>
-          <MDBCard className="w-auto">
-            <div>
-              <MYStepper activeStep={this.state.activeStep} />
-            </div>
+            <MDBCard className="w-auto">
+              <div>
+                <MYStepper activeStep={this.state.activeStep} />
+              </div>
 
-            <MDBCardBody>
-              <MDBCardText>
-                <MDBContainer>
-                  <h3 className="pt-3 category">Subordinates</h3>
-                  <MDBRow>
-                    <ReactSelect
-                      className="basic-single"
-                      classNamePrefix="select"
-                      isDisabled={false}
-                      isClearable={true}
-                      isRtl={false}
-                      isSearchable={true}
-                      name="SelectedPeer"
-                      isLoading={this.state.UsersIsLoading}
-                      onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
-                      options={this.state.UserInfo}
-                      // loadOptions={this.promiseOptions}
-                      placeholder="select..."
-                    />
-                    <Tooltip title="Add" aria-label="add">
-                      <Fab size="small" color="primary" className="ml-3" aria-label="add">
-                        <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
-                      </Fab>
-                    </Tooltip>
-                  </MDBRow>
-                  <MDBRow>
-                    <Card className="CardTable">
-                      <Table className="table">
-                        <TableHead>
-                          <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                        </TableHead>
-                        <TableBody>{this.onRenderRows()}</TableBody>
-                      </Table>
-                    </Card>
-                  </MDBRow>
+              <MDBCardBody>
+                <MDBCardText>
+                  <MDBContainer>
+                    <h3 className="pt-3 category">Subordinates</h3>
+                    <MDBRow>
+                      <MDBCol>
+                        <div className="inline-items">
+                          <AsyncSelect
+                            defaultOptions
+                            getOptionLabel={RenderOption as any}
+                            className="basic-single"
+                            classNamePrefix="select"
+                            dir="ltr"
+                            loadOptions={inputValue => this.loadOptions(inputValue)}
+                            isSearchable={true}
+                            name="SelectedSubOrdinate"
+                            isLoading={this.state.UsersIsLoading}
+                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
+                            options={this.state.UserInfo}
+                            placeholder="select..."
+                          />
 
-                  <h3 className="pt-3 category">Peer</h3>
+                          <Tooltip title="Add" aria-label="add">
+                            <Fab size="small" color="primary" className="ml-3" aria-label="add">
+                              <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
+                            </Fab>
+                          </Tooltip>
+                        </div>
+                      </MDBCol>
+                      <MDBCol />
+                    </MDBRow>
+                    <MDBRow>
+                      <MDBCol>
+                        <Card className="Card">
+                          <Table className="table">
+                            <TableHead>
+                              <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                            </TableHead>
+                            <TableBody>{this.onRenderRows()}</TableBody>
+                          </Table>
+                        </Card>
+                      </MDBCol>
+                      <MDBCol />
+                    </MDBRow>
 
-                  <MDBRow>
-                    <ReactSelect
-                      className="basic-single"
-                      classNamePrefix="select"
-                      isDisabled={false}
-                      isClearable={true}
-                      isRtl={false}
-                      isSearchable={true}
-                      name="SelectedPeer"
-                      isLoading={this.state.UsersIsLoading}
-                      onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
-                      options={this.state.UserInfo}
-                      // loadOptions={this.promiseOptions}
-                      placeholder="select..."
-                    />
-                    <Tooltip title="Add" aria-label="add">
-                      <Fab size="small" color="primary" className="ml-3" aria-label="add">
-                        <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
-                      </Fab>
-                    </Tooltip>
-                  </MDBRow>
+                    <h3 className="pt-3 category">Peer</h3>
 
-                  <MDBRow>
-                    <Card className="CardTable">
-                      <ReapitingTable tableName="SelectedPeer" Items={SelectedPeers} />
-                    </Card>
-                  </MDBRow>
+                    <MDBRow>
+                      <MDBCol>
+                        <div className="inline-items">
+                          <AsyncSelect
+                            defaultOptions
+                            getOptionLabel={RenderOption as any}
+                            className="basic-single"
+                            classNamePrefix="select"
+                            loadOptions={inputValue => this.loadOptions(inputValue)}
+                            isSearchable={true}
+                            name="SelectedPeer"
+                            isLoading={this.state.UsersIsLoading}
+                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
+                            options={this.state.UserInfo}
+                            placeholder="select..."
+                          />
 
-                  <h3 className="pt-3 category">Other</h3>
+                          <Tooltip title="Add" aria-label="add">
+                            <Fab size="small" color="primary" className="ml-3" aria-label="add">
+                              <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
+                            </Fab>
+                          </Tooltip>
+                        </div>
+                      </MDBCol>
+                      <MDBCol />
+                    </MDBRow>
 
-                  <MDBRow>
-                    <ReactSelect
-                      className="basic-single"
-                      classNamePrefix="select"
-                      isDisabled={false}
-                      isClearable={true}
-                      isRtl={false}
-                      isSearchable={true}
-                      name="SelectedOther"
-                      isLoading={this.state.UsersIsLoading}
-                      onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
-                      options={this.state.UserInfo}
-                      // loadOptions={this.promiseOptions}
-                      placeholder="select..."
-                    />
-                    <Tooltip title="Add" aria-label="add">
-                      <Fab size="small" className="ml-3" color="primary" aria-label="add">
-                        <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
-                      </Fab>
-                    </Tooltip>
-                  </MDBRow>
+                    <MDBRow>
+                      <MDBCol>
+                        <Card className="Card">
+                          <ReapitingTable tableName="SelectedPeer" Items={SelectedPeers} />
+                        </Card>
+                      </MDBCol>
+                      <MDBCol />
+                    </MDBRow>
 
-                  <MDBRow>
-                    <Card className="CardTable">
-                      <ReapitingTable tableName="SelectedOther" Items={SelectedOthers} />
-                    </Card>
-                  </MDBRow>
-                </MDBContainer>
-              </MDBCardText>
-              <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
-                Submit
-              </MDBBtn>
-              <MDBBtn size="sm" color="grey lighten-3">
-                Cancel
-              </MDBBtn>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
+                    <h3 className="pt-3 category">Other</h3>
+
+                    <MDBRow>
+                      <MDBCol>
+                        <div className="inline-items">
+                          <AsyncSelect
+                            defaultOptions
+                            getOptionLabel={RenderOption as any}
+                            className="basic-single"
+                            classNamePrefix="select"
+                            loadOptions={inputValue => this.loadOptions(inputValue)}
+                            isSearchable={true}
+                            name="SelectedOther"
+                            isLoading={this.state.UsersIsLoading}
+                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
+                            options={this.state.UserInfo}
+                            placeholder="select..."
+                          />
+                          <Tooltip title="Add" aria-label="add">
+                            <Fab size="small" className="ml-3" color="primary" aria-label="add">
+                              <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
+                            </Fab>
+                          </Tooltip>
+                        </div>
+                      </MDBCol>
+                      <MDBCol />
+                    </MDBRow>
+
+                    <MDBRow>
+                      <MDBCol>
+                        <Card className="Card">
+                          <ReapitingTable tableName="SelectedOther" Items={SelectedOthers} />
+                        </Card>
+                      </MDBCol>
+                      <MDBCol />
+                    </MDBRow>
+                  </MDBContainer>
+                </MDBCardText>
+                <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
+                  Submit
+                </MDBBtn>
+                <MDBBtn size="sm" color="grey lighten-3">
+                  Cancel
+                </MDBBtn>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        )}
         <SnackBarMessage
           type={this.state.snackbarType}
           message={this.state.snackbarMessage}
@@ -434,4 +471,8 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
       this.ListService.updateNominationData(UpdateItem);
     }
   };
+  /************************************************************** */
+  private async loadOptions(inputValue: string) {
+    return await this.ListService.getUserInfo(inputValue);
+  }
 }

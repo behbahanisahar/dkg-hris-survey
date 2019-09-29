@@ -15,10 +15,13 @@
 .basic-single {
   width: 80%;
 }
-.CardTable {
+.Card {
   margin: 2% 0;
   width: 90%;
 }
 .table {
   margin-bottom: 0;
+}
+.inline-items {
+  display: flex !important;
 }
