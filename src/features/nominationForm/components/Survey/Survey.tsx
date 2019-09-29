@@ -175,9 +175,9 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
               <MDBCardBody>
                 <MDBCardText>
                   <MDBContainer>
+                    <h3 className="pt-3 category">Subordinates</h3>
                     <MDBRow>
                       <MDBCol>
-                        <h3 className="pt-3 category">Subordinates</h3>
                         <div className="inline-items">
                           <AsyncSelect
                             defaultOptions
@@ -206,11 +206,11 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       <MDBCol>
                         <div className="inline-items">
                           <Card className="CardTable">
-                            <Table className="table">
+                            <Table style={{ direction: "ltr" }} className="table">
                               <TableHead>
                                 <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
                               </TableHead>
-                              <TableBody>{this.onRenderRows("SubOrdinate")}</TableBody>
+                              <TableBody>{this.onRenderRows("SubOrdinates")}</TableBody>
                             </Table>
                           </Card>
                           <Tooltip
@@ -230,9 +230,11 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       <MDBCol>
                         {this.state.HideSubordinateHistory === false && (
                           <div className="History">
-                            <h3 className="pt-3 category">History</h3>
+                            <h3 style={{ float: "left" }} className="pt-3 category">
+                              History
+                            </h3>
                             <Card className="HistoryTable">
-                              <Table className="table">
+                              <Table style={{ direction: "ltr" }} className="table">
                                 <TableHead>
                                   <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
                                 </TableHead>
@@ -244,9 +246,9 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       </MDBCol>
                     </MDBRow>
                     <hr />
+                    <h3 className="pt-5 category">Peer</h3>
                     <MDBRow>
                       <MDBCol>
-                        <h3 className="pt-5 category">Peer</h3>
                         <div className="inline-items">
                           <AsyncSelect
                             defaultOptions
@@ -275,7 +277,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       <MDBCol>
                         <div className="inline-items">
                           <Card className="CardTable">
-                            <Table className="table">
+                            <Table style={{ direction: "ltr" }} className="table">
                               <TableHead>
                                 <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
                               </TableHead>
@@ -296,9 +298,11 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       <MDBCol>
                         {this.state.HidePeerHistory === false && (
                           <div className="History">
-                            <h3 className="pt-3 category">History</h3>
+                            <h3 style={{ float: "left" }} className="pt-3 category">
+                              History
+                            </h3>
                             <Card className="HistoryTable">
-                              <Table className="table">
+                              <Table style={{ direction: "ltr" }} className="table">
                                 <TableHead>
                                   <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
                                 </TableHead>
@@ -310,9 +314,9 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       </MDBCol>
                     </MDBRow>
                     <hr />
+                    <h3 className="pt-5 category">Other</h3>
                     <MDBRow>
                       <MDBCol>
-                        <h3 className="pt-5 category">Other</h3>
                         <div className="inline-items">
                           <AsyncSelect
                             defaultOptions
@@ -341,7 +345,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       <MDBCol>
                         <div className="inline-items">
                           <Card className="CardTable">
-                            <Table className="table">
+                            <Table style={{ direction: "ltr" }} className="table">
                               <TableHead>
                                 <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
                               </TableHead>
@@ -362,9 +366,11 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                       <MDBCol>
                         {this.state.HideOtherHistory === false && (
                           <div className="History">
-                            <h3 className="pt-3 category">History</h3>
+                            <h3 style={{ float: "left" }} className="pt-3 category">
+                              History
+                            </h3>
                             <Card className="HistoryTable">
-                              <Table className="table">
+                              <Table style={{ direction: "ltr" }} className="table">
                                 <TableHead>
                                   <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
                                 </TableHead>
@@ -556,9 +562,8 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
 
   private onRenderRows = (TableName: string) => {
     let items: any[] = [];
-    console.log(this.state.NominationData);
     switch (TableName) {
-      case "SubOrdinate": {
+      case "SubOrdinates": {
         items = this.state.NominationData.Subordinates;
         break;
       }
@@ -581,7 +586,11 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
             {index + 1}
           </TableCell>
           <TableCell>{n.SPLatinFullName}</TableCell>
-          <TableCell style={{ width: "3%" }} align="center" onClick={() => this.DeleteItem(n.SPLatinFullName)}>
+          <TableCell
+            style={{ width: "3%" }}
+            align="center"
+            onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
+          >
             <Delete cursor="pointer" color="primary" />
           </TableCell>
         </TableRow>
@@ -589,16 +598,32 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
     });
   };
   /******************************delete item from table***************************************************** */
-  private DeleteItem = (currentItem: string) => {
+  private DeleteItem = (currentItem: string, TableName: string) => {
     this.setState(prevState => {
-      // const prevValues=items;
-      const prevValues = prevState.NominationData.Subordinates || [];
+      let prevValues = [];
+      switch (TableName) {
+        case "SubOrdinates": {
+          prevValues = prevState.NominationData.Subordinates || [];
+          break;
+        }
+        case "Peer": {
+          prevValues = prevState.NominationData.Peer || [];
+          break;
+        }
+        case "Other": {
+          prevValues = prevState.NominationData.Other || [];
+          break;
+        }
+        default:
+          prevValues = prevState.NominationData.Subordinates || [];
+      }
+
       const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
       return {
         ...prevState,
         NominationData: {
           ...prevState.NominationData,
-          Subordinates: newValue,
+          [TableName]: newValue,
         },
       };
     });

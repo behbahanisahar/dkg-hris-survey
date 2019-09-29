@@ -43,7 +43,7 @@ export default class MockData {
     },
   ];
   public static NominationData: NominationData = {
-    Status: "notstarted",
+    Status: "notstarted2",
     Subordinates: [
       {
         AvatarUrl: "/PublishingImages/760674.png",

@@ -175,8 +175,8 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                       </MDBCol>
                       <MDBCol />
                     </MDBRow>
-
-                    <h3 className="pt-3 category">Peer</h3>
+                    <hr />
+                    <h3 className="pt-5 category">Peer</h3>
 
                     <MDBRow>
                       <MDBCol>
@@ -213,8 +213,8 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                       </MDBCol>
                       <MDBCol />
                     </MDBRow>
-
-                    <h3 className="pt-3 category">Other</h3>
+                    <hr />
+                    <h3 className="pt-5 category">Other</h3>
 
                     <MDBRow>
                       <MDBCol>
