@@ -179,7 +179,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                 //  valueLabelFormat={this.valueLabelFormat}
                 marks={this.state.marks}
                 //onChange={(event: any) => this.changedValue(event, value)}
-                onChange={this.changedValue}
+                onChangeCommitted={this.changedValue(item.ItemId)}
                 max={10}
                 min={0}
               />
@@ -191,8 +191,6 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   };
 
   private initializeAnwers = (data: Isurvey) => {
-    console.log("initializeAnwers");
-
     data.Categories.forEach(element => {
       element.Questions.forEach(q => {
         this.state.answers.push({
@@ -204,7 +202,6 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   };
   /**************************render slider value***************************** */
   private onRenderSliderValue = (Field: any) => {
-    console.log("onRenderSliderValue", Field);
     if (Field === null || this.state.answers.some(x => x.QuestionId === Field) == false) {
       return 0;
     } else {
@@ -217,20 +214,16 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   }
   /************************************* */
 
-  private changedValue = (event: any, value: any) => {
-    console.log("changeValue", value);
+  changedValue = (itemId: number) => (event: any, value: any) => {
     this.setState(prevState => {
-      debugger;
-      if (event.target !== null && event.target.Id !== "" && event.target.Id !== "0") {
-        if (prevState.answers.some(x => x.QuestionId === event.target.id)) {
-          prevState.answers.filter(x => x.QuestionId === event.target.id)[0].Value = value;
+      if (itemId !== 0) {
+        if (prevState.answers.some(x => x.QuestionId === itemId)) {
+          prevState.answers.filter(x => x.QuestionId === itemId)[0].Value = value;
         } else
           prevState.answers.push({
-            QuestionId: event.target.id,
+            QuestionId: itemId,
             Value: value,
-            //QuestionField: event.target.id,
           });
-        console.log(prevState.answers);
       }
       return {
         ...prevState,
@@ -240,34 +233,13 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     });
   };
 
-  // private changedValue = (event: any, value: any) => {
-  //   this.setState(prevState => {
-  //     if (event.target != null && event.target.Id !== "") {
-  //       if (prevState.answers.findIndex(x => x.QuestionId === event.target.id) > -1) {
-  //         prevState.answers.filter(x => x.QuestionId === event.target.id)[0].Value = value;
-  //       } else prevState.answers.push({ QuestionId: event.target.id, Value: value });
-  //       console.log(prevState.answers);
-  //     }
-  //     return {
-  //       ...prevState,
-  //       selectedValue: value,
-  //       answers: prevState.answers,
-  //     };
-  //   });
-  // };
   /*****************submit form *********************************** */
   private onSubmitForm = async (status: string) => {
     const SubmitData: ISurveyData = {
       nominationItemId: this.state.itemid,
       currentUserId: Context.userId,
       status,
-      answers: [
-        {
-          QuestionId: 3,
-          Value: 4,
-          //QuestionField: "",
-        },
-      ],
+      answers: this.state.answers,
     };
     await this.ListService.SubmitForm(SubmitData);
   };
