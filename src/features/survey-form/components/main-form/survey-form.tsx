@@ -166,20 +166,14 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
             <div className="slider-Style">
               <Slider
                 key={index}
-                id={item.Field}
                 className="slider"
-                defaultValue={this.onRenderSliderValue(item.ItemId)}
+                defaultValue={this.onRenderSliderValue(item.Field)}
                 getAriaValueText={this.valuetext}
                 aria-labelledby="discrete-slider-custom"
                 step={1}
                 valueLabelDisplay="auto"
-                //value={this.onRenderSliderValue(item.Field)}
-                // value={this.state.answers[index].QuestionId}
-                //  valueLabelDisplay={this.showLabel(marks)}
-                //  valueLabelFormat={this.valueLabelFormat}
                 marks={this.state.marks}
-                //onChange={(event: any) => this.changedValue(event, value)}
-                onChangeCommitted={this.changedValue(item.ItemId)}
+                onChangeCommitted={this.changedValue(item.Field)}
                 max={10}
                 min={0}
               />
@@ -194,7 +188,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     data.Categories.forEach(element => {
       element.Questions.forEach(q => {
         this.state.answers.push({
-          QuestionId: q.ItemId,
+          QuestionField: q.Field,
           Value: q.Value,
         });
       });
@@ -202,10 +196,10 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   };
   /**************************render slider value***************************** */
   private onRenderSliderValue = (Field: any) => {
-    if (Field === null || this.state.answers.some(x => x.QuestionId === Field) == false) {
+    if (Field === null || this.state.answers.some(x => x.QuestionField === Field) === false) {
       return 0;
     } else {
-      return this.state.answers.filter(x => x.QuestionId === Field)[0].Value;
+      return this.state.answers.filter(x => x.QuestionField === Field)[0].Value;
     }
   };
   /********************************************************** */
@@ -214,14 +208,14 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   }
   /************************************* */
 
-  changedValue = (itemId: number) => (event: any, value: any) => {
+  changedValue = (itemId: string) => (event: any, value: any) => {
     this.setState(prevState => {
-      if (itemId !== 0) {
-        if (prevState.answers.some(x => x.QuestionId === itemId)) {
-          prevState.answers.filter(x => x.QuestionId === itemId)[0].Value = value;
+      if (itemId !== "") {
+        if (prevState.answers.some(x => x.QuestionField === itemId)) {
+          prevState.answers.filter(x => x.QuestionField === itemId)[0].Value = value;
         } else
           prevState.answers.push({
-            QuestionId: itemId,
+            QuestionField: itemId,
             Value: value,
           });
       }
