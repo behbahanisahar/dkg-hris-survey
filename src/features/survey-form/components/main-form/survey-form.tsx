@@ -6,11 +6,11 @@ import "./survey-form.css";
 import IQuestion from "../../../../entities/survey-questions";
 import { Slider, Tooltip, withStyles, Theme, Typography } from "@material-ui/core";
 import ICategory from "../../../../entities/categories";
-import Isurvey from "../../../../entities/survey";
 import Util from "../../../../utilities/utilities";
 import { ISurveyData } from "../../../../entities/survey-data";
 import Context from "../../../../utilities/context";
 import Info from "@material-ui/icons/Info";
+import Isurvey from "../../../../entities/survey";
 
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
@@ -39,13 +39,12 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       radio: 1,
       marks: [],
       selectedValue: 0,
-      answers: [{ QuestionId: 0, Value: 0 }],
+      answers: [],
       itemid: 0,
     };
   }
   public async componentDidMount() {
     const itemid = this.util.getQueryStringValue("itemid");
-    const SurveyFormData: Isurvey = await this.ListService.getSurveyFormData(Number(itemid));
     const marks = [
       {
         value: 0,
@@ -92,18 +91,23 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
         label: "تقریبا همیشه",
       },
     ];
-
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        SurveyFormData,
-        marks,
-        itemid: Number(itemid),
-      };
+    await this.ListService.getSurveyFormData(Number(itemid)).then(data => {
+      this.initializeAnwers(data);
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          SurveyFormData: data,
+          marks,
+          itemid: Number(itemid),
+        };
+      });
     });
   }
 
   public render() {
+    if (this.state.SurveyFormData == null) {
+      return null;
+    }
     return (
       <div>
         <div>{this.onRenderCard()}</div>
@@ -164,18 +168,18 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                 key={index}
                 id={item.Field}
                 className="slider"
-                //  defaultValue={this.state.selectedValue}
+                defaultValue={this.onRenderSliderValue(item.ItemId)}
                 getAriaValueText={this.valuetext}
                 aria-labelledby="discrete-slider-custom"
                 step={1}
                 valueLabelDisplay="auto"
-                value={this.state.selectedValue}
+                //value={this.onRenderSliderValue(item.Field)}
                 // value={this.state.answers[index].QuestionId}
                 //  valueLabelDisplay={this.showLabel(marks)}
                 //  valueLabelFormat={this.valueLabelFormat}
                 marks={this.state.marks}
-                // onChange={(event: any) => this.changedValue(event, value)}
-                onChange={this.changedValue("slider1")}
+                //onChange={(event: any) => this.changedValue(event, value)}
+                onChange={this.changedValue}
                 max={10}
                 min={0}
               />
@@ -185,43 +189,72 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       );
     });
   };
-  /*********************************** */
+
+  private initializeAnwers = (data: Isurvey) => {
+    console.log("initializeAnwers");
+
+    data.Categories.forEach(element => {
+      element.Questions.forEach(q => {
+        this.state.answers.push({
+          QuestionId: q.ItemId,
+          Value: q.Value,
+        });
+      });
+    });
+  };
+  /**************************render slider value***************************** */
+  private onRenderSliderValue = (Field: any) => {
+    console.log("onRenderSliderValue", Field);
+    if (Field === null || this.state.answers.some(x => x.QuestionId === Field) == false) {
+      return 0;
+    } else {
+      return this.state.answers.filter(x => x.QuestionId === Field)[0].Value;
+    }
+  };
+  /********************************************************** */
   private valuetext(value: number) {
     return `${value}`;
   }
   /************************************* */
 
-  private changedValue = (name: string) => (event: any, value: any) => {
-    console.log(name);
-    //   this.setState(prevState => {
-    //     if (event.target !== null && event.target.Id !== "") {
-    //       if (prevState.answers.some(x => x.QuestionId === event.target.id)) {
-    //         prevState.answers.filter(x => x.QuestionId === event.target.id)[0].Value = value;
-    //       } else prevState.answers.push({ QuestionId: event.target.id, Value: value });
-    //       console.log(prevState.answers);
-    //     }
-    //     return {
-    //       ...prevState,
-    //       selectedValue: value,
-    //       answers: prevState.answers,
-    //     };
-    //   });
-    // };
-    // private changedValue = (event: any, value: any) => {
-    //   this.setState(prevState => {
-    //     if (event.target != null && event.target.Id !== "") {
-    //       if (prevState.answers.findIndex(x => x.QuestionId === event.target.id) > -1) {
-    //         prevState.answers.filter(x => x.QuestionId === event.target.id)[0].Value = value;
-    //       } else prevState.answers.push({ QuestionId: event.target.id, Value: value });
-    //       console.log(prevState.answers);
-    //     }
-    //     return {
-    //       ...prevState,
-    //       selectedValue: value,
-    //       answers: prevState.answers,
-    //     };
-    //   });
+  private changedValue = (event: any, value: any) => {
+    console.log("changeValue", value);
+    this.setState(prevState => {
+      debugger;
+      if (event.target !== null && event.target.Id !== "" && event.target.Id !== "0") {
+        if (prevState.answers.some(x => x.QuestionId === event.target.id)) {
+          prevState.answers.filter(x => x.QuestionId === event.target.id)[0].Value = value;
+        } else
+          prevState.answers.push({
+            QuestionId: event.target.id,
+            Value: value,
+            //QuestionField: event.target.id,
+          });
+        console.log(prevState.answers);
+      }
+      return {
+        ...prevState,
+        selectedValue: value,
+        answers: prevState.answers,
+      };
+    });
   };
+
+  // private changedValue = (event: any, value: any) => {
+  //   this.setState(prevState => {
+  //     if (event.target != null && event.target.Id !== "") {
+  //       if (prevState.answers.findIndex(x => x.QuestionId === event.target.id) > -1) {
+  //         prevState.answers.filter(x => x.QuestionId === event.target.id)[0].Value = value;
+  //       } else prevState.answers.push({ QuestionId: event.target.id, Value: value });
+  //       console.log(prevState.answers);
+  //     }
+  //     return {
+  //       ...prevState,
+  //       selectedValue: value,
+  //       answers: prevState.answers,
+  //     };
+  //   });
+  // };
   /*****************submit form *********************************** */
   private onSubmitForm = async (status: string) => {
     const SubmitData: ISurveyData = {
@@ -232,6 +265,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
         {
           QuestionId: 3,
           Value: 4,
+          //QuestionField: "",
         },
       ],
     };
