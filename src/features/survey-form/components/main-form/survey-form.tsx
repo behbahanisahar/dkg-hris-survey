@@ -11,6 +11,7 @@ import { ISurveyData } from "../../../../entities/survey-data";
 import Context from "../../../../utilities/context";
 import Info from "@material-ui/icons/Info";
 import Isurvey from "../../../../entities/survey";
+import { DKPortlet } from "../../../../core/components/Portlet/portlet";
 
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
@@ -110,6 +111,9 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     }
     return (
       <div>
+        <DKPortlet title=" بهترین تجربه ">
+          <p> بهترین تجربه برای مشتریان</p>>
+        </DKPortlet>
         <div>{this.onRenderCard()}</div>
         <div className="buttons">
           <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Not Completed")}>
