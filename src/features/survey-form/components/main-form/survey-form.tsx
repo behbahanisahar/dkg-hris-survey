@@ -53,7 +53,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       },
       {
         value: 1,
-        label: "تقریبا هیچگاه",
+        label: "تقریبا هیچگاه\r\n almost never",
       },
       {
         value: 2,
@@ -69,7 +69,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       },
       {
         value: 5,
-        label: "گهگاه",
+        label: "گهگاه\r\n occassionally",
       },
       {
         value: 6,
@@ -77,7 +77,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       },
       {
         value: 7,
-        label: "تقریبا اغلب اوقات",
+        label: "تقریبا اغلب اوقات\r\n fairly often",
       },
       {
         value: 8,
@@ -85,11 +85,11 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       },
       {
         value: 9,
-        label: "مکرر و پیوسته",
+        label: "مکرر و پیوسته\r\nvery frequently",
       },
       {
         value: 10,
-        label: "تقریبا همیشه",
+        label: "تقریبا همیشه\r\nalmost always",
       },
     ];
     await this.ListService.getSurveyFormData(Number(itemid)).then(data => {
@@ -139,14 +139,34 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   private onRenderCard = () => {
     const ProfilePhoto = "http://hq-spsrv03:90/SiteAssets/pic.png";
     return this.state.SurveyFormData.Categories.map((n: ICategory, index: any) => {
+      let categoryClassName = "";
+      switch (n.BaseCategory) {
+        case "Cat2": {
+          categoryClassName = "Cat2";
+          break;
+        }
+        case "Cat1": {
+          categoryClassName = "Cat1";
+          break;
+        }
+        case "Cat3": {
+          categoryClassName = "Cat3";
+          break;
+        }
+        default:
+          categoryClassName = "Cat2";
+      }
+
       return (
         <div key={index}>
-          <MDBCard className="Container mx-4">
+          <MDBCard className={categoryClassName + " Container mx-4 "}>
             <img src={ProfilePhoto} alt="badge" className="Image"></img>
             <MDBRow className="question-row">
               <MDBCol md="4"></MDBCol>
               <MDBCol style={{ textAlign: "center" }}>
-                <h5>{n.Title}</h5>
+                <h5>{n.TitleFa}</h5>
+                <h6>{n.Title}</h6>
+                <br />
               </MDBCol>
               <MDBCol md="4" />
             </MDBRow>

@@ -38,3 +38,15 @@
   text-align: right;
   margin: 2%;
 }
+.MuiSlider-markLabel {
+  white-space: pre !important;
+}
+.Cat1 {
+  border-right: 2px solid yellow;
+}
+.Cat2 {
+  border-right: 2px solid red;
+}
+.Cat3 {
+  border-right: 2px solid green;
+}

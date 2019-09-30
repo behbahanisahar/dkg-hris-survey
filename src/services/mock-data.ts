@@ -142,6 +142,9 @@ export default class MockData {
     Categories: [
       {
         Title: "Builder Approach & Result Oriented",
+        BaseCategory: "Cat1",
+        BaseCategoryFa: "کتگوری ۱",
+        TitleFa: "مشتری محوری",
         SignUrl: "",
         Questions: [
           {
@@ -167,6 +170,9 @@ export default class MockData {
 
       {
         Title: "Builder Approach & Result Oriented",
+        BaseCategory: "Cat2",
+        BaseCategoryFa: "کتگوری ۲",
+        TitleFa: "نتیجه گرایی",
         SignUrl: "",
         Questions: [
           {
