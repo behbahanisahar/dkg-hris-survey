@@ -195,24 +195,30 @@ export default class MockData {
   public static Appraisee: IAppraisee[] = [
     {
       NominationItemId: 2,
-      Progress: 64,
+      Progress: 30,
       Relation: "Peer",
-      Status: "Not Completed",
+      Status: "NotStarted",
       Title: "Atria KhodaRahmi",
+      UserAvatar:
+        "https://keenthemes.com/metronic/themes/metronic/theme/default/demo5/dist/assets/media/users/100_14.jpg",
     },
     {
       NominationItemId: 4,
       Progress: 64,
       Relation: "Line Manager",
-      Status: "Not Completed",
+      Status: "NotStarted",
       Title: "Ali Nooshabadi",
+      UserAvatar:
+        "https://keenthemes.com/metronic/themes/metronic/theme/default/demo5/dist/assets/media/users/100_14.jpg",
     },
     {
       NominationItemId: 5,
-      Progress: 64,
+      Progress: 80,
       Relation: "Self",
-      Status: "Not Completed",
+      Status: "LineManagerApproval",
       Title: "Sahar Behbahani",
+      UserAvatar:
+        "https://keenthemes.com/metronic/themes/metronic/theme/default/demo5/dist/assets/media/users/100_14.jpg",
     },
   ];
   public static NominationTaks: UserTasks[] = [

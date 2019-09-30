@@ -15,8 +15,25 @@
   direction: rtl;
 }
 .completed {
-  background-color: #acd591;
+  color: #acd591 !important;
 }
 .not-completed {
-  background-color: #f3736c;
+  color: #f3736c !important;
+}
+.complete-progress > div {
+  background-color: #00ac4e !important;
+  border-radius: 30px;
+}
+.not-completed-progress > div {
+  background-color: #ffc107 !important;
+  border-radius: 30px;
+}
+.MuiLinearProgress-colorPrimary {
+  background-color: #dedfe0 !important;
+  border-radius: 30px;
+}
+.user-img {
+  border-radius: 50%;
+  width: 13%;
+  margin-left: 3%;
 }

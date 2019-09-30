@@ -12,6 +12,7 @@ import Context from "../../../../utilities/context";
 import Info from "@material-ui/icons/Info";
 import Isurvey from "../../../../entities/survey";
 
+// const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
     backgroundColor: "#87D3E1",
@@ -103,6 +104,15 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       });
     });
   }
+  // public async UNSAFE_componentWillUpdate2(nextProps: any, nextState: any) {
+  //   await sleep(20000);
+  //   this.onSubmitForm("Not Completed");
+  // }
+
+  public UNSAFE_componentWillUpdate = (nextProps: any, nextState: any) =>
+    setInterval(() => {
+      this.onSubmitForm("Not Completed");
+    }, 2000);
 
   public render() {
     if (this.state.SurveyFormData == null) {

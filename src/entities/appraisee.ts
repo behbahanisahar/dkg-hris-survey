@@ -4,4 +4,5 @@ export interface IAppraisee {
   Relation: string;
   Status: string;
   Title: string;
+  UserAvatar: string;
 }

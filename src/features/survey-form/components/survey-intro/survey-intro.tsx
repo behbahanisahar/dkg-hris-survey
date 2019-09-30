@@ -2,11 +2,23 @@ import React from "react";
 import ISurveyIntroState from "./survey-intro-state";
 import ListServices from "../../../../services/list-services";
 import { IAppraisee } from "../../../../entities/appraisee";
-import Pageview from "@material-ui/icons/Pageview";
 import "./survey-intro.css";
-import { Card, Table, TableHead, TableRow, TableBody, TableCell } from "@material-ui/core";
+import { Card, Table, TableHead, TableRow, TableBody, TableCell, LinearProgress } from "@material-ui/core";
 import ITableHeader from "../../../../entities/table-headers";
+import { MDBBtn } from "mdbreact";
+// import { lighten, withStyles } from "@material-ui/core/styles";
 
+// const BorderLinearProgress = withStyles({
+//   root: {
+//     height: 6,
+//     backgroundColor: lighten("#DEDFE0", 0.5),
+//     borderRadius: 30,
+//   },
+//   bar: {
+//     borderRadius: 30,
+//     //   backgroundColor: "  #19BFD3",
+//   },
+// })(LinearProgress);
 export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroState> {
   private ListService: ListServices;
   private tableHeaders: ITableHeader[];
@@ -92,17 +104,27 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
     return this.state.appraisee.map((n: IAppraisee, index: any) => {
       return (
         <TableRow key={index}>
-          <TableCell style={{ width: "3%" }} align="center">
+          <TableCell style={{ width: "1%" }} align="center">
             {index + 1}
           </TableCell>
-          <TableCell align="center">{n.Title}</TableCell>
+          <TableCell align="center">
+            <img className="user-img" src={n.UserAvatar} />
+            {n.Title}
+          </TableCell>
           <TableCell align="center">{n.Relation}</TableCell>
           <TableCell align="center" className={n.Status === "تکمیل شده" ? "completed" : "not-completed"}>
             {n.Status}
           </TableCell>
-          <TableCell align="center">{n.Progress}%</TableCell>
+          <TableCell align="left">
+            {n.Progress}%
+            <LinearProgress
+              className={Number(n.Progress) >= 100 ? "complete-progress" : "not-completed-progress"}
+              variant="determinate"
+              value={n.Progress}
+            />
+          </TableCell>
           <TableCell style={{ width: "3%" }} align="center">
-            <Pageview cursor="pointer" color="primary" onClick={() => this.onShowItem(n.NominationItemId)} />
+            <MDBBtn onClick={() => this.onShowItem(n.NominationItemId)}>نمایش</MDBBtn>
           </TableCell>
         </TableRow>
       );
