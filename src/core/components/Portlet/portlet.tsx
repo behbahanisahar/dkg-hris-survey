@@ -8,7 +8,7 @@ export interface DKPortletProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function DKPortlet({ children, title = "", ...other }: DKPortletProps) {
   return (
-    <div className="dk-portlet" {...other}>
+    <div className="dk-portlet m-3" {...other}>
       <div className="dk-portlet__head">
         <div className="dk-portlet__head-label">
           <h3 className="dk-portlet__head-title">{title}</h3>

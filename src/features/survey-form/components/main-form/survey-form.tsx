@@ -11,7 +11,6 @@ import { ISurveyData } from "../../../../entities/survey-data";
 import Context from "../../../../utilities/context";
 import Info from "@material-ui/icons/Info";
 import Isurvey from "../../../../entities/survey";
-import { DKPortlet } from "../../../../core/components/Portlet/portlet";
 
 // const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 const HtmlTooltip = withStyles((theme: Theme) => ({
@@ -110,10 +109,11 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   //   this.onSubmitForm("Not Completed");
   // }
 
-  public UNSAFE_componentWillUpdate = (nextProps: any, nextState: any) =>
+  public UNSAFE_componentWillUpdate = (nextProps: any, nextState: any) => {
     setInterval(() => {
-      this.onSubmitForm("Not Completed");
+      this.onSubmitForm("Not Completed", "interval");
     }, 2000);
+  };
 
   public render() {
     if (this.state.SurveyFormData == null) {
@@ -121,15 +121,12 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     }
     return (
       <div>
-        <DKPortlet title=" بهترین تجربه ">
-          <p> بهترین تجربه برای مشتریان</p>>
-        </DKPortlet>
         <div>{this.onRenderCard()}</div>
         <div className="buttons">
-          <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Not Completed")}>
+          <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Not Completed", "submit")}>
             ذخیره
           </MDBBtn>
-          <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Completed")}>
+          <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Completed", "submit")}>
             ثبت نهایی
           </MDBBtn>
           <MDBBtn size="sm" color="grey lighten-3">
@@ -169,7 +166,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
               <MDBCol md="4"></MDBCol>
               <MDBCol style={{ textAlign: "center" }}>
                 <h5>{n.TitleFa}</h5>
-                <h6>{n.Title}</h6>
+                <p style={{ fontSize: "11px" }}>{n.Title}</p>
                 <br />
               </MDBCol>
               <MDBCol md="4" />
@@ -262,7 +259,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   };
 
   /*****************submit form *********************************** */
-  private onSubmitForm = async (status: string) => {
+  private onSubmitForm = async (status: string, saveFormat: string) => {
     const SubmitData: ISurveyData = {
       nominationItemId: this.state.itemid,
       currentUserId: Context.userId,
@@ -270,6 +267,9 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       answers: this.state.answers,
     };
     await this.ListService.SubmitForm(SubmitData);
+    if (saveFormat === "submit") {
+      window.location.href = "?page=surveyintro&itemid=" + this.state.itemid + "";
+    }
   };
 }
 
