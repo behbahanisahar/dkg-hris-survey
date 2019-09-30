@@ -106,6 +106,7 @@ const uploadFolderToSP = async (sourceGlob: string, targetBasePath: string): Pro
 
     try {
       if (fileData.byteLength <= 10485760) {
+        if (f.indexOf("precache") > 0) continue;
         await folder.files.add(path.basename(f), fileData, true);
       } else {
         await folder.files.addChunked(path.basename(f), fileData, undefined, true);
