@@ -9,4 +9,5 @@ export default interface ISurveyFromState {
   answers: IAnswer[];
   SurveyFormData: Isurvey;
   itemid: number;
+  showSpinner: boolean;
 }

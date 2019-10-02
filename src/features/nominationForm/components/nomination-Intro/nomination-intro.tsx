@@ -1,22 +1,22 @@
 import React from "react";
 import INominationIntroState from "./nomination-intro-state";
 import ListServices from "../../../../services/list-services";
-import ITableHeader from "../../../../entities/table-headers";
-import { Card, Table, TableHead, TableRow, TableBody, TableCell } from "@material-ui/core";
+
+import { Card, TableRow, TableCell } from "@material-ui/core";
 import UserTasks from "../../../../entities/user-task";
-import Pageview from "@material-ui/icons/Pageview";
+import { MDBTable, MDBTableBody, MDBBtn, MDBRow, MDBCol } from "mdbreact";
 
 export default class NominationIntroPage extends React.Component<{}, INominationIntroState> {
   private ListService: ListServices;
-  private tableHeaders: ITableHeader[];
+  // private tableHeaders: ITableHeader[];
   public constructor(props: any) {
     super(props);
     this.ListService = new ListServices();
-    this.tableHeaders = [
-      { id: "Row", label: "ردیف" },
-      { id: "Title", label: "عنوان" },
-      { id: "action", label: "نمایش" },
-    ];
+    // this.tableHeaders = [
+    //   { id: "Row", label: "ردیف" },
+    //   { id: "Title", label: "عنوان" },
+    //   { id: "action", label: "نمایش" },
+    // ];
     this.state = {
       nominationTasks: [],
     };
@@ -58,30 +58,35 @@ export default class NominationIntroPage extends React.Component<{}, INomination
 مدیریت منابع انسانی`}
           </div>
           <div>
-            <Card className="CardTable">
-              <Table className="table">
-                <TableHead>
+            <MDBRow>
+              <MDBCol />
+              <MDBCol>
+                <Card dir="rtl" style={{ margin: "3% 3% 2% 0" }}>
+                  <MDBTable className="table" borderless>
+                    {/* <TableHead>
                   <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                </TableHead>
-                <TableBody>{this.onRenderRows()}</TableBody>
-              </Table>
-            </Card>
+                </TableHead> */}
+                    <MDBTableBody>{this.onRenderRows()}</MDBTableBody>
+                  </MDBTable>
+                </Card>
+              </MDBCol>
+            </MDBRow>
           </div>
         </Card>
       </div>
     );
   }
   /**************************** Repeat Table ****************************** */
-  private renderHeader = (columnDetail: any[]) => {
-    return columnDetail.map(
-      row => (
-        <TableCell align="center" key={row.id} sortDirection="desc">
-          {row.label}
-        </TableCell>
-      ),
-      this,
-    );
-  };
+  // private renderHeader = (columnDetail: any[]) => {
+  //   return columnDetail.map(
+  //     row => (
+  //       <TableCell align="center" key={row.id} sortDirection="desc">
+  //         {row.label}
+  //       </TableCell>
+  //     ),
+  //     this,
+  //   );
+  // };
 
   private onRenderRows = () => {
     return this.state.nominationTasks.map((n: UserTasks, index: any) => {
@@ -92,7 +97,9 @@ export default class NominationIntroPage extends React.Component<{}, INomination
           </TableCell>
           <TableCell align="center">{n.Title}</TableCell>
           <TableCell style={{ width: "3%" }} align="center">
-            <Pageview cursor="pointer" color="primary" onClick={() => this.onShowItem(n.ItemId)} />
+            <MDBBtn className="show-item" onClick={() => this.onShowItem(n.ItemId)}>
+              نمایش
+            </MDBBtn>
           </TableCell>
         </TableRow>
       );
@@ -100,6 +107,6 @@ export default class NominationIntroPage extends React.Component<{}, INomination
   };
   /************************************************************* */
   private onShowItem = (ItemId: number) => {
-    window.location.href = "?itemid=" + ItemId + "&page=SurveyForm";
+    window.location.href = "?itemid=" + ItemId + "&page=NominationForm";
   };
 }

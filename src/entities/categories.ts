@@ -6,5 +6,6 @@ export default interface ICategory {
   SignUrl: string;
   Questions: IQuestion[];
   BaseCategory: string;
+  BaseCategoryId: number;
   BaseCategoryFa: string;
 }

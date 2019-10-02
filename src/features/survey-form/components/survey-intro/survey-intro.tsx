@@ -5,7 +5,7 @@ import { IAppraisee } from "../../../../entities/appraisee";
 import "./survey-intro.css";
 import { Card, TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/core";
 
-import { MDBBtn, MDBTable, MDBTableBody } from "mdbreact";
+import { MDBBtn, MDBTable, MDBTableBody, MDBRow, MDBCol } from "mdbreact";
 import Spinner from "../../../../spinner/spinner";
 // import { lighten, withStyles } from "@material-ui/core/styles";
 
@@ -77,14 +77,17 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
           </div>
           {this.state.showSpinner && <Spinner />}
           {!this.state.showSpinner && (
-            <div>
-              <Card className="CardTable">
-                <MDBTable className="table" borderless>
-                  <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
-                  <MDBTableBody>{this.onRenderRows()}</MDBTableBody>
-                </MDBTable>
-              </Card>
-            </div>
+            <MDBRow>
+              <MDBCol />
+              <MDBCol>
+                <Card dir="rtl" style={{ margin: "3% 3% 2% 0" }}>
+                  <MDBTable className="table" borderless>
+                    <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
+                    <MDBTableBody>{this.onRenderRows()}</MDBTableBody>
+                  </MDBTable>
+                </Card>
+              </MDBCol>
+            </MDBRow>
           )}
         </Card>
       </div>

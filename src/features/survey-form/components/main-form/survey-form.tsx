@@ -11,6 +11,7 @@ import { ISurveyData } from "../../../../entities/survey-data";
 import Context from "../../../../utilities/context";
 import Info from "@material-ui/icons/Info";
 import Isurvey from "../../../../entities/survey";
+import Spinner from "../../../../spinner/spinner";
 
 // const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 const HtmlTooltip = withStyles((theme: Theme) => ({
@@ -42,6 +43,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       selectedValue: 0,
       answers: [],
       itemid: 0,
+      showSpinner: true,
     };
   }
   public async componentDidMount() {
@@ -100,6 +102,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
           SurveyFormData: data,
           marks,
           itemid: Number(itemid),
+          showSpinner: false,
         };
       });
     });
@@ -109,11 +112,11 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   //   this.onSubmitForm("Not Completed");
   // }
 
-  public UNSAFE_componentWillUpdate = (nextProps: any, nextState: any) => {
-    setInterval(() => {
-      this.onSubmitForm("Not Completed", "interval");
-    }, 2000);
-  };
+  // public UNSAFE_componentWillUpdate = (nextProps: any, nextState: any) => {
+  //   setInterval(() => {
+  //     this.onSubmitForm("Not Completed", "interval");
+  //   }, 2000);
+  // };
 
   public render() {
     if (this.state.SurveyFormData == null) {
@@ -121,47 +124,52 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     }
     return (
       <div>
-        <div>{this.onRenderCard()}</div>
-        <div className="buttons">
-          <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Not Completed", "submit")}>
-            ذخیره
-          </MDBBtn>
-          <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Completed", "submit")}>
-            ثبت نهایی
-          </MDBBtn>
-          <MDBBtn size="sm" color="grey lighten-3">
-            انصراف
-          </MDBBtn>
-        </div>
+        {this.state.showSpinner && <Spinner />}
+        {!this.state.showSpinner && (
+          <div>
+            <div>{this.onRenderCard()}</div>
+            <div className="buttons">
+              <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Not Completed", "submit")}>
+                ذخیره
+              </MDBBtn>
+              <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Completed", "submit")}>
+                ثبت نهایی
+              </MDBBtn>
+              <MDBBtn size="sm" color="grey lighten-3">
+                انصراف
+              </MDBBtn>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
   /**********************render cards**************************************** */
   private onRenderCard = () => {
-    const ProfilePhoto = "http://hq-spsrv03:90/SiteAssets/pic.png";
+    //  const ProfilePhoto = "http://hq-spsrv03:90/SiteAssets/pic.png";
     return this.state.SurveyFormData.Categories.map((n: ICategory, index: any) => {
       let categoryClassName = "";
-      switch (n.BaseCategory) {
-        case "Cat2": {
+      switch (n.BaseCategoryId) {
+        case 1: {
           categoryClassName = "Cat2";
           break;
         }
-        case "Cat1": {
+        case 2: {
           categoryClassName = "Cat1";
           break;
         }
-        case "Cat3": {
+        case 3: {
           categoryClassName = "Cat3";
           break;
         }
         default:
-          categoryClassName = "Cat2";
+          categoryClassName = "Core Values";
       }
 
       return (
         <div key={index}>
           <MDBCard className={categoryClassName + " Container mx-4 "}>
-            <img src={ProfilePhoto} alt="badge" className="Image"></img>
+            <img src={n.SignUrl} alt="" className="Image"></img>
             <MDBRow className="question-row">
               <MDBCol md="4"></MDBCol>
               <MDBCol style={{ textAlign: "center" }}>

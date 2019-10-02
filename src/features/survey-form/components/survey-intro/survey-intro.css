@@ -9,11 +9,7 @@
   margin: 2% auto;
   width: 90%;
 }
-.CardTable {
-  width: 50%;
-  margin: 1% 46%;
-  direction: rtl;
-}
+
 .completed {
   color: #acd591 !important;
 }
