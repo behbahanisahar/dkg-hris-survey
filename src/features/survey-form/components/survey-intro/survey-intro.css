@@ -10,8 +10,8 @@
   width: 90%;
 }
 .CardTable {
-  width: 90%;
-  margin: 1% auto;
+  width: 50%;
+  margin: 1% 46%;
   direction: rtl;
 }
 .completed {
@@ -34,6 +34,27 @@
 }
 .user-img {
   border-radius: 50%;
-  width: 13%;
+  width: 22%;
   margin-left: 3%;
+}
+tbody > tr {
+  border: red !important;
+}
+.Relation {
+  font-weight: 300;
+  color: #77787b;
+  margin: -4% 25% 0 0;
+}
+.show-item {
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 2px 25px;
+  width: 100%;
+  background-color: #dedfe0 !important;
+  color: #f37a8a;
+  margin-top: 10%;
+}
+.show-item:hover {
+  background-color: #f37a8a !important;
+  color: #dedfe0;
 }

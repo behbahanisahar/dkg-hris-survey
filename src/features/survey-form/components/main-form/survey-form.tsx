@@ -15,10 +15,10 @@ import Isurvey from "../../../../entities/survey";
 // const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
-    backgroundColor: "#87D3E1",
+    backgroundColor: "#DEDFE0",
     color: "#fff",
-    maxWidth: 300,
-    fontSize: "6px",
+    maxWidth: 260,
+    fontSize: "3px  !important",
     border: "1px solid #dadde9",
   },
 }))(Tooltip);

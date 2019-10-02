@@ -3,9 +3,10 @@ import ISurveyIntroState from "./survey-intro-state";
 import ListServices from "../../../../services/list-services";
 import { IAppraisee } from "../../../../entities/appraisee";
 import "./survey-intro.css";
-import { Card, Table, TableHead, TableRow, TableBody, TableCell, LinearProgress } from "@material-ui/core";
-import ITableHeader from "../../../../entities/table-headers";
-import { MDBBtn } from "mdbreact";
+import { Card, TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/core";
+
+import { MDBBtn, MDBTable, MDBTableBody } from "mdbreact";
+import Spinner from "../../../../spinner/spinner";
 // import { lighten, withStyles } from "@material-ui/core/styles";
 
 // const BorderLinearProgress = withStyles({
@@ -21,20 +22,20 @@ import { MDBBtn } from "mdbreact";
 // })(LinearProgress);
 export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroState> {
   private ListService: ListServices;
-  private tableHeaders: ITableHeader[];
+  // private tableHeaders: ITableHeader[];
   public constructor(props: any) {
     super(props);
     this.ListService = new ListServices();
-    this.tableHeaders = [
-      { id: "Row", label: "ردیف" },
-      { id: "Title", label: "ارزیابی شونده" },
-      { id: "Relation", label: "ارتباط" },
-      { id: "Status", label: "وضعیت" },
-      { id: "Progress", label: "درصد تکمیل" },
-      { id: "action", label: "نمایش" },
-    ];
+    // this.tableHeaders = [
+    //   { id: "Row", label: "ردیف" },
+    //   { id: "Title", label: "ارزیابی شونده" },
+    //   { id: "Status", label: "وضعیت" },
+    //   { id: "Progress", label: "درصد تکمیل" },
+    //   { id: "action", label: "نمایش" },
+    // ];
     this.state = {
       appraisee: [],
+      showSpinner: true,
     };
   }
   public async componentDidMount() {
@@ -43,6 +44,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
         return {
           ...prevState,
           appraisee,
+          showSpinner: false,
         };
       });
     });
@@ -73,49 +75,53 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
 
 مدیریت منابع انسانی`}
           </div>
-          <div>
-            <Card className="CardTable">
-              <Table className="table">
-                <TableHead>
-                  <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                </TableHead>
-                <TableBody>{this.onRenderRows()}</TableBody>
-              </Table>
-            </Card>
-          </div>
+          {this.state.showSpinner && <Spinner />}
+          {!this.state.showSpinner && (
+            <div>
+              <Card className="CardTable">
+                <MDBTable className="table" borderless>
+                  <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
+                  <MDBTableBody>{this.onRenderRows()}</MDBTableBody>
+                </MDBTable>
+              </Card>
+            </div>
+          )}
         </Card>
       </div>
     );
   }
   /**************************** Repeat Table ****************************** */
-  private renderHeader = (columnDetail: any[]) => {
-    return columnDetail.map(
-      row => (
-        <TableCell align="center" key={row.id} sortDirection="desc">
-          {row.label}
-        </TableCell>
-      ),
-      this,
-    );
-  };
+  // private renderHeader = (columnDetail: any[]) => {
+  //   return columnDetail.map(
+  //     row => (
+  //       <TableCell align="center" key={row.id} sortDirection="desc">
+  //         {row.label}
+  //       </TableCell>
+  //     ),
+  //     this,
+  //   );
+  // };
 
   private onRenderRows = () => {
     console.log(this.state.appraisee);
     return this.state.appraisee.map((n: IAppraisee, index: any) => {
       return (
         <TableRow key={index}>
-          <TableCell style={{ width: "1%" }} align="center">
-            {index + 1}
-          </TableCell>
-          <TableCell align="center">
+          <TableCell align="right">
             <img className="user-img" src={n.UserAvatar} />
             {n.Title}
+
+            <div className="Relation">{n.Relation}</div>
           </TableCell>
-          <TableCell align="center">{n.Relation}</TableCell>
-          <TableCell align="center" className={n.Status === "تکمیل شده" ? "completed" : "not-completed"}>
-            {n.Status}
+
+          <TableCell
+            style={{ width: "5%" }}
+            align="right"
+            className={n.Status === "تکمیل شده" ? "completed" : "not-completed"}
+          >
+            <div style={{ marginTop: "10%" }}> {n.Status}</div>
           </TableCell>
-          <TableCell align="left">
+          <TableCell style={{ width: "20%" }} align="left">
             {n.Progress}%
             <LinearProgress
               className={Number(n.Progress) >= 100 ? "complete-progress" : "not-completed-progress"}
@@ -123,8 +129,10 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
               value={n.Progress}
             />
           </TableCell>
-          <TableCell style={{ width: "3%" }} align="center">
-            <MDBBtn onClick={() => this.onShowItem(n.NominationItemId)}>نمایش</MDBBtn>
+          <TableCell style={{ width: "2%" }} align="center">
+            <MDBBtn className="show-item" onClick={() => this.onShowItem(n.NominationItemId)}>
+              نمایش
+            </MDBBtn>
           </TableCell>
         </TableRow>
       );
