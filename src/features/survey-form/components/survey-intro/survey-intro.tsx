@@ -5,7 +5,7 @@ import { IAppraisee } from "../../../../entities/appraisee";
 import "./survey-intro.css";
 import { Card, TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/core";
 
-import { MDBBtn, MDBTable, MDBTableBody, MDBRow, MDBCol } from "mdbreact";
+import { MDBTable, MDBTableBody, MDBRow, MDBCol } from "mdbreact";
 import Spinner from "../../../../spinner/spinner";
 // import { lighten, withStyles } from "@material-ui/core/styles";
 
@@ -133,9 +133,12 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
             />
           </TableCell>
           <TableCell style={{ width: "2%" }} align="center">
-            <MDBBtn className="show-item" onClick={() => this.onShowItem(n.NominationItemId)}>
+            <button
+              className="btn btn-sm btn-label-primary btn-bold"
+              onClick={() => this.onShowItem(n.NominationItemId)}
+            >
               نمایش
-            </MDBBtn>
+            </button>
           </TableCell>
         </TableRow>
       );

@@ -41,16 +41,3 @@ tbody > tr {
   color: #77787b;
   margin: -4% 25% 0 0;
 }
-.show-item {
-  font-size: 1rem;
-  font-weight: 300;
-  padding: 2px 25px;
-  width: 100%;
-  background-color: #dedfe0 !important;
-  color: #f37a8a;
-  margin-top: 10%;
-}
-.show-item:hover {
-  background-color: #f37a8a !important;
-  color: #dedfe0;
-}
