@@ -1,5 +1,5 @@
 .intro {
-  white-space: pre !important;
+  white-space: pre-line !important;
   text-align: right;
   width: 95%;
   margin: 1% 1%;
@@ -40,4 +40,57 @@ tbody > tr {
   font-weight: 300;
   color: #77787b;
   margin: -4% 25% 0 0;
+}
+
+.kt-sc-2 .kt-sc__top .kt-sc__content {
+  margin-left: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-height: 385px;
+  padding: 0 3rem;
+}
+.kt-sc-2 .kt-sc__bg .kt-svg-icon {
+  height: auto;
+  width: 40%;
+}
+.kt-sc-2 .kt-sc__bg--layer {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.kt-sc-2 .kt-sc__bg {
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+  right: 4rem;
+  bottom: 4rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: start;
+  z-index: 0;
+}
+.kt-sc-2 .kt-sc__top {
+  min-height: 385px;
+  position: relative;
+  z-index: 1;
+}
+.kt-sc-2 .kt-sc__top .kt-sc__content .kt-sc__title {
+  color: #48465b;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+}
+img.kt-svg-icon {
+  width: 85%;
+  height: auto;
 }

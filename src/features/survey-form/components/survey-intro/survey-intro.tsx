@@ -3,23 +3,13 @@ import ISurveyIntroState from "./survey-intro-state";
 import ListServices from "../../../../services/list-services";
 import { IAppraisee } from "../../../../entities/appraisee";
 import "./survey-intro.css";
-import { Card, TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/core";
+import { TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/core";
 
-import { MDBTable, MDBTableBody, MDBRow, MDBCol } from "mdbreact";
+import { MDBTable, MDBTableBody } from "mdbreact";
 import Spinner from "../../../../spinner/spinner";
-// import { lighten, withStyles } from "@material-ui/core/styles";
 
-// const BorderLinearProgress = withStyles({
-//   root: {
-//     height: 6,
-//     backgroundColor: lighten("#DEDFE0", 0.5),
-//     borderRadius: 30,
-//   },
-//   bar: {
-//     borderRadius: 30,
-//     //   backgroundColor: "  #19BFD3",
-//   },
-// })(LinearProgress);
+import SurveyHeaderBackgroun from "./../../../../assets/img/survey-intro-header.png";
+
 export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroState> {
   private ListService: ListServices;
   // private tableHeaders: ITableHeader[];
@@ -51,45 +41,62 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
   }
   public render() {
     return (
-      <div>
-        <Card className="intro-card">
-          <div className="intro">
-            {`همکار محترم 
- این پرسشنامه‌ به منظور ارزیابی 360 درجه رهبران شرکت دیجی‎کالا طراحی شده است، لذا خواهشمند است با در نظر گرفتن تعاملاتی که در موقعیت‎های مختلف کاری برای تحقق اهداف عملکردی در طول حداقل 6 ماه اخیر
- با فرد ارزیابی شونده داشتید، نسبت به تکمیل پرسشنامه زیر اقدام نمایید.`}{" "}
-            <br />
-            {`
-زمانی می توانید بازخوردهای خود را ثبت نمایید که به تمامی سوالات پاسخ داده باشید.
+      <div className="rtl">
+        <div className="kt-portlet kt-sc-2">
+          <div className="kt-portlet__body">
+            <div className="row">
+              <div className="col-sm">
+                <img src={SurveyHeaderBackgroun} className="kt-svg-icon" alt="survey-intro"></img>
+              </div>
+              <div className="col-sm">
+                <div className="kt-sc__content">
+                  <h2 className="kt-sc__title">همکار محترم</h2>
+                  <div className="intro">
+                    <p>
+                      {`این پرسشنامه‌ به منظور ارزیابی 360 درجه رهبران شرکت دیجی‎کالا طراحی شده است، لذا خواهشمند است با در نظر گرفتن تعاملاتی که در موقعیت‎های مختلف کاری برای تحقق اهداف عملکردی در طول حداقل 6 ماه اخیر
+                      با فرد ارزیابی شونده داشتید، نسبت به تکمیل پرسشنامه زیر اقدام نمایید.`}
+                      <br />
+                      {`
+                      زمانی می توانید بازخوردهای خود را ثبت نمایید که به تمامی سوالات پاسخ داده باشید.
 
- اطمینان داشته باشید که اطلاعات جمع آوری شده از این پرسشنامه، کاملا بدون نام و محرمانه خواهد بود.
+                      اطمینان داشته باشید که اطلاعات جمع آوری شده از این پرسشنامه، کاملا بدون نام و محرمانه خواهد بود.
 
-تمام اطلاعات جمع آوری شده در راستای توسعه شایستگی‎های رهبری مورد استفاده قرار خواهد گرفت.
+                      تمام اطلاعات جمع آوری شده در راستای توسعه شایستگی‎های رهبری مورد استفاده قرار خواهد گرفت.
 
-همکاری و مشارکت شما در پاسخ به این پرسشنامه، بسیار مهم و ارزشمند خواهد بود.
+                      همکاری و مشارکت شما در پاسخ به این پرسشنامه، بسیار مهم و ارزشمند خواهد بود.
 
-پیشاپیش از حسن توجه و دقت شما در تکمیل این فرم، کمال تشکر و قدردانی را داریم.
+                      پیشاپیش از حسن توجه و دقت شما در تکمیل این فرم، کمال تشکر و قدردانی را داریم.
 
- 
+                      
 
-با سپاس فراوان
+                      با سپاس فراوان
 
-مدیریت منابع انسانی`}
+                      مدیریت منابع انسانی`}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+        <div className="kt-portlet kt-portlet--height-fluid kt-sc-2">
           {this.state.showSpinner && <Spinner />}
           {!this.state.showSpinner && (
-            <MDBRow>
-              <MDBCol />
-              <MDBCol>
-                <Card dir="rtl" style={{ margin: "3% 3% 2% 0" }}>
-                  <MDBTable className="table" borderless>
-                    <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
-                    <MDBTableBody>{this.onRenderRows()}</MDBTableBody>
-                  </MDBTable>
-                </Card>
-              </MDBCol>
-            </MDBRow>
+            <div>
+              <div className="kt-portlet__head">
+                <div className="kt-portlet__head-label">
+                  <h3 className="kt-portlet__head-title">نفرات ارزیابی</h3>
+                </div>
+              </div>
+              <div className="kt-portlet__body">
+                <MDBTable className="kt-datatable__table">
+                  <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
+                  <MDBTableBody clssName="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
+                </MDBTable>
+              </div>
+            </div>
           )}
-        </Card>
+        </div>
       </div>
     );
   }
@@ -109,22 +116,27 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
     console.log(this.state.appraisee);
     return this.state.appraisee.map((n: IAppraisee, index: any) => {
       return (
-        <TableRow key={index}>
-          <TableCell align="right">
-            <img className="user-img" src={n.UserAvatar} />
-            {n.Title}
-
-            <div className="Relation">{n.Relation}</div>
+        <TableRow key={index} className="kt-datatable__row">
+          <TableCell align="right" className="kt-datatable__cell">
+            <div className="kt-user-card-v2">
+              <div className="kt-user-card-v2__pic">
+                <img alt={n.Title} src={n.UserAvatar} />
+              </div>
+              <div className="kt-user-card-v2__details">
+                <span className="kt-user-card-v2__name">{n.Title}</span>
+                <span className="kt-user-card-v2__desc">{n.Relation}</span>
+              </div>{" "}
+            </div>
           </TableCell>
 
           <TableCell
             style={{ width: "5%" }}
             align="right"
-            className={n.Status === "تکمیل شده" ? "completed" : "not-completed"}
+            className={n.Status === "تکمیل شده" ? " kt-datatable__cell completed" : " kt-datatable__cell not-completed"}
           >
             <div style={{ marginTop: "10%" }}> {n.Status}</div>
           </TableCell>
-          <TableCell style={{ width: "20%" }} align="left">
+          <TableCell style={{ width: "20%" }} className="kt-datatable__cell" align="left">
             {n.Progress}%
             <LinearProgress
               className={Number(n.Progress) >= 100 ? "complete-progress" : "not-completed-progress"}
@@ -132,12 +144,12 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
               value={n.Progress}
             />
           </TableCell>
-          <TableCell style={{ width: "2%" }} align="center">
+          <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
             <button
               className="btn btn-sm btn-label-primary btn-bold"
               onClick={() => this.onShowItem(n.NominationItemId)}
             >
-              نمایش
+              ارزیابی
             </button>
           </TableCell>
         </TableRow>

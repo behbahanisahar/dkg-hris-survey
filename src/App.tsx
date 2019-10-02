@@ -54,22 +54,24 @@ class App extends React.Component<{}, IAppState> {
 
   public render() {
     return (
-      <div className="App">
-        <MuiThemeProvider theme={theme}>
-          {this.state.page.toLowerCase() === "nominationform" && (
-            <div>
-              {this.state.NominationData.Status.toLowerCase() === "notstarted" && (
-                <SelfSurvey itemId={this.state.itemId} />
-              )}
-              {this.state.NominationData.Status.toLowerCase() !== "notstarted" && (
-                <FlowSurvey itemId={this.state.itemId} />
-              )}
-            </div>
-          )}
-          {this.state.page.toLowerCase() === "surveyform" && <FormSurvey />}
-          {this.state.page.toLowerCase() === "surveyintro" && <SurveyIntroPage />}
-          {this.state.page.toLowerCase() === "nominationintro" && <NominationIntroPage />}
-        </MuiThemeProvider>
+      <div className="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
+        <div className="kt-container  kt-grid__item kt-grid__item--fluid">
+          <MuiThemeProvider theme={theme}>
+            {this.state.page.toLowerCase() === "nominationform" && (
+              <div>
+                {this.state.NominationData.Status.toLowerCase() === "notstarted" && (
+                  <SelfSurvey itemId={this.state.itemId} />
+                )}
+                {this.state.NominationData.Status.toLowerCase() !== "notstarted" && (
+                  <FlowSurvey itemId={this.state.itemId} />
+                )}
+              </div>
+            )}
+            {this.state.page.toLowerCase() === "surveyform" && <FormSurvey />}
+            {this.state.page.toLowerCase() === "surveyintro" && <SurveyIntroPage />}
+            {this.state.page.toLowerCase() === "nominationintro" && <NominationIntroPage />}
+          </MuiThemeProvider>
+        </div>
       </div>
     );
   }
