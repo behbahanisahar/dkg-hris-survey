@@ -258,12 +258,10 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                         </MDBRow>
                       </MDBContainer>
                     </MDBCardText>
-                    <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
-                      Submit
+                    <MDBBtn className="btn btn-success" onClick={this.SubmitForm}>
+                      تایید
                     </MDBBtn>
-                    <MDBBtn size="sm" color="grey lighten-3">
-                      Cancel
-                    </MDBBtn>
+                    <MDBBtn sclassName="btn btn-secondary btn-hover-brand">انصراف</MDBBtn>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>

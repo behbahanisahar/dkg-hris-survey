@@ -1,0 +1,8 @@
+.show > .btn-hover-brand,
+.btn-hover-brand.active,
+.btn-hover-brand:active,
+.btn-hover-brand:hover {
+  color: #ffffff;
+  background-color: #591df1;
+  border-color: #591df1;
+}
