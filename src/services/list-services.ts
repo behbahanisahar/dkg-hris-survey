@@ -102,8 +102,24 @@ class ListServices extends ServiceBase {
   /********************get survey form ***************************************************************** */
   public async getSurveyFormData(itemId: number): Promise<Isurvey> {
     if (process.env.NODE_ENV === "production") {
+      debugger;
       const items: any = await this.get("/survey?nominationItemId=" + itemId + "");
-      return Promise.resolve(items.data);
+      console.log(items);
+      if (items.status === 200) {
+        return Promise.resolve({
+          UserDisplayName: items.data.UserDisplayName,
+          SurveyAnswerId: items.data.SurveyAnswerId,
+          Categories: items.data.Categories,
+          statusCode: items.status,
+        });
+      } else {
+        return {
+          UserDisplayName: "",
+          SurveyAnswerId: 0,
+          Categories: [],
+          statusCode: items.status,
+        };
+      }
     }
 
     return Promise.resolve(MockData.SurveyFormData);
