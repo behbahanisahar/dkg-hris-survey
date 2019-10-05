@@ -86,6 +86,7 @@ const uploadFolderToSP = async (sourceGlob: string, targetBasePath: string): Pro
   });
 
   for (const f of files) {
+    if (f.indexOf("eot") > 0 || f.indexOf("woff") > 0 || f.indexOf("ttf") > 0 || f.indexOf("svg") > 0) continue;
     console.log(f);
     const fileData = await fs.readAsync(f, "buffer");
 
