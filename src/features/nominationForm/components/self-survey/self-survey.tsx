@@ -19,6 +19,7 @@ import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
 import Spinner from "../../../spinner/spinner";
 import Authentication from "../../../authentication/authentication";
+import { NominationFormHeader } from "../nomination-form-header/nomination-form-header";
 const RenderOption = (option: any) => (
   <div>
     <strong>{option.label}</strong>
@@ -118,18 +119,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
             )}
             {this.state.NominationData.statusCode === 200 && (
               <MDBCol>
-                <div className="card-header mt-2">
-                  <div className="content">
-                    <p className="user">
-                      <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
-                      <h6>
-                        {this.state.NominationData.User!.EmailAddress} | {this.state.NominationData.User!.Department} |{" "}
-                        {this.state.NominationData.User!.JobGrade}{" "}
-                      </h6>
-                    </p>
-                    <div className="page-header">Nomination Form</div>
-                  </div>
-                </div>
+                <NominationFormHeader user={this.state.NominationData.User}></NominationFormHeader>
                 <MDBCard className="w-auto">
                   <div>
                     <MYStepper activeStep={this.state.activeStep} />
@@ -268,12 +258,10 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                         </MDBRow>
                       </MDBContainer>
                     </MDBCardText>
-                    <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
-                      Submit
+                    <MDBBtn className="btn btn-success" onClick={this.SubmitForm}>
+                      تایید
                     </MDBBtn>
-                    <MDBBtn size="sm" color="grey lighten-3">
-                      Cancel
-                    </MDBBtn>
+                    <MDBBtn sclassName="btn btn-secondary btn-hover-brand">انصراف</MDBBtn>
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
