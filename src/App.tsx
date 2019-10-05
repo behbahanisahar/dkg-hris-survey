@@ -41,7 +41,6 @@ class App extends React.Component<{}, IAppState> {
     const itemId = this.util.getQueryStringValue("itemid");
     const page = this.util.getQueryStringValue("page");
     const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
-
     this.setState(prevState => {
       return {
         ...prevState,

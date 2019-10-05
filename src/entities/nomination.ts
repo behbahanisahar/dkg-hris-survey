@@ -8,4 +8,5 @@ export default interface NominationData {
   Peer: IUser[];
   User?: SubOrdinate;
   LineManager?: SubOrdinate;
+  statusCode?: number;
 }

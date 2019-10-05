@@ -17,7 +17,8 @@ import IUpdatedData from "../../../../entities/updatedNominationItem";
 import MYStepper from "../stepper/stepper";
 import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
-import Spinner from "../../../../spinner/spinner";
+import Spinner from "../../../spinner/spinner";
+import Authentication from "../../../authentication/authentication";
 const RenderOption = (option: any) => (
   <div>
     <strong>{option.label}</strong>
@@ -111,166 +112,173 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
       <div>
         {this.state.showSpinner && <Spinner />}
         {!this.state.showSpinner && (
-          <MDBCol>
-            <div className="card-header mt-2">
-              <div className="content">
-                <p className="user">
-                  <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
-                  <h6>
-                    {this.state.NominationData.User!.EmailAddress} | {this.state.NominationData.User!.Department} |{" "}
-                    {this.state.NominationData.User!.JobGrade}{" "}
-                  </h6>
-                </p>
-                <div className="page-header">Nomination Form</div>
-              </div>
-            </div>
-            <MDBCard className="w-auto">
-              <div>
-                <MYStepper activeStep={this.state.activeStep} />
-              </div>
+          <div>
+            {this.state.NominationData.statusCode !== 200 && (
+              <Authentication status={this.state.NominationData.statusCode || 401} />
+            )}
+            {this.state.NominationData.statusCode === 200 && (
+              <MDBCol>
+                <div className="card-header mt-2">
+                  <div className="content">
+                    <p className="user">
+                      <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
+                      <h6>
+                        {this.state.NominationData.User!.EmailAddress} | {this.state.NominationData.User!.Department} |{" "}
+                        {this.state.NominationData.User!.JobGrade}{" "}
+                      </h6>
+                    </p>
+                    <div className="page-header">Nomination Form</div>
+                  </div>
+                </div>
+                <MDBCard className="w-auto">
+                  <div>
+                    <MYStepper activeStep={this.state.activeStep} />
+                  </div>
 
-              <MDBCardBody>
-                <MDBCardText>
-                  <MDBContainer>
-                    <h3 className="pt-3 category">Subordinates</h3>
-                    <MDBRow>
-                      <MDBCol>
-                        <div className="inline-items">
-                          <AsyncSelect
-                            defaultOptions
-                            getOptionLabel={RenderOption as any}
-                            className="basic-single"
-                            classNamePrefix="select"
-                            dir="ltr"
-                            loadOptions={inputValue => this.loadOptions(inputValue)}
-                            isSearchable={true}
-                            name="SelectedSubOrdinate"
-                            isLoading={this.state.UsersIsLoading}
-                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
-                            options={this.state.UserInfo}
-                            placeholder="select..."
-                          />
+                  <MDBCardBody>
+                    <MDBCardText>
+                      <MDBContainer>
+                        <h3 className="pt-3 category">Subordinates</h3>
+                        <MDBRow>
+                          <MDBCol>
+                            <div className="inline-items">
+                              <AsyncSelect
+                                defaultOptions
+                                getOptionLabel={RenderOption as any}
+                                className="basic-single"
+                                classNamePrefix="select"
+                                dir="ltr"
+                                loadOptions={inputValue => this.loadOptions(inputValue)}
+                                isSearchable={true}
+                                name="SelectedSubOrdinate"
+                                isLoading={this.state.UsersIsLoading}
+                                onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
+                                options={this.state.UserInfo}
+                                placeholder="select..."
+                              />
 
-                          <Tooltip title="Add" aria-label="add">
-                            <Fab size="small" color="primary" className="ml-3" aria-label="add">
-                              <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
-                            </Fab>
-                          </Tooltip>
-                        </div>
-                      </MDBCol>
-                      <MDBCol />
-                    </MDBRow>
-                    <MDBRow>
-                      <MDBCol>
-                        <Card className="Card">
-                          <Table className="table">
-                            <TableHead>
-                              <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                            </TableHead>
-                            <TableBody>{this.onRenderRows("Subordinates")}</TableBody>
-                          </Table>
-                        </Card>
-                      </MDBCol>
-                      <MDBCol />
-                    </MDBRow>
-                    <hr />
-                    <h3 className="pt-5 category">Peer</h3>
+                              <Tooltip title="Add" aria-label="add">
+                                <Fab size="small" color="primary" className="ml-3" aria-label="add">
+                                  <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
+                                </Fab>
+                              </Tooltip>
+                            </div>
+                          </MDBCol>
+                          <MDBCol />
+                        </MDBRow>
+                        <MDBRow>
+                          <MDBCol>
+                            <Card className="Card">
+                              <Table className="table">
+                                <TableHead>
+                                  <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                                </TableHead>
+                                <TableBody>{this.onRenderRows("Subordinates")}</TableBody>
+                              </Table>
+                            </Card>
+                          </MDBCol>
+                          <MDBCol />
+                        </MDBRow>
+                        <hr />
+                        <h3 className="pt-5 category">Peer</h3>
 
-                    <MDBRow>
-                      <MDBCol>
-                        <div className="inline-items">
-                          <AsyncSelect
-                            defaultOptions
-                            getOptionLabel={RenderOption as any}
-                            className="basic-single"
-                            classNamePrefix="select"
-                            loadOptions={inputValue => this.loadOptions(inputValue)}
-                            isSearchable={true}
-                            name="SelectedPeer"
-                            isLoading={this.state.UsersIsLoading}
-                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
-                            options={this.state.UserInfo}
-                            placeholder="select..."
-                          />
+                        <MDBRow>
+                          <MDBCol>
+                            <div className="inline-items">
+                              <AsyncSelect
+                                defaultOptions
+                                getOptionLabel={RenderOption as any}
+                                className="basic-single"
+                                classNamePrefix="select"
+                                loadOptions={inputValue => this.loadOptions(inputValue)}
+                                isSearchable={true}
+                                name="SelectedPeer"
+                                isLoading={this.state.UsersIsLoading}
+                                onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
+                                options={this.state.UserInfo}
+                                placeholder="select..."
+                              />
 
-                          <Tooltip title="Add" aria-label="add">
-                            <Fab size="small" color="primary" className="ml-3" aria-label="add">
-                              <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
-                            </Fab>
-                          </Tooltip>
-                        </div>
-                      </MDBCol>
-                      <MDBCol />
-                    </MDBRow>
+                              <Tooltip title="Add" aria-label="add">
+                                <Fab size="small" color="primary" className="ml-3" aria-label="add">
+                                  <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
+                                </Fab>
+                              </Tooltip>
+                            </div>
+                          </MDBCol>
+                          <MDBCol />
+                        </MDBRow>
 
-                    <MDBRow>
-                      <MDBCol>
-                        <Card className="Card">
-                          <Table className="table">
-                            <TableHead>
-                              <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                            </TableHead>
-                            <TableBody>{this.onRenderRows("Peer")}</TableBody>
-                          </Table>
-                        </Card>
-                      </MDBCol>
-                      <MDBCol />
-                    </MDBRow>
-                    <hr />
-                    <h3 className="pt-5 category">Other</h3>
+                        <MDBRow>
+                          <MDBCol>
+                            <Card className="Card">
+                              <Table className="table">
+                                <TableHead>
+                                  <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                                </TableHead>
+                                <TableBody>{this.onRenderRows("Peer")}</TableBody>
+                              </Table>
+                            </Card>
+                          </MDBCol>
+                          <MDBCol />
+                        </MDBRow>
+                        <hr />
+                        <h3 className="pt-5 category">Other</h3>
 
-                    <MDBRow>
-                      <MDBCol>
-                        <div className="inline-items">
-                          <AsyncSelect
-                            defaultOptions
-                            getOptionLabel={RenderOption as any}
-                            className="basic-single"
-                            classNamePrefix="select"
-                            loadOptions={inputValue => this.loadOptions(inputValue)}
-                            isSearchable={true}
-                            name="SelectedOther"
-                            isLoading={this.state.UsersIsLoading}
-                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
-                            options={this.state.UserInfo}
-                            placeholder="select..."
-                          />
-                          <Tooltip title="Add" aria-label="add">
-                            <Fab size="small" className="ml-3" color="primary" aria-label="add">
-                              <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
-                            </Fab>
-                          </Tooltip>
-                        </div>
-                      </MDBCol>
-                      <MDBCol />
-                    </MDBRow>
+                        <MDBRow>
+                          <MDBCol>
+                            <div className="inline-items">
+                              <AsyncSelect
+                                defaultOptions
+                                getOptionLabel={RenderOption as any}
+                                className="basic-single"
+                                classNamePrefix="select"
+                                loadOptions={inputValue => this.loadOptions(inputValue)}
+                                isSearchable={true}
+                                name="SelectedOther"
+                                isLoading={this.state.UsersIsLoading}
+                                onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
+                                options={this.state.UserInfo}
+                                placeholder="select..."
+                              />
+                              <Tooltip title="Add" aria-label="add">
+                                <Fab size="small" className="ml-3" color="primary" aria-label="add">
+                                  <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
+                                </Fab>
+                              </Tooltip>
+                            </div>
+                          </MDBCol>
+                          <MDBCol />
+                        </MDBRow>
 
-                    <MDBRow>
-                      <MDBCol>
-                        <Card className="Card">
-                          <Card className="Card">
-                            <Table className="table">
-                              <TableHead>
-                                <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                              </TableHead>
-                              <TableBody>{this.onRenderRows("Other")}</TableBody>
-                            </Table>
-                          </Card>
-                        </Card>
-                      </MDBCol>
-                      <MDBCol />
-                    </MDBRow>
-                  </MDBContainer>
-                </MDBCardText>
-                <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
-                  Submit
-                </MDBBtn>
-                <MDBBtn size="sm" color="grey lighten-3">
-                  Cancel
-                </MDBBtn>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
+                        <MDBRow>
+                          <MDBCol>
+                            <Card className="Card">
+                              <Card className="Card">
+                                <Table className="table">
+                                  <TableHead>
+                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                                  </TableHead>
+                                  <TableBody>{this.onRenderRows("Other")}</TableBody>
+                                </Table>
+                              </Card>
+                            </Card>
+                          </MDBCol>
+                          <MDBCol />
+                        </MDBRow>
+                      </MDBContainer>
+                    </MDBCardText>
+                    <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
+                      Submit
+                    </MDBBtn>
+                    <MDBBtn size="sm" color="grey lighten-3">
+                      Cancel
+                    </MDBBtn>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            )}
+          </div>
         )}
         <SnackBarMessage
           type={this.state.snackbarType}

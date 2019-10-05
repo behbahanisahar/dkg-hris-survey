@@ -11,7 +11,7 @@ import { ISurveyData } from "../../../../entities/survey-data";
 import Context from "../../../../utilities/context";
 import Info from "@material-ui/icons/Info";
 import Isurvey from "../../../../entities/survey";
-import Spinner from "../../../../spinner/spinner";
+import Spinner from "../../../spinner/spinner";
 
 // const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 const HtmlTooltip = withStyles((theme: Theme) => ({

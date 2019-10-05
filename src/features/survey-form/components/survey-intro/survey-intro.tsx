@@ -6,23 +6,16 @@ import "./survey-intro.css";
 import { TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/core";
 
 import { MDBTable, MDBTableBody } from "mdbreact";
-import Spinner from "../../../../spinner/spinner";
+import Spinner from "../../../spinner/spinner";
 
 import SurveyHeaderBackgroun from "./../../../../assets/img/survey-intro-header.png";
 
 export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroState> {
   private ListService: ListServices;
-  // private tableHeaders: ITableHeader[];
   public constructor(props: any) {
     super(props);
     this.ListService = new ListServices();
-    // this.tableHeaders = [
-    //   { id: "Row", label: "ردیف" },
-    //   { id: "Title", label: "ارزیابی شونده" },
-    //   { id: "Status", label: "وضعیت" },
-    //   { id: "Progress", label: "درصد تکمیل" },
-    //   { id: "action", label: "نمایش" },
-    // ];
+
     this.state = {
       appraisee: [],
       showSpinner: true,
@@ -89,7 +82,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
                 </div>
               </div>
               <div className="kt-portlet__body">
-                <MDBTable className="kt-datatable__table">
+                <MDBTable className="kt-datatable__table" borderless>
                   <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
                   <MDBTableBody clssName="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
                 </MDBTable>
@@ -101,17 +94,6 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
     );
   }
   /**************************** Repeat Table ****************************** */
-  // private renderHeader = (columnDetail: any[]) => {
-  //   return columnDetail.map(
-  //     row => (
-  //       <TableCell align="center" key={row.id} sortDirection="desc">
-  //         {row.label}
-  //       </TableCell>
-  //     ),
-  //     this,
-  //   );
-  // };
-
   private onRenderRows = () => {
     console.log(this.state.appraisee);
     return this.state.appraisee.map((n: IAppraisee, index: any) => {

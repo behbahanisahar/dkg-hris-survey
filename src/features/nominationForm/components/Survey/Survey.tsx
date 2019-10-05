@@ -18,8 +18,9 @@ import MYStepper from "../stepper/stepper";
 import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
 import IHistory from "../../../../entities/history";
-import Spinner from "../../../../spinner/spinner";
+import Spinner from "../../../spinner/spinner";
 import Forward from "@material-ui/icons/Forward";
+import Authentication from "../../../authentication/authentication";
 
 const RenderOption = (option: any) => (
   <div>
@@ -114,6 +115,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
     const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
+    console.log(NominationData);
     const NominationHistory: IHistory[] = await this.ListService.getNominationHistory(Number(itemId));
     let activeStep: number = 0;
     switch (NominationData.Status) {
@@ -154,245 +156,255 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
       <div>
         {this.state.showSpinner && <Spinner />}
         {!this.state.showSpinner && (
-          <MDBCol>
-            <div className="card-header mt-2">
-              <div className="content">
-                <p className="user">
-                  <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
-                  <h6>
-                    {this.state.NominationData.User!.EmailAddress} | {this.state.NominationData.User!.Department} |{" "}
-                    {this.state.NominationData.User!.JobGrade}{" "}
-                  </h6>
-                </p>
+          <div>
+            {this.state.NominationData.statusCode !== 200 && (
+              <Authentication status={this.state.NominationData.statusCode || 401} />
+            )}
+            {this.state.NominationData.statusCode === 200 && (
+              <MDBCol>
+                <div className="card-header mt-2">
+                  <div className="content">
+                    <p className="user">
+                      <strong>{this.state.NominationData.User!.SPLatinFullName}</strong>{" "}
+                      <h6>
+                        {this.state.NominationData.User!.EmailAddress} | {this.state.NominationData.User!.Department} |{" "}
+                        {this.state.NominationData.User!.JobGrade}{" "}
+                      </h6>
+                    </p>
 
-                <div className="page-header">Nomination Form</div>
-              </div>
-            </div>
-            <MDBCard className="w-auto">
-              <div>
-                <MYStepper activeStep={this.state.activeStep} />
-              </div>
+                    <div className="page-header">Nomination Form</div>
+                  </div>
+                </div>
+                <MDBCard className="w-auto">
+                  <div>
+                    <MYStepper activeStep={this.state.activeStep} />
+                  </div>
 
-              <MDBCardBody>
-                <MDBCardText>
-                  <MDBContainer>
-                    <h3 className="pt-3 category">Subordinates</h3>
-                    <MDBRow>
-                      <MDBCol>
-                        <div className="inline-items">
-                          <AsyncSelect
-                            defaultOptions
-                            getOptionLabel={RenderOption as any}
-                            className="basic-single"
-                            classNamePrefix="select"
-                            loadOptions={inputValue => this.loadOptions(inputValue)}
-                            isSearchable={true}
-                            name="SelectedSubOrdinate"
-                            isLoading={this.state.UsersIsLoading}
-                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
-                            options={this.state.UserInfo}
-                            placeholder="select..."
-                          />
-                          <Tooltip title="Add" aria-label="add">
-                            <Fab size="small" color="primary" className="ml-3" aria-label="add">
-                              <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
-                            </Fab>
-                          </Tooltip>
-                        </div>
-                      </MDBCol>
-                      <MDBCol />
-                    </MDBRow>
-
-                    <MDBRow>
-                      <MDBCol>
-                        <div className="inline-items">
-                          <Card className="CardTable">
-                            <Table style={{ direction: "ltr" }} className="table">
-                              <TableHead>
-                                <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                              </TableHead>
-                              <TableBody>{this.onRenderRows("Subordinates")}</TableBody>
-                            </Table>
-                          </Card>
-                          <Tooltip
-                            style={{ marginTop: "16%" }}
-                            title="show history table"
-                            aria-label="show history table"
-                          >
-                            <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
-                              <Forward
-                                style={{ color: "white" }}
-                                onClick={(ev: any) => this.HideHistory("Subordinate")}
+                  <MDBCardBody>
+                    <MDBCardText>
+                      <MDBContainer>
+                        <h3 className="pt-3 category">Subordinates</h3>
+                        <MDBRow>
+                          <MDBCol>
+                            <div className="inline-items">
+                              <AsyncSelect
+                                defaultOptions
+                                getOptionLabel={RenderOption as any}
+                                className="basic-single"
+                                classNamePrefix="select"
+                                loadOptions={inputValue => this.loadOptions(inputValue)}
+                                isSearchable={true}
+                                name="SelectedSubOrdinate"
+                                isLoading={this.state.UsersIsLoading}
+                                onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
+                                options={this.state.UserInfo}
+                                placeholder="select..."
                               />
-                            </Fab>
-                          </Tooltip>
-                        </div>
-                      </MDBCol>
-                      <MDBCol>
-                        {this.state.HideSubordinateHistory === false && (
-                          <div className="History">
-                            <h3 style={{ float: "left" }} className="pt-3 category">
-                              History
-                            </h3>
-                            <Card className="HistoryTable">
-                              <Table style={{ direction: "ltr" }} className="table">
-                                <TableHead>
-                                  <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
-                                </TableHead>
-                                <TableBody>{this.onRenderHistoryRows("Subordinate")}</TableBody>
-                              </Table>
-                            </Card>
-                          </div>
-                        )}
-                      </MDBCol>
-                    </MDBRow>
-                    <hr />
-                    <h3 className="pt-5 category">Peer</h3>
-                    <MDBRow>
-                      <MDBCol>
-                        <div className="inline-items">
-                          <AsyncSelect
-                            defaultOptions
-                            getOptionLabel={RenderOption as any}
-                            className="basic-single"
-                            classNamePrefix="select"
-                            loadOptions={inputValue => this.loadOptions(inputValue)}
-                            isSearchable={true}
-                            name="SelectedPeer"
-                            isLoading={this.state.UsersIsLoading}
-                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
-                            options={this.state.UserInfo}
-                            placeholder="select..."
-                          />
+                              <Tooltip title="Add" aria-label="add">
+                                <Fab size="small" color="primary" className="ml-3" aria-label="add">
+                                  <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
+                                </Fab>
+                              </Tooltip>
+                            </div>
+                          </MDBCol>
+                          <MDBCol />
+                        </MDBRow>
 
-                          <Tooltip title="Add" aria-label="add">
-                            <Fab size="small" color="primary" className="ml-3" aria-label="add">
-                              <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
-                            </Fab>
-                          </Tooltip>
-                        </div>
-                      </MDBCol>
-                      <MDBCol />
-                    </MDBRow>
-                    <MDBRow>
-                      <MDBCol>
-                        <div className="inline-items">
-                          <Card className="CardTable">
-                            <Table style={{ direction: "ltr" }} className="table">
-                              <TableHead>
-                                <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                              </TableHead>
-                              <TableBody>{this.onRenderRows("Peer")}</TableBody>
-                            </Table>
-                          </Card>
-                          <Tooltip
-                            style={{ marginTop: "16%" }}
-                            title="show history table"
-                            aria-label="show history table"
-                          >
-                            <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
-                              <Forward style={{ color: "white" }} onClick={(ev: any) => this.HideHistory("Peer")} />
-                            </Fab>
-                          </Tooltip>
-                        </div>
-                      </MDBCol>
-                      <MDBCol>
-                        {this.state.HidePeerHistory === false && (
-                          <div className="History">
-                            <h3 style={{ float: "left" }} className="pt-3 category">
-                              History
-                            </h3>
-                            <Card className="HistoryTable">
-                              <Table style={{ direction: "ltr" }} className="table">
-                                <TableHead>
-                                  <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
-                                </TableHead>
-                                <TableBody>{this.onRenderHistoryRows("Peer")}</TableBody>
-                              </Table>
-                            </Card>
-                          </div>
-                        )}
-                      </MDBCol>
-                    </MDBRow>
-                    <hr />
-                    <h3 className="pt-5 category">Other</h3>
-                    <MDBRow>
-                      <MDBCol>
-                        <div className="inline-items">
-                          <AsyncSelect
-                            defaultOptions
-                            getOptionLabel={RenderOption as any}
-                            className="basic-single"
-                            classNamePrefix="select"
-                            loadOptions={inputValue => this.loadOptions(inputValue)}
-                            isSearchable={true}
-                            name="SelectedOther"
-                            isLoading={this.state.UsersIsLoading}
-                            onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
-                            options={this.state.UserInfo}
-                            placeholder="select..."
-                          />
-                          <Tooltip title="Add" aria-label="add">
-                            <Fab size="small" className="ml-3" color="primary" aria-label="add">
-                              <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
-                            </Fab>
-                          </Tooltip>
-                        </div>
-                      </MDBCol>
-                      <MDBCol />
-                    </MDBRow>
+                        <MDBRow>
+                          <MDBCol>
+                            <div className="inline-items">
+                              <Card className="CardTable">
+                                <Table style={{ direction: "ltr" }} className="table">
+                                  <TableHead>
+                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                                  </TableHead>
+                                  <TableBody>{this.onRenderRows("Subordinates")}</TableBody>
+                                </Table>
+                              </Card>
+                              <Tooltip
+                                style={{ marginTop: "16%" }}
+                                title="show history table"
+                                aria-label="show history table"
+                              >
+                                <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
+                                  <Forward
+                                    style={{ color: "white" }}
+                                    onClick={(ev: any) => this.HideHistory("Subordinate")}
+                                  />
+                                </Fab>
+                              </Tooltip>
+                            </div>
+                          </MDBCol>
+                          <MDBCol>
+                            {this.state.HideSubordinateHistory === false && (
+                              <div className="History">
+                                <h3 style={{ float: "left" }} className="pt-3 category">
+                                  History
+                                </h3>
+                                <Card className="HistoryTable">
+                                  <Table style={{ direction: "ltr" }} className="table">
+                                    <TableHead>
+                                      <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
+                                    </TableHead>
+                                    <TableBody>{this.onRenderHistoryRows("Subordinate")}</TableBody>
+                                  </Table>
+                                </Card>
+                              </div>
+                            )}
+                          </MDBCol>
+                        </MDBRow>
+                        <hr />
+                        <h3 className="pt-5 category">Peer</h3>
+                        <MDBRow>
+                          <MDBCol>
+                            <div className="inline-items">
+                              <AsyncSelect
+                                defaultOptions
+                                getOptionLabel={RenderOption as any}
+                                className="basic-single"
+                                classNamePrefix="select"
+                                loadOptions={inputValue => this.loadOptions(inputValue)}
+                                isSearchable={true}
+                                name="SelectedPeer"
+                                isLoading={this.state.UsersIsLoading}
+                                onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
+                                options={this.state.UserInfo}
+                                placeholder="select..."
+                              />
 
-                    <MDBRow>
-                      <MDBCol>
-                        <div className="inline-items">
-                          <Card className="CardTable">
-                            <Table style={{ direction: "ltr" }} className="table">
-                              <TableHead>
-                                <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                              </TableHead>
-                              <TableBody>{this.onRenderRows("Other")}</TableBody>
-                            </Table>
-                          </Card>
-                          <Tooltip
-                            style={{ marginTop: "16%" }}
-                            title="show history table"
-                            aria-label="show history table"
-                          >
-                            <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
-                              <Forward style={{ color: "white" }} onClick={(ev: any) => this.HideHistory("Other")} />
-                            </Fab>
-                          </Tooltip>
-                        </div>
-                      </MDBCol>
-                      <MDBCol>
-                        {this.state.HideOtherHistory === false && (
-                          <div className="History">
-                            <h3 style={{ float: "left" }} className="pt-3 category">
-                              History
-                            </h3>
-                            <Card className="HistoryTable">
-                              <Table style={{ direction: "ltr" }} className="table">
-                                <TableHead>
-                                  <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
-                                </TableHead>
-                                <TableBody>{this.onRenderHistoryRows("Other")}</TableBody>
-                              </Table>
-                            </Card>
-                          </div>
-                        )}
-                      </MDBCol>
-                    </MDBRow>
-                  </MDBContainer>
-                </MDBCardText>
-                <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
-                  Submit
-                </MDBBtn>
-                <MDBBtn size="sm" color="grey lighten-3">
-                  Cancel
-                </MDBBtn>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
+                              <Tooltip title="Add" aria-label="add">
+                                <Fab size="small" color="primary" className="ml-3" aria-label="add">
+                                  <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
+                                </Fab>
+                              </Tooltip>
+                            </div>
+                          </MDBCol>
+                          <MDBCol />
+                        </MDBRow>
+                        <MDBRow>
+                          <MDBCol>
+                            <div className="inline-items">
+                              <Card className="CardTable">
+                                <Table style={{ direction: "ltr" }} className="table">
+                                  <TableHead>
+                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                                  </TableHead>
+                                  <TableBody>{this.onRenderRows("Peer")}</TableBody>
+                                </Table>
+                              </Card>
+                              <Tooltip
+                                style={{ marginTop: "16%" }}
+                                title="show history table"
+                                aria-label="show history table"
+                              >
+                                <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
+                                  <Forward style={{ color: "white" }} onClick={(ev: any) => this.HideHistory("Peer")} />
+                                </Fab>
+                              </Tooltip>
+                            </div>
+                          </MDBCol>
+                          <MDBCol>
+                            {this.state.HidePeerHistory === false && (
+                              <div className="History">
+                                <h3 style={{ float: "left" }} className="pt-3 category">
+                                  History
+                                </h3>
+                                <Card className="HistoryTable">
+                                  <Table style={{ direction: "ltr" }} className="table">
+                                    <TableHead>
+                                      <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
+                                    </TableHead>
+                                    <TableBody>{this.onRenderHistoryRows("Peer")}</TableBody>
+                                  </Table>
+                                </Card>
+                              </div>
+                            )}
+                          </MDBCol>
+                        </MDBRow>
+                        <hr />
+                        <h3 className="pt-5 category">Other</h3>
+                        <MDBRow>
+                          <MDBCol>
+                            <div className="inline-items">
+                              <AsyncSelect
+                                defaultOptions
+                                getOptionLabel={RenderOption as any}
+                                className="basic-single"
+                                classNamePrefix="select"
+                                loadOptions={inputValue => this.loadOptions(inputValue)}
+                                isSearchable={true}
+                                name="SelectedOther"
+                                isLoading={this.state.UsersIsLoading}
+                                onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
+                                options={this.state.UserInfo}
+                                placeholder="select..."
+                              />
+                              <Tooltip title="Add" aria-label="add">
+                                <Fab size="small" className="ml-3" color="primary" aria-label="add">
+                                  <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
+                                </Fab>
+                              </Tooltip>
+                            </div>
+                          </MDBCol>
+                          <MDBCol />
+                        </MDBRow>
+
+                        <MDBRow>
+                          <MDBCol>
+                            <div className="inline-items">
+                              <Card className="CardTable">
+                                <Table style={{ direction: "ltr" }} className="table">
+                                  <TableHead>
+                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                                  </TableHead>
+                                  <TableBody>{this.onRenderRows("Other")}</TableBody>
+                                </Table>
+                              </Card>
+                              <Tooltip
+                                style={{ marginTop: "16%" }}
+                                title="show history table"
+                                aria-label="show history table"
+                              >
+                                <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
+                                  <Forward
+                                    style={{ color: "white" }}
+                                    onClick={(ev: any) => this.HideHistory("Other")}
+                                  />
+                                </Fab>
+                              </Tooltip>
+                            </div>
+                          </MDBCol>
+                          <MDBCol>
+                            {this.state.HideOtherHistory === false && (
+                              <div className="History">
+                                <h3 style={{ float: "left" }} className="pt-3 category">
+                                  History
+                                </h3>
+                                <Card className="HistoryTable">
+                                  <Table style={{ direction: "ltr" }} className="table">
+                                    <TableHead>
+                                      <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
+                                    </TableHead>
+                                    <TableBody>{this.onRenderHistoryRows("Other")}</TableBody>
+                                  </Table>
+                                </Card>
+                              </div>
+                            )}
+                          </MDBCol>
+                        </MDBRow>
+                      </MDBContainer>
+                    </MDBCardText>
+                    <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
+                      Submit
+                    </MDBBtn>
+                    <MDBBtn size="sm" color="grey lighten-3">
+                      Cancel
+                    </MDBBtn>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBCol>
+            )}
+          </div>
         )}
         <SnackBarMessage
           type={this.state.snackbarType}

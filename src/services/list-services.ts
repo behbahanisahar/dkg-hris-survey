@@ -45,7 +45,43 @@ class ListServices extends ServiceBase {
   public async getNominationData(itemId: number): Promise<NominationData> {
     if (process.env.NODE_ENV === "production") {
       const items: any = await this.get("/survey/nomination?itemId=" + itemId + "");
-      return Promise.resolve(items.data);
+      if (items.status === 200) {
+        return Promise.resolve({
+          Status: items.data.Status,
+          Subordinates: items.data.Subordinates,
+          Other: items.data.Other,
+          Peer: items.data.Peer,
+          User: items.data.User,
+          LineManager: items.data.LineManager,
+          statusCode: items.status,
+        });
+      } else {
+        return {
+          Status: "",
+          Subordinates: [],
+          Other: [],
+          Peer: [],
+          User: {
+            AvatarUrl: "",
+            Id: 0,
+            ItemId: 0,
+            SPLatinFullName: "",
+            Department: "",
+            EmailAddress: "",
+            JobGrade: "",
+          },
+          LineManager: {
+            AvatarUrl: "",
+            Id: 0,
+            ItemId: 0,
+            SPLatinFullName: "",
+            Department: "",
+            EmailAddress: "",
+            JobGrade: "",
+          },
+          statusCode: items.status,
+        };
+      }
     }
     return Promise.resolve(MockData.NominationData);
   }
@@ -76,6 +112,7 @@ class ListServices extends ServiceBase {
   public async getAppraisee(): Promise<any[]> {
     if (process.env.NODE_ENV === "production") {
       const result: any = await this.get("/Appraisee");
+
       return Promise.resolve(result.data);
     }
 
@@ -85,7 +122,7 @@ class ListServices extends ServiceBase {
   public async getNominationTasks(): Promise<UserTasks[]> {
     if (process.env.NODE_ENV === "production") {
       const items: any = await this.get("/survey/nomination/tasks");
-      console.log(items.data);
+
       return Promise.resolve(items.data);
     }
 
