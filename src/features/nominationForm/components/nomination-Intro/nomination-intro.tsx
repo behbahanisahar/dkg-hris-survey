@@ -22,6 +22,7 @@ export default class NominationIntroPage extends React.Component<{}, INomination
     };
   }
   public async componentDidMount() {
+    document.title = "Nomination Intro";
     await this.ListService.getNominationTasks().then(nominationTasks => {
       this.setState(prevState => {
         return {

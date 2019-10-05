@@ -48,6 +48,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     };
   }
   public async componentDidMount() {
+    document.title = "Survey Form";
     const itemid = this.util.getQueryStringValue("itemid");
     const marks = [
       {

@@ -22,6 +22,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
     };
   }
   public async componentDidMount() {
+    document.title = "Survey Intro";
     await this.ListService.getAppraisee().then(appraisee => {
       this.setState(prevState => {
         return {

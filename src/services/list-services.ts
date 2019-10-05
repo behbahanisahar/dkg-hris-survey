@@ -44,44 +44,21 @@ class ListServices extends ServiceBase {
   /****************get nomination form data*****************************************************8 */
   public async getNominationData(itemId: number): Promise<NominationData> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("/survey/nomination?itemId=" + itemId + "");
-      if (items.status === 200) {
-        return Promise.resolve({
-          Status: items.data.Status,
-          Subordinates: items.data.Subordinates,
-          Other: items.data.Other,
-          Peer: items.data.Peer,
-          User: items.data.User,
-          LineManager: items.data.LineManager,
-          statusCode: items.status,
-        });
-      } else {
+      const items: any = await this.get("/survey/nomination?itemId=" + itemId + "").catch(function(error) {
         return {
-          Status: "",
-          Subordinates: [],
-          Other: [],
-          Peer: [],
-          User: {
-            AvatarUrl: "",
-            Id: 0,
-            ItemId: 0,
-            SPLatinFullName: "",
-            Department: "",
-            EmailAddress: "",
-            JobGrade: "",
-          },
-          LineManager: {
-            AvatarUrl: "",
-            Id: 0,
-            ItemId: 0,
-            SPLatinFullName: "",
-            Department: "",
-            EmailAddress: "",
-            JobGrade: "",
-          },
-          statusCode: items.status,
+          statusCode: error.response.status,
         };
-      }
+      });
+
+      return Promise.resolve({
+        Status: items.data.Status,
+        Subordinates: items.data.Subordinates,
+        Other: items.data.Other,
+        Peer: items.data.Peer,
+        User: items.data.User,
+        LineManager: items.data.LineManager,
+        statusCode: items.status,
+      });
     }
     return Promise.resolve(MockData.NominationData);
   }
@@ -103,23 +80,18 @@ class ListServices extends ServiceBase {
   public async getSurveyFormData(itemId: number): Promise<Isurvey> {
     if (process.env.NODE_ENV === "production") {
       debugger;
-      const items: any = await this.get("/survey?nominationItemId=" + itemId + "");
-      console.log(items);
-      if (items.status === 200) {
-        return Promise.resolve({
-          UserDisplayName: items.data.UserDisplayName,
-          SurveyAnswerId: items.data.SurveyAnswerId,
-          Categories: items.data.Categories,
-          statusCode: items.status,
-        });
-      } else {
+      const items: any = await this.get("/survey?nominationItemId=" + itemId + "").catch(function(error) {
         return {
-          UserDisplayName: "",
-          SurveyAnswerId: 0,
-          Categories: [],
-          statusCode: items.status,
+          statusCode: error.response.status,
         };
-      }
+      });
+
+      return Promise.resolve({
+        UserDisplayName: items.data.UserDisplayName,
+        SurveyAnswerId: items.data.SurveyAnswerId,
+        Categories: items.data.Categories,
+        statusCode: items.status,
+      });
     }
 
     return Promise.resolve(MockData.SurveyFormData);
