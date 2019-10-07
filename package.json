@@ -4,7 +4,7 @@
   "homepage": "./",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
+    "start": "craco start",
     "start-dev-server": "craco start",
     "build": "craco build",
     "test": "node ./bin/sp-rest-proxy.js test-interactive",

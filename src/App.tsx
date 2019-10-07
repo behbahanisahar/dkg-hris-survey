@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.less";
-import SelfSurvey from "./features/nominationForm/components/self-survey/self-survey";
 import Util from "../src/utilities/utilities";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import ListServices from "./services/list-services";
 import NominationData from "../src/entities/nomination";
-import FlowSurvey from "./features/nominationForm/components/survey/survey";
 import SurveyIntroPage from "./features/survey-form/components/survey-intro/survey-intro";
 import FormSurvey from "./features/survey-form/components/main-form/survey-form";
 import NominationIntroPage from "./features/nominationForm/components/nomination-Intro/nomination-intro";
+import SelfNomination from "./features/nominationForm/components/self-nomination/self-enomination-form";
+import Nomination from "./features/nominationForm/components/nomination-form/nomination-form";
 
 const theme = createMuiTheme({
   palette: {
@@ -59,10 +59,10 @@ class App extends React.Component<{}, IAppState> {
             {this.state.page.toLowerCase() === "nominationform" && (
               <div>
                 {this.state.NominationData.Status.toLowerCase() === "notstarted" && (
-                  <SelfSurvey itemId={this.state.itemId} />
+                  <SelfNomination itemId={this.state.itemId} />
                 )}
                 {this.state.NominationData.Status.toLowerCase() !== "notstarted" && (
-                  <FlowSurvey itemId={this.state.itemId} />
+                  <Nomination itemId={this.state.itemId} />
                 )}
               </div>
             )}

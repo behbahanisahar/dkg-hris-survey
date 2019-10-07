@@ -1,7 +1,7 @@
 import * as React from "react";
-import ISurveyProps from "./survey-props";
-import ISurveyState from "./survey-state";
-import "./survey.css";
+import ISurveyProps from "./nomination-form-props";
+import ISurveyState from "./nomination-form-state";
+import "./nomination-form.css";
 import ListServices from "../../../../services/list-services";
 import AsyncSelect from "react-select/async";
 import Add from "@material-ui/icons/Add";
@@ -13,7 +13,7 @@ import Util from "../../../../utilities/utilities";
 import NominationData from "../../../../entities/nomination";
 import IUser from "../../../../entities/user";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
-import MYStepper from "../stepper/stepper";
+import MYStepper from "../../../stepper/stepper";
 import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
 import IHistory from "../../../../entities/history";
@@ -32,7 +32,7 @@ const RenderOption = (option: any) => (
     </div>
   </div>
 );
-export default class FlowSurvey extends React.Component<ISurveyProps, ISurveyState> {
+export default class Nomination extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
   private tableHeaders: ITableHeader[];
   private HistorytableHeaders: ITableHeader[];

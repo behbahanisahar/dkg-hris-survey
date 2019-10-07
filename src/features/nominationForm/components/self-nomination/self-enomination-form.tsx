@@ -1,8 +1,8 @@
 import * as React from "react";
-import ISurveyProps from "./self-survey-props";
-import ISurveyState from "./self-survey-state";
+import ISurveyProps from "./self-nomination-form-props";
+import ISurveyState from "./self-nomination-form-state";
 import { MDBCard, MDBCardBody, MDBContainer, MDBCardText } from "mdbreact";
-import "./self-survey.css";
+import "./self-enomination-form.css";
 import ListServices from "../../../../services/list-services";
 import SPLists from "../../../../entities/lists";
 import Add from "@material-ui/icons/Add";
@@ -14,7 +14,7 @@ import Util from "../../../../utilities/utilities";
 import NominationData from "../../../../entities/nomination";
 import IUser from "../../../../entities/user";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
-import MYStepper from "../stepper/stepper";
+import MYStepper from "../../../stepper/stepper";
 import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
 import Spinner from "../../../spinner/spinner";
@@ -32,7 +32,7 @@ const RenderOption = (option: any) => (
     </div>
   </div>
 );
-export default class SelfServuy extends React.Component<ISurveyProps, ISurveyState> {
+export default class SelfNomination extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
   private tableHeaders: ITableHeader[];
   private util: Util;
