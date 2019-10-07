@@ -1,12 +1,12 @@
 import * as React from "react";
 import ISurveyProps from "./self-survey-props";
 import ISurveyState from "./self-survey-state";
-import { MDBCard, MDBCol, MDBCardBody, MDBBtn, MDBRow, MDBContainer, MDBCardText } from "mdbreact";
+import { MDBCard, MDBCardBody, MDBContainer, MDBCardText } from "mdbreact";
 import "./self-survey.css";
 import ListServices from "../../../../services/list-services";
 import SPLists from "../../../../entities/lists";
 import Add from "@material-ui/icons/Add";
-import { Fab, Card, Tooltip, Table, TableHead, TableRow, TableBody, TableCell } from "@material-ui/core";
+import { Fab, Tooltip, Table, TableRow, TableBody, TableCell } from "@material-ui/core";
 import AsyncSelect from "react-select/async";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
@@ -20,6 +20,8 @@ import Delete from "@material-ui/icons/Delete";
 import Spinner from "../../../spinner/spinner";
 import Authentication from "../../../authentication/authentication";
 import { NominationFormHeader } from "../nomination-form-header/nomination-form-header";
+import Search from "@material-ui/icons/Search";
+
 const RenderOption = (option: any) => (
   <div>
     <strong>{option.label}</strong>
@@ -119,7 +121,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
               <Authentication status={this.state.NominationData.statusCode || 401} />
             )}
             {this.state.NominationData.statusCode === 200 && (
-              <MDBCol>
+              <div className="col-sm">
                 <NominationFormHeader user={this.state.NominationData.User}></NominationFormHeader>
                 <MDBCard className="w-auto">
                   <div>
@@ -129,14 +131,15 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                   <MDBCardBody>
                     <MDBCardText>
                       <MDBContainer>
-                        <h3 className="pt-3 category">Subordinates</h3>
-                        <MDBRow>
-                          <MDBCol>
-                            <div className="inline-items">
+                        <h3 className="pt-5 kt-portlet__head-title">Subordinates</h3>
+                        <div className="row">
+                          <div className="col-sm-3" />
+                          <div className="col-sm-7">
+                            <div className="inline-items" dir="rtl">
                               <AsyncSelect
                                 defaultOptions
                                 getOptionLabel={RenderOption as any}
-                                className="basic-single"
+                                className="basic-single  "
                                 classNamePrefix="select"
                                 dir="ltr"
                                 loadOptions={inputValue => this.loadOptions(inputValue)}
@@ -146,36 +149,50 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                                 onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
                                 options={this.state.UserInfo}
                                 placeholder="select..."
+                                IconComponent={Search}
+                                onKeyDown={(e: any) => this.keyPress(e, "SelectedSubOrdinate")}
                               />
 
                               <Tooltip title="Add" aria-label="add">
-                                <Fab size="small" color="primary" className="ml-3" aria-label="add">
+                                <Fab
+                                  size="small"
+                                  color="primary"
+                                  className="ml-3 kt-header__topbar-icon kt-header__topbar-icon--brand"
+                                  aria-label="add"
+                                >
                                   <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
                                 </Fab>
                               </Tooltip>
                             </div>
-                          </MDBCol>
-                          <MDBCol />
-                        </MDBRow>
-                        <MDBRow>
-                          <MDBCol>
-                            <Card className="Card">
-                              <Table className="table">
-                                <TableHead>
-                                  <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                                </TableHead>
-                                <TableBody>{this.onRenderRows("Subordinates")}</TableBody>
-                              </Table>
-                            </Card>
-                          </MDBCol>
-                          <MDBCol />
-                        </MDBRow>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-sm-3" />
+                          <div className="col-sm-7">
+                            <div className="kt-portlet">
+                              <div className="kt-portlet__head">
+                                <div className="kt-portlet__head-label">
+                                  <h3 className="pt-5 kt-portlet__head-title">Subordinates</h3>
+                                </div>
+                              </div>
+                              <div className="kt-portlet__body">
+                                <Table dir="rtl" className="kt-datatable__table">
+                                  <thead className="kt-datatable__head">
+                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                                  </thead>
+                                  <TableBody>{this.onRenderRows("Subordinates")}</TableBody>
+                                </Table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <hr />
-                        <h3 className="pt-5 category">Peer</h3>
+                        <h3 className="pt-5 kt-portlet__head-title">Peer</h3>
 
-                        <MDBRow>
-                          <MDBCol>
-                            <div className="inline-items">
+                        <div className="row">
+                          <div className="col-sm-3" />
+                          <div className="col-sm-7">
+                            <div className="inline-items" dir="rtl">
                               <AsyncSelect
                                 defaultOptions
                                 getOptionLabel={RenderOption as any}
@@ -188,6 +205,8 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                                 onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
                                 options={this.state.UserInfo}
                                 placeholder="select..."
+                                IconComponent={Search}
+                                onKeyDown={(e: any) => this.keyPress(e, "SelectedPeer")}
                               />
 
                               <Tooltip title="Add" aria-label="add">
@@ -196,29 +215,32 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                                 </Fab>
                               </Tooltip>
                             </div>
-                          </MDBCol>
-                          <MDBCol />
-                        </MDBRow>
+                          </div>
+                        </div>
 
-                        <MDBRow>
-                          <MDBCol>
-                            <Card className="Card">
-                              <Table className="table">
-                                <TableHead>
-                                  <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                                </TableHead>
-                                <TableBody>{this.onRenderRows("Peer")}</TableBody>
-                              </Table>
-                            </Card>
-                          </MDBCol>
-                          <MDBCol />
-                        </MDBRow>
+                        <div className="row">
+                          <div className="col-sm-3" />
+                          <div className="col-sm-7">
+                            <div className="kt-portlet">
+                              <div className="kt-portlet__body">
+                                <Table dir="rtl" className="kt-datatable__table">
+                                  <thead className="kt-datatable__head">
+                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                                  </thead>
+                                  <TableBody>{this.onRenderRows("Peer")}</TableBody>
+                                </Table>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-sm" />
+                        </div>
                         <hr />
-                        <h3 className="pt-5 category">Other</h3>
+                        <h3 className="pt-5 kt-portlet__head-title">Other</h3>
 
-                        <MDBRow>
-                          <MDBCol>
-                            <div className="inline-items">
+                        <div className="row">
+                          <div className="col-sm-3" />
+                          <div className="col-sm-7">
+                            <div className="inline-items" dir="rtl">
                               <AsyncSelect
                                 defaultOptions
                                 getOptionLabel={RenderOption as any}
@@ -231,6 +253,9 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                                 onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
                                 options={this.state.UserInfo}
                                 placeholder="select..."
+                                IconComponent={Search}
+                                dir="rtl"
+                                onKeyDown={(e: any) => this.keyPress(e, "SelectedOther")}
                               />
                               <Tooltip title="Add" aria-label="add">
                                 <Fab size="small" className="ml-3" color="primary" aria-label="add">
@@ -238,34 +263,47 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                                 </Fab>
                               </Tooltip>
                             </div>
-                          </MDBCol>
-                          <MDBCol />
-                        </MDBRow>
-
-                        <MDBRow>
-                          <MDBCol>
-                            <Card className="Card">
-                              <Card className="Card">
-                                <Table className="table">
-                                  <TableHead>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-sm-3" />
+                          <div className="col-sm-7">
+                            <div className="kt-portlet">
+                              <div className="kt-portlet__body">
+                                <Table dir="rtl" className="kt-datatable__table">
+                                  <thead className="kt-datatable__head">
                                     <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                                  </TableHead>
+                                  </thead>
                                   <TableBody>{this.onRenderRows("Other")}</TableBody>
                                 </Table>
-                              </Card>
-                            </Card>
-                          </MDBCol>
-                          <MDBCol />
-                        </MDBRow>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </MDBContainer>
                     </MDBCardText>
-                    <MDBBtn className="btn btn-success" onClick={this.SubmitForm}>
-                      تایید
-                    </MDBBtn>
-                    <MDBBtn sclassName="btn btn-secondary btn-hover-brand">انصراف</MDBBtn>
+                    <div className="col-lg-12">
+                      <button
+                        onKeyPress={e => {
+                          if (e.key === "Enter") e.preventDefault();
+                        }}
+                        className="btn btn-secondary "
+                      >
+                        انصراف
+                      </button>
+                      <button
+                        onKeyPress={e => {
+                          if (e.key === "Enter") e.preventDefault();
+                        }}
+                        className="btn btn-primary mr-2"
+                        onClick={this.SubmitForm}
+                      >
+                        تایید
+                      </button>
+                    </div>
                   </MDBCardBody>
                 </MDBCard>
-              </MDBCol>
+              </div>
             )}
           </div>
         )}
@@ -445,12 +483,11 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
               {index + 1}
             </TableCell>
             <TableCell align="center">{n.SPLatinFullName}</TableCell>
-            <TableCell
-              align="center"
-              onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
-              style={{ width: "3%" }}
-            >
-              <Delete color="primary" />
+            <TableCell align="center" style={{ width: "3%" }}>
+              <Delete
+                className="flaticon-pie-chart-1 kt-font-info"
+                onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
+              />
             </TableCell>
           </TableRow>
         );
@@ -567,11 +604,19 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
       return "";
     }
   };
-  /************************************************************** */
+  /******************async select options******************************************** */
   private async loadOptions(inputValue: string) {
     return await this.ListService.getUserInfo(inputValue);
   }
+  /******************dintics all items in tables******************************** */
   private distict = (value: any, index: any, self: any[]) => {
     return self.indexOf(value) == index;
   };
+  /**********************async select key press function**************************** */
+  private keyPress(e: any, value: string) {
+    if (e.keyCode == 13) {
+      this.AddItem(value);
+      // put the login here
+    }
+  }
 }

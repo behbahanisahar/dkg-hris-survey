@@ -109,6 +109,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
         };
       });
     });
+    console.log(this.state.SurveyFormData);
   }
   // public async UNSAFE_componentWillUpdate2(nextProps: any, nextState: any) {
   //   await sleep(20000);
