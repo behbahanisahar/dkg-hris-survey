@@ -12,6 +12,7 @@ import Context from "../../../../utilities/context";
 import Info from "@material-ui/icons/Info";
 import Isurvey from "../../../../entities/survey";
 import Spinner from "../../../spinner/spinner";
+import Authentication from "../../../authentication/authentication";
 
 // const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 const HtmlTooltip = withStyles((theme: Theme) => ({
@@ -47,6 +48,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     };
   }
   public async componentDidMount() {
+    document.title = "Survey Form";
     const itemid = this.util.getQueryStringValue("itemid");
     const marks = [
       {
@@ -96,6 +98,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     ];
     await this.ListService.getSurveyFormData(Number(itemid)).then(data => {
       this.initializeAnwers(data);
+
       this.setState(prevState => {
         return {
           ...prevState,
@@ -127,18 +130,29 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
         {this.state.showSpinner && <Spinner />}
         {!this.state.showSpinner && (
           <div>
-            <div>{this.onRenderCard()}</div>
-            <div className="buttons">
-              <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Not Completed", "submit")}>
-                ذخیره
-              </MDBBtn>
-              <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Completed", "submit")}>
-                ثبت نهایی
-              </MDBBtn>
-              <MDBBtn size="sm" color="grey lighten-3">
-                انصراف
-              </MDBBtn>
-            </div>
+            {this.state.SurveyFormData.statusCode !== 200 && (
+              <Authentication status={this.state.SurveyFormData.statusCode || 401} />
+            )}
+            {this.state.SurveyFormData.statusCode === 200 && (
+              <div>
+                <div>{this.onRenderCard()}</div>
+                <div className="buttons">
+                  <MDBBtn
+                    size="sm"
+                    color="dark-green"
+                    onClick={(ev: any) => this.onSubmitForm("Not Completed", "submit")}
+                  >
+                    ذخیره
+                  </MDBBtn>
+                  <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Completed", "submit")}>
+                    ثبت نهایی
+                  </MDBBtn>
+                  <MDBBtn size="sm" color="grey lighten-3">
+                    انصراف
+                  </MDBBtn>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -224,14 +238,16 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   };
 
   private initializeAnwers = (data: Isurvey) => {
-    data.Categories.forEach(element => {
-      element.Questions.forEach(q => {
-        this.state.answers.push({
-          QuestionField: q.Field,
-          Value: q.Value,
+    if (data.statusCode === 200) {
+      data.Categories.forEach(element => {
+        element.Questions.forEach(q => {
+          this.state.answers.push({
+            QuestionField: q.Field,
+            Value: q.Value,
+          });
         });
       });
-    });
+    }
   };
   /**************************render slider value***************************** */
   private onRenderSliderValue = (Field: any) => {

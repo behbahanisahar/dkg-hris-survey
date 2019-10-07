@@ -8,7 +8,7 @@ import { TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/cor
 import { MDBTable, MDBTableBody } from "mdbreact";
 import Spinner from "../../../spinner/spinner";
 
-import SurveyHeaderBackgroun from "./../../../../assets/img/survey-intro-header.png";
+import SurveyHeaderBackground from "./../../../../assets/img/survey-intro-header.png";
 
 export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroState> {
   private ListService: ListServices;
@@ -22,6 +22,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
     };
   }
   public async componentDidMount() {
+    document.title = "Survey Intro";
     await this.ListService.getAppraisee().then(appraisee => {
       this.setState(prevState => {
         return {
@@ -39,7 +40,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
           <div className="kt-portlet__body">
             <div className="row">
               <div className="col-sm">
-                <img src={SurveyHeaderBackgroun} className="kt-svg-icon" alt="survey-intro"></img>
+                <img src={SurveyHeaderBackground} className="kt-svg-icon" alt="survey-intro"></img>
               </div>
               <div className="col-sm">
                 <div className="kt-sc__content">

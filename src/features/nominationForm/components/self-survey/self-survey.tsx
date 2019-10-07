@@ -93,6 +93,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
   }
 
   public async componentDidMount() {
+    document.title = "Nomination Form";
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
     const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
@@ -504,39 +505,73 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
   };
   /****************************on form submited*************************************/
   private SubmitForm = () => {
-    const subordinateLength = this.state.NominationData.Subordinates.length;
-    const Other = this.state.NominationData.Other.length;
-    const Peer = this.state.NominationData.Peer.length;
-    if (subordinateLength <= 2 || Other <= 2 || Peer <= 2) {
+    let dataComparison: string = this.Compare(
+      this.state.NominationData.Peer,
+      this.state.NominationData.Other,
+      this.state.NominationData.Subordinates,
+    );
+    console.log(dataComparison);
+    if ((dataComparison = "")) {
+      const subordinateLength = this.state.NominationData.Subordinates.length;
+      const Other = this.state.NominationData.Other.length;
+      const Peer = this.state.NominationData.Peer.length;
+      if (subordinateLength <= 2 || Other <= 2 || Peer <= 2) {
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            snackbarMessage: "you should select between 3 to 15 users!",
+            showSnackbarMessage: true,
+            snackbarType: SnackBarMode.Error,
+          };
+        });
+      } else {
+        const UpdateItem: IUpdatedData = {
+          ItemId: this.state.itemId,
+          peer: this.state.NominationData.Peer,
+          other: this.state.NominationData.Other,
+          subordinate: this.state.NominationData.Subordinates,
+        };
+        this.ListService.updateNominationData(UpdateItem);
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            snackbarMessage: "successfully submitted!",
+            showSnackbarMessage: true,
+            snackbarType: SnackBarMode.Success,
+          };
+        });
+        window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
+      }
+    } else {
       this.setState(prevState => {
         return {
           ...prevState,
-          snackbarMessage: "you should select between 3 to 15 users!",
+          snackbarMessage: "peer, other or subordinate cant have common user",
           showSnackbarMessage: true,
           snackbarType: SnackBarMode.Error,
         };
       });
+    }
+  };
+  /*******compare if peer or other or subordinate are the same******************* */
+  private Compare = (Peer: any[], Other: any[], SubOrdinate: any[]) => {
+    const allData: any[] = Peer.map(x => x.ItemId)
+      .concat(Other.map(x => x.ItemId))
+      .concat(SubOrdinate.map(x => x.ItemId));
+    console.log(allData);
+    const disttictAlldata: any[] = allData.filter(this.distict);
+    console.log(disttictAlldata);
+    if (disttictAlldata.length < allData.length) {
+      return "peer, other or subordinate cant have common user";
     } else {
-      const UpdateItem: IUpdatedData = {
-        ItemId: this.state.itemId,
-        peer: this.state.NominationData.Peer,
-        other: this.state.NominationData.Other,
-        subordinate: this.state.NominationData.Subordinates,
-      };
-      this.ListService.updateNominationData(UpdateItem);
-      this.setState(prevState => {
-        return {
-          ...prevState,
-          snackbarMessage: "successfully submitted!",
-          showSnackbarMessage: true,
-          snackbarType: SnackBarMode.Success,
-        };
-      });
-      window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
+      return "";
     }
   };
   /************************************************************** */
   private async loadOptions(inputValue: string) {
     return await this.ListService.getUserInfo(inputValue);
   }
+  private distict = (value: any, index: any, self: any[]) => {
+    return self.indexOf(value) == index;
+  };
 }

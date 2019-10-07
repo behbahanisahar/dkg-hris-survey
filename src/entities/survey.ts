@@ -4,4 +4,5 @@ export default interface Isurvey {
   UserDisplayName: string;
   SurveyAnswerId: number;
   Categories: ICategory[];
+  statusCode?: number;
 }
