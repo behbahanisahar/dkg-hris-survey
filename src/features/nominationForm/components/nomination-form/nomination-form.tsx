@@ -823,7 +823,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       this.state.NominationData.Subordinates,
     );
     console.log(dataComparison);
-    if ((dataComparison = "")) {
+    if (dataComparison === "") {
       const subordinateLength = this.state.NominationData.Subordinates.length;
       const Other = this.state.NominationData.Other.length;
       const Peer = this.state.NominationData.Peer.length;
@@ -867,9 +867,9 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   };
   /*******compare if peer or other or subordinate are the same******************* */
   private Compare = (Peer: any[], Other: any[], SubOrdinate: any[]) => {
-    const allData: any[] = Peer.map(x => x.ItemId)
-      .concat(Other.map(x => x.ItemId))
-      .concat(SubOrdinate.map(x => x.ItemId));
+    const allData: any[] = Peer.map(x => Number(x.ItemId))
+      .concat(Other.map(x => Number(x.ItemId)))
+      .concat(SubOrdinate.map(x => Number(x.ItemId)));
     console.log(allData);
     const disttictAlldata: any[] = allData.filter(this.distict);
     console.log(disttictAlldata);

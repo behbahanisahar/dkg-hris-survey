@@ -207,32 +207,27 @@ export default class MockData {
       NominationItemId: 2,
       Relation: "Peer",
       Status: { Status: "NotStarted", Progress: 40 },
-      Title: "Atria KhodaRahmi",
-      UserAvatar:
-        "https://keenthemes.com/metronic/themes/metronic/theme/default/demo5/dist/assets/media/users/100_14.jpg",
+      User: {},
     },
     {
       NominationItemId: 4,
       Relation: "Line Manager",
       Status: { Status: "NotStarted", Progress: 40 },
-      Title: "Ali Nooshabadi",
-      UserAvatar:
-        "https://keenthemes.com/metronic/themes/metronic/theme/default/demo5/dist/assets/media/users/100_14.jpg",
+      User: {},
     },
     {
       NominationItemId: 5,
       Relation: "Self",
       Status: { Status: "NotStarted", Progress: 40 },
-      Title: "Sahar Behbahani",
-      UserAvatar:
-        "https://keenthemes.com/metronic/themes/metronic/theme/default/demo5/dist/assets/media/users/100_14.jpg",
+      User: {},
     },
   ];
   public static NominationTaks: UserTasks[] = [
     {
-      ItemId: 5,
-      Title: "Sahar Behbahani",
-      Status: "Approved",
+      ItemId: 2,
+      Status: "",
+      Title: "",
+      User: {},
     },
   ];
 }

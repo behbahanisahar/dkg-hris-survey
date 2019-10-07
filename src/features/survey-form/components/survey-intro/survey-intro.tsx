@@ -103,10 +103,10 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
           <TableCell align="right" className="kt-datatable__cell">
             <div className="kt-user-card-v2">
               <div className="kt-user-card-v2__pic">
-                <img alt={n.Title} src={n.UserAvatar} />
+                <img alt={n.User.Title} src={n.User.AvatarUrl} />
               </div>
               <div className="kt-user-card-v2__details">
-                <span className="kt-user-card-v2__name">{n.Title}</span>
+                <span className="kt-user-card-v2__name">{n.User.Title}</span>
                 <span className="kt-user-card-v2__desc">{n.Relation}</span>
               </div>{" "}
             </div>
@@ -130,7 +130,14 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
             />
           </TableCell>
           <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
-            <button className="btn btn-sm btn-bold btn-brand-hover" onClick={() => this.onShowItem(n.NominationItemId)}>
+            <button
+              className="btn btn-sm btn-bold btn-brand-hover"
+              onClick={(e: any) => {
+                this.onShowItem(n.NominationItemId);
+                e.preventDefault();
+                return false;
+              }}
+            >
               ارزیابی
             </button>
           </TableCell>
