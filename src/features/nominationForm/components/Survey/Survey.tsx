@@ -183,7 +183,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
 
                     <div>
                       <h3 className="pt-3 kt-portlet__head-title" style={{ margin: "0 5rem 2rem 0" }}>
-                        Subordinates
+                        نیروی مستقیم تحت سرپرستی
                       </h3>
                       <div className="kt-container  kt-grid__item kt-grid__item--fluid">
                         <div className="row">
@@ -192,10 +192,15 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                             <Tooltip title="Add" aria-label="add">
                               <Fab
                                 size="small"
-                                className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-brand"
+                                className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-brand firstADD"
                                 aria-label="add"
+                                onClick={(ev: any) => {
+                                  // ev.preventDefault();
+                                  this.AddItem("SelectedSubOrdinate");
+                                }}
+                                onKeyPress={(e: any) => this.onAddkeyPress(e, "SelectedSubOrdinate")}
                               >
-                                <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
+                                <Add />
                               </Fab>
                             </Tooltip>
                           </div>
@@ -213,7 +218,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                                 onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
                                 options={this.state.UserInfo}
                                 placeholder="select..."
-                                onKeyDown={(e: any) => this.keyPress(e, "SelectedSubOrdinate")}
+                                onKeyDown={(e: any) => this.keyPress(e, "firstADD")}
                               />
                             </div>
                           </div>
@@ -286,10 +291,12 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                             <Tooltip title="Add" aria-label="add">
                               <Fab
                                 size="small"
-                                className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-brand"
+                                className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-brand secondADD"
                                 aria-label="add"
+                                onClick={(ev: any) => this.AddItem("SelectedPeer")}
+                                onKeyPress={(e: any) => this.onAddkeyPress(e, "SelectedPeer")}
                               >
-                                <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
+                                <Add />
                               </Fab>
                             </Tooltip>
                           </div>
@@ -307,7 +314,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                                 onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
                                 options={this.state.UserInfo}
                                 placeholder="select..."
-                                onKeyDown={(e: any) => this.keyPress(e, "SelectedPeer")}
+                                onKeyDown={(e: any) => this.keyPress(e, "secondADD")}
                               />
                             </div>
                           </div>
@@ -378,10 +385,12 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                             <Tooltip title="Add" aria-label="add">
                               <Fab
                                 size="small"
-                                className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-brand"
+                                className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-brand thirdAdd"
                                 aria-label="add"
+                                onKeyPress={(e: any) => this.onAddkeyPress(e, "SelectedOther")}
+                                onClick={(ev: any) => this.AddItem("SelectedOther")}
                               >
-                                <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
+                                <Add />
                               </Fab>
                             </Tooltip>
                           </div>
@@ -399,7 +408,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                                 onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
                                 options={this.state.UserInfo}
                                 placeholder="select..."
-                                onKeyDown={(e: any) => this.keyPress(e, "SelectedOther")}
+                                onKeyDown={(e: any) => this.keyPress(e, "thirdAdd")}
                               />
                             </div>
                           </div>
@@ -465,8 +474,27 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                   </div>
 
                   <div className="col-lg-12">
-                    <button className="btn btn-secondary ">انصراف</button>
-                    <button className="btn btn-primary mr-2" onClick={this.SubmitForm}>
+                    <button
+                      className="btn btn-secondary "
+                      onKeyPress={e => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                        }
+                      }}
+                      onClick={e => {
+                        e.preventDefault();
+                        return false;
+                      }}
+                    >
+                      انصراف
+                    </button>
+                    <button
+                      onKeyPress={e => {
+                        if (e.key === "Enter") e.preventDefault();
+                      }}
+                      className="btn btn-primary mr-2"
+                      onClick={this.SubmitForm}
+                    >
                       تایید
                     </button>
                   </div>
@@ -511,6 +539,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   };
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName: string) => {
+    console.log(FieldName);
     if (FieldName === "SelectedOther") {
       const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Other);
       if (ValidTableLength === false) {
@@ -864,8 +893,19 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   };
   private keyPress(e: any, value: string) {
     if (e.keyCode == 13) {
+      var x = document.getElementsByClassName(value) as HTMLCollectionOf<HTMLElement>;
+      console.log(x);
+      x[0].focus();
+
+      // console.log(this.  next.focus();
+    }
+  }
+  /***************************************************** */
+  private onAddkeyPress(e: any, value: string) {
+    debugger;
+    if (e.keyCode == 13) {
+      console.log(e.keyCode);
       this.AddItem(value);
-      // put the login here
     }
   }
 }

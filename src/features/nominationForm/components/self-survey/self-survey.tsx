@@ -131,7 +131,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                   <MDBCardBody>
                     <MDBCardText>
                       <MDBContainer>
-                        <h3 className="pt-5 kt-portlet__head-title">Subordinates</h3>
+                        <h3 className="pt-5 kt-portlet__head-title">نیروی مستقیم تحت سرپرستی</h3>
                         <div className="row">
                           <div className="col-sm-3" />
                           <div className="col-sm-7">
@@ -150,17 +150,19 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                                 options={this.state.UserInfo}
                                 placeholder="select..."
                                 IconComponent={Search}
-                                onKeyDown={(e: any) => this.keyPress(e, "SelectedSubOrdinate")}
+                                onKeyDown={(e: any) => this.keyPress(e, "firstADD")}
                               />
 
                               <Tooltip title="Add" aria-label="add">
                                 <Fab
                                   size="small"
                                   color="primary"
-                                  className="ml-3 kt-header__topbar-icon kt-header__topbar-icon--brand"
+                                  className="ml-3 kt-header__topbar-icon kt-header__topbar-icon--brand firstADD"
                                   aria-label="add"
+                                  onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")}
+                                  onKeyPress={(e: any) => this.onAddkeyPress(e, "SelectedSubOrdinate")}
                                 >
-                                  <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
+                                  <Add />
                                 </Fab>
                               </Tooltip>
                             </div>
@@ -187,7 +189,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                           </div>
                         </div>
                         <hr />
-                        <h3 className="pt-5 kt-portlet__head-title">Peer</h3>
+                        <h3 className="pt-5 kt-portlet__head-title">همکار همرده</h3>
 
                         <div className="row">
                           <div className="col-sm-3" />
@@ -206,12 +208,19 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                                 options={this.state.UserInfo}
                                 placeholder="select..."
                                 IconComponent={Search}
-                                onKeyDown={(e: any) => this.keyPress(e, "SelectedPeer")}
+                                onKeyDown={(e: any) => this.keyPress(e, "secondAdd")}
                               />
 
                               <Tooltip title="Add" aria-label="add">
-                                <Fab size="small" color="primary" className="ml-3" aria-label="add">
-                                  <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
+                                <Fab
+                                  size="small"
+                                  color="primary"
+                                  className="ml-3 secondAdd"
+                                  aria-label="add"
+                                  onClick={(ev: any) => this.AddItem("SelectedPeer")}
+                                  onKeyPress={(e: any) => this.onAddkeyPress(e, "SelectedPeer")}
+                                >
+                                  <Add />
                                 </Fab>
                               </Tooltip>
                             </div>
@@ -235,7 +244,7 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                           <div className="col-sm" />
                         </div>
                         <hr />
-                        <h3 className="pt-5 kt-portlet__head-title">Other</h3>
+                        <h3 className="pt-5 kt-portlet__head-title">سایرین</h3>
 
                         <div className="row">
                           <div className="col-sm-3" />
@@ -255,11 +264,18 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                                 placeholder="select..."
                                 IconComponent={Search}
                                 dir="rtl"
-                                onKeyDown={(e: any) => this.keyPress(e, "SelectedOther")}
+                                onKeyDown={(e: any) => this.keyPress(e, "thirdAdd")}
                               />
                               <Tooltip title="Add" aria-label="add">
-                                <Fab size="small" className="ml-3" color="primary" aria-label="add">
-                                  <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
+                                <Fab
+                                  onClick={(ev: any) => this.AddItem("SelectedOther")}
+                                  onKeyPress={(e: any) => this.onAddkeyPress(e, "SelectedOther")}
+                                  size="small"
+                                  className="ml-3 thirdAdd"
+                                  color="primary"
+                                  aria-label="add"
+                                >
+                                  <Add />
                                 </Fab>
                               </Tooltip>
                             </div>
@@ -285,7 +301,13 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
                     <div className="col-lg-12">
                       <button
                         onKeyPress={e => {
-                          if (e.key === "Enter") e.preventDefault();
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                          }
+                        }}
+                        onClick={e => {
+                          e.preventDefault();
+                          return false;
                         }}
                         className="btn btn-secondary "
                       >
@@ -615,8 +637,19 @@ export default class SelfServuy extends React.Component<ISurveyProps, ISurveySta
   /**********************async select key press function**************************** */
   private keyPress(e: any, value: string) {
     if (e.keyCode == 13) {
+      var x = document.getElementsByClassName(value) as HTMLCollectionOf<HTMLElement>;
+      console.log(x);
+      x[0].focus();
+
+      // console.log(this.  next.focus();
+    }
+  }
+  /***************************************************** */
+  private onAddkeyPress(e: any, value: string) {
+    debugger;
+    if (e.keyCode == 13) {
+      console.log(e.keyCode);
       this.AddItem(value);
-      // put the login here
     }
   }
 }
