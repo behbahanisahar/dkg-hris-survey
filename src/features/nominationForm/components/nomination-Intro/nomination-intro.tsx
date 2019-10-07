@@ -4,7 +4,7 @@ import ListServices from "../../../../services/list-services";
 
 import { TableRow, TableCell } from "@material-ui/core";
 import UserTasks from "../../../../entities/user-task";
-import { MDBTable, MDBTableBody, MDBBtn } from "mdbreact";
+import { MDBTable, MDBTableBody } from "mdbreact";
 import SurveyHeaderBackground from "./../../../../assets/img/survey-intro-header.png";
 
 export default class NominationIntroPage extends React.Component<{}, INominationIntroState> {
@@ -71,7 +71,7 @@ export default class NominationIntroPage extends React.Component<{}, INomination
           <div>
             <div className="kt-portlet__head">
               <div className="kt-portlet__head-label">
-                <h3 className="kt-portlet__head-title">نفرات ارزیابی</h3>
+                <h3 className="kt-portlet__head-title">نفرات </h3>
               </div>
             </div>
             <div className="kt-portlet__body">
@@ -94,9 +94,9 @@ export default class NominationIntroPage extends React.Component<{}, INomination
           </TableCell>
           <TableCell align="center">{n.Title}</TableCell>
           <TableCell style={{ width: "3%" }} align="center">
-            <MDBBtn className="show-item" onClick={() => this.onShowItem(n.ItemId)}>
+            <button className="btn btn-sm btn-bold btn-brand-hover" onClick={() => this.onShowItem(n.ItemId)}>
               نمایش
-            </MDBBtn>
+            </button>
           </TableCell>
         </TableRow>
       );

@@ -128,10 +128,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
             />
           </TableCell>
           <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
-            <button
-              className="btn btn-sm btn-label-primary btn-bold"
-              onClick={() => this.onShowItem(n.NominationItemId)}
-            >
+            <button className="btn btn-sm btn-bold btn-brand-hover" onClick={() => this.onShowItem(n.NominationItemId)}>
               ارزیابی
             </button>
           </TableCell>

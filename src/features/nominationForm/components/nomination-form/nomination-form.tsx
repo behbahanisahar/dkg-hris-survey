@@ -154,7 +154,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
 
   public render() {
     return (
-      <div>
+      <div className="rtl">
         {this.state.showSpinner && <Spinner />}
         {!this.state.showSpinner && (
           <div>
@@ -174,6 +174,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                       <h3 className="pt-3 kt-portlet__head-title" style={{ margin: "0 5rem 2rem 0" }}>
                         نیروی مستقیم تحت سرپرستی
                       </h3>
+
                       <div className="kt-container  kt-grid__item kt-grid__item--fluid">
                         <div className="row">
                           <div className="col-lg-6" />
@@ -270,6 +271,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                         </div>
                       </div>
                       <hr />
+
                       <h3 className="pt-5 kt-portlet__head-title" style={{ margin: "0 5rem 2rem 0" }}>
                         همکار همرده
                       </h3>
@@ -464,7 +466,16 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
 
                   <div className="col-lg-12">
                     <button
-                      className="btn btn-secondary "
+                      onKeyPress={e => {
+                        if (e.key === "Enter") e.preventDefault();
+                      }}
+                      className="btn btn-brand"
+                      onClick={this.SubmitForm}
+                    >
+                      تایید
+                    </button>
+                    <button
+                      className="btn btn-secondary mr-2"
                       onKeyPress={e => {
                         if (e.key === "Enter") {
                           e.preventDefault();
@@ -476,15 +487,6 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                       }}
                     >
                       انصراف
-                    </button>
-                    <button
-                      onKeyPress={e => {
-                        if (e.key === "Enter") e.preventDefault();
-                      }}
-                      className="btn btn-primary mr-2"
-                      onClick={this.SubmitForm}
-                    >
-                      تایید
                     </button>
                   </div>
                 </div>
