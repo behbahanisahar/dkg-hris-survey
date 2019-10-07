@@ -11,7 +11,7 @@ export function NominationFormHeader({ user, ...other }: NominationFormHeaderPro
     <div className="card-header mt-2">
       <div className="content">
         <p className="user">
-          <strong>{user!.SPLatinFullName}</strong>
+          <strong>{user!.Title}</strong>
           <h6>
             {user!.EmailAddress} | {user!.Department} | {user!.JobGrade}
           </h6>

@@ -1,4 +1,5 @@
 export default interface SubOrdinate {
+  Title?: string;
   AvatarUrl: string;
   Id: number;
   ItemId: number;

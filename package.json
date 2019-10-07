@@ -57,6 +57,7 @@
     "@types/react-dom": "16.9.0",
     "@types/react-select": "^3.0.4",
     "axios": "^0.19.0",
+    "craco-less": "^1.13.0",
     "lodash": "^4.17.14",
     "mdbreact": "^4.20.0",
     "react": "^16.9.0",

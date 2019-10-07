@@ -16,6 +16,9 @@ export default class ServiceBase {
 
   protected get = async (operation: string) => {
     return await axios.get(`${this.config.Endpoint}/${operation}`, {
+      // validateStatus: function(status) {
+      //   return status < 500;
+      // },
       headers: this.config.headers,
     });
   };

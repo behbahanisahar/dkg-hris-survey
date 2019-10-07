@@ -1,16 +1,9 @@
 require("dotenv").config();
 const { whenDev } = require("@craco/craco");
-const CracoRawLoaderPlugin = require("@baristalabs/craco-raw-loader");
+const CracoLessPlugin = require("craco-less");
 
 module.exports = {
-  plugins: [
-    {
-      plugin: CracoRawLoaderPlugin,
-      options: {
-        test: /\.foo$/,
-      },
-    },
-  ],
+  plugins: [{ plugin: CracoLessPlugin }],
   babel: [
     {
       plugins: [["@babel/plugin-proposal-decorators", { legacy: true }]],
