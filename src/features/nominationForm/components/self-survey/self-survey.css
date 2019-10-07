@@ -24,4 +24,5 @@
 }
 .inline-items {
   display: flex !important;
+  margin-bottom: 2%;
 }

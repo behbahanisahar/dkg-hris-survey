@@ -1,12 +1,11 @@
 import * as React from "react";
 import ISurveyProps from "./survey-props";
 import ISurveyState from "./survey-state";
-import { MDBCard, MDBCol, MDBCardBody, MDBBtn, MDBRow, MDBContainer, MDBCardText } from "mdbreact";
 import "./survey.css";
 import ListServices from "../../../../services/list-services";
 import AsyncSelect from "react-select/async";
 import Add from "@material-ui/icons/Add";
-import { Fab, Card, Tooltip, Table, TableHead, TableRow, TableBody, TableCell } from "@material-ui/core";
+import { Fab, Tooltip, Table, TableRow, TableBody, TableCell } from "@material-ui/core";
 
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
@@ -19,7 +18,7 @@ import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
 import IHistory from "../../../../entities/history";
 import Spinner from "../../../spinner/spinner";
-import Forward from "@material-ui/icons/Forward";
+import Forward from "@material-ui/icons/ArrowBack";
 import Authentication from "../../../authentication/authentication";
 
 const RenderOption = (option: any) => (
@@ -162,7 +161,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
               <Authentication status={this.state.NominationData.statusCode || 401} />
             )}
             {this.state.NominationData.statusCode === 200 && (
-              <MDBCol>
+              <div className="col-lg">
                 <div className="card-header mt-2">
                   <div className="content">
                     <p className="user">
@@ -176,18 +175,32 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                     <div className="page-header">Nomination Form</div>
                   </div>
                 </div>
-                <MDBCard className="w-auto">
-                  <div>
-                    <MYStepper activeStep={this.state.activeStep} />
-                  </div>
+                <div>
+                  <div className="kt-portlet kt-sc-2">
+                    <div className="kt-portlet__body">
+                      <MYStepper activeStep={this.state.activeStep} />
+                    </div>
 
-                  <MDBCardBody>
-                    <MDBCardText>
-                      <MDBContainer>
-                        <h3 className="pt-3 category">Subordinates</h3>
-                        <MDBRow>
-                          <MDBCol>
-                            <div className="inline-items">
+                    <div>
+                      <h3 className="pt-3 kt-portlet__head-title" style={{ margin: "0 5rem 2rem 0" }}>
+                        Subordinates
+                      </h3>
+                      <div className="kt-container  kt-grid__item kt-grid__item--fluid">
+                        <div className="row">
+                          <div className="col-lg-6" />
+                          <div className="col-lg-1">
+                            <Tooltip title="Add" aria-label="add">
+                              <Fab
+                                size="small"
+                                className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-brand"
+                                aria-label="add"
+                              >
+                                <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
+                              </Fab>
+                            </Tooltip>
+                          </div>
+                          <div className="col-lg-4">
+                            <div className="inline-items" dir="rtl">
                               <AsyncSelect
                                 defaultOptions
                                 getOptionLabel={RenderOption as any}
@@ -200,65 +213,88 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                                 onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
                                 options={this.state.UserInfo}
                                 placeholder="select..."
+                                onKeyDown={(e: any) => this.keyPress(e, "SelectedSubOrdinate")}
                               />
-                              <Tooltip title="Add" aria-label="add">
-                                <Fab size="small" color="primary" className="ml-3" aria-label="add">
-                                  <Add onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")} />
-                                </Fab>
-                              </Tooltip>
                             </div>
-                          </MDBCol>
-                          <MDBCol />
-                        </MDBRow>
-
-                        <MDBRow>
-                          <MDBCol>
-                            <div className="inline-items">
-                              <Card className="CardTable">
-                                <Table style={{ direction: "ltr" }} className="table">
-                                  <TableHead>
-                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                                  </TableHead>
-                                  <TableBody>{this.onRenderRows("Subordinates")}</TableBody>
-                                </Table>
-                              </Card>
-                              <Tooltip
-                                style={{ marginTop: "16%" }}
-                                title="show history table"
-                                aria-label="show history table"
-                              >
-                                <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
-                                  <Forward
-                                    style={{ color: "white" }}
-                                    onClick={(ev: any) => this.HideHistory("Subordinate")}
-                                  />
-                                </Fab>
-                              </Tooltip>
-                            </div>
-                          </MDBCol>
-                          <MDBCol>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="kt-container  kt-grid__item kt-grid__item--fluid">
+                        <div className="row">
+                          <div className="col-lg-6">
                             {this.state.HideSubordinateHistory === false && (
-                              <div className="History">
-                                <h3 style={{ float: "left" }} className="pt-3 category">
-                                  History
-                                </h3>
-                                <Card className="HistoryTable">
-                                  <Table style={{ direction: "ltr" }} className="table">
-                                    <TableHead>
-                                      <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
-                                    </TableHead>
-                                    <TableBody>{this.onRenderHistoryRows("Subordinate")}</TableBody>
-                                  </Table>
-                                </Card>
+                              <div>
+                                <div className="kt-portlet">
+                                  <div>
+                                    {" "}
+                                    <h3 dir="rtl" className="pt-3 ml-5 kt-portlet__head-title">
+                                      History
+                                    </h3>
+                                  </div>
+                                  <div className="kt-portlet__body">
+                                    <Table dir="rtl" className="kt-datatable__table">
+                                      <thead className="kt-datatable__head">
+                                        <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
+                                      </thead>
+                                      <TableBody>{this.onRenderHistoryRows("Subordinate")}</TableBody>
+                                    </Table>
+                                  </div>
+                                </div>
                               </div>
                             )}
-                          </MDBCol>
-                        </MDBRow>
-                        <hr />
-                        <h3 className="pt-5 category">Peer</h3>
-                        <MDBRow>
-                          <MDBCol>
+                          </div>
+                          <div className="col-lg-1">
+                            <Tooltip
+                              style={{ marginTop: "16%" }}
+                              title="show history table"
+                              aria-label="show history table"
+                            >
+                              <Fab
+                                size="small"
+                                color="secondary"
+                                className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-success"
+                                aria-label="show history table"
+                              >
+                                <Forward onClick={(ev: any) => this.HideHistory("Subordinate")} />
+                              </Fab>
+                            </Tooltip>
+                          </div>
+                          <div className="col-lg-4">
                             <div className="inline-items">
+                              <div className="kt-portlet">
+                                <div className="kt-portlet__body">
+                                  <Table dir="rtl" className="kt-datatable__table">
+                                    <thead className="kt-datatable__head">
+                                      <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                                    </thead>
+                                    <TableBody>{this.onRenderRows("Subordinates")}</TableBody>
+                                  </Table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                      <h3 className="pt-5 kt-portlet__head-title" style={{ margin: "0 5rem 2rem 0" }}>
+                        همکار همرده
+                      </h3>
+                      <div className="kt-container  kt-grid__item kt-grid__item--fluid">
+                        <div className="row">
+                          <div className="col-lg-6" />
+                          <div className="col-lg-1">
+                            <Tooltip title="Add" aria-label="add">
+                              <Fab
+                                size="small"
+                                className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-brand"
+                                aria-label="add"
+                              >
+                                <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
+                              </Fab>
+                            </Tooltip>
+                          </div>
+                          <div className="col-lg-4">
+                            <div className="inline-items" dir="rtl">
                               <AsyncSelect
                                 defaultOptions
                                 getOptionLabel={RenderOption as any}
@@ -271,62 +307,86 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                                 onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
                                 options={this.state.UserInfo}
                                 placeholder="select..."
+                                onKeyDown={(e: any) => this.keyPress(e, "SelectedPeer")}
                               />
-
-                              <Tooltip title="Add" aria-label="add">
-                                <Fab size="small" color="primary" className="ml-3" aria-label="add">
-                                  <Add onClick={(ev: any) => this.AddItem("SelectedPeer")} />
-                                </Fab>
-                              </Tooltip>
                             </div>
-                          </MDBCol>
-                          <MDBCol />
-                        </MDBRow>
-                        <MDBRow>
-                          <MDBCol>
-                            <div className="inline-items">
-                              <Card className="CardTable">
-                                <Table style={{ direction: "ltr" }} className="table">
-                                  <TableHead>
-                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                                  </TableHead>
-                                  <TableBody>{this.onRenderRows("Peer")}</TableBody>
-                                </Table>
-                              </Card>
-                              <Tooltip
-                                style={{ marginTop: "16%" }}
-                                title="show history table"
-                                aria-label="show history table"
-                              >
-                                <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
-                                  <Forward style={{ color: "white" }} onClick={(ev: any) => this.HideHistory("Peer")} />
-                                </Fab>
-                              </Tooltip>
-                            </div>
-                          </MDBCol>
-                          <MDBCol>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="kt-container  kt-grid__item kt-grid__item--fluid">
+                        <div className="row">
+                          <div className="col-lg-6">
                             {this.state.HidePeerHistory === false && (
-                              <div className="History">
-                                <h3 style={{ float: "left" }} className="pt-3 category">
-                                  History
-                                </h3>
-                                <Card className="HistoryTable">
-                                  <Table style={{ direction: "ltr" }} className="table">
-                                    <TableHead>
+                              <div className="kt-portlet">
+                                <div>
+                                  {" "}
+                                  <h3 dir="rtl" className="pt-3 ml-5 kt-portlet__head-title">
+                                    History
+                                  </h3>
+                                </div>
+                                <div className="kt-portlet__body">
+                                  <Table dir="rtl" className="kt-datatable__table">
+                                    <thead className="kt-datatable__head">
                                       <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
-                                    </TableHead>
+                                    </thead>
                                     <TableBody>{this.onRenderHistoryRows("Peer")}</TableBody>
                                   </Table>
-                                </Card>
+                                </div>
                               </div>
                             )}
-                          </MDBCol>
-                        </MDBRow>
-                        <hr />
-                        <h3 className="pt-5 category">Other</h3>
-                        <MDBRow>
-                          <MDBCol>
+                          </div>
+                          <div className="col-lg-1">
+                            <Tooltip
+                              style={{ marginTop: "16%" }}
+                              title="show history table"
+                              aria-label="show history table"
+                            >
+                              <Fab
+                                size="small"
+                                color="secondary"
+                                className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-success"
+                                aria-label="show history table"
+                              >
+                                <Forward onClick={(ev: any) => this.HideHistory("Peer")} />
+                              </Fab>
+                            </Tooltip>
+                          </div>
+                          <div className="col-lg-4">
                             <div className="inline-items">
+                              <div className="kt-portlet">
+                                <div className="kt-portlet__body">
+                                  <Table dir="rtl" className="kt-datatable__table">
+                                    <thead className="kt-datatable__head">
+                                      <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                                    </thead>
+                                    <TableBody>{this.onRenderRows("Peer")}</TableBody>
+                                  </Table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                      <h3 className="pt-5 kt-portlet__head-title" style={{ margin: "0 5rem 2rem 0" }}>
+                        سایرین
+                      </h3>
+                      <div className="kt-container  kt-grid__item kt-grid__item--fluid">
+                        <div className="row">
+                          <div className="col-lg-6" />
+                          <div className="col-lg-1">
+                            <Tooltip title="Add" aria-label="add">
+                              <Fab
+                                size="small"
+                                className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-brand"
+                                aria-label="add"
+                              >
+                                <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
+                              </Fab>
+                            </Tooltip>
+                          </div>
+                          <div className="col-lg-4">
+                            <div className="inline-items" dir="rtl">
                               <AsyncSelect
                                 defaultOptions
                                 getOptionLabel={RenderOption as any}
@@ -339,71 +399,79 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
                                 onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
                                 options={this.state.UserInfo}
                                 placeholder="select..."
+                                onKeyDown={(e: any) => this.keyPress(e, "SelectedOther")}
                               />
-                              <Tooltip title="Add" aria-label="add">
-                                <Fab size="small" className="ml-3" color="primary" aria-label="add">
-                                  <Add onClick={(ev: any) => this.AddItem("SelectedOther")} />
-                                </Fab>
-                              </Tooltip>
                             </div>
-                          </MDBCol>
-                          <MDBCol />
-                        </MDBRow>
-
-                        <MDBRow>
-                          <MDBCol>
-                            <div className="inline-items">
-                              <Card className="CardTable">
-                                <Table style={{ direction: "ltr" }} className="table">
-                                  <TableHead>
-                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                                  </TableHead>
-                                  <TableBody>{this.onRenderRows("Other")}</TableBody>
-                                </Table>
-                              </Card>
-                              <Tooltip
-                                style={{ marginTop: "16%" }}
-                                title="show history table"
-                                aria-label="show history table"
-                              >
-                                <Fab size="small" color="secondary" className="ml-3" aria-label="show history table">
-                                  <Forward
-                                    style={{ color: "white" }}
-                                    onClick={(ev: any) => this.HideHistory("Other")}
-                                  />
-                                </Fab>
-                              </Tooltip>
-                            </div>
-                          </MDBCol>
-                          <MDBCol>
-                            {this.state.HideOtherHistory === false && (
-                              <div className="History">
-                                <h3 style={{ float: "left" }} className="pt-3 category">
-                                  History
-                                </h3>
-                                <Card className="HistoryTable">
-                                  <Table style={{ direction: "ltr" }} className="table">
-                                    <TableHead>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="kt-container  kt-grid__item kt-grid__item--fluid">
+                      <div className="row">
+                        <div className="col-lg-6">
+                          {this.state.HideOtherHistory === false && (
+                            <div>
+                              <div className="kt-portlet">
+                                <div>
+                                  {" "}
+                                  <h3 dir="rtl" className="pt-3 ml-5 kt-portlet__head-title">
+                                    History
+                                  </h3>
+                                </div>
+                                <div className="kt-portlet__body">
+                                  <Table dir="rtl" className="kt-datatable__table">
+                                    <thead className="kt-datatable__head">
                                       <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
-                                    </TableHead>
+                                    </thead>
                                     <TableBody>{this.onRenderHistoryRows("Other")}</TableBody>
                                   </Table>
-                                </Card>
+                                </div>
                               </div>
-                            )}
-                          </MDBCol>
-                        </MDBRow>
-                      </MDBContainer>
-                    </MDBCardText>
-                    <MDBBtn size="sm" color="dark-green" onClick={this.SubmitForm}>
-                      Submit
-                    </MDBBtn>
-                    <MDBBtn size="sm" color="grey lighten-3">
-                      Cancel
-                    </MDBBtn>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
+                            </div>
+                          )}
+                        </div>
+                        <div className="col-lg-1">
+                          <Tooltip
+                            style={{ marginTop: "16%" }}
+                            title="show history table"
+                            aria-label="show history table"
+                          >
+                            <Fab
+                              size="small"
+                              color="secondary"
+                              className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-success"
+                              aria-label="show history table"
+                            >
+                              <Forward onClick={(ev: any) => this.HideHistory("Other")} />
+                            </Fab>
+                          </Tooltip>
+                        </div>
+                        <div className="col-lg-4">
+                          <div className="inline-items">
+                            <div className="kt-portlet">
+                              <div className="kt-portlet__body">
+                                <Table dir="rtl" className="kt-datatable__table">
+                                  <thead className="kt-datatable__head">
+                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+                                  </thead>
+                                  <TableBody>{this.onRenderRows("Other")}</TableBody>
+                                </Table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12">
+                    <button className="btn btn-secondary ">انصراف</button>
+                    <button className="btn btn-primary mr-2" onClick={this.SubmitForm}>
+                      تایید
+                    </button>
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         )}
@@ -613,7 +681,7 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
               align="center"
               onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
             >
-              <Delete cursor="pointer" color="primary" />
+              <Delete cursor="pointer" className="flaticon-pie-chart-1 kt-font-info" />
             </TableCell>
           </TableRow>
         );
@@ -701,10 +769,10 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
             <TableCell align="center">{index + 1}</TableCell>
             <TableCell align="center">{n.ModifiedBy}</TableCell>
             <TableCell align="center">{n.ModifiedDateShamsi}</TableCell>
-            <TableCell align="center" className={AddedStr !== "" ? "added-items" : ""}>
+            <TableCell align="center" className={AddedStr !== "" ? "kt-font-bold kt-font-success" : ""}>
               {AddedStr}
             </TableCell>
-            <TableCell align="center" className={DeletedStr !== "" ? "deleted-items" : ""}>
+            <TableCell align="center" className={DeletedStr !== "" ? "kt-font-bold kt-font-danger" : ""}>
               {DeletedStr}
             </TableCell>
           </TableRow>
@@ -794,4 +862,10 @@ export default class FlowSurvey extends React.Component<ISurveyProps, ISurveySta
   private distict = (value: any, index: any, self: any[]) => {
     return self.indexOf(value) == index;
   };
+  private keyPress(e: any, value: string) {
+    if (e.keyCode == 13) {
+      this.AddItem(value);
+      // put the login here
+    }
+  }
 }

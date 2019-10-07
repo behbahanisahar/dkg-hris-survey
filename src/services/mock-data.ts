@@ -43,7 +43,7 @@ export default class MockData {
     },
   ];
   public static NominationData: NominationData = {
-    Status: "notstarted",
+    Status: "notstarted1",
     statusCode: 200,
     Subordinates: [
       {
@@ -140,6 +140,7 @@ export default class MockData {
   public static SurveyFormData: Isurvey = {
     UserDisplayName: "Sahar Behbahani",
     SurveyAnswerId: 0,
+    statusCode: 200,
     Categories: [
       {
         Title: "Builder Approach & Result Oriented",
