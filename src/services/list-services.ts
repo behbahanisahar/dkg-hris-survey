@@ -44,23 +44,31 @@ class ListServices extends ServiceBase {
   /****************get nomination form data*****************************************************8 */
   public async getNominationData(itemId: number): Promise<NominationData> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("/survey/nomination?itemId=" + itemId + "").catch(function(error) {
-        return {
-          statusCode: error.response.status,
-        };
-      });
+      let data: NominationData;
+      data = await this.get("/survey/nomination?itemId=" + itemId + "")
+        .then(response => {
+          return {
+            Status: response.data.Status,
+            Subordinates: response.data.Subordinates,
+            Other: response.data.Other,
+            Peer: response.data.Peer,
+            User: response.data.User,
+            LineManager: response.data.LineManager,
+            statusCode: response.status,
+          };
+        })
+        .catch(error => {
+          return {
+            statusCode: error.response.status,
+            Status: "",
+            Subordinates: [],
+            Other: [],
+            Peer: [],
+          };
+        });
 
-      return Promise.resolve({
-        Status: items.data.Status,
-        Subordinates: items.data.Subordinates,
-        Other: items.data.Other,
-        Peer: items.data.Peer,
-        User: items.data.User,
-        LineManager: items.data.LineManager,
-        statusCode: items.status,
-      });
-    }
-    return Promise.resolve(MockData.NominationData);
+      return Promise.resolve(data);
+    } else return Promise.resolve(MockData.NominationData);
   }
   /**********************get nomination form history******************************************* */
   public async getNominationHistory(itemId: number): Promise<IHistory[]> {
