@@ -115,16 +115,18 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
           <TableCell
             style={{ width: "5%" }}
             align="right"
-            className={n.Status === "تکمیل شده" ? " kt-datatable__cell completed" : " kt-datatable__cell not-completed"}
+            className={
+              n.Status.Status === "تکمیل شده" ? " kt-datatable__cell completed" : " kt-datatable__cell not-completed"
+            }
           >
-            <div style={{ marginTop: "10%" }}> {n.Status}</div>
+            <div style={{ marginTop: "10%" }}> {n.Status.Status}</div>
           </TableCell>
           <TableCell style={{ width: "20%" }} className="kt-datatable__cell" align="left">
-            {n.Progress}%
+            {n.Status.Progress}%
             <LinearProgress
-              className={Number(n.Progress) >= 100 ? "complete-progress" : "not-completed-progress"}
+              className={Number(n.Status) >= 100 ? "complete-progress" : "not-completed-progress"}
               variant="determinate"
-              value={n.Progress}
+              value={n.Status.Progress}
             />
           </TableCell>
           <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">

@@ -1,8 +1,9 @@
+import { IAppraiseeStatus } from "./IAppraiseeStatus";
+
 export interface IAppraisee {
   NominationItemId: number;
-  Progress: number;
   Relation: string;
-  Status: string;
+  Status: IAppraiseeStatus;
   Title: string;
   UserAvatar: string;
 }
