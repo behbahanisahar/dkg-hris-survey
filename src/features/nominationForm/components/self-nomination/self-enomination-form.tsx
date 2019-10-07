@@ -306,6 +306,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                           }
                         }}
                         onClick={e => {
+                          this.onCancelRequest();
                           e.preventDefault();
                           return false;
                         }}
@@ -318,7 +319,11 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                           if (e.key === "Enter") e.preventDefault();
                         }}
                         className="btn btn-primary mr-2"
-                        onClick={this.SubmitForm}
+                        onClick={e => {
+                          this.SubmitForm();
+                          e.preventDefault();
+                          return false;
+                        }}
                       >
                         تایید
                       </button>
@@ -563,14 +568,13 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     return false;
   };
   /****************************on form submited*************************************/
-  private SubmitForm = () => {
+  private SubmitForm = async () => {
     let dataComparison: string = this.Compare(
       this.state.NominationData.Peer,
       this.state.NominationData.Other,
       this.state.NominationData.Subordinates,
     );
-    console.log(dataComparison);
-    if ((dataComparison = "")) {
+    if (dataComparison === "") {
       const subordinateLength = this.state.NominationData.Subordinates.length;
       const Other = this.state.NominationData.Other.length;
       const Peer = this.state.NominationData.Peer.length;
@@ -590,16 +594,18 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
           other: this.state.NominationData.Other,
           subordinate: this.state.NominationData.Subordinates,
         };
-        this.ListService.updateNominationData(UpdateItem);
-        this.setState(prevState => {
-          return {
-            ...prevState,
-            snackbarMessage: "successfully submitted!",
-            showSnackbarMessage: true,
-            snackbarType: SnackBarMode.Success,
-          };
+
+        await this.ListService.updateNominationData(UpdateItem).then(() => {
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              snackbarMessage: "successfully submitted!",
+              showSnackbarMessage: true,
+              snackbarType: SnackBarMode.Success,
+            };
+          });
+          this.onCancelRequest();
         });
-        window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
       }
     } else {
       this.setState(prevState => {
@@ -614,9 +620,9 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
   };
   /*******compare if peer or other or subordinate are the same******************* */
   private Compare = (Peer: any[], Other: any[], SubOrdinate: any[]) => {
-    const allData: any[] = Peer.map(x => x.ItemId)
-      .concat(Other.map(x => x.ItemId))
-      .concat(SubOrdinate.map(x => x.ItemId));
+    const allData: any[] = Peer.map(x => Number(x.ItemId))
+      .concat(Other.map(x => Number(x.ItemId)))
+      .concat(SubOrdinate.map(x => Number(x.ItemId)));
     console.log(allData);
     const disttictAlldata: any[] = allData.filter(this.distict);
     console.log(disttictAlldata);
@@ -652,4 +658,8 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       this.AddItem(value);
     }
   }
+  /********************************************** */
+  private onCancelRequest = () => {
+    window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
+  };
 }
