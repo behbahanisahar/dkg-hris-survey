@@ -1,0 +1,41 @@
+/* .card{
+    width: 60% !important;
+    margin: 2% auto;
+} */
+
+.category {
+  color: #76787a;
+  font-size: 1.7rem;
+  font-weight: 300 !important;
+  margin: 30px 0 15px;
+}
+.MuiChip-root {
+  background-color: #eeeeee;
+}
+.basic-single {
+  width: 100%;
+}
+.CardTable {
+  margin: 2% 0;
+  width: 90%;
+}
+.HistoryTable {
+  width: 100%;
+  margin: 2% 0;
+}
+
+.table {
+  margin-bottom: 0;
+}
+.inline-items {
+  display: flex !important;
+}
+.History {
+  margin-top: -16%;
+}
+.added-items {
+  background-color: #acd591;
+}
+.deleted-items {
+  background-color: #f3736c;
+}
