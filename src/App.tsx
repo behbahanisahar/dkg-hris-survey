@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./App.less";
 import SelfSurvey from "./features/nominationForm/components/self-survey/self-survey";
 import Util from "../src/utilities/utilities";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
