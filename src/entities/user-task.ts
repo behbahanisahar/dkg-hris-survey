@@ -1,5 +1,8 @@
+import UserInfoItem from "./user-info";
+
 export default interface UserTasks {
-  Title: string;
-  Status: string;
   ItemId: number;
+  Status: string;
+  Title: string;
+  User: UserInfoItem;
 }

@@ -1,9 +1,9 @@
 import { IAppraiseeStatus } from "./IAppraiseeStatus";
+import UserInfoItem from "./user-info";
 
 export interface IAppraisee {
   NominationItemId: number;
   Relation: string;
   Status: IAppraiseeStatus;
-  Title: string;
-  UserAvatar: string;
+  User: UserInfoItem;
 }

@@ -7,7 +7,6 @@ import IHistory from "../entities/history";
 import SPLists from "../entities/lists";
 import Isurvey from "../entities/survey";
 import { ISurveyData } from "../entities/survey-data";
-import UserTasks from "../entities/user-task";
 
 class ListServices extends ServiceBase {
   public constructor() {
@@ -115,7 +114,7 @@ class ListServices extends ServiceBase {
     return Promise.resolve(MockData.Appraisee);
   }
   /************************get nomination task*********************************************** */
-  public async getNominationTasks(): Promise<UserTasks[]> {
+  public async getNominationTasks(): Promise<any[]> {
     if (process.env.NODE_ENV === "production") {
       const items: any = await this.get("/survey/nomination/tasks");
 

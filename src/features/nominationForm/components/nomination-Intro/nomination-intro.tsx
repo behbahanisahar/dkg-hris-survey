@@ -76,7 +76,7 @@ export default class NominationIntroPage extends React.Component<{}, INomination
             </div>
             <div className="kt-portlet__body">
               <MDBTable className="kt-datatable__table" borderless>
-                <MDBTableBody>{this.onRenderRows()}</MDBTableBody>
+                <MDBTableBody clssName="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
               </MDBTable>
             </div>
           </div>
@@ -88,14 +88,32 @@ export default class NominationIntroPage extends React.Component<{}, INomination
   private onRenderRows = () => {
     return this.state.nominationTasks.map((n: UserTasks, index: any) => {
       return (
-        <TableRow key={index}>
-          <TableCell style={{ width: "3%" }} align="center">
-            {index + 1}
+        <TableRow key={index} className="kt-datatable__row">
+          <TableCell align="right" className="kt-datatable__cell">
+            <div className="kt-user-card-v2">
+              <div className="kt-user-card-v2__pic">
+                <img alt={n.Title} src={n.User.AvatarUrl} />
+              </div>
+              <div className="kt-user-card-v2__details">
+                <span className="kt-user-card-v2__name">{n.Title}</span>
+              </div>{" "}
+            </div>
           </TableCell>
-          <TableCell align="center">{n.Title}</TableCell>
-          <TableCell style={{ width: "3%" }} align="center">
-            <button className="btn btn-sm btn-bold btn-brand-hover" onClick={() => this.onShowItem(n.ItemId)}>
-              نمایش
+
+          <TableCell style={{ width: "5%" }} align="right">
+            {n.User.PersianReportedPost}
+          </TableCell>
+
+          <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
+            <button
+              className="btn btn-sm btn-bold btn-brand-hover"
+              onClick={(e: any) => {
+                this.onShowItem(n.ItemId);
+                e.preventDefault();
+                return false;
+              }}
+            >
+              انتخاب
             </button>
           </TableCell>
         </TableRow>
