@@ -9,6 +9,9 @@ import NominationIntroPage from "./features/nominationForm/components/nomination
 import MainNomination from "./features/nominationForm/components/main-nomination/main-nomination";
 
 const theme = createMuiTheme({
+  typography: {
+    fontFamily: ["IRANYekan", "tahoma", '"Helvetica Neue"', "Arial", "sans-serif"].join(","),
+  },
   palette: {
     primary: { main: "#ef5661" },
     // secondary: { main: "#00A998" },
@@ -31,6 +34,7 @@ class App extends React.Component<{}, IAppState> {
       page: "",
     };
   }
+
   public async componentDidMount() {
     const page = this.util.getQueryStringValue("page");
     this.setState(prevState => {
