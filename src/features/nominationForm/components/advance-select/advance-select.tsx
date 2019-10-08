@@ -4,12 +4,12 @@ import IAdvanceSelectState from "./advance-select-state";
 import AsyncSelect from "react-select/async";
 import { Tooltip, Fab, Table, TableRow, TableBody, TableCell } from "@material-ui/core";
 import Add from "@material-ui/icons/Add";
-import ITableHeader from "../../../entities/table-headers";
+import ITableHeader from "../../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
-import IUser from "../../../entities/user";
-import SnackBarMessage from "../../../features/nominationForm/components/snakbar-message/snackbar-message";
-import SnackBarMode from "../../../entities/snackbar-mode";
-import ListServices from "../../../services/list-services";
+import IUser from "../../../../entities/user";
+import SnackBarMessage from "../snakbar-message/snackbar-message";
+import SnackBarMode from "../../../../entities/snackbar-mode";
+import ListServices from "../../../../services/list-services";
 
 const RenderOption = (option: any) => (
   <div>
@@ -76,54 +76,47 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
     return (
       <div>
         <div className="row">
-          <div className="col-sm-3" />
-          <div className="col-sm-7">
-            <div className="inline-items" dir="rtl">
-              <AsyncSelect
-                defaultOptions
-                getOptionLabel={RenderOption as any}
-                className="basic-single"
-                classNamePrefix="select"
-                loadOptions={inputValue => this.loadOptions(inputValue)}
-                isSearchable={true}
-                name="SelectedOther"
-                // isLoading={this.state.UsersIsLoading}
-                onChange={(ev: any) => this.onSelectAutoComplete(ev, this.props.fieldName)}
-                options={this.props.UserInfo}
-                placeholder="select..."
-                dir="rtl"
-                onKeyDown={(e: any) => this.keyPress(e, "thirdAdd")}
-              />
-              <Tooltip title="Add" aria-label="add">
-                <Fab
-                  onClick={(ev: any) => this.AddItem(this.props.fieldName)}
-                  onKeyPress={(e: any) => this.onAddkeyPress(e, this.props.fieldName)}
-                  size="small"
-                  className="ml-3 thirdAdd"
-                  color="primary"
-                  aria-label="add"
-                >
-                  <Add />
-                </Fab>
-              </Tooltip>
-            </div>
+          <div className="inline-items w-100" dir="rtl">
+            <AsyncSelect
+              defaultOptions
+              getOptionLabel={RenderOption as any}
+              className="basic-single"
+              classNamePrefix="select"
+              loadOptions={inputValue => this.loadOptions(inputValue)}
+              isSearchable={true}
+              name="SelectedOther"
+              // isLoading={this.state.UsersIsLoading}
+              onChange={(ev: any) => this.onSelectAutoComplete(ev, this.props.fieldName)}
+              options={this.props.UserInfo}
+              placeholder="select..."
+              dir="rtl"
+              onKeyDown={(e: any) => this.keyPress(e, this.props.AddOrder)}
+            />
+            <Tooltip title="Add" aria-label="add">
+              <Fab
+                onClick={(ev: any) => this.AddItem(this.props.fieldName)}
+                onKeyPress={(e: any) => this.onAddkeyPress(e, this.props.fieldName)}
+                size="small"
+                className={this.props.AddOrder + " ml-3 "}
+                color="primary"
+                aria-label="add"
+              >
+                <Add />
+              </Fab>
+            </Tooltip>
           </div>
         </div>
-        <div className="row">
-          <div className="col-sm-3" />
-          <div className="col-sm-7">
-            <div className="kt-portlet">
-              <div className="kt-portlet__body">
-                <Table dir="rtl" className="kt-datatable__table">
-                  <thead className="kt-datatable__head">
-                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                  </thead>
-                  <TableBody>{this.onRenderRows(this.props.tableName)}</TableBody>
-                </Table>
-              </div>
-            </div>
+        <div className="kt-portlet">
+          <div className="kt-portlet__body">
+            <Table dir="rtl" className="kt-datatable__table">
+              <thead className="kt-datatable__head">
+                <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
+              </thead>
+              <TableBody>{this.onRenderRows(this.props.tableName)}</TableBody>
+            </Table>
           </div>
         </div>
+
         <SnackBarMessage
           type={this.state.snackbarType}
           message={this.state.snackbarMessage}
@@ -273,19 +266,19 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
     let items: any[] = [];
     switch (TableName) {
       case "Subordinates": {
-        items = this.props.NominationData.Subordinates;
+        items = this.state.NominationData.Subordinates;
         break;
       }
       case "Peer": {
-        items = this.props.NominationData.Peer;
+        items = this.state.NominationData.Peer;
         break;
       }
       case "Other": {
-        items = this.props.NominationData.Other;
+        items = this.state.NominationData.Other;
         break;
       }
       default:
-        items = this.props.NominationData.Subordinates;
+        items = this.state.NominationData.Subordinates;
     }
 
     if (items.length === 0) {
@@ -337,6 +330,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
       }
 
       const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
+      this.props.onChangeDataTableValue(newValue);
       return {
         ...prevState,
         NominationData: {

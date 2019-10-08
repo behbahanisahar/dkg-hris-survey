@@ -14,8 +14,7 @@ import MYStepper from "../../../stepper/stepper";
 import Spinner from "../../../spinner/spinner";
 import Authentication from "../../../authentication/authentication";
 import { NominationFormHeader } from "../nomination-form-header/nomination-form-header";
-
-import AdvanceSelect from "../../../../core/components/AdvanceSelect/advance-select";
+import AdvanceSelect from "../advance-select/advance-select";
 
 export default class SelfNomination extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
@@ -102,7 +101,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
               <Authentication status={this.state.NominationData.statusCode || 401} />
             )}
             {this.state.NominationData.statusCode === 200 && (
-              <div className="col-sm">
+              <div className="col-sm rtl">
                 <NominationFormHeader user={this.state.NominationData.User}></NominationFormHeader>
                 <MDBCard className="w-auto">
                   <div>
@@ -113,32 +112,44 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                     <MDBCardText>
                       <MDBContainer>
                         <h3 className="pt-5 kt-portlet__head-title">نیروی مستقیم تحت سرپرستی</h3>
-
-                        <AdvanceSelect
-                          NominationData={this.state.NominationData}
-                          fieldName="SelectedSubOrdinate"
-                          UserInfo={this.state.UserInfo}
-                          tableName="Subordinates"
-                        />
+                        <div className="col-lg-3" />
+                        <div className="col-lg-9">
+                          <AdvanceSelect
+                            NominationData={this.state.NominationData}
+                            fieldName="SelectedSubOrdinate"
+                            UserInfo={this.state.UserInfo}
+                            tableName="Subordinates"
+                            AddOrder="firstAdd"
+                            onChangeDataTableValue={this.ChangeValueSubordinate}
+                          />
+                        </div>
 
                         <hr />
                         <h3 className="pt-5 kt-portlet__head-title">همکار همرده</h3>
-
-                        <AdvanceSelect
-                          NominationData={this.state.NominationData}
-                          fieldName="SelectedPeer"
-                          UserInfo={this.state.UserInfo}
-                          tableName="Peer"
-                        />
+                        <div className="col-lg-3" />
+                        <div className="col-lg-9">
+                          <AdvanceSelect
+                            NominationData={this.state.NominationData}
+                            fieldName="SelectedPeer"
+                            UserInfo={this.state.UserInfo}
+                            tableName="Peer"
+                            AddOrder="secondAdd"
+                            onChangeDataTableValue={this.ChangeValuePeer}
+                          />
+                        </div>
                         <hr />
                         <h3 className="pt-5 kt-portlet__head-title">سایرین</h3>
-
-                        <AdvanceSelect
-                          NominationData={this.state.NominationData}
-                          fieldName="SelectedOther"
-                          UserInfo={this.state.UserInfo}
-                          tableName="Other"
-                        />
+                        <div className="col-lg-3" />
+                        <div className="col-lg-9">
+                          <AdvanceSelect
+                            NominationData={this.state.NominationData}
+                            fieldName="SelectedOther"
+                            UserInfo={this.state.UserInfo}
+                            tableName="Other"
+                            AddOrder="thirdAdd"
+                            onChangeDataTableValue={this.ChangeValueOther}
+                          />
+                        </div>
                       </MDBContainer>
                     </MDBCardText>
                     <div className="col-lg-12">
@@ -239,9 +250,9 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       } else {
         const UpdateItem: IUpdatedData = {
           ItemId: this.state.itemId,
-          peer: this.state.NominationData.Peer,
-          other: this.state.NominationData.Other,
-          subordinate: this.state.NominationData.Subordinates,
+          Peer: this.state.NominationData.Peer.map(x => x.ItemId.toString()),
+          Other: this.state.NominationData.Other.map(x => x.ItemId.toString()),
+          Subordinate: this.state.NominationData.Subordinates.map(x => x.ItemId.toString()),
         };
 
         await this.ListService.updateNominationData(UpdateItem).then(() => {
@@ -290,5 +301,39 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
   /********************************************** */
   private onCancelRequest = () => {
     window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
+  };
+  /*************************************************************************** */
+  private ChangeValueSubordinate = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        NominationData: {
+          ...prevState.NominationData,
+          Subordinates: st,
+        },
+      };
+    });
+  };
+  private ChangeValuePeer = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        NominationData: {
+          ...prevState.NominationData,
+          Peer: st,
+        },
+      };
+    });
+  };
+  private ChangeValueOther = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        NominationData: {
+          ...prevState.NominationData,
+          Other: st,
+        },
+      };
+    });
   };
 }

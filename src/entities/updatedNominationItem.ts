@@ -1,8 +1,6 @@
-import IUser from "./user";
-
 export default interface IUpdatedData {
   ItemId: number;
-  peer: IUser[];
-  other: IUser[];
-  subordinate: IUser[];
+  Peer: string[];
+  Other: string[];
+  Subordinate: string[];
 }
