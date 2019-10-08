@@ -237,6 +237,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             }
                           }}
                           onClick={e => {
+                            this.onCancelRequest();
                             e.preventDefault();
                             return false;
                           }}
@@ -386,7 +387,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     return self.indexOf(value) == index;
   };
 
-  /*************************************************************************** */
+  /*******************props from advance select for deleting data******************************************************** */
   private ChangeValueSubordinate = (st: any) => {
     this.setState(prevState => {
       return {
@@ -420,7 +421,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       };
     });
   };
-  /******************************************************** */
+  /***********props from advance select for add data to table********************************************* */
   private addValueSubordinate = (st: any) => {
     this.setState(prevState => {
       return {
@@ -444,5 +445,9 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         SelectedPeers: st,
       };
     });
+  };
+  /********************************************** */
+  private onCancelRequest = () => {
+    window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
   };
 }
