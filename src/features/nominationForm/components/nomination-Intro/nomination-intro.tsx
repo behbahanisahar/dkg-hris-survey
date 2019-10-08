@@ -96,7 +96,7 @@ export default class NominationIntroPage extends React.Component<{}, INomination
               </div>
               <div className="kt-user-card-v2__details">
                 <span className="dk-username">{n.Title}</span>
-                <p className="kt-widget4__text">{n.User.PersianDepartment}</p>
+                <span className="kt-widget4__text">{n.User.PersianDepartment}</span>
               </div>
             </div>
           </TableCell>
