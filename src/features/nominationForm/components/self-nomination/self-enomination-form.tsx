@@ -5,46 +5,27 @@ import { MDBCard, MDBCardBody, MDBContainer, MDBCardText } from "mdbreact";
 import "./self-enomination-form.css";
 import ListServices from "../../../../services/list-services";
 import SPLists from "../../../../entities/lists";
-import Add from "@material-ui/icons/Add";
-import { Fab, Tooltip, Table, TableRow, TableBody, TableCell } from "@material-ui/core";
-import AsyncSelect from "react-select/async";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
 import Util from "../../../../utilities/utilities";
 import NominationData from "../../../../entities/nomination";
-import IUser from "../../../../entities/user";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
 import MYStepper from "../../../stepper/stepper";
-import ITableHeader from "../../../../entities/table-headers";
-import Delete from "@material-ui/icons/Delete";
 import Spinner from "../../../spinner/spinner";
 import Authentication from "../../../authentication/authentication";
 import { NominationFormHeader } from "../nomination-form-header/nomination-form-header";
-import Search from "@material-ui/icons/Search";
 
-const RenderOption = (option: any) => (
-  <div>
-    <strong>{option.label}</strong>
-    <div>
-      <small>
-        <i>{option.EmailAddress}</i> | <span>{option.Department}</span>
-      </small>
-    </div>
-  </div>
-);
+import AdvanceSelect from "../../../../core/components/AdvanceSelect/advance-select";
+
 export default class SelfNomination extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
-  private tableHeaders: ITableHeader[];
+
   private util: Util;
   public constructor(props: ISurveyProps) {
     super(props);
     this.ListService = new ListServices();
     this.util = new Util();
-    this.tableHeaders = [
-      { id: "Row", label: "Row" },
-      { id: "Selected", label: "Selected Person" },
-      { id: "Action", label: "Delete" },
-    ];
+
     this.state = {
       UserInfo: [],
       SelectedPeerID: 0,
@@ -132,170 +113,32 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                     <MDBCardText>
                       <MDBContainer>
                         <h3 className="pt-5 kt-portlet__head-title">نیروی مستقیم تحت سرپرستی</h3>
-                        <div className="row">
-                          <div className="col-sm-3" />
-                          <div className="col-sm-7">
-                            <div className="inline-items" dir="rtl">
-                              <AsyncSelect
-                                defaultOptions
-                                getOptionLabel={RenderOption as any}
-                                className="basic-single  "
-                                classNamePrefix="select"
-                                dir="ltr"
-                                loadOptions={inputValue => this.loadOptions(inputValue)}
-                                isSearchable={true}
-                                name="SelectedSubOrdinate"
-                                isLoading={this.state.UsersIsLoading}
-                                onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
-                                options={this.state.UserInfo}
-                                placeholder="select..."
-                                IconComponent={Search}
-                                onKeyDown={(e: any) => this.keyPress(e, "firstADD")}
-                              />
 
-                              <Tooltip title="Add" aria-label="add">
-                                <Fab
-                                  size="small"
-                                  color="primary"
-                                  className="ml-3 kt-header__topbar-icon kt-header__topbar-icon--brand firstADD"
-                                  aria-label="add"
-                                  onClick={(ev: any) => this.AddItem("SelectedSubOrdinate")}
-                                  onKeyPress={(e: any) => this.onAddkeyPress(e, "SelectedSubOrdinate")}
-                                >
-                                  <Add />
-                                </Fab>
-                              </Tooltip>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-3" />
-                          <div className="col-sm-7">
-                            <div className="kt-portlet">
-                              <div className="kt-portlet__head">
-                                <div className="kt-portlet__head-label">
-                                  <h3 className="pt-5 kt-portlet__head-title">Subordinates</h3>
-                                </div>
-                              </div>
-                              <div className="kt-portlet__body">
-                                <Table dir="rtl" className="kt-datatable__table">
-                                  <thead className="kt-datatable__head">
-                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                                  </thead>
-                                  <TableBody>{this.onRenderRows("Subordinates")}</TableBody>
-                                </Table>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <AdvanceSelect
+                          NominationData={this.state.NominationData}
+                          fieldName="SelectedSubOrdinate"
+                          UserInfo={this.state.UserInfo}
+                          tableName="Subordinates"
+                        />
+
                         <hr />
                         <h3 className="pt-5 kt-portlet__head-title">همکار همرده</h3>
 
-                        <div className="row">
-                          <div className="col-sm-3" />
-                          <div className="col-sm-7">
-                            <div className="inline-items" dir="rtl">
-                              <AsyncSelect
-                                defaultOptions
-                                getOptionLabel={RenderOption as any}
-                                className="basic-single"
-                                classNamePrefix="select"
-                                loadOptions={inputValue => this.loadOptions(inputValue)}
-                                isSearchable={true}
-                                name="SelectedPeer"
-                                isLoading={this.state.UsersIsLoading}
-                                onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedPeer")}
-                                options={this.state.UserInfo}
-                                placeholder="select..."
-                                IconComponent={Search}
-                                onKeyDown={(e: any) => this.keyPress(e, "secondAdd")}
-                              />
-
-                              <Tooltip title="Add" aria-label="add">
-                                <Fab
-                                  size="small"
-                                  color="primary"
-                                  className="ml-3 secondAdd"
-                                  aria-label="add"
-                                  onClick={(ev: any) => this.AddItem("SelectedPeer")}
-                                  onKeyPress={(e: any) => this.onAddkeyPress(e, "SelectedPeer")}
-                                >
-                                  <Add />
-                                </Fab>
-                              </Tooltip>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="row">
-                          <div className="col-sm-3" />
-                          <div className="col-sm-7">
-                            <div className="kt-portlet">
-                              <div className="kt-portlet__body">
-                                <Table dir="rtl" className="kt-datatable__table">
-                                  <thead className="kt-datatable__head">
-                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                                  </thead>
-                                  <TableBody>{this.onRenderRows("Peer")}</TableBody>
-                                </Table>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-sm" />
-                        </div>
+                        <AdvanceSelect
+                          NominationData={this.state.NominationData}
+                          fieldName="SelectedPeer"
+                          UserInfo={this.state.UserInfo}
+                          tableName="Peer"
+                        />
                         <hr />
                         <h3 className="pt-5 kt-portlet__head-title">سایرین</h3>
 
-                        <div className="row">
-                          <div className="col-sm-3" />
-                          <div className="col-sm-7">
-                            <div className="inline-items" dir="rtl">
-                              <AsyncSelect
-                                defaultOptions
-                                getOptionLabel={RenderOption as any}
-                                className="basic-single"
-                                classNamePrefix="select"
-                                loadOptions={inputValue => this.loadOptions(inputValue)}
-                                isSearchable={true}
-                                name="SelectedOther"
-                                isLoading={this.state.UsersIsLoading}
-                                onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
-                                options={this.state.UserInfo}
-                                placeholder="select..."
-                                IconComponent={Search}
-                                dir="rtl"
-                                onKeyDown={(e: any) => this.keyPress(e, "thirdAdd")}
-                              />
-                              <Tooltip title="Add" aria-label="add">
-                                <Fab
-                                  onClick={(ev: any) => this.AddItem("SelectedOther")}
-                                  onKeyPress={(e: any) => this.onAddkeyPress(e, "SelectedOther")}
-                                  size="small"
-                                  className="ml-3 thirdAdd"
-                                  color="primary"
-                                  aria-label="add"
-                                >
-                                  <Add />
-                                </Fab>
-                              </Tooltip>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-3" />
-                          <div className="col-sm-7">
-                            <div className="kt-portlet">
-                              <div className="kt-portlet__body">
-                                <Table dir="rtl" className="kt-datatable__table">
-                                  <thead className="kt-datatable__head">
-                                    <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                                  </thead>
-                                  <TableBody>{this.onRenderRows("Other")}</TableBody>
-                                </Table>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <AdvanceSelect
+                          NominationData={this.state.NominationData}
+                          fieldName="SelectedOther"
+                          UserInfo={this.state.UserInfo}
+                          tableName="Other"
+                        />
                       </MDBContainer>
                     </MDBCardText>
                     <div className="col-lg-12">
@@ -344,17 +187,6 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     );
   }
 
-  /*****************************select user**********************************************8 */
-  private onSelectAutoComplete = async (event: any, dropdownName: string) => {
-    const dropdownId = dropdownName + "ID";
-    await this.setState(prevState => {
-      return {
-        ...prevState,
-        [dropdownName]: event === null ? "" : event.label,
-        [dropdownId]: event === null ? 0 : event.value,
-      };
-    });
-  };
   /*************************************************************************************************** */
   public loadUsers = async () => {
     let UserInfo: any[];
@@ -370,85 +202,6 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       };
     });
   };
-  /*********************************add item to table****************************************************** */
-  private AddItem = (FieldName: string) => {
-    if (FieldName === "SelectedOther") {
-      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Other);
-      if (ValidTableLength === false) {
-        const NewItem: IUser[] = this.state.NominationData.Other;
-        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
-        if (index > -1) {
-          this.setState(prevState => {
-            return {
-              ...prevState,
-              snackbarMessage: "User Exist!",
-              showSnackbarMessage: true,
-              snackbarType: SnackBarMode.Error,
-            };
-          });
-        } else {
-          if (this.state.SelectedOther !== "")
-            NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
-          this.setState(prevState => {
-            return {
-              ...prevState,
-              SelectedOthers: NewItem,
-            };
-          });
-        }
-      }
-    } else if (FieldName === "SelectedPeer") {
-      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Peer);
-      if (ValidTableLength === false) {
-        const NewItem: IUser[] = this.state.NominationData.Peer;
-        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
-        if (index > -1) {
-          this.setState(prevState => {
-            return {
-              ...prevState,
-              snackbarMessage: "User Exist!",
-              showSnackbarMessage: true,
-              snackbarType: SnackBarMode.Error,
-            };
-          });
-        } else {
-          if (this.state.SelectedPeer !== "")
-            NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
-          this.setState(prevState => {
-            return {
-              ...prevState,
-              SelectedPeers: NewItem,
-            };
-          });
-        }
-      }
-    } else {
-      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Subordinates);
-      if (ValidTableLength === false) {
-        const NewItem: IUser[] = this.state.NominationData.Subordinates;
-        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
-        if (index > -1) {
-          this.setState(prevState => {
-            return {
-              ...prevState,
-              snackbarMessage: "User Exist!",
-              showSnackbarMessage: true,
-              snackbarType: SnackBarMode.Error,
-            };
-          });
-        } else {
-          if (this.state.SelectedSubOrdinate !== "")
-            NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
-          this.setState(prevState => {
-            return {
-              ...prevState,
-              SelectedSubOrdinates: NewItem,
-            };
-          });
-        }
-      }
-    }
-  };
 
   /**************************** SnackBar ****************************** */
   private handleCloseMessage = () => {
@@ -463,110 +216,6 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     }
   };
 
-  /**************************** Repeat Table ****************************** */
-  private renderHeader = (columnDetail: any[]) => {
-    return columnDetail.map(
-      row => (
-        <TableCell className="LogPadding" key={row.id} align="center" padding="none" sortDirection="desc">
-          {row.label}
-        </TableCell>
-      ),
-      this,
-    );
-  };
-
-  private onRenderRows = (TableName: string) => {
-    let items: any[] = [];
-    switch (TableName) {
-      case "Subordinates": {
-        items = this.state.NominationData.Subordinates;
-        break;
-      }
-      case "Peer": {
-        items = this.state.NominationData.Peer;
-        break;
-      }
-      case "Other": {
-        items = this.state.NominationData.Other;
-        break;
-      }
-      default:
-        items = this.state.NominationData.Subordinates;
-    }
-
-    if (items.length === 0) {
-      return (
-        <TableRow>
-          <TableCell align="center" colSpan={3} className="emptyRowLog">
-            There is no data to display!
-          </TableCell>
-        </TableRow>
-      );
-    } else {
-      return items.map((n: any, index: any) => {
-        return (
-          <TableRow key={index}>
-            <TableCell style={{ width: "1%" }} align="center">
-              {index + 1}
-            </TableCell>
-            <TableCell align="center">{n.SPLatinFullName}</TableCell>
-            <TableCell align="center" style={{ width: "3%" }}>
-              <Delete
-                className="flaticon-pie-chart-1 kt-font-info"
-                onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
-              />
-            </TableCell>
-          </TableRow>
-        );
-      });
-    }
-  };
-  /******************************delete item from table***************************************************** */
-  private DeleteItem = (currentItem: string, TableName: string) => {
-    this.setState(prevState => {
-      let prevValues = [];
-      switch (TableName) {
-        case "Subordinates": {
-          prevValues = prevState.NominationData.Subordinates || [];
-          break;
-        }
-        case "Peer": {
-          prevValues = prevState.NominationData.Peer || [];
-          break;
-        }
-        case "Other": {
-          prevValues = prevState.NominationData.Other || [];
-          break;
-        }
-        default:
-          prevValues = prevState.NominationData.Subordinates || [];
-      }
-
-      const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
-      return {
-        ...prevState,
-        NominationData: {
-          ...prevState.NominationData,
-          [TableName]: newValue,
-        },
-      };
-    });
-  };
-  /*********************table length validation**************************************** */
-  private TableLengthValidation = (FieldName: any[]) => {
-    if (FieldName.length >= 15) {
-      this.setState(prevState => {
-        return {
-          ...prevState,
-          snackbarMessage: "you should select between 3 to 15 users!",
-          showSnackbarMessage: true,
-          snackbarType: SnackBarMode.Error,
-        };
-      });
-      return true;
-    }
-    return false;
-  };
   /****************************on form submited*************************************/
   private SubmitForm = async () => {
     let dataComparison: string = this.Compare(
@@ -632,32 +281,12 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       return "";
     }
   };
-  /******************async select options******************************************** */
-  private async loadOptions(inputValue: string) {
-    return await this.ListService.getUserInfo(inputValue);
-  }
+
   /******************dintics all items in tables******************************** */
   private distict = (value: any, index: any, self: any[]) => {
     return self.indexOf(value) == index;
   };
-  /**********************async select key press function**************************** */
-  private keyPress(e: any, value: string) {
-    if (e.keyCode == 13) {
-      var x = document.getElementsByClassName(value) as HTMLCollectionOf<HTMLElement>;
-      console.log(x);
-      x[0].focus();
 
-      // console.log(this.  next.focus();
-    }
-  }
-  /***************************************************** */
-  private onAddkeyPress(e: any, value: string) {
-    debugger;
-    if (e.keyCode == 13) {
-      console.log(e.keyCode);
-      this.AddItem(value);
-    }
-  }
   /********************************************** */
   private onCancelRequest = () => {
     window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
