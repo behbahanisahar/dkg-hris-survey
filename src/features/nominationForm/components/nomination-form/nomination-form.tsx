@@ -138,16 +138,9 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                       <MYStepper activeStep={this.state.activeStep} />
 
                       <div className="kt-section kt-section--first">
-                        <h3 className="pt-3 kt-section__title">
-                          نیروی مستقیم تحت سرپرستی
-                          <span
-                            className="history-link pull-left"
-                            onClick={(ev: any) => this.HideHistory("Subordinate")}
-                          >
-                            (نمایش سابقه تغییرات)
-                          </span>
-                        </h3>
-
+                        <div>
+                          <h3 className="pt-3 kt-section__title">نیروی مستقیم تحت سرپرستی</h3>
+                        </div>
                         <div className="kt-section__body">
                           <div className="row">
                             <div className="col-lg-6">
@@ -160,6 +153,13 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 onChangeDataTableValue={this.ChangeValueSubordinate}
                                 onAddField={this.addValueSubordinate}
                               />
+                              <button
+                                type="button"
+                                onClick={(ev: any) => this.HideHistory("Subordinate")}
+                                className="btn btn-sm btn-clean pull-left"
+                              >
+                                نمایش سابقه تغییرات
+                              </button>
                             </div>
                             <div className="col-lg-6">
                               {this.state.HideSubordinateHistory === false && (
