@@ -36,7 +36,7 @@ export default class SnackBarMessage extends React.Component<ISnackBarProps, ISn
           horizontal: "left",
         }}
         open={this.props.showMessage}
-        autoHideDuration={20000}
+        autoHideDuration={200000}
         onClose={this.props.onHandleCloseMessage}
         ContentProps={{
           "aria-describedby": "message-id",
@@ -54,7 +54,13 @@ export default class SnackBarMessage extends React.Component<ISnackBarProps, ISn
             </div>
           }
           action={[
-            <IconButton key="close" aria-label="Close" color="inherit" onClick={this.props.onHandleCloseMessage}>
+            <IconButton
+              key="close"
+              aria-label="Close"
+              className="closeSnackbar mr-10"
+              color="inherit"
+              onClick={this.props.onHandleCloseMessage}
+            >
               <CloseIcon />
             </IconButton>,
           ]}

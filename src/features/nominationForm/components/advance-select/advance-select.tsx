@@ -175,7 +175,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "User Exist!",
+              snackbarMessage: "کاربر وجود دارد!",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Error,
             };
@@ -201,7 +201,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "User Exist!",
+              snackbarMessage: "کاربر وجود دارد!",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Error,
             };
@@ -223,14 +223,14 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
   /*********************table length validation**************************************** */
   private TableLengthValidation = (FieldName: any[]) => {
     if (FieldName.length >= 15) {
-      //   this.setState(prevState => {
-      //     return {
-      //       ...prevState,
-      //       snackbarMessage: "you should select between 3 to 15 users!",
-      //       showSnackbarMessage: true,
-      //      // snackbarType: SnackBarMode.Error,
-      //     };
-      //   });
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          snackbarMessage: "تعداد انتخاب شدگان باید بین ۳ تا ۱۵ نفر باشد!",
+          showSnackbarMessage: true,
+          // snackbarType: SnackBarMode.Error,
+        };
+      });
       return true;
     }
     return false;

@@ -245,7 +245,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "you should select between 3 to 15 users!",
+            snackbarMessage: "تعداد انتخاب شدگان باید بین ۳ تا ۱۵ نفر باشد!",
             showSnackbarMessage: true,
             snackbarType: SnackBarMode.Error,
           };
@@ -262,7 +262,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "successfully submitted!",
+              snackbarMessage: "با موفقیت ثبت شد!",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Success,
             };
@@ -274,7 +274,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       this.setState(prevState => {
         return {
           ...prevState,
-          snackbarMessage: "peer, other or subordinate cant have common user",
+          snackbarMessage: "فرد تکراری انتخاب شده است!",
           showSnackbarMessage: true,
           snackbarType: SnackBarMode.Error,
         };
@@ -290,7 +290,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     const disttictAlldata: any[] = allData.filter(this.distict);
     console.log(disttictAlldata);
     if (disttictAlldata.length < allData.length) {
-      return "peer, other or subordinate cant have common user";
+      return "فرد تکراری انتخاب شده است!";
     } else {
       return "";
     }
