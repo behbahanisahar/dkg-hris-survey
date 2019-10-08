@@ -86,36 +86,46 @@ export default class NominationIntroPage extends React.Component<{}, INomination
   }
   /**************************** Repeat Table ****************************** */
   private onRenderRows = () => {
-    return this.state.nominationTasks.map((n: UserTasks, index: any) => {
+    if (this.state.nominationTasks.length === 0) {
       return (
-        <TableRow key={index} className="kt-datatable__row">
-          <TableCell align="right" className="kt-datatable__cell">
-            <div className="kt-user-card-v2">
-              <div className="kt-user-card-v2__pic">
-                <img alt={n.Title} src={n.User.AvatarUrl} />
-              </div>
-              <div className="kt-user-card-v2__details">
-                <span className="kt-user-card-v2__name">{n.Title}</span>
-                <span className="kt-user-card-v2__desc">{n.User.ReportedPost}</span>
-              </div>
-            </div>
-          </TableCell>
-
-          <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
-            <button
-              className="btn btn-sm btn-bold btn-brand-hover"
-              onClick={(e: any) => {
-                this.onShowItem(n.ItemId);
-                e.preventDefault();
-                return false;
-              }}
-            >
-              انتخاب
-            </button>
+        <TableRow>
+          <TableCell align="center" colSpan={3} className="emptyRowLog">
+            موردی جهت نمایش وجود ندارد!
           </TableCell>
         </TableRow>
       );
-    });
+    } else {
+      return this.state.nominationTasks.map((n: UserTasks, index: any) => {
+        return (
+          <TableRow key={index} className="kt-datatable__row">
+            <TableCell align="right" className="kt-datatable__cell">
+              <div className="kt-user-card-v2">
+                <div className="kt-user-card-v2__pic">
+                  <img alt={n.Title} src={n.User.AvatarUrl} />
+                </div>
+                <div className="kt-user-card-v2__details">
+                  <span className="kt-user-card-v2__name">{n.Title}</span>
+                  <span className="kt-user-card-v2__desc">{n.User.ReportedPost}</span>
+                </div>
+              </div>
+            </TableCell>
+
+            <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
+              <button
+                className="btn btn-sm btn-bold btn-brand-hover"
+                onClick={(e: any) => {
+                  this.onShowItem(n.ItemId);
+                  e.preventDefault();
+                  return false;
+                }}
+              >
+                انتخاب
+              </button>
+            </TableCell>
+          </TableRow>
+        );
+      });
+    }
   };
   /************************************************************* */
   private onShowItem = (ItemId: number) => {

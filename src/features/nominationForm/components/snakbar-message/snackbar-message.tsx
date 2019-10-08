@@ -46,10 +46,10 @@ export default class SnackBarMessage extends React.Component<ISnackBarProps, ISn
           style={{ backgroundColor: `${this.props.type}` }}
           message={
             <div>
-              {this.props.type === SnackBarMode.Success && <CheckCircle className="middleIcon" />}
-              {this.props.type === SnackBarMode.Warning && <Warning className="middleIcon" />}
-              {this.props.type === SnackBarMode.Error && <Error className="middleIcon" />}
-              {this.props.type === SnackBarMode.Info && <Info className="middleIcon" />}
+              {this.props.type === SnackBarMode.Success && <CheckCircle className="middleIcon mx-3" />}
+              {this.props.type === SnackBarMode.Warning && <Warning className="middleIcon  mx-3" />}
+              {this.props.type === SnackBarMode.Error && <Error className="middleIcon  mx-3" />}
+              {this.props.type === SnackBarMode.Info && <Info className="middleIcon  mx-3" />}
               <span id="message-id">{this.props.message}</span>
             </div>
           }

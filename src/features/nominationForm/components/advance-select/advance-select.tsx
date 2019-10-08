@@ -28,9 +28,9 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
     super(props);
     this.ListService = new ListServices();
     this.tableHeaders = [
-      { id: "Row", label: "Row" },
-      { id: "Selected", label: "Selected Person" },
-      { id: "Action", label: "Delete" },
+      { id: "Row", label: "#" },
+      { id: "Selected", label: "نام و نام خانوادگی" },
+      { id: "Action", label: "" },
     ];
 
     this.state = {
@@ -88,7 +88,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
               // isLoading={this.state.UsersIsLoading}
               onChange={(ev: any) => this.onSelectAutoComplete(ev, this.props.fieldName)}
               options={this.props.UserInfo}
-              placeholder="select..."
+              placeholder="انتخاب..."
               dir="rtl"
               onKeyDown={(e: any) => this.keyPress(e, this.props.AddOrder)}
             />
@@ -288,7 +288,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
       return (
         <TableRow>
           <TableCell align="center" colSpan={3} className="emptyRowLog">
-            There is no data to display!
+            کسی انتخاب نشده است!
           </TableCell>
         </TableRow>
       );
@@ -302,8 +302,9 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
             <TableCell align="center">{n.SPLatinFullName}</TableCell>
             <TableCell align="center" style={{ width: "3%" }}>
               <Delete
-                className="flaticon-pie-chart-1 kt-font-info"
+                className="flaticon-pie-chart-1 kt-font-info kt-label-font-color-2"
                 onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
+                cursor="pointer"
               />
             </TableCell>
           </TableRow>
