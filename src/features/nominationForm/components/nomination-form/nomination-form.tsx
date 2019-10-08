@@ -168,7 +168,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                         </div>
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
 
-                        <h3 className="pt-5 kt-portlet__head-title" style={{ margin: "0 5rem 2rem 0" }}>
+                        <h3 className="pt-5 kt-section__title" style={{ margin: "0 5rem 2rem 0" }}>
                           همکار همرده( <a onClick={(ev: any) => this.HideHistory("Peer")}>نمایش سوابق</a>)
                         </h3>
                         <div className="kt-section__body">
@@ -193,7 +193,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                         </div>
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
 
-                        <h3 className="pt-5 kt-portlet__head-title" style={{ margin: "0 5rem 2rem 0" }}>
+                        <h3 className="pt-5 kt-section__title" style={{ margin: "0 5rem 2rem 0" }}>
                           سایرین( <a onClick={(ev: any) => this.HideHistory("Other")}>نمایش سوابق</a>)
                         </h3>
                         <div className="kt-section__body">

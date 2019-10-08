@@ -111,7 +111,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                   <MDBCardBody>
                     <MDBCardText>
                       <MDBContainer>
-                        <h3 className="pt-5 kt-portlet__head-title">نیروی مستقیم تحت سرپرستی</h3>
+                        <h3 className="pt-5 kt-section__title">نیروی مستقیم تحت سرپرستی</h3>
                         <div className="col-lg-3" />
                         <div className="col-lg-9">
                           <AdvanceSelect
@@ -126,7 +126,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                         </div>
 
                         <hr />
-                        <h3 className="pt-5 kt-portlet__head-title">همکار همرده</h3>
+                        <h3 className="pt-5 kt-section__title">همکار همرده</h3>
                         <div className="col-lg-3" />
                         <div className="col-lg-9">
                           <AdvanceSelect
@@ -140,7 +140,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                           />
                         </div>
                         <hr />
-                        <h3 className="pt-5 kt-portlet__head-title">سایرین</h3>
+                        <h3 className="pt-5 kt-section__title">سایرین</h3>
                         <div className="col-lg-3" />
                         <div className="col-lg-9">
                           <AdvanceSelect
