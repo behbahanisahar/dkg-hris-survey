@@ -139,8 +139,13 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
 
                       <div className="kt-section kt-section--first">
                         <h3 className="pt-3 kt-section__title">
-                          نیروی مستقیم تحت سرپرستی ({" "}
-                          <a onClick={(ev: any) => this.HideHistory("Subordinate")}>نمایش سوابق</a>)
+                          نیروی مستقیم تحت سرپرستی
+                          <span
+                            className="history-link pull-left"
+                            onClick={(ev: any) => this.HideHistory("Subordinate")}
+                          >
+                            (نمایش سابقه تغییرات)
+                          </span>
                         </h3>
 
                         <div className="kt-section__body">
@@ -224,8 +229,12 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                           onKeyPress={e => {
                             if (e.key === "Enter") e.preventDefault();
                           }}
-                          className="btn btn-brand"
-                          onClick={this.SubmitForm}
+                          className="btn btn-primary mr-2"
+                          onClick={e => {
+                            this.SubmitForm();
+                            e.preventDefault();
+                            return false;
+                          }}
                         >
                           تایید
                         </button>
