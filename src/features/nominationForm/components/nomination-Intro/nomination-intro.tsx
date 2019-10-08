@@ -71,7 +71,7 @@ export default class NominationIntroPage extends React.Component<{}, INomination
           <div>
             <div className="kt-portlet__head">
               <div className="kt-portlet__head-label">
-                <h3 className="kt-portlet__head-title">نفرات </h3>
+                <h3 className="kt-portlet__head-title">لیست افراد </h3>
               </div>
             </div>
             <div className="kt-portlet__body">
@@ -95,14 +95,10 @@ export default class NominationIntroPage extends React.Component<{}, INomination
                 <img alt={n.Title} src={n.User.AvatarUrl} />
               </div>
               <div className="kt-user-card-v2__details">
-                <span className="dk-username">{n.Title}</span>
-                <span className="kt-widget4__text">{n.User.PersianDepartment}</span>
+                <span className="kt-user-card-v2__name">{n.Title}</span>
+                <span className="kt-user-card-v2__desc">{n.User.ReportedPost}</span>
               </div>
             </div>
-          </TableCell>
-
-          <TableCell style={{ width: "5%" }} align="right">
-            {n.User.PersianReportedPost}
           </TableCell>
 
           <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
