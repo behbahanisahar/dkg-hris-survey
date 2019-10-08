@@ -70,6 +70,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
           EmailAddress: "",
           JobGrade: "",
         },
+        statusCode: 0,
       },
       NominationHistory: [
         {
@@ -163,10 +164,14 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             </div>
                             <div className="col-lg-6">
                               {this.state.HideSubordinateHistory === false && (
-                                <HistoryTable
-                                  NominationHistory={this.state.NominationHistory}
-                                  tableName="Subordinate"
-                                />
+                                <div className="kt-portlet kt-sc-2">
+                                  <div className="kt-portlet__body">
+                                    <HistoryTable
+                                      NominationHistory={this.state.NominationHistory}
+                                      tableName="Subordinate"
+                                    />
+                                  </div>
+                                </div>
                               )}
                             </div>
                           </div>
@@ -174,7 +179,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
 
                         <h3 className="pt-5 kt-section__title" style={{ margin: "0 5rem 2rem 0" }}>
-                          همکار همرده( <a onClick={(ev: any) => this.HideHistory("Peer")}>نمایش سوابق</a>)
+                          همکار همرده
                         </h3>
                         <div className="kt-section__body">
                           <div className="row">
@@ -188,10 +193,21 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 onChangeDataTableValue={this.ChangeValuePeer}
                                 onAddField={this.addValuePeer}
                               />
+                              <button
+                                type="button"
+                                onClick={(ev: any) => this.HideHistory("Peer")}
+                                className="btn btn-sm btn-clean pull-left"
+                              >
+                                نمایش سابقه تغییرات
+                              </button>
                             </div>
                             <div className="col-lg-6">
                               {this.state.HidePeerHistory === false && (
-                                <HistoryTable NominationHistory={this.state.NominationHistory} tableName="Peer" />
+                                <div className="kt-portlet kt-sc-2">
+                                  <div className="kt-portlet__body">
+                                    <HistoryTable NominationHistory={this.state.NominationHistory} tableName="Peer" />
+                                  </div>
+                                </div>
                               )}
                             </div>
                           </div>
@@ -199,7 +215,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
 
                         <h3 className="pt-5 kt-section__title" style={{ margin: "0 5rem 2rem 0" }}>
-                          سایرین( <a onClick={(ev: any) => this.HideHistory("Other")}>نمایش سوابق</a>)
+                          سایرین
                         </h3>
                         <div className="kt-section__body">
                           <div className="row">
@@ -213,10 +229,21 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 onChangeDataTableValue={this.ChangeValueOther}
                                 onAddField={this.addValueOther}
                               />
+                              <button
+                                type="button"
+                                onClick={(ev: any) => this.HideHistory("Other")}
+                                className="btn btn-sm btn-clean pull-left"
+                              >
+                                نمایش سابقه تغییرات
+                              </button>
                             </div>
                             <div className="col-lg-6">
                               {this.state.HideOtherHistory === false && (
-                                <HistoryTable NominationHistory={this.state.NominationHistory} tableName="Other" />
+                                <div className="kt-portlet kt-sc-2">
+                                  <div className="kt-portlet__body">
+                                    <HistoryTable NominationHistory={this.state.NominationHistory} tableName="Other" />
+                                  </div>
+                                </div>
                               )}
                             </div>
                           </div>

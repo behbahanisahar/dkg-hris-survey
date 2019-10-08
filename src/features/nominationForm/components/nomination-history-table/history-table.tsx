@@ -9,7 +9,6 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
   constructor(props: IHistoryTableProps) {
     super(props);
     this.HistorytableHeaders = [
-      { id: "Row", label: "Row" },
       { id: "ModifiedBy", label: "ModifiedBy" },
       { id: "ModifiedDate", label: "ModifiedDate" },
       { id: "Added", label: "Added" },
@@ -90,7 +89,6 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
 
         return (
           <TableRow key={index}>
-            <TableCell align="center">{index + 1}</TableCell>
             <TableCell align="center">{n.ModifiedBy}</TableCell>
             <TableCell align="center">{n.ModifiedDateShamsi}</TableCell>
             <TableCell align="center" className={AddedStr !== "" ? "kt-font-bold kt-font-success" : ""}>

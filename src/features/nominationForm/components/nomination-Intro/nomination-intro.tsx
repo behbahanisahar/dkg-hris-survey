@@ -1,7 +1,7 @@
 import React from "react";
 import INominationIntroState from "./nomination-intro-state";
 import ListServices from "../../../../services/list-services";
-
+import AvatarUrl from "../../../../assets/img/DefaultAvatar.png";
 import { TableRow, TableCell } from "@material-ui/core";
 import UserTasks from "../../../../entities/user-task";
 import { MDBTable, MDBTableBody } from "mdbreact";
@@ -101,7 +101,7 @@ export default class NominationIntroPage extends React.Component<{}, INomination
             <TableCell align="right" className="kt-datatable__cell">
               <div className="kt-user-card-v2">
                 <div className="kt-user-card-v2__pic">
-                  <img alt={n.Title} src={n.User.AvatarUrl} />
+                  <img alt={n.Title} src={n.User.AvatarUrl === null ? AvatarUrl : n.User.AvatarUrl} />
                 </div>
                 <div className="kt-user-card-v2__details">
                   <span className="kt-user-card-v2__name">{n.Title}</span>
