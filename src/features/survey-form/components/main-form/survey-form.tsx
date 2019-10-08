@@ -1,7 +1,7 @@
 import React from "react";
 import ISurveyFromState from "./survey-form-state";
 import ListServices from "../../../../services/list-services";
-import { MDBCard, MDBRow, MDBCol, MDBBtn } from "mdbreact";
+import { MDBRow, MDBCol } from "mdbreact";
 import "./survey-form.css";
 import IQuestion from "../../../../entities/survey-questions";
 import { Slider, Tooltip, withStyles, Theme, Typography } from "@material-ui/core";
@@ -135,22 +135,42 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
               <Authentication status={this.state.SurveyFormData.statusCode || 401} />
             )}
             {this.state.SurveyFormData.statusCode === 200 && (
-              <div>
-                <div>{this.onRenderCard()}</div>
-                <div className="buttons">
-                  <MDBBtn
-                    size="sm"
-                    color="dark-green"
-                    onClick={(ev: any) => this.onSubmitForm("Not Completed", "submit")}
-                  >
-                    ذخیره
-                  </MDBBtn>
-                  <MDBBtn size="sm" color="dark-green" onClick={(ev: any) => this.onSubmitForm("Completed", "submit")}>
-                    ثبت نهایی
-                  </MDBBtn>
-                  <MDBBtn size="sm" color="grey lighten-3">
-                    انصراف
-                  </MDBBtn>
+              <div className="rtl">
+                <div className="kt-portlet">
+                  <div className="kt-portlet__head">
+                    <div className="kt-portlet__head-label">
+                      <span className="kt-portlet__head-icon kt-hidden">
+                        <i className="la la-gear"></i>
+                      </span>
+                      <h3 className="kt-portlet__head-title">{this.state.SurveyFormData.UserDisplayName}</h3>
+                    </div>
+                  </div>
+
+                  <div className="kt-portlet__body">
+                    <div>{this.onRenderCard()}</div>
+                  </div>
+                  <div className="kt-portlet__foot">
+                    <div className="row">
+                      <div className="col kt-align-left">
+                        <button
+                          className="btn btn-info mx-2"
+                          onClick={(ev: any) => this.onSubmitForm("Not Completed", "submit")}
+                        >
+                          ذخیره فرم
+                        </button>
+
+                        <button className="btn btn-secondary mx-2">انصراف</button>
+                      </div>
+                      <div className="col kt-align-right">
+                        <button
+                          className="btn btn-success btn-wide btn-elevate btn-elevate-air mx-2"
+                          onClick={(ev: any) => this.onSubmitForm("Completed", "submit")}
+                        >
+                          ثبت نهایی ارزیابی
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -161,7 +181,6 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   }
   /**********************render cards**************************************** */
   private onRenderCard = () => {
-    //  const ProfilePhoto = "http://hq-spsrv03:90/SiteAssets/pic.png";
     return this.state.SurveyFormData.Categories.map((n: ICategory, index: any) => {
       let categoryClassName = "";
       switch (n.BaseCategoryId) {
@@ -182,8 +201,8 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       }
 
       return (
-        <div key={index}>
-          <MDBCard className={categoryClassName + " Container mx-4 "}>
+        <div className="kt-section my-5 py-5" key={index}>
+          <div className={categoryClassName + " kt-section__content kt-section__content--solid "}>
             <img src={n.SignUrl} alt="" className="Image"></img>
             <MDBRow className="question-row">
               <MDBCol md="4"></MDBCol>
@@ -196,7 +215,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
             </MDBRow>
 
             <MDBRow className="question-row">{this.onRenderQuestion(n.Questions, index)}</MDBRow>
-          </MDBCard>
+          </div>
         </div>
       );
     });

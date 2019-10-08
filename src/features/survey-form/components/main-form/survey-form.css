@@ -1,9 +1,9 @@
 .Image {
   border-radius: 50% !important;
-  margin-top: -6%;
   max-width: 10%;
   height: auto;
-  margin-left: 45%;
+  margin: -5% auto 0;
+  display: block;
 }
 .Container {
   background-color: white;
@@ -42,11 +42,11 @@
   white-space: pre !important;
 }
 .Cat1 {
-  border-right: 2px solid yellow;
+  border-right: 2px solid #1dc9b7 !important;
 }
 .Cat2 {
-  border-right: 2px solid red;
+  border-right: 2px solid #ffb822 !important;
 }
 .Cat3 {
-  border-right: 2px solid green;
+  border-right: 2px solid #591df1 !important;
 }
