@@ -41,11 +41,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     super(props);
     this.ListService = new ListServices();
     this.util = new Util();
-    this.tableHeaders = [
-      { id: "Row", label: "Row" },
-      { id: "Selected", label: "Selected Person" },
-      { id: "Action", label: "Delete" },
-    ];
+    this.tableHeaders = [{ id: "Row", label: "#" }, { id: "Selected", label: "نام" }, { id: "Action", label: "" }];
     this.HistorytableHeaders = [
       { id: "Row", label: "Row" },
       { id: "ModifiedBy", label: "ModifiedBy" },
@@ -179,7 +175,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                   <AsyncSelect
                                     defaultOptions
                                     getOptionLabel={RenderOption as any}
-                                    className="basic-single"
+                                    className="w-100"
                                     classNamePrefix="select"
                                     loadOptions={inputValue => this.loadOptions(inputValue)}
                                     isSearchable={true}
@@ -187,7 +183,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                     isLoading={this.state.UsersIsLoading}
                                     onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedSubOrdinate")}
                                     options={this.state.UserInfo}
-                                    placeholder="select..."
+                                    placeholder="انتخاب ... "
                                     onKeyDown={(e: any) => this.keyPress(e, "firstADD")}
                                   />
                                 </div>
@@ -294,8 +290,8 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 <AsyncSelect
                                   defaultOptions
                                   getOptionLabel={RenderOption as any}
-                                  className="basic-single"
-                                  classNamePrefix="select"
+                                  className="w-100"
+                                  classNamePrefix="انتخاب .."
                                   loadOptions={inputValue => this.loadOptions(inputValue)}
                                   isSearchable={true}
                                   name="SelectedPeer"
@@ -388,7 +384,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 <AsyncSelect
                                   defaultOptions
                                   getOptionLabel={RenderOption as any}
-                                  className="basic-single"
+                                  className="w-100"
                                   classNamePrefix="select"
                                   loadOptions={inputValue => this.loadOptions(inputValue)}
                                   isSearchable={true}
@@ -655,7 +651,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   private renderHeader = (columnDetail: any[]) => {
     return columnDetail.map(
       row => (
-        <TableCell className="LogPadding" key={row.id} sortDirection="desc">
+        <TableCell align="center" className="LogPadding" key={row.id} sortDirection="desc">
           {row.label}
         </TableCell>
       ),
@@ -693,16 +689,16 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       return items.map((n: any, index: any) => {
         return (
           <TableRow key={index}>
-            <TableCell style={{ width: "3%" }} align="center">
+            <TableCell style={{ width: "3%" }} align="right">
               {index + 1}
             </TableCell>
-            <TableCell>{n.SPLatinFullName}</TableCell>
+            <TableCell align="right">{n.SPLatinFullName}</TableCell>
             <TableCell
               style={{ width: "3%" }}
               align="center"
               onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
             >
-              <Delete cursor="pointer" className="flaticon-pie-chart-1 kt-font-info" />
+              <Delete cursor="pointer" className="kt-label-font-color-3" />
             </TableCell>
           </TableRow>
         );

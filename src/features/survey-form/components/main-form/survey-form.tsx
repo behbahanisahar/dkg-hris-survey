@@ -205,7 +205,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   private onRenderQuestion = (Questions: IQuestion[], cardIndex: Number) => {
     return Questions.map((item: IQuestion, index: any) => {
       return (
-        <ul key={index} className="ul-class">
+        <ul key={index} className="ul-class my-5 py-5">
           <li className="li-class">
             {item.QuestionFa}
             <HtmlTooltip
