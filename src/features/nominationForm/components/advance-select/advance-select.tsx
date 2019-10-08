@@ -157,6 +157,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         } else {
           if (this.state.SelectedOther !== "")
             NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
+          this.props.onAddField(NewItem);
           this.setState(prevState => {
             return {
               ...prevState,
@@ -182,6 +183,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         } else {
           if (this.state.SelectedPeer !== "")
             NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
+          this.props.onAddField(NewItem);
           this.setState(prevState => {
             return {
               ...prevState,
@@ -207,6 +209,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         } else {
           if (this.state.SelectedSubOrdinate !== "")
             NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
+          this.props.onAddField(NewItem);
           this.setState(prevState => {
             return {
               ...prevState,

@@ -8,4 +8,5 @@ export default interface IAdvanceSelectProps {
   NominationData: NominationData;
   AddOrder: string;
   onChangeDataTableValue: (st: any) => void;
+  onAddField: (st: any) => void;
 }

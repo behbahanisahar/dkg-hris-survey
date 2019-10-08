@@ -121,6 +121,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             tableName="Subordinates"
                             AddOrder="firstAdd"
                             onChangeDataTableValue={this.ChangeValueSubordinate}
+                            onAddField={this.addValueSubordinate}
                           />
                         </div>
 
@@ -135,6 +136,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             tableName="Peer"
                             AddOrder="secondAdd"
                             onChangeDataTableValue={this.ChangeValuePeer}
+                            onAddField={this.addValuePeer}
                           />
                         </div>
                         <hr />
@@ -148,6 +150,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             tableName="Other"
                             AddOrder="thirdAdd"
                             onChangeDataTableValue={this.ChangeValueOther}
+                            onAddField={this.addValueOther}
                           />
                         </div>
                       </MDBContainer>
@@ -333,6 +336,31 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
           ...prevState.NominationData,
           Other: st,
         },
+      };
+    });
+  };
+  /******************************************************** */
+  private addValueSubordinate = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        SelectedSubOrdinates: st,
+      };
+    });
+  };
+  private addValueOther = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        SelectedOthers: st,
+      };
+    });
+  };
+  private addValuePeer = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        SelectedPeers: st,
       };
     });
   };

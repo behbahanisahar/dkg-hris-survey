@@ -17,33 +17,14 @@ import { NominationFormHeader } from "../nomination-form-header/nomination-form-
 import HistoryTable from "../nomination-history-table/history-table";
 import AdvanceSelect from "../advance-select/advance-select";
 
-// const RenderOption = (option: any) => (
-//   <div>
-//     <strong>{option.label}</strong>
-//     <div>
-//       <small>
-//         <i>{option.EmailAddress}</i> | <span>{option.Department}</span>
-//       </small>
-//     </div>
-//   </div>
-// );
 export default class Nomination extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
-  // private tableHeaders: ITableHeader[];
-  // private HistorytableHeaders: ITableHeader[];
+
   private util: Util;
   public constructor(props: ISurveyProps) {
     super(props);
     this.ListService = new ListServices();
     this.util = new Util();
-    // this.tableHeaders = [{ id: "Row", label: "#" }, { id: "Selected", label: "نام" }, { id: "Action", label: "" }];
-    // this.HistorytableHeaders = [
-    //   { id: "Row", label: "Row" },
-    //   { id: "ModifiedBy", label: "ModifiedBy" },
-    //   { id: "ModifiedDate", label: "ModifiedDate" },
-    //   { id: "Added", label: "Added" },
-    //   { id: "Deleted", label: "Deleted" },
-    // ];
     this.state = {
       showSpinner: true,
       UserInfo: [],
@@ -139,10 +120,6 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     });
   }
 
-  // private async loadOptions(inputValue: string) {
-  //   return await this.ListService.getUserInfo(inputValue);
-  // }
-
   public render() {
     return (
       <div className="rtl">
@@ -176,6 +153,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 tableName="Subordinates"
                                 AddOrder="firstAdd"
                                 onChangeDataTableValue={this.ChangeValueSubordinate}
+                                onAddField={this.addValueSubordinate}
                               />
                             </div>
                             <div className="col-lg-6">
@@ -203,6 +181,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 tableName="Peer"
                                 AddOrder="secondAdd"
                                 onChangeDataTableValue={this.ChangeValuePeer}
+                                onAddField={this.addValuePeer}
                               />
                             </div>
                             <div className="col-lg-6">
@@ -227,6 +206,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 tableName="Other"
                                 AddOrder="thirdAdd"
                                 onChangeDataTableValue={this.ChangeValueOther}
+                                onAddField={this.addValueOther}
                               />
                             </div>
                             <div className="col-lg-6">
@@ -236,100 +216,6 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             </div>
                           </div>
                         </div>
-
-                        {/* <div className="kt-container  kt-grid__item kt-grid__item--fluid">
-                          <div className="row">
-                            <div className="col-lg-6" />
-                            <div className="col-lg-1">
-                              <Tooltip title="Add" aria-label="add">
-                                <Fab
-                                  size="small"
-                                  className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-brand thirdAdd"
-                                  aria-label="add"
-                                  onKeyPress={(e: any) => this.onAddkeyPress(e, "SelectedOther")}
-                                  onClick={(ev: any) => this.AddItem("SelectedOther")}
-                                >
-                                  <Add />
-                                </Fab>
-                              </Tooltip>
-                            </div>
-                            <div className="col-lg-4">
-                              <div className="inline-items" dir="rtl">
-                                <AsyncSelect
-                                  defaultOptions
-                                  getOptionLabel={RenderOption as any}
-                                  className="w-100"
-                                  classNamePrefix="select"
-                                  loadOptions={inputValue => this.loadOptions(inputValue)}
-                                  isSearchable={true}
-                                  name="SelectedOther"
-                                  isLoading={this.state.UsersIsLoading}
-                                  onChange={(ev: any) => this.onSelectAutoComplete(ev, "SelectedOther")}
-                                  options={this.state.UserInfo}
-                                  placeholder="select..."
-                                  onKeyDown={(e: any) => this.keyPress(e, "thirdAdd")}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="kt-container  kt-grid__item kt-grid__item--fluid">
-                          <div className="row">
-                            <div className="col-lg-6">
-                              {this.state.HideOtherHistory === false && (
-                                <div>
-                                  <div className="kt-portlet">
-                                    <div>
-                                      {" "}
-                                      <h3 dir="rtl" className="pt-3 ml-5 kt-portlet__head-title">
-                                        History
-                                      </h3>
-                                    </div>
-                                    <div className="kt-portlet__body">
-                                      <Table dir="rtl" className="kt-datatable__table">
-                                        <thead className="kt-datatable__head">
-                                          <TableRow>{this.renderHistoryHeader(this.HistorytableHeaders)}</TableRow>
-                                        </thead>
-                                        <TableBody>{this.onRenderHistoryRows("Other")}</TableBody>
-                                      </Table>
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                            </div>
-                            <div className="col-lg-1">
-                              <Tooltip
-                                style={{ marginTop: "16%" }}
-                                title="show history table"
-                                aria-label="show history table"
-                              >
-                                <Fab
-                                  size="small"
-                                  color="secondary"
-                                  className="ml-3 btn btn-bold btn-sm btn-font-sm  btn-label-success"
-                                  aria-label="show history table"
-                                >
-                                  <Forward onClick={(ev: any) => this.HideHistory("Other")} />
-                                </Fab>
-                              </Tooltip>
-                            </div>
-                            <div className="col-lg-4">
-                              <div className="inline-items">
-                                <div className="kt-portlet">
-                                  <div className="kt-portlet__body">
-                                    <Table dir="rtl" className="kt-datatable__table">
-                                      <thead className="kt-datatable__head">
-                                        <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow>
-                                      </thead>
-                                      <TableBody>{this.onRenderRows("Other")}</TableBody>
-                                    </Table>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> */}
                       </div>
                     </div>
                     <div className="kt-portlet__foot">
@@ -374,17 +260,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       </div>
     );
   }
-  // /*****************************select user**********************************************8 */
-  // private onSelectAutoComplete = async (event: any, dropdownName: string) => {
-  //   const dropdownId = dropdownName + "ID";
-  //   await this.setState(prevState => {
-  //     return {
-  //       ...prevState,
-  //       [dropdownName]: event === null ? "" : event.label,
-  //       [dropdownId]: event === null ? 0 : event.value,
-  //     };
-  //   });
-  // };
+
   /*************************************************************************************************** */
   public loadUsers = async () => {
     let UserInfo: any[];
@@ -399,86 +275,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       };
     });
   };
-  // /*********************************add item to table****************************************************** */
-  // private AddItem = (FieldName: string) => {
-  //   console.log(FieldName);
-  //   if (FieldName === "SelectedOther") {
-  //     const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Other);
-  //     if (ValidTableLength === false) {
-  //       const NewItem: IUser[] = this.state.NominationData.Other;
-  //       const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
-  //       if (index > -1) {
-  //         this.setState(prevState => {
-  //           return {
-  //             ...prevState,
-  //             snackbarMessage: "User Exist!",
-  //             showSnackbarMessage: true,
-  //             snackbarType: SnackBarMode.Error,
-  //           };
-  //         });
-  //       } else {
-  //         if (this.state.SelectedOther !== "")
-  //           NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
-  //         this.setState(prevState => {
-  //           return {
-  //             ...prevState,
-  //             SelectedOthers: NewItem,
-  //           };
-  //         });
-  //       }
-  //     }
-  //   } else if (FieldName === "SelectedPeer") {
-  //     const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Peer);
-  //     if (ValidTableLength === false) {
-  //       const NewItem: IUser[] = this.state.NominationData.Peer;
-  //       const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
-  //       if (index > -1) {
-  //         this.setState(prevState => {
-  //           return {
-  //             ...prevState,
-  //             snackbarMessage: "User Exist!",
-  //             showSnackbarMessage: true,
-  //             snackbarType: SnackBarMode.Error,
-  //           };
-  //         });
-  //       } else {
-  //         if (this.state.SelectedPeer !== "")
-  //           NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
-  //         this.setState(prevState => {
-  //           return {
-  //             ...prevState,
-  //             SelectedPeers: NewItem,
-  //           };
-  //         });
-  //       }
-  //     }
-  //   } else {
-  //     const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Subordinates);
-  //     if (ValidTableLength === false) {
-  //       const NewItem: IUser[] = this.state.NominationData.Subordinates;
-  //       const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
-  //       if (index > -1) {
-  //         this.setState(prevState => {
-  //           return {
-  //             ...prevState,
-  //             snackbarMessage: "User Exist!",
-  //             showSnackbarMessage: true,
-  //             snackbarType: SnackBarMode.Error,
-  //           };
-  //         });
-  //       } else {
-  //         if (this.state.SelectedSubOrdinate !== "")
-  //           NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
-  //         this.setState(prevState => {
-  //           return {
-  //             ...prevState,
-  //             SelectedSubOrdinates: NewItem,
-  //           };
-  //         });
-  //       }
-  //     }
-  //   }
-  // };
+
   /****************************hide history table***************************** */
   private HideHistory = (FieldName: string) => {
     if (FieldName === "Subordinate") {
@@ -521,171 +318,6 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     }
   };
 
-  // /**************************** Repeat Table ****************************** */
-  // private renderHeader = (columnDetail: any[]) => {
-  //   return columnDetail.map(
-  //     row => (
-  //       <TableCell align="center" className="LogPadding" key={row.id} sortDirection="desc">
-  //         {row.label}
-  //       </TableCell>
-  //     ),
-  //     this,
-  //   );
-  // };
-
-  // private onRenderRows = (TableName: string) => {
-  //   let items: any[] = [];
-  //   switch (TableName) {
-  //     case "Subordinates": {
-  //       items = this.state.NominationData.Subordinates;
-  //       break;
-  //     }
-  //     case "Peer": {
-  //       items = this.state.NominationData.Peer;
-  //       break;
-  //     }
-  //     case "Other": {
-  //       items = this.state.NominationData.Other;
-  //       break;
-  //     }
-  //     default:
-  //       items = this.state.NominationData.Subordinates;
-  //   }
-  //   if (items.length === 0) {
-  //     return (
-  //       <TableRow>
-  //         <TableCell align="center" colSpan={3} className="emptyRowLog">
-  //           There is no data to display!
-  //         </TableCell>
-  //       </TableRow>
-  //     );
-  //   } else {
-  //     return items.map((n: any, index: any) => {
-  //       return (
-  //         <TableRow key={index}>
-  //           <TableCell style={{ width: "3%" }} align="right">
-  //             {index + 1}
-  //           </TableCell>
-  //           <TableCell align="right">{n.SPLatinFullName}</TableCell>
-  //           <TableCell
-  //             style={{ width: "3%" }}
-  //             align="center"
-  //             onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
-  //           >
-  //             <Delete cursor="pointer" className="kt-label-font-color-3" />
-  //           </TableCell>
-  //         </TableRow>
-  //       );
-  //     });
-  //   }
-  // };
-  // /******************************delete item from table***************************************************** */
-  // private DeleteItem = (currentItem: string, TableName: string) => {
-  //   this.setState(prevState => {
-  //     let prevValues = [];
-  //     switch (TableName) {
-  //       case "Subordinates": {
-  //         prevValues = prevState.NominationData.Subordinates || [];
-  //         break;
-  //       }
-  //       case "Peer": {
-  //         prevValues = prevState.NominationData.Peer || [];
-  //         break;
-  //       }
-  //       case "Other": {
-  //         prevValues = prevState.NominationData.Other || [];
-  //         break;
-  //       }
-  //       default:
-  //         prevValues = prevState.NominationData.Subordinates || [];
-  //     }
-
-  //     const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
-  //     return {
-  //       ...prevState,
-  //       NominationData: {
-  //         ...prevState.NominationData,
-  //         [TableName]: newValue,
-  //       },
-  //     };
-  //   });
-  // };
-  // /**************************** Repeat Table ****************************** */
-  // private renderHistoryHeader = (columnDetail: any[]) => {
-  //   return columnDetail.map(
-  //     row => (
-  //       <TableCell className="LogPadding" key={row.id} sortDirection="desc">
-  //         {row.label}
-  //       </TableCell>
-  //     ),
-  //     this,
-  //   );
-  // };
-
-  // private onRenderHistoryRows = (tableName: string) => {
-  //   const Subordinates = this.state.NominationHistory.filter(el => el.Field === "Subordinate");
-  //   const Peer = this.state.NominationHistory.filter(el => el.Field === "Peer");
-  //   const Other = this.state.NominationHistory.filter(el => el.Field === "Other");
-  //   let items: any[] = [];
-  //   switch (tableName) {
-  //     case "Subordinate": {
-  //       items = Subordinates;
-  //       break;
-  //     }
-  //     case "Other": {
-  //       items = Other;
-  //       break;
-  //     }
-  //     case "Peer": {
-  //       items = Peer;
-  //       break;
-  //     }
-  //     default:
-  //       items = Subordinates;
-  //   }
-
-  //   for (let i = 0; i < items.length; ++i) {
-  //     return items[i].Changes.map((n: any, index: any) => {
-  //       let DeletedStr: string = "";
-  //       let AddedStr: string = "";
-  //       if (n.Added !== null) {
-  //         AddedStr = n.Added.join();
-  //       }
-  //       if (n.Deleted !== null) {
-  //         DeletedStr = n.Deleted.join();
-  //       }
-
-  //       return (
-  //         <TableRow key={index}>
-  //           <TableCell align="center">{index + 1}</TableCell>
-  //           <TableCell align="center">{n.ModifiedBy}</TableCell>
-  //           <TableCell align="center">{n.ModifiedDateShamsi}</TableCell>
-  //           <TableCell align="center" className={AddedStr !== "" ? "kt-font-bold kt-font-success" : ""}>
-  //             {AddedStr}
-  //           </TableCell>
-  //           <TableCell align="center" className={DeletedStr !== "" ? "kt-font-bold kt-font-danger" : ""}>
-  //             {DeletedStr}
-  //           </TableCell>
-  //         </TableRow>
-  //       );
-  //     });
-  //   }
-  // };
-  /*********************table length validation**************************************** */
-  // private TableLengthValidation = (FieldName: any[]) => {
-  //   if (FieldName.length >= 15) {
-  //     this.setState(prevState => {
-  //       return {
-  //         ...prevState,
-  //         snackbarMessage: "you should select between 3 to 15 users!",
-  //         showSnackbarMessage: true,
-  //         snackbarType: SnackBarMode.Error,
-  //       };
-  //     });
-  //     return true;
-  //   }
-  //   return false;
-  // };
   /****************************on form submited*************************************/
   private SubmitForm = () => {
     let dataComparison: string = this.Compare(
@@ -753,7 +385,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   private distict = (value: any, index: any, self: any[]) => {
     return self.indexOf(value) == index;
   };
-  /*************************************************************************** */
+
   /*************************************************************************** */
   private ChangeValueSubordinate = (st: any) => {
     this.setState(prevState => {
@@ -788,21 +420,29 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       };
     });
   };
-  // private keyPress(e: any, value: string) {
-  //   if (e.keyCode == 13) {
-  //     var x = document.getElementsByClassName(value) as HTMLCollectionOf<HTMLElement>;
-  //     console.log(x);
-  //     x[0].focus();
-
-  //     // console.log(this.  next.focus();
-  //   }
-  // }
-  // /***************************************************** */
-  // private onAddkeyPress(e: any, value: string) {
-  //   debugger;
-  //   if (e.keyCode == 13) {
-  //     console.log(e.keyCode);
-  //     this.AddItem(value);
-  //   }
-  // }
+  /******************************************************** */
+  private addValueSubordinate = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        SelectedSubOrdinates: st,
+      };
+    });
+  };
+  private addValueOther = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        SelectedOthers: st,
+      };
+    });
+  };
+  private addValuePeer = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        SelectedPeers: st,
+      };
+    });
+  };
 }
