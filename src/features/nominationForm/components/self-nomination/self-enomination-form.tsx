@@ -93,7 +93,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
   public render() {
     // const Subordinates = this.state.NominationData.Subordinates;
     return (
-      <div>
+      <div className="rtl">
         {this.state.showSpinner && <Spinner />}
         {!this.state.showSpinner && (
           <div>
@@ -158,6 +158,19 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                     <div className="col-lg-12">
                       <button
                         onKeyPress={e => {
+                          if (e.key === "Enter") e.preventDefault();
+                        }}
+                        className="btn btn-primary mr-2"
+                        onClick={e => {
+                          this.SubmitForm();
+                          e.preventDefault();
+                          return false;
+                        }}
+                      >
+                        تایید
+                      </button>
+                      <button
+                        onKeyPress={e => {
                           if (e.key === "Enter") {
                             e.preventDefault();
                           }
@@ -170,19 +183,6 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                         className="btn btn-secondary "
                       >
                         انصراف
-                      </button>
-                      <button
-                        onKeyPress={e => {
-                          if (e.key === "Enter") e.preventDefault();
-                        }}
-                        className="btn btn-primary mr-2"
-                        onClick={e => {
-                          this.SubmitForm();
-                          e.preventDefault();
-                          return false;
-                        }}
-                      >
-                        تایید
                       </button>
                     </div>
                   </MDBCardBody>
