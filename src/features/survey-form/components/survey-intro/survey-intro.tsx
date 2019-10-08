@@ -79,7 +79,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
             <div>
               <div className="kt-portlet__head">
                 <div className="kt-portlet__head-label">
-                  <h3 className="kt-portlet__head-title">نفرات ارزیابی</h3>
+                  <h3 className="kt-portlet__head-title">لیست ارزیابی</h3>
                 </div>
               </div>
               <div className="kt-portlet__body">
@@ -122,7 +122,10 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
             <div style={{ marginTop: "10%" }}> {n.Status.Status}</div>
           </TableCell>
           <TableCell style={{ width: "20%" }} className="kt-datatable__cell" align="left">
-            {n.Status.Progress}%
+            <div className="progress-details ">
+              <span className="progress-status">{n.Status.Status}</span>
+              <span className="progress-number">{n.Status.Progress}%</span>
+            </div>
             <LinearProgress
               className={Number(n.Status) >= 100 ? "complete-progress" : "not-completed-progress"}
               variant="determinate"
