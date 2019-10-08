@@ -95,8 +95,9 @@ export default class NominationIntroPage extends React.Component<{}, INomination
                 <img alt={n.Title} src={n.User.AvatarUrl} />
               </div>
               <div className="kt-user-card-v2__details">
-                <span className="kt-user-card-v2__name">{n.Title}</span>
-              </div>{" "}
+                <span className="dk-username">{n.Title}</span>
+                <p class="kt-widget4__text">{n.User.PersianDepartment}</p>
+              </div>
             </div>
           </TableCell>
 
