@@ -46,6 +46,17 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         Other: [],
         Peer: [],
         User: {
+          Title: "",
+          AvatarUrl: "",
+          Id: 0,
+          ItemId: 894,
+          SPLatinFullName: "",
+          Department: "",
+          EmailAddress: "",
+          JobGrade: "",
+        },
+        LineManager: {
+          Title: "",
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,

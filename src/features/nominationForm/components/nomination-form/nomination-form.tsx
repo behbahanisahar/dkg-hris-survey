@@ -46,6 +46,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       snackbarType: SnackBarMode.Info,
       UsersIsLoading: true,
       itemId: 0,
+
       activeStep: 0,
       NominationData: {
         Status: "",
@@ -53,6 +54,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         Other: [],
         Peer: [],
         User: {
+          Title: "",
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
@@ -62,6 +64,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
           JobGrade: "",
         },
         LineManager: {
+          Title: "",
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
@@ -137,7 +140,16 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                   <div className="kt-portlet kt-sc-2">
                     <div className="kt-portlet__body">
                       <MYStepper activeStep={this.state.activeStep} />
-
+                      <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                      <div className="kt-section kt-section--first">
+                        <div style={{ display: "inline-Block" }}>
+                          <h3 style={{ display: "inline-table" }} className="pt-3 kt-section__title">
+                            مدیر مستقیم
+                          </h3>
+                          :<h5 style={{ display: "inline-table" }}>{this.state.NominationData.LineManager!.Title} </h5>
+                        </div>
+                      </div>
+                      <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
                       <div className="kt-section kt-section--first">
                         <div>
                           <h3 className="pt-3 kt-section__title">نیروی مستقیم تحت سرپرستی</h3>
@@ -178,9 +190,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                         </div>
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
 
-                        <h3 className="pt-5 kt-section__title" style={{ margin: "0 5rem 2rem 0" }}>
-                          همکار همرده
-                        </h3>
+                        <h3 className="pt-5 kt-section__title">همکار همرده</h3>
                         <div className="kt-section__body">
                           <div className="row">
                             <div className="col-lg-6">
@@ -214,9 +224,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                         </div>
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
 
-                        <h3 className="pt-5 kt-section__title" style={{ margin: "0 5rem 2rem 0" }}>
-                          سایرین
-                        </h3>
+                        <h3 className="pt-5 kt-section__title">سایرین</h3>
                         <div className="kt-section__body">
                           <div className="row">
                             <div className="col-lg-6">

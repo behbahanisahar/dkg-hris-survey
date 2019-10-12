@@ -48,6 +48,7 @@ class ListServices extends ServiceBase {
       data = await this.get("/survey/nomination?itemId=" + itemId + "")
         .then(response => {
           return {
+            Title: "",
             Status: response.data.Status,
             Subordinates: response.data.Subordinates,
             Other: response.data.Other,
@@ -63,6 +64,7 @@ class ListServices extends ServiceBase {
             Status: "",
             Subordinates: [],
             Other: [],
+
             Peer: [],
           };
         });
