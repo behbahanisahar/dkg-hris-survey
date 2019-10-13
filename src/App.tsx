@@ -47,6 +47,7 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public render() {
+    debugger;
     return (
       <div className="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
         <div className="kt-container  kt-grid__item kt-grid__item--fluid">
@@ -55,6 +56,17 @@ class App extends React.Component<{}, IAppState> {
             {this.state.page.toLowerCase() === "surveyform" && <FormSurvey />}
             {this.state.page.toLowerCase() === "surveyintro" && <SurveyIntroPage />}
             {this.state.page.toLowerCase() === "nominationintro" && <NominationIntroPage />}
+            {this.state.page.toLowerCase() === "" && <NominationIntroPage />}
+            {/* <BrowserRouter>
+              <Switch>
+                <Route exact={true} path="/" component={NominationIntroPage} />
+                <Route path="/nominationform" component={MainNomination} />
+                <Link to={"/nominationform/"}> click</Link>
+                <Route path="/surveyform" component={FormSurvey} />
+                <Route path="/surveyintro" component={SurveyIntroPage} />
+                <Route path="/nominationintro" component={NominationIntroPage} />
+              </Switch>
+            </BrowserRouter> */}
           </MuiThemeProvider>
         </div>
       </div>

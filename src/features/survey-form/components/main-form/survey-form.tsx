@@ -1,7 +1,7 @@
 import React from "react";
 import ISurveyFromState from "./survey-form-state";
 import ListServices from "../../../../services/list-services";
-import { MDBRow, MDBCol } from "mdbreact";
+import { MDBRow } from "mdbreact";
 import "./survey-form.css";
 import IQuestion from "../../../../entities/survey-questions";
 import { Slider, Tooltip, withStyles, Theme, Typography } from "@material-ui/core";
@@ -17,11 +17,12 @@ import Authentication from "../../../authentication/authentication";
 // const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
-    backgroundColor: "#DEDFE0",
+    backgroundColor: "#77787B",
     color: "#fff",
     maxWidth: 260,
     fontSize: "3px  !important",
     border: "1px solid #dadde9",
+    textAlign: "left",
   },
 }))(Tooltip);
 class FormSurvey extends React.Component<{}, ISurveyFromState> {
@@ -61,39 +62,19 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       },
       {
         value: 2,
-        label: "",
+        label: "به ندرت\r\n seldom",
       },
       {
         value: 3,
-        label: "بندرت",
+        label: "بعضی اوقات\r\n sometimes",
       },
       {
         value: 4,
-        label: "",
+        label: "معمولا\r\n usually",
       },
       {
         value: 5,
-        label: "گهگاه\r\n occassionally",
-      },
-      {
-        value: 6,
-        label: "",
-      },
-      {
-        value: 7,
-        label: "تقریبا اغلب اوقات\r\n fairly often",
-      },
-      {
-        value: 8,
-        label: "",
-      },
-      {
-        value: 9,
-        label: "مکرر و پیوسته\r\nvery frequently",
-      },
-      {
-        value: 10,
-        label: "تقریبا همیشه\r\nalmost always",
+        label: "تقریبا همیشه\r\n almost always",
       },
     ];
     await this.ListService.getSurveyFormData(Number(itemid)).then(data => {
@@ -111,16 +92,6 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     });
     console.log(this.state.SurveyFormData);
   }
-  // public async UNSAFE_componentWillUpdate2(nextProps: any, nextState: any) {
-  //   await sleep(20000);
-  //   this.onSubmitForm("Not Completed");
-  // }
-
-  // public UNSAFE_componentWillUpdate = (nextProps: any, nextState: any) => {
-  //   setInterval(() => {
-  //     this.onSubmitForm("Not Completed", "interval");
-  //   }, 2000);
-  // };
 
   public render() {
     if (this.state.SurveyFormData == null) {
@@ -185,34 +156,39 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       let categoryClassName = "";
       switch (n.BaseCategoryId) {
         case 1: {
-          categoryClassName = "Cat2";
+          categoryClassName = "dk-brand-red";
           break;
         }
         case 2: {
-          categoryClassName = "Cat1";
+          categoryClassName = "dk-brand-blue";
           break;
         }
         case 3: {
-          categoryClassName = "Cat3";
+          categoryClassName = "dk-brand-grey";
           break;
         }
         default:
-          categoryClassName = "Core Values";
+          categoryClassName = "dk-brand-red";
       }
 
       return (
-        <div className="kt-section my-5 py-5" key={index}>
-          <div className={categoryClassName + " kt-section__content kt-section__content--solid "}>
+        <div className="kt-section my-5 py-5 kt-ribbon  kt-ribbon--clip" key={index}>
+          <div className={" kt-section__content kt-section__content--solid "}>
             <img src={n.SignUrl} alt="" className="Image"></img>
-            <MDBRow className="question-row">
-              <MDBCol md="4"></MDBCol>
-              <MDBCol style={{ textAlign: "center" }}>
-                <h5>{n.TitleFa}</h5>
-                <p style={{ fontSize: "11px" }}>{n.Title}</p>
-                <br />
-              </MDBCol>
-              <MDBCol md="4" />
-            </MDBRow>
+            <div className={categoryClassName + " kt-ribbon--clip kt-ribbon--left"}>
+              <div className={categoryClassName + " kt-ribbon__target badge"}>
+                <span className="kt-ribbon__inner" />
+                {n.TitleFa}
+              </div>
+            </div>
+            <div className={categoryClassName + " kt-ribbon--clip kt-ribbon--right"}>
+              <div className={categoryClassName + " kt-ribbon__target badge"}>
+                <span className="kt-ribbon__inner" />
+                {n.Title}
+              </div>
+            </div>
+
+            <div className="row question-row"></div>
 
             <MDBRow className="question-row">{this.onRenderQuestion(n.Questions, index)}</MDBRow>
           </div>
@@ -247,7 +223,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                 valueLabelDisplay="auto"
                 marks={this.state.marks}
                 onChangeCommitted={this.changedValue(item.Field)}
-                max={10}
+                max={5}
                 min={0}
               />
             </div>

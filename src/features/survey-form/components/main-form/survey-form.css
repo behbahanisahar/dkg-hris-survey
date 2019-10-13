@@ -1,8 +1,8 @@
 .Image {
   border-radius: 50% !important;
-  max-width: 10%;
+  max-width: 14%;
   height: auto;
-  margin: -5% auto 0;
+  margin: -8% auto 0;
   display: block;
 }
 .Container {
@@ -15,6 +15,7 @@
   direction: rtl;
   list-style: none;
   text-align: right;
+  font-weight: 600;
 }
 .ul-class {
   direction: rtl;
@@ -33,6 +34,8 @@
 }
 .slider-Style {
   text-align: center !important;
+  margin: 0 auto;
+  width: 75%;
 }
 .buttons {
   text-align: right;
@@ -49,4 +52,11 @@
 }
 .Cat3 {
   border-right: 2px solid #591df1 !important;
+}
+.badge {
+  font-size: 1.5rem;
+  font-weight: 600;
+  width: 363px;
+  height: 36px;
+  margin-top: -6%;
 }

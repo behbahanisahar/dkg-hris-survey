@@ -1,5 +1,6 @@
 export default interface UserInfoItem {
   LastSyncDate?: string;
+  AvatarTextPlaceholder?: string;
   AvatarUrl?: string;
   PerssonelSystemCode?: string;
   PerssonelCode?: string;

@@ -6,7 +6,7 @@ import "./survey-intro.css";
 import { TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/core";
 import { MDBTable, MDBTableBody } from "mdbreact";
 import Spinner from "../../../spinner/spinner";
-import AvatarUrl from "../../../../assets/img/DefaultAvatar.png";
+// import AvatarUrl from "../../../../assets/img/DefaultAvatar.png";
 import SurveyHeaderBackground from "./../../../../assets/img/survey-intro-header.png";
 
 export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroState> {
@@ -102,7 +102,10 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
           <TableCell align="right" className="kt-datatable__cell">
             <div className="kt-user-card-v2">
               <div className="kt-user-card-v2__pic">
-                <img alt={n.User.Title} src={n.User.AvatarUrl === null ? AvatarUrl : n.User.AvatarUrl} />
+                {/* <img alt={n.User.Title} src={n.User.AvatarUrl === null ? AvatarUrl : n.User.AvatarUrl} /> */}
+
+                {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
+                {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
               </div>
               <div className="kt-user-card-v2__details">
                 <span className="kt-user-card-v2__name">{n.User.Title}</span>
