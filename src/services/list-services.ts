@@ -17,12 +17,18 @@ class ListServices extends ServiceBase {
     if (process.env.NODE_ENV === "production") {
       var filter =
         searchTerm.length > 0
-          ? "JobStatus eq 'شاغل' and SPLatinFullName ne '' and substringof('" + searchTerm + "',SPLatinFullName)"
+          ? "(JobStatus eq 'شاغل' and SPLatinFullName ne '') and (substringof('" +
+            searchTerm +
+            "',Title) or substringof('" +
+            searchTerm +
+            "',EmailAddress) or substringof('" +
+            searchTerm +
+            "',SPLatinFullName))"
           : "JobStatus eq 'شاغل' and SPLatinFullName ne ''";
       const result: any[] = await sp.web.lists
         .getByTitle(SPLists.UserInfo)
         .items.filter(filter)
-        .select("EmailAddress", "SPLatinFullName", "Department", "Id")
+        .select("EmailAddress", "SPLatinFullName", "Department", "ReportedPost", "Id")
         .orderBy("SPLatinFullName", true)
         .top(20)
         .get();
