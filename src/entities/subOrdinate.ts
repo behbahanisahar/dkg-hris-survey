@@ -7,4 +7,5 @@ export default interface SubOrdinate {
   Department: string;
   EmailAddress: string;
   JobGrade: string;
+  ReportedPost: string;
 }

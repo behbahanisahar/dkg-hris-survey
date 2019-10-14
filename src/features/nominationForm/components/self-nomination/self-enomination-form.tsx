@@ -61,6 +61,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
           Department: "",
           EmailAddress: "",
           JobGrade: "",
+          ReportedPost: "",
         },
         LineManager: {
           Title: "",
@@ -71,6 +72,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
           Department: "",
           EmailAddress: "",
           JobGrade: "",
+          ReportedPost: "",
         },
       },
     };

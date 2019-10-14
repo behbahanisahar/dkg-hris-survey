@@ -62,6 +62,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
           Department: "",
           EmailAddress: "",
           JobGrade: "",
+          ReportedPost: "",
         },
         LineManager: {
           Title: "",
@@ -72,6 +73,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
           Department: "",
           EmailAddress: "",
           JobGrade: "",
+          ReportedPost: "",
         },
         statusCode: 0,
       },
