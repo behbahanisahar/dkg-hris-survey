@@ -275,6 +275,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
           this.setState(prevState => {
             return {
               ...prevState,
+              showSpinner: true,
               snackbarMessage: "با موفقیت ثبت شد!",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Success,

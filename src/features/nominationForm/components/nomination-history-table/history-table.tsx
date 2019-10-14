@@ -9,10 +9,10 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
   constructor(props: IHistoryTableProps) {
     super(props);
     this.HistorytableHeaders = [
-      { id: "ModifiedBy", label: "ModifiedBy" },
-      { id: "ModifiedDate", label: "ModifiedDate" },
-      { id: "Added", label: "Added" },
-      { id: "Deleted", label: "Deleted" },
+      { id: "ModifiedBy", label: "تغییر توسط" },
+      { id: "ModifiedDate", label: "زمان تغییر" },
+      { id: "Added", label: "اضافه شده" },
+      { id: "Deleted", label: "حذف شده" },
     ];
     this.state = {
       NominationHistory: [],
@@ -46,7 +46,7 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
   private renderHistoryHeader = (columnDetail: any[]) => {
     return columnDetail.map(
       row => (
-        <TableCell className="LogPadding" key={row.id} sortDirection="desc">
+        <TableCell align="center" className="LogPadding" key={row.id} sortDirection="desc">
           {row.label}
         </TableCell>
       ),

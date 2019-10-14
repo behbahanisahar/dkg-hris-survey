@@ -6,6 +6,9 @@ import { TableRow, TableCell } from "@material-ui/core";
 import UserTasks from "../../../../entities/user-task";
 import { MDBTable, MDBTableBody } from "mdbreact";
 import SurveyHeaderBackground from "./../../../../assets/img/survey-intro-header.png";
+import "./nomination-intro.css";
+
+import Spinner from "../../../spinner/spinner";
 
 export default class NominationIntroPage extends React.Component<{}, INominationIntroState> {
   private ListService: ListServices;
@@ -14,6 +17,7 @@ export default class NominationIntroPage extends React.Component<{}, INomination
     this.ListService = new ListServices();
     this.state = {
       nominationTasks: [],
+      showSpinner: true,
     };
   }
   public async componentDidMount() {
@@ -22,6 +26,7 @@ export default class NominationIntroPage extends React.Component<{}, INomination
       this.setState(prevState => {
         return {
           ...prevState,
+          showSpinner: false,
           nominationTasks,
         };
       });
@@ -75,9 +80,12 @@ export default class NominationIntroPage extends React.Component<{}, INomination
               </div>
             </div>
             <div className="kt-portlet__body">
-              <MDBTable className="kt-datatable__table" borderless>
-                <MDBTableBody clssName="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
-              </MDBTable>
+              {this.state.showSpinner && <Spinner className="spinner" />}
+              {!this.state.showSpinner && (
+                <MDBTable className="kt-datatable__table" borderless>
+                  <MDBTableBody clssName="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
+                </MDBTable>
+              )}
             </div>
           </div>
         </div>

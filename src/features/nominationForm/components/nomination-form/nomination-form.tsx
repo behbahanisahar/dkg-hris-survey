@@ -396,6 +396,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         this.setState(prevState => {
           return {
             ...prevState,
+            showSpinner: true,
             snackbarMessage: "با موفقیت ثبت شد!",
             showSnackbarMessage: true,
             snackbarType: SnackBarMode.Success,
