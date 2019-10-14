@@ -103,7 +103,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
         {!this.state.showSpinner && (
           <div>
             {this.state.SurveyFormData.statusCode !== 200 && (
-              <Authentication status={this.state.SurveyFormData.statusCode || 401} />
+              <Authentication status={this.state.SurveyFormData.statusCode || 401 || 403} />
             )}
             {this.state.SurveyFormData.statusCode === 200 && (
               <div className="rtl">
@@ -113,7 +113,9 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                       <span className="kt-portlet__head-icon kt-hidden">
                         <i className="la la-gear"></i>
                       </span>
-                      <h3 className="kt-portlet__head-title">{this.state.SurveyFormData.UserDisplayName}</h3>
+                      <div style={{ display: "inline-block" }}>
+                        <h3 className="kt-portlet__head-title">{this.state.SurveyFormData.UserDisplayName}</h3>
+                      </div>
                     </div>
                   </div>
 
@@ -125,17 +127,34 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                       <div className="col kt-align-left">
                         <button
                           className="btn btn-info mx-2"
-                          onClick={(ev: any) => this.onSubmitForm("Not Completed", "submit")}
+                          onClick={e => {
+                            this.onSubmitForm("تکمیل نشده", "submit");
+                            e.preventDefault();
+                            return false;
+                          }}
                         >
                           ذخیره فرم
                         </button>
 
-                        <button className="btn btn-secondary mx-2">انصراف</button>
+                        <button
+                          className="btn btn-secondary mx-2"
+                          onClick={e => {
+                            this.onCancelRequest();
+                            e.preventDefault();
+                            return false;
+                          }}
+                        >
+                          انصراف
+                        </button>
                       </div>
                       <div className="col kt-align-right">
                         <button
                           className="btn btn-success btn-wide btn-elevate btn-elevate-air mx-2"
-                          onClick={(ev: any) => this.onSubmitForm("Completed", "submit")}
+                          onClick={e => {
+                            this.onSubmitForm("تکمیل شده", "submit");
+                            e.preventDefault();
+                            return false;
+                          }}
                         >
                           ثبت نهایی ارزیابی
                         </button>
@@ -202,7 +221,12 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       return (
         <ul key={index} className="ul-class my-5 py-5">
           <li className="li-class">
-            {item.QuestionFa}
+            <div style={{ display: "inline-block" }}>
+              <p style={{ display: "inline-block" }} className="mr-2">
+                {item.QuestionNumber}.
+              </p>
+              {item.QuestionFa}
+            </div>
             <HtmlTooltip
               title={
                 <React.Fragment>
@@ -290,6 +314,10 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     if (saveFormat === "submit") {
       window.location.href = "?page=surveyintro&itemid=" + this.state.itemid + "";
     }
+  };
+  /********************************************** */
+  private onCancelRequest = () => {
+    window.location.href = "?page=Surveyintro&itemid=" + this.state.itemid + "";
   };
 }
 

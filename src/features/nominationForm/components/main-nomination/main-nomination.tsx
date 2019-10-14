@@ -4,6 +4,7 @@ import ListServices from "../../../../services/list-services";
 import NominationData from "../../../../entities/nomination";
 import SelfNomination from "../self-nomination/self-enomination-form";
 import Nomination from "../nomination-form/nomination-form";
+import Authentication from "../../../authentication/authentication";
 
 interface IAppState {
   itemId: number;
@@ -43,11 +44,18 @@ class MainNomination extends React.Component<{}, IAppState> {
       <div>
         {this.state.page.toLowerCase() === "nominationform" && (
           <div>
-            {this.state.NominationData.Status.toLowerCase() === "notstarted" && (
-              <SelfNomination itemId={this.state.itemId} />
+            {this.state.NominationData.statusCode !== 200 && (
+              <Authentication status={this.state.NominationData.statusCode || 401} />
             )}
-            {this.state.NominationData.Status.toLowerCase() !== "notstarted" && (
-              <Nomination itemId={this.state.itemId} />
+            {this.state.NominationData.statusCode === 200 && (
+              <div>
+                {this.state.NominationData.Status.toLowerCase() === "notstarted" && (
+                  <SelfNomination itemId={this.state.itemId} />
+                )}
+                {this.state.NominationData.Status.toLowerCase() !== "notstarted" && (
+                  <Nomination itemId={this.state.itemId} />
+                )}
+              </div>
             )}
           </div>
         )}

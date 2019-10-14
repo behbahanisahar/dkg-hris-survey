@@ -5,4 +5,5 @@ export default interface IQuestion {
   QuestionFa: string;
   Field: string;
   Category: string;
+  QuestionNumber: string;
 }

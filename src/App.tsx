@@ -47,7 +47,6 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public render() {
-    debugger;
     return (
       <div className="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
         <div className="kt-container  kt-grid__item kt-grid__item--fluid">

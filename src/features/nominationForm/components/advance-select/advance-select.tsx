@@ -248,7 +248,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
   };
   /***************************************************** */
   private onAddkeyPress(e: any, value: string) {
-    debugger;
+  
     if (e.keyCode == 13) {
       console.log(e.keyCode);
       this.AddItem(value);

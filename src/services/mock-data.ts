@@ -159,6 +159,7 @@ export default class MockData {
             Field: "Question1",
             Category: "",
             Value: 5,
+            QuestionNumber: "1",
           },
           {
             ItemId: 3,
@@ -167,6 +168,7 @@ export default class MockData {
             Field: "Question2",
             Category: "",
             Value: 2,
+            QuestionNumber: "2",
           },
         ],
       },
@@ -188,6 +190,7 @@ export default class MockData {
             Field: "Question3",
             Category: "",
             Value: 2,
+            QuestionNumber: "3",
           },
           {
             ItemId: 4,
@@ -196,6 +199,7 @@ export default class MockData {
             Field: "Question4",
             Category: "",
             Value: 7,
+            QuestionNumber: "4",
           },
         ],
       },
