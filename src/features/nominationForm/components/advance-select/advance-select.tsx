@@ -108,8 +108,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
                 onClick={(ev: any) => this.AddItem(this.props.fieldName)}
                 onKeyPress={(e: any) => this.onAddkeyPress(e, this.props.fieldName)}
                 size="small"
-                className={this.props.AddOrder + " ml-3 "}
-                color="primary"
+                className={this.props.AddOrder + " ml-3 dk-primary"}
                 aria-label="add"
               >
                 <Add />
@@ -151,6 +150,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
 
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName: string) => {
+    console.log(this.state.NominationData);
     if (FieldName === "SelectedOther") {
       const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Other);
       if (ValidTableLength === false) {
@@ -248,7 +248,6 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
   };
   /***************************************************** */
   private onAddkeyPress(e: any, value: string) {
-  
     if (e.keyCode == 13) {
       console.log(e.keyCode);
       this.AddItem(value);
