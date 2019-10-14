@@ -176,7 +176,6 @@ class ReactSelect extends React.Component {
   };
 
   handleChange = name => value => {
-    debugger;
     // tslint:disable-next-line:no-console
     this.setState({
       [name]: value,

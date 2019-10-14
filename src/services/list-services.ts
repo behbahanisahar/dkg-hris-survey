@@ -50,9 +50,11 @@ class ListServices extends ServiceBase {
   public async getNominationData(itemId: number): Promise<NominationData> {
     if (process.env.NODE_ENV === "production") {
       let data: NominationData;
-      data = await this.get("/survey/nomination?itemId=" + itemId + "")
+
+      data = await this.get("survey/nomination?itemId=" + itemId + "")
         .then(response => {
           return {
+            Title: "",
             Status: response.data.Status,
             Subordinates: response.data.Subordinates,
             Other: response.data.Other,
@@ -78,7 +80,7 @@ class ListServices extends ServiceBase {
   /**********************get nomination form history******************************************* */
   public async getNominationHistory(itemId: number): Promise<IHistory[]> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("/survey/nomination/history?itemId=" + itemId + "");
+      const items: any = await this.get("survey/nomination/history?itemId=" + itemId + "");
       return Promise.resolve(items.data);
     }
 
@@ -86,25 +88,32 @@ class ListServices extends ServiceBase {
   }
   /*******************put nomination form data************************************************** */
   public async updateNominationData(param: IUpdatedData): Promise<IUpdatedData> {
-    const items: any = await this.put("/survey/nomination", param);
+    const items: any = await this.put("survey/nomination", param);
     return Promise.resolve(items.data);
   }
   /********************get survey form ***************************************************************** */
   public async getSurveyFormData(itemId: number): Promise<Isurvey> {
     if (process.env.NODE_ENV === "production") {
-      debugger;
-      const items: any = await this.get("/survey?nominationItemId=" + itemId + "").catch(function(error) {
-        return {
-          statusCode: error.response.status,
-        };
-      });
+      const items: any = await this.get("survey?nominationItemId=" + itemId + "")
+        .then(response => {
+          return {
+            Categories: response.data.Categories,
+            SurveyAnswerId: response.data.SurveyAnswerId,
+            UserDisplayName: response.data.UserDisplayName,
+            statusCode: response.status,
+          };
+        })
 
-      return Promise.resolve({
-        UserDisplayName: items.data.UserDisplayName,
-        SurveyAnswerId: items.data.SurveyAnswerId,
-        Categories: items.data.Categories,
-        statusCode: items.status,
-      });
+        .catch(function(error) {
+          return {
+            statusCode: error.response.status,
+            Categories: [],
+            SurveyAnswerId: 0,
+            UserDisplayName: "",
+          };
+        });
+
+      return Promise.resolve(items);
     }
 
     return Promise.resolve(MockData.SurveyFormData);
@@ -112,7 +121,7 @@ class ListServices extends ServiceBase {
   /*****************************get appraisee***************************************************** */
   public async getAppraisee(): Promise<any[]> {
     if (process.env.NODE_ENV === "production") {
-      const result: any = await this.get("/Appraisee");
+      const result: any = await this.get("Appraisee");
 
       return Promise.resolve(result.data);
     }
@@ -122,7 +131,7 @@ class ListServices extends ServiceBase {
   /************************get nomination task*********************************************** */
   public async getNominationTasks(): Promise<any[]> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("/survey/nomination/tasks");
+      const items: any = await this.get("survey/nomination/tasks");
 
       return Promise.resolve(items.data);
     }
@@ -131,7 +140,7 @@ class ListServices extends ServiceBase {
   }
   /**************************submit form***************************************************** */
   public async SubmitForm(param: ISurveyData): Promise<any> {
-    const items: any = await this.post("/survey", param);
+    const items: any = await this.post("survey", param);
     return Promise.resolve(items);
   }
   /************************************************************** */

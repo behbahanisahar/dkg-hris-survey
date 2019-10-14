@@ -9,11 +9,10 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
   constructor(props: IHistoryTableProps) {
     super(props);
     this.HistorytableHeaders = [
-      { id: "Row", label: "Row" },
-      { id: "ModifiedBy", label: "ModifiedBy" },
-      { id: "ModifiedDate", label: "ModifiedDate" },
-      { id: "Added", label: "Added" },
-      { id: "Deleted", label: "Deleted" },
+      { id: "ModifiedBy", label: "تغییر توسط" },
+      { id: "ModifiedDate", label: "زمان تغییر" },
+      { id: "Added", label: "اضافه شده" },
+      { id: "Deleted", label: "حذف شده" },
     ];
     this.state = {
       NominationHistory: [],
@@ -47,7 +46,7 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
   private renderHistoryHeader = (columnDetail: any[]) => {
     return columnDetail.map(
       row => (
-        <TableCell className="LogPadding" key={row.id} sortDirection="desc">
+        <TableCell align="center" className="LogPadding" key={row.id} sortDirection="desc">
           {row.label}
         </TableCell>
       ),
@@ -90,13 +89,12 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
 
         return (
           <TableRow key={index}>
-            <TableCell align="center">{index + 1}</TableCell>
             <TableCell align="center">{n.ModifiedBy}</TableCell>
             <TableCell align="center">{n.ModifiedDateShamsi}</TableCell>
-            <TableCell align="center" className={AddedStr !== "" ? "kt-font-bold kt-font-success" : ""}>
+            <TableCell align="center" className={AddedStr !== "" ? "kt-font-bold dk-brand-green-font" : ""}>
               {AddedStr}
             </TableCell>
-            <TableCell align="center" className={DeletedStr !== "" ? "kt-font-bold kt-font-danger" : ""}>
+            <TableCell align="center" className={DeletedStr !== "" ? "kt-font-bold dk-brand-red-font " : ""}>
               {DeletedStr}
             </TableCell>
           </TableRow>

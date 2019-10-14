@@ -53,6 +53,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
         Other: [],
         Peer: [],
         User: {
+          Title: "",
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
@@ -62,6 +63,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
           JobGrade: "",
         },
         LineManager: {
+          Title: "",
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
@@ -111,6 +113,17 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                   <MDBCardBody>
                     <MDBCardText>
                       <MDBContainer>
+                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                        <div className="kt-section kt-section--first">
+                          <div style={{ display: "inline-Block" }}>
+                            <h3 style={{ display: "inline-table" }} className="pt-3 kt-section__title">
+                              مدیر مستقیم
+                            </h3>
+                            :
+                            <h5 style={{ display: "inline-table" }}>{this.state.NominationData.LineManager!.Title} </h5>
+                          </div>
+                        </div>
+                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
                         <h3 className="pt-5 kt-section__title">نیروی مستقیم تحت سرپرستی</h3>
                         <div className="col-lg-3" />
                         <div className="col-lg-9">
@@ -125,7 +138,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                           />
                         </div>
 
-                        <hr />
+                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
                         <h3 className="pt-5 kt-section__title">همکار همرده</h3>
                         <div className="col-lg-3" />
                         <div className="col-lg-9">
@@ -139,7 +152,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             onAddField={this.addValuePeer}
                           />
                         </div>
-                        <hr />
+                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
                         <h3 className="pt-5 kt-section__title">سایرین</h3>
                         <div className="col-lg-3" />
                         <div className="col-lg-9">
@@ -245,7 +258,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "you should select between 3 to 15 users!",
+            snackbarMessage: "تعداد انتخاب شدگان باید بین ۳ تا ۱۵ نفر باشد!",
             showSnackbarMessage: true,
             snackbarType: SnackBarMode.Error,
           };
@@ -262,7 +275,8 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "successfully submitted!",
+              showSpinner: true,
+              snackbarMessage: "با موفقیت ثبت شد!",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Success,
             };
@@ -274,7 +288,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       this.setState(prevState => {
         return {
           ...prevState,
-          snackbarMessage: "peer, other or subordinate cant have common user",
+          snackbarMessage: "فرد تکراری انتخاب شده است!",
           showSnackbarMessage: true,
           snackbarType: SnackBarMode.Error,
         };
@@ -290,7 +304,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     const disttictAlldata: any[] = allData.filter(this.distict);
     console.log(disttictAlldata);
     if (disttictAlldata.length < allData.length) {
-      return "peer, other or subordinate cant have common user";
+      return "فرد تکراری انتخاب شده است!";
     } else {
       return "";
     }

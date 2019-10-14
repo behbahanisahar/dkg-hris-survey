@@ -36,7 +36,7 @@ export default class SnackBarMessage extends React.Component<ISnackBarProps, ISn
           horizontal: "left",
         }}
         open={this.props.showMessage}
-        autoHideDuration={20000}
+        autoHideDuration={200000}
         onClose={this.props.onHandleCloseMessage}
         ContentProps={{
           "aria-describedby": "message-id",
@@ -46,15 +46,21 @@ export default class SnackBarMessage extends React.Component<ISnackBarProps, ISn
           style={{ backgroundColor: `${this.props.type}` }}
           message={
             <div>
-              {this.props.type === SnackBarMode.Success && <CheckCircle className="middleIcon" />}
-              {this.props.type === SnackBarMode.Warning && <Warning className="middleIcon" />}
-              {this.props.type === SnackBarMode.Error && <Error className="middleIcon" />}
-              {this.props.type === SnackBarMode.Info && <Info className="middleIcon" />}
+              {this.props.type === SnackBarMode.Success && <CheckCircle className="middleIcon mx-3" />}
+              {this.props.type === SnackBarMode.Warning && <Warning className="middleIcon  mx-3" />}
+              {this.props.type === SnackBarMode.Error && <Error className="middleIcon  mx-3" />}
+              {this.props.type === SnackBarMode.Info && <Info className="middleIcon  mx-3" />}
               <span id="message-id">{this.props.message}</span>
             </div>
           }
           action={[
-            <IconButton key="close" aria-label="Close" color="inherit" onClick={this.props.onHandleCloseMessage}>
+            <IconButton
+              key="close"
+              aria-label="Close"
+              className="closeSnackbar mr-10"
+              color="inherit"
+              onClick={this.props.onHandleCloseMessage}
+            >
               <CloseIcon />
             </IconButton>,
           ]}

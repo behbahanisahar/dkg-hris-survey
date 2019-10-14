@@ -28,9 +28,9 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
     super(props);
     this.ListService = new ListServices();
     this.tableHeaders = [
-      { id: "Row", label: "Row" },
-      { id: "Selected", label: "Selected Person" },
-      { id: "Action", label: "Delete" },
+      { id: "Row", label: "#" },
+      { id: "Selected", label: "نام و نام خانوادگی" },
+      { id: "Action", label: "" },
     ];
 
     this.state = {
@@ -46,6 +46,17 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         Other: [],
         Peer: [],
         User: {
+          Title: "",
+          AvatarUrl: "",
+          Id: 0,
+          ItemId: 894,
+          SPLatinFullName: "",
+          Department: "",
+          EmailAddress: "",
+          JobGrade: "",
+        },
+        LineManager: {
+          Title: "",
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
@@ -88,7 +99,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
               // isLoading={this.state.UsersIsLoading}
               onChange={(ev: any) => this.onSelectAutoComplete(ev, this.props.fieldName)}
               options={this.props.UserInfo}
-              placeholder="select..."
+              placeholder="انتخاب..."
               dir="rtl"
               onKeyDown={(e: any) => this.keyPress(e, this.props.AddOrder)}
             />
@@ -97,8 +108,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
                 onClick={(ev: any) => this.AddItem(this.props.fieldName)}
                 onKeyPress={(e: any) => this.onAddkeyPress(e, this.props.fieldName)}
                 size="small"
-                className={this.props.AddOrder + " ml-3 "}
-                color="primary"
+                className={this.props.AddOrder + " ml-3 dk-primary"}
                 aria-label="add"
               >
                 <Add />
@@ -140,6 +150,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
 
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName: string) => {
+    console.log(this.state.NominationData);
     if (FieldName === "SelectedOther") {
       const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Other);
       if (ValidTableLength === false) {
@@ -175,7 +186,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "User Exist!",
+              snackbarMessage: "کاربر وجود دارد!",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Error,
             };
@@ -201,7 +212,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "User Exist!",
+              snackbarMessage: "کاربر وجود دارد!",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Error,
             };
@@ -223,21 +234,20 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
   /*********************table length validation**************************************** */
   private TableLengthValidation = (FieldName: any[]) => {
     if (FieldName.length >= 15) {
-      //   this.setState(prevState => {
-      //     return {
-      //       ...prevState,
-      //       snackbarMessage: "you should select between 3 to 15 users!",
-      //       showSnackbarMessage: true,
-      //      // snackbarType: SnackBarMode.Error,
-      //     };
-      //   });
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          snackbarMessage: "تعداد انتخاب شدگان باید بین ۳ تا ۱۵ نفر باشد!",
+          showSnackbarMessage: true,
+          // snackbarType: SnackBarMode.Error,
+        };
+      });
       return true;
     }
     return false;
   };
   /***************************************************** */
   private onAddkeyPress(e: any, value: string) {
-    debugger;
     if (e.keyCode == 13) {
       console.log(e.keyCode);
       this.AddItem(value);
@@ -288,7 +298,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
       return (
         <TableRow>
           <TableCell align="center" colSpan={3} className="emptyRowLog">
-            There is no data to display!
+            کسی انتخاب نشده است!
           </TableCell>
         </TableRow>
       );
@@ -302,8 +312,9 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
             <TableCell align="center">{n.SPLatinFullName}</TableCell>
             <TableCell align="center" style={{ width: "3%" }}>
               <Delete
-                className="flaticon-pie-chart-1 kt-font-info"
+                className="flaticon-pie-chart-1 kt-font-info kt-label-font-color-2"
                 onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
+                cursor="pointer"
               />
             </TableCell>
           </TableRow>

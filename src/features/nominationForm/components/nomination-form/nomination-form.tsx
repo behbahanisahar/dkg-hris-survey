@@ -46,6 +46,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       snackbarType: SnackBarMode.Info,
       UsersIsLoading: true,
       itemId: 0,
+
       activeStep: 0,
       NominationData: {
         Status: "",
@@ -53,6 +54,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         Other: [],
         Peer: [],
         User: {
+          Title: "",
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
@@ -62,6 +64,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
           JobGrade: "",
         },
         LineManager: {
+          Title: "",
           AvatarUrl: "",
           Id: 0,
           ItemId: 894,
@@ -70,6 +73,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
           EmailAddress: "",
           JobGrade: "",
         },
+        statusCode: 0,
       },
       NominationHistory: [
         {
@@ -88,6 +92,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
     const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
+    debugger;
     console.log(NominationData);
     const NominationHistory: IHistory[] = await this.ListService.getNominationHistory(Number(itemId));
     let activeStep: number = 0;
@@ -136,7 +141,16 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                   <div className="kt-portlet kt-sc-2">
                     <div className="kt-portlet__body">
                       <MYStepper activeStep={this.state.activeStep} />
-
+                      <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                      <div className="kt-section kt-section--first">
+                        <div style={{ display: "inline-Block" }}>
+                          <h3 style={{ display: "inline-table" }} className="pt-3 kt-section__title">
+                            مدیر مستقیم
+                          </h3>
+                          :<h5 style={{ display: "inline-table" }}>{this.state.NominationData.LineManager!.Title} </h5>
+                        </div>
+                      </div>
+                      <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
                       <div className="kt-section kt-section--first">
                         <div>
                           <h3 className="pt-3 kt-section__title">نیروی مستقیم تحت سرپرستی</h3>
@@ -163,19 +177,21 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             </div>
                             <div className="col-lg-6">
                               {this.state.HideSubordinateHistory === false && (
-                                <HistoryTable
-                                  NominationHistory={this.state.NominationHistory}
-                                  tableName="Subordinate"
-                                />
+                                <div className="kt-portlet kt-sc-2">
+                                  <div className="kt-portlet__body">
+                                    <HistoryTable
+                                      NominationHistory={this.state.NominationHistory}
+                                      tableName="Subordinate"
+                                    />
+                                  </div>
+                                </div>
                               )}
                             </div>
                           </div>
                         </div>
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
 
-                        <h3 className="pt-5 kt-section__title" style={{ margin: "0 5rem 2rem 0" }}>
-                          همکار همرده( <a onClick={(ev: any) => this.HideHistory("Peer")}>نمایش سوابق</a>)
-                        </h3>
+                        <h3 className="pt-5 kt-section__title">همکار همرده</h3>
                         <div className="kt-section__body">
                           <div className="row">
                             <div className="col-lg-6">
@@ -188,19 +204,28 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 onChangeDataTableValue={this.ChangeValuePeer}
                                 onAddField={this.addValuePeer}
                               />
+                              <button
+                                type="button"
+                                onClick={(ev: any) => this.HideHistory("Peer")}
+                                className="btn btn-sm btn-clean pull-left"
+                              >
+                                نمایش سابقه تغییرات
+                              </button>
                             </div>
                             <div className="col-lg-6">
                               {this.state.HidePeerHistory === false && (
-                                <HistoryTable NominationHistory={this.state.NominationHistory} tableName="Peer" />
+                                <div className="kt-portlet kt-sc-2">
+                                  <div className="kt-portlet__body">
+                                    <HistoryTable NominationHistory={this.state.NominationHistory} tableName="Peer" />
+                                  </div>
+                                </div>
                               )}
                             </div>
                           </div>
                         </div>
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
 
-                        <h3 className="pt-5 kt-section__title" style={{ margin: "0 5rem 2rem 0" }}>
-                          سایرین( <a onClick={(ev: any) => this.HideHistory("Other")}>نمایش سوابق</a>)
-                        </h3>
+                        <h3 className="pt-5 kt-section__title">سایرین</h3>
                         <div className="kt-section__body">
                           <div className="row">
                             <div className="col-lg-6">
@@ -213,10 +238,21 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 onChangeDataTableValue={this.ChangeValueOther}
                                 onAddField={this.addValueOther}
                               />
+                              <button
+                                type="button"
+                                onClick={(ev: any) => this.HideHistory("Other")}
+                                className="btn btn-sm btn-clean pull-left"
+                              >
+                                نمایش سابقه تغییرات
+                              </button>
                             </div>
                             <div className="col-lg-6">
                               {this.state.HideOtherHistory === false && (
-                                <HistoryTable NominationHistory={this.state.NominationHistory} tableName="Other" />
+                                <div className="kt-portlet kt-sc-2">
+                                  <div className="kt-portlet__body">
+                                    <HistoryTable NominationHistory={this.state.NominationHistory} tableName="Other" />
+                                  </div>
+                                </div>
                               )}
                             </div>
                           </div>
@@ -344,7 +380,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "you should select between 3 to 15 users!",
+            snackbarMessage: "تعداد انتخاب شدگان باید بین ۳ تا ۱۵ نفر باشد!",
             showSnackbarMessage: true,
             snackbarType: SnackBarMode.Error,
           };
@@ -360,7 +396,8 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "successfully submitted!",
+            showSpinner: true,
+            snackbarMessage: "با موفقیت ثبت شد!",
             showSnackbarMessage: true,
             snackbarType: SnackBarMode.Success,
           };
@@ -371,7 +408,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       this.setState(prevState => {
         return {
           ...prevState,
-          snackbarMessage: "peer, other or subordinate cant have common user",
+          snackbarMessage: "نفر تکراری انتخاب شده است!",
           showSnackbarMessage: true,
           snackbarType: SnackBarMode.Error,
         };
@@ -387,7 +424,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     const disttictAlldata: any[] = allData.filter(this.distict);
     console.log(disttictAlldata);
     if (disttictAlldata.length < allData.length) {
-      return "peer, other or subordinate cant have common user";
+      return "فرد تکراری انتخاب شده است!";
     } else {
       return "";
     }

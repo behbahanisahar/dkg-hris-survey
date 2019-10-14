@@ -1,7 +1,7 @@
 import React from "react";
 import ISurveyFromState from "./survey-form-state";
 import ListServices from "../../../../services/list-services";
-import { MDBRow, MDBCol } from "mdbreact";
+import { MDBRow } from "mdbreact";
 import "./survey-form.css";
 import IQuestion from "../../../../entities/survey-questions";
 import { Slider, Tooltip, withStyles, Theme, Typography } from "@material-ui/core";
@@ -17,11 +17,12 @@ import Authentication from "../../../authentication/authentication";
 // const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
-    backgroundColor: "#DEDFE0",
+    backgroundColor: "#77787B",
     color: "#fff",
     maxWidth: 260,
     fontSize: "3px  !important",
     border: "1px solid #dadde9",
+    textAlign: "left",
   },
 }))(Tooltip);
 class FormSurvey extends React.Component<{}, ISurveyFromState> {
@@ -61,39 +62,19 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       },
       {
         value: 2,
-        label: "",
+        label: "به ندرت\r\n seldom",
       },
       {
         value: 3,
-        label: "بندرت",
+        label: "بعضی اوقات\r\n sometimes",
       },
       {
         value: 4,
-        label: "",
+        label: "معمولا\r\n usually",
       },
       {
         value: 5,
-        label: "گهگاه\r\n occassionally",
-      },
-      {
-        value: 6,
-        label: "",
-      },
-      {
-        value: 7,
-        label: "تقریبا اغلب اوقات\r\n fairly often",
-      },
-      {
-        value: 8,
-        label: "",
-      },
-      {
-        value: 9,
-        label: "مکرر و پیوسته\r\nvery frequently",
-      },
-      {
-        value: 10,
-        label: "تقریبا همیشه\r\nalmost always",
+        label: "تقریبا همیشه\r\n almost always",
       },
     ];
     await this.ListService.getSurveyFormData(Number(itemid)).then(data => {
@@ -111,16 +92,6 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     });
     console.log(this.state.SurveyFormData);
   }
-  // public async UNSAFE_componentWillUpdate2(nextProps: any, nextState: any) {
-  //   await sleep(20000);
-  //   this.onSubmitForm("Not Completed");
-  // }
-
-  // public UNSAFE_componentWillUpdate = (nextProps: any, nextState: any) => {
-  //   setInterval(() => {
-  //     this.onSubmitForm("Not Completed", "interval");
-  //   }, 2000);
-  // };
 
   public render() {
     if (this.state.SurveyFormData == null) {
@@ -132,7 +103,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
         {!this.state.showSpinner && (
           <div>
             {this.state.SurveyFormData.statusCode !== 200 && (
-              <Authentication status={this.state.SurveyFormData.statusCode || 401} />
+              <Authentication status={this.state.SurveyFormData.statusCode || 401 || 403} />
             )}
             {this.state.SurveyFormData.statusCode === 200 && (
               <div className="rtl">
@@ -142,7 +113,9 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                       <span className="kt-portlet__head-icon kt-hidden">
                         <i className="la la-gear"></i>
                       </span>
-                      <h3 className="kt-portlet__head-title">{this.state.SurveyFormData.UserDisplayName}</h3>
+                      <div style={{ display: "inline-block" }}>
+                        <h3 className="kt-portlet__head-title">{this.state.SurveyFormData.UserDisplayName}</h3>
+                      </div>
                     </div>
                   </div>
 
@@ -154,17 +127,34 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                       <div className="col kt-align-left">
                         <button
                           className="btn btn-info mx-2"
-                          onClick={(ev: any) => this.onSubmitForm("Not Completed", "submit")}
+                          onClick={e => {
+                            this.onSubmitForm("تکمیل نشده", "submit");
+                            e.preventDefault();
+                            return false;
+                          }}
                         >
                           ذخیره فرم
                         </button>
 
-                        <button className="btn btn-secondary mx-2">انصراف</button>
+                        <button
+                          className="btn btn-secondary mx-2"
+                          onClick={e => {
+                            this.onCancelRequest();
+                            e.preventDefault();
+                            return false;
+                          }}
+                        >
+                          انصراف
+                        </button>
                       </div>
                       <div className="col kt-align-right">
                         <button
                           className="btn btn-success btn-wide btn-elevate btn-elevate-air mx-2"
-                          onClick={(ev: any) => this.onSubmitForm("Completed", "submit")}
+                          onClick={e => {
+                            this.onSubmitForm("تکمیل شده", "submit");
+                            e.preventDefault();
+                            return false;
+                          }}
                         >
                           ثبت نهایی ارزیابی
                         </button>
@@ -185,34 +175,39 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       let categoryClassName = "";
       switch (n.BaseCategoryId) {
         case 1: {
-          categoryClassName = "Cat2";
+          categoryClassName = "dk-brand-red";
           break;
         }
         case 2: {
-          categoryClassName = "Cat1";
+          categoryClassName = "dk-brand-blue";
           break;
         }
         case 3: {
-          categoryClassName = "Cat3";
+          categoryClassName = "dk-brand-grey";
           break;
         }
         default:
-          categoryClassName = "Core Values";
+          categoryClassName = "dk-brand-red";
       }
 
       return (
-        <div className="kt-section my-5 py-5" key={index}>
-          <div className={categoryClassName + " kt-section__content kt-section__content--solid "}>
+        <div className="kt-section my-5 py-5 kt-ribbon  kt-ribbon--clip" key={index}>
+          <div className={" kt-section__content kt-section__content--solid "}>
             <img src={n.SignUrl} alt="" className="Image"></img>
-            <MDBRow className="question-row">
-              <MDBCol md="4"></MDBCol>
-              <MDBCol style={{ textAlign: "center" }}>
-                <h5>{n.TitleFa}</h5>
-                <p style={{ fontSize: "11px" }}>{n.Title}</p>
-                <br />
-              </MDBCol>
-              <MDBCol md="4" />
-            </MDBRow>
+            <div className={categoryClassName + " kt-ribbon--clip kt-ribbon--left"}>
+              <div className={categoryClassName + " kt-ribbon__target badge"}>
+                <span className="kt-ribbon__inner" />
+                {n.TitleFa}
+              </div>
+            </div>
+            <div className={categoryClassName + " kt-ribbon--clip kt-ribbon--right"}>
+              <div className={categoryClassName + " kt-ribbon__target badge"}>
+                <span className="kt-ribbon__inner" />
+                {n.Title}
+              </div>
+            </div>
+
+            <div className="row question-row"></div>
 
             <MDBRow className="question-row">{this.onRenderQuestion(n.Questions, index)}</MDBRow>
           </div>
@@ -226,7 +221,12 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       return (
         <ul key={index} className="ul-class my-5 py-5">
           <li className="li-class">
-            {item.QuestionFa}
+            <div style={{ display: "inline-block" }}>
+              <p style={{ display: "inline-block" }} className="mr-2">
+                {item.QuestionNumber}.
+              </p>
+              {item.QuestionFa}
+            </div>
             <HtmlTooltip
               title={
                 <React.Fragment>
@@ -247,7 +247,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                 valueLabelDisplay="auto"
                 marks={this.state.marks}
                 onChangeCommitted={this.changedValue(item.Field)}
-                max={10}
+                max={5}
                 min={0}
               />
             </div>
@@ -314,6 +314,10 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     if (saveFormat === "submit") {
       window.location.href = "?page=surveyintro&itemid=" + this.state.itemid + "";
     }
+  };
+  /********************************************** */
+  private onCancelRequest = () => {
+    window.location.href = "?page=Surveyintro&itemid=" + this.state.itemid + "";
   };
 }
 

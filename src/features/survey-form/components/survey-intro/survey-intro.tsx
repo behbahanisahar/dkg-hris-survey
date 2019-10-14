@@ -4,10 +4,9 @@ import ListServices from "../../../../services/list-services";
 import { IAppraisee } from "../../../../entities/appraisee";
 import "./survey-intro.css";
 import { TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/core";
-
 import { MDBTable, MDBTableBody } from "mdbreact";
 import Spinner from "../../../spinner/spinner";
-
+// import AvatarUrl from "../../../../assets/img/DefaultAvatar.png";
 import SurveyHeaderBackground from "./../../../../assets/img/survey-intro-header.png";
 
 export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroState> {
@@ -97,13 +96,17 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
   /**************************** Repeat Table ****************************** */
   private onRenderRows = () => {
     console.log(this.state.appraisee);
+
     return this.state.appraisee.map((n: IAppraisee, index: any) => {
       return (
         <TableRow key={index} className="kt-datatable__row">
           <TableCell align="right" className="kt-datatable__cell">
             <div className="kt-user-card-v2">
               <div className="kt-user-card-v2__pic">
-                <img alt={n.User.Title} src={n.User.AvatarUrl} />
+                {/* <img alt={n.User.Title} src={n.User.AvatarUrl === null ? AvatarUrl : n.User.AvatarUrl} /> */}
+
+                {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
+                {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
               </div>
               <div className="kt-user-card-v2__details">
                 <span className="kt-user-card-v2__name">{n.User.Title}</span>
@@ -112,15 +115,6 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
             </div>
           </TableCell>
 
-          <TableCell
-            style={{ width: "5%" }}
-            align="right"
-            className={
-              n.Status.Status === "تکمیل شده" ? " kt-datatable__cell completed" : " kt-datatable__cell not-completed"
-            }
-          >
-            <div style={{ marginTop: "10%" }}> {n.Status.Status}</div>
-          </TableCell>
           <TableCell style={{ width: "20%" }} className="kt-datatable__cell" align="left">
             <div className="progress-details ">
               <span className="progress-status">{n.Status.Status}</span>
@@ -132,18 +126,20 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
               value={n.Status.Progress}
             />
           </TableCell>
-          <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
-            <button
-              className="btn btn-sm btn-bold btn-brand-hover"
-              onClick={(e: any) => {
-                this.onShowItem(n.NominationItemId);
-                e.preventDefault();
-                return false;
-              }}
-            >
-              ارزیابی
-            </button>
-          </TableCell>
+          {n.Status.Status !== "Completed" && (
+            <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
+              <button
+                className="btn btn-sm btn-bold btn-brand-hover"
+                onClick={(e: any) => {
+                  this.onShowItem(n.NominationItemId);
+                  e.preventDefault();
+                  return false;
+                }}
+              >
+                ارزیابی
+              </button>
+            </TableCell>
+          )}
         </TableRow>
       );
     });
