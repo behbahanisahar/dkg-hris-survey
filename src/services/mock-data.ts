@@ -95,6 +95,8 @@ export default class MockData {
       Department: "HR",
       EmailAddress: "sa.behbahani@digikala.com",
       JobGrade: "specialist",
+      Title: "سحر بهبهانی",
+      ReportedPost: "developer",
     },
 
     LineManager: {
@@ -105,6 +107,8 @@ export default class MockData {
       Department: "HR",
       EmailAddress: "sa.behbahani@digikala.com",
       JobGrade: "specialist",
+      Title: "علی نوش آبادی",
+      ReportedPost: "developer",
     },
   };
   public static NominationHistory: IHistory[] = [

@@ -54,6 +54,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           Department: "",
           EmailAddress: "",
           JobGrade: "",
+          ReportedPost: "",
         },
         LineManager: {
           Title: "",
@@ -64,6 +65,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           Department: "",
           EmailAddress: "",
           JobGrade: "",
+          ReportedPost: "",
         },
       },
       SelectedPeers: [],
