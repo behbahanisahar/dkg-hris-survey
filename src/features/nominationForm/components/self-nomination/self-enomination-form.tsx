@@ -121,55 +121,57 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             <h3 style={{ display: "inline-table" }} className="pt-3 kt-section__title">
                               مدیر مستقیم
                             </h3>
-                            :
-                            <h5 style={{ display: "inline-table" }}>{this.state.NominationData.LineManager!.Title} </h5>
+                            :<h5>{this.state.NominationData.LineManager!.Title} </h5>
                           </div>
                         </div>
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
-                        <h3 className="pt-5 kt-section__title">نیروی مستقیم تحت سرپرستی</h3>
-                        <div className="col-lg-3" />
-                        <div className="col-lg-9">
-                          <AdvanceSelect
-                            NominationData={this.state.NominationData}
-                            fieldName="SelectedSubOrdinate"
-                            UserInfo={this.state.UserInfo}
-                            tableName="Subordinates"
-                            AddOrder="firstAdd"
-                            onChangeDataTableValue={this.ChangeValueSubordinate}
-                            onAddField={this.addValueSubordinate}
-                          />
-                        </div>
+                        <div className="kt-section kt-section--first">
+                          <h3 className="pt-5 kt-section__title">نیروی مستقیم تحت سرپرستی</h3>
+                          <div className="col-lg-3" />
+                          <div className="col-lg-9">
+                            <AdvanceSelect
+                              NominationData={this.state.NominationData}
+                              fieldName="SelectedSubOrdinate"
+                              UserInfo={this.state.UserInfo}
+                              tableName="Subordinates"
+                              AddOrder="firstAdd"
+                              onChangeDataTableValue={this.ChangeValueSubordinate}
+                              onAddField={this.addValueSubordinate}
+                            />
+                          </div>
 
-                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
-                        <h3 className="pt-5 kt-section__title">همکار همرده</h3>
-                        <div className="col-lg-3" />
-                        <div className="col-lg-9">
-                          <AdvanceSelect
-                            NominationData={this.state.NominationData}
-                            fieldName="SelectedPeer"
-                            UserInfo={this.state.UserInfo}
-                            tableName="Peer"
-                            AddOrder="secondAdd"
-                            onChangeDataTableValue={this.ChangeValuePeer}
-                            onAddField={this.addValuePeer}
-                          />
-                        </div>
-                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
-                        <h3 className="pt-5 kt-section__title">سایرین</h3>
-                        <div className="col-lg-3" />
-                        <div className="col-lg-9">
-                          <AdvanceSelect
-                            NominationData={this.state.NominationData}
-                            fieldName="SelectedOther"
-                            UserInfo={this.state.UserInfo}
-                            tableName="Other"
-                            AddOrder="thirdAdd"
-                            onChangeDataTableValue={this.ChangeValueOther}
-                            onAddField={this.addValueOther}
-                          />
+                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                          <h3 className="pt-5 kt-section__title">همکار همرده</h3>
+                          <div className="col-lg-3" />
+                          <div className="col-lg-9">
+                            <AdvanceSelect
+                              NominationData={this.state.NominationData}
+                              fieldName="SelectedPeer"
+                              UserInfo={this.state.UserInfo}
+                              tableName="Peer"
+                              AddOrder="secondAdd"
+                              onChangeDataTableValue={this.ChangeValuePeer}
+                              onAddField={this.addValuePeer}
+                            />
+                          </div>
+                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                          <h3 className="pt-5 kt-section__title">سایرین</h3>
+                          <div className="col-lg-3" />
+                          <div className="col-lg-9">
+                            <AdvanceSelect
+                              NominationData={this.state.NominationData}
+                              fieldName="SelectedOther"
+                              UserInfo={this.state.UserInfo}
+                              tableName="Other"
+                              AddOrder="thirdAdd"
+                              onChangeDataTableValue={this.ChangeValueOther}
+                              onAddField={this.addValueOther}
+                            />
+                          </div>
                         </div>
                       </MDBContainer>
                     </MDBCardText>
+
                     <div className="col-lg-12">
                       <button
                         onKeyPress={e => {

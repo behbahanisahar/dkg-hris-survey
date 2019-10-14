@@ -12,7 +12,7 @@ export function NominationFormHeader({ user, ...other }: NominationFormHeaderPro
       <div className="content">
         <p className="user">
           <div className="page-header">فرم انتخاب ارزیابی کنندگان</div>
-          <h4 className="page-header">{user!.Title}</h4>
+          <div className="user-name">{user!.Title}</div>
           <h6>
             {user!.EmailAddress} | {user!.Department} | {user!.ReportedPost}
           </h6>

@@ -149,7 +149,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                           <h3 style={{ display: "inline-table" }} className="pt-3 kt-section__title">
                             مدیر مستقیم
                           </h3>
-                          :<h5 style={{ display: "inline-table" }}>{this.state.NominationData.LineManager!.Title} </h5>
+                          :<h5>{this.state.NominationData.LineManager!.Title} </h5>
                         </div>
                       </div>
                       <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
