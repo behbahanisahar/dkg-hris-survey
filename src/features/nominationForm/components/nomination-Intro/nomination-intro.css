@@ -1,3 +1,14 @@
 .spinner > div {
   margin: 0 auto !important;
 }
+.NoAvatar {
+  background: linear-gradient(135deg, #acb6e5, #86fde8);
+  color: aliceblue;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 10px;
+}
+.pointer {
+  cursor: pointer;
+}

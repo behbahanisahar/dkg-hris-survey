@@ -1,7 +1,6 @@
 import React from "react";
 import INominationIntroState from "./nomination-intro-state";
 import ListServices from "../../../../services/list-services";
-import AvatarUrl from "../../../../assets/img/DefaultAvatar.png";
 import { TableRow, TableCell } from "@material-ui/core";
 import UserTasks from "../../../../entities/user-task";
 import { MDBTable, MDBTableBody } from "mdbreact";
@@ -109,10 +108,20 @@ export default class NominationIntroPage extends React.Component<{}, INomination
             <TableCell align="right" className="kt-datatable__cell">
               <div className="kt-user-card-v2">
                 <div className="kt-user-card-v2__pic">
-                  <img alt={n.Title} src={n.User.AvatarUrl === null ? AvatarUrl : n.User.AvatarUrl} />
+                  {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
+                  {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
                 </div>
                 <div className="kt-user-card-v2__details">
-                  <span className="kt-user-card-v2__name">{n.Title}</span>
+                  <a
+                    onClick={(e: any) => {
+                      this.onShowItem(n.ItemId);
+                      e.preventDefault();
+                      return false;
+                    }}
+                    className="kt-user-card-v2__name pointer"
+                  >
+                    {n.Title}
+                  </a>
                   <span className="kt-user-card-v2__desc">{n.User.ReportedPost}</span>
                 </div>
               </div>

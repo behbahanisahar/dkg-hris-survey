@@ -109,7 +109,16 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
                 {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
               </div>
               <div className="kt-user-card-v2__details">
-                <span className="kt-user-card-v2__name">{n.User.Title}</span>
+                <a
+                  onClick={(e: any) => {
+                    this.onShowItem(n.NominationItemId);
+                    e.preventDefault();
+                    return false;
+                  }}
+                  className="kt-user-card-v2__name pointer"
+                >
+                  {n.User.Title}
+                </a>
                 <span className="kt-user-card-v2__desc">{n.Relation}</span>
               </div>{" "}
             </div>
@@ -126,7 +135,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
               value={n.Status.Progress}
             />
           </TableCell>
-          {n.Status.Status !== "Completed" && (
+          {n.Status.Status !== "تکمیل شده" && (
             <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
               <button
                 className="btn btn-sm btn-bold btn-brand-hover"

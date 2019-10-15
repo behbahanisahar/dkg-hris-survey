@@ -60,3 +60,6 @@
   height: 36px;
   margin-top: -6%;
 }
+.pointer {
+  cursor: pointer;
+}
