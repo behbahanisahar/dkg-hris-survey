@@ -158,7 +158,6 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
 
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName: string) => {
-    console.log(this.state.NominationData);
     if (FieldName === "SelectedOther") {
       const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Other);
       if (ValidTableLength === false) {

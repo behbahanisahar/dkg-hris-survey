@@ -16,7 +16,19 @@ import Authentication from "../../../authentication/authentication";
 import { NominationFormHeader } from "../nomination-form-header/nomination-form-header";
 import HistoryTable from "../nomination-history-table/history-table";
 import AdvanceSelect from "../advance-select/advance-select";
-
+import { withStyles } from "@material-ui/styles";
+import { Theme, Tooltip, Typography } from "@material-ui/core";
+import Info from "@material-ui/icons/Info";
+const HtmlTooltip = withStyles((theme: Theme) => ({
+  tooltip: {
+    backgroundColor: "#77787B",
+    color: "#fff",
+    maxWidth: 260,
+    fontSize: "3px  !important",
+    border: "1px solid #dadde9",
+    textAlign: "left",
+  },
+}))(Tooltip);
 export default class Nomination extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
 
@@ -156,6 +168,15 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                       <div className="kt-section kt-section--first">
                         <div style={{ display: "inline-Block" }}>
                           <h3 style={{ display: "inline-table" }} className="pt-3 kt-section__title">
+                            <HtmlTooltip
+                              title={
+                                <React.Fragment>
+                                  <Typography color="inherit"> Line Manager</Typography>
+                                </React.Fragment>
+                              }
+                            >
+                              <Info color="primary" />
+                            </HtmlTooltip>
                             مدیر مستقیم
                           </h3>
                           :<h5>{this.state.NominationData.LineManager!.Title} </h5>
@@ -171,6 +192,15 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 : "pt-3 kt-section__title"
                             }
                           >
+                            <HtmlTooltip
+                              title={
+                                <React.Fragment>
+                                  <Typography color="inherit"> Direct Report</Typography>
+                                </React.Fragment>
+                              }
+                            >
+                              <Info color="primary" />
+                            </HtmlTooltip>
                             نیروی مستقیم تحت سرپرستی
                           </h3>
                         </div>
@@ -216,6 +246,15 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             this.state.errorOther === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
                           }
                         >
+                          <HtmlTooltip
+                            title={
+                              <React.Fragment>
+                                <Typography color="inherit">Peer</Typography>
+                              </React.Fragment>
+                            }
+                          >
+                            <Info color="primary" />
+                          </HtmlTooltip>
                           همکار همرده
                         </h3>
                         <div className="kt-section__body">
@@ -257,7 +296,16 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             this.state.errorOther === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
                           }
                         >
-                          سایرین
+                          <HtmlTooltip
+                            title={
+                              <React.Fragment>
+                                <Typography color="inherit">Indirect Report / Internal Customer</Typography>
+                              </React.Fragment>
+                            }
+                          >
+                            <Info color="primary" />
+                          </HtmlTooltip>
+                          نیروی غیر تحت سرپرستی/ مشتری داخلی
                         </h3>
                         <div className="kt-section__body">
                           <div className="row">
