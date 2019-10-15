@@ -9,4 +9,5 @@ export default interface IAdvanceSelectProps {
   AddOrder: string;
   onChangeDataTableValue: (st: any) => void;
   onAddField: (st: any) => void;
+  onError: (st: any) => void;
 }

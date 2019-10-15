@@ -26,6 +26,9 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     this.util = new Util();
 
     this.state = {
+      errorSubordinate: false,
+      errorOther: false,
+      errorPeer: false,
       UserInfo: [],
       SelectedPeerID: 0,
       SelectedPeer: "",
@@ -40,6 +43,12 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       SelectedPeers: [],
       SelectedOthers: [],
       SelectedSubOrdinates: [],
+      showSnackbarMessagePeer: false,
+      snackbarMessagePeer: "",
+      showSnackbarMessageOther: false,
+      snackbarMessageOther: "",
+      showSnackbarMessageSubordinate: false,
+      snackbarMessageSubordinate: "",
       showSnackbarMessage: false,
       snackbarMessage: "",
       snackbarType: SnackBarMode.Info,
@@ -96,6 +105,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
 
   public render() {
     // const Subordinates = this.state.NominationData.Subordinates;
+
     return (
       <div className="rtl">
         {this.state.showSpinner && <Spinner />}
@@ -115,7 +125,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                   <MDBCardBody>
                     <MDBCardText>
                       <MDBContainer>
-                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg "></div>
                         <div className="kt-section kt-section--first">
                           <div style={{ display: "inline-Block" }}>
                             <h3 style={{ display: "inline-table" }} className="pt-3 kt-section__title">
@@ -124,9 +134,17 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             :<h5>{this.state.NominationData.LineManager!.Title} </h5>
                           </div>
                         </div>
-                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
                         <div className="kt-section kt-section--first">
-                          <h3 className="pt-5 kt-section__title">نیروی مستقیم تحت سرپرستی</h3>
+                          <h3
+                            className={
+                              this.state.errorSubordinate === true
+                                ? "pt-5 kt-section__title error"
+                                : "pt-5 kt-section__title"
+                            }
+                          >
+                            نیروی مستقیم تحت سرپرستی
+                          </h3>
                           <div className="col-lg-3" />
                           <div className="col-lg-9">
                             <AdvanceSelect
@@ -137,11 +155,18 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                               AddOrder="firstAdd"
                               onChangeDataTableValue={this.ChangeValueSubordinate}
                               onAddField={this.addValueSubordinate}
+                              onError={this.ChangeErrorSubordinate}
                             />
                           </div>
 
-                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
-                          <h3 className="pt-5 kt-section__title">همکار همرده</h3>
+                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
+                          <h3
+                            className={
+                              this.state.errorPeer === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
+                            }
+                          >
+                            همکار همرده
+                          </h3>
                           <div className="col-lg-3" />
                           <div className="col-lg-9">
                             <AdvanceSelect
@@ -152,10 +177,17 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                               AddOrder="secondAdd"
                               onChangeDataTableValue={this.ChangeValuePeer}
                               onAddField={this.addValuePeer}
+                              onError={this.ChangeErrorPeer}
                             />
                           </div>
-                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
-                          <h3 className="pt-5 kt-section__title">سایرین</h3>
+                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
+                          <h3
+                            className={
+                              this.state.errorOther === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
+                            }
+                          >
+                            سایرین
+                          </h3>
                           <div className="col-lg-3" />
                           <div className="col-lg-9">
                             <AdvanceSelect
@@ -166,6 +198,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                               AddOrder="thirdAdd"
                               onChangeDataTableValue={this.ChangeValueOther}
                               onAddField={this.addValueOther}
+                              onError={this.ChangeErrorOther}
                             />
                           </div>
                         </div>
@@ -208,12 +241,40 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
             )}
           </div>
         )}
-        <SnackBarMessage
-          type={this.state.snackbarType}
-          message={this.state.snackbarMessage}
-          showMessage={this.state.showSnackbarMessage}
-          onHandleCloseMessage={this.handleCloseMessage}
-        />
+        <div className="snackbarContainer">
+          <SnackBarMessage
+            type={this.state.snackbarType}
+            message={this.state.snackbarMessagePeer}
+            showMessage={this.state.showSnackbarMessagePeer}
+            onHandleCloseMessage={e => {
+              this.handleCloseMessage("Peer");
+            }}
+          />
+          <SnackBarMessage
+            type={this.state.snackbarType}
+            message={this.state.snackbarMessageOther}
+            showMessage={this.state.showSnackbarMessageOther}
+            onHandleCloseMessage={e => {
+              this.handleCloseMessage("Other");
+            }}
+          />
+          <SnackBarMessage
+            type={this.state.snackbarType}
+            message={this.state.snackbarMessageSubordinate}
+            showMessage={this.state.showSnackbarMessageSubordinate}
+            onHandleCloseMessage={e => {
+              this.handleCloseMessage("Subordinate");
+            }}
+          />
+          <SnackBarMessage
+            type={this.state.snackbarType}
+            message={this.state.snackbarMessage}
+            showMessage={this.state.showSnackbarMessage}
+            onHandleCloseMessage={e => {
+              this.handleCloseMessage("");
+            }}
+          />
+        </div>
       </div>
     );
   }
@@ -235,13 +296,14 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
   };
 
   /**************************** SnackBar ****************************** */
-  private handleCloseMessage = () => {
+  private handleCloseMessage = (Field: string) => {
+    const stateName = "showSnackbarMessage" + Field;
     if (this.state.snackbarType === SnackBarMode.Success) {
     } else {
       this.setState(prevState => {
         return {
           ...prevState,
-          showSnackbarMessage: false,
+          [stateName]: false,
         };
       });
     }
@@ -253,33 +315,66 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       this.state.NominationData.Peer,
       this.state.NominationData.Other,
       this.state.NominationData.Subordinates,
+      this.state.NominationData.LineManager,
+      this.state.NominationData.User,
     );
     if (dataComparison === "") {
       const subordinateLength = this.state.NominationData.Subordinates.length;
       const Other = this.state.NominationData.Other.length;
       const Peer = this.state.NominationData.Peer.length;
-      if (subordinateLength <= 2 || Other <= 2 || Peer <= 2) {
+      debugger;
+      if (subordinateLength <= 2) {
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "تعداد انتخاب شدگان باید بین ۳ تا ۱۵ نفر باشد!",
-            showSnackbarMessage: true,
+            snackbarMessageSubordinate: "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد!",
+            showSnackbarMessageSubordinate: true,
+
             snackbarType: SnackBarMode.Error,
+            errorSubordinate: true,
           };
         });
-      } else {
+      }
+      if (Other <= 2) {
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            snackbarMessageOther: "تعداد سایرین نباید کمتر از ۳ نفر باشد!",
+            showSnackbarMessageOther: true,
+            snackbarType: SnackBarMode.Error,
+            errorOther: true,
+          };
+        });
+      }
+      if (Peer <= 2) {
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            snackbarMessagePeer: "تعداد همکار همرده نباید کمتر از ۳ نفر باشد!",
+            showSnackbarMessagePeer: true,
+            snackbarType: SnackBarMode.Error,
+            errorPeer: true,
+          };
+        });
+      } else if (subordinateLength >= 3 && Other >= 3 && Peer >= 3) {
         const UpdateItem: IUpdatedData = {
           ItemId: this.state.itemId,
           Peer: this.state.NominationData.Peer.map(x => x.ItemId.toString()),
           Other: this.state.NominationData.Other.map(x => x.ItemId.toString()),
           Subordinate: this.state.NominationData.Subordinates.map(x => x.ItemId.toString()),
         };
-
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            showSpinner: true,
+          };
+        });
         await this.ListService.updateNominationData(UpdateItem).then(() => {
           this.setState(prevState => {
             return {
               ...prevState,
-              showSpinner: true,
+              error: false,
+              showSpinner: false,
               snackbarMessage: "با موفقیت ثبت شد!",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Success,
@@ -300,11 +395,14 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     }
   };
   /*******compare if peer or other or subordinate are the same******************* */
-  private Compare = (Peer: any[], Other: any[], SubOrdinate: any[]) => {
+  private Compare = (Peer: any[], Other: any[], SubOrdinate: any[], lineManager: any, self: any) => {
+    debugger;
     const allData: any[] = Peer.map(x => Number(x.ItemId))
       .concat(Other.map(x => Number(x.ItemId)))
       .concat(SubOrdinate.map(x => Number(x.ItemId)));
     console.log(allData);
+    allData.push(lineManager.ItemId);
+    allData.push(self.ItemId);
     const disttictAlldata: any[] = allData.filter(this.distict);
     console.log(disttictAlldata);
     if (disttictAlldata.length < allData.length) {
@@ -357,6 +455,31 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       };
     });
   };
+  /************************************************************ */
+  private ChangeErrorOther = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        errorOther: st,
+      };
+    });
+  };
+  private ChangeErrorSubordinate = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        errorSubordinate: st,
+      };
+    });
+  };
+  private ChangeErrorPeer = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        errorPeer: st,
+      };
+    });
+  };
   /******************************************************** */
   private addValueSubordinate = (st: any) => {
     this.setState(prevState => {
@@ -382,4 +505,5 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       };
     });
   };
+  /*************************************** */
 }

@@ -30568,7 +30568,7 @@ strong {
 .kt-separator {
   height: 0;
   margin: 20px 0;
-  border-bottom: 1px solid #ebedf2; }
+  border-bottom: 1px solid  #ebedf2; }
   .kt-separator.kt-separator--border-dashed, .kt-separator.kt-separator--dashed {
     border-bottom: 1px dashed #ebedf2; }
   .kt-separator.kt-separator--border-2x {

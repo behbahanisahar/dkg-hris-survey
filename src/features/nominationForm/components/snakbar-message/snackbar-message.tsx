@@ -13,7 +13,7 @@ interface ISnackBarProps {
   type: string;
   message: string;
   showMessage: boolean;
-  onHandleCloseMessage: () => void;
+  onHandleCloseMessage: (st: any) => any;
 }
 interface ISnackBarState {
   color: string;

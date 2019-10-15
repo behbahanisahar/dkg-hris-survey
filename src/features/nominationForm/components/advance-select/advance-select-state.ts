@@ -10,6 +10,9 @@ export default interface IAdvanceSelectState {
   SelectedPeerID: number;
   SelectedPeer: string;
   SelectedOtherID: number;
+  SelectedPeerReportPost: string;
+  SelectedOtherReportPost: string;
+  SelectedSubOrdinateReportPost: string;
   SelectedOther: string;
   SelectedSubOrdinateID: number;
   SelectedSubOrdinate: string;

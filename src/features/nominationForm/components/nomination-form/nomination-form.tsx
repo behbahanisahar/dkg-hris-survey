@@ -26,6 +26,9 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     this.ListService = new ListServices();
     this.util = new Util();
     this.state = {
+      errorSubordinate: false,
+      errorOther: false,
+      errorPeer: false,
       showSpinner: true,
       UserInfo: [],
       SelectedPeerID: 0,
@@ -41,6 +44,12 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       SelectedPeers: [],
       SelectedOthers: [],
       SelectedSubOrdinates: [],
+      showSnackbarMessagePeer: false,
+      snackbarMessagePeer: "",
+      showSnackbarMessageOther: false,
+      snackbarMessageOther: "",
+      showSnackbarMessageSubordinate: false,
+      snackbarMessageSubordinate: "",
       showSnackbarMessage: false,
       snackbarMessage: "",
       snackbarType: SnackBarMode.Info,
@@ -143,7 +152,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                   <div className="kt-portlet kt-sc-2">
                     <div className="kt-portlet__body">
                       <MYStepper activeStep={this.state.activeStep} />
-                      <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                      <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg "></div>
                       <div className="kt-section kt-section--first">
                         <div style={{ display: "inline-Block" }}>
                           <h3 style={{ display: "inline-table" }} className="pt-3 kt-section__title">
@@ -152,10 +161,18 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                           :<h5>{this.state.NominationData.LineManager!.Title} </h5>
                         </div>
                       </div>
-                      <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                      <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
                       <div className="kt-section kt-section--first">
                         <div>
-                          <h3 className="pt-3 kt-section__title">نیروی مستقیم تحت سرپرستی</h3>
+                          <h3
+                            className={
+                              this.state.errorSubordinate === true
+                                ? "pt-3 kt-section__title error"
+                                : "pt-3 kt-section__title"
+                            }
+                          >
+                            نیروی مستقیم تحت سرپرستی
+                          </h3>
                         </div>
                         <div className="kt-section__body">
                           <div className="row">
@@ -168,6 +185,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 AddOrder="firstAdd"
                                 onChangeDataTableValue={this.ChangeValueSubordinate}
                                 onAddField={this.addValueSubordinate}
+                                onError={this.ChangeErrorSubordinate}
                               />
                               <button
                                 type="button"
@@ -191,9 +209,15 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             </div>
                           </div>
                         </div>
-                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
 
-                        <h3 className="pt-5 kt-section__title">همکار همرده</h3>
+                        <h3
+                          className={
+                            this.state.errorOther === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
+                          }
+                        >
+                          همکار همرده
+                        </h3>
                         <div className="kt-section__body">
                           <div className="row">
                             <div className="col-lg-6">
@@ -205,6 +229,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 AddOrder="secondAdd"
                                 onChangeDataTableValue={this.ChangeValuePeer}
                                 onAddField={this.addValuePeer}
+                                onError={this.ChangeErrorPeer}
                               />
                               <button
                                 type="button"
@@ -225,9 +250,15 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             </div>
                           </div>
                         </div>
-                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
 
-                        <h3 className="pt-5 kt-section__title">سایرین</h3>
+                        <h3
+                          className={
+                            this.state.errorOther === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
+                          }
+                        >
+                          سایرین
+                        </h3>
                         <div className="kt-section__body">
                           <div className="row">
                             <div className="col-lg-6">
@@ -239,6 +270,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 AddOrder="thirdAdd"
                                 onChangeDataTableValue={this.ChangeValueOther}
                                 onAddField={this.addValueOther}
+                                onError={this.ChangeErrorOther}
                               />
                               <button
                                 type="button"
@@ -299,12 +331,40 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
             )}
           </div>
         )}
-        <SnackBarMessage
-          type={this.state.snackbarType}
-          message={this.state.snackbarMessage}
-          showMessage={this.state.showSnackbarMessage}
-          onHandleCloseMessage={this.handleCloseMessage}
-        />
+        <div className="snackbarContainer">
+          <SnackBarMessage
+            type={this.state.snackbarType}
+            message={this.state.snackbarMessagePeer}
+            showMessage={this.state.showSnackbarMessagePeer}
+            onHandleCloseMessage={e => {
+              this.handleCloseMessage("Peer");
+            }}
+          />
+          <SnackBarMessage
+            type={this.state.snackbarType}
+            message={this.state.snackbarMessageOther}
+            showMessage={this.state.showSnackbarMessageOther}
+            onHandleCloseMessage={e => {
+              this.handleCloseMessage("Other");
+            }}
+          />
+          <SnackBarMessage
+            type={this.state.snackbarType}
+            message={this.state.snackbarMessageSubordinate}
+            showMessage={this.state.showSnackbarMessageSubordinate}
+            onHandleCloseMessage={e => {
+              this.handleCloseMessage("Subordinate");
+            }}
+          />
+          <SnackBarMessage
+            type={this.state.snackbarType}
+            message={this.state.snackbarMessage}
+            showMessage={this.state.showSnackbarMessage}
+            onHandleCloseMessage={e => {
+              this.handleCloseMessage("");
+            }}
+          />
+        </div>
       </div>
     );
   }
@@ -353,14 +413,15 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   };
 
   /**************************** SnackBar ****************************** */
-  private handleCloseMessage = () => {
+  private handleCloseMessage = (Field: string) => {
+    const stateName = "showSnackbarMessage" + Field;
     if (this.state.snackbarType === SnackBarMode.Success) {
       alert("success");
     } else {
       this.setState(prevState => {
         return {
           ...prevState,
-          showSnackbarMessage: false,
+          [stateName]: false,
         };
       });
     }
@@ -378,33 +439,60 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       const subordinateLength = this.state.NominationData.Subordinates.length;
       const Other = this.state.NominationData.Other.length;
       const Peer = this.state.NominationData.Peer.length;
-      if (subordinateLength <= 2 || Other <= 2 || Peer <= 2) {
+      if (subordinateLength <= 2) {
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessage: "تعداد انتخاب شدگان باید بین ۳ تا ۱۵ نفر باشد!",
-            showSnackbarMessage: true,
+            snackbarMessageSubordinate: "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد!",
+            showSnackbarMessageSubordinate: true,
             snackbarType: SnackBarMode.Error,
           };
         });
-      } else {
+      }
+      if (Other <= 2) {
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            snackbarMessageOther: "تعداد سایرین نباید کمتر از ۳ نفر باشد!",
+            showSnackbarMessageOther: true,
+            snackbarType: SnackBarMode.Error,
+          };
+        });
+      }
+      if (Peer <= 2) {
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            snackbarMessagePeer: "تعداد همکار همرده نباید کمتر از ۳ نفر باشد!",
+            showSnackbarMessagePeer: true,
+            snackbarType: SnackBarMode.Error,
+          };
+        });
+      } else if (subordinateLength >= 3 || Other >= 3 || Peer >= 3) {
         const UpdateItem: IUpdatedData = {
           ItemId: this.state.itemId,
           Peer: this.state.NominationData.Peer.map(x => x.ItemId.toString()),
           Other: this.state.NominationData.Other.map(x => x.ItemId.toString()),
           Subordinate: this.state.NominationData.Subordinates.map(x => x.ItemId.toString()),
         };
-        this.ListService.updateNominationData(UpdateItem);
         this.setState(prevState => {
           return {
             ...prevState,
             showSpinner: true,
-            snackbarMessage: "با موفقیت ثبت شد!",
-            showSnackbarMessage: true,
-            snackbarType: SnackBarMode.Success,
           };
         });
-        window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
+        this.ListService.updateNominationData(UpdateItem).then(() => {
+          this.setState(prevState => {
+            return {
+              ...prevState,
+              showSpinner: true,
+              snackbarMessage: "با موفقیت ثبت شد!",
+              showSnackbarMessage: true,
+              snackbarType: SnackBarMode.Success,
+            };
+          });
+          window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
+        });
       }
     } else {
       this.setState(prevState => {
@@ -466,6 +554,31 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
           ...prevState.NominationData,
           Other: st,
         },
+      };
+    });
+  };
+  /************************************************************ */
+  private ChangeErrorOther = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        errorOther: st,
+      };
+    });
+  };
+  private ChangeErrorSubordinate = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        errorSubordinate: st,
+      };
+    });
+  };
+  private ChangeErrorPeer = (st: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        errorPeer: st,
       };
     });
   };

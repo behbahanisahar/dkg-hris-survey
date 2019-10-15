@@ -23,8 +23,17 @@ export default interface ISurveyState {
   NominationData: NominationData;
   activeStep: number;
   showSpinner: boolean;
+  errorSubordinate: boolean;
+  errorOther: boolean;
+  errorPeer: boolean;
   /****** Snackbar message ********* */
-  showSnackbarMessage: boolean;
   snackbarType: SnackBarMode;
+  showSnackbarMessagePeer: boolean;
+  snackbarMessagePeer: string;
+  showSnackbarMessageOther: boolean;
+  snackbarMessageOther: string;
+  showSnackbarMessageSubordinate: boolean;
+  snackbarMessageSubordinate: string;
+  showSnackbarMessage: boolean;
   snackbarMessage: string;
 }

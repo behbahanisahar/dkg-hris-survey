@@ -34,6 +34,9 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
     ];
 
     this.state = {
+      SelectedOtherReportPost: "",
+      SelectedPeerReportPost: "",
+      SelectedSubOrdinateReportPost: "",
       SelectedPeerID: 0,
       SelectedPeer: "",
       SelectedOtherID: 0,
@@ -140,12 +143,15 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
   }
   /*********************************************************************** */
   private onSelectAutoComplete = async (event: any, dropdownName: string) => {
+    debugger;
     const dropdownId = dropdownName + "ID";
+    const dropdownReportPost = dropdownName + "ReportPost";
     await this.setState(prevState => {
       return {
         ...prevState,
         [dropdownName]: event === null ? "" : event.label,
-        [dropdownId]: event === null ? 0 : event.value,
+        [dropdownId]: event === null ? 0 : Number(event.value),
+        [dropdownReportPost]: event === null ? "" : event.ReportedPost,
       };
     });
   };
@@ -157,7 +163,10 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
       const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Other);
       if (ValidTableLength === false) {
         const NewItem: IUser[] = this.state.NominationData.Other;
-        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedOther);
+        if (NewItem.length >= 2) {
+          this.props.onError(false);
+        }
+        const index = NewItem.findIndex(x => x.ItemId === this.state.SelectedOtherID);
         if (index > -1) {
           this.setState(prevState => {
             return {
@@ -169,7 +178,11 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           });
         } else {
           if (this.state.SelectedOther !== "")
-            NewItem.push({ SPLatinFullName: this.state.SelectedOther, ItemId: this.state.SelectedOtherID });
+            NewItem.push({
+              SPLatinFullName: this.state.SelectedOther,
+              ItemId: this.state.SelectedOtherID,
+              ReportedPost: this.state.SelectedOtherReportPost,
+            });
           this.props.onAddField(NewItem);
           this.setState(prevState => {
             return {
@@ -183,7 +196,10 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
       const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Peer);
       if (ValidTableLength === false) {
         const NewItem: IUser[] = this.state.NominationData.Peer;
-        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedPeer);
+        if (NewItem.length >= 2) {
+          this.props.onError(false);
+        }
+        const index = NewItem.findIndex(x => x.ItemId === this.state.SelectedPeerID);
         if (index > -1) {
           this.setState(prevState => {
             return {
@@ -195,7 +211,11 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           });
         } else {
           if (this.state.SelectedPeer !== "")
-            NewItem.push({ SPLatinFullName: this.state.SelectedPeer, ItemId: this.state.SelectedPeerID });
+            NewItem.push({
+              SPLatinFullName: this.state.SelectedPeer,
+              ItemId: this.state.SelectedPeerID,
+              ReportedPost: this.state.SelectedPeerReportPost,
+            });
           this.props.onAddField(NewItem);
           this.setState(prevState => {
             return {
@@ -209,7 +229,10 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
       const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Subordinates);
       if (ValidTableLength === false) {
         const NewItem: IUser[] = this.state.NominationData.Subordinates;
-        const index = NewItem.findIndex(x => x.SPLatinFullName === this.state.SelectedSubOrdinate);
+        if (NewItem.length >= 2) {
+          this.props.onError(false);
+        }
+        const index = NewItem.findIndex(x => x.ItemId === this.state.SelectedSubOrdinateID);
         if (index > -1) {
           this.setState(prevState => {
             return {
@@ -221,7 +244,11 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           });
         } else {
           if (this.state.SelectedSubOrdinate !== "")
-            NewItem.push({ SPLatinFullName: this.state.SelectedSubOrdinate, ItemId: this.state.SelectedSubOrdinateID });
+            NewItem.push({
+              SPLatinFullName: this.state.SelectedSubOrdinate,
+              ItemId: this.state.SelectedSubOrdinateID,
+              ReportedPost: this.state.SelectedSubOrdinateReportPost,
+            });
           this.props.onAddField(NewItem);
           this.setState(prevState => {
             return {
@@ -311,7 +338,10 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
             <TableCell style={{ width: "1%" }} align="center">
               {index + 1}
             </TableCell>
-            <TableCell align="center">{n.SPLatinFullName}</TableCell>
+            <TableCell align="center">
+              <div style={{ fontWeight: 700, fontSize: "13px" }}>{n.SPLatinFullName}</div>
+              <div style={{ fontStyle: "italic" }}>{n.ReportedPost}</div>
+            </TableCell>
             <TableCell align="center" style={{ width: "3%" }}>
               <Delete
                 className="flaticon-pie-chart-1 kt-font-info kt-label-font-color-2"

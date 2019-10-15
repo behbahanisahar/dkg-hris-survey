@@ -93,7 +93,7 @@ class MYStepper extends React.Component<IStepperProps, {}> {
       { title: "Self", titleFa: "تایید فرد" },
       { title: "Line Manager Approval", titleFa: "تایید مدیر مستقیم" },
       { title: "BP Approval", titleFa: "تایید BP" },
-      { title: "C-Level Approval", titleFa: "تایید مدیر واحد" },
+      { title: "C-Level Approval", titleFa: "تایید C-Level" },
     ];
   }
 }
