@@ -384,7 +384,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
             message={this.state.snackbarMessagePeer}
             showMessage={this.state.showSnackbarMessagePeer}
             onHandleCloseMessage={e => {
-              this.handleCloseMessage("Peer");
+              this.handleCloseMessagePeer("Peer");
             }}
           />
           <SnackBarMessage
@@ -392,7 +392,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
             message={this.state.snackbarMessageOther}
             showMessage={this.state.showSnackbarMessageOther}
             onHandleCloseMessage={e => {
-              this.handleCloseMessage("Other");
+              this.handleCloseMessageOther("Other");
             }}
           />
           <SnackBarMessage
@@ -400,7 +400,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
             message={this.state.snackbarMessageSubordinate}
             showMessage={this.state.showSnackbarMessageSubordinate}
             onHandleCloseMessage={e => {
-              this.handleCloseMessage("Subordinate");
+              this.handleCloseMessageSubordinate("Subordinate");
             }}
           />
           <SnackBarMessage
@@ -460,16 +460,48 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   };
 
   /**************************** SnackBar ****************************** */
-  private handleCloseMessage = (Field: string) => {
-    debugger;
-    const stateName = "showSnackbarMessage" + Field;
+  private handleCloseMessageOther = (Field: string) => {
     if (this.state.snackbarType === SnackBarMode.Success) {
-      alert("success");
     } else {
       this.setState(prevState => {
         return {
           ...prevState,
-          [stateName]: false,
+          showSnackbarMessageOther: false,
+        };
+      });
+    }
+  };
+  private handleCloseMessagePeer = (Field: string) => {
+    // const stateName = "showSnackbarMessage" + Field;
+    if (this.state.snackbarType === SnackBarMode.Success) {
+    } else {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          showSnackbarMessagePeer: false,
+        };
+      });
+    }
+  };
+  private handleCloseMessageSubordinate = (Field: string) => {
+    //  const stateName = "showSnackbarMessage" + Field;
+    if (this.state.snackbarType === SnackBarMode.Success) {
+    } else {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          showSnackbarMessageSubordinate: false,
+        };
+      });
+    }
+  };
+  private handleCloseMessage = (Field: string) => {
+    if (this.state.snackbarType === SnackBarMode.Success) {
+    } else {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          showSnackbarMessage: false,
         };
       });
     }
