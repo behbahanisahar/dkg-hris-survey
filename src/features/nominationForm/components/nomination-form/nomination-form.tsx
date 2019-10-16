@@ -3,7 +3,6 @@ import ISurveyProps from "./nomination-form-props";
 import ISurveyState from "./nomination-form-state";
 import "./nomination-form.css";
 import ListServices from "../../../../services/list-services";
-
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
 import Util from "../../../../utilities/utilities";
@@ -175,7 +174,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 </React.Fragment>
                               }
                             >
-                              <Info color="primary" />
+                              <Info className="mr-3" color="primary" />
                             </HtmlTooltip>
                             مدیر مستقیم
                           </h3>
@@ -199,7 +198,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 </React.Fragment>
                               }
                             >
-                              <Info color="primary" />
+                              <Info className="mr-3" color="primary" />
                             </HtmlTooltip>
                             نیروی مستقیم تحت سرپرستی
                           </h3>
@@ -253,7 +252,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                               </React.Fragment>
                             }
                           >
-                            <Info color="primary" />
+                            <Info className="mr-3" color="primary" />
                           </HtmlTooltip>
                           همکار همرده
                         </h3>
@@ -303,7 +302,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                               </React.Fragment>
                             }
                           >
-                            <Info color="primary" />
+                            <Info className="mr-3" color="primary" />
                           </HtmlTooltip>
                           نیروی غیر تحت سرپرستی/ مشتری داخلی
                         </h3>
@@ -385,7 +384,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
             message={this.state.snackbarMessagePeer}
             showMessage={this.state.showSnackbarMessagePeer}
             onHandleCloseMessage={e => {
-              this.handleCloseMessage("Peer");
+              this.handleCloseMessagePeer("Peer");
             }}
           />
           <SnackBarMessage
@@ -393,7 +392,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
             message={this.state.snackbarMessageOther}
             showMessage={this.state.showSnackbarMessageOther}
             onHandleCloseMessage={e => {
-              this.handleCloseMessage("Other");
+              this.handleCloseMessageOther("Other");
             }}
           />
           <SnackBarMessage
@@ -401,7 +400,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
             message={this.state.snackbarMessageSubordinate}
             showMessage={this.state.showSnackbarMessageSubordinate}
             onHandleCloseMessage={e => {
-              this.handleCloseMessage("Subordinate");
+              this.handleCloseMessageSubordinate("Subordinate");
             }}
           />
           <SnackBarMessage
@@ -461,15 +460,48 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   };
 
   /**************************** SnackBar ****************************** */
-  private handleCloseMessage = (Field: string) => {
-    const stateName = "showSnackbarMessage" + Field;
+  private handleCloseMessageOther = (Field: string) => {
     if (this.state.snackbarType === SnackBarMode.Success) {
-      alert("success");
     } else {
       this.setState(prevState => {
         return {
           ...prevState,
-          [stateName]: false,
+          showSnackbarMessageOther: false,
+        };
+      });
+    }
+  };
+  private handleCloseMessagePeer = (Field: string) => {
+    // const stateName = "showSnackbarMessage" + Field;
+    if (this.state.snackbarType === SnackBarMode.Success) {
+    } else {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          showSnackbarMessagePeer: false,
+        };
+      });
+    }
+  };
+  private handleCloseMessageSubordinate = (Field: string) => {
+    //  const stateName = "showSnackbarMessage" + Field;
+    if (this.state.snackbarType === SnackBarMode.Success) {
+    } else {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          showSnackbarMessageSubordinate: false,
+        };
+      });
+    }
+  };
+  private handleCloseMessage = (Field: string) => {
+    if (this.state.snackbarType === SnackBarMode.Success) {
+    } else {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          showSnackbarMessage: false,
         };
       });
     }
