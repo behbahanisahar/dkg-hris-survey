@@ -262,7 +262,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                         onKeyPress={e => {
                           if (e.key === "Enter") e.preventDefault();
                         }}
-                        className="btn btn-primary mr-2"
+                        className="btn btn-brand btn-elevate btn-elevate-air mr-2"
                         onClick={e => {
                           this.SubmitForm();
                           e.preventDefault();
