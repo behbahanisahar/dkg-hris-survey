@@ -174,7 +174,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 </React.Fragment>
                               }
                             >
-                              <Info color="primary" />
+                              <Info className="mr-3" color="primary" />
                             </HtmlTooltip>
                             مدیر مستقیم
                           </h3>
@@ -198,7 +198,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                                 </React.Fragment>
                               }
                             >
-                              <Info color="primary" />
+                              <Info className="mr-3" color="primary" />
                             </HtmlTooltip>
                             نیروی مستقیم تحت سرپرستی
                           </h3>
@@ -252,7 +252,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                               </React.Fragment>
                             }
                           >
-                            <Info color="primary" />
+                            <Info className="mr-3" color="primary" />
                           </HtmlTooltip>
                           همکار همرده
                         </h3>
@@ -302,7 +302,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                               </React.Fragment>
                             }
                           >
-                            <Info color="primary" />
+                            <Info className="mr-3" color="primary" />
                           </HtmlTooltip>
                           نیروی غیر تحت سرپرستی/ مشتری داخلی
                         </h3>
