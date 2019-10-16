@@ -18,6 +18,7 @@ import AdvanceSelect from "../../../../core/components/advance-select/advance-se
 import { withStyles } from "@material-ui/styles";
 import { Theme, Tooltip, Typography } from "@material-ui/core";
 import Explicit from "@material-ui/icons/Explicit";
+import IUser from "../../../../entities/user";
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
     backgroundColor: "#77787B",
@@ -465,8 +466,8 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
               snackbarType: SnackBarMode.Success,
             };
           });
-          this.onCancelRequest();
         });
+        setTimeout(() => this.onCancelRequest(), 4000);
       }
     } else {
       this.setState(prevState => {
@@ -482,14 +483,21 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
   /*******compare if peer or other or subordinate are the same******************* */
   private Compare = (Peer: any[], Other: any[], SubOrdinate: any[], lineManager: any, self: any) => {
     debugger;
-    const allData: any[] = Peer.map(x => Number(x.ItemId))
-      .concat(Other.map(x => Number(x.ItemId)))
-      .concat(SubOrdinate.map(x => Number(x.ItemId)));
+    // const allData: any[] = Peer.map(x => Number(x.ItemId))
+    //   .concat(Other.map(x => Number(x.ItemId)))
+    //   .concat(SubOrdinate.map(x => Number(x.ItemId)));
+    // console.log(allData);
+    // allData.push(lineManager.ItemId);
+    // allData.push(self.ItemId);
+    const allData: IUser[] = Peer.concat(Other).concat(SubOrdinate);
+    allData.push(lineManager);
+    allData.push(self);
     console.log(allData);
-    allData.push(lineManager.ItemId);
-    allData.push(self.ItemId);
     const disttictAlldata: any[] = allData.filter(this.distict);
-    console.log(disttictAlldata);
+
+    let findDuplicates = (arr: any) => arr.filter((item: any, index: any) => arr.indexOf(item) != index);
+    const duplicate = findDuplicates(allData);
+    console.log(duplicate);
     if (disttictAlldata.length < allData.length) {
       return "فرد تکراری انتخاب شده است!";
     } else {
@@ -499,6 +507,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
 
   /******************dintics all items in tables******************************** */
   private distict = (value: any, index: any, self: any[]) => {
+    // console.log(value);
     return self.indexOf(value) == index;
   };
 

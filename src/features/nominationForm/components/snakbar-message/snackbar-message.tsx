@@ -37,7 +37,7 @@ export default class SnackBarMessage extends React.Component<ISnackBarProps, ISn
           horizontal: "left",
         }}
         open={this.props.showMessage}
-        autoHideDuration={2000}
+        //  autoHideDuration={100000}
         // autoHideDuration={false}
         onClose={this.props.onHandleCloseMessage}
         ContentProps={{
