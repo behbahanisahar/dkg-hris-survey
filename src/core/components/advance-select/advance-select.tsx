@@ -335,7 +335,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
       return items.map((n: any, index: any) => {
         return (
           <TableRow key={index}>
-            <TableCell style={{ width: "1%" }} align="center">
+            <TableCell style={{ width: "1%" }} padding="none" align="center">
               {index + 1}
             </TableCell>
             <TableCell align="center">
