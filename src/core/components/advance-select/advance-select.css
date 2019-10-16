@@ -1,3 +1,6 @@
 .select__control {
   height: 48px;
 }
+.selector-item {
+  font-weight: 500;
+}

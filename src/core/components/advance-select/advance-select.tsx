@@ -14,7 +14,7 @@ import "./advance-select.css";
 
 const RenderOption = (option: any) => (
   <div>
-    <strong>{option.label}</strong>
+    <span className="selector-item">{option.label}</span>
     <div>
       <small>
         <i>{option.EmailAddress}</i> | <span>{option.Department}</span> | <span>{option.ReportedPost}</span>
