@@ -339,7 +339,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
             </TableCell>
             <TableCell align="center">
               <div style={{ fontWeight: 700, fontSize: "13px" }}>{n.SPLatinFullName}</div>
-              <div style={{ fontStyle: "italic" }}>{n.ReportedPost}</div>
+              <div style={{ fontStyle: "italic", color: "dimgrey" }}>{n.ReportedPost}</div>
             </TableCell>
             <TableCell align="center" style={{ width: "3%" }}>
               <Delete
