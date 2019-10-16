@@ -50,10 +50,10 @@ class MainNomination extends React.Component<{}, IAppState> {
             {this.state.NominationData.statusCode === 200 && (
               <div>
                 {this.state.NominationData.Status.toLowerCase() === "notstarted" && (
-                  <SelfNomination itemId={this.state.itemId} />
+                  <SelfNomination NominationData={this.state.NominationData} itemId={this.state.itemId} />
                 )}
                 {this.state.NominationData.Status.toLowerCase() !== "notstarted" && (
-                  <Nomination itemId={this.state.itemId} />
+                  <Nomination NominationData={this.state.NominationData} itemId={this.state.itemId} />
                 )}
               </div>
             )}

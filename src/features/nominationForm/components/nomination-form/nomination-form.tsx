@@ -114,9 +114,9 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     document.title = "Nomination Form";
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
-    const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
-    debugger;
-    console.log(NominationData);
+   // const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
+    const NominationData: NominationData=this.props.NominationData;
+    // console.log(NominationData);
     const NominationHistory: IHistory[] = await this.ListService.getNominationHistory(Number(itemId));
     let activeStep: number = 0;
     switch (NominationData.Status) {

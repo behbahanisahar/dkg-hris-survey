@@ -104,7 +104,8 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     document.title = "Nomination Form";
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
-    const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
+    //  const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
+    const NominationData: NominationData = this.props.NominationData;
 
     this.setState(prevState => {
       return {
