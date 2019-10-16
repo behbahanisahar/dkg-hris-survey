@@ -157,7 +157,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             :<h5>{this.state.NominationData.LineManager!.Title} </h5>
                           </div>
                         </div>
-                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
+                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
                         <div className="kt-section kt-section--first">
                           <h3
                             className={
@@ -191,7 +191,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             />
                           </div>
 
-                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
+                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
 
                           <h3
                             className={
@@ -223,7 +223,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             />
                           </div>
 
-                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
+                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
                           <h3
                             className={
                               this.state.errorOther === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
