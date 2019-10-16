@@ -1,6 +1,6 @@
-import NominationData from "../../../../entities/nomination";
-import IUser from "../../../../entities/user";
-import SnackBarMode from "../../../../entities/snackbar-mode";
+import NominationData from "../../../entities/nomination";
+import IUser from "../../../entities/user";
+import SnackBarMode from "../../../entities/snackbar-mode";
 
 export default interface IAdvanceSelectState {
   NominationData: NominationData;

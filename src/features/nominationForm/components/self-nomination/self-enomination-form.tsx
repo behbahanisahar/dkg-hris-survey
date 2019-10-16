@@ -14,7 +14,7 @@ import MYStepper from "../../../stepper/stepper";
 import Spinner from "../../../spinner/spinner";
 import Authentication from "../../../authentication/authentication";
 import { NominationFormHeader } from "../nomination-form-header/nomination-form-header";
-import AdvanceSelect from "../advance-select/advance-select";
+import AdvanceSelect from "../../../../core/components/advance-select/advance-select";
 import { withStyles } from "@material-ui/styles";
 import { Theme, Tooltip, Typography } from "@material-ui/core";
 import Info from "@material-ui/icons/Info";
