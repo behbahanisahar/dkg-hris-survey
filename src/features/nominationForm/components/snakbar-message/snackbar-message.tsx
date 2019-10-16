@@ -8,6 +8,7 @@ import Error from "@material-ui/icons/Error";
 import Info from "@material-ui/icons/Info";
 import { SnackbarContent } from "@material-ui/core";
 import SnackBarMode from "../../../../entities/snackbar-mode";
+import "./snackbar-message.css";
 
 interface ISnackBarProps {
   type: string;

@@ -1,0 +1,28 @@
+.snackbarContainer {
+  position: fixed;
+  bottom: 0;
+  /* display: flex; */
+  display: block;
+  width: 100%;
+  padding: 0 10%;
+}
+
+.MuiSnackbar-root {
+  left: 8px;
+  right: 8px;
+  display: flex;
+  z-index: 1400;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row-reverse;
+  margin-bottom: 10px;
+}
+
+.MuiSnackbarContent-action {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+  margin-left: -8px;
+  padding-right: 16px;
+}

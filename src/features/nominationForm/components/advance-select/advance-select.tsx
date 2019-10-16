@@ -16,7 +16,7 @@ const RenderOption = (option: any) => (
     <strong>{option.label}</strong>
     <div>
       <small>
-        <i>{option.EmailAddress}</i> | <span>{option.Department}</span>
+        <i>{option.EmailAddress}</i> | <span>{option.Department}</span> | <span>{option.ReportedPost}</span>
       </small>
     </div>
   </div>
@@ -170,7 +170,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "User Exist!",
+              snackbarMessage: "نام کاربری قبلا انتخاب شده است",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Error,
             };
@@ -203,7 +203,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "کاربر وجود دارد!",
+              snackbarMessage: "نام کاربری قبلا انتخاب شده است",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Error,
             };
@@ -236,7 +236,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           this.setState(prevState => {
             return {
               ...prevState,
-              snackbarMessage: "کاربر وجود دارد!",
+              snackbarMessage: "نام کاربری قبلا انتخاب شده است",
               showSnackbarMessage: true,
               snackbarType: SnackBarMode.Error,
             };
@@ -265,7 +265,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
       this.setState(prevState => {
         return {
           ...prevState,
-          snackbarMessage: "تعداد انتخاب شدگان باید بین ۳ تا ۱۵ نفر باشد!",
+          snackbarMessage: "تعداد کاربران انتخاب شده باید بین ۳ تا ۱۵ نفر باشد",
           showSnackbarMessage: true,
           // snackbarType: SnackBarMode.Error,
         };
