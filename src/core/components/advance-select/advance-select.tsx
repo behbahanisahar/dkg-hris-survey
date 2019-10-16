@@ -4,17 +4,17 @@ import IAdvanceSelectState from "./advance-select-state";
 import AsyncSelect from "react-select/async";
 import { Tooltip, Fab, Table, TableRow, TableBody, TableCell } from "@material-ui/core";
 import Add from "@material-ui/icons/Add";
-import ITableHeader from "../../../../entities/table-headers";
+import ITableHeader from "../../../entities/table-headers";
 import Delete from "@material-ui/icons/Delete";
-import IUser from "../../../../entities/user";
-import SnackBarMessage from "../snakbar-message/snackbar-message";
-import SnackBarMode from "../../../../entities/snackbar-mode";
-import ListServices from "../../../../services/list-services";
+import IUser from "../../../entities/user";
+import SnackBarMessage from "../../../features/nominationForm/components/snakbar-message/snackbar-message";
+import SnackBarMode from "../../../entities/snackbar-mode";
+import ListServices from "../../../services/list-services";
 import "./advance-select.css";
 
 const RenderOption = (option: any) => (
   <div>
-    <strong>{option.label}</strong>
+    <span className="selector-item">{option.label}</span>
     <div>
       <small>
         <i>{option.EmailAddress}</i> | <span>{option.Department}</span> | <span>{option.ReportedPost}</span>
@@ -339,7 +339,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
               {index + 1}
             </TableCell>
             <TableCell align="center">
-              <div style={{ fontWeight: 700, fontSize: "13px" }}>{n.SPLatinFullName}</div>
+              <div style={{ fontWeight: 500, fontSize: "13px" }}>{n.SPLatinFullName}</div>
               <div style={{ fontStyle: "italic", color: "dimgrey" }}>{n.ReportedPost}</div>
             </TableCell>
             <TableCell align="center" style={{ width: "3%" }}>
