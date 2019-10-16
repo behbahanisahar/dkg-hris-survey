@@ -10,7 +10,7 @@ import MainNomination from "./features/nominationForm/components/main-nomination
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: ["IRANYekan", "tahoma", '"Helvetica Neue"', "Arial", "sans-serif"].join(","),
+    fontFamily: ["IRANYekan", "sans-serif", '"Helvetica Neue"', "Arial", "sans-serif"].join(","),
   },
   palette: {
     primary: { main: "#ef5661" },
