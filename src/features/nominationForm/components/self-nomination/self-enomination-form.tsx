@@ -17,7 +17,7 @@ import { NominationFormHeader } from "../nomination-form-header/nomination-form-
 import AdvanceSelect from "../advance-select/advance-select";
 import { withStyles } from "@material-ui/styles";
 import { Theme, Tooltip, Typography } from "@material-ui/core";
-import Info from "@material-ui/icons/Info";
+import Explicit from "@material-ui/icons/Explicit";
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
     backgroundColor: "#77787B",
@@ -150,7 +150,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                                   </React.Fragment>
                                 }
                               >
-                                <Info className="mr-3" color="primary" />
+                                <Explicit className="mr-3 " color="primary" />
                               </HtmlTooltip>
                               مدیر مستقیم
                             </h3>
@@ -173,7 +173,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                                 </React.Fragment>
                               }
                             >
-                              <Info className="mr-3" color="primary" />
+                              <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
                             نیروی مستقیم تحت سرپرستی / همکار
                           </h3>
@@ -205,7 +205,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                                 </React.Fragment>
                               }
                             >
-                              <Info className="mr-3" color="primary" />
+                              <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
                             همکار همرده
                           </h3>
@@ -236,7 +236,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                                 </React.Fragment>
                               }
                             >
-                              <Info className="mr-3" color="primary" />
+                              <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
                             نیروی غیر تحت سرپرستی/ مشتری داخلی
                           </h3>

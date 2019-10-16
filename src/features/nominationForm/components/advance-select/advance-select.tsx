@@ -172,7 +172,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
             return {
               ...prevState,
               snackbarMessage: "نام کاربری قبلا انتخاب شده است",
-              showSnackbarMessage: true,
+              showSnackbarMessage: false,
               snackbarType: SnackBarMode.Error,
             };
           });
@@ -205,7 +205,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
             return {
               ...prevState,
               snackbarMessage: "نام کاربری قبلا انتخاب شده است",
-              showSnackbarMessage: true,
+              showSnackbarMessage: false,
               snackbarType: SnackBarMode.Error,
             };
           });
@@ -238,7 +238,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
             return {
               ...prevState,
               snackbarMessage: "نام کاربری قبلا انتخاب شده است",
-              showSnackbarMessage: true,
+              showSnackbarMessage: false,
               snackbarType: SnackBarMode.Error,
             };
           });
