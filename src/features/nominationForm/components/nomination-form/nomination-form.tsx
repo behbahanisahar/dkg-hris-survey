@@ -114,8 +114,8 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     document.title = "Nomination Form";
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
-   // const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
-    const NominationData: NominationData=this.props.NominationData;
+    // const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
+    const NominationData: NominationData = this.props.NominationData;
     // console.log(NominationData);
     const NominationHistory: IHistory[] = await this.ListService.getNominationHistory(Number(itemId));
     let activeStep: number = 0;
@@ -243,7 +243,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
 
                         <h3
                           className={
-                            this.state.errorOther === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
+                            this.state.errorPeer === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
                           }
                         >
                           <HtmlTooltip
@@ -482,11 +482,12 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       this.state.NominationData.Other,
       this.state.NominationData.Subordinates,
     );
-    console.log(dataComparison);
+
     if (dataComparison === "") {
       const subordinateLength = this.state.NominationData.Subordinates.length;
       const Other = this.state.NominationData.Other.length;
       const Peer = this.state.NominationData.Peer.length;
+      debugger;
       if (subordinateLength <= 2) {
         this.setState(prevState => {
           return {
@@ -494,6 +495,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
             snackbarMessageSubordinate: "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد!",
             showSnackbarMessageSubordinate: true,
             snackbarType: SnackBarMode.Error,
+            errorSubordinate: true,
           };
         });
       }
@@ -501,9 +503,10 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessageOther: "تعداد سایرین نباید کمتر از ۳ نفر باشد!",
+            snackbarMessageOther: "تعداد نیروی غیر تحت سرپرستی/ مشتری داخلی نباید کمتر از ۳ نفر باشد!",
             showSnackbarMessageOther: true,
             snackbarType: SnackBarMode.Error,
+            errorOther: true,
           };
         });
       }
@@ -514,9 +517,10 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
             snackbarMessagePeer: "تعداد همکار همرده نباید کمتر از ۳ نفر باشد!",
             showSnackbarMessagePeer: true,
             snackbarType: SnackBarMode.Error,
+            errorPeer: true,
           };
         });
-      } else if (subordinateLength >= 3 || Other >= 3 || Peer >= 3) {
+      } else if (subordinateLength >= 3 && Other >= 3 && Peer >= 3) {
         const UpdateItem: IUpdatedData = {
           ItemId: this.state.itemId,
           Peer: this.state.NominationData.Peer.map(x => x.ItemId.toString()),

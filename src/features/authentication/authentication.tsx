@@ -12,7 +12,7 @@ export default class Authentication extends React.Component<IAuthenticationProps
       <div>
         {this.props.status === 401 ||
           (this.props.status === 403 && (
-            <div>
+            <div className="rtl">
               <img style={{ margin: "0 auto", display: "block" }} src={AccessDenied} />
 
               <h1 style={{ textAlign: "center" }}>شما به این صفحه دسترسی ندارید!</h1>
