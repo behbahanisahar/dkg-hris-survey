@@ -3,7 +3,6 @@ import ISurveyProps from "./nomination-form-props";
 import ISurveyState from "./nomination-form-state";
 import "./nomination-form.css";
 import ListServices from "../../../../services/list-services";
-
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
 import Util from "../../../../utilities/utilities";
@@ -462,6 +461,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
 
   /**************************** SnackBar ****************************** */
   private handleCloseMessage = (Field: string) => {
+    debugger;
     const stateName = "showSnackbarMessage" + Field;
     if (this.state.snackbarType === SnackBarMode.Success) {
       alert("success");
