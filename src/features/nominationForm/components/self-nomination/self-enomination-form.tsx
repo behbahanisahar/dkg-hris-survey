@@ -374,7 +374,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       const subordinateLength = this.state.NominationData.Subordinates.length;
       const Other = this.state.NominationData.Other.length;
       const Peer = this.state.NominationData.Peer.length;
-      debugger;
+
       if (subordinateLength <= 2) {
         this.setState(prevState => {
           return {
@@ -391,7 +391,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessageOther: "تعداد سایرین نباید کمتر از ۳ نفر باشد!",
+            snackbarMessageOther: "تعداد نیروی غیر تحت سرپرستی/ مشتری داخلی نباید کمتر از ۳ نفر باشد!",
             showSnackbarMessageOther: true,
             snackbarType: SnackBarMode.Error,
             errorOther: true,
