@@ -242,7 +242,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
 
                         <h3
                           className={
-                            this.state.errorPeer === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
+                            this.state.errorPeer === true ? " kt-section__title error" : " kt-section__title"
                           }
                         >
                           <HtmlTooltip
@@ -292,7 +292,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
 
                         <h3
                           className={
-                            this.state.errorOther === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
+                            this.state.errorOther === true ? " kt-section__title error" : " kt-section__title"
                           }
                         >
                           <HtmlTooltip
@@ -304,7 +304,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                           >
                             <Explicit className="mr-3" color="primary" />
                           </HtmlTooltip>
-                          نیروی غیر تحت سرپرستی/ مشتری داخلی
+                          نیروی غیرمستقیم تحت سرپرستی / مشتری داخلی
                         </h3>
                         <div className="kt-section__body">
                           <div className="row">

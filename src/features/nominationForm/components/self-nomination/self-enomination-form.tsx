@@ -158,13 +158,11 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             :<h5>{this.state.NominationData.LineManager!.Title} </h5>
                           </div>
                         </div>
-                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
+                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
                         <div className="kt-section kt-section--first">
                           <h3
                             className={
-                              this.state.errorSubordinate === true
-                                ? "pt-5 kt-section__title error"
-                                : "pt-5 kt-section__title"
+                              this.state.errorSubordinate === true ? " kt-section__title error" : " kt-section__title"
                             }
                           >
                             <HtmlTooltip
@@ -192,11 +190,11 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             />
                           </div>
 
-                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
+                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
 
                           <h3
                             className={
-                              this.state.errorPeer === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
+                              this.state.errorPeer === true ? " kt-section__title error" : " kt-section__title"
                             }
                           >
                             <HtmlTooltip
@@ -224,10 +222,10 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             />
                           </div>
 
-                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
+                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
                           <h3
                             className={
-                              this.state.errorOther === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
+                              this.state.errorOther === true ? " kt-section__title error" : " kt-section__title"
                             }
                           >
                             <HtmlTooltip
@@ -239,7 +237,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             >
                               <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
-                            نیروی غیر تحت سرپرستی/ مشتری داخلی
+                            نیروی غیرمستقیم تحت سرپرستی / مشتری داخلی
                           </h3>
                           <div className="col-lg-3" />
                           <div className="col-lg-9">
