@@ -18,7 +18,6 @@ import AdvanceSelect from "../../../../core/components/advance-select/advance-se
 import { withStyles } from "@material-ui/styles";
 import { Theme, Tooltip, Typography } from "@material-ui/core";
 import Explicit from "@material-ui/icons/Explicit";
-import IUser from "../../../../entities/user";
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
     backgroundColor: "#77787B",
@@ -158,11 +157,13 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             :<h5>{this.state.NominationData.LineManager!.Title} </h5>
                           </div>
                         </div>
-                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
+                        <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
                         <div className="kt-section kt-section--first">
                           <h3
                             className={
-                              this.state.errorSubordinate === true ? " kt-section__title error" : " kt-section__title"
+                              this.state.errorSubordinate === true
+                                ? "pt-5 kt-section__title error"
+                                : "pt-5 kt-section__title"
                             }
                           >
                             <HtmlTooltip
@@ -190,11 +191,11 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             />
                           </div>
 
-                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
+                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
 
                           <h3
                             className={
-                              this.state.errorPeer === true ? " kt-section__title error" : " kt-section__title"
+                              this.state.errorPeer === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
                             }
                           >
                             <HtmlTooltip
@@ -222,10 +223,10 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             />
                           </div>
 
-                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
+                          <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
                           <h3
                             className={
-                              this.state.errorOther === true ? " kt-section__title error" : " kt-section__title"
+                              this.state.errorOther === true ? "pt-5 kt-section__title error" : "pt-5 kt-section__title"
                             }
                           >
                             <HtmlTooltip
@@ -237,7 +238,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             >
                               <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
-                            نیروی غیرمستقیم تحت سرپرستی / مشتری داخلی
+                            نیروی غیر تحت سرپرستی/ مشتری داخلی
                           </h3>
                           <div className="col-lg-3" />
                           <div className="col-lg-9">
@@ -471,7 +472,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       this.setState(prevState => {
         return {
           ...prevState,
-          snackbarMessage: "فرد تکراری انتخاب شده است!",
+          snackbarMessage: dataComparison,
           showSnackbarMessage: true,
           snackbarType: SnackBarMode.Error,
         };
@@ -480,24 +481,23 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
   };
   /*******compare if peer or other or subordinate are the same******************* */
   private Compare = (Peer: any[], Other: any[], SubOrdinate: any[], lineManager: any, self: any) => {
-    debugger;
-    // const allData: any[] = Peer.map(x => Number(x.ItemId))
-    //   .concat(Other.map(x => Number(x.ItemId)))
-    //   .concat(SubOrdinate.map(x => Number(x.ItemId)));
-    // console.log(allData);
-    // allData.push(lineManager.ItemId);
-    // allData.push(self.ItemId);
-    const allData: IUser[] = Peer.concat(Other).concat(SubOrdinate);
+    const allData: any[] = Peer.concat(Other).concat(SubOrdinate);
+    const disttictAlldata: any[] = allData.filter(this.distict);
     allData.push(lineManager);
     allData.push(self);
-    console.log(allData);
-    const disttictAlldata: any[] = allData.filter(this.distict);
 
-    let findDuplicates = (arr: any) => arr.filter((item: any, index: any) => arr.indexOf(item) != index);
-    const duplicate = findDuplicates(allData);
-    console.log(duplicate);
+    const lookup = allData.reduce((a, e) => {
+      a[e.ItemId] = e.ItemId in a ? ++a[e.ItemId] : 0;
+      return a;
+    }, {});
+    const a = allData.filter(e => lookup[e.ItemId]);
+    const duplicateData = this.removeDuplicates(a, {});
+
+    const duplicateSPName = duplicateData.map(x => x.SPLatinFullName);
+    console.log(duplicateSPName);
+
     if (disttictAlldata.length < allData.length) {
-      return "فرد تکراری انتخاب شده است!";
+      return "افراد تکراری انتخاب شده است" + "" + duplicateSPName.join();
     } else {
       return "";
     }
@@ -598,4 +598,9 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     });
   };
   /*************************************** */
+  private removeDuplicates(myArr: any[], prop: any) {
+    return myArr.filter((obj, pos, arr) => {
+      return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+    });
+  }
 }
