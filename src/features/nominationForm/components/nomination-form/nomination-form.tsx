@@ -520,6 +520,8 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       this.state.NominationData.Peer,
       this.state.NominationData.Other,
       this.state.NominationData.Subordinates,
+      this.state.NominationData.LineManager,
+      this.state.NominationData.User,
     );
 
     if (dataComparison === "") {
@@ -576,24 +578,35 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         });
       }
     } else {
-      this.notifyError("Duplicate", "نام کاربری تکراری انتخاب شده است");
+      this.notifyError("Duplicate", dataComparison);
     }
   };
-  /*******compare if peer or other or subordinate are the same******************* */
-  private Compare = (Peer: any[], Other: any[], SubOrdinate: any[]) => {
-    const allData: any[] = Peer.map(x => Number(x.ItemId))
-      .concat(Other.map(x => Number(x.ItemId)))
-      .concat(SubOrdinate.map(x => Number(x.ItemId)));
-    const disttictAlldata: any[] = allData.filter(this.distict);
-    if (disttictAlldata.length < allData.length) {
-      return "فرد تکراری انتخاب شده است!";
+
+  private Compare = (Peer: any[], Other: any[], SubOrdinate: any[], lineManager: any, self: any) => {
+    const allData: any[] = Peer.concat(Other).concat(SubOrdinate);
+    allData.push(lineManager);
+    allData.push(self);
+
+    const lookup = allData.reduce((a, e) => {
+      a[e.ItemId] = e.ItemId in a ? ++a[e.ItemId] : 0;
+      return a;
+    }, {});
+    const a = allData.filter(e => lookup[e.ItemId]);
+    const duplicateData = this.removeDuplicates(a, {});
+
+    const duplicateSPName = duplicateData.map(x => x.SPLatinFullName);
+    if (duplicateSPName.length > 0) {
+      return "نام کاربری تکراری انتخاب شده است: " + duplicateSPName.join();
     } else {
       return "";
     }
   };
-  private distict = (value: any, index: any, self: any[]) => {
-    return self.indexOf(value) == index;
-  };
+
+  private removeDuplicates(myArr: any[], prop: any) {
+    return myArr.filter((obj, pos, arr) => {
+      return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+    });
+  }
 
   /*******************props from advance select for deleting data******************************************************** */
   private ChangeValueSubordinate = (st: any) => {

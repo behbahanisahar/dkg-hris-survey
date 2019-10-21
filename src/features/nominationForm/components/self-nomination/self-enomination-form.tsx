@@ -475,14 +475,13 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
         });
       }
     } else {
-      this.notifyError("Duplicate", "نام کاربری تکراری انتخاب شده است");
+      this.notifyError("Duplicate", dataComparison);
     }
   };
 
   /*******compare if peer or other or subordinate are the same******************* */
   private Compare = (Peer: any[], Other: any[], SubOrdinate: any[], lineManager: any, self: any) => {
     const allData: any[] = Peer.concat(Other).concat(SubOrdinate);
-    const disttictAlldata: any[] = allData.filter(this.distict);
     allData.push(lineManager);
     allData.push(self);
 
@@ -495,17 +494,18 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
 
     const duplicateSPName = duplicateData.map(x => x.SPLatinFullName);
 
-    if (disttictAlldata.length < allData.length) {
-      return "افراد تکراری انتخاب شده است" + duplicateSPName.join();
+    if (duplicateSPName.length > 0) {
+      return "نام کاربری تکراری انتخاب شده است: " + duplicateSPName.join();
     } else {
       return "";
     }
   };
 
-  /******************dintics all items in tables******************************** */
-  private distict = (value: any, index: any, self: any[]) => {
-    return self.indexOf(value) == index;
-  };
+  private removeDuplicates(myArr: any[], prop: any) {
+    return myArr.filter((obj, pos, arr) => {
+      return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+    });
+  }
 
   /*************************************************************************** */
   private ChangeValueSubordinate = (st: any) => {
@@ -592,9 +592,4 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     });
   };
   /*************************************** */
-  private removeDuplicates(myArr: any[], prop: any) {
-    return myArr.filter((obj, pos, arr) => {
-      return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
-    });
-  }
 }
