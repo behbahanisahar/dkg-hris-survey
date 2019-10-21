@@ -27,7 +27,7 @@ class ListServices extends ServiceBase {
           : "JobStatus eq 'شاغل' and SPLatinFullName ne ''";
       const result: any[] = await sp.web.lists
         .getByTitle(SPLists.UserInfo)
-        .items.filter(filter)
+        .items.filter(encodeURIComponent(filter))
         .select("EmailAddress", "SPLatinFullName", "Department", "ReportedPost", "Id")
         .orderBy("SPLatinFullName", true)
         .top(20)

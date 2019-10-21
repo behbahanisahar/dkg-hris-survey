@@ -240,7 +240,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             >
                               <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
-                            نیروی غیر تحت سرپرستی/ مشتری داخلی
+                            نیروی غیرمستقیم تحت سرپرستی / مشتری داخلی
                           </h3>
                           <div className="col-lg-3" />
                           <div className="col-lg-9">
