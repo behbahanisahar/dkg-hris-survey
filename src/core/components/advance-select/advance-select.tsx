@@ -144,7 +144,6 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
   }
   /*********************************************************************** */
   private onSelectAutoComplete = async (event: any, dropdownName: string) => {
-    debugger;
     const dropdownId = dropdownName + "ID";
     const dropdownReportPost = dropdownName + "ReportPost";
     await this.setState(prevState => {

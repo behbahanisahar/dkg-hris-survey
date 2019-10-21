@@ -19,6 +19,7 @@ export default interface ISurveyState {
   rowsPerPage: number;
   SelectedPeers: IUser[];
   showSpinner: boolean;
+  submittingForm: boolean;
   SelectedOthers: IUser[];
   UsersIsLoading: boolean;
   itemId: number;

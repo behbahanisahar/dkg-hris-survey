@@ -7,6 +7,8 @@ import SurveyIntroPage from "./features/survey-form/components/survey-intro/surv
 import FormSurvey from "./features/survey-form/components/main-form/survey-form";
 import NominationIntroPage from "./features/nominationForm/components/nomination-Intro/nomination-intro";
 import MainNomination from "./features/nominationForm/components/main-nomination/main-nomination";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const theme = createMuiTheme({
   typography: {
@@ -67,6 +69,7 @@ class App extends React.Component<{}, IAppState> {
               </Switch>
             </BrowserRouter> */}
           </MuiThemeProvider>
+          <ToastContainer rtl newestOnTop={true} />
         </div>
       </div>
     );

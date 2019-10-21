@@ -87,3 +87,5 @@ dist/
 sp-rest-proxy/
 junit.xml
 
+yarn.lock
+package-lock.json

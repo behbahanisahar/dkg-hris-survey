@@ -23,6 +23,7 @@ export default interface ISurveyState {
   NominationData: NominationData;
   activeStep: number;
   showSpinner: boolean;
+  submittingForm: boolean;
   errorSubordinate: boolean;
   errorOther: boolean;
   errorPeer: boolean;

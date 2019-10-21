@@ -66,7 +66,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       snackbarType: SnackBarMode.Info,
       UsersIsLoading: true,
       itemId: 0,
-
+      submittingForm: false,
       activeStep: 0,
       NominationData: {
         Status: "",
@@ -241,9 +241,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
 
                         <h3
-                          className={
-                            this.state.errorPeer === true ? " kt-section__title error" : " kt-section__title"
-                          }
+                          className={this.state.errorPeer === true ? " kt-section__title error" : " kt-section__title"}
                         >
                           <HtmlTooltip
                             title={
@@ -291,9 +289,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
 
                         <h3
-                          className={
-                            this.state.errorOther === true ? " kt-section__title error" : " kt-section__title"
-                          }
+                          className={this.state.errorOther === true ? " kt-section__title error" : " kt-section__title"}
                         >
                           <HtmlTooltip
                             title={
@@ -519,7 +515,6 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       const subordinateLength = this.state.NominationData.Subordinates.length;
       const Other = this.state.NominationData.Other.length;
       const Peer = this.state.NominationData.Peer.length;
-      debugger;
       if (subordinateLength <= 2) {
         this.setState(prevState => {
           return {
