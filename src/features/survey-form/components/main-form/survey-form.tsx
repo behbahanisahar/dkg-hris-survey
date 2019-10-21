@@ -90,7 +90,6 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
         };
       });
     });
-    console.log(this.state.SurveyFormData);
   }
 
   public render() {

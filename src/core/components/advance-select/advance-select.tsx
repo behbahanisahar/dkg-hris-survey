@@ -277,7 +277,6 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
   /***************************************************** */
   private onAddkeyPress(e: any, value: string) {
     if (e.keyCode == 13) {
-      console.log(e.keyCode);
       this.AddItem(value);
     }
   }
@@ -285,10 +284,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
   private keyPress(e: any, value: string) {
     if (e.keyCode == 13) {
       var x = document.getElementsByClassName(value) as HTMLCollectionOf<HTMLElement>;
-      console.log(x);
       x[0].focus();
-
-      // console.log(this.  next.focus();
     }
   }
   /**************************** Repeat Table ****************************** */

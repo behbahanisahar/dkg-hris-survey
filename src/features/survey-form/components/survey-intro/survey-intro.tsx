@@ -95,8 +95,6 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
   }
   /**************************** Repeat Table ****************************** */
   private onRenderRows = () => {
-    console.log(this.state.appraisee);
-
     return this.state.appraisee.map((n: IAppraisee, index: any) => {
       return (
         <TableRow key={index} className="kt-datatable__row">

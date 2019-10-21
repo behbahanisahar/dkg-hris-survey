@@ -473,7 +473,6 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
           });
           toast.success("فرم با موفقیت ثبت شد", this.toastSubmitoptions);
         });
-        setTimeout(() => this.onCancelRequest(), 4000);
       }
     } else {
       this.notifyError("Duplicate", "نام کاربری تکراری انتخاب شده است");
@@ -495,10 +494,9 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     const duplicateData = this.removeDuplicates(a, {});
 
     const duplicateSPName = duplicateData.map(x => x.SPLatinFullName);
-    console.log(duplicateSPName);
 
     if (disttictAlldata.length < allData.length) {
-      return "افراد تکراری انتخاب شده است" + "" + duplicateSPName.join();
+      return "افراد تکراری انتخاب شده است" + duplicateSPName.join();
     } else {
       return "";
     }
@@ -506,7 +504,6 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
 
   /******************dintics all items in tables******************************** */
   private distict = (value: any, index: any, self: any[]) => {
-    // console.log(value);
     return self.indexOf(value) == index;
   };
 

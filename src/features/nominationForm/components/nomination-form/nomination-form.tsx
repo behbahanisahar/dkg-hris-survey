@@ -18,6 +18,7 @@ import AdvanceSelect from "../../../../core/components/advance-select/advance-se
 import { withStyles } from "@material-ui/styles";
 import { Theme, Tooltip, Typography } from "@material-ui/core";
 import Explicit from "@material-ui/icons/Explicit";
+import { ToastOptions, toast } from "react-toastify";
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
     backgroundColor: "#77787B",
@@ -115,7 +116,6 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     await this.loadUsers();
     // const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
     const NominationData: NominationData = this.props.NominationData;
-    // console.log(NominationData);
     const NominationHistory: IHistory[] = await this.ListService.getNominationHistory(Number(itemId));
     let activeStep: number = 0;
     switch (NominationData.Status) {
@@ -342,7 +342,11 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                           onKeyPress={e => {
                             if (e.key === "Enter") e.preventDefault();
                           }}
-                          className="btn btn-brand btn-elevate btn-elevate-air mr-2"
+                          className={
+                            this.state.submittingForm
+                              ? "btn btn-brand mr-2 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light"
+                              : "btn btn-brand btn-elevate btn-elevate-air mr-2"
+                          }
                           onClick={e => {
                             this.SubmitForm();
                             e.preventDefault();
@@ -502,9 +506,16 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       });
     }
   };
-
+  onCancelRequest = () => {
+    window.location.href = "?page=nominationintro";
+  };
+  toastSubmitoptions: ToastOptions = { onClose: this.onCancelRequest, autoClose: 5000, position: "bottom-left" };
+  notifyError = (Id: string, message: string) => {
+    toast.error(message, { autoClose: false, position: "bottom-left", toastId: Id });
+  };
   /****************************on form submited*************************************/
   private SubmitForm = () => {
+    toast.dismiss();
     let dataComparison: string = this.Compare(
       this.state.NominationData.Peer,
       this.state.NominationData.Other,
@@ -516,34 +527,28 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       const Other = this.state.NominationData.Other.length;
       const Peer = this.state.NominationData.Peer.length;
       if (subordinateLength <= 2) {
+        this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessageSubordinate: "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد!",
-            showSnackbarMessageSubordinate: true,
-            snackbarType: SnackBarMode.Error,
             errorSubordinate: true,
           };
         });
       }
       if (Other <= 2) {
+        this.notifyError("errorOther", "تعداد نیروی غیر تحت سرپرستی / مشتری داخلی نباید کمتر از ۳ نفر باشد");
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessageOther: "تعداد نیروی غیر تحت سرپرستی/ مشتری داخلی نباید کمتر از ۳ نفر باشد!",
-            showSnackbarMessageOther: true,
-            snackbarType: SnackBarMode.Error,
             errorOther: true,
           };
         });
       }
       if (Peer <= 2) {
+        this.notifyError("errorPeer", "تعداد همکار همرده نباید کمتر از ۳ نفر باشد!");
         this.setState(prevState => {
           return {
             ...prevState,
-            snackbarMessagePeer: "تعداد همکار همرده نباید کمتر از ۳ نفر باشد!",
-            showSnackbarMessagePeer: true,
-            snackbarType: SnackBarMode.Error,
             errorPeer: true,
           };
         });
@@ -557,31 +562,21 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         this.setState(prevState => {
           return {
             ...prevState,
-            showSpinner: true,
+            submittingForm: true,
           };
         });
         this.ListService.updateNominationData(UpdateItem).then(() => {
           this.setState(prevState => {
             return {
               ...prevState,
-              showSpinner: true,
-              snackbarMessage: "با موفقیت ثبت شد!",
-              showSnackbarMessage: true,
-              snackbarType: SnackBarMode.Success,
+              submittingForm: true,
             };
           });
-          window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
+          toast.success("فرم با موفقیت ثبت شد", this.toastSubmitoptions);
         });
       }
     } else {
-      this.setState(prevState => {
-        return {
-          ...prevState,
-          snackbarMessage: "نفر تکراری انتخاب شده است!",
-          showSnackbarMessage: true,
-          snackbarType: SnackBarMode.Error,
-        };
-      });
+      this.notifyError("Duplicate", "نام کاربری تکراری انتخاب شده است");
     }
   };
   /*******compare if peer or other or subordinate are the same******************* */
@@ -589,9 +584,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     const allData: any[] = Peer.map(x => Number(x.ItemId))
       .concat(Other.map(x => Number(x.ItemId)))
       .concat(SubOrdinate.map(x => Number(x.ItemId)));
-    console.log(allData);
     const disttictAlldata: any[] = allData.filter(this.distict);
-    console.log(disttictAlldata);
     if (disttictAlldata.length < allData.length) {
       return "فرد تکراری انتخاب شده است!";
     } else {
@@ -685,9 +678,5 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         SelectedPeers: st,
       };
     });
-  };
-  /********************************************** */
-  private onCancelRequest = () => {
-    window.location.href = "?page=nominationintro&itemid=" + this.state.itemId + "";
   };
 }
