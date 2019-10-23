@@ -2,7 +2,7 @@
 @import "./assets/css/dk-brand.less";
 
 .ltr {
-  direction: ltr;
+  direction: ltr !important;
 }
 .rtl {
   direction: rtl;

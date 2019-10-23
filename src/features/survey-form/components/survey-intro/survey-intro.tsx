@@ -107,16 +107,21 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
                 {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
               </div>
               <div className="kt-user-card-v2__details">
-                <a
-                  onClick={(e: any) => {
-                    this.onShowItem(n.NominationItemId);
-                    e.preventDefault();
-                    return false;
-                  }}
-                  className="kt-user-card-v2__name pointer"
-                >
-                  {n.User.Title}
-                </a>
+                {n.Status.Status !== "تکمیل شده" && (
+                  <a
+                    onClick={(e: any) => {
+                      this.onShowItem(n.NominationItemId);
+                      e.preventDefault();
+                      return false;
+                    }}
+                    className="kt-user-card-v2__name pointer"
+                  >
+                    {n.User.Title}
+                  </a>
+                )}
+
+                {n.Status.Status === "تکمیل شده" && <a className="kt-user-card-v2__name pointer">{n.User.Title}</a>}
+
                 <span className="kt-user-card-v2__desc">{n.Relation}</span>
               </div>{" "}
             </div>
@@ -125,12 +130,12 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
           <TableCell style={{ width: "20%" }} className="kt-datatable__cell" align="left">
             <div className="progress-details ">
               <span className="progress-status">{n.Status.Status}</span>
-              <span className="progress-number">{n.Status.Progress}%</span>
+              <span className="progress-number">{n.Status.Status !== "تکمیل شده" ? n.Status.Progress : 100}%</span>
             </div>
             <LinearProgress
-              className={Number(n.Status) >= 100 ? "complete-progress" : "not-completed-progress"}
+              className={n.Status.Status === "تکمیل شده" ? "complete-progress" : "not-completed-progress"}
               variant="determinate"
-              value={n.Status.Progress}
+              value={n.Status.Status !== "تکمیل شده" ? n.Status.Progress : 100}
             />
           </TableCell>
           {n.Status.Status !== "تکمیل شده" && (

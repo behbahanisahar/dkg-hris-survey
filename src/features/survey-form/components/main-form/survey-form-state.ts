@@ -10,4 +10,5 @@ export default interface ISurveyFromState {
   SurveyFormData: Isurvey;
   itemid: number;
   showSpinner: boolean;
+  submittingForm: boolean;
 }

@@ -9,10 +9,11 @@ import ICategory from "../../../../entities/categories";
 import Util from "../../../../utilities/utilities";
 import { ISurveyData } from "../../../../entities/survey-data";
 import Context from "../../../../utilities/context";
-import Info from "@material-ui/icons/Info";
+import Info from "@material-ui/icons/Explicit";
 import Isurvey from "../../../../entities/survey";
 import Spinner from "../../../spinner/spinner";
 import Authentication from "../../../authentication/authentication";
+import { ToastOptions, toast } from "react-toastify";
 
 // const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 const HtmlTooltip = withStyles((theme: Theme) => ({
@@ -46,6 +47,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       answers: [],
       itemid: 0,
       showSpinner: true,
+      submittingForm: false,
     };
   }
   public async componentDidMount() {
@@ -309,14 +311,30 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       status,
       answers: this.state.answers,
     };
-    await this.ListService.SubmitForm(SubmitData);
-    if (saveFormat === "submit") {
-      window.location.href = "?page=surveyintro&itemid=" + this.state.itemid + "";
-    }
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        submittingForm: true,
+      };
+    });
+    await this.ListService.SubmitForm(SubmitData).then(() => {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          submittingForm: false,
+        };
+      });
+      toast.success("فرم با موفقیت ثبت شد", this.toastSubmitoptions);
+    });
   };
+
   /********************************************** */
   private onCancelRequest = () => {
-    window.location.href = "?page=Surveyintro&itemid=" + this.state.itemid + "";
+    window.location.href = "?page=Surveyintro";
+  };
+  toastSubmitoptions: ToastOptions = { onClose: this.onCancelRequest, autoClose: 5000, position: "bottom-left" };
+  notifyError = (Id: string, message: string) => {
+    toast.error(message, { autoClose: false, position: "bottom-left", toastId: Id });
   };
 }
 

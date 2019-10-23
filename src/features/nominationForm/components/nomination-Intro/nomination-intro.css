@@ -12,3 +12,8 @@
 .pointer {
   cursor: pointer;
 }
+.align-left {
+  text-align: left !important;
+  margin-left: 26px;
+  display: block;
+}

@@ -5,6 +5,13 @@
   margin: 1% 1%;
   direction: rtl;
 }
+.intro-en {
+  white-space: pre-line !important;
+  text-align: left;
+  width: 95%;
+  margin: 1% 1%;
+  direction: ltr;
+}
 .intro-card {
   margin: 2% auto;
   width: 90%;
