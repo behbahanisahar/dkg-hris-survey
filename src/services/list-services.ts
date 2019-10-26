@@ -102,8 +102,11 @@ class ListServices extends ServiceBase {
           return {
             Categories: response.data.Categories,
             SurveyAnswerId: response.data.SurveyAnswerId,
-            UserDisplayName: response.data.UserDisplayName,
+            User: response.data.User,
             statusCode: response.status,
+            ShouldBeContinued: response.data.ShouldBeContinued,
+            ShouldBeStarted: response.data.ShouldBeStarted,
+            ShouldBeStopped: response.data.ShouldBeStopped,
           };
         })
 
@@ -112,7 +115,10 @@ class ListServices extends ServiceBase {
             statusCode: error.response.status,
             Categories: [],
             SurveyAnswerId: 0,
-            UserDisplayName: "",
+            User: {},
+            ShouldBeContinued: "",
+            ShouldBeStarted: "",
+            ShouldBeStopped: "",
           };
         });
 

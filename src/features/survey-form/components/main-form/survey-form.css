@@ -63,3 +63,7 @@
 .pointer {
   cursor: pointer;
 }
+.textarea {
+  width: 100% !important;
+  background: #fff !important;
+}

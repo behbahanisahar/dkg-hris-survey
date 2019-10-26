@@ -4,7 +4,7 @@ import ListServices from "../../../../services/list-services";
 import { MDBRow } from "mdbreact";
 import "./survey-form.css";
 import IQuestion from "../../../../entities/survey-questions";
-import { Slider, Tooltip, withStyles, Theme, Typography } from "@material-ui/core";
+import { Slider, Tooltip, withStyles, Theme, Typography, InputLabel, TextField } from "@material-ui/core";
 import ICategory from "../../../../entities/categories";
 import Util from "../../../../utilities/utilities";
 import { ISurveyData } from "../../../../entities/survey-data";
@@ -14,6 +14,7 @@ import Isurvey from "../../../../entities/survey";
 import Spinner from "../../../spinner/spinner";
 import Authentication from "../../../authentication/authentication";
 import { ToastOptions, toast } from "react-toastify";
+import { SurveyFormHeader } from "../survey-form-header/survey-form-header";
 
 // const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 const HtmlTooltip = withStyles((theme: Theme) => ({
@@ -36,9 +37,22 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
 
     this.state = {
       SurveyFormData: {
-        UserDisplayName: "Sahar Behbahani",
+        User: {
+          Title: "",
+          AvatarUrl: "",
+          Id: 0,
+          ItemId: 894,
+          SPLatinFullName: "",
+          Department: "",
+          EmailAddress: "",
+          JobGrade: "",
+          ReportedPost: "",
+        },
         SurveyAnswerId: 0,
         Categories: [],
+        ShouldBeStarted: "",
+        ShouldBeContinued: "",
+        ShouldBeStopped: "",
       },
       score: "",
       radio: 1,
@@ -98,6 +112,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     if (this.state.SurveyFormData == null) {
       return null;
     }
+    console.log(this.state.SurveyFormData);
     return (
       <div>
         {this.state.showSpinner && <Spinner />}
@@ -109,25 +124,97 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
             {this.state.SurveyFormData.statusCode === 200 && (
               <div className="rtl">
                 <div className="kt-portlet">
-                  <div className="kt-portlet__head">
-                    <div className="kt-portlet__head-label">
-                      <span className="kt-portlet__head-icon kt-hidden">
-                        <i className="la la-gear"></i>
-                      </span>
-                      <div style={{ display: "inline-block" }}>
-                        <h3 className="kt-portlet__head-title">{this.state.SurveyFormData.UserDisplayName}</h3>
-                      </div>
-                    </div>
+                  <SurveyFormHeader user={this.state.SurveyFormData.User} />
+                  <div className="kt-portlet__head-label">
+                    <span className="kt-portlet__head-icon kt-hidden">
+                      <i className="la la-gear"></i>
+                    </span>
                   </div>
 
                   <div className="kt-portlet__body">
                     <div>{this.onRenderCard()}</div>
+                    <div className="kt-section my-5 py-5 kt-ribbon  kt-ribbon--clip">
+                      <div className={" kt-section__content kt-section__content--solid "}>
+                        <div className=" kt-ribbon--clip kt-ribbon--left">
+                          <div className=" kt-ribbon__target badge mt-3">
+                            <span className="kt-ribbon__inner" />
+                            بازخورد کیفی
+                          </div>
+                        </div>
+                        <div className=" kt-ribbon--clip kt-ribbon--right">
+                          <div className=" kt-ribbon__target badge  mt-3">
+                            <span className="kt-ribbon__inner" />
+                            Qualititative Feedback
+                          </div>
+                        </div>
+                        <div>
+                          <div style={{ marginTop: "7%" }}>
+                            <InputLabel htmlFor="standard-name">
+                              شروع - عادات و رفتارهایی که می بایست شروع شوند
+                            </InputLabel>
+                            <TextField
+                              id="outlined-email-input"
+                              value={this.state.SurveyFormData.ShouldBeStarted}
+                              onChange={(event: any) =>
+                                this.handleChangeTextField("ShouldBeStarted", event.target.value)
+                              }
+                              className="textarea"
+                              autoComplete="email"
+                              margin="normal"
+                              multiline={true}
+                              rowsMax={3}
+                              variant="outlined"
+                            />
+                          </div>
+                          <div>
+                            <InputLabel htmlFor="standard-name">
+                              ادامه - عادات و رفتارهای موثری که می بایست ادامه پیدا کنند
+                            </InputLabel>
+                            <TextField
+                              className="textarea"
+                              id="outlined-email-input"
+                              value={this.state.SurveyFormData.ShouldBeContinued}
+                              onChange={(event: any) =>
+                                this.handleChangeTextField("ShouldBeContinued", event.target.value)
+                              }
+                              autoComplete="email"
+                              margin="normal"
+                              multiline={true}
+                              rowsMax={3}
+                              variant="outlined"
+                            />
+                          </div>
+                          <div>
+                            <InputLabel htmlFor="standard-name">
+                              توقف - عادات و رفتارهایی که می بایست متوقف شده یا به نحو دیگری صورت پذیرند
+                            </InputLabel>
+                            <TextField
+                              className="textarea"
+                              id="outlined-email-input"
+                              value={this.state.SurveyFormData.ShouldBeStopped}
+                              onChange={(event: any) =>
+                                this.handleChangeTextField("ShouldBeStopped", event.target.value)
+                              }
+                              autoComplete="email"
+                              margin="normal"
+                              multiline={true}
+                              rowsMax={3}
+                              variant="outlined"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="kt-portlet__foot">
                     <div className="row">
                       <div className="col kt-align-left">
                         <button
-                          className="btn btn-info mx-2"
+                          className={
+                            this.state.submittingForm
+                              ? "btn btn-info mx-2 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light"
+                              : "btn btn-info mx-2 btn-elevate btn-elevate-air mr-2"
+                          }
                           onClick={e => {
                             this.onSubmitForm("تکمیل نشده", "submit");
                             e.preventDefault();
@@ -150,7 +237,11 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                       </div>
                       <div className="col kt-align-right">
                         <button
-                          className="btn btn-success btn-wide btn-elevate btn-elevate-air mx-2"
+                          className={
+                            this.state.submittingForm
+                              ? "btn btn-success btn-wide btn-elevate btn-elevate-air mx-2 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light"
+                              : "btn btn-success btn-wide btn-elevate btn-elevate-air mx-2 btn-elevate btn-elevate-air mr-2"
+                          }
                           onClick={e => {
                             this.onSubmitForm("تکمیل شده", "submit");
                             e.preventDefault();
@@ -310,6 +401,9 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       currentUserId: Context.userId,
       status,
       answers: this.state.answers,
+      ShouldBeStopped: this.state.SurveyFormData.ShouldBeStopped,
+      ShouldBeContinued: this.state.SurveyFormData.ShouldBeContinued,
+      ShouldBeStarted: this.state.SurveyFormData.ShouldBeStarted,
     };
     this.setState(prevState => {
       return {
@@ -325,6 +419,18 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
         };
       });
       toast.success("فرم با موفقیت ثبت شد", this.toastSubmitoptions);
+    });
+  };
+  /************************************************************* */
+  private handleChangeTextField = (Field: string, event: any) => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        SurveyFormData: {
+          ...prevState.SurveyFormData,
+          [Field]: event,
+        },
+      };
     });
   };
 

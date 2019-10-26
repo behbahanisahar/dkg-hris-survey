@@ -153,7 +153,20 @@ export default class MockData {
   ];
 
   public static SurveyFormData: Isurvey = {
-    UserDisplayName: "Sahar Behbahani",
+    User: {
+      AvatarUrl: "/PublishingImages/760674.png",
+      Id: 0,
+      ItemId: 10,
+      SPLatinFullName: "Abdolhossin Mohammbgnhnad Hashemi",
+      Department: "HR",
+      EmailAddress: "sa.behbahani@digikala.com",
+      JobGrade: "specialist",
+      Title: "سحر بهبهانی",
+      ReportedPost: "developer",
+    },
+    ShouldBeStarted: "",
+    ShouldBeContinued: "",
+    ShouldBeStopped: "",
     SurveyAnswerId: 0,
     statusCode: 200,
     Categories: [
