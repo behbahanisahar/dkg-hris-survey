@@ -122,7 +122,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
 
                 {n.Status.Status === "تکمیل شده" && <a className="kt-user-card-v2__name pointer">{n.User.Title}</a>}
 
-                <span className="kt-user-card-v2__desc">{n.Relation}</span>
+                <span className="kt-user-card-v2__desc">{n.HasCoworker === true ? "همکار" : n.Relation}</span>
               </div>{" "}
             </div>
           </TableCell>

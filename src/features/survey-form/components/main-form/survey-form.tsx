@@ -139,7 +139,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                         <MDBIcon icon="exclamation-triangle kt-font-brand fa-2x" />
                       </div>
                       در نظر داشته باشید تمامی نظرات شما در این سه بخش به طور مستقیم در گزارش فرد ارزیابی شونده آورده
-                      خواهد شد لطفا در صورت امکان به منظور ارزیابی افراد غیر ایرانی بازخوردهای خود را به زبان انگلیسی
+                      خواهد شد. لطفا در صورت امکان به منظور ارزیابی افراد غیر ایرانی بازخوردهای خود را به زبان انگلیسی
                       .بنویسید
                     </div>
                     <div className="kt-section my-2 py-5 kt-ribbon  kt-ribbon--clip">

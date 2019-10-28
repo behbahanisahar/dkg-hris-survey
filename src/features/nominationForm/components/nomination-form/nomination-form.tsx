@@ -148,6 +148,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   }
 
   public render() {
+    console.log(this.state.NominationData);
     return (
       <div className="rtl">
         {this.state.showSpinner && <Spinner />}
@@ -200,7 +201,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             >
                               <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
-                            نیروی مستقیم تحت سرپرستی
+                            {this.state.NominationData.HasCoworker === true ? "همکار" : " نیروی مستقیم تحت سرپرستی"}
                           </h3>
                         </div>
                         <div className="kt-section__body">
@@ -529,7 +530,12 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       const Other = this.state.NominationData.Other.length;
       const Peer = this.state.NominationData.Peer.length;
       if (subordinateLength <= 2) {
-        this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
+        {
+          this.state.NominationData.HasCoworker === true
+            ? this.notifyError("errorSubordinate", "تعداد همکار نباید کمتر از ۳ نفر باشد")
+            : this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
+        }
+
         this.setState(prevState => {
           return {
             ...prevState,

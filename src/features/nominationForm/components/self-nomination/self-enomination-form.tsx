@@ -177,7 +177,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             >
                               <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
-                            نیروی مستقیم تحت سرپرستی / همکار
+                            {this.state.NominationData.HasCoworker === true ? "همکار" : " نیروی مستقیم تحت سرپرستی"}
                           </h3>
                           <div className="col-lg-3" />
                           <div className="col-lg-9">
@@ -423,7 +423,9 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       const Peer = this.state.NominationData.Peer.length;
 
       if (subordinateLength <= 2) {
-        this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
+        this.state.NominationData.HasCoworker === true
+          ? this.notifyError("errorSubordinate", "تعداد همکار نباید کمتر از ۳ نفر باشد")
+          : this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
         this.setState(prevState => {
           return {
             ...prevState,

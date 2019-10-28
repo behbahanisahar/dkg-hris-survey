@@ -240,18 +240,21 @@ export default class MockData {
       Relation: "Peer",
       Status: { Status: "NotStarted", Progress: 40 },
       User: {},
+      HasCoworker: false,
     },
     {
       NominationItemId: 4,
       Relation: "Line Manager",
       Status: { Status: "NotStarted", Progress: 40 },
       User: {},
+      HasCoworker: false,
     },
     {
       NominationItemId: 5,
       Relation: "Self",
       Status: { Status: "NotStarted", Progress: 40 },
       User: {},
+      HasCoworker: false,
     },
   ];
   public static NominationTaks: UserTasks[] = [

@@ -9,4 +9,5 @@ export default interface NominationData {
   User?: SubOrdinate;
   LineManager?: SubOrdinate;
   statusCode?: number;
+  HasCoworker?: boolean;
 }
