@@ -1,7 +1,7 @@
 import React from "react";
 import ISurveyFromState from "./survey-form-state";
 import ListServices from "../../../../services/list-services";
-import { MDBRow } from "mdbreact";
+import { MDBRow, MDBIcon } from "mdbreact";
 import "./survey-form.css";
 import IQuestion from "../../../../entities/survey-questions";
 import { Slider, Tooltip, withStyles, Theme, Typography, InputLabel, TextField } from "@material-ui/core";
@@ -10,6 +10,7 @@ import Util from "../../../../utilities/utilities";
 import { ISurveyData } from "../../../../entities/survey-data";
 import Context from "../../../../utilities/context";
 import Info from "@material-ui/icons/Explicit";
+
 import Isurvey from "../../../../entities/survey";
 import Spinner from "../../../spinner/spinner";
 import Authentication from "../../../authentication/authentication";
@@ -133,24 +134,41 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
 
                   <div className="kt-portlet__body">
                     <div>{this.onRenderCard()}</div>
-                    <div className="kt-section my-5 py-5 kt-ribbon  kt-ribbon--clip">
+                    <div className="form-group form-group-last alert alert-secondary">
+                      <div className="alert-icon">
+                        <MDBIcon icon="exclamation-triangle kt-font-brand fa-2x" />
+                      </div>
+                      در نظر داشته باشید تمامی نظرات شما در این سه بخش به طور مستقیم در گزارش فرد ارزیابی شونده آورده
+                      خواهد شد لطفا در صورت امکان به منظور ارزیابی افراد غیر ایرانی بازخوردهای خود را به زبان انگلیسی
+                      .بنویسید
+                    </div>
+                    <div className="kt-section my-2 py-5 kt-ribbon  kt-ribbon--clip">
                       <div className={" kt-section__content kt-section__content--solid "}>
                         <div className=" kt-ribbon--clip kt-ribbon--left">
-                          <div className=" kt-ribbon__target badge mt-3">
+                          <div className=" kt-ribbon__target badge dk-brand-yellow mt-3">
                             <span className="kt-ribbon__inner" />
                             بازخورد کیفی
                           </div>
                         </div>
                         <div className=" kt-ribbon--clip kt-ribbon--right">
-                          <div className=" kt-ribbon__target badge  mt-3">
+                          <div className=" kt-ribbon__target badge dk-brand-yellow  mt-3">
                             <span className="kt-ribbon__inner" />
                             Qualititative Feedback
                           </div>
                         </div>
                         <div>
                           <div style={{ marginTop: "7%" }}>
-                            <InputLabel htmlFor="standard-name">
+                            <InputLabel className="dk-brand-green-font" htmlFor="standard-name">
                               شروع - عادات و رفتارهایی که می بایست شروع شوند
+                              <HtmlTooltip
+                                title={
+                                  <React.Fragment>
+                                    <Typography color="inherit">Start - Behaviors & habits to start </Typography>
+                                  </React.Fragment>
+                                }
+                              >
+                                <Info color="primary" />
+                              </HtmlTooltip>
                             </InputLabel>
                             <TextField
                               id="outlined-email-input"
@@ -167,8 +185,19 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                             />
                           </div>
                           <div>
-                            <InputLabel htmlFor="standard-name">
+                            <InputLabel className="dk-brand-bllue-font " htmlFor="standard-name">
                               ادامه - عادات و رفتارهای موثری که می بایست ادامه پیدا کنند
+                              <HtmlTooltip
+                                title={
+                                  <React.Fragment>
+                                    <Typography color="inherit">
+                                      Continue - Effective behaviors & habits to continue{" "}
+                                    </Typography>
+                                  </React.Fragment>
+                                }
+                              >
+                                <Info color="primary" />
+                              </HtmlTooltip>
                             </InputLabel>
                             <TextField
                               className="textarea"
@@ -185,8 +214,19 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                             />
                           </div>
                           <div>
-                            <InputLabel htmlFor="standard-name">
+                            <InputLabel className="dk-brand-red-font" htmlFor="standard-name">
                               توقف - عادات و رفتارهایی که می بایست متوقف شده یا به نحو دیگری صورت پذیرند
+                              <HtmlTooltip
+                                title={
+                                  <React.Fragment>
+                                    <Typography color="inherit">
+                                      Stop - Behaviors & habits to stop or do differently
+                                    </Typography>
+                                  </React.Fragment>
+                                }
+                              >
+                                <Info color="primary" />
+                              </HtmlTooltip>
                             </InputLabel>
                             <TextField
                               className="textarea"
@@ -212,8 +252,8 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                         <button
                           className={
                             this.state.submittingForm
-                              ? "btn btn-info mx-2 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light"
-                              : "btn btn-info mx-2 btn-elevate btn-elevate-air mr-2"
+                              ? "btn btn-brand mx-2 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light"
+                              : "btn btn-brand mx-2 btn-elevate btn-elevate-air mr-2"
                           }
                           onClick={e => {
                             this.onSubmitForm("تکمیل نشده", "submit");
@@ -239,8 +279,8 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                         <button
                           className={
                             this.state.submittingForm
-                              ? "btn btn-success btn-wide btn-elevate btn-elevate-air mx-2 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light"
-                              : "btn btn-success btn-wide btn-elevate btn-elevate-air mx-2 btn-elevate btn-elevate-air mr-2"
+                              ? "btn btn-brand btn-wide btn-elevate btn-elevate-air mx-2 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light"
+                              : "btn btn-brand btn-wide btn-elevate btn-elevate-air mx-2 btn-elevate btn-elevate-air mr-2"
                           }
                           onClick={e => {
                             this.onSubmitForm("تکمیل شده", "submit");
