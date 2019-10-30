@@ -63,6 +63,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       itemid: 0,
       showSpinner: true,
       submittingForm: false,
+      savingForm: false,
     };
   }
   public async componentDidMount() {
@@ -140,7 +141,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                       </div>
                       در نظر داشته باشید تمامی نظرات شما در این سه بخش به طور مستقیم در گزارش فرد ارزیابی شونده آورده
                       خواهد شد. لطفا در صورت امکان به منظور ارزیابی افراد غیر ایرانی بازخوردهای خود را به زبان انگلیسی
-                      .بنویسید
+                      بنویسید.
                     </div>
                     <div className="kt-section my-2 py-5 kt-ribbon  kt-ribbon--clip">
                       <div className={" kt-section__content kt-section__content--solid "}>
@@ -156,6 +157,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                             Qualititative Feedback
                           </div>
                         </div>
+
                         <div>
                           <div style={{ marginTop: "7%" }}>
                             <InputLabel className="dk-brand-green-font" htmlFor="standard-name">
@@ -246,17 +248,17 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                       </div>
                     </div>
                   </div>
-                  <div className="kt-portlet__foot">
+                  <div className="kt-portlet__foot bottom-stick">
                     <div className="row">
                       <div className="col kt-align-left">
                         <button
                           className={
-                            this.state.submittingForm
+                            this.state.savingForm
                               ? "btn btn-brand mx-2 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light"
-                              : "btn btn-brand mx-2 btn-elevate btn-elevate-air mr-2"
+                              : "btn btn-brand mx-2 mr-2"
                           }
                           onClick={e => {
-                            this.onSubmitForm("تکمیل نشده", "submit");
+                            this.onSubmitForm("تکمیل نشده", "save");
                             e.preventDefault();
                             return false;
                           }}
@@ -272,15 +274,15 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                             return false;
                           }}
                         >
-                          انصراف
+                          بازگشت به لیست
                         </button>
                       </div>
                       <div className="col kt-align-right">
                         <button
                           className={
                             this.state.submittingForm
-                              ? "btn btn-brand btn-wide btn-elevate btn-elevate-air mx-2 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light"
-                              : "btn btn-brand btn-wide btn-elevate btn-elevate-air mx-2 btn-elevate btn-elevate-air mr-2"
+                              ? "btn dk-brand-green btn-wide btn-elevate btn-elevate-air mx-2 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light"
+                              : "btn dk-brand-green btn-wide btn-elevate btn-elevate-air mx-2 btn-elevate btn-elevate-air mr-2"
                           }
                           onClick={e => {
                             this.onSubmitForm("تکمیل شده", "submit");
@@ -450,7 +452,8 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     this.setState(prevState => {
       return {
         ...prevState,
-        submittingForm: true,
+        submittingForm: saveFormat === "submit" ? true : false,
+        savingForm: saveFormat === "save" ? true : false,
       };
     });
     await this.ListService.SubmitForm(SubmitData).then(() => {
@@ -458,12 +461,14 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
         return {
           ...prevState,
           submittingForm: false,
+          savingForm: false,
         };
       });
-      toast.success("فرم با موفقیت ثبت شد", this.toastSubmitoptions);
+      if (saveFormat === "submit") toast.success("فرم با موفقیت ثبت شد", this.toastSubmitoptions);
+      else toast.success("فرم با موفقیت ثبت شد", { position: "bottom-left", toastId: "save" });
     });
   };
-  /************************************************************* */
+
   private handleChangeTextField = (Field: string, event: any) => {
     this.setState(prevState => {
       return {
@@ -476,7 +481,6 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     });
   };
 
-  /********************************************** */
   private onCancelRequest = () => {
     window.location.href = "?page=Surveyintro";
   };
