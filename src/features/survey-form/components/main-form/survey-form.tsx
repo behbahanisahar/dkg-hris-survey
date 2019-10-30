@@ -357,12 +357,14 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
               <p style={{ display: "inline-block" }} className="mr-2">
                 {item.QuestionNumber}.
               </p>
-              {item.QuestionFa}
+              <span dangerouslySetInnerHTML={{ __html: item.QuestionFa }}></span>
             </div>
             <HtmlTooltip
               title={
                 <React.Fragment>
-                  <Typography color="inherit"> {item.Question}</Typography>
+                  <Typography color="inherit">
+                    <span dangerouslySetInnerHTML={{ __html: item.Question }}></span>{" "}
+                  </Typography>
                 </React.Fragment>
               }
             >

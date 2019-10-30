@@ -15,7 +15,7 @@
   direction: rtl;
   list-style: none;
   text-align: right;
-  font-weight: 600;
+  font-weight: 500;
 }
 .ul-class {
   direction: rtl;
@@ -66,4 +66,7 @@
 .textarea {
   width: 100% !important;
   background: #fff !important;
+}
+.bold-text {
+  font-weight: 800 !important;
 }
