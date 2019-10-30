@@ -65,7 +65,6 @@ class ListServices extends ServiceBase {
             User: response.data.User,
             LineManager: response.data.LineManager,
             statusCode: response.status,
-            HasCoworker: response.data.HasCoworker,
           };
         })
         .catch(error => {
@@ -75,7 +74,6 @@ class ListServices extends ServiceBase {
             Subordinates: [],
             Other: [],
             Peer: [],
-            HasCoworker: false,
           };
         });
 

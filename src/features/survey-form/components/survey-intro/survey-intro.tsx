@@ -95,66 +95,76 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
   }
   /**************************** Repeat Table ****************************** */
   private onRenderRows = () => {
-    return this.state.appraisee.map((n: IAppraisee, index: any) => {
+    if (this.state.appraisee.length === 0) {
       return (
-        <TableRow key={index} className="kt-datatable__row">
-          <TableCell align="right" className="kt-datatable__cell">
-            <div className="kt-user-card-v2">
-              <div className="kt-user-card-v2__pic">
-                {/* <img alt={n.User.Title} src={n.User.AvatarUrl === null ? AvatarUrl : n.User.AvatarUrl} /> */}
-
-                {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
-                {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
-              </div>
-              <div className="kt-user-card-v2__details">
-                {n.Status.Status !== "تکمیل شده" && (
-                  <a
-                    onClick={(e: any) => {
-                      this.onShowItem(n.NominationItemId);
-                      e.preventDefault();
-                      return false;
-                    }}
-                    className="kt-user-card-v2__name pointer"
-                  >
-                    {n.User.Title}
-                  </a>
-                )}
-
-                {n.Status.Status === "تکمیل شده" && <a className="kt-user-card-v2__name pointer">{n.User.Title}</a>}
-
-                <span className="kt-user-card-v2__desc">{n.HasCoworker === true ? "همکار" : n.Relation}</span>
-              </div>{" "}
-            </div>
+        <TableRow>
+          <TableCell align="center" colSpan={3} className="emptyRowLog">
+            موردی جهت نمایش وجود ندارد!
           </TableCell>
-
-          <TableCell style={{ width: "20%" }} className="kt-datatable__cell" align="left">
-            <div className="progress-details ">
-              <span className="progress-status">{n.Status.Status}</span>
-              <span className="progress-number">{n.Status.Status !== "تکمیل شده" ? n.Status.Progress : 100}%</span>
-            </div>
-            <LinearProgress
-              className={n.Status.Status === "تکمیل شده" ? "complete-progress" : "not-completed-progress"}
-              variant="determinate"
-              value={n.Status.Status !== "تکمیل شده" ? n.Status.Progress : 100}
-            />
-          </TableCell>
-          {n.Status.Status !== "تکمیل شده" && (
-            <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
-              <button
-                className="btn btn-sm btn-bold btn-brand-hover"
-                onClick={(e: any) => {
-                  this.onShowItem(n.NominationItemId);
-                  e.preventDefault();
-                  return false;
-                }}
-              >
-                ارزیابی
-              </button>
-            </TableCell>
-          )}
         </TableRow>
       );
-    });
+    } else {
+      return this.state.appraisee.map((n: IAppraisee, index: any) => {
+        return (
+          <TableRow key={index} className="kt-datatable__row">
+            <TableCell align="right" className="kt-datatable__cell">
+              <div className="kt-user-card-v2">
+                <div className="kt-user-card-v2__pic">
+                  {/* <img alt={n.User.Title} src={n.User.AvatarUrl === null ? AvatarUrl : n.User.AvatarUrl} /> */}
+
+                  {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
+                  {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
+                </div>
+                <div className="kt-user-card-v2__details">
+                  {n.Status.Status !== "تکمیل شده" && (
+                    <a
+                      onClick={(e: any) => {
+                        this.onShowItem(n.NominationItemId);
+                        e.preventDefault();
+                        return false;
+                      }}
+                      className="kt-user-card-v2__name pointer"
+                    >
+                      {n.User.Title}
+                    </a>
+                  )}
+
+                  {n.Status.Status === "تکمیل شده" && <a className="kt-user-card-v2__name pointer">{n.User.Title}</a>}
+
+                  <span className="kt-user-card-v2__desc">{n.HasCoworker === true ? "همکار" : n.Relation}</span>
+                </div>{" "}
+              </div>
+            </TableCell>
+
+            <TableCell style={{ width: "20%" }} className="kt-datatable__cell" align="left">
+              <div className="progress-details ">
+                <span className="progress-status">{n.Status.Status}</span>
+                <span className="progress-number">{n.Status.Status !== "تکمیل شده" ? n.Status.Progress : 100}%</span>
+              </div>
+              <LinearProgress
+                className={n.Status.Status === "تکمیل شده" ? "complete-progress" : "not-completed-progress"}
+                variant="determinate"
+                value={n.Status.Status !== "تکمیل شده" ? n.Status.Progress : 100}
+              />
+            </TableCell>
+            {n.Status.Status !== "تکمیل شده" && (
+              <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
+                <button
+                  className="btn btn-sm btn-bold btn-brand-hover"
+                  onClick={(e: any) => {
+                    this.onShowItem(n.NominationItemId);
+                    e.preventDefault();
+                    return false;
+                  }}
+                >
+                  ارزیابی
+                </button>
+              </TableCell>
+            )}
+          </TableRow>
+        );
+      });
+    }
   };
   /************************************************************* */
   private onShowItem = (ItemId: number) => {
