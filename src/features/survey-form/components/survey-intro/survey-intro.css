@@ -3,12 +3,14 @@
   direction: rtl;
   line-height: 30px;
   text-align: justify;
+  padding-left: 20px;
 }
 .survey-intro .intro-en p {
   text-align: left;
   direction: ltr;
   line-height: 30px;
   text-align: justify;
+  font-size: 0.95rem;
 }
 .intro-card {
   margin: 2% auto;

@@ -33,7 +33,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
   }
   public render() {
     return (
-      <div className="rtl">
+      <div className="rtl survey-intro">
         <div className="kt-portlet kt-sc-2">
           <div className="kt-portlet__body">
             <div className="row">
@@ -46,7 +46,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
               </div>
               <div className="col-sm">
                 <div className="kt-sc__content">
-                  <div className="intro">
+                  <div className="intro-en">
                     <p dangerouslySetInnerHTML={{ __html: getIntroTextEn() }}></p>
                   </div>
                 </div>
