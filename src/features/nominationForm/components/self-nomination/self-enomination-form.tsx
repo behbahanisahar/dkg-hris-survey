@@ -8,7 +8,7 @@ import SPLists from "../../../../entities/lists";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
 import Util from "../../../../utilities/utilities";
-import NominationData from "../../../../entities/nomination";
+import INominationData from "../../../../entities/nomination";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
 import MYStepper from "../../../stepper/stepper";
 import Spinner from "../../../spinner/spinner";
@@ -106,8 +106,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     document.title = "Nomination Form";
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
-    //  const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
-    const NominationData: NominationData = this.props.NominationData;
+    const NominationData: INominationData = this.props.NominationData;
 
     this.setState(prevState => {
       return {

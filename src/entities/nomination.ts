@@ -1,7 +1,7 @@
 import SubOrdinate from "./subOrdinate";
 import IUser from "./user";
 
-export default interface NominationData {
+export default interface INominationData {
   Status: string;
   Subordinates: IUser[];
   Other: IUser[];

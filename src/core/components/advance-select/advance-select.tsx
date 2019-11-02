@@ -274,15 +274,15 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
     }
     return false;
   };
-  /***************************************************** */
+
   private onAddkeyPress(e: any, value: string) {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       this.AddItem(value);
     }
   }
-  /**********************async select key press function**************************** */
+
   private keyPress(e: any, value: string) {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       var x = document.getElementsByClassName(value) as HTMLCollectionOf<HTMLElement>;
       x[0].focus();
     }

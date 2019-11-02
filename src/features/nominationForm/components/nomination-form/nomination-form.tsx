@@ -6,7 +6,7 @@ import ListServices from "../../../../services/list-services";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
 import Util from "../../../../utilities/utilities";
-import NominationData from "../../../../entities/nomination";
+import INominationData from "../../../../entities/nomination";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
 import MYStepper from "../../../stepper/stepper";
 import IHistory from "../../../../entities/history";
@@ -115,7 +115,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
     // const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
-    const NominationData: NominationData = this.props.NominationData;
+    const NominationData: INominationData = this.props.NominationData;
     const NominationHistory: IHistory[] = await this.ListService.getNominationHistory(Number(itemId));
     let activeStep: number = 0;
     switch (NominationData.Status) {
@@ -530,11 +530,9 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       const Other = this.state.NominationData.Other.length;
       const Peer = this.state.NominationData.Peer.length;
       if (subordinateLength <= 2) {
-        {
-          this.state.NominationData.HasCoworker === true
-            ? this.notifyError("errorSubordinate", "تعداد همکار نباید کمتر از ۳ نفر باشد")
-            : this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
-        }
+        this.state.NominationData.HasCoworker === true
+          ? this.notifyError("errorSubordinate", "تعداد همکار نباید کمتر از ۳ نفر باشد")
+          : this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
 
         this.setState(prevState => {
           return {

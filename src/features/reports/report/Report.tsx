@@ -2,9 +2,6 @@ import * as React from "react";
 import { HorizontalBar } from "react-chartjs-2";
 
 export default class SurveyReport extends React.Component<{}> {
-  constructor(props: any) {
-    super(props);
-  }
   public render() {
     debugger;
     const data = {

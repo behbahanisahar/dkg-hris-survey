@@ -83,7 +83,7 @@ tbody > tr {
   bottom: 4rem;
   display: flex;
   justify-content: flex-end;
-  align-items: start;
+  align-items: flex-start;
   z-index: 0;
 }
 .kt-sc-2 .kt-sc__top {

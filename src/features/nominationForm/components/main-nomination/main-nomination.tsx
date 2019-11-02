@@ -1,7 +1,7 @@
 import React from "react";
 import Util from "../../../../utilities/utilities";
 import ListServices from "../../../../services/list-services";
-import NominationData from "../../../../entities/nomination";
+import INominationData from "../../../../entities/nomination";
 import SelfNomination from "../self-nomination/self-enomination-form";
 import Nomination from "../nomination-form/nomination-form";
 import Authentication from "../../../authentication/authentication";
@@ -28,7 +28,7 @@ class MainNomination extends React.Component<{}, IAppState> {
   public async componentDidMount() {
     const itemId = this.util.getQueryStringValue("itemid");
     const page = this.util.getQueryStringValue("page");
-    const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
+    const NominationData: INominationData = await this.ListService.getNominationData(Number(itemId));
     this.setState(prevState => {
       return {
         ...prevState,
