@@ -5,5 +5,4 @@ export default class Config {
       ? Context.siteServerRelativeUrl + "_layouts/api"
       : Context.siteServerRelativeUrl + "/_layouts/api";
   public headers = { "Content-Type": "application/json" };
-  public PDFheaders = { "Content-Type": "application/PDF" };
 }
