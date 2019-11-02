@@ -10,7 +10,6 @@ import Util from "../../../../utilities/utilities";
 import { ISurveyData } from "../../../../entities/survey-data";
 import Context from "../../../../utilities/context";
 import Info from "@material-ui/icons/Explicit";
-
 import Isurvey from "../../../../entities/survey";
 import Spinner from "../../../spinner/spinner";
 import Authentication from "../../../authentication/authentication";
@@ -160,7 +159,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
 
                         <div>
                           <div className="mt-5 pt-5">
-                            <InputLabel className="dk-brand-green-font" htmlFor="standard-name">
+                            <InputLabel className="dk-brand-text-green" htmlFor="standard-name">
                               شروع - عادات و رفتارهایی که می بایست شروع شوند
                               <HtmlTooltip
                                 title={
@@ -216,7 +215,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                             />
                           </div>
                           <div className="mt-5">
-                            <InputLabel className="dk-brand-red-font" htmlFor="standard-name">
+                            <InputLabel className="dk-brand-text-red" htmlFor="standard-name">
                               توقف - عادات و رفتارهایی که می بایست متوقف شده یا به نحو دیگری صورت پذیرند
                               <HtmlTooltip
                                 title={
