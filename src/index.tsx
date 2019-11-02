@@ -1,6 +1,5 @@
 import "react-app-polyfill/ie9";
 import React from "react";
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
