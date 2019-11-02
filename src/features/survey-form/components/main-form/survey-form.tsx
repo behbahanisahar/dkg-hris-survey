@@ -159,7 +159,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                         </div>
 
                         <div>
-                          <div style={{ marginTop: "7%" }}>
+                          <div className="mt-5 pt-5">
                             <InputLabel className="dk-brand-green-font" htmlFor="standard-name">
                               شروع - عادات و رفتارهایی که می بایست شروع شوند
                               <HtmlTooltip
@@ -186,7 +186,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                               variant="outlined"
                             />
                           </div>
-                          <div>
+                          <div className="mt-5">
                             <InputLabel className="dk-brand-bllue-font " htmlFor="standard-name">
                               ادامه - عادات و رفتارهای موثری که می بایست ادامه پیدا کنند
                               <HtmlTooltip
@@ -215,7 +215,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                               variant="outlined"
                             />
                           </div>
-                          <div>
+                          <div className="mt-5">
                             <InputLabel className="dk-brand-red-font" htmlFor="standard-name">
                               توقف - عادات و رفتارهایی که می بایست متوقف شده یا به نحو دیگری صورت پذیرند
                               <HtmlTooltip

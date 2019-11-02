@@ -12,10 +12,9 @@
 
 .li-class {
   display: block;
-  direction: rtl;
   list-style: none;
-  text-align: right;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 13px;
 }
 .ul-class {
   direction: rtl;
@@ -83,4 +82,7 @@
 .MuiSvgIcon-root {
   margin-right: 5px !important;
   margin-bottom: 5px;
+}
+.MuiSvgIcon-colorPrimary {
+  color: #607d8b;
 }
