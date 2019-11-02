@@ -262,7 +262,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                             return false;
                           }}
                         >
-                          ذخیره فرم
+                          ذخیره | Save
                         </button>
 
                         <button
@@ -273,7 +273,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                             return false;
                           }}
                         >
-                          بازگشت به لیست
+                          بازگشت | Back
                         </button>
                       </div>
                       <div className="col kt-align-right">
@@ -289,7 +289,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                             return false;
                           }}
                         >
-                          ثبت نهایی ارزیابی
+                          ثبت نهایی | Submit
                         </button>
                       </div>
                     </div>
