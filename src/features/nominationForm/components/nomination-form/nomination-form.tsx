@@ -148,7 +148,6 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   }
 
   public render() {
-    console.log(this.state.NominationData);
     return (
       <div className="rtl">
         {this.state.showSpinner && <Spinner />}
@@ -179,7 +178,12 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             </HtmlTooltip>
                             مدیر مستقیم
                           </h3>
-                          :<h5>{this.state.NominationData.LineManager!.Title} </h5>
+                          :
+                          <h5>
+                            {this.state.NominationData.LineManager != null
+                              ? this.state.NominationData.LineManager!.Title
+                              : "-"}
+                          </h5>
                         </div>
                       </div>
                       <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>

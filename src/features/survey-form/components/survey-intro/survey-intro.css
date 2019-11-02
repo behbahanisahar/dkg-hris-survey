@@ -1,10 +1,10 @@
-.intro p {
+.survey-intro .intro p {
   text-align: right;
   direction: rtl;
   line-height: 30px;
   text-align: justify;
 }
-.intro-en p {
+.survey-intro .intro-en p {
   text-align: left;
   direction: ltr;
   line-height: 30px;

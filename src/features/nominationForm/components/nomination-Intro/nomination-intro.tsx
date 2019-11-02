@@ -33,7 +33,7 @@ export default class NominationIntroPage extends React.Component<{}, INomination
   }
   public render() {
     return (
-      <div className="rtl">
+      <div className="rtl nomination-intro">
         <div className="kt-portlet kt-sc-2">
           <div className="kt-portlet__body">
             <div className="row">
