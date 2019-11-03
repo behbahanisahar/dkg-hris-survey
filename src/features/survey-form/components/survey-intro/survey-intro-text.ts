@@ -68,7 +68,7 @@ export function getIntroTextEn() {
   This questionnaire aims to assist Digikala’s on-going success and its sustainable growth by collecting employees’ feedback about core values, leadership, and business competencies.
   Therefore, please complete the questionnaire by considering your experiences working with this individual during the last 6 months.
   Please be assured that all the data will be collected 
-  <b class='dk-brand-text-red'>anoanonymously</b>. <br>
+  <b class='dk-brand-text-red'>anonymously</b>. <br>
   Your comments and feedback play an important role in these individuals’ personal development, so please be completely open and honest in completing the questionnaire.
   Please click on the name of each person at the bottom of the page to enter the survey page. 
   The survey page has been divided into 2 sections; quantitative (25 items) and qualitative (3 items).
