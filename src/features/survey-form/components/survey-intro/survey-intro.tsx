@@ -92,8 +92,6 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
             <TableCell align="right" className="kt-datatable__cell">
               <div className="kt-user-card-v2">
                 <div className="kt-user-card-v2__pic">
-                  {/* <img alt={n.User.Title} src={n.User.AvatarUrl === null ? AvatarUrl : n.User.AvatarUrl} /> */}
-
                   {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
                   {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
                 </div>
@@ -111,7 +109,9 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
                     </a>
                   )}
 
-                  {n.Status.Status === "تکمیل شده" && <a className="kt-user-card-v2__name pointer">{n.User.Title}</a>}
+                  {n.Status.Status === "تکمیل شده" && (
+                    <span className="kt-user-card-v2__name pointer">{n.User.Title}</span>
+                  )}
 
                   <span className="kt-user-card-v2__desc">{n.HasCoworker === true ? "همکار" : n.Relation}</span>
                 </div>{" "}

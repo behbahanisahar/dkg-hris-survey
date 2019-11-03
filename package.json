@@ -21,8 +21,10 @@
     "pre-commit-prettier": "pretty-quick --staged",
     "eslint": "eslint \"src/**/*.{ts,tsx,js,jsx}\"",
     "deploy": "run-s build deploy-build",
+    "deploy-production": "run-s build deploy-build-production",
     "deploy-build-debug": "node --inspect ./node_modules/.bin/ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./build/**\" \"/Apps/Survey\"",
-    "deploy-build": "ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./build/**\" \"/Apps/Survey\"",
+    "deploy-build": "ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./build/**\" \"/Apps/Survey\" \"dev\"",
+    "deploy-build-production": "ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./build/**\" \"/Apps/Survey\" \"production\"",
     "deploy-api": "ts-node --project ./bin/tsconfig.json ./bin/uploadFolderToSP.ts \"./src/api/**\" \"/Apps/Survey\""
   },
   "eslintConfig": {

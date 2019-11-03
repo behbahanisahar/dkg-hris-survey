@@ -68,18 +68,20 @@ const ensureSPPath = async (web: Web, targetPath: string): Promise<Folder | unde
   return currentFolder;
 };
 
-const uploadFolderToSP = async (sourceGlob: string, targetBasePath: string): Promise<boolean> => {
+const uploadFolderToSP = async (sourceGlob: string, targetBasePath: string, environment: string): Promise<boolean> => {
   if (!targetBasePath.endsWith(path.sep)) {
     targetBasePath = targetBasePath + path.sep;
   }
 
   const settings = await new PnpNode({
     config: {
-      configPath: "./sp-rest-proxy/private.json",
+      configPath:
+        environment == "production" ? "./sp-rest-proxy/private.production.json" : "./sp-rest-proxy/private.json",
     },
   }).init();
 
   const web = new Web(settings.siteUrl || "");
+  console.log(`Deploying on ${web.toUrl()}`);
 
   const files = fs.find(".", {
     matching: sourceGlob,
@@ -87,7 +89,7 @@ const uploadFolderToSP = async (sourceGlob: string, targetBasePath: string): Pro
 
   for (const f of files) {
     if (f.indexOf("eot") > 0 || f.indexOf("woff") > 0 || f.indexOf("ttf") > 0 || f.indexOf("svg") > 0) continue;
-    console.log(f);
+    console.log(`${environment}: ${f}`);
     const fileData = await fs.readAsync(f, "buffer");
 
     if (!fileData) {
@@ -124,7 +126,7 @@ const uploadFolderToSP = async (sourceGlob: string, targetBasePath: string): Pro
 };
 
 const args = process.argv.slice(2);
-uploadFolderToSP(args[0], args[1])
+uploadFolderToSP(args[0], args[1], args[2])
   .then(res => {
     if (res === true) {
       console.log("Files Deployed!");
