@@ -5,7 +5,7 @@ interface IProps {
 }
 const RatersTable: React.SFC<IProps> = props => {
   return (
-    <DKPortlet title="Rater Categories">
+    <DKPortlet title="سلام">
       <div>Your feedback report is based on evaluations gathered from the following rater categories</div>
       <table className="table">
         <thead className="thead-light">

@@ -7,7 +7,7 @@ export interface DKPortletProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
 }
 
-export function DKPortlet({ children, title = "", description = "", ...other }: DKPortletProps) {
+export function DKWidget({ children, title = "", description = "", ...other }: DKPortletProps) {
   return (
     <div className="kt-portlet kt-portlet--height-fluid">
       <div className="kt-widget14">
