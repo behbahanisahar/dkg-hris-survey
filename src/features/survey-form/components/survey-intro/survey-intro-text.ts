@@ -3,7 +3,7 @@ export function getIntroTextFa() {
   <br/>
   <br/>
   احتراما به‌اطلاع می‌رساند که هر ساله بازخورد ۳۶۰ درجه برای تمامی رهبران دیجی‌کالا (از مدیران‌عامل تا سرپرستان) انجام می‌شود.
-  از این‌رو، شما برای ارائه بازخورد به افرادی که نامشان در قسمت پایین صفحه آمده است، انتخاب شده‌اید. 
+  از این‌رو، شما برای ارائه بازخورد به افرادی که نامشان در پایین صفحه آمده است، انتخاب شده‌اید. 
   <br>
   <i class="la bullet"></i>
   هدف از این پرسش‌نامه، جمع‌آوری بازخورد‌هایی در حوزه ارزش‌های اصلی، شایستگی‌های رهبری و کسب‌وکار در جهت موفقیت و رشد پایدار دیجی‌کالا می‌باشد.  
@@ -44,7 +44,7 @@ export function getIntroTextFa() {
   <b class='dk-brand-text-blue'>
     "نظری ندارم"
     </b>
-     را انتخاب کنید؛ 
+   را انتخاب کنید. 
      <br>
   <i class="la bullet"></i>
   همچنین در انتهای هر فرم، بخش کیفی در ۳ بخش خواهید دید که می توانید رفتارهایی که فرد مورد نظر می بایست، شروع، ادامه و یا متوقف کند را اعلام نمایید. در نظر داشته باشید که همه افرادی که به فرد مورد نظر در این قسمت بازخورد می‌دهند، در گزارش فرد، جملات آنها عینا اما به صورت کاملا 
@@ -60,6 +60,7 @@ export function getIntroTextFa() {
   لطفا پس از تکمیل پرسش‌نامه با کلیک بر روی دکمه ثبت نهائی پاسخ‌های خود را نهایی کرده و ثبت نمائید. 
   <br>
   <br>
+  <br>
   <i class="la bullet"></i>
   در صورت داشتن هر گونه سوال یا مشکل با موهبت شعله (ایمیل: 
     <a href="mailto:m.sholeh@digikala.com?subject=بازخورد ۳۶۰ درجه">m.sholeh@digikala.com</a>
@@ -68,7 +69,8 @@ export function getIntroTextFa() {
         داخلی: ۶۱۴۳)  تماس بگیرید.
         <br>
   پیشاپیش از همراهیتان در مسیر توسعه و تعالی دیجی کالا متشکریم.
-  <br><br>
+  <br>
+  <br>
   <b>
   تیم توسعه و رهبری دیجی‌کالا
   </b>
@@ -119,14 +121,17 @@ export function getIntroTextEn() {
   <br>
   <i class="la bullet"></i>
   After completing the questionnaire, please click on “Submit” to finalize and store your response. 
-  <br><br>
+  <br>
+  <br>
   <br>
   <i class="la bullet"></i>
   Should you encounter any issues or problems do not hesitate to contact Mouhebat Sholeh (Email:  <a href="mailto:m.sholeh@digikala.com?subject=بازخورد ۳۶۰ درجه">m.sholeh@digikala.com</a>
    / Ext: 6039) or Mohsen Alipour (<a href="mailto:mohsen.alipour@digikala.com?subject=بازخورد ۳۶۰ درجه">mohsen.alipour@digikala.com</a> / Ext: 6143). 
   <br>
   Thank you in advance for your cooperation in the path toward DK’s excellence.
-  <br><br><b>
+  <br>
+  <br>
+  <b>
   Talent & Leadership Development Team
   </b>
   `;

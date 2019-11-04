@@ -2,6 +2,7 @@ import { IAnswer } from "./../../../../entities/answer";
 import Isurvey from "../../../../entities/survey";
 
 export default interface ISurveyFromState {
+  open: boolean;
   score: string;
   radio: number;
   marks: any[];

@@ -4,7 +4,20 @@ import ListServices from "../../../../services/list-services";
 import { MDBRow, MDBIcon } from "mdbreact";
 import "./survey-form.css";
 import IQuestion from "../../../../entities/survey-questions";
-import { Slider, Tooltip, withStyles, Theme, Typography, InputLabel, TextField } from "@material-ui/core";
+import {
+  Slider,
+  Tooltip,
+  withStyles,
+  Theme,
+  Typography,
+  InputLabel,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@material-ui/core";
 import ICategory from "../../../../entities/categories";
 import Util from "../../../../utilities/utilities";
 import { ISurveyData } from "../../../../entities/survey-data";
@@ -21,7 +34,7 @@ const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
     backgroundColor: "#77787B",
     color: "#fff",
-    maxWidth: 260,
+    maxWidth: 560,
     fontSize: "3px  !important",
     border: "1px solid #dadde9",
     textAlign: "left",
@@ -36,6 +49,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
     this.ListService = new ListServices();
 
     this.state = {
+      open: false,
       SurveyFormData: {
         User: {
           Title: "",
@@ -65,6 +79,22 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       savingForm: false,
     };
   }
+  handleClickOpen = () => {
+    this.setState({
+      open: true,
+    });
+  };
+  handleClose = () => {
+    this.onSubmitForm("تکمیل شده", "submit");
+    this.setState({
+      open: false,
+    });
+  };
+  handleCancel = () => {
+    this.setState({
+      open: false,
+    });
+  };
   public async componentDidMount() {
     document.title = "Survey Form";
     const itemid = this.util.getQueryStringValue("itemid");
@@ -284,7 +314,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                               : "btn dk-brand-green btn-wide btn-elevate btn-elevate-air mx-2 btn-elevate btn-elevate-air mr-2"
                           }
                           onClick={e => {
-                            this.onSubmitForm("تکمیل شده", "submit");
+                            this.handleClickOpen();
                             e.preventDefault();
                             return false;
                           }}
@@ -297,6 +327,27 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                 </div>
               </div>
             )}
+            <Dialog
+              open={this.state.open}
+              onClose={this.handleCancel}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">{"ثبت نهایی فرم"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  پس از ثبت‌نهایی، فرم از دسترس شما خارج خواهد شد. آیا مایل به ثبت‌نهایی هستید؟
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <button onClick={this.handleCancel} className="btn btn-sm btn-brand-hover">
+                  خیر
+                </button>
+                <button className="btn dk-brand-green btn-sm mx-2 mr-2" onClick={this.handleClose}>
+                  بله، ثبت کن
+                </button>
+              </DialogActions>
+            </Dialog>
           </div>
         )}
       </div>
@@ -448,6 +499,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
       ShouldBeContinued: this.state.SurveyFormData.ShouldBeContinued,
       ShouldBeStarted: this.state.SurveyFormData.ShouldBeStarted,
     };
+
     this.setState(prevState => {
       return {
         ...prevState,

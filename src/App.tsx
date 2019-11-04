@@ -9,7 +9,7 @@ import NominationIntroPage from "./features/nominationForm/components/nomination
 import MainNomination from "./features/nominationForm/components/main-nomination/main-nomination";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SurveyReport from "./features/reports/report/Report";
+import SurveyReport from "./features/reports/report/report";
 
 const theme = createMuiTheme({
   typography: {
