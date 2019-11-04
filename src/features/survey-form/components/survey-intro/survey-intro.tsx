@@ -1,11 +1,11 @@
 import React from "react";
+import "./survey-intro.less";
 import ISurveyIntroState from "./survey-intro-state";
 import ListServices from "../../../../services/list-services";
+import Spinner from "../../../spinner/spinner";
 import { IAppraisee } from "../../../../entities/appraisee";
-import "./survey-intro.css";
 import { TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/core";
 import { MDBTable, MDBTableBody } from "mdbreact";
-import Spinner from "../../../spinner/spinner";
 import { getIntroTextFa, getIntroTextEn } from "./survey-intro-text";
 
 export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroState> {
@@ -75,7 +75,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
       </div>
     );
   }
-  /**************************** Repeat Table ****************************** */
+
   private onRenderRows = () => {
     if (this.state.appraisee.length === 0) {
       return (
@@ -148,9 +148,8 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
       });
     }
   };
-  /************************************************************* */
+
   private onShowItem = (ItemId: number) => {
     window.location.href = "?itemid=" + ItemId + "&page=SurveyForm";
   };
-  /*********************************************************** */
 }
