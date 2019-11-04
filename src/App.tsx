@@ -10,6 +10,7 @@ import MainNomination from "./features/nominationForm/components/main-nomination
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SurveyReport from "./features/reports/report/report";
+import MainDashboard from "./features/dashboard/main-dashboard/main-dashboard";
 
 const theme = createMuiTheme({
   typography: {
@@ -56,6 +57,7 @@ class App extends React.Component<{}, IAppState> {
           <MuiThemeProvider theme={theme}>
             {this.state.page.toLowerCase() === "nominationform" && <MainNomination />}
             {this.state.page.toLowerCase() === "report" && <SurveyReport />}
+            {this.state.page.toLowerCase() === "dashboard" && <MainDashboard />}
             {this.state.page.toLowerCase() === "surveyform" && <FormSurvey />}
             {this.state.page.toLowerCase() === "surveyintro" && <SurveyIntroPage />}
             {this.state.page.toLowerCase() === "nominationintro" && <NominationIntroPage />}
