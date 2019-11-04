@@ -8,7 +8,7 @@ import DKValueRadarChart from "../dk-value-radar-chart/dk-value-radar-chart";
 export default class MainDashboard extends React.Component<{}> {
   public render() {
     return (
-      <>
+      <div className="rtl">
         <Grid container spacing={3}>
           <Grid item xs={4}>
             <CompetencySummary></CompetencySummary>
@@ -24,7 +24,7 @@ export default class MainDashboard extends React.Component<{}> {
           </Grid>
           <Grid item xs={12} sm={12}></Grid>
         </Grid>
-      </>
+      </div>
     );
   }
 }
