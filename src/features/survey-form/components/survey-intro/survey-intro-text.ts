@@ -1,9 +1,10 @@
 export function getIntroTextFa() {
   return `<b>  همکاران گرامی، </b>
   <br/>
-  <br/>
+
   احتراما به‌اطلاع می‌رساند که هر ساله بازخورد ۳۶۰ درجه برای تمامی رهبران دیجی‌کالا (از مدیران‌عامل تا سرپرستان) انجام می‌شود.
   از این‌رو، شما برای ارائه بازخورد به افرادی که نامشان در پایین صفحه آمده است، انتخاب شده‌اید. 
+  <br>
   <br>
   <i class="la bullet"></i>
   هدف از این پرسش‌نامه، جمع‌آوری بازخورد‌هایی در حوزه ارزش‌های اصلی، شایستگی‌های رهبری و کسب‌وکار در جهت موفقیت و رشد پایدار دیجی‌کالا می‌باشد.  
@@ -61,7 +62,6 @@ export function getIntroTextFa() {
   <br>
   <br>
   <br>
-  <i class="la bullet"></i>
   در صورت داشتن هر گونه سوال یا مشکل با موهبت شعله (ایمیل: 
     <a href="mailto:m.sholeh@digikala.com?subject=بازخورد ۳۶۰ درجه">m.sholeh@digikala.com</a>
     / داخلی: ۶۰۳۹) یا محسن علیپور (ایمیل: 
@@ -80,10 +80,11 @@ export function getIntroTextFa() {
 export function getIntroTextEn() {
   return `<b>Dear Colleagues,</b>
   <br/>
-  <br/>
   As you know, we conduct 360-degree feedback for all Digikala leaders (from supervisors to C-level executives) annually. 
   You have been selected to provide feedback for the people listed below.
   <br>
+  <br>
+
   <i class="la bullet"></i>
   This questionnaire aims to assist Digikala’s on-going success and its sustainable growth by collecting employees’ feedback about core values, leadership, and business competencies.
   Therefore, please complete the questionnaire by considering your experiences working with this individual during the last 6 months.
@@ -124,7 +125,6 @@ export function getIntroTextEn() {
   <br>
   <br>
   <br>
-  <i class="la bullet"></i>
   Should you encounter any issues or problems do not hesitate to contact Mouhebat Sholeh (Email:  <a href="mailto:m.sholeh@digikala.com?subject=بازخورد ۳۶۰ درجه">m.sholeh@digikala.com</a>
    / Ext: 6039) or Mohsen Alipour (<a href="mailto:mohsen.alipour@digikala.com?subject=بازخورد ۳۶۰ درجه">mohsen.alipour@digikala.com</a> / Ext: 6143). 
   <br>
