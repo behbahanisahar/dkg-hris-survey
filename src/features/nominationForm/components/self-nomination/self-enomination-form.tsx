@@ -72,6 +72,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       showSpinner: true,
       submittingForm: false,
       NominationData: {
+        HasCoworker: false,
         Status: "",
         Subordinates: [],
         Other: [],
@@ -120,7 +121,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
 
   public render() {
     // const Subordinates = this.state.NominationData.Subordinates;
-
+    console.log(this.state);
     return (
       <div className="rtl">
         {this.state.showSpinner && <Spinner />}
@@ -170,7 +171,9 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             <HtmlTooltip
                               title={
                                 <React.Fragment>
-                                  <Typography color="inherit"> Direct Report</Typography>
+                                  <Typography color="inherit">
+                                    {this.state.NominationData.HasCoworker === true ? "Colleague" : " Direct Report"}
+                                  </Typography>
                                 </React.Fragment>
                               }
                             >
@@ -274,7 +277,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                           return false;
                         }}
                       >
-                        تایید
+                        تایید | Submit
                       </button>
                       <button
                         onKeyPress={e => {
@@ -289,7 +292,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                         }}
                         className="btn btn-secondary "
                       >
-                        انصراف
+                        انصراف | Cancel
                       </button>
                     </div>
                   </MDBCardBody>

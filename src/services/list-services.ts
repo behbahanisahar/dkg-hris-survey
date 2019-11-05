@@ -58,6 +58,7 @@ class ListServices extends ServiceBase {
         .then(response => {
           return {
             Title: "",
+            HasCoworker: response.data.HasCoworker,
             Status: response.data.Status,
             Subordinates: response.data.Subordinates,
             Other: response.data.Other,
@@ -69,6 +70,7 @@ class ListServices extends ServiceBase {
         })
         .catch(error => {
           return {
+            HasCoworker: false,
             statusCode: error.response.status,
             Status: "",
             Subordinates: [],

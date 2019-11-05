@@ -358,7 +358,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             return false;
                           }}
                         >
-                          تایید
+                          تایید | Submit
                         </button>
                         <button
                           className="btn btn-secondary ml-2"
@@ -373,7 +373,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             return false;
                           }}
                         >
-                          انصراف
+                          انصراف | Cancel
                         </button>
                       </div>
                     </div>

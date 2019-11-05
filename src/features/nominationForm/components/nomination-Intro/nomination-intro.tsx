@@ -100,7 +100,7 @@ export default class NominationIntroPage extends React.Component<{}, INomination
              •	You can search for people using their names in English/Persian or their email address and select their names from the list of names shown. Then click the plus sign (+) which is located on the left of space specified for names or alternatively press “Enter” on your keyboard. Since some names on the list are very similar, the email address, department, and position of each person is shown as well. 
              •	Each person can be nominated in only one category and nominating the same person for another category will result in an error message. 
              •	Per the explanations above, manager and above will see forms with their subordinate’s nominees if their subordinates have completed their own forms. In this case by clicking on each name, you can make necessary modifications. 
-             •	After completing the nomination process, confirm your selection by clicking the “تائید” button at the bottom of the page. 
+             •	After completing the nomination process, confirm your selection by clicking the “Submit” button at the bottom of the page. 
              •	After the final confirmation, you cannot change the data. 
 
              Should you have any questions or issues do not hesitate to contact Mouhebat Sholeh (email: m.sholeh@digikala.com / Ext: 6039) or Mohsen Alipour (Email: mohsen.alipour@digikala.com / Ext: 6143). 
