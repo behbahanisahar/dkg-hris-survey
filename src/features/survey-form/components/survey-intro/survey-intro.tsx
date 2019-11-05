@@ -7,6 +7,7 @@ import { IAppraisee } from "../../../../entities/appraisee";
 import { TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/core";
 import { MDBTable, MDBTableBody } from "mdbreact";
 import { getIntroTextFa, getIntroTextEn } from "./survey-intro-text";
+import { NoContent } from "../../../nominationForm/components/no-content/no-content";
 
 export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroState> {
   private ListService: ListServices;
@@ -81,7 +82,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
       return (
         <TableRow>
           <TableCell align="center" colSpan={3} className="emptyRowLog">
-            موردی جهت نمایش وجود ندارد!
+            <NoContent></NoContent>
           </TableCell>
         </TableRow>
       );

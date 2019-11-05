@@ -258,11 +258,11 @@ export default class MockData {
     },
   ];
   public static NominationTaks: UserTasks[] = [
-    {
-      ItemId: 2,
-      Status: "",
-      Title: "",
-      User: {},
-    },
+    // {
+    //   ItemId: 2,
+    //   Status: "",
+    //   Title: "",
+    //   User: {},
+    // },
   ];
 }

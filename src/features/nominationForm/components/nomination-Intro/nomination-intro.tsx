@@ -4,10 +4,10 @@ import ListServices from "../../../../services/list-services";
 import { TableRow, TableCell } from "@material-ui/core";
 import UserTasks from "../../../../entities/user-task";
 import { MDBTable, MDBTableBody } from "mdbreact";
-
 import "./nomination-intro.css";
 
 import Spinner from "../../../spinner/spinner";
+import { NoContent } from "../no-content/no-content";
 
 export default class NominationIntroPage extends React.Component<{}, INominationIntroState> {
   private ListService: ListServices;
@@ -141,8 +141,8 @@ Thank you in advance for your cooperation in the path toward DK’s excellence.
     if (this.state.nominationTasks.length === 0) {
       return (
         <TableRow>
-          <TableCell align="center" colSpan={3} className="emptyRowLog">
-            موردی جهت نمایش وجود ندارد!
+          <TableCell align="center" colSpan={3}>
+            <NoContent></NoContent>
           </TableCell>
         </TableRow>
       );
