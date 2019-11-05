@@ -21,6 +21,8 @@ class ListServices extends ServiceBase {
             searchTerm +
             "',Title) or substringof('" +
             searchTerm +
+            "',NickName) or substringof('" +
+            searchTerm +
             "',EmailAddress) or substringof('" +
             searchTerm +
             "',SPLatinFullName))"
@@ -28,7 +30,7 @@ class ListServices extends ServiceBase {
       const result: any[] = await sp.web.lists
         .getByTitle(SPLists.UserInfo)
         .items.filter(encodeURIComponent(filter))
-        .select("EmailAddress", "SPLatinFullName", "Department", "ReportedPost", "Id")
+        .select("EmailAddress", "SPLatinFullName", "Department", "ReportedPost", "Id", "NickName")
         .orderBy("SPLatinFullName", true)
         .top(20)
         .get();
@@ -100,8 +102,11 @@ class ListServices extends ServiceBase {
           return {
             Categories: response.data.Categories,
             SurveyAnswerId: response.data.SurveyAnswerId,
-            UserDisplayName: response.data.UserDisplayName,
+            User: response.data.User,
             statusCode: response.status,
+            ShouldBeContinued: response.data.ShouldBeContinued,
+            ShouldBeStarted: response.data.ShouldBeStarted,
+            ShouldBeStopped: response.data.ShouldBeStopped,
           };
         })
 
@@ -110,7 +115,10 @@ class ListServices extends ServiceBase {
             statusCode: error.response.status,
             Categories: [],
             SurveyAnswerId: 0,
-            UserDisplayName: "",
+            User: {},
+            ShouldBeContinued: "",
+            ShouldBeStarted: "",
+            ShouldBeStopped: "",
           };
         });
 
@@ -141,7 +149,7 @@ class ListServices extends ServiceBase {
   }
   /**************************submit form***************************************************** */
   public async SubmitForm(param: ISurveyData): Promise<any> {
-    const items: any = await this.post("survey", param);
+    const items: any = await this.put("survey", param);
     return Promise.resolve(items);
   }
   /************************************************************** */

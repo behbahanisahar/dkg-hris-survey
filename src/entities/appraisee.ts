@@ -6,4 +6,5 @@ export interface IAppraisee {
   Relation: string;
   Status: IAppraiseeStatus;
   User: UserInfoItem;
+  HasCoworker: boolean;
 }
