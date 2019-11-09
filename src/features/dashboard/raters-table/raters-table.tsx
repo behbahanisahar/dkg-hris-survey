@@ -11,17 +11,6 @@ interface IState {
   itemId?: number;
   raters: Raters[];
 }
-// const RatersTable: React.SFC<IProps> = props => {
-//   return (
-
-//   );
-// };
-// RatersTable.defaultProps = {
-//   name: "Guest User",
-// };
-
-// export default RatersTable;
-
 class RatersTable extends React.Component<IProps, IState> {
   private ReportServices: ReportServices;
   private util: Util;
