@@ -127,7 +127,7 @@ btn btn-sm btn-clean read-more  w-25"
                     <span className="kt-user-card-v2__name pointer">{n.User.Title}</span>
                   )}
 
-                  <span className="kt-user-card-v2__desc">{n.HasCoworker === true ? "همکار" : n.Relation}</span>
+                  <span className="kt-user-card-v2__desc">{n.HasCoworker === true ? "Colleague" : n.Relation}</span>
                 </div>{" "}
               </div>
             </TableCell>

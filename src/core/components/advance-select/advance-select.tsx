@@ -303,7 +303,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
     let items: any[] = [];
     switch (TableName) {
       case "Subordinates": {
-        items = this.state.NominationData.Subordinates.slice(0, 15);
+        items = this.state.NominationData.Subordinates;
         break;
       }
       case "Peer": {
