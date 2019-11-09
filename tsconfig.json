@@ -14,7 +14,8 @@
     "noEmit": true,
     "jsx": "preserve",
     "lib": ["dom", "es6"],
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "strictNullChecks": true
   },
   "include": ["src"],
   "exclude": ["node_modules"]
