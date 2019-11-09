@@ -8,7 +8,7 @@ import SPLists from "../../../../entities/lists";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
 import Util from "../../../../utilities/utilities";
-import NominationData from "../../../../entities/nomination";
+import INominationData from "../../../../entities/nomination";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
 import MYStepper from "../../../stepper/stepper";
 import Spinner from "../../../spinner/spinner";
@@ -72,6 +72,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       showSpinner: true,
       submittingForm: false,
       NominationData: {
+        HasCoworker: false,
         Status: "",
         Subordinates: [],
         Other: [],
@@ -106,8 +107,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     document.title = "Nomination Form";
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
-    //  const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
-    const NominationData: NominationData = this.props.NominationData;
+    const NominationData: INominationData = this.props.NominationData;
 
     this.setState(prevState => {
       return {
@@ -121,7 +121,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
 
   public render() {
     // const Subordinates = this.state.NominationData.Subordinates;
-
+    console.log(this.state);
     return (
       <div className="rtl">
         {this.state.showSpinner && <Spinner />}
@@ -171,13 +171,15 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             <HtmlTooltip
                               title={
                                 <React.Fragment>
-                                  <Typography color="inherit"> Direct Report</Typography>
+                                  <Typography color="inherit">
+                                    {this.state.NominationData.HasCoworker === true ? "Colleague" : " Direct Report"}
+                                  </Typography>
                                 </React.Fragment>
                               }
                             >
                               <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
-                            نیروی مستقیم تحت سرپرستی / همکار
+                            {this.state.NominationData.HasCoworker === true ? "همکار" : " نیروی مستقیم تحت سرپرستی"}
                           </h3>
                           <div className="col-lg-3" />
                           <div className="col-lg-9">
@@ -275,7 +277,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                           return false;
                         }}
                       >
-                        تایید
+                        تایید | Submit
                       </button>
                       <button
                         onKeyPress={e => {
@@ -290,7 +292,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                         }}
                         className="btn btn-secondary "
                       >
-                        انصراف
+                        انصراف | Cancel
                       </button>
                     </div>
                   </MDBCardBody>
@@ -423,7 +425,9 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       const Peer = this.state.NominationData.Peer.length;
 
       if (subordinateLength <= 2) {
-        this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
+        this.state.NominationData.HasCoworker === true
+          ? this.notifyError("errorSubordinate", "تعداد همکار نباید کمتر از ۳ نفر باشد")
+          : this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
         this.setState(prevState => {
           return {
             ...prevState,

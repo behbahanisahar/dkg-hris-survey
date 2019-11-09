@@ -6,7 +6,7 @@ import ListServices from "../../../../services/list-services";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
 import Util from "../../../../utilities/utilities";
-import NominationData from "../../../../entities/nomination";
+import INominationData from "../../../../entities/nomination";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
 import MYStepper from "../../../stepper/stepper";
 import IHistory from "../../../../entities/history";
@@ -115,7 +115,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     const itemId = this.util.getQueryStringValue("itemid");
     await this.loadUsers();
     // const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
-    const NominationData: NominationData = this.props.NominationData;
+    const NominationData: INominationData = this.props.NominationData;
     const NominationHistory: IHistory[] = await this.ListService.getNominationHistory(Number(itemId));
     let activeStep: number = 0;
     switch (NominationData.Status) {
@@ -178,7 +178,12 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             </HtmlTooltip>
                             مدیر مستقیم
                           </h3>
-                          :<h5>{this.state.NominationData.LineManager!.Title} </h5>
+                          :
+                          <h5>
+                            {this.state.NominationData.LineManager != null
+                              ? this.state.NominationData.LineManager!.Title
+                              : "-"}
+                          </h5>
                         </div>
                       </div>
                       <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg border-brand-grey"></div>
@@ -200,7 +205,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             >
                               <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
-                            نیروی مستقیم تحت سرپرستی
+                            {this.state.NominationData.HasCoworker === true ? "همکار" : " نیروی مستقیم تحت سرپرستی"}
                           </h3>
                         </div>
                         <div className="kt-section__body">
@@ -353,7 +358,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             return false;
                           }}
                         >
-                          تایید
+                          تایید | Submit
                         </button>
                         <button
                           className="btn btn-secondary ml-2"
@@ -368,7 +373,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             return false;
                           }}
                         >
-                          انصراف
+                          انصراف | Cancel
                         </button>
                       </div>
                     </div>
@@ -529,7 +534,10 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       const Other = this.state.NominationData.Other.length;
       const Peer = this.state.NominationData.Peer.length;
       if (subordinateLength <= 2) {
-        this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
+        this.state.NominationData.HasCoworker === true
+          ? this.notifyError("errorSubordinate", "تعداد همکار نباید کمتر از ۳ نفر باشد")
+          : this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
+
         this.setState(prevState => {
           return {
             ...prevState,

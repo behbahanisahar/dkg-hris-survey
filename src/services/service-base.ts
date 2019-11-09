@@ -16,9 +16,6 @@ export default class ServiceBase {
 
   protected get = async (operation: string) => {
     return await axios.get(`${this.config.Endpoint}/${operation}`, {
-      // validateStatus: function(status) {
-      //   return status < 500;
-      // },
       headers: this.config.headers,
     });
   };
@@ -31,14 +28,6 @@ export default class ServiceBase {
   protected put = async (operation: string, params: any) => {
     return await axios.put(`${this.config.Endpoint}/${operation}`, JSON.parse(JSON.stringify(params)), {
       headers: this.config.headers,
-    });
-  };
-
-  protected postPDF = async (operation: string, params: any) => {
-    return await axios.post(`${this.config.Endpoint}/${operation}`, JSON.parse(JSON.stringify(params)), {
-      headers: this.config.headers,
-      method: "POST",
-      responseType: "blob",
     });
   };
 }

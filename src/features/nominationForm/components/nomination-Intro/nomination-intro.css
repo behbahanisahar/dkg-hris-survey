@@ -17,3 +17,13 @@
   margin-left: 26px;
   display: block;
 }
+.nomination-intro .intro p {
+  text-align: right;
+  direction: rtl;
+  white-space: pre-line;
+}
+.nomination-intro .intro-en p {
+  text-align: left;
+  direction: ltr;
+  white-space: pre-line;
+}

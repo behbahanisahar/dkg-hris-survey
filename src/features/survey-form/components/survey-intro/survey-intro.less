@@ -1,16 +1,18 @@
-.intro {
-  white-space: pre-line !important;
+@import "../../../../assets/css/dk-brand.less";
+
+.survey-intro .intro p {
   text-align: right;
-  width: 95%;
-  margin: 1% 1%;
   direction: rtl;
+  line-height: 30px;
+  text-align: justify;
+  padding-left: 17px;
 }
-.intro-en {
-  white-space: pre-line !important;
+.survey-intro .intro-en p {
   text-align: left;
-  width: 95%;
-  margin: 1% 1%;
   direction: ltr;
+  line-height: 30px;
+  text-align: justify;
+  font-size: 0.95rem;
 }
 .intro-card {
   margin: 2% auto;
@@ -83,7 +85,7 @@ tbody > tr {
   bottom: 4rem;
   display: flex;
   justify-content: flex-end;
-  align-items: start;
+  align-items: flex-start;
   z-index: 0;
 }
 .kt-sc-2 .kt-sc__top {
@@ -138,4 +140,10 @@ img.kt-svg-icon {
 }
 .MuiSlider-markLabel {
   font-weight: 600;
+}
+
+.la.bullet:before {
+  content: "\f17c";
+  color: @dk-blue;
+  font-size: 1.4rem;
 }

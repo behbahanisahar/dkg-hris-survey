@@ -91,10 +91,10 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
           <TableRow key={index}>
             <TableCell align="center">{n.ModifiedBy}</TableCell>
             <TableCell align="center">{n.ModifiedDateShamsi}</TableCell>
-            <TableCell align="center" className={AddedStr !== "" ? "kt-font-bold dk-brand-green-font" : ""}>
+            <TableCell align="center" className={AddedStr !== "" ? "kt-font-bold dk-brand-text-green" : ""}>
               {AddedStr}
             </TableCell>
-            <TableCell align="center" className={DeletedStr !== "" ? "kt-font-bold dk-brand-red-font " : ""}>
+            <TableCell align="center" className={DeletedStr !== "" ? "kt-font-bold dk-brand-text-red " : ""}>
               {DeletedStr}
             </TableCell>
           </TableRow>

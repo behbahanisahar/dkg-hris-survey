@@ -1,7 +1,7 @@
 import SubOrdinate from "./subOrdinate";
 import IUser from "./user";
 
-export default interface NominationData {
+export default interface INominationData {
   Status: string;
   Subordinates: IUser[];
   Other: IUser[];
@@ -9,4 +9,5 @@ export default interface NominationData {
   User?: SubOrdinate;
   LineManager?: SubOrdinate;
   statusCode?: number;
+  HasCoworker?: boolean;
 }
