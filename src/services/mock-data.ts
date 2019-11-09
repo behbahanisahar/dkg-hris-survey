@@ -265,4 +265,43 @@ export default class MockData {
     //   User: {},
     // },
   ];
+  /*********************************reports mock data**************************************************** */
+  public static getRaters: any[] = [
+    {
+      RaterGroup: "Self",
+      NominatedCount: 1,
+      CompletedCount: 1,
+      IsTotal: false,
+    },
+    {
+      RaterGroup: "Line Manager",
+      NominatedCount: 1,
+      CompletedCount: 0,
+      IsTotal: false,
+    },
+    {
+      RaterGroup: "Peer",
+      NominatedCount: 0,
+      CompletedCount: 0,
+      IsTotal: false,
+    },
+    {
+      RaterGroup: "Direct Report",
+      NominatedCount: 0,
+      CompletedCount: 0,
+      IsTotal: false,
+    },
+    {
+      RaterGroup: "Others",
+      NominatedCount: 1,
+      CompletedCount: 0,
+      IsTotal: false,
+    },
+    {
+      RaterGroup: "Total",
+      NominatedCount: 3,
+      CompletedCount: 1,
+      IsTotal: true,
+    },
+  ];
 }
