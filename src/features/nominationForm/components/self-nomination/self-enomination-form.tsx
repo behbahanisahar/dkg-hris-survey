@@ -156,7 +156,12 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                               </HtmlTooltip>
                               مدیر مستقیم
                             </h3>
-                            :<h5>{this.state.NominationData.LineManager!.Title} </h5>
+                            :
+                            <h5>
+                              {this.state.NominationData.LineManager != null
+                                ? this.state.NominationData.LineManager.Title
+                                : "-"}
+                            </h5>
                           </div>
                         </div>
                         <div className="kt-separator kt-separator--border-dashed kt-separator--space-lg dk-brand-grey"></div>
