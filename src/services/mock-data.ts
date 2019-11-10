@@ -3,6 +3,7 @@ import IHistory from "../entities/history";
 import Isurvey from "../entities/survey";
 import { IAppraisee } from "../entities/appraisee";
 import UserTasks from "../entities/user-task";
+import ReportStructure from "../entities/reportData";
 
 export default class MockData {
   public static getUserInfo: any[] = [
@@ -304,4 +305,42 @@ export default class MockData {
       IsTotal: true,
     },
   ];
+
+  public static competencySummary: ReportStructure = {
+    AverageValue: 0,
+    Labels: [
+      "کار گروهـــــــــی",
+      "مشتری محوری",
+      "نتیــــــــــــجه گرایی",
+      "اشتیاق برای تعـــــــــالی",
+      "مدیریت و توسعه افراد",
+      "ایجاد و توسعه چشم انداز مشترک",
+      "شم تجــــــــــــاری",
+      "تصمیـــــم گیری",
+    ],
+    Datasets: [
+      {
+        Label: "خود فرد",
+        DrilldownData: "",
+        BackgroundColor: "rgba(239, 57, 78, 0.2)",
+        BorderColor: "rgba(239, 57, 78, 1)",
+        HoverBackgroundColor: "rgba(239, 57, 78, 0.4)",
+        HoverBorderColor: "rgba(239, 57, 78, 1)",
+        BorderWidth: 1,
+        Data: [0, 0, 0, 0, 0, 0, 0, 0],
+        Items: null,
+      },
+      {
+        Label: "سایر ارزیابان",
+        DrilldownData: "",
+        BackgroundColor: "rgba(25, 191, 211, 0.2)",
+        BorderColor: "rgba(25, 191, 211, 1)",
+        HoverBackgroundColor: "rgba(25, 191, 211, 0.4)",
+        HoverBorderColor: "rgba(25, 191, 211, 1)",
+        BorderWidth: 1,
+        Data: [0, 0, 0, 0, 0, 0, 0, 0],
+        Items: null,
+      },
+    ],
+  };
 }

@@ -1,29 +1,57 @@
 import * as React from "react";
+import ReportServices from "../../../services/report-services";
+import Util from "../.././../utilities/utilities";
+
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { HorizontalBar } from "react-chartjs-2";
 interface IProps {
   name?: string;
 }
-const data = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-    {
-      label: "My First dataset",
-      backgroundColor: "rgba(255,99,132,0.2)",
-      borderColor: "rgba(255,99,132,1)",
-      borderWidth: 1,
-      hoverBackgroundColor: "rgba(255,99,132,0.4)",
-      hoverBorderColor: "rgba(255,99,132,1)",
-      data: [65, 59, 80, 81, 56, 55, 40],
-    },
-  ],
-};
-const CompetencySummary: React.SFC<IProps> = props => {
-  return (
-    <DKPortlet title="Competency Summary">
-      <HorizontalBar data={data} />
-    </DKPortlet>
-  );
-};
+interface IState {
+  itemId?: number;
+  data: any;
+}
+class CompetencySummary extends React.Component<IProps, IState> {
+  private ReportServices: ReportServices;
+  private util: Util;
+  public constructor(props: any) {
+    super(props);
+    this.ReportServices = new ReportServices();
+    this.util = new Util();
+    this.state = {
+      itemId: 0,
+      data: {
+        averageValue: 0,
+        labels: [],
+        datasets: [],
+      },
+    };
+  }
+  public async componentDidMount() {
+    const itemId = Number(this.util.getQueryStringValue("itemId"));
+    const reportData: any = await this.ReportServices.getCompetencySummary(itemId);
+    const data = {
+      labels: reportData.labels,
+      datasets: reportData.datasets,
+    };
+
+    console.log(reportData);
+    console.log(data);
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        data,
+        itemId,
+      };
+    });
+  }
+  public render() {
+    return (
+      <DKPortlet title="شایستگی ها">
+        <HorizontalBar data={this.state.data} />
+      </DKPortlet>
+    );
+  }
+}
 
 export default CompetencySummary;
