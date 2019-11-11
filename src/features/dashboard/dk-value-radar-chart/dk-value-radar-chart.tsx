@@ -119,7 +119,10 @@ export default class ComparingChart extends React.Component<IProps, IState> {
       scale: {
         reverse: false,
         ticks: {
-          beginAtZero: true,
+          beginAtZero: false,
+          min: 1,
+          max: 5,
+          stepSize: 1,
         },
         scaleLabel: { fontFamily: "IRANYekan" },
         labels: {
@@ -138,7 +141,7 @@ export default class ComparingChart extends React.Component<IProps, IState> {
       },
     };
     return (
-      <DKPortlet title="Comparing Chart">
+      <DKPortlet title="امتیازات شما براساس ارزش های دیجی کالا">
         <Radar data={this.state.data} options={options} width={400} height={350}></Radar>
       </DKPortlet>
     );

@@ -1,11 +1,14 @@
 export default interface ReportDataset {
-  Label: string;
-  DrilldownData: string;
-  BackgroundColor: string;
-  BorderColor: string;
-  HoverBackgroundColor: string;
-  HoverBorderColor: string;
-  BorderWidth: number;
-  Data: number[];
-  Items: any;
+  label: string;
+  drilldownData: string;
+  backgroundColor: string[];
+  borderColor: string;
+  hoverBackgroundColor: string;
+  hoverBorderColor: string;
+  borderWidth: number;
+  data: number[];
+  items: any;
+  lineTension?: number;
+  fill?: boolean;
+  borderDash?: number[];
 }

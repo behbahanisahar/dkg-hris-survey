@@ -2,6 +2,7 @@ import ServiceBase from "./service-base";
 import MockData from "./mock-data";
 import Raters from "../entities/raters";
 import ReportStructure from "../entities/reportData";
+import ICategoryScore from "../entities/category-scores";
 
 class ReportServices extends ServiceBase {
   public constructor() {
@@ -21,12 +22,32 @@ class ReportServices extends ServiceBase {
   public async getCompetencySummary(itemId: number): Promise<ReportStructure> {
     if (process.env.NODE_ENV === "production") {
       const items: any = await this.get("survey/report/competencysummary?itemid=" + itemId + "");
-      console.log(items);
       return Promise.resolve(items.data);
     }
 
     return Promise.resolve(MockData.competencySummary);
   }
-  /************************************************************** */
+  /*******************get compare competency************************************* */
+  public async getCompareCompetency(itemId: number): Promise<ReportStructure> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/report/compare?itemid=" + itemId + "");
+      console.log(items);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockData.CompareCompetency);
+  }
+  /********************get competency category details************************* */
+  public async getCompetencyCategory(itemId: number, categoryId: number): Promise<ICategoryScore> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get(
+        "survey/report/categoryscores?itemid=" + itemId + "&categoryid=" + categoryId + "",
+      );
+      console.log(items);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockData.CompetencyCategories);
+  }
 }
 export default ReportServices;

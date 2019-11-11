@@ -46,9 +46,35 @@ class CompetencySummary extends React.Component<IProps, IState> {
     });
   }
   public render() {
+    const options = {
+      onClick: (e: any, item: any) => {
+        console.log(e);
+        console.log(item);
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: false,
+              min: 0,
+              max: 5,
+            },
+          },
+        ],
+        xAxes: [
+          {
+            ticks: {
+              beginAtZero: false,
+              min: 0,
+              max: 5,
+            },
+          },
+        ],
+      },
+    };
     return (
       <DKPortlet title="شایستگی ها">
-        <HorizontalBar data={this.state.data} />
+        <HorizontalBar options={options} width={400} height={350} data={this.state.data} />
       </DKPortlet>
     );
   }
