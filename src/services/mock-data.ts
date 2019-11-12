@@ -3,6 +3,8 @@ import IHistory from "../entities/history";
 import Isurvey from "../entities/survey";
 import { IAppraisee } from "../entities/appraisee";
 import UserTasks from "../entities/user-task";
+import ReportStructure from "../entities/reportData";
+import ICategoryScore from "../entities/category-scores";
 
 export default class MockData {
   public static getUserInfo: any[] = [
@@ -265,4 +267,219 @@ export default class MockData {
       User: {},
     },
   ];
+  /*********************************reports mock data**************************************************** */
+  public static getRaters: any[] = [
+    {
+      RaterGroup: "Self",
+      NominatedCount: 1,
+      CompletedCount: 1,
+      IsTotal: false,
+    },
+    {
+      RaterGroup: "Line Manager",
+      NominatedCount: 1,
+      CompletedCount: 0,
+      IsTotal: false,
+    },
+    {
+      RaterGroup: "Peer",
+      NominatedCount: 0,
+      CompletedCount: 0,
+      IsTotal: false,
+    },
+    {
+      RaterGroup: "Direct Report",
+      NominatedCount: 0,
+      CompletedCount: 0,
+      IsTotal: false,
+    },
+    {
+      RaterGroup: "Others",
+      NominatedCount: 1,
+      CompletedCount: 0,
+      IsTotal: false,
+    },
+    {
+      RaterGroup: "Total",
+      NominatedCount: 3,
+      CompletedCount: 1,
+      IsTotal: true,
+    },
+  ];
+
+  public static competencySummary: ReportStructure = {
+    averageValue: 0,
+    labels: [
+      "کار گروهـــــــــی",
+      "مشتری محوری",
+      "نتیــــــــــــجه گرایی",
+      "اشتیاق برای تعـــــــــالی",
+      "مدیریت و توسعه افراد",
+      "ایجاد و توسعه چشم انداز مشترک",
+      "شم تجــــــــــــاری",
+      "تصمیـــــم گیری",
+    ],
+    datasets: [
+      {
+        label: "خود فرد",
+        drilldownData: "",
+        backgroundColor: ["rgba(239, 57, 78, 0.2)"],
+        borderColor: "rgba(239, 57, 78, 1)",
+        hoverBackgroundColor: "rgba(239, 57, 78, 0.4)",
+        hoverBorderColor: "rgba(239, 57, 78, 1)",
+        borderWidth: 1,
+        data: [0, 0, 0, 0, 0, 0, 0, 0],
+        items: "",
+      },
+      {
+        label: "سایر ارزیابان",
+        drilldownData: "",
+        backgroundColor: ["rgba(25, 191, 211, 0.2)"],
+        borderColor: "rgba(25, 191, 211, 1)",
+        hoverBackgroundColor: "rgba(25, 191, 211, 0.4)",
+        hoverBorderColor: "rgba(25, 191, 211, 1)",
+        borderWidth: 1,
+        data: [0, 0, 0, 0, 0, 0, 0, 0],
+        items: "",
+      },
+    ],
+  };
+
+  public static CompareCompetency: ReportStructure = {
+    averageValue: 0,
+    labels: [
+      "کار گروهی",
+      "مشتری محوری",
+      "نتیجه گرایی",
+      "اشتیاق برای تعالی",
+      "مدیریت و توسعه افراد",
+      "ایجاد و توسعه چشم انداز مشترک",
+      "شم تجاری",
+      "تصمیم گیری",
+    ],
+    datasets: [
+      {
+        label: "امتیاز دیجی‌کالا",
+        drilldownData: "",
+        backgroundColor: ["rgba(239, 57, 78, 0.2)"],
+        borderColor: "rgba(239, 57, 78, 1)",
+        hoverBackgroundColor: "rgba(239, 57, 78, 0.4)",
+        hoverBorderColor: "rgba(239, 57, 78, 1)",
+        borderWidth: 1,
+        data: [3, 4.25, 3, 3.28571428571429, 2.5, 4, 3.66666666666667, 2],
+        items: "",
+      },
+      {
+        label: "امتیاز شما",
+        drilldownData: "",
+        backgroundColor: ["rgba(25, 191, 211, 0.2)"],
+        borderColor: "rgba(25, 191, 211, 1)",
+        hoverBackgroundColor: "rgba(25, 191, 211, 0.4)",
+        hoverBorderColor: "rgba(25, 191, 211, 1)",
+        borderWidth: 1,
+        data: [3, 4.25, 3, 3.28571428571429, 2.5, 4, 3.66666666666667, 2],
+        items: "",
+      },
+    ],
+  };
+
+  public static CompetencyCategories: ICategoryScore = {
+    CategoryTitle: "کار گروهـــــــــی",
+    CategoryChart: {
+      averageValue: 0,
+      labels: ["خودفرد", "مدیر مستقیم", "همکار همرده", "همکار", "سایرین"],
+      datasets: [
+        {
+          borderDash: [0],
+          fill: false,
+          lineTension: 0,
+          label: "",
+          drilldownData: "",
+          backgroundColor: [""],
+          borderColor: "",
+          hoverBackgroundColor: "",
+          hoverBorderColor: "",
+          borderWidth: 0,
+          data: [4],
+          items: "",
+        },
+      ],
+    },
+    QuestionsData: [
+      {
+        QuestionTitle: "در ﺑﯿﻦ ﻫﻤﮑﺎران راﺑﻄﻪ ﺑﯿﻦb ﻓﺮدي ﻗﻮي اﯾﺠﺎد ﮐﺮده و ﺑﻪ ﺗﻮﺳﻌﻪ رواﺑﻂ/b ﮐﻤﮏ ﻣﯽ ﮐﻨﺪ.",
+        Average: 0,
+        QuestionChart: {
+          averageValue: 0,
+          labels: ["خودفرد", "مدیر مستقیم", "همکار همرده", "همکار", "سایرین"],
+          datasets: [
+            {
+              borderDash: [],
+              fill: false,
+              lineTension: 0,
+              label: "",
+              drilldownData: "",
+              backgroundColor: [""],
+              borderColor: "",
+              hoverBackgroundColor: "",
+              hoverBorderColor: "",
+              borderWidth: 0,
+              data: [0, 0, 0, 0, 0],
+              items: "",
+            },
+          ],
+        },
+      },
+      {
+        QuestionTitle:
+          "از ﻃﺮﯾﻖ ﭘﺬﯾﺮا ﺑﻮدن ﻧﻈﺮات دﯾﮕﺮان و ﺑﻪ اﺷﺘﺮاك ﮔﺬاري اﻃﻼﻋﺎت ﻣﺮﺗﺒﻂ ﺑﺎ ﮐﺎرﺷﺎن، ﺑﺎ آﻧﻬﺎ ﺑﻪ اﯾﺠﺎد ﺳﻄﺢ ﺑﺎﻻﯾﯽ از ﺷﻔﺎﻓﯿﺖ و اﻋﺘﻤﺎد در ﻣﺤﯿﻂ ﮐﺎر ﮐﻤﮏ ﻣﯽ ﮐﻨﺪ.",
+        Average: 0,
+        QuestionChart: {
+          averageValue: 0,
+          labels: ["خودفرد", "مدیر مستقیم", "همکار همرده", "همکار", "سایرین"],
+          datasets: [
+            {
+              borderDash: [],
+              fill: false,
+              lineTension: 0,
+              label: "",
+              drilldownData: "",
+              backgroundColor: [""],
+              borderColor: "",
+              hoverBackgroundColor: "",
+              hoverBorderColor: "",
+              borderWidth: 0,
+              data: [0, 0, 0, 0, 0],
+              items: "",
+            },
+          ],
+        },
+      },
+      {
+        QuestionTitle:
+          "ﺑﻪ دﺳﺘﯿﺎﺑﯽ ﺑﻪ اﻫﺪاف ﮔﺮوه و ﺗﻼش در اﯾﻦ زﻣﯿﻨﻪ ﻣﺘﻌﻬﺪ اﺳﺖ ﺣﺘﯽ اﮔﺮ اﯾﻦ اﻫﺪاف ﺑﺎ ﻧﻈﺮات و ﻋﻼﯾﻖ ﺷﺨﺼﯽ اش در ﺗﻀﺎد ﺑﺎﺷﻨﺪ.",
+        Average: 0,
+        QuestionChart: {
+          averageValue: 0,
+          labels: ["خودفرد", "مدیر مستقیم", "همکار همرده", "همکار", "سایرین"],
+          datasets: [
+            {
+              borderDash: [],
+              fill: false,
+              lineTension: 0,
+              label: "",
+              drilldownData: "",
+              backgroundColor: [""],
+              borderColor: "",
+              hoverBackgroundColor: "",
+              hoverBorderColor: "",
+              borderWidth: 0,
+              data: [0, 0, 0, 0, 0],
+              items: "",
+            },
+          ],
+        },
+      },
+    ],
+  };
 }

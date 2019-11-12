@@ -325,7 +325,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
             کسی انتخاب نشده است!
           </TableCell>
         </TableRow>
-      );
+      ); 
     } else {
       return items.map((n: any, index: any) => {
         return (

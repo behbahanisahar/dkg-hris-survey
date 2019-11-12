@@ -15,7 +15,7 @@ export function DKPortlet({ children, noborder = false, title = "", ...other }: 
           <h3 className="kt-portlet__head-title">{title}</h3>
         </div>
       </div>
-      <div className="kt-portlet__body">{children}</div>         
+      <div className="kt-portlet__body">{children}</div>
     </div>
   );
 }

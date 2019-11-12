@@ -18,6 +18,7 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
     this.state = {
       appraisee: [],
       showSpinner: true,
+      buttonText: "نمایش بیشتر...",
     };
   }
   public async componentDidMount() {
@@ -40,20 +41,32 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
             <div className="row">
               <div className="col-sm">
                 <div className="kt-sc__content">
-                  <div className="intro">
+                  <div className="intro sidebar-box">
                     <p dangerouslySetInnerHTML={{ __html: getIntroTextFa() }}></p>
                   </div>
                 </div>
               </div>
               <div className="col-sm">
                 <div className="kt-sc__content">
-                  <div className="intro-en">
+                  <div className="intro-en sidebar-box">
                     <p dangerouslySetInnerHTML={{ __html: getIntroTextEn() }}></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <button
+            onClick={e => {
+              this.showContent();
+              e.preventDefault();
+              return false;
+            }}
+            style={{ margin: "1% auto" }}
+            className="d-flex justify-content-center 
+btn btn-sm btn-clean read-more  w-25"
+          >
+            {this.state.buttonText}
+          </button>
         </div>
         <div className="kt-portlet kt-portlet--height-fluid kt-sc-2">
           {this.state.showSpinner && <Spinner />}
@@ -152,5 +165,42 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
 
   private onShowItem = (ItemId: number) => {
     window.location.href = "?itemid=" + ItemId + "&page=SurveyForm";
+  };
+  private showContent = () => {
+    // let classNameDiv = document.getElementById("expand").className;
+
+    const myComponent = document.getElementById("expand");
+    // At this point `myComponent` is of type HTMLElement | null
+    if (myComponent) {
+      if (myComponent.className === "collapse") {
+        const collapsableLength = document.getElementsByClassName("collapse").length;
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            buttonText: "نمایش کمتر...",
+          };
+        });
+        if (collapsableLength !== 0) {
+          for (let i = 0; i < collapsableLength; ++i) {
+            document.getElementsByClassName("collapse")[0].className = "collapse-show";
+          }
+        }
+      } else if (myComponent.className === "collapse-show") {
+        const collapsableLength = document.getElementsByClassName("collapse-show").length;
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            buttonText: "نمایش بیشتر...",
+          };
+        });
+        if (collapsableLength !== 0) {
+          for (let i = 0; i < collapsableLength; ++i) {
+            document.getElementsByClassName("collapse-show")[0].className = "collapse";
+          }
+        }
+      }
+    }
+
+    // document.getElementsByClassName("collapse")[1].className = "collapse-show";
   };
 }

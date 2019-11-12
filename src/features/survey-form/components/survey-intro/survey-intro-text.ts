@@ -11,6 +11,7 @@ export function getIntroTextFa() {
   
   بنابراین، خواهشمند است با در نظر گرفتن تعاملاتی که در موقعیت  ‎های مختلف کاری در طول حداقل ۶ ماه اخیر با فرد ارزیابی شونده داشتید، نسبت به تکمیل پرسش‌نامه اقدام نمایید.
   <br>
+  <div id="expand" class="collapse">
   <i class="la bullet"></i>
   اطمینان داشته باشید که اطلاعات جمع‌آوری شده از این پرسش‌نامه، کاملا 
   <b class='dk-brand-text-red bold'>
@@ -74,6 +75,7 @@ export function getIntroTextFa() {
   <b>
   تیم توسعه و رهبری دیجی‌کالا
   </b>
+  </div>
   `;
 }
 
@@ -89,6 +91,7 @@ export function getIntroTextEn() {
   This questionnaire aims to assist Digikala’s on-going success and its sustainable growth by collecting employees’ feedback about core values, leadership, and business competencies.
   Therefore, please complete the questionnaire by considering your experiences working with this individual during the last 6 months.
   <br>
+  <div id="expand" class="collapse">
   <i class="la bullet"></i>  
   Please be assured that all the data will be collected 
   <b class='dk-brand-text-red'>anonymously</b>. 
@@ -134,5 +137,6 @@ export function getIntroTextEn() {
   <b>
   Talent & Leadership Development Team
   </b>
+  </div>
   `;
 }
