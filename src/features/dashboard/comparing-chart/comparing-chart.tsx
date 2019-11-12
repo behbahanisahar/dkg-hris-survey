@@ -16,7 +16,7 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
   private util: Util;
   public constructor(props: any) {
     super(props);
-    defaults.global.defaultFontFamily = "IRANYekan";
+    defaults.global.defaultFontFamily = "IRANYekan,Poppins";
     this.ReportServices = new ReportServices();
     this.util = new Util();
     this.state = {

@@ -307,7 +307,7 @@ export default class MockData {
     },
   ];
 
-  public static competencySummary: ReportStructure = {
+  public static comparingChartData: ReportStructure = {
     averageValue: 0,
     labels: [
       "کار گروهـــــــــی",
@@ -478,6 +478,62 @@ export default class MockData {
               items: "",
             },
           ],
+        },
+      },
+    ],
+  };
+  public static competencySummary: any = {
+    title: {
+      text: "Combination chart",
+    },
+    xAxis: {
+      categories: ["Apples", "Oranges", "Pears", "Bananas", "Plums"],
+    },
+    labels: {
+      items: [
+        {
+          html: "Total fruit consumption",
+          style: {
+            left: "50px",
+            top: "18px",
+            color:
+              // theme
+              "black",
+          },
+        },
+      ],
+    },
+    series: [
+      {
+        type: "bar",
+        name: "Jane",
+        data: [3, 2, 1, 3, 4],
+      },
+      {
+        type: "bar",
+        name: "John",
+        data: [2, 3, 5, 7, 6],
+      },
+      {
+        type: "spline",
+        name: "Average",
+        data: [1, 8.67, 3, 5.33, 1.33],
+        lineWidth: 0,
+        marker: {
+          lineWidth: 2,
+          lineColor: "white",
+          fillColor: "white",
+        },
+      },
+      {
+        type: "spline",
+        name: "Average",
+        data: [3, 2.67, 3, 6.33, 3.33],
+        lineWidth: 0,
+        marker: {
+          lineWidth: 2,
+          lineColor: "white",
+          fillColor: "white",
         },
       },
     ],

@@ -58,7 +58,7 @@ export default class ComparingChart extends React.Component<IProps, IState> {
   private util: Util;
   public constructor(props: any) {
     super(props);
-    defaults.global.defaultFontFamily = "IRANYekan";
+    defaults.global.defaultFontFamily = "IRANYekan,Poppins";
     this.ReportServices = new ReportServices();
     this.util = new Util();
     this.state = {
@@ -72,7 +72,7 @@ export default class ComparingChart extends React.Component<IProps, IState> {
   }
   public async componentDidMount() {
     const itemId = Number(this.util.getQueryStringValue("itemId"));
-    const reportData: any = await this.ReportServices.getCompetencySummary(itemId);
+    const reportData: any = await this.ReportServices.getComparingChartData(itemId);
     const dataset: any[] = reportData.datasets;
     const NewDataSet = dataset.map(
       ({

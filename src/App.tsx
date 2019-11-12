@@ -11,7 +11,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import MainDashboard from "./features/dashboard/main-dashboard/main-dashboard";
-import ResponsiveBulletClass from "./features/dashboard/competency-summary-category-detail/competency-category2";
+import ResponsiveBulletClass from "./features/dashboard/competency-summary-category-detail/competency-category";
+import CompetencyCategoryComponent from "./features/dashboard/competency-summary-category-detail/competency-category-detail";
 
 const theme = createMuiTheme({
   typography: {
@@ -58,6 +59,7 @@ class App extends React.Component<{}, IAppState> {
           <MuiThemeProvider theme={theme}>
             {this.state.page.toLowerCase() === "nominationform" && <MainNomination />}
             {this.state.page.toLowerCase() === "report" && <ResponsiveBulletClass />}
+            {this.state.page.toLowerCase() === "competency" && <CompetencyCategoryComponent />}
             {this.state.page.toLowerCase() === "dashboard" && <MainDashboard />}
             {this.state.page.toLowerCase() === "surveyform" && <FormSurvey />}
             {this.state.page.toLowerCase() === "surveyintro" && <SurveyIntroPage />}

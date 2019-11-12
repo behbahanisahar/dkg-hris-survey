@@ -18,15 +18,42 @@ class ReportServices extends ServiceBase {
 
     return Promise.resolve(MockData.getRaters);
   }
-  /*****************get competency summary************************************* */
-  public async getCompetencySummary(itemId: number): Promise<ReportStructure> {
+  /*****************get competency summary(for radar chart)************************ */
+  public async getComparingChartData(itemId: number): Promise<ReportStructure> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/report/competencysummary/chartjs?itemid=" + itemId + "");
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockData.comparingChartData);
+  }
+  /*************get competency summary(for drilldown chart(highchart))************ */
+  public async getCompetencySummary(itemId: number): Promise<any> {
     if (process.env.NODE_ENV === "production") {
       const items: any = await this.get("survey/report/competencysummary?itemid=" + itemId + "");
+      // const obj: any = {
+      //   categories: items.data.categories,
+      //   series: items.data.series,
+      // };
+
+      // const options = {
+      //   xAxis: {
+      //     categories: items.data.categories,
+      //   },
+
+      //   series: items.data.series,
+      // };
+
+      // for (let i = 0; i < options.series.length; ++i) {
+      //   if (options.series[i].type === "bar") options.series[i].type === "bar";
+      // }
+
       return Promise.resolve(items.data);
     }
 
     return Promise.resolve(MockData.competencySummary);
   }
+
   /*******************get compare competency************************************* */
   public async getCompareCompetency(itemId: number): Promise<ReportStructure> {
     if (process.env.NODE_ENV === "production") {
@@ -43,7 +70,7 @@ class ReportServices extends ServiceBase {
       const items: any = await this.get(
         "survey/report/categoryscores?itemid=" + itemId + "&categoryid=" + categoryId + "",
       );
-      console.log(items);
+
       return Promise.resolve(items.data);
     }
 
