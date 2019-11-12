@@ -276,6 +276,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             ? "btn btn-brand mr-2 kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light"
                             : "btn btn-brand btn-elevate btn-elevate-air mr-2"
                         }
+                        disabled={this.state.submittingForm}
                         onClick={e => {
                           this.SubmitForm();
                           e.preventDefault();
