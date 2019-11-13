@@ -384,6 +384,48 @@ export default class MockData {
   };
 
   public static CompetencyCategories: ICategoryScore = {
+    Categories: [
+      {
+        Id: 1,
+        Title: "کار گروهـــــــــی",
+        SignUrl: "/SiteAssets/Pics/Survey/Team%20Working.png",
+      },
+      {
+        Id: 2,
+        Title: "مشتری محوری",
+        SignUrl: "/SiteAssets/Pics/Survey/Customer%20Centric.png",
+      },
+      {
+        Id: 3,
+        Title: "نتیــــــــــــجه گرایی",
+        SignUrl: "/SiteAssets/Pics/Survey/Result%20Oriented.png",
+      },
+      {
+        Id: 4,
+        Title: "اشتیاق برای تعـــــــــالی",
+        SignUrl: "/SiteAssets/Pics/Survey/Drive%20For%20Excellence.png",
+      },
+      {
+        Id: 5,
+        Title: "مدیریت و توسعه افراد",
+        SignUrl: "http://hq-spsrv03:90/SiteAssets/Pics/Survey/People%20Development.png",
+      },
+      {
+        Id: 6,
+        Title: "ایجاد و توسعه چشم انداز مشترک",
+        SignUrl: "/SiteAssets/Pics/Survey/Vision.png",
+      },
+      {
+        Id: 7,
+        Title: "شم تجــــــــــــاری",
+        SignUrl: "http://hq-spsrv03:90/SiteAssets/Pics/Survey/Business%20Acumen.png",
+      },
+      {
+        Id: 8,
+        Title: "تصمیـــــم گیری",
+        SignUrl: "/SiteAssets/Pics/Survey/Decision%20Making.png",
+      },
+    ],
     CategoryTitle: "کار گروهـــــــــی",
     CategoryChart: {
       averageValue: 0,

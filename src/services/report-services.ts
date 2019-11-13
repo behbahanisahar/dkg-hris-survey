@@ -31,22 +31,6 @@ class ReportServices extends ServiceBase {
   public async getCompetencySummary(itemId: number): Promise<any> {
     if (process.env.NODE_ENV === "production") {
       const items: any = await this.get("survey/report/competencysummary?itemid=" + itemId + "");
-      // const obj: any = {
-      //   categories: items.data.categories,
-      //   series: items.data.series,
-      // };
-
-      // const options = {
-      //   xAxis: {
-      //     categories: items.data.categories,
-      //   },
-
-      //   series: items.data.series,
-      // };
-
-      // for (let i = 0; i < options.series.length; ++i) {
-      //   if (options.series[i].type === "bar") options.series[i].type === "bar";
-      // }
 
       return Promise.resolve(items.data);
     }

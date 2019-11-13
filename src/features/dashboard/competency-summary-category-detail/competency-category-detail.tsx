@@ -30,6 +30,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
       itemId: 0,
       categoryid: 0,
       data: {
+        Categories: [],
         CategoryTitle: "",
         CategoryChart: {
           averageValue: 0,
@@ -65,6 +66,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
     });
   }
   public render() {
+    console.log(this.state.data.Categories);
     const options = {
       plugins: {
         datalabels: {
@@ -108,6 +110,19 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
     };
     return (
       <div className="rtl">
+        {/* <Grid container spacing={3}>
+          <Grid item xs={1}>
+             <img src={this.state.data.Categories[0].SignUrl}></img> 
+            <span>{this.state.data.Categories[0].Title}</span>
+          </Grid>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={1}></Grid>
+        </Grid> */}
         <DKPortlet noborder={true} title={this.state.data.CategoryTitle}>
           <HorizontalBar height={60} options={options} data={this.state.reportData} />
         </DKPortlet>

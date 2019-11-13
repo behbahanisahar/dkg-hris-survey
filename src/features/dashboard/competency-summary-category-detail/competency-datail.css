@@ -1,0 +1,21 @@
+.highcharts-color-0 {
+  fill: #ef394e !important;
+}
+.highcharts-color-0 > rect {
+  fill: #ef394e !important;
+}
+
+.highcharts-color-1 {
+  fill: #19bfd3 !important;
+}
+.highcharts-color-1 > rect {
+  fill: #19bfd3 !important;
+}
+
+.highcharts-color-2 {
+  fill: #636466 !important;
+}
+
+.highcharts-color-2:nth-child(2) {
+  fill: #636466 !important;
+}

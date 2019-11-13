@@ -3,6 +3,8 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import ReportServices from "../../../services/report-services";
 import Util from "../../../utilities/utilities";
+import { borderRight } from "@material-ui/system";
+import "./competency-datail.css";
 
 class ResponsiveBulletClass extends Component {
   constructor(props) {
@@ -25,6 +27,14 @@ class ResponsiveBulletClass extends Component {
       this.internalChart.series[3].data.forEach(element => {
         element.graphic.translate(-10, 0);
       });
+      console.log(this.internalChart);
+      // this.internalChart.setOptions({
+      //   chart: {
+      //     style: {
+      //       fontFamily: "IRANYekan",
+      //     },
+      //   },
+      // });
     }
     const itemId = Number(this.util.getQueryStringValue("itemId"));
     const reportData = await this.ReportServices.getCompetencySummary(itemId);
@@ -34,11 +44,31 @@ class ResponsiveBulletClass extends Component {
     }));
   }
   render() {
+    const colors = ["#3B86FF", "#77E5AA", "#093fb9", "#6d00f6", "#FF006E", "#FFBE0B", "#1EFFBC", "#ff8b12"];
     const itemId = this.state.itemId;
-    console.log(this.state.reportData);
+    // console.log(this.state.reportData);
     const options = {
+      tooltip: {
+        useHTML: true,
+        style: {
+          textAlign: "right",
+        },
+      },
+      chart: {
+        style: {
+          fontFamily: "IRANYekan,Poppins",
+        },
+      },
+      title: {
+        text: "شایستگی ها",
+        style: {
+          textAlign: "right",
+          float: "right",
+        },
+      },
       xAxis: {
         categories: this.state.reportData.categories,
+
         labels: {
           events: {
             click: function() {
@@ -47,9 +77,26 @@ class ResponsiveBulletClass extends Component {
           },
         },
       },
+      yAxis: {
+        title: {
+          enabled: true,
+          text: "",
+          style: {
+            fontWeight: "normal",
+          },
+        },
+      },
       plotOptions: {
+        column: {
+          color: "red",
+        },
         series: {
           cursor: "pointer",
+          states: {
+            hover: {
+              lineWidth: 0,
+            },
+          },
           point: {
             events: {
               click: function() {
@@ -73,7 +120,7 @@ class ResponsiveBulletClass extends Component {
   }
   afterChartCreated(chart) {
     this.internalChart = chart;
-    console.log(chart.xAxis.labelGroup);
+    console.log(chart);
   }
 }
 
