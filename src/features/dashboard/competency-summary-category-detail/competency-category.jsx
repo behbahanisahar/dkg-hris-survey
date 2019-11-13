@@ -6,7 +6,7 @@ import Util from "../../../utilities/utilities";
 import { borderRight } from "@material-ui/system";
 import "./competency-datail.css";
 
-class ResponsiveBulletClass extends Component {
+class ResponsiveBulletClass extends React.Component {
   constructor(props) {
     super(props);
     this.afterChartCreated = this.afterChartCreated.bind(this);
