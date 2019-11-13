@@ -29,7 +29,7 @@ class RatersTable extends React.Component<IProps, IState> {
       this.setState(current => ({
         ...current,
         raters: response,
-        isFetching: true,
+        isFetching: false,
       })),
     );
   }
@@ -43,7 +43,6 @@ class RatersTable extends React.Component<IProps, IState> {
           <Table dir="rtl" className="table table-bordered mt-3">
             <thead className="thead-dark">
               <tr>
-                {" "}
                 <th>گروه ارزیاﺏ</th>
                 <th># کل ارزیابان</th>
                 <th># ارزیابی های تکمیل شده</th>
