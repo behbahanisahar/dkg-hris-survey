@@ -35,7 +35,8 @@ class ResponsiveBulletClass extends React.Component {
       //   },
       // });
     }
-    const itemId = Number(Util.getQueryStringValue("itemId"));
+    //  const itemId = Number(Util.getQueryStringValue("itemId"));
+    const itemId = this.props.match.params.itemId;
     const reportData = await this.ReportServices.getCompetencySummary(itemId);
     this.setState(state => ({
       itemId,

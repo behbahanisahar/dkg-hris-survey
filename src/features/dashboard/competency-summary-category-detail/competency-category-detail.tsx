@@ -131,7 +131,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
     return (
       <div className="rtl">
         {this.state.isFetch === true && (
-          <div style={{ margin: "0 15%" }}>
+          <div>
             <Grid style={{ margin: "0 15%" }} container spacing={3}>
               {this.OnRenderCategories()}
             </Grid>

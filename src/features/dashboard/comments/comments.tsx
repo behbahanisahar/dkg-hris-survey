@@ -1,6 +1,6 @@
 import * as React from "react";
 import ReportServices from "../../../services/report-services";
-import Util from "../.././../utilities/utilities";
+
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { IComment } from "../../../entities/reports/comments";
 import { Grid } from "@material-ui/core";
@@ -9,6 +9,7 @@ import { DKSpinner } from "../../../core/components/spinner/spinner";
 
 interface IProps {
   name?: string;
+  match?: any;
 }
 interface IState {
   isFetching: boolean;
@@ -30,7 +31,9 @@ export default class Comments extends React.Component<IProps, IState> {
     };
   }
   public async componentDidMount() {
-    const itemId = Number(Util.getQueryStringValue("itemId"));
+    //  const itemId = Number(Util.getQueryStringValue("itemId"));
+
+    const itemId = this.props.match.params.itemId;
     await this.ReportServices.getComments(itemId).then(response =>
       this.setState(current => ({
         ...current,

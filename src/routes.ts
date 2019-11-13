@@ -33,7 +33,7 @@ const routes: RouteTypes[] = [
   },
   {
     exact: false,
-    path: "/dashboard",
+    path: "/dashboard/:itemId",
     component: MainDashboard,
   },
   {

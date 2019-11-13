@@ -42,12 +42,13 @@
 
 import * as React from "react";
 import ReportServices from "../../../services/report-services";
-import Util from "../.././../utilities/utilities";
+
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { Radar } from "react-chartjs-2";
 import { defaults } from "react-chartjs-2";
 interface IProps {
   name?: string;
+  match?: any;
 }
 interface IState {
   itemId?: number;
@@ -69,7 +70,8 @@ export default class ComparingChart extends React.Component<IProps, IState> {
     };
   }
   public async componentDidMount() {
-    const itemId = Number(Util.getQueryStringValue("itemId"));
+    // const itemId = Number(Util.getQueryStringValue("itemId"));
+    const itemId = this.props.match.params.itemId;
     const reportData: any = await this.ReportServices.getComparingChartData(itemId);
     const dataset: any[] = reportData.datasets;
     const NewDataSet = dataset.map(

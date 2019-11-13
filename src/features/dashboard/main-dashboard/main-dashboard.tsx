@@ -15,16 +15,16 @@ export default class MainDashboard extends React.Component<{}> {
             <ResponsiveBulletClass />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <RatersTable></RatersTable>
+            <RatersTable />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <DKValueRadarChart></DKValueRadarChart>
+            <DKValueRadarChart />>
           </Grid>
           <Grid item xs={12} sm={12}>
-            <ComparingChart></ComparingChart>
+            <ComparingChart />>
           </Grid>
           <Grid item xs={12} sm={12}>
-            <Comments></Comments>
+            <Comments />
           </Grid>
         </Grid>
       </div>

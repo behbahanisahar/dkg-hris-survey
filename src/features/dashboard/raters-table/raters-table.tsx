@@ -6,6 +6,7 @@ import Raters from "../../../entities/raters";
 import { Table, TableBody } from "@material-ui/core";
 interface IProps {
   name?: string;
+  match?: any;
 }
 interface IState {
   itemId?: number;
@@ -22,7 +23,8 @@ class RatersTable extends React.Component<IProps, IState> {
     };
   }
   public async componentDidMount() {
-    const itemId = Number(Util.getQueryStringValue("itemId"));
+    // const itemId = Number(Util.getQueryStringValue("itemId"));
+    const itemId = this.props.match.params.itemId;
     const raters: Raters[] = await this.ReportServices.getraters(itemId);
     console.log(raters);
     this.setState(prevState => {
