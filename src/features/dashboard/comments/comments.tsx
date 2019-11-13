@@ -5,7 +5,7 @@ import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { IComment } from "../../../entities/reports/comments";
 import { Grid } from "@material-ui/core";
 import "./comments.css";
-import Spinner from "../../spinner/spinner";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
 
 interface IProps {
   name?: string;
@@ -46,7 +46,7 @@ export default class Comments extends React.Component<IProps, IState> {
           {this.state.data.map(comment => (
             <Grid item xs={4}>
               <DKPortlet title={comment.Title}>
-                {this.state.isFetching === true && <Spinner></Spinner>}
+                {this.state.isFetching === true && <DKSpinner></DKSpinner>}
                 {this.state.isFetching === false && (
                   <div className="kt-scroll" data-scroll="true" data-height="200" data-scrollbar-shown="true">
                     <div className={"kt-widget2 " + comment.Value}>

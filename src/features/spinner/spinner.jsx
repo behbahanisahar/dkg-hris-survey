@@ -8,9 +8,10 @@ const InnerSpinner = props => {
   let size = "80";
 
   return (
-    <div className="spinner">
-      <Loader type="Oval" color="#ef5661" height={size} width={size} style={{ margin: "14% 0%" }} />
-    </div>
+    <div class="d-flex mx-auto kt-spinner kt-spinner--sm kt-spinner--brand"></div>
+    // <div className="spinner">
+    //   <Loader type="Oval" color="#ef5661" height={size} width={size} style={{ margin: "14% 0%" }} />
+    // </div>
   );
 };
 
