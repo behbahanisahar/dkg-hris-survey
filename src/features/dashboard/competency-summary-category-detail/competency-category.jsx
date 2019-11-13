@@ -90,7 +90,7 @@ class ResponsiveBulletClass extends React.Component {
               click: function() {
                 //  alert("Category: " + this.category + ", value: " + this.options.query);
                 // console.log(this);
-                window.location.href = "?page=competency&itemid=" + itemId + "&categoryid=" + this.options.query + "";
+                window.location.href = "?page=competency/" + itemId + "/" + this.options.query;
               },
             },
           },

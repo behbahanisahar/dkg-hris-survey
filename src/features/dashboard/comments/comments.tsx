@@ -42,15 +42,15 @@ export default class Comments extends React.Component<IProps, IState> {
     return (
       <>
         <Grid container spacing={3}>
-          {this.state.data.map(comment => (
-            <Grid item xs={4}>
+          {this.state.data.map((comment, i) => (
+            <Grid key={i} item xs={4}>
               <DKPortlet title={comment.Title}>
                 {this.state.isFetching === true && <DKSpinner></DKSpinner>}
                 {this.state.isFetching === false && (
                   <div className="kt-scroll" data-scroll="true" data-height="200" data-scrollbar-shown="true">
                     <div className={"kt-widget2 " + comment.Value}>
-                      {comment.Comments.map(text => (
-                        <div className="kt-widget2__item ">
+                      {comment.Comments.map((text, i) => (
+                        <div key={i} className="kt-widget2__item ">
                           <div className="kt-widget2__info">
                             <a href="#" className="kt-widget2__title">
                               {text}
