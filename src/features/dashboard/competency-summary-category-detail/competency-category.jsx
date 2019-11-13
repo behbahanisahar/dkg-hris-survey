@@ -5,6 +5,8 @@ import ReportServices from "../../../services/report-services";
 import Util from "../../../utilities/utilities";
 import { borderRight } from "@material-ui/system";
 import "./competency-datail.css";
+import { DKPortlet } from "../../../core/components/portlet/portlet";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
 
 class ResponsiveBulletClass extends React.Component {
   constructor(props) {
@@ -12,11 +14,12 @@ class ResponsiveBulletClass extends React.Component {
     this.afterChartCreated = this.afterChartCreated.bind(this);
     this.ReportServices = new ReportServices();
     this.state = {
+      isFetching: true,
       reportData: {},
     };
   }
   async componentDidMount() {
-    if (this.internalChart.series.length >= 2) {
+    if (this.state.isFetching == false && this.internalChart.series.length >= 2) {
       this.internalChart.series[0].type = "bar";
       this.internalChart.series[1].type = "bar";
       this.internalChart.series[2].data.forEach(element => {
@@ -26,15 +29,16 @@ class ResponsiveBulletClass extends React.Component {
         element.graphic.translate(-10, 0);
       });
     }
-    const reportData = await this.ReportServices.getCompetencySummary(this.props.itemId);
-    this.setState(state => ({
-      reportData,
-    }));
+    await this.ReportServices.getCompetencySummary(this.props.itemId).then(response =>
+      this.setState(state => ({
+        isFetching: false,
+        reportData: response,
+      })),
+    );
   }
   render() {
     const colors = ["#3B86FF", "#77E5AA", "#093fb9", "#6d00f6", "#FF006E", "#FFBE0B", "#1EFFBC", "#ff8b12"];
-    const itemId = this.state.itemId;
-    // console.log(this.state.reportData);
+    const itemId = this.props.itemId;
     const options = {
       tooltip: {
         useHTML: true,
@@ -48,7 +52,7 @@ class ResponsiveBulletClass extends React.Component {
         },
       },
       title: {
-        text: "شایستگی ها",
+        text: "",
         style: {
           textAlign: "right",
           float: "right",
@@ -88,9 +92,7 @@ class ResponsiveBulletClass extends React.Component {
           point: {
             events: {
               click: function() {
-                //  alert("Category: " + this.category + ", value: " + this.options.query);
-                // console.log(this);
-                window.location.href = "?page=competency/" + itemId + "/" + this.options.query;
+                window.location.href = "#/competency/" + itemId + "/" + this.options.query;
               },
             },
           },
@@ -101,9 +103,12 @@ class ResponsiveBulletClass extends React.Component {
     };
 
     return (
-      <div className="app">
-        <HighchartsReact callback={this.afterChartCreated} highcharts={Highcharts} options={options} />
-      </div>
+      <DKPortlet title="شایستگی‌ها">
+        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
+        {this.state.isFetching === false && (
+          <HighchartsReact callback={this.afterChartCreated} highcharts={Highcharts} options={options} />
+        )}
+      </DKPortlet>
     );
   }
   afterChartCreated(chart) {
