@@ -13,11 +13,9 @@ interface IState {
 }
 class CompetencySummary extends React.Component<IProps, IState> {
   private ReportServices: ReportServices;
-  private util: Util;
   public constructor(props: any) {
     super(props);
     this.ReportServices = new ReportServices();
-    this.util = new Util();
     this.state = {
       itemId: 0,
       data: {
@@ -28,7 +26,7 @@ class CompetencySummary extends React.Component<IProps, IState> {
     };
   }
   public async componentDidMount() {
-    const itemId = Number(this.util.getQueryStringValue("itemId"));
+    const itemId = Number(Util.getQueryStringValue("itemId"));
     const reportData: any = await this.ReportServices.getCompetencySummary(itemId);
     const data = {
       labels: reportData.labels,

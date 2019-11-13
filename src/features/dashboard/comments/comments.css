@@ -1,0 +1,12 @@
+.kt-widget2__item {
+  padding: 1rem 2.2rem 0 0;
+}
+.kt-widget2.Stop .kt-widget2__item:before {
+  background: #ef5661;
+}
+.kt-widget2.Start .kt-widget2__item:before {
+  background: #1dc9b7;
+}
+.kt-widget2.Continue .kt-widget2__item:before {
+  background: #2786fb;
+}

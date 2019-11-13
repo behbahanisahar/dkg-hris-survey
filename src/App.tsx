@@ -25,10 +25,8 @@ interface IAppState {
 }
 
 class App extends React.Component<{}, IAppState> {
-  private util: Util;
   constructor(props: any) {
     super(props);
-    this.util = new Util();
     this.state = {
       NominationData: {},
       page: "",
@@ -36,7 +34,7 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public async componentDidMount() {
-    const page = this.util.getQueryStringValue("page");
+    const page = Util.getQueryStringValue("page");
     this.setState(prevState => {
       return {
         ...prevState,

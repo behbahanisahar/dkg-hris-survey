@@ -32,11 +32,9 @@ const HtmlTooltip = withStyles((theme: Theme) => ({
 export default class Nomination extends React.Component<ISurveyProps, ISurveyState> {
   private ListService: ListServices;
 
-  private util: Util;
   public constructor(props: ISurveyProps) {
     super(props);
     this.ListService = new ListServices();
-    this.util = new Util();
     this.state = {
       errorSubordinate: false,
       errorOther: false,
@@ -112,7 +110,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
 
   public async componentDidMount() {
     document.title = "Nomination Form";
-    const itemId = this.util.getQueryStringValue("itemid");
+    const itemId = Util.getQueryStringValue("itemid");
     await this.loadUsers();
     // const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
     const NominationData: INominationData = this.props.NominationData;

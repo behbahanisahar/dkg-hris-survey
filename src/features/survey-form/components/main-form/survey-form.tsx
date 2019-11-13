@@ -42,10 +42,8 @@ const HtmlTooltip = withStyles((theme: Theme) => ({
 }))(Tooltip);
 class FormSurvey extends React.Component<{}, ISurveyFromState> {
   private ListService: ListServices;
-  private util: Util;
   constructor(props: any) {
     super(props);
-    this.util = new Util();
     this.ListService = new ListServices();
 
     this.state = {
@@ -97,7 +95,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   };
   public async componentDidMount() {
     document.title = "Survey Form";
-    const itemid = this.util.getQueryStringValue("itemid");
+    const itemid = Util.getQueryStringValue("itemid");
     const marks = [
       {
         value: 0,

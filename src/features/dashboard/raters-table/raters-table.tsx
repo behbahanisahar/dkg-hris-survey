@@ -13,18 +13,16 @@ interface IState {
 }
 class RatersTable extends React.Component<IProps, IState> {
   private ReportServices: ReportServices;
-  private util: Util;
   public constructor(props: any) {
     super(props);
     this.ReportServices = new ReportServices();
-    this.util = new Util();
     this.state = {
       itemId: 0,
       raters: [],
     };
   }
   public async componentDidMount() {
-    const itemId = Number(this.util.getQueryStringValue("itemId"));
+    const itemId = Number(Util.getQueryStringValue("itemId"));
     const raters: Raters[] = await this.ReportServices.getraters(itemId);
     console.log(raters);
     this.setState(prevState => {
@@ -41,8 +39,8 @@ class RatersTable extends React.Component<IProps, IState> {
         <div>ارزیابان شما که این گزارش بر اساس نظرات آنها تهیه شده شامل این گروه ها می باشند:</div>
         {this.onRenderTable}
 
-        <Table dir="rtl" className="table">
-          <thead className="thead-light">
+        <Table dir="rtl" className="table table-bordered mt-3">
+          <thead className="thead-dark">
             <tr>
               {" "}
               <th>گروه ارزیاﺏ</th>
@@ -61,8 +59,8 @@ class RatersTable extends React.Component<IProps, IState> {
       return (
         <tr key={index}>
           <th align="center">{n.RaterGroup}</th>
-          <td align="center">{n.NominatedCount}</td>
-          <td align="center">{n.CompletedCount}</td>
+          <td align="center">{Util.toPersianNumber(n.NominatedCount.toString())}</td>
+          <td align="center">{Util.toPersianNumber(n.CompletedCount.toString())}</td>
         </tr>
       );
     });

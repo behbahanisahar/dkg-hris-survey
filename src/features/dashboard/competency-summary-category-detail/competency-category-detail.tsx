@@ -23,12 +23,10 @@ interface IState {
 }
 class CompetencyCategoryComponent extends React.Component<IProps, IState> {
   private ReportServices: ReportServices;
-
   public constructor(props: any) {
     super(props);
     defaults.global.defaultFontFamily = "IRANYekan,Poppins";
     this.ReportServices = new ReportServices();
-
     this.state = {
       itemId: 0,
       categoryid: 0,
