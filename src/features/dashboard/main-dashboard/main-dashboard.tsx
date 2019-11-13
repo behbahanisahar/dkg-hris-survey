@@ -4,6 +4,7 @@ import RatersTable from "../raters-table/raters-table";
 import ComparingChart from "../comparing-chart/comparing-chart";
 import DKValueRadarChart from "../dk-value-radar-chart/dk-value-radar-chart";
 import ResponsiveBulletClass from "../competency-summary-category-detail/competency-category";
+import Comments from "../comments/comments";
 
 export default class MainDashboard extends React.Component<{}> {
   public render() {
@@ -22,7 +23,9 @@ export default class MainDashboard extends React.Component<{}> {
           <Grid item xs={12} sm={12}>
             <ComparingChart></ComparingChart>
           </Grid>
-          <Grid item xs={12} sm={12}></Grid>
+          <Grid item xs={12} sm={12}>
+            <Comments></Comments>
+          </Grid>
         </Grid>
       </div>
     );

@@ -1,3 +1,4 @@
+import { IComment } from "./../entities/reports/comments";
 import ServiceBase from "./service-base";
 import MockData from "./mock-data";
 import Raters from "../entities/raters";
@@ -59,6 +60,15 @@ class ReportServices extends ServiceBase {
     }
 
     return Promise.resolve(MockData.CompetencyCategories);
+  }
+
+  public async getComments(itemId: number): Promise<IComment[]> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/report/comments?itemid=" + itemId);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockData.Comments);
   }
 }
 export default ReportServices;

@@ -14,10 +14,8 @@ interface IAppState {
 
 class MainNomination extends React.Component<{}, IAppState> {
   private ListService: ListServices;
-  private util: Util;
   constructor(props: any) {
     super(props);
-    this.util = new Util();
     this.ListService = new ListServices();
     this.state = {
       itemId: 0,
@@ -26,8 +24,8 @@ class MainNomination extends React.Component<{}, IAppState> {
     };
   }
   public async componentDidMount() {
-    const itemId = this.util.getQueryStringValue("itemid");
-    const page = this.util.getQueryStringValue("page");
+    const itemId = Util.getQueryStringValue("itemid");
+    const page = Util.getQueryStringValue("page");
     const NominationData: INominationData = await this.ListService.getNominationData(Number(itemId));
     this.setState(prevState => {
       return {

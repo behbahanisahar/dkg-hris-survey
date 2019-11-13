@@ -11,7 +11,6 @@ class ResponsiveBulletClass extends Component {
     super(props);
     this.afterChartCreated = this.afterChartCreated.bind(this);
     this.ReportServices = new ReportServices();
-    this.util = new Util();
     this.state = {
       itemId: 0,
       reportData: {},
@@ -36,7 +35,7 @@ class ResponsiveBulletClass extends Component {
       //   },
       // });
     }
-    const itemId = Number(this.util.getQueryStringValue("itemId"));
+    const itemId = Number(Util.getQueryStringValue("itemId"));
     const reportData = await this.ReportServices.getCompetencySummary(itemId);
     this.setState(state => ({
       itemId,

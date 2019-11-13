@@ -580,4 +580,22 @@ export default class MockData {
       },
     ],
   };
+
+  public static Comments: any = [
+    {
+      Title: "ادامه - عادات و رفتاریهایی موثری که می‌بایست ادامه پیدا کنند",
+      Value: "Continue",
+      Comments: ["ادامه ۱", "ادامه ۲"],
+    },
+    {
+      Title: "شروع - عادات و رفتارهایی که می‌بایست شروع شوند",
+      Value: "Start",
+      Comments: ["شروع ۳", "شروع ۲", "شروع ۱"],
+    },
+    {
+      Title: "توقف - رفتاریهایی که می‌بایست متوقف شده یا به نحو دیگری صورت پذیرند",
+      Value: "Stop",
+      Comments: ["توقف ۱", "S​top"],
+    },
+  ];
 }

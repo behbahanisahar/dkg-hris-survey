@@ -20,12 +20,10 @@ interface IState {
 }
 class CompetencyCategoryComponent extends React.Component<IProps, IState> {
   private ReportServices: ReportServices;
-  private util: Util;
   public constructor(props: any) {
     super(props);
     defaults.global.defaultFontFamily = "IRANYekan,Poppins";
     this.ReportServices = new ReportServices();
-    this.util = new Util();
     this.state = {
       itemId: 0,
       categoryid: 0,
@@ -43,8 +41,8 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
     };
   }
   public async componentDidMount() {
-    const itemId = Number(this.util.getQueryStringValue("itemId"));
-    const categoryid = Number(this.util.getQueryStringValue("categoryid"));
+    const itemId = Number(Util.getQueryStringValue("itemId"));
+    const categoryid = Number(Util.getQueryStringValue("categoryid"));
     const data: ICategoryScore = await this.ReportServices.getCompetencyCategory(itemId, categoryid);
 
     // const data = {

@@ -13,18 +13,16 @@ interface IState {
 }
 class RatersTable extends React.Component<IProps, IState> {
   private ReportServices: ReportServices;
-  private util: Util;
   public constructor(props: any) {
     super(props);
     this.ReportServices = new ReportServices();
-    this.util = new Util();
     this.state = {
       itemId: 0,
       raters: [],
     };
   }
   public async componentDidMount() {
-    const itemId = Number(this.util.getQueryStringValue("itemId"));
+    const itemId = Number(Util.getQueryStringValue("itemId"));
     const raters: Raters[] = await this.ReportServices.getraters(itemId);
     console.log(raters);
     this.setState(prevState => {
