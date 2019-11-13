@@ -98,7 +98,9 @@ class ResponsiveBulletClass extends React.Component {
           },
         },
       },
-
+      credits: {
+        enabled: false,
+      },
       series: this.state.reportData.series,
     };
 
