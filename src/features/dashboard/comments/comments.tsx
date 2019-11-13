@@ -35,7 +35,7 @@ export default class Comments extends React.Component<IProps, IState> {
       this.setState(current => ({
         ...current,
         data: response,
-        isFetching: true,
+        isFetching: false,
       })),
     );
   }
