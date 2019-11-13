@@ -1,14 +1,15 @@
 import * as React from "react";
 import ReportServices from "../../../services/report-services";
 import Util from "../.././../utilities/utilities";
-
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { HorizontalBar } from "react-chartjs-2";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
 interface IProps {
   name?: string;
+  itemId: number;
 }
 interface IState {
-  itemId?: number;
+  isFetching: boolean;
   data: any;
 }
 class CompetencySummary extends React.Component<IProps, IState> {
@@ -17,7 +18,7 @@ class CompetencySummary extends React.Component<IProps, IState> {
     super(props);
     this.ReportServices = new ReportServices();
     this.state = {
-      itemId: 0,
+      isFetching: true,
       data: {
         averageValue: 0,
         labels: [],
@@ -27,28 +28,22 @@ class CompetencySummary extends React.Component<IProps, IState> {
   }
   public async componentDidMount() {
     const itemId = Number(Util.getQueryStringValue("itemId"));
-    const reportData: any = await this.ReportServices.getCompetencySummary(itemId);
-    const data = {
-      labels: reportData.labels,
-      datasets: reportData.datasets,
-    };
-
-    console.log(reportData);
-    console.log(data);
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        data,
-        itemId,
+    await this.ReportServices.getCompetencySummary(itemId).then(response => {
+      const data = {
+        labels: response.labels,
+        datasets: response.datasets,
       };
+      this.setState(current => ({
+        ...current,
+        data: data,
+        isFetching: false,
+      }));
     });
   }
+
   public render() {
     const options = {
-      onClick: (e: any, item: any) => {
-        console.log(e);
-        console.log(item);
-      },
+      onClick: (e: any, item: any) => {},
       scales: {
         yAxes: [
           {
@@ -72,7 +67,10 @@ class CompetencySummary extends React.Component<IProps, IState> {
     };
     return (
       <DKPortlet title="شایستگی ها">
-        <HorizontalBar options={options} width={400} height={350} data={this.state.data} />
+        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
+        {this.state.isFetching === false && (
+          <HorizontalBar options={options} width={400} height={350} data={this.state.data} />
+        )}
       </DKPortlet>
     );
   }

@@ -10,10 +10,10 @@ import { DKSpinner } from "../../../core/components/spinner/spinner";
 interface IProps {
   name?: string;
   match?: any;
+  itemId: number;
 }
 interface IState {
   isFetching: boolean;
-  itemId?: number;
   data: IComment[];
 }
 
@@ -26,15 +26,11 @@ export default class Comments extends React.Component<IProps, IState> {
 
     this.state = {
       isFetching: true,
-      itemId: 0,
       data: [],
     };
   }
   public async componentDidMount() {
-    //  const itemId = Number(Util.getQueryStringValue("itemId"));
-
-    const itemId = this.props.match.params.itemId;
-    await this.ReportServices.getComments(itemId).then(response =>
+    await this.ReportServices.getComments(this.props.itemId).then(response =>
       this.setState(current => ({
         ...current,
         data: response,

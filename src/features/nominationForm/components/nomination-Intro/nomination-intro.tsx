@@ -127,7 +127,7 @@ Thank you in advance for your cooperation in the path toward DK’s excellence.
               {this.state.showSpinner && <Spinner className="spinner" />}
               {!this.state.showSpinner && (
                 <MDBTable className="kt-datatable__table" borderless>
-                  <MDBTableBody clssName="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
+                  <MDBTableBody className="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
                 </MDBTable>
               )}
             </div>

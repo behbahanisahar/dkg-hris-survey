@@ -1,17 +1,16 @@
 import * as React from "react";
-import { DKPortlet } from "../../../core/components/portlet/portlet";
 import ReportServices from "../../../services/report-services";
 import Util from "../.././../utilities/utilities";
 import Raters from "../../../entities/raters";
+import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { Table, TableBody } from "@material-ui/core";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 interface IProps {
-  name?: string;
   match?: any;
+  itemId: number;
 }
 interface IState {
   isFetching: boolean;
-  itemId?: number;
   raters: Raters[];
 }
 class RatersTable extends React.Component<IProps, IState> {
@@ -20,13 +19,12 @@ class RatersTable extends React.Component<IProps, IState> {
     super(props);
     this.ReportServices = new ReportServices();
     this.state = {
-      itemId: 0,
       isFetching: true,
       raters: [],
     };
   }
   public async componentDidMount() {
-    const itemId = Number(Util.getQueryStringValue("itemId"));
+    const itemId = this.props.itemId;
     await this.ReportServices.getraters(itemId).then(response =>
       this.setState(current => ({
         ...current,

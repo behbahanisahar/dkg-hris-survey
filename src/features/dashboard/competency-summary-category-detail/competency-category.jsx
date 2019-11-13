@@ -12,7 +12,6 @@ class ResponsiveBulletClass extends React.Component {
     this.afterChartCreated = this.afterChartCreated.bind(this);
     this.ReportServices = new ReportServices();
     this.state = {
-      itemId: 0,
       reportData: {},
     };
   }
@@ -26,20 +25,9 @@ class ResponsiveBulletClass extends React.Component {
       this.internalChart.series[3].data.forEach(element => {
         element.graphic.translate(-10, 0);
       });
-      console.log(this.internalChart);
-      // this.internalChart.setOptions({
-      //   chart: {
-      //     style: {
-      //       fontFamily: "IRANYekan",
-      //     },
-      //   },
-      // });
     }
-    //  const itemId = Number(Util.getQueryStringValue("itemId"));
-    const itemId = this.props.match.params.itemId;
-    const reportData = await this.ReportServices.getCompetencySummary(itemId);
+    const reportData = await this.ReportServices.getCompetencySummary(this.props.itemId);
     this.setState(state => ({
-      itemId,
       reportData,
     }));
   }

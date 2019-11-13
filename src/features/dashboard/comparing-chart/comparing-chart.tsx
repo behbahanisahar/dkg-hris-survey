@@ -4,12 +4,15 @@ import ReportServices from "../../../services/report-services";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { Line } from "react-chartjs-2";
 import { defaults } from "react-chartjs-2";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
 interface IProps {
   name?: string;
   match?: any;
+  itemId: number;
 }
 interface IState {
-  itemId?: number;
+  isFetching: boolean;
+
   data: any;
 }
 export default class DKValueRadarChart extends React.Component<IProps, IState> {
@@ -19,7 +22,7 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
     defaults.global.defaultFontFamily = "IRANYekan,Poppins";
     this.ReportServices = new ReportServices();
     this.state = {
-      itemId: 0,
+      isFetching: true,
       data: {
         averageValue: 0,
         labels: [],
@@ -28,77 +31,23 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
     };
   }
   public async componentDidMount() {
-    //  const itemId = Number(Util.getQueryStringValue("itemId"));
-    const itemId = this.props.match.params.itemId;
-    const reportData: any = await this.ReportServices.getCompareCompetency(itemId);
-    console.log(reportData);
-    const data = {
-      labels: reportData.labels,
-      datasets: reportData.datasets,
-    };
-    // const data = {
-    //   labels: ["January", "February", "March", "April", "May", "June", "July"],
-    //   datasets: [
-    //     {
-    //       label: "My First dataset",
-    //       fill: false,
-    //       lineTension: 0.1,
-    //       backgroundColor: "rgba(75,192,192,0.4)",
-    //       borderColor: "rgba(75,192,192,1)",
-    //       borderCapStyle: "butt",
-    //       borderDash: [],
-    //       borderDashOffset: 0.0,
-    //       borderJoinStyle: "miter",
-    //       pointBorderColor: "rgba(75,192,192,1)",
-    //       pointBackgroundColor: "#fff",
-    //       pointBorderWidth: 1,
-    //       pointHoverRadius: 5,
-    //       pointHoverBackgroundColor: "rgba(75,192,192,1)",
-    //       pointHoverBorderColor: "rgba(220,220,220,1)",
-    //       pointHoverBorderWidth: 2,
-    //       pointRadius: 1,
-    //       pointHitRadius: 10,
-    //       data: [65, 59, 80, 81, 56, 55, 40],
-    //     },
-    //   ],
-    // };
-
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        data,
-        itemId,
+    await this.ReportServices.getCompareCompetency(this.props.itemId).then(response => {
+      const data = {
+        labels: response.labels,
+        datasets: response.datasets,
       };
+      this.setState(current => ({
+        ...current,
+        data: data,
+        isFetching: false,
+      }));
     });
   }
   public render() {
-    // const options = {
-    //   scales: {
-    //     yAxes: [
-    //       {
-    //         ticks: {
-    //           beginAtZero: false,
-    //           min: 1,
-    //           max: 5,
-    //           stepSize: 1,
-    //         },
-    //       },
-    //     ],
-    //     xAxes: [
-    //       {
-    //         ticks: {
-    //           beginAtZero: false,
-    //           min: 1,
-    //           max: 5,
-    //           stepSize: 1,
-    //         },
-    //       },
-    //     ],
-    //   },
-    // };
     return (
       <DKPortlet title="مقایسه امتیاز شما با سایر رهبران واحد">
-        <Line height={60} data={this.state.data} />
+        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
+        {this.state.isFetching === false && <Line height={60} data={this.state.data} />}
       </DKPortlet>
     );
   }

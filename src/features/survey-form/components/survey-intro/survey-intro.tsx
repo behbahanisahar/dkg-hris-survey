@@ -80,7 +80,7 @@ btn btn-sm btn-clean read-more  w-25"
               <div className="kt-portlet__body">
                 <MDBTable className="kt-datatable__table" borderless>
                   <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
-                  <MDBTableBody clssName="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
+                  <MDBTableBody className="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
                 </MDBTable>
               </div>
             </div>

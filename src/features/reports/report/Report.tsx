@@ -19,7 +19,6 @@ export default class SurveyReport extends React.Component<{}> {
         },
       ],
     };
-    console.log(data);
 
     return (
       <div>
