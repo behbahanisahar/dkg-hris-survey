@@ -5,8 +5,11 @@ import Util from "../src/utilities/utilities";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import routes from "./routes";
+import NominationIntroPage from "./features/nominationForm/components/nomination-Intro/nomination-intro";
+import SurveyIntroPage from "./features/survey-form/components/survey-intro/survey-intro";
 
 const theme = createMuiTheme({
   typography: {
@@ -45,10 +48,14 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public render() {
+    console.log(this.state.page);
     return (
       <div className="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
         <div className="kt-container  kt-grid__item kt-grid__item--fluid">
           <MuiThemeProvider theme={theme}>
+            {this.state.page.toLowerCase() === "nominationintro" && <NominationIntroPage />}
+            {this.state.page.toLowerCase() === "surveyintro" && <SurveyIntroPage />}
+
             {/* {this.state.page.toLowerCase() === "nominationform" && <MainNomination />}
             {this.state.page.toLowerCase() === "report" && <ResponsiveBulletClass />}
             {this.state.page.toLowerCase() === "competency" && <CompetencyCategoryComponent />}
@@ -57,15 +64,18 @@ class App extends React.Component<{}, IAppState> {
             {this.state.page.toLowerCase() === "surveyintro" && <SurveyIntroPage />}
             {this.state.page.toLowerCase() === "nominationintro" && <NominationIntroPage />}
             {this.state.page.toLowerCase() === "" && <NominationIntroPage />} */}
-            <Router>
-              <div>
-                <Switch>
-                  {routes.map(route => (
-                    <Route key={route.path} {...route} />
-                  ))}
-                </Switch>
-              </div>
-            </Router>
+
+            {this.state.page == "" && (
+              <Router>
+                <div>
+                  <Switch>
+                    {routes.map(route => (
+                      <Route key={route.path} {...route} />
+                    ))}
+                  </Switch>
+                </div>
+              </Router>
+            )}
           </MuiThemeProvider>
           <ToastContainer rtl newestOnTop={true} />
         </div>

@@ -8,8 +8,10 @@ import "./nomination-intro.css";
 
 import Spinner from "../../../spinner/spinner";
 import { NoContent } from "../no-content/no-content";
-
-export default class NominationIntroPage extends React.Component<{}, INominationIntroState> {
+interface IState {
+  match?: any;
+}
+export default class NominationIntroPage extends React.Component<IState, INominationIntroState> {
   private ListService: ListServices;
   public constructor(props: any) {
     super(props);
@@ -191,6 +193,6 @@ Thank you in advance for your cooperation in the path toward DK’s excellence.
   };
   /************************************************************* */
   private onShowItem = (ItemId: number) => {
-    window.location.href = "?itemid=" + ItemId + "&page=NominationForm";
+    window.location.href = "#/nominationform/" + ItemId;
   };
 }

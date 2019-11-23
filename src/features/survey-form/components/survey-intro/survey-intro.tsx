@@ -8,8 +8,9 @@ import { TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/cor
 import { MDBTable, MDBTableBody } from "mdbreact";
 import { getIntroTextFa, getIntroTextEn } from "./survey-intro-text";
 import { NoContent } from "../../../nominationForm/components/no-content/no-content";
+import ISurveyIntroProps from "./survey-intro-props";
 
-export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroState> {
+export default class SurveyIntroPage extends React.Component<ISurveyIntroProps, ISurveyIntroState> {
   private ListService: ListServices;
   public constructor(props: any) {
     super(props);
@@ -23,7 +24,10 @@ export default class SurveyIntroPage extends React.Component<{}, ISurveyIntroSta
   }
   public async componentDidMount() {
     document.title = "Survey Intro";
-    await this.ListService.getAppraisee().then(appraisee => {
+    let username = this.props.match != undefined ? this.props.match.params.username : "";
+    if (username == null) username = "";
+
+    await this.ListService.getAppraisee(username).then(appraisee => {
       this.setState(prevState => {
         return {
           ...prevState,
@@ -164,7 +168,7 @@ btn btn-sm btn-clean read-more  w-25"
   };
 
   private onShowItem = (ItemId: number) => {
-    window.location.href = "?itemid=" + ItemId + "&page=SurveyForm";
+    window.location.href = "#/surveyform/" + ItemId;
   };
   private showContent = () => {
     // let classNameDiv = document.getElementById("expand").className;

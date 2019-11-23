@@ -19,7 +19,6 @@ import {
   DialogActions,
 } from "@material-ui/core";
 import ICategory from "../../../../entities/categories";
-import Util from "../../../../utilities/utilities";
 import { ISurveyData } from "../../../../entities/survey-data";
 import Context from "../../../../utilities/context";
 import Info from "@material-ui/icons/Explicit";
@@ -40,13 +39,19 @@ const HtmlTooltip = withStyles((theme: Theme) => ({
     textAlign: "left",
   },
 }))(Tooltip);
-class FormSurvey extends React.Component<{}, ISurveyFromState> {
+
+interface IProps {
+  match?: any;
+}
+
+class FormSurvey extends React.Component<IProps, ISurveyFromState> {
   private ListService: ListServices;
   constructor(props: any) {
     super(props);
     this.ListService = new ListServices();
 
     this.state = {
+      userId: 0,
       open: false,
       SurveyFormData: {
         User: {
@@ -95,7 +100,8 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   };
   public async componentDidMount() {
     document.title = "Survey Form";
-    const itemid = Util.getQueryStringValue("itemid");
+    const itemid = this.props.match.params.itemId;
+    const userId = this.props.match.params.userId;
     const marks = [
       {
         value: 0,
@@ -132,6 +138,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
           marks,
           itemid: Number(itemid),
           showSpinner: false,
+          userId,
         };
       });
     });
@@ -181,7 +188,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
                         <div className=" kt-ribbon--clip kt-ribbon--right">
                           <div className=" kt-ribbon__target badge dk-brand-yellow  mt-3">
                             <span className="kt-ribbon__inner" />
-                            Qualititative Feedback
+                            Qualitative Feedback
                           </div>
                         </div>
 
@@ -488,9 +495,20 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
 
   /*****************submit form *********************************** */
   private onSubmitForm = async (status: string, saveFormat: string) => {
+    let currentUserId: number = 0;
+    let impersonated: boolean = false;
+    console.log(this.state.userId);
+    if (this.state.userId == 0 || this.state.userId == null) {
+      currentUserId = Context.userId;
+      impersonated = false;
+    } else {
+      currentUserId = this.state.userId;
+      impersonated = true;
+    }
     const SubmitData: ISurveyData = {
       nominationItemId: this.state.itemid,
-      currentUserId: Context.userId,
+      currentUserId: currentUserId,
+      impersonated: impersonated,
       status,
       answers: this.state.answers,
       ShouldBeStopped: this.state.SurveyFormData.ShouldBeStopped,
@@ -531,7 +549,7 @@ class FormSurvey extends React.Component<{}, ISurveyFromState> {
   };
 
   private onCancelRequest = () => {
-    window.location.href = "?page=Surveyintro";
+    window.location.href = "#/surveyintro";
   };
   toastSubmitoptions: ToastOptions = { onClose: this.onCancelRequest, autoClose: 5000, position: "bottom-left" };
   notifyError = (Id: string, message: string) => {

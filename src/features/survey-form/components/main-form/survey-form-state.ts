@@ -13,4 +13,5 @@ export default interface ISurveyFromState {
   showSpinner: boolean;
   submittingForm: boolean;
   savingForm: boolean;
+  userId: number;
 }

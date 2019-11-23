@@ -61,13 +61,20 @@ export function getIntroTextFa() {
   <i class="la bullet"></i>
   لطفا پس از تکمیل پرسش‌نامه با کلیک بر روی دکمه ثبت نهائی پاسخ‌های خود را نهایی کرده و ثبت نمائید. 
   <br>
+  <i class="la bullet"></i>
+  در صورت اینکه دکمه "ثبت نهایی" در انتهای هر فرم را انتخاب نکنید، بازخوردهای شما در نظر گرفته نخواهد شد.
   <br>
   <br>
-  در صورت داشتن هر گونه سوال یا مشکل با موهبت شعله (ایمیل: 
+
+  در صورت داشتن هر گونه سوال یا مشکل مساله را با  
+  HRBP
+  واحد خود مطرح نمائید. در صورت حل نشدن مشکل می‌توانید با موهبت شعله (ایمیل: 
     <a href="mailto:m.sholeh@digikala.com?subject=بازخورد ۳۶۰ درجه">m.sholeh@digikala.com</a>
-    / داخلی: ۶۰۳۹) یا محسن علیپور (ایمیل: 
-    <a href="mailto:mohsen.alipour@digikala.com?subject=بازخورد ۳۶۰ درجه">mohsen.alipour@digikala.com</a>
-        داخلی: ۶۱۴۳)  تماس بگیرید.
+     / داخلی: ۶۰۳۹) یا محسن علی‌پور                                  
+               (ایمیل: 
+                <a href="mailto:mohsen.alipour@digikala.com?subject=بازخورد ۳۶۰ درجه">mohsen.alipour@digikala.com</a>
+                  داخلی: ۶۱۴۳)  تماس بگیرید.
+  
         <br>
   پیشاپیش از همراهیتان در مسیر توسعه و تعالی دیجی کالا متشکریم.
   <br>
@@ -126,12 +133,17 @@ export function getIntroTextEn() {
   <i class="la bullet"></i>
   After completing the questionnaire, please click on “Submit” to finalize and store your response. 
   <br>
+  <i class="la bullet"></i>
+  If you don’t click on “Submit” button at the bottom of each form, your feedback won’t be considered.
   <br>
   <br>
-  Should you encounter any issues or problems do not hesitate to contact Mouhebat Sholeh (Email:  <a href="mailto:m.sholeh@digikala.com?subject=بازخورد ۳۶۰ درجه">m.sholeh@digikala.com</a>
+  
+  <br>
+  Should you encounter any issues or problems do not hesitate to contact your HRBP, Mouhebat Sholeh (Email:  <a href="mailto:m.sholeh@digikala.com?subject=بازخورد ۳۶۰ درجه">m.sholeh@digikala.com</a>
    / Ext: 6039) or Mohsen Alipour (<a href="mailto:mohsen.alipour@digikala.com?subject=بازخورد ۳۶۰ درجه">mohsen.alipour@digikala.com</a> / Ext: 6143). 
   <br>
   Thank you in advance for your cooperation in the path toward DK’s excellence.
+  <br>
   <br>
   <br>
   <b>
