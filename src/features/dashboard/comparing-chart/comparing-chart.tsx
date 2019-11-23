@@ -44,10 +44,35 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
     });
   }
   public render() {
+    const options = {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: false,
+              stepSize: 1,
+              min: 1,
+              max: 5,
+            },
+          },
+        ],
+        xAxes: [
+          {
+            ticks: {
+              beginAtZero: false,
+              stepSize: 1,
+
+              min: 1,
+              max: 5,
+            },
+          },
+        ],
+      },
+    };
     return (
       <DKPortlet title="مقایسه امتیاز شما با سایر رهبران واحد">
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
-        {this.state.isFetching === false && <Line height={60} data={this.state.data} />}
+        {this.state.isFetching === false && <Line options={options} height={60} data={this.state.data} />}
       </DKPortlet>
     );
   }

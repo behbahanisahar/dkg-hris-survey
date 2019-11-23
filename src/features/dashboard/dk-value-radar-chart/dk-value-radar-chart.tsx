@@ -76,7 +76,7 @@ export default class ComparingChart extends React.Component<IProps, IState> {
         reverse: false,
         ticks: {
           beginAtZero: false,
-          min: 1,
+          min: 0,
           max: 5,
           stepSize: 1,
         },

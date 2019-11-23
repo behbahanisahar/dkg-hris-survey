@@ -8,6 +8,7 @@ import QuestionData from "../../../entities/category-score-questiondata";
 import "chartjs-plugin-datalabels";
 import { defaults } from "react-chartjs-2";
 import { Link } from "react-router-dom";
+import "./competency-summary-detail.css";
 
 interface IProps {
   name?: string;
@@ -57,15 +58,11 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
   public async componentDidMount() {
     console.log(this.props.match);
     this.getData();
-    // const data = {
-    //   labels: reportData.labels,
-    //   datasets: reportData.datasets,
-    // };
   }
 
   public async getData() {
-    const itemId = this.props.match.params.itemId; //Number(this.util.getQueryStringValue("itemId"));
-    const categoryid = this.props.match.params.categoryId; // Number(this.util.getQueryStringValue("categoryid"));
+    const itemId = this.props.match.params.itemId;
+    const categoryid = this.props.match.params.categoryId;
     await this.ReportServices.getCompetencyCategory(itemId, categoryid).then((data: ICategoryScore) => {
       const reportData = {
         labels: data.CategoryChart.labels,
@@ -84,9 +81,6 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
     });
   }
   public render() {
-    console.log(this.state.data);
-    // const category = this.state.data.Categories;
-    // console.log(category[0]);
     const options = {
       plugins: {
         datalabels: {
@@ -130,21 +124,35 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
     };
     return (
       <div className="rtl">
+        <button
+          className="btn btn-secondary mx-2"
+          style={{ float: "left" }}
+          onClick={e => {
+            this.onBackToPrev();
+            e.preventDefault();
+            return false;
+          }}
+        >
+          بازگشت | Back
+        </button>
         {this.state.isFetch === true && (
           <div>
-            <Grid style={{ margin: "0 15%" }} container spacing={3}>
+            <Grid style={{ marginRight: "10%", width: "80%" }} container spacing={2}>
               {this.OnRenderCategories()}
             </Grid>
           </div>
         )}
         <DKPortlet noborder={true} title={this.state.data.CategoryTitle}>
-          <HorizontalBar height={60} options={options} data={this.state.reportData} />
+          <HorizontalBar height={40} options={options} data={this.state.reportData} />
         </DKPortlet>
         <Grid container spacing={3}>
           {this.onRenderQuestionScore()}
         </Grid>
       </div>
     );
+  }
+  private onBackToPrev() {
+    window.location.href = "#/dashboard/" + this.state.itemId;
   }
   /*********************************************************** */
   private onRenderQuestionScore = () => {
@@ -188,12 +196,24 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
       },
     };
     return this.state.data.QuestionsData.map((n: QuestionData, index: any) => {
+      let avgClassName: string = "";
+      if (n.Average < 2) {
+        avgClassName = "average1";
+      } else if (n.Average > 1 && n.Average <= 2.5) {
+        avgClassName = "average2";
+      } else if (n.Average > 2.5 && n.Average <= 3.5) {
+        avgClassName = "average3";
+      } else if (n.Average > 3.5 && n.Average <= 4.5) {
+        avgClassName = "average4";
+      } else if (n.Average > 4.5 && n.Average <= 5) {
+        avgClassName = "average5";
+      }
       return (
         <Grid item xs={6} sm={6}>
-          <DKPortlet noborder={true}>
+          <DKPortlet hasHeader={false} noborder={true}>
             <span dangerouslySetInnerHTML={{ __html: n.QuestionTitle }}></span>
             <HorizontalBar height={80} options={options} data={n.QuestionChart} />
-            <span>میانگین : {n.Average} </span>
+            <span className={avgClassName + " average-bold"}>میانگین : {n.Average} </span>
           </DKPortlet>
         </Grid>
       );
@@ -208,7 +228,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
             <img style={{ width: "100%" }} src={n.SignUrl}></img>
           </Link>
           <Link to={"/competency/" + this.state.itemId + "/" + n.Id}>
-            <span>{n.Title}</span>
+            <span style={{ textAlign: "center", fontWeight: "400" }}>{n.Title}</span>
           </Link>
         </Grid>
       );

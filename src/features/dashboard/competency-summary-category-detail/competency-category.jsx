@@ -19,9 +19,6 @@ class ResponsiveBulletClass extends React.Component {
     };
   }
   async componentDidMount() {
-    console.log(this.state.isFetching);
-    //console.log(this.internalChart);
-
     await this.ReportServices.getCompetencySummary(this.props.itemId).then(response =>
       this.setState(state => ({
         isFetching: false,
@@ -64,9 +61,7 @@ class ResponsiveBulletClass extends React.Component {
 
         labels: {
           events: {
-            click: function() {
-              console.log(this);
-            },
+            click: function() {},
           },
         },
       },
@@ -132,10 +127,6 @@ class ResponsiveBulletClass extends React.Component {
 
     this.internalChart = chart;
     if (this.state.isFetching == false && this.internalChart.series.length >= 2) {
-      console.log("after");
-
-      // this.internalChart.series[0].type = "bar";
-      // this.internalChart.series[1].type = "bar";
       this.internalChart.series[2].data.forEach(element => {
         element.graphic.translate(5, 0);
       });
@@ -143,7 +134,6 @@ class ResponsiveBulletClass extends React.Component {
         element.graphic.translate(-5, 0);
       });
     }
-    console.log("afterChartCreated", chart);
   }
 }
 

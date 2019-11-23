@@ -6,7 +6,8 @@ import DKValueRadarChart from "../dk-value-radar-chart/dk-value-radar-chart";
 import ResponsiveBulletClass from "../competency-summary-category-detail/competency-category";
 import Comments from "../comments/comments";
 import IndexReport from "../index";
-import DashboardIntro from "../intro/dashboard-intro";
+
+import DashboardHeader from "../dashboard-header/dashboard-header";
 
 interface IProps {
   match: any;
@@ -17,9 +18,10 @@ const MainDashboard: React.SFC<IProps> = props => {
   const itemId = props.match.params.itemId;
   return (
     <div className="rtl">
+      <DashboardHeader />
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12}>
-          <DashboardIntro></DashboardIntro>
+          {/* <DashboardIntro></DashboardIntro> */}
         </Grid>
         <Grid item xs={4}>
           <RatersTable itemId={itemId} />
