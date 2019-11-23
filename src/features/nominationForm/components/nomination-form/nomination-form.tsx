@@ -5,7 +5,6 @@ import "./nomination-form.css";
 import ListServices from "../../../../services/list-services";
 import SnackBarMode from "../../../../entities/snackbar-mode";
 import SnackBarMessage from "../snakbar-message/snackbar-message";
-import Util from "../../../../utilities/utilities";
 import INominationData from "../../../../entities/nomination";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
 import MYStepper from "../../../stepper/stepper";
@@ -110,7 +109,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
 
   public async componentDidMount() {
     document.title = "Nomination Form";
-    const itemId = Util.getQueryStringValue("itemid");
+    const itemId = this.props.itemId;
     await this.loadUsers();
     // const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
     const NominationData: INominationData = this.props.NominationData;
@@ -511,7 +510,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     }
   };
   onCancelRequest = () => {
-    window.location.href = "?page=nominationintro";
+    window.location.href = "#/nominationintro";
   };
   toastSubmitoptions: ToastOptions = { onClose: this.onCancelRequest, autoClose: 5000, position: "bottom-left" };
   notifyError = (Id: string, message: string) => {

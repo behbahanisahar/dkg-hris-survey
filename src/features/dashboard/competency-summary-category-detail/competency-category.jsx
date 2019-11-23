@@ -19,9 +19,14 @@ class ResponsiveBulletClass extends React.Component {
     };
   }
   async componentDidMount() {
+    console.log(this.state.isFetching);
+    //console.log(this.internalChart.series.length);
+
     if (this.state.isFetching == false && this.internalChart.series.length >= 2) {
-      this.internalChart.series[0].type = "bar";
-      this.internalChart.series[1].type = "bar";
+      console.log("after");
+
+      // this.internalChart.series[0].type = "bar";
+      // this.internalChart.series[1].type = "bar";
       this.internalChart.series[2].data.forEach(element => {
         element.graphic.translate(10, 0);
       });
@@ -114,8 +119,10 @@ class ResponsiveBulletClass extends React.Component {
     );
   }
   afterChartCreated(chart) {
+    console.log("this.state.isFetching", this.state.isFetching);
+
     this.internalChart = chart;
-    console.log(chart);
+    console.log("afterChartCreated", chart);
   }
 }
 

@@ -14,11 +14,21 @@ const routes: RouteTypes[] = [
   {
     exact: true,
     path: "/",
+    component: SurveyIntroPage,
+  },
+  {
+    exact: true,
+    path: "/surveyintro",
+    component: SurveyIntroPage,
+  },
+  {
+    exact: false,
+    path: "/nominationintro",
     component: NominationIntroPage,
   },
   {
     exact: false,
-    path: "/nominationform",
+    path: "/nominationform/:itemId",
     component: MainNomination,
   },
   // {
@@ -37,13 +47,19 @@ const routes: RouteTypes[] = [
     component: MainDashboard,
   },
   {
-    exact: false,
-    path: "/surveyform",
+    exact: true,
+    path: "/surveyform/:itemId",
     component: FormSurvey,
   },
   {
     exact: false,
-    path: "/surveyintro",
+    path: "/surveyform/:itemId/:userId",
+    component: FormSurvey,
+  },
+
+  {
+    exact: false,
+    path: "/surveyintro/:username",
     component: SurveyIntroPage,
   },
   {

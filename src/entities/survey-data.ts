@@ -8,4 +8,5 @@ export interface ISurveyData {
   ShouldBeStarted: string;
   ShouldBeContinued: string;
   ShouldBeStopped: string;
+  impersonated?: boolean;
 }

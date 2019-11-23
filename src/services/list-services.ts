@@ -130,9 +130,9 @@ class ListServices extends ServiceBase {
     return Promise.resolve(MockData.SurveyFormData);
   }
   /*****************************get appraisee***************************************************** */
-  public async getAppraisee(): Promise<any[]> {
+  public async getAppraisee(username: string): Promise<any[]> {
     if (process.env.NODE_ENV === "production") {
-      const result: any = await this.get("Appraisee");
+      const result: any = await this.get("Appraisee?username=" + username);
 
       return Promise.resolve(result.data);
     }
