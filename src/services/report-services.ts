@@ -4,6 +4,7 @@ import MockData from "./mock-data";
 import Raters from "../entities/raters";
 import ReportStructure from "../entities/reportData";
 import ICategoryScore from "../entities/category-scores";
+import IndexData from "../entities/reports/index-report";
 
 class ReportServices extends ServiceBase {
   public constructor() {
@@ -61,6 +62,7 @@ class ReportServices extends ServiceBase {
 
     return Promise.resolve(MockData.CompetencyCategories);
   }
+  /***************************************************************************** */
 
   public async getComments(itemId: number): Promise<IComment[]> {
     if (process.env.NODE_ENV === "production") {
@@ -69,6 +71,15 @@ class ReportServices extends ServiceBase {
     }
 
     return Promise.resolve(MockData.Comments);
+  }
+  /**************************************************************************** */
+  public async getIndex(itemId: number): Promise<IndexData[]> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/report/index?itemid=" + itemId);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockData.Index);
   }
 }
 export default ReportServices;

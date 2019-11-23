@@ -43,12 +43,12 @@ const routes: RouteTypes[] = [
   },
   {
     exact: false,
-    path: "/surveyintro",
+    path: "/surveyintro/:itemId",
     component: SurveyIntroPage,
   },
   {
     exact: false,
-    path: "/nominationintro",
+    path: "/nominationintro/:itemId",
     component: NominationIntroPage,
   },
 ];

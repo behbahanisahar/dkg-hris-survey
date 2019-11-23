@@ -5,6 +5,7 @@ import ComparingChart from "../comparing-chart/comparing-chart";
 import DKValueRadarChart from "../dk-value-radar-chart/dk-value-radar-chart";
 import ResponsiveBulletClass from "../competency-summary-category-detail/competency-category";
 import Comments from "../comments/comments";
+import IndexReport from "../index";
 
 interface IProps {
   match: any;
@@ -16,19 +17,22 @@ const MainDashboard: React.SFC<IProps> = props => {
   return (
     <div className="rtl">
       <Grid container spacing={3}>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={12}>
           <ResponsiveBulletClass itemId={itemId} />
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <RatersTable itemId={itemId} />
+        <Grid item xs={12}>
+          <IndexReport itemId={itemId} />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={6}>
           <DKValueRadarChart itemId={itemId} />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={6}>
+          <RatersTable itemId={itemId} />
+        </Grid>
+        <Grid item xs={12}>
           <ComparingChart itemId={itemId} />
         </Grid>
-        <Grid item xs={12} sm={12}>
+        <Grid item xs={12}>
           <Comments itemId={itemId} />
         </Grid>
       </Grid>

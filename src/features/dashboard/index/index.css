@@ -1,0 +1,10 @@
+.transform-header {
+  transform: rotate(90deg);
+}
+.table th {
+  vertical-align: middle !important ;
+}
+.desc-questions {
+  color: #77787b;
+  font-size: 1.1rem;
+}

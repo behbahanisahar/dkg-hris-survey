@@ -59,6 +59,12 @@ class ResponsiveBulletClass extends React.Component {
         },
       },
       xAxis: {
+        ticks: {
+          beginAtZero: false,
+          stepSize: 1,
+          min: 0,
+          max: 5,
+        },
         categories: this.state.reportData.categories,
 
         labels: {
@@ -70,6 +76,12 @@ class ResponsiveBulletClass extends React.Component {
         },
       },
       yAxis: {
+        ticks: {
+          beginAtZero: false,
+          stepSize: 1,
+          min: 0,
+          max: 5,
+        },
         title: {
           enabled: true,
           text: "",
