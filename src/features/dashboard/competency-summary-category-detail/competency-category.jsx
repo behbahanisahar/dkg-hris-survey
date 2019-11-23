@@ -4,7 +4,6 @@ import HighchartsReact from "highcharts-react-official";
 import ReportServices from "../../../services/report-services";
 import Util from "../../../utilities/utilities";
 import { borderRight } from "@material-ui/system";
-import "./competency-datail.css";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 
@@ -20,20 +19,8 @@ class ResponsiveBulletClass extends React.Component {
   }
   async componentDidMount() {
     console.log(this.state.isFetching);
-    //console.log(this.internalChart.series.length);
+    //console.log(this.internalChart);
 
-    if (this.state.isFetching == false && this.internalChart.series.length >= 2) {
-      console.log("after");
-
-      // this.internalChart.series[0].type = "bar";
-      // this.internalChart.series[1].type = "bar";
-      this.internalChart.series[2].data.forEach(element => {
-        element.graphic.translate(10, 0);
-      });
-      this.internalChart.series[3].data.forEach(element => {
-        element.graphic.translate(-10, 0);
-      });
-    }
     await this.ReportServices.getCompetencySummary(this.props.itemId).then(response =>
       this.setState(state => ({
         isFetching: false,
@@ -41,10 +28,14 @@ class ResponsiveBulletClass extends React.Component {
       })),
     );
   }
+  async componentDidUpdate() {}
   render() {
     const colors = ["#3B86FF", "#77E5AA", "#093fb9", "#6d00f6", "#FF006E", "#FFBE0B", "#1EFFBC", "#ff8b12"];
     const itemId = this.props.itemId;
     const options = {
+      legend: {
+        rtl: true,
+      },
       tooltip: {
         useHTML: true,
         style: {
@@ -66,9 +57,6 @@ class ResponsiveBulletClass extends React.Component {
       xAxis: {
         ticks: {
           beginAtZero: false,
-          stepSize: 1,
-          min: 0,
-          max: 5,
         },
         categories: this.state.reportData.categories,
 
@@ -81,11 +69,14 @@ class ResponsiveBulletClass extends React.Component {
         },
       },
       yAxis: {
+        max: 5,
+        stackLabels: {
+          enabled: true,
+          textAlign: "right",
+        },
+        tickInterval: 1,
         ticks: {
           beginAtZero: false,
-          stepSize: 1,
-          min: 0,
-          max: 5,
         },
         title: {
           enabled: true,
@@ -103,6 +94,7 @@ class ResponsiveBulletClass extends React.Component {
           cursor: "pointer",
           states: {
             hover: {
+              enabled: false,
               lineWidth: 0,
             },
           },
@@ -134,6 +126,18 @@ class ResponsiveBulletClass extends React.Component {
     console.log("this.state.isFetching", this.state.isFetching);
 
     this.internalChart = chart;
+    if (this.state.isFetching == false && this.internalChart.series.length >= 2) {
+      console.log("after");
+
+      // this.internalChart.series[0].type = "bar";
+      // this.internalChart.series[1].type = "bar";
+      this.internalChart.series[2].data.forEach(element => {
+        element.graphic.translate(5, 0);
+      });
+      this.internalChart.series[3].data.forEach(element => {
+        element.graphic.translate(-5, 0);
+      });
+    }
     console.log("afterChartCreated", chart);
   }
 }

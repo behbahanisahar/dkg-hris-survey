@@ -1,4 +1,4 @@
-.highcharts-color-0 {
+/* .highcharts-color-0 {
   fill: #ef394e !important;
 }
 .highcharts-color-0 > rect {
@@ -18,4 +18,7 @@
 
 .highcharts-color-2:nth-child(2) {
   fill: #636466 !important;
+} */
+tspan {
+  direction: rtl !important;
 }
