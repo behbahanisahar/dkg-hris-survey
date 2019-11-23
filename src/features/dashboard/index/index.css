@@ -3,8 +3,13 @@
 }
 .table th {
   vertical-align: middle !important ;
+  text-align: center;
 }
 .desc-questions {
   color: #77787b;
   font-size: 1.1rem;
+}
+
+.question {
+  font-size: 0.9rem;
 }

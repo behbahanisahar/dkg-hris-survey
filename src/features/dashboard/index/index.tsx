@@ -54,8 +54,7 @@ export default class IndexReport extends React.Component<IProps, IState> {
           </th>
           <td align="right">
             <div className="desc-questions">{n.Description}:</div>
-            <br />
-            {this.onRenderQuestions(n.Items)}
+            <ul>{this.onRenderQuestions(n.Items)}</ul>
           </td>
         </tr>
       );
@@ -66,12 +65,9 @@ export default class IndexReport extends React.Component<IProps, IState> {
   private onRenderQuestions = (Items: any[]) => {
     return Items.map((n: any, index: any) => {
       return (
-        <ul>
-          <li>
-            {""}
-            <span dangerouslySetInnerHTML={{ __html: n.Question }}></span>{" "}
-          </li>
-        </ul>
+        <li>
+          <span className="question" dangerouslySetInnerHTML={{ __html: n.Question }}></span>{" "}
+        </li>
       );
     });
   };
