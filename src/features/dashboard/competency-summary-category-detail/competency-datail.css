@@ -19,6 +19,6 @@
 .highcharts-color-2:nth-child(2) {
   fill: #636466 !important;
 } */
-tspan {
-  direction: rtl !important;
-}
+/* g.highcharts-legend {
+  direction: rtl;
+} */

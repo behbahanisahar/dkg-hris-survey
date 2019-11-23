@@ -4,6 +4,7 @@ import HighchartsReact from "highcharts-react-official";
 import ReportServices from "../../../services/report-services";
 import Util from "../../../utilities/utilities";
 import { borderRight } from "@material-ui/system";
+import "./competency-datail.css";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 
@@ -34,6 +35,7 @@ class ResponsiveBulletClass extends React.Component {
     const itemId = this.props.itemId;
     const options = {
       legend: {
+        align: "center",
         rtl: true,
       },
       tooltip: {
@@ -69,6 +71,9 @@ class ResponsiveBulletClass extends React.Component {
         },
       },
       yAxis: {
+        labels: {
+          align: "right",
+        },
         max: 5,
         stackLabels: {
           enabled: true,
