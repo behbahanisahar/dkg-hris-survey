@@ -47,4 +47,13 @@ export default interface UserInfoItem {
   DirectManager?: UserInfoItem;
   ItemId?: number;
   Title?: string;
+  Username?: string;
+  InsuranceNumber?: string;
+  IBANCode?: string;
+  BonusPercent?: string;
+  EmploymentFrom?: string;
+  AccountNumber?: string;
+  Degree?: string;
+  FieldOfStudy?: string;
+  CollegeOrUniversity?: string;
 }

@@ -1,4 +1,5 @@
 import * as React from "react";
+import ReportServices from "../../../services/report-services";
 import { Grid } from "@material-ui/core";
 import RatersTable from "../raters-table/raters-table";
 import ComparingChart from "../comparing-chart/comparing-chart";
@@ -8,68 +9,80 @@ import Comments from "../comments/comments";
 import IndexReport from "../index";
 
 import DashboardHeader from "../dashboard-header/dashboard-header";
+import Authentication from "../../authentication/authentication";
 
 interface IProps {
   match: any;
-  name?: string;
 }
+interface IState {
+  hasAccess: boolean;
+  itemId: number;
+}
+export default class MainDashboard extends React.Component<IProps, IState> {
+  private ReportServices: ReportServices;
+  public constructor(props: any) {
+    super(props);
+    this.ReportServices = new ReportServices();
+    this.state = {
+      hasAccess: false,
+      itemId: 0,
+    };
+  }
+  public async componentWillReceiveProps(nextProps: any) {
+    const itemId = nextProps.match.params.itemId;
+    console.log(nextProps);
+    console.log(itemId);
 
-const MainDashboard: React.SFC<IProps> = props => {
-  const itemId = props.match.params.itemId;
-  return (
-    <div className="rtl">
-      <DashboardHeader />
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={12}>
-          {/* <DashboardIntro></DashboardIntro> */}
-        </Grid>
-        <Grid item xs={4}>
-          <RatersTable itemId={itemId} />
-        </Grid>
-        <Grid item xs={8}>
-          <ResponsiveBulletClass itemId={itemId} />
-        </Grid>
-        <Grid item xs={8}>
-          <IndexReport itemId={itemId} />
-        </Grid>
-        <Grid item xs={4}>
-          <DKValueRadarChart itemId={itemId} />
-        </Grid>
-        <Grid item xs={12}>
-          <ComparingChart itemId={itemId} />
-        </Grid>
-        <Grid item xs={12}>
-          <Comments itemId={itemId} />
-        </Grid>
-      </Grid>
-    </div>
-  );
-};
+    this.setState(current => ({
+      ...current,
+      itemId: itemId,
+    }));
+  }
 
-export default MainDashboard;
-
-// export default class MainDashboard extends React.Component<{}> {
-//   public render() {
-//     return (
-//       <div className="rtl">
-//         <Grid container spacing={3}>
-//           <Grid item xs={4}>
-//             <ResponsiveBulletClass />
-//           </Grid>
-//           <Grid item xs={12} sm={4}>
-//             <RatersTable />
-//           </Grid>
-//           <Grid item xs={12} sm={4}>
-//             <DKValueRadarChart />>
-//           </Grid>
-//           <Grid item xs={12} sm={12}>
-//             <ComparingChart />>
-//           </Grid>
-//           <Grid item xs={12} sm={12}>
-//             <Comments />
-//           </Grid>
-//         </Grid>
-//       </div>
-//     );
-//   }
-// }
+  public async componentDidMount() {
+    const itemId = this.props.match.params.itemId;
+    await this.ReportServices.getReportAuthentication(itemId).then(response => {
+      this.setState(current => ({
+        ...current,
+        hasAccess: response.HasAccess,
+        itemId: response.ItemId,
+      }));
+    });
+  }
+  public render() {
+    const hasNoAccess: number = 401;
+    return (
+      <div>
+        {this.state.hasAccess && (
+          <div className="rtl">
+            <DashboardHeader itemId={this.state.itemId} />
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={12}>
+                {/* <DashboardIntro></DashboardIntro> */}
+              </Grid>
+              <Grid item xs={4}>
+                <RatersTable itemId={this.state.itemId} />
+              </Grid>
+              <Grid item xs={8}>
+                <ResponsiveBulletClass itemId={this.state.itemId} />
+              </Grid>
+              <Grid item xs={8}>
+                <IndexReport itemId={this.state.itemId} />
+              </Grid>
+              <Grid item xs={4}>
+                <DKValueRadarChart itemId={this.state.itemId} />
+              </Grid>
+              <Grid item xs={12}>
+                <ComparingChart itemId={this.state.itemId} />
+              </Grid>
+              <Grid item xs={12}>
+                <Comments itemId={this.state.itemId} />
+              </Grid>
+            </Grid>
+          </div>
+        )}
+        {!this.state.hasAccess && <Authentication status={hasNoAccess} />}
+      </div>
+    );
+  }
+}

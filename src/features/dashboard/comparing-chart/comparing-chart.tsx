@@ -20,6 +20,7 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
   public constructor(props: any) {
     super(props);
     defaults.global.defaultFontFamily = "IRANYekan,Poppins";
+    // defaults.global.tooltips.enabled === true;
     this.ReportServices = new ReportServices();
     this.state = {
       isFetching: true,
@@ -45,6 +46,9 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
   }
   public render() {
     const options = {
+      tooltips: {
+        enabled: true,
+      },
       scales: {
         yAxes: [
           {

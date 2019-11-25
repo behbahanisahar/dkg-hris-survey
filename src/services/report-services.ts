@@ -5,6 +5,7 @@ import Raters from "../entities/raters";
 import ReportStructure from "../entities/reportData";
 import ICategoryScore from "../entities/category-scores";
 import IndexData from "../entities/reports/index-report";
+import CategorySummary from "../entities/reports/category-summary";
 
 class ReportServices extends ServiceBase {
   public constructor() {
@@ -32,7 +33,7 @@ class ReportServices extends ServiceBase {
   /*************get competency summary(for drilldown chart(highchart))************ */
   public async getCompetencySummary(itemId: number): Promise<any> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("survey/report/competencysummary?itemid=" + itemId + "");
+      const items: any = await this.get("survey/report/competencysummary?itemid=" + itemId + "&year=1397");
 
       return Promise.resolve(items.data);
     }
@@ -80,6 +81,24 @@ class ReportServices extends ServiceBase {
     }
 
     return Promise.resolve(MockData.Index);
+  }
+  /************************************************************************ */
+  public async getReportHeaderData(itemId: number): Promise<CategorySummary> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/report/header?itemid=" + itemId);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockData.ReportSummary);
+  }
+  /*************************************************************** */
+  public async getReportAuthentication(itemId: number): Promise<any> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/report?itemid=" + itemId);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockData.ReportSummary);
   }
 }
 export default ReportServices;

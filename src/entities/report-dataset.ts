@@ -1,7 +1,7 @@
 export default interface ReportDataset {
   label: string;
   drilldownData: string;
-  backgroundColor: string[];
+  backgroundColor: any[];
   borderColor: string;
   hoverBackgroundColor: string;
   hoverBorderColor: string;

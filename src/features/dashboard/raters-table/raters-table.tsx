@@ -12,6 +12,7 @@ interface IProps {
 interface IState {
   isFetching: boolean;
   raters: Raters[];
+  itemId: number;
 }
 class RatersTable extends React.Component<IProps, IState> {
   private ReportServices: ReportServices;
@@ -21,17 +22,28 @@ class RatersTable extends React.Component<IProps, IState> {
     this.state = {
       isFetching: true,
       raters: [],
+      itemId: 0,
     };
   }
-  public async componentDidMount() {
-    const itemId = this.props.itemId;
-    await this.ReportServices.getraters(itemId).then(response =>
+  public async componentWillReceiveProps(nextProps: any) {
+    console.log(nextProps);
+    console.log(this.state.itemId);
+    if (this.state.itemId !== nextProps.itemId) {
+      this.getData(nextProps.itemId);
+    }
+  }
+  public async getData(NominationId: number) {
+    await this.ReportServices.getraters(NominationId).then(response =>
       this.setState(current => ({
         ...current,
         raters: response,
         isFetching: false,
+        itemId: NominationId,
       })),
     );
+  }
+  public async componentDidMount() {
+    this.getData(this.props.itemId);
   }
 
   public render() {

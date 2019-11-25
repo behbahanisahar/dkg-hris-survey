@@ -18,6 +18,7 @@ class ResponsiveBulletClass extends React.Component {
       reportData: {},
     };
   }
+
   async componentDidMount() {
     await this.ReportServices.getCompetencySummary(this.props.itemId).then(response =>
       this.setState(state => ({
@@ -128,10 +129,10 @@ class ResponsiveBulletClass extends React.Component {
     this.internalChart = chart;
     if (this.state.isFetching == false && this.internalChart.series.length >= 2) {
       this.internalChart.series[2].data.forEach(element => {
-        element.graphic.translate(5, 0);
+        element.graphic.translate(6, 0);
       });
       this.internalChart.series[3].data.forEach(element => {
-        element.graphic.translate(-5, 0);
+        element.graphic.translate(-6, 0);
       });
     }
   }

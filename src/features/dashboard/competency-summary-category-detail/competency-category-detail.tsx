@@ -50,19 +50,21 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
   public async componentWillReceiveProps(nextProps: any) {
     if (this.props.match.params.categoryId !== nextProps.match.params.categoryId) {
       console.log("changed");
+      console.log(this.props.match.params.categoryId);
+      console.log(nextProps.match.params.categoryId);
 
-      this.getData();
+      this.getData(nextProps.match.params.categoryId);
     }
   }
 
   public async componentDidMount() {
     console.log(this.props.match);
-    this.getData();
+    this.getData(this.props.match.params.categoryId);
   }
 
-  public async getData() {
+  public async getData(categoryid: number) {
     const itemId = this.props.match.params.itemId;
-    const categoryid = this.props.match.params.categoryId;
+    // const categoryid = this.props.match.params.categoryId;
     await this.ReportServices.getCompetencyCategory(itemId, categoryid).then((data: ICategoryScore) => {
       const reportData = {
         labels: data.CategoryChart.labels,
@@ -211,7 +213,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
       return (
         <Grid item xs={6} sm={6}>
           <DKPortlet hasHeader={false} noborder={true}>
-            <span dangerouslySetInnerHTML={{ __html: n.QuestionTitle }}></span>
+            <span style={{ fontWeight: 400 }} dangerouslySetInnerHTML={{ __html: n.QuestionTitle }}></span>
             <HorizontalBar height={80} options={options} data={n.QuestionChart} />
             <span className={avgClassName + " average-bold"}>میانگین : {n.Average} </span>
           </DKPortlet>
@@ -228,7 +230,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
             <img style={{ width: "100%" }} src={n.SignUrl}></img>
           </Link>
           <Link to={"/competency/" + this.state.itemId + "/" + n.Id}>
-            <span style={{ textAlign: "center", fontWeight: "400" }}>{n.Title}</span>
+            <span style={{ textAlign: "center", fontWeight: 400 }}>{n.Title}</span>
           </Link>
         </Grid>
       );
