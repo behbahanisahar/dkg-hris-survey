@@ -15,6 +15,7 @@ interface IProps {
 interface IState {
   isFetching: boolean;
   data: IComment[];
+  itemId: number;
 }
 
 export default class Comments extends React.Component<IProps, IState> {
@@ -27,16 +28,26 @@ export default class Comments extends React.Component<IProps, IState> {
     this.state = {
       isFetching: true,
       data: [],
+      itemId: 0,
     };
   }
-  public async componentDidMount() {
-    await this.ReportServices.getComments(this.props.itemId).then(response =>
+  public async componentWillReceiveProps(nextProps: any) {
+    if (this.state.itemId !== nextProps.itemId) {
+      this.getData(nextProps.itemId);
+    }
+  }
+  public async getData(NominationId: number) {
+    await this.ReportServices.getComments(NominationId).then(response =>
       this.setState(current => ({
         ...current,
         data: response,
         isFetching: false,
+        itemId: NominationId,
       })),
     );
+  }
+  public async componentDidMount() {
+    this.getData(this.props.itemId);
   }
   public render() {
     return (
