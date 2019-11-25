@@ -16,18 +16,26 @@ class ResponsiveBulletClass extends React.Component {
     this.state = {
       isFetching: true,
       reportData: {},
+      state: 0,
     };
   }
-
-  async componentDidMount() {
-    await this.ReportServices.getCompetencySummary(this.props.itemId).then(response =>
+  async componentWillReceiveProps(nextProps) {
+    if (this.state.itemId !== nextProps.itemId) {
+      this.getData(nextProps.itemId);
+    }
+  }
+  async getData(NominationId) {
+    await this.ReportServices.getCompetencySummary(NominationId).then(response =>
       this.setState(state => ({
         isFetching: false,
         reportData: response,
+        itemId: NominationId,
       })),
     );
   }
-  async componentDidUpdate() {}
+  async componentDidMount() {
+    this.getData(this.props.itemId);
+  }
   render() {
     const colors = ["#3B86FF", "#77E5AA", "#093fb9", "#6d00f6", "#FF006E", "#FFBE0B", "#1EFFBC", "#ff8b12"];
     const itemId = this.props.itemId;

@@ -12,7 +12,7 @@ interface IProps {
 }
 interface IState {
   isFetching: boolean;
-
+  itemId: number;
   data: any;
 }
 export default class DKValueRadarChart extends React.Component<IProps, IState> {
@@ -29,10 +29,16 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
         labels: [],
         datasets: [],
       },
+      itemId: 0,
     };
   }
-  public async componentDidMount() {
-    await this.ReportServices.getCompareCompetency(this.props.itemId).then(response => {
+  public async componentWillReceiveProps(nextProps: any) {
+    if (this.state.itemId !== nextProps.itemId) {
+      this.getData(nextProps.itemId);
+    }
+  }
+  public async getData(NominationId: number) {
+    await this.ReportServices.getCompareCompetency(NominationId).then(response => {
       const data = {
         labels: response.labels,
         datasets: response.datasets,
@@ -41,8 +47,12 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
         ...current,
         data: data,
         isFetching: false,
+        itemId: NominationId,
       }));
     });
+  }
+  public async componentDidMount() {
+    this.getData(this.props.itemId);
   }
   public render() {
     const options = {

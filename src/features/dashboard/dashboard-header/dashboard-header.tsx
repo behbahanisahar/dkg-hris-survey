@@ -62,7 +62,11 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
                     <p className="NoAvatar">{this.state.userInfo.User.AvatarTextPlaceholder}</p>
                   )}
                   {this.state.userInfo.User.AvatarUrl !== null && (
-                    <img alt={this.state.userInfo.User.Title} src={this.state.userInfo.User.AvatarUrl} />
+                    <img
+                      className="has-image"
+                      alt={this.state.userInfo.User.Title}
+                      src={this.state.userInfo.User.AvatarUrl}
+                    />
                   )}
                 </div>
               </div>
@@ -83,7 +87,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
               <span style={{ float: "left" }}>{this.state.userInfo.SurveyProgress} %</span>
               <LinearProgress variant="determinate" value={this.state.userInfo.SurveyProgress} />
               <br />
-              {this.state.userInfo.Subordinates !== [] && (
+              {this.state.userInfo.Subordinates.length !== 0 && (
                 <div className="kt-media-group">
                   <span>نیروهای تحت سرپرستی</span>
                   {this.onRenderSubordinates()}

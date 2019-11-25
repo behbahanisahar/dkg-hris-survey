@@ -13,6 +13,7 @@ interface IProps {
 interface IState {
   isFetching: boolean;
   data: IndexData[];
+  itemId: number;
 }
 export default class IndexReport extends React.Component<IProps, IState> {
   private ReportServices: ReportServices;
@@ -23,16 +24,26 @@ export default class IndexReport extends React.Component<IProps, IState> {
     this.state = {
       isFetching: true,
       data: [],
+      itemId: 0,
     };
   }
-  public async componentDidMount() {
-    await this.ReportServices.getIndex(this.props.itemId).then(response => {
+  public async componentWillReceiveProps(nextProps: any) {
+    if (this.state.itemId !== nextProps.itemId) {
+      this.getData(nextProps.itemId);
+    }
+  }
+  public async getData(NominationId: number) {
+    await this.ReportServices.getIndex(NominationId).then(response => {
       this.setState(current => ({
         ...current,
         isFetching: false,
         data: response,
+        itemId: NominationId,
       }));
     });
+  }
+  public async componentDidMount() {
+    this.getData(this.props.itemId);
   }
 
   public render() {

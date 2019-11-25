@@ -12,6 +12,7 @@ interface IProps {
 interface IState {
   isFetching: boolean;
   data: any;
+  itemId: number;
 }
 export default class ComparingChart extends React.Component<IProps, IState> {
   private ReportServices: ReportServices;
@@ -26,9 +27,15 @@ export default class ComparingChart extends React.Component<IProps, IState> {
         labels: [],
         datasets: [],
       },
+      itemId: 0,
     };
   }
-  public async componentDidMount() {
+  public async componentWillReceiveProps(nextProps: any) {
+    if (this.state.itemId !== nextProps.itemId) {
+      this.getData(nextProps.itemId);
+    }
+  }
+  public async getData(NominationId: number) {
     await this.ReportServices.getComparingChartData(this.props.itemId).then(response => {
       const newDataSet = response.datasets.map(
         ({
@@ -66,8 +73,13 @@ export default class ComparingChart extends React.Component<IProps, IState> {
         raters: response,
         isFetching: false,
         data,
+        itemId: NominationId,
       }));
     });
+  }
+
+  public async componentDidMount() {
+    this.getData(this.props.itemId);
   }
 
   public render() {
