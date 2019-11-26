@@ -8,6 +8,7 @@ import { DKSpinner } from "../../../core/components/spinner/spinner";
 interface IProps {
   match?: any;
   itemId: number;
+  lang: string;
 }
 interface IState {
   isFetching: boolean;
@@ -48,17 +49,32 @@ class RatersTable extends React.Component<IProps, IState> {
 
   public render() {
     return (
-      <DKPortlet title="دسته بندی ارزیابان">
-        <div>ارزیابان شما که این گزارش بر اساس نظرات آنها تهیه شده شامل این گروه ها می باشند:</div>
+      <DKPortlet title={this.props.lang === "IR" ? "دسته بندی ارزیابان" : "Rater Categories"}>
+        <div className={this.props.lang === "IR" ? "text-align-right" : "text-align-left"}>
+          {" "}
+          {this.props.lang === "IR"
+            ? " ارزیابان شما که این گزارش بر اساس نظرات آنها تهیه شده شامل این گروه ها می باشند:"
+            : "Your feedback report is based on evaluations gathered from the following rater categories:"}{" "}
+        </div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <Table dir="rtl" className="table table-bordered mt-3">
+          <Table
+            className={this.props.lang === "IR" ? "table table-bordered mt-3 rtl" : "table table-bordered mt-3 ltr"}
+          >
             <thead className="thead-dark">
-              <tr>
-                <th>گروه ارزیاﺏ</th>
-                <th># کل ارزیابان</th>
-                <th># ارزیابی های تکمیل شده</th>
-              </tr>
+              {this.props.lang === "IR" ? (
+                <tr>
+                  <th>گروه ارزیاﺏ</th>
+                  <th># کل ارزیابان</th>
+                  <th># ارزیابی های تکمیل شده</th>
+                </tr>
+              ) : (
+                <tr>
+                  <th>Rater Group</th>
+                  <th># NominatedRater </th>
+                  <th># Completed</th>
+                </tr>
+              )}
             </thead>
             <TableBody>{this.onRenderTable()}</TableBody>
           </Table>

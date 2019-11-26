@@ -31,9 +31,11 @@ class ReportServices extends ServiceBase {
     return Promise.resolve(MockData.comparingChartData);
   }
   /*************get competency summary(for drilldown chart(highchart))************ */
-  public async getCompetencySummary(itemId: number): Promise<any> {
+  public async getCompetencySummary(itemId: number, selectedYear: string): Promise<any> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("survey/report/competencysummary?itemid=" + itemId + "&year=1397");
+      const items: any = await this.get(
+        "survey/report/competencysummary?itemid=" + itemId + "&year=" + selectedYear + "",
+      );
 
       return Promise.resolve(items.data);
     }

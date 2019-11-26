@@ -8,6 +8,7 @@ interface IProps {
   name?: string;
   match?: any;
   itemId: number;
+  lang: string;
 }
 interface IState {
   isFetching: boolean;
@@ -107,12 +108,17 @@ export default class ComparingChart extends React.Component<IProps, IState> {
       },
     };
     return (
-      <DKPortlet title="امتیازات شما براساس ارزش های دیجی کالا">
-        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
-        {this.state.isFetching === false && (
-          <Radar data={this.state.data} options={options} width={400} height={350}></Radar>
-        )}
-      </DKPortlet>
+      <div className={this.props.lang === "IR" ? "rtl" : "ltr"}>
+        <DKPortlet
+          // className={this.props.lang === "IR" ? "rtl" : "ltr"}
+          title={this.props.lang === "IR" ? "امتیازات شما براساس ارزش های دیجی کالا" : "Results Based on DK Values"}
+        >
+          {this.state.isFetching === true && <DKSpinner></DKSpinner>}
+          {this.state.isFetching === false && (
+            <Radar data={this.state.data} options={options} width={400} height={350}></Radar>
+          )}
+        </DKPortlet>
+      </div>
     );
   }
 }

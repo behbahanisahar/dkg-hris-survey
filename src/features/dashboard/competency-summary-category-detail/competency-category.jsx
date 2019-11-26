@@ -7,6 +7,9 @@ import { borderRight } from "@material-ui/system";
 import "./competency-datail.css";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 
 class ResponsiveBulletClass extends React.Component {
   constructor(props) {
@@ -17,6 +20,9 @@ class ResponsiveBulletClass extends React.Component {
       isFetching: true,
       reportData: {},
       state: 0,
+      yearID: "",
+      year: "",
+      years: [],
     };
   }
   async componentWillReceiveProps(nextProps) {
@@ -25,11 +31,13 @@ class ResponsiveBulletClass extends React.Component {
     }
   }
   async getData(NominationId) {
-    await this.ReportServices.getCompetencySummary(NominationId).then(response =>
+    const years = [{ key: "1", text: "1396" }, { key: "2", text: "1397" }, { key: "2", text: "1398" }];
+    await this.ReportServices.getCompetencySummary(NominationId, "1398").then(response =>
       this.setState(state => ({
         isFetching: false,
         reportData: response,
         itemId: NominationId,
+        years,
       })),
     );
   }
@@ -123,7 +131,26 @@ class ResponsiveBulletClass extends React.Component {
     };
 
     return (
-      <DKPortlet title="شایستگی‌ها">
+      <DKPortlet title={this.props.lang === "IR" ? "شایستگی‌ها" : "Competency Summary"}>
+        <div className="dropdown mb-5" style={{ width: "15%" }}>
+          <Select
+            //  error={this.state.errors.minExpID}
+            margin="dense"
+            placeholder="انتخاب سال"
+            value={this.state.yearID}
+            fullWidth={true}
+            onChange={event => this.handleChangeDropdown("year", event)}
+            // className="btn btn-default dropdown-toggle"
+            inputProps={{
+              name: "year",
+              id: "demo-controlled-open-select",
+            }}
+            IconComponent={KeyboardArrowDown}
+            variant="outlined"
+          >
+            {this.renderDropDown(this.state.years)}
+          </Select>
+        </div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <HighchartsReact callback={this.afterChartCreated} highcharts={Highcharts} options={options} />
@@ -144,6 +171,41 @@ class ResponsiveBulletClass extends React.Component {
       });
     }
   }
+  renderDropDown = items => {
+    return items.map(item => {
+      return (
+        <MenuItem value={item.key} key={item.key}>
+          {" "}
+          {item.text}
+        </MenuItem>
+      );
+    });
+  };
+  /*************************************************** */
+  handleChangeDropdown = async (name, event) => {
+    const dropdownId = name + "ID";
+    console.log(this.state.year);
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        year: event.nativeEvent.target.outerText,
+        yearID: event.target.value,
+      };
+    });
+    // this.setState(state => ({
+    //   [name]: event.nativeEvent.target.outerText,
+    //   [dropdownId]: event.target.value,
+    // })),
+    console.log(this.state.year);
+    await this.ReportServices.getCompetencySummary(this.state.itemId, this.state.year).then(response =>
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          reportData: response,
+        };
+      }),
+    );
+  };
 }
 
 export default ResponsiveBulletClass;

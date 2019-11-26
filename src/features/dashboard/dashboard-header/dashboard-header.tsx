@@ -24,6 +24,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
     this.ReportServices = new ReportServices();
     this.state = {
       itemId: 0,
+
       userInfo: {
         User: {},
         SurveyProgress: 0,
@@ -83,16 +84,19 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
               </div>
             </Grid>
             <Grid item xs={4}>
-              <span className="dk-username">:نفراتی که فرم را پر کرده اند</span>
-              <span style={{ float: "left" }}>{this.state.userInfo.SurveyProgress} %</span>
-              <LinearProgress variant="determinate" value={this.state.userInfo.SurveyProgress} />
               <br />
-              {this.state.userInfo.Subordinates.length !== 0 && (
-                <div className="kt-media-group">
-                  <span>نیروهای تحت سرپرستی</span>
-                  {this.onRenderSubordinates()}
-                </div>
-              )}
+              <Grid>
+                <span className="dk-username">:نفراتی که فرم را پر کرده اند</span>
+                <span style={{ float: "left" }}>{this.state.userInfo.SurveyProgress} %</span>
+                <LinearProgress variant="determinate" value={this.state.userInfo.SurveyProgress} />
+                <br />
+                {this.state.userInfo.Subordinates.length !== 0 && (
+                  <div className="kt-media-group">
+                    <span>نیروهای تحت سرپرستی</span>
+                    {this.onRenderSubordinates()}
+                  </div>
+                )}
+              </Grid>
             </Grid>
           </Grid>
         </DKPortlet>
@@ -112,10 +116,13 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
         //   title=""
         //   data-original-title="John Myer"
         // >
-        <span onClick={(ev: any) => this.onClickSubOrdinate(n.NominationId)}>
-          {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
+        <a
+          onClick={(ev: any) => this.onClickSubOrdinate(n.NominationId)}
+          className="kt-media kt-media--md kt-media--circle gradient"
+        >
+          {n.User.AvatarUrl === null && <span>{n.User.AvatarTextPlaceholder}</span>}
           {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
-        </span>
+        </a>
         // </a>
       );
     });
