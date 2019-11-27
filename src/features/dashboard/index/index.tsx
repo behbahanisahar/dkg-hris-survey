@@ -69,7 +69,7 @@ export default class IndexReport extends React.Component<IProps, IState> {
   private onRenderTable = () => {
     return this.state.data.map((n: IndexData, index: any) => {
       return (
-        <tr key={index}>
+        <tr key={index} className="table-row">
           <th className="table-dark">
             <div>{n.Title}</div>
           </th>
