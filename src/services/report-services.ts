@@ -104,5 +104,14 @@ class ReportServices extends ServiceBase {
 
     return Promise.resolve(MockData.ReportSummary);
   }
+  /************************************************************************ */
+  public async getReportIntro(username: number): Promise<any> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/report/intro?username=" + username);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockData.ReportSummary);
+  }
 }
 export default ReportServices;

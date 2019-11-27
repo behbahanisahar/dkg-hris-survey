@@ -13,17 +13,17 @@
 .question {
   font-size: 0.9rem;
 }
-.table-row > tr:nth-child(1) {
+.table-dark-0 {
   background-color: #6cbe45;
 }
-.table-row > tr:nth-child(2) {
+.table-dark-1 {
   background-color: #acd591;
 }
 
-.table-row > tr:nth-child(1) {
+.table-dark-2 {
   background-color: #fbad18;
 }
 
-.table-row > tr:nth-child(1) {
+.table-dark-3 {
   background-color: #ffcd7e;
 }

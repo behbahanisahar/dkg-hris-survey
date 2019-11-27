@@ -59,7 +59,7 @@ export default class IndexReport extends React.Component<IProps, IState> {
           <Table
             className={this.props.lang === "IR" ? "table table-bordered mt-3 rtl" : "table table-bordered mt-3 ltr"}
           >
-            <TableBody>{this.onRenderTable()}</TableBody>
+            <TableBody className="table-row">{this.onRenderTable()}</TableBody>
           </Table>
         )}
       </DKPortlet>
@@ -69,8 +69,8 @@ export default class IndexReport extends React.Component<IProps, IState> {
   private onRenderTable = () => {
     return this.state.data.map((n: IndexData, index: any) => {
       return (
-        <tr key={index} className="table-row">
-          <th className="table-dark">
+        <tr key={index}>
+          <th className={"table-dark" + "-" + index}>
             <div>{n.Title}</div>
           </th>
           <td align={this.props.lang === "IR" ? "right" : "left"}>

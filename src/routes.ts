@@ -4,6 +4,7 @@ import NominationIntroPage from "./features/nominationForm/components/nomination
 import MainDashboard from "./features/dashboard/main-dashboard/main-dashboard";
 import FormSurvey from "./features/survey-form/components/main-form/survey-form";
 import SurveyIntroPage from "./features/survey-form/components/survey-intro/survey-intro";
+import DashboardIntroPage from "./features/dashboard/dashboard-intro/dashboard-intro";
 
 export interface RouteTypes {
   exact: boolean;
@@ -45,6 +46,11 @@ const routes: RouteTypes[] = [
     exact: false,
     path: "/dashboard/:itemId",
     component: MainDashboard,
+  },
+  {
+    exact: false,
+    path: "/dashboardIntro/:username",
+    component: DashboardIntroPage,
   },
   {
     exact: true,

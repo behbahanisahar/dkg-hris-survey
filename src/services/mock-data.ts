@@ -5,6 +5,7 @@ import { IAppraisee } from "../entities/appraisee";
 import UserTasks from "../entities/user-task";
 import ReportStructure from "../entities/reportData";
 import ICategoryScore from "../entities/category-scores";
+import IReportIntro from "../entities/reports/report-intro";
 
 export default class MockData {
   public static getUserInfo: any[] = [
@@ -1114,5 +1115,8 @@ export default class MockData {
       },
     ],
     HasAccess: true,
+  };
+  public static ReportIntro: IReportIntro = {
+    Users: [],
   };
 }
