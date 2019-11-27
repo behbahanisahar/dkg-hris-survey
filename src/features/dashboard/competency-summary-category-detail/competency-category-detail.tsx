@@ -49,22 +49,16 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
 
   public async componentWillReceiveProps(nextProps: any) {
     if (this.props.match.params.categoryId !== nextProps.match.params.categoryId) {
-      console.log("changed");
-      console.log(this.props.match.params.categoryId);
-      console.log(nextProps.match.params.categoryId);
-
       this.getData(nextProps.match.params.categoryId);
     }
   }
 
   public async componentDidMount() {
-    console.log(this.props.match);
     this.getData(this.props.match.params.categoryId);
   }
 
   public async getData(categoryid: number) {
     const itemId = this.props.match.params.itemId;
-    // const categoryid = this.props.match.params.categoryId;
     await this.ReportServices.getCompetencyCategory(itemId, categoryid).then((data: ICategoryScore) => {
       const reportData = {
         labels: data.CategoryChart.labels,
@@ -125,7 +119,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
       },
     };
     return (
-      <div className={this.props.match.params.lang === "IR" ? "rtl" : "ltr"}>
+      <div className={this.props.match.params.lang === "fa" ? "rtl" : "ltr"}>
         <button
           className="btn btn-secondary mx-2"
           style={{ float: "left" }}
@@ -138,11 +132,15 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
           بازگشت | Back
         </button>
         {this.state.isFetch === true && (
-          <div>
-            <Grid style={{ marginRight: "10%", width: "80%" }} container spacing={2}>
-              {this.OnRenderCategories()}
-            </Grid>
-          </div>
+          <DKPortlet hasHeader={false} noborder={true}>
+            <div className="kt-section">
+              <div className="kt-section__content kt-section__content--border kt-section__content--fit">
+                <div className="kt-grid-nav kt-grid-nav--skin-light">
+                  <div className="kt-grid-nav__row">{this.OnRenderCategories()}</div>
+                </div>
+              </div>
+            </div>
+          </DKPortlet>
         )}
         <DKPortlet noborder={true} title={this.state.data.CategoryTitle}>
           <HorizontalBar height={40} options={options} data={this.state.reportData} />
@@ -217,12 +215,12 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
             <HorizontalBar height={80} options={options} data={n.QuestionChart} />
             <span
               className={
-                this.props.match.params.lang === "IR"
+                this.props.match.params.lang === "fa"
                   ? avgClassName + " average-bold text-align-right"
                   : avgClassName + " average-bold text-align-left"
               }
             >
-              {this.props.match.params.lang === "IR" ? " میانگین :" : "Average:"} {n.Average}{" "}
+              {this.props.match.params.lang === "fa" ? " میانگین :" : "Average:"} {n.Average}{" "}
             </span>
           </DKPortlet>
         </Grid>
@@ -233,20 +231,20 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
   private OnRenderCategories = () => {
     return this.state.data.Categories.map((n: any, index: any) => {
       return (
-        <Grid
-          className={this.props.match.params.lang === "IR" ? "text-align-right mr-5" : "text-align-left mr-5"}
-          item
-          xs={1}
+        <Link
+          className="kt-grid-nav__item"
+          to={"/competency/" + this.state.itemId + "/" + n.Id + "/" + this.props.match.params.lang}
         >
-          <Link to={"/competency/" + this.state.itemId + "/" + n.Id}>
-            <img style={{ width: "100%" }} src={n.SignUrl}></img>
-          </Link>
-          <Link to={"/competency/" + this.state.itemId + "/" + n.Id}>
-            <div>
+          <a href="#" className="kt-grid-nav__item">
+            <span className="kt-grid-nav__icon">
+              <img style={{ maxWidth: "80px" }} src={n.SignUrl}></img>
+            </span>
+            <span className="kt-grid-nav__title">
               <span style={{ textAlign: "center", fontWeight: 400 }}>{n.Title}</span>
-            </div>
-          </Link>
-        </Grid>
+            </span>
+            <span className="kt-grid-nav__desc">Latest cases</span>
+          </a>
+        </Link>
       );
     });
   };

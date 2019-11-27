@@ -17,7 +17,6 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: { main: "#ef5661" },
-    // secondary: { main: "#00A998" },
     secondary: { main: "#00A998" },
   },
 });
@@ -48,23 +47,12 @@ class App extends React.Component<{}, IAppState> {
   }
 
   public render() {
-    console.log(this.state.page);
     return (
       <div className="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor">
         <div className="kt-container  kt-grid__item kt-grid__item--fluid">
           <MuiThemeProvider theme={theme}>
             {this.state.page.toLowerCase() === "nominationintro" && <NominationIntroPage />}
             {this.state.page.toLowerCase() === "surveyintro" && <SurveyIntroPage />}
-
-            {/* {this.state.page.toLowerCase() === "nominationform" && <MainNomination />}
-            {this.state.page.toLowerCase() === "report" && <ResponsiveBulletClass />}
-            {this.state.page.toLowerCase() === "competency" && <CompetencyCategoryComponent />}
-            {this.state.page.toLowerCase() === "dashboard" && <MainDashboard />}
-            {this.state.page.toLowerCase() === "surveyform" && <FormSurvey />}
-            {this.state.page.toLowerCase() === "surveyintro" && <SurveyIntroPage />}
-            {this.state.page.toLowerCase() === "nominationintro" && <NominationIntroPage />}
-            {this.state.page.toLowerCase() === "" && <NominationIntroPage />} */}
-
             {this.state.page == "" && (
               <Router>
                 <div>

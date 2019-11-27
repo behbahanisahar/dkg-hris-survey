@@ -43,14 +43,19 @@ const routes: RouteTypes[] = [
     component: CompetencyCategoryComponent,
   },
   {
-    exact: false,
-    path: "/dashboard/:itemId",
-    component: MainDashboard,
+    exact: true,
+    path: "/dashboard/intro",
+    component: DashboardIntroPage,
   },
   {
     exact: false,
-    path: "/dashboardIntro/:username",
+    path: "/dashboard/intro/:username",
     component: DashboardIntroPage,
+  },
+  {
+    exact: false,
+    path: "/dashboard/:itemId",
+    component: MainDashboard,
   },
   {
     exact: true,

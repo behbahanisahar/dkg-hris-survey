@@ -51,20 +51,20 @@ class RatersTable extends React.Component<IProps, IState> {
 
   public render() {
     return (
-      <DKPortlet title={this.props.lang === "IR" ? "دسته بندی ارزیابان" : "Rater Categories"}>
-        <div className={this.props.lang === "IR" ? "text-align-right" : "text-align-left"}>
+      <DKPortlet title={this.props.lang === "fa" ? "دسته بندی ارزیابان" : "Rater Categories"}>
+        <div className={this.props.lang === "fa" ? "text-align-right" : "text-align-left"}>
           {" "}
-          {this.props.lang === "IR"
+          {this.props.lang === "fa"
             ? " ارزیابان شما که این گزارش بر اساس نظرات آنها تهیه شده شامل این گروه ها می باشند:"
             : "Your feedback report is based on evaluations gathered from the following rater categories:"}{" "}
         </div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <Table
-            className={this.props.lang === "IR" ? "table table-bordered mt-3 rtl" : "table table-bordered mt-3 ltr"}
+            className={this.props.lang === "fa" ? "table table-bordered mt-3 rtl" : "table table-bordered mt-3 ltr"}
           >
             <thead className="thead-dark">
-              {this.props.lang === "IR" ? (
+              {this.props.lang === "fa" ? (
                 <tr>
                   <th>گروه ارزیاﺏ</th>
                   <th># کل ارزیابان</th>
@@ -92,10 +92,10 @@ class RatersTable extends React.Component<IProps, IState> {
         <tr key={index}>
           <th align="center">{n.RaterGroup}</th>
           <td align="center">
-            {this.props.lang === "IR" ? Util.toPersianNumber(n.NominatedCount.toString()) : n.NominatedCount}
+            {this.props.lang === "fa" ? Util.toPersianNumber(n.NominatedCount.toString()) : n.NominatedCount}
           </td>
           <td align="center">
-            {this.props.lang === "IR" ? Util.toPersianNumber(n.CompletedCount.toString()) : n.CompletedCount}
+            {this.props.lang === "fa" ? Util.toPersianNumber(n.CompletedCount.toString()) : n.CompletedCount}
           </td>
         </tr>
       );

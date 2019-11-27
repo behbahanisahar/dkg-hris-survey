@@ -24,11 +24,13 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
   }
   public async componentDidMount() {
     document.title = "Report Intro";
-    const username = this.props.match.params.username;
+    var username = this.props.match.params.username;
+    if (username == undefined) username = "";
     await this.ReportServices.getReportIntro(username).then(response => {
       this.setState(current => ({
         ...current,
         items: response,
+        showSpinner: false,
       }));
     });
   }
@@ -59,7 +61,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
   }
 
   private onRenderRows = () => {
-    if (this.state.items.Users == undefined || this.state.items.Users.length === 0) {
+    if (this.state.items.Users.length === 0) {
       return (
         <TableRow>
           <TableCell align="center" colSpan={3} className="emptyRowLog">

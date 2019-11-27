@@ -138,7 +138,7 @@ class ResponsiveBulletClass extends React.Component {
     };
 
     return (
-      <DKPortlet title={this.props.lang === "IR" ? "شایستگی‌ها" : "Competency Summary"}>
+      <DKPortlet title={this.props.lang === "fa" ? "شایستگی‌ها" : "Competency Summary"}>
         <div className="dropdown mb-5" style={{ width: "15%" }}>
           <Select
             margin="dense"

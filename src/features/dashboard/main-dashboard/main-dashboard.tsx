@@ -7,8 +7,8 @@ import DKValueRadarChart from "../dk-value-radar-chart/dk-value-radar-chart";
 import ResponsiveBulletClass from "../competency-summary-category-detail/competency-category";
 import Comments from "../comments/comments";
 import IndexReport from "../index";
-import UkIcon from "../../../assets/img/UK.png";
-import IRIcon from "../../../assets/img/IR.png";
+import UkIcon from "../../../assets/img/en.png";
+import IRIcon from "../../../assets/img/fa.png";
 import DashboardHeader from "../dashboard-header/dashboard-header";
 import Authentication from "../../authentication/authentication";
 
@@ -28,14 +28,11 @@ export default class MainDashboard extends React.Component<IProps, IState> {
     this.state = {
       hasAccess: false,
       itemId: 0,
-      lang: "IR",
+      lang: "fa",
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
     const itemId = nextProps.match.params.itemId;
-    console.log(nextProps);
-    console.log(itemId);
-
     this.setState(current => ({
       ...current,
       itemId: itemId,
@@ -58,13 +55,11 @@ export default class MainDashboard extends React.Component<IProps, IState> {
       <div>
         {this.state.hasAccess && (
           <div>
-            <Grid style={{ marginRight: "80%" }}>
-              <span className="kt-header__topbar-icon">
-                <img style={{ width: "38px" }} src={UkIcon} onClick={(ev: any) => this.onChangeLang("UK")}></img>
-                <img style={{ width: "38px" }} src={IRIcon} onClick={(ev: any) => this.onChangeLang("IR")}></img>
-              </span>
-            </Grid>
-            <div className={this.state.lang === "IR" ? "rtl" : "ltr"}>
+            <div className=" mb-1 w-100 text-right">
+              <img className="mx-2 pointer" src={UkIcon} onClick={(ev: any) => this.onChangeLang("en")}></img>
+              <img className="mx-2 pointer" src={IRIcon} onClick={(ev: any) => this.onChangeLang("fa")}></img>
+            </div>
+            <div className={this.state.lang === "fa" ? "rtl" : "ltr"}>
               <DashboardHeader lang={this.state.lang} itemId={this.state.itemId} />
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12}>

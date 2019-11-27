@@ -57,7 +57,7 @@ export default class IndexReport extends React.Component<IProps, IState> {
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <Table
-            className={this.props.lang === "IR" ? "table table-bordered mt-3 rtl" : "table table-bordered mt-3 ltr"}
+            className={this.props.lang === "fa" ? "table table-bordered mt-3 rtl" : "table table-bordered mt-3 ltr"}
           >
             <TableBody className="table-row">{this.onRenderTable()}</TableBody>
           </Table>
@@ -73,7 +73,7 @@ export default class IndexReport extends React.Component<IProps, IState> {
           <th className={"table-dark" + "-" + index}>
             <div>{n.Title}</div>
           </th>
-          <td align={this.props.lang === "IR" ? "right" : "left"}>
+          <td align={this.props.lang === "fa" ? "right" : "left"}>
             <div className="desc-questions">{n.Description}:</div>
             <ul>{this.onRenderQuestions(n.Items)}</ul>
           </td>

@@ -90,7 +90,7 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
     return (
       <DKPortlet
         title={
-          this.props.lang === "IR" ? "مقایسه امتیاز شما با سایر رهبران واحد" : "Comparing your results with the others"
+          this.props.lang === "fa" ? "مقایسه امتیاز شما با سایر رهبران واحد" : "Comparing your results with the others"
         }
       >
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
