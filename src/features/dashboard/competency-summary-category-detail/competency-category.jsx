@@ -47,6 +47,7 @@ class ResponsiveBulletClass extends React.Component {
   render() {
     const colors = ["#3B86FF", "#77E5AA", "#093fb9", "#6d00f6", "#FF006E", "#FFBE0B", "#1EFFBC", "#ff8b12"];
     const itemId = this.props.itemId;
+    const lang = this.props.lamg;
     const options = {
       legend: {
         align: "center",
@@ -118,7 +119,7 @@ class ResponsiveBulletClass extends React.Component {
           point: {
             events: {
               click: function() {
-                window.location.href = "#/competency/" + itemId + "/" + this.options.query;
+                window.location.href = "#/competency/" + itemId + "/" + this.options.query + "/" + lang;
               },
             },
           },

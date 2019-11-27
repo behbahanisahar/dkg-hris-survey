@@ -77,16 +77,16 @@ export default class MainDashboard extends React.Component<IProps, IState> {
                   <ResponsiveBulletClass lang={this.state.lang} itemId={this.state.itemId} />
                 </Grid>
                 <Grid item xs={8}>
-                  <IndexReport itemId={this.state.itemId} />
+                  <IndexReport lang={this.state.lang} itemId={this.state.itemId} />
                 </Grid>
                 <Grid item xs={4}>
                   <DKValueRadarChart lang={this.state.lang} itemId={this.state.itemId} />
                 </Grid>
                 <Grid item xs={12}>
-                  <ComparingChart itemId={this.state.itemId} />
+                  <ComparingChart lang={this.state.lang} itemId={this.state.itemId} />
                 </Grid>
                 <Grid item xs={12}>
-                  <Comments itemId={this.state.itemId} />
+                  <Comments lang={this.state.lang} itemId={this.state.itemId} />
                 </Grid>
               </Grid>
             </div>

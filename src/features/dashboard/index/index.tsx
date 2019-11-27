@@ -9,6 +9,7 @@ interface IProps {
   name?: string;
   match?: any;
   itemId: number;
+  lang: string;
 }
 interface IState {
   isFetching: boolean;
@@ -49,7 +50,7 @@ export default class IndexReport extends React.Component<IProps, IState> {
   public render() {
     return (
       <DKPortlet hasHeader={false} noborder={true}>
-        <Table dir="rtl" className="table table-bordered mt-3">
+        <Table className={this.props.lang === "IR" ? "table table-bordered mt-3 rtl" : "table table-bordered mt-3 ltr"}>
           <TableBody>{this.onRenderTable()}</TableBody>
         </Table>
       </DKPortlet>
@@ -61,9 +62,9 @@ export default class IndexReport extends React.Component<IProps, IState> {
       return (
         <tr key={index}>
           <th className="table-dark">
-            <div className="transform-header">{n.Title}</div>
+            <div>{n.Title}</div>
           </th>
-          <td align="right">
+          <td align={this.props.lang === "IR" ? "right" : "left"}>
             <div className="desc-questions">{n.Description}:</div>
             <ul>{this.onRenderQuestions(n.Items)}</ul>
           </td>

@@ -29,12 +29,11 @@ class RatersTable extends React.Component<IProps, IState> {
   public async componentWillReceiveProps(nextProps: any) {
     console.log(nextProps);
     console.log(this.state.itemId);
-    if (this.state.itemId !== nextProps.itemId) {
-      this.getData(nextProps.itemId);
-    }
+
+    this.getData(nextProps.itemId);
   }
   public async getData(NominationId: number) {
-    await this.ReportServices.getraters(NominationId).then(response =>
+    await this.ReportServices.getraters(NominationId, this.props.lang).then(response =>
       this.setState(current => ({
         ...current,
         raters: response,
@@ -84,6 +83,7 @@ class RatersTable extends React.Component<IProps, IState> {
   }
   /******************************************* */
   private onRenderTable = () => {
+    console.log(this.state.raters);
     return this.state.raters.map((n: Raters, index: any) => {
       return (
         <tr key={index}>

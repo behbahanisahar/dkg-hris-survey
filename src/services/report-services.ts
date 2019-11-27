@@ -13,9 +13,9 @@ class ReportServices extends ServiceBase {
   }
 
   /**********************get raters ******************************************* */
-  public async getraters(itemId: number): Promise<Raters[]> {
+  public async getraters(itemId: number, lang: string): Promise<Raters[]> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("survey/report/raters?itemid=" + itemId + "");
+      const items: any = await this.get("survey/report/raters?itemid=" + itemId + "&language=" + lang + "");
       return Promise.resolve(items.data);
     }
 

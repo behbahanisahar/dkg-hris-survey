@@ -11,6 +11,7 @@ interface IProps {
   name?: string;
   match?: any;
   itemId: number;
+  lang: string;
 }
 interface IState {
   isFetching: boolean;

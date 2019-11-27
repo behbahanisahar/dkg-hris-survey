@@ -9,6 +9,7 @@ interface IProps {
   name?: string;
   match?: any;
   itemId: number;
+  lang: string;
 }
 interface IState {
   isFetching: boolean;
@@ -84,7 +85,11 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
       },
     };
     return (
-      <DKPortlet title="مقایسه امتیاز شما با سایر رهبران واحد">
+      <DKPortlet
+        title={
+          this.props.lang === "IR" ? "مقایسه امتیاز شما با سایر رهبران واحد" : "Comparing your results with the others"
+        }
+      >
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && <Line options={options} height={60} data={this.state.data} />}
       </DKPortlet>
