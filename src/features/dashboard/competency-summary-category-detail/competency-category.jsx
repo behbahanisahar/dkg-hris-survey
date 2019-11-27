@@ -35,7 +35,7 @@ class ResponsiveBulletClass extends React.Component {
     this.setState(state => ({
       isFetching,
     }));
-    const years = [{ key: "1", text: "1396" }, { key: "2", text: "1397" }, { key: "3", text: "1398" }];
+    const years = [{ key: "1396", text: "1396" }, { key: "1397", text: "1397" }, { key: "1398", text: "1398" }];
     await this.ReportServices.getCompetencySummary(NominationId, "1398", lang).then(response =>
       this.setState(state => ({
         isFetching: false,
@@ -140,13 +140,11 @@ class ResponsiveBulletClass extends React.Component {
       <DKPortlet title={this.props.lang === "IR" ? "شایستگی‌ها" : "Competency Summary"}>
         <div className="dropdown mb-5" style={{ width: "15%" }}>
           <Select
-            //  error={this.state.errors.minExpID}
             margin="dense"
             placeholder="انتخاب سال"
             value={this.state.yearID}
             fullWidth={true}
             onChange={event => this.handleChangeDropdown("year", event)}
-            // className="btn btn-default dropdown-toggle"
             inputProps={{
               name: "year",
               id: "demo-controlled-open-select",
@@ -190,7 +188,7 @@ class ResponsiveBulletClass extends React.Component {
   /*************************************************** */
   handleChangeDropdown = async (name, event) => {
     const dropdownId = name + "ID";
-    console.log(this.state.year);
+    debugger;
     this.setState(prevState => {
       return {
         ...prevState,
