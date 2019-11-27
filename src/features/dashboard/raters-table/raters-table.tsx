@@ -91,8 +91,12 @@ class RatersTable extends React.Component<IProps, IState> {
       return (
         <tr key={index}>
           <th align="center">{n.RaterGroup}</th>
-          <td align="center">{Util.toPersianNumber(n.NominatedCount.toString())}</td>
-          <td align="center">{Util.toPersianNumber(n.CompletedCount.toString())}</td>
+          <td align="center">
+            {this.props.lang === "IR" ? Util.toPersianNumber(n.NominatedCount.toString()) : n.NominatedCount}
+          </td>
+          <td align="center">
+            {this.props.lang === "IR" ? Util.toPersianNumber(n.CompletedCount.toString()) : n.CompletedCount}
+          </td>
         </tr>
       );
     });
