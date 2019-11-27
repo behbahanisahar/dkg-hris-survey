@@ -38,7 +38,7 @@ const routes: RouteTypes[] = [
   // },
   {
     exact: false,
-    path: "/competency/:itemId/:categoryId",
+    path: "/competency/:itemId/:categoryId/:lang",
     component: CompetencyCategoryComponent,
   },
   {

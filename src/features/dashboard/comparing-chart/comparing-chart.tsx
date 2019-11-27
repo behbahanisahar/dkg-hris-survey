@@ -34,12 +34,15 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.state.itemId !== nextProps.itemId) {
-      this.getData(nextProps.itemId);
-    }
+    // if (this.state.itemId !== nextProps.itemId) {
+    this.getData(nextProps.itemId, nextProps.lang, true);
+    //  }
   }
-  public async getData(NominationId: number) {
-    await this.ReportServices.getCompareCompetency(NominationId).then(response => {
+  public async getData(NominationId: number, lang: string, isFetching: boolean) {
+    this.setState(state => ({
+      isFetching,
+    }));
+    await this.ReportServices.getCompareCompetency(NominationId, lang).then(response => {
       const data = {
         labels: response.labels,
         datasets: response.datasets,
@@ -53,7 +56,7 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
     });
   }
   public async componentDidMount() {
-    this.getData(this.props.itemId);
+    this.getData(this.props.itemId, this.props.lang, this.state.isFetching);
   }
   public render() {
     const options = {

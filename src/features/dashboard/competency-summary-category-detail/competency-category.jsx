@@ -23,31 +23,36 @@ class ResponsiveBulletClass extends React.Component {
       yearID: "",
       year: "",
       years: [],
+      lang: "",
     };
   }
   async componentWillReceiveProps(nextProps) {
-    if (this.state.itemId !== nextProps.itemId) {
-      this.getData(nextProps.itemId);
-    }
+    //  if (this.state.itemId !== nextProps.itemId) {
+    this.getData(nextProps.itemId, nextProps.lang, true);
+    //  }
   }
-  async getData(NominationId) {
-    const years = [{ key: "1", text: "1396" }, { key: "2", text: "1397" }, { key: "2", text: "1398" }];
-    await this.ReportServices.getCompetencySummary(NominationId, "1398").then(response =>
+  async getData(NominationId, lang, isFetching) {
+    this.setState(state => ({
+      isFetching,
+    }));
+    const years = [{ key: "1", text: "1396" }, { key: "2", text: "1397" }, { key: "3", text: "1398" }];
+    await this.ReportServices.getCompetencySummary(NominationId, "1398", lang).then(response =>
       this.setState(state => ({
         isFetching: false,
         reportData: response,
         itemId: NominationId,
         years,
+        lang,
       })),
     );
   }
   async componentDidMount() {
-    this.getData(this.props.itemId);
+    this.getData(this.props.itemId, this.props.lang, this.state.isFetching);
   }
   render() {
     const colors = ["#3B86FF", "#77E5AA", "#093fb9", "#6d00f6", "#FF006E", "#FFBE0B", "#1EFFBC", "#ff8b12"];
     const itemId = this.props.itemId;
-    const lang = this.props.lamg;
+    const lang = this.props.lang;
     const options = {
       legend: {
         align: "center",
@@ -198,7 +203,7 @@ class ResponsiveBulletClass extends React.Component {
     //   [dropdownId]: event.target.value,
     // })),
     console.log(this.state.year);
-    await this.ReportServices.getCompetencySummary(this.state.itemId, this.state.year).then(response =>
+    await this.ReportServices.getCompetencySummary(this.state.itemId, this.state.year, this.state.lang).then(response =>
       this.setState(prevState => {
         return {
           ...prevState,

@@ -28,7 +28,7 @@ class CompetencySummary extends React.Component<IProps, IState> {
   }
   public async componentDidMount() {
     const itemId = Number(Util.getQueryStringValue("itemId"));
-    await this.ReportServices.getCompetencySummary(itemId, "1398").then(response => {
+    await this.ReportServices.getCompetencySummary(itemId, "1398", "IR").then(response => {
       const data = {
         labels: response.labels,
         datasets: response.datasets,

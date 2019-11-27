@@ -125,7 +125,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
       },
     };
     return (
-      <div className="rtl">
+      <div className={this.props.match.params.lang === "IR" ? "rtl" : "ltr"}>
         <button
           className="btn btn-secondary mx-2"
           style={{ float: "left" }}
@@ -215,7 +215,15 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
           <DKPortlet hasHeader={false} noborder={true}>
             <span style={{ fontWeight: 400 }} dangerouslySetInnerHTML={{ __html: n.QuestionTitle }}></span>
             <HorizontalBar height={80} options={options} data={n.QuestionChart} />
-            <span className={avgClassName + " average-bold"}>میانگین : {n.Average} </span>
+            <span
+              className={
+                this.props.match.params.lang === "IR"
+                  ? avgClassName + " average-bold text-align-right"
+                  : avgClassName + " average-bold text-align-left"
+              }
+            >
+              {this.props.match.params.lang === "IR" ? " میانگین :" : "Average:"} {n.Average}{" "}
+            </span>
           </DKPortlet>
         </Grid>
       );
@@ -225,12 +233,18 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
   private OnRenderCategories = () => {
     return this.state.data.Categories.map((n: any, index: any) => {
       return (
-        <Grid item xs={1} className="mr-5">
+        <Grid
+          className={this.props.match.params.lang === "IR" ? "text-align-right mr-5" : "text-align-left mr-5"}
+          item
+          xs={1}
+        >
           <Link to={"/competency/" + this.state.itemId + "/" + n.Id}>
             <img style={{ width: "100%" }} src={n.SignUrl}></img>
           </Link>
           <Link to={"/competency/" + this.state.itemId + "/" + n.Id}>
-            <span style={{ textAlign: "center", fontWeight: 400 }}>{n.Title}</span>
+            <div>
+              <span style={{ textAlign: "center", fontWeight: 400 }}>{n.Title}</span>
+            </div>
           </Link>
         </Grid>
       );

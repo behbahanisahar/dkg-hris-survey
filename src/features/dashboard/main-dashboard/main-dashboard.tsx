@@ -65,7 +65,7 @@ export default class MainDashboard extends React.Component<IProps, IState> {
               </span>
             </Grid>
             <div className={this.state.lang === "IR" ? "rtl" : "ltr"}>
-              <DashboardHeader itemId={this.state.itemId} />
+              <DashboardHeader lang={this.state.lang} itemId={this.state.itemId} />
               <Grid container spacing={3}>
                 <Grid item xs={12} sm={12}>
                   {/* <DashboardIntro></DashboardIntro> */}

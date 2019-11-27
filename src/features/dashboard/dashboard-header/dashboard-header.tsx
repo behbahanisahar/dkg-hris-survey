@@ -11,6 +11,7 @@ import ReportServices from "../../../services/report-services";
 interface IProps {
   itemId: number;
   match?: any;
+  lang: string;
 }
 interface IState {
   itemId: number;
@@ -56,7 +57,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
       <>
         <DKPortlet hasHeader={false}>
           <Grid container spacing={3}>
-            <Grid item xs={8}>
+            <Grid item xs={8} className={this.props.lang === "IR" ? "text-align-right" : "text-align-left"}>
               <div className="kt-widget__media kt-hidden-">
                 <div className="kt-user-card-v2__pic">
                   {this.state.userInfo.User.AvatarUrl === null && (
@@ -83,7 +84,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
                 </div>
               </div>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={4} className={this.props.lang === "IR" ? "text-align-right" : "text-align-left"}>
               <br />
               <Grid>
                 <span className="dk-username">:نفراتی که فرم را پر کرده اند</span>

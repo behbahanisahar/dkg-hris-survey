@@ -5,6 +5,7 @@ import IndexData from "../../../entities/reports/index-report";
 import { Table, TableBody } from "@material-ui/core";
 import "./index.css";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
 interface IProps {
   name?: string;
   match?: any;
@@ -29,12 +30,15 @@ export default class IndexReport extends React.Component<IProps, IState> {
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.state.itemId !== nextProps.itemId) {
-      this.getData(nextProps.itemId);
-    }
+    //  if (this.state.itemId !== nextProps.itemId) {
+    this.getData(nextProps.itemId, nextProps.lang, true);
+    // }
   }
-  public async getData(NominationId: number) {
-    await this.ReportServices.getIndex(NominationId).then(response => {
+  public async getData(NominationId: number, lang: string, isFetching: boolean) {
+    this.setState(state => ({
+      isFetching,
+    }));
+    await this.ReportServices.getIndex(NominationId, lang).then(response => {
       this.setState(current => ({
         ...current,
         isFetching: false,
@@ -44,15 +48,20 @@ export default class IndexReport extends React.Component<IProps, IState> {
     });
   }
   public async componentDidMount() {
-    this.getData(this.props.itemId);
+    this.getData(this.props.itemId, this.props.lang, this.state.isFetching);
   }
 
   public render() {
     return (
       <DKPortlet hasHeader={false} noborder={true}>
-        <Table className={this.props.lang === "IR" ? "table table-bordered mt-3 rtl" : "table table-bordered mt-3 ltr"}>
-          <TableBody>{this.onRenderTable()}</TableBody>
-        </Table>
+        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
+        {this.state.isFetching === false && (
+          <Table
+            className={this.props.lang === "IR" ? "table table-bordered mt-3 rtl" : "table table-bordered mt-3 ltr"}
+          >
+            <TableBody>{this.onRenderTable()}</TableBody>
+          </Table>
+        )}
       </DKPortlet>
     );
   }

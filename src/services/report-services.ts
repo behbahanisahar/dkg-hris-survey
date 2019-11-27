@@ -22,19 +22,21 @@ class ReportServices extends ServiceBase {
     return Promise.resolve(MockData.getRaters);
   }
   /*****************get competency summary(for radar chart)************************ */
-  public async getComparingChartData(itemId: number): Promise<ReportStructure> {
+  public async getComparingChartData(itemId: number, lang: string): Promise<ReportStructure> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("survey/report/competencysummary/chartjs?itemid=" + itemId + "");
+      const items: any = await this.get(
+        "survey/report/competencysummary/chartjs?itemid=" + itemId + "&language=" + lang + "",
+      );
       return Promise.resolve(items.data);
     }
 
     return Promise.resolve(MockData.comparingChartData);
   }
   /*************get competency summary(for drilldown chart(highchart))************ */
-  public async getCompetencySummary(itemId: number, selectedYear: string): Promise<any> {
+  public async getCompetencySummary(itemId: number, selectedYear: string, lang: string): Promise<any> {
     if (process.env.NODE_ENV === "production") {
       const items: any = await this.get(
-        "survey/report/competencysummary?itemid=" + itemId + "&year=" + selectedYear + "",
+        "survey/report/competencysummary?itemid=" + itemId + "&year=" + selectedYear + "&language=" + lang + "",
       );
 
       return Promise.resolve(items.data);
@@ -44,9 +46,9 @@ class ReportServices extends ServiceBase {
   }
 
   /*******************get compare competency************************************* */
-  public async getCompareCompetency(itemId: number): Promise<ReportStructure> {
+  public async getCompareCompetency(itemId: number, lang: string): Promise<ReportStructure> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("survey/report/compare?itemid=" + itemId + "");
+      const items: any = await this.get("survey/report/compare?itemid=" + itemId + "&language=" + lang + "");
       console.log(items);
       return Promise.resolve(items.data);
     }
@@ -67,18 +69,18 @@ class ReportServices extends ServiceBase {
   }
   /***************************************************************************** */
 
-  public async getComments(itemId: number): Promise<IComment[]> {
+  public async getComments(itemId: number, lang: string): Promise<IComment[]> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("survey/report/comments?itemid=" + itemId);
+      const items: any = await this.get("survey/report/comments?itemid=" + itemId + "&language=" + lang + "");
       return Promise.resolve(items.data);
     }
 
     return Promise.resolve(MockData.Comments);
   }
   /**************************************************************************** */
-  public async getIndex(itemId: number): Promise<IndexData[]> {
+  public async getIndex(itemId: number, lang: string): Promise<IndexData[]> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("survey/report/index?itemid=" + itemId);
+      const items: any = await this.get("survey/report/index?itemid=" + itemId + "&language=" + lang + "");
       return Promise.resolve(items.data);
     }
 
