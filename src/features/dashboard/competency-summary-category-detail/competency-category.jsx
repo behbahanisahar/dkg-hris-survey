@@ -35,7 +35,11 @@ class ResponsiveBulletClass extends React.Component {
     this.setState(state => ({
       isFetching,
     }));
-    const years = [{ key: "1396", text: "1396" }, { key: "1397", text: "1397" }, { key: "1398", text: "1398" }];
+    const years = [
+      { key: "1396", text: "1396" },
+      { key: "1397", text: "1397" },
+      { key: "1398", text: "1398" },
+    ];
     await this.ReportServices.getCompetencySummary(NominationId, "1398", lang).then(response =>
       this.setState(state => ({
         isFetching: false,
@@ -196,19 +200,23 @@ class ResponsiveBulletClass extends React.Component {
         yearID: event.target.value,
       };
     });
-    // this.setState(state => ({
-    //   [name]: event.nativeEvent.target.outerText,
-    //   [dropdownId]: event.target.value,
-    // })),
-    console.log(this.state.year);
-    await this.ReportServices.getCompetencySummary(this.state.itemId, this.state.year, this.state.lang).then(response =>
+
+    console.log("event", event.nativeEvent.target.outerText);
+    console.log("after", this.state.year);
+
+    await this.ReportServices.getCompetencySummary(
+      this.state.itemId,
+      event.nativeEvent.target.outerText,
+      this.state.lang,
+    ).then(response => {
       this.setState(prevState => {
         return {
           ...prevState,
           reportData: response,
         };
-      }),
-    );
+      });
+      this.afterChartCreated(this.internalChart);
+    });
   };
 }
 
