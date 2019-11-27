@@ -21,37 +21,34 @@ class ResponsiveBulletClass extends React.Component {
       reportData: {},
       state: 0,
       yearID: "",
-      year: "",
-      years: [],
+      year: "1397",
+      years: [
+        { key: "1396", text: "1396" },
+        { key: "1397", text: "1397" },
+      ],
       lang: "",
     };
   }
   async componentWillReceiveProps(nextProps) {
-    //  if (this.state.itemId !== nextProps.itemId) {
-    this.getData(nextProps.itemId, nextProps.lang, true);
-    //  }
+    this.getData(nextProps.itemId, nextProps.lang, true, this.state.year);
   }
-  async getData(NominationId, lang, isFetching) {
+  async getData(NominationId, lang, isFetching, year) {
+    console.log(this.state);
     this.setState(state => ({
       isFetching,
     }));
-    const years = [
-      { key: "1396", text: "1396" },
-      { key: "1397", text: "1397" },
-      { key: "1398", text: "1398" },
-    ];
-    await this.ReportServices.getCompetencySummary(NominationId, "1398", lang).then(response =>
+
+    await this.ReportServices.getCompetencySummary(NominationId, year, lang).then(response =>
       this.setState(state => ({
         isFetching: false,
         reportData: response,
         itemId: NominationId,
-        years,
         lang,
       })),
     );
   }
   async componentDidMount() {
-    this.getData(this.props.itemId, this.props.lang, this.state.isFetching);
+    this.getData(this.props.itemId, this.props.lang, this.state.isFetching, this.state.year);
   }
   render() {
     const colors = ["#3B86FF", "#77E5AA", "#093fb9", "#6d00f6", "#FF006E", "#FFBE0B", "#1EFFBC", "#ff8b12"];
@@ -192,31 +189,20 @@ class ResponsiveBulletClass extends React.Component {
   /*************************************************** */
   handleChangeDropdown = async (name, event) => {
     const dropdownId = name + "ID";
-    debugger;
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        year: event.nativeEvent.target.outerText,
-        yearID: event.target.value,
-      };
-    });
-
-    console.log("event", event.nativeEvent.target.outerText);
-    console.log("after", this.state.year);
-
-    await this.ReportServices.getCompetencySummary(
-      this.state.itemId,
-      event.nativeEvent.target.outerText,
-      this.state.lang,
-    ).then(response => {
-      this.setState(prevState => {
-        return {
-          ...prevState,
-          reportData: response,
-        };
-      });
-      this.afterChartCreated(this.internalChart);
-    });
+    // this.setState(prevState => {
+    //   return {
+    //     ...prevState,
+    //     year: event.nativeEvent.target.outerText,
+    //     yearID: event.target.value,
+    //   };
+    // });
+    this.setState(state => ({
+      year: event.nativeEvent.target.outerText,
+      yearID: event.target.value,
+    }));
+    this.getData(this.state.itemId, this.state.lang, true, event.nativeEvent.target.outerText).then(
+      this.afterChartCreated(this.internalChart),
+    );
   };
 }
 
