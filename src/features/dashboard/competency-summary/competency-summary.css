@@ -20,3 +20,7 @@
 .kt-section .kt-section__content.kt-section__content--border {
   border: 2px solid #ebedf2;
 }
+svg.MuiSvgIcon-root.MuiSelect-icon.MuiSelect-iconOutlined {
+  margin-left: 5px;
+  margin-right: 0 !important;
+}

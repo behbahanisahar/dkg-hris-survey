@@ -4,7 +4,7 @@ import { Grid } from "@material-ui/core";
 import RatersTable from "../raters-table/raters-table";
 import ComparingChart from "../comparing-chart/comparing-chart";
 import DKValueRadarChart from "../dk-value-radar-chart/dk-value-radar-chart";
-import ResponsiveBulletClass from "../competency-summary-category-detail/competency-category";
+import CompetencySummaryClass from "../competency-summary/competency-summary";
 import Comments from "../comments/comments";
 import IndexReport from "../index";
 import UkIcon from "../../../assets/img/en.png";
@@ -69,7 +69,7 @@ export default class MainDashboard extends React.Component<IProps, IState> {
                   <RatersTable lang={this.state.lang} itemId={this.state.itemId} />
                 </Grid>
                 <Grid item xs={8}>
-                  <ResponsiveBulletClass lang={this.state.lang} itemId={this.state.itemId} />
+                  <CompetencySummaryClass lang={this.state.lang} itemId={this.state.itemId} />
                 </Grid>
                 <Grid item xs={8}>
                   <IndexReport lang={this.state.lang} itemId={this.state.itemId} />

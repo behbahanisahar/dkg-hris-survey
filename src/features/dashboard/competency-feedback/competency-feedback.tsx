@@ -5,7 +5,11 @@ interface IProps {
 }
 
 const CompetencyFeedback: React.SFC<IProps> = props => {
-  return <DKPortlet title="Comparing Chart"></DKPortlet>;
+  return (
+    <DKPortlet title="Comparing Chart">
+      <span>a</span>
+    </DKPortlet>
+  );
 };
 
 export default CompetencyFeedback;

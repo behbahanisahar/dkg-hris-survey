@@ -4,14 +4,15 @@ import HighchartsReact from "highcharts-react-official";
 import ReportServices from "../../../services/report-services";
 import Util from "../../../utilities/utilities";
 import { borderRight } from "@material-ui/system";
-import "./competency-datail.css";
+import "./competency-summary.css";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
+import { DKPortletToolbar } from "../../../core/components/portlet/portlet-header/portlet-header";
 
-class ResponsiveBulletClass extends React.Component {
+class CompetencySummaryClass extends React.Component {
   constructor(props) {
     super(props);
     this.afterChartCreated = this.afterChartCreated.bind(this);
@@ -50,6 +51,26 @@ class ResponsiveBulletClass extends React.Component {
   async componentDidMount() {
     this.getData(this.props.itemId, this.props.lang, this.state.isFetching, this.state.year);
   }
+  yearSelect() {
+    return (
+      <Select
+        margin="dense"
+        placeholder="انتخاب سال"
+        value={this.state.yearID}
+        fullWidth={true}
+        onChange={event => this.handleChangeDropdown("year", event)}
+        inputProps={{
+          name: "year",
+          id: "demo-controlled-open-select",
+        }}
+        IconComponent={KeyboardArrowDown}
+        variant="outlined"
+      >
+        {this.renderDropDown(this.state.years)}
+      </Select>
+    );
+  }
+
   render() {
     const colors = ["#3B86FF", "#77E5AA", "#093fb9", "#6d00f6", "#FF006E", "#FFBE0B", "#1EFFBC", "#ff8b12"];
     const itemId = this.props.itemId;
@@ -138,24 +159,12 @@ class ResponsiveBulletClass extends React.Component {
     };
 
     return (
-      <DKPortlet title={this.props.lang === "fa" ? "شایستگی‌ها" : "Competency Summary"}>
-        <div className="dropdown mb-5" style={{ width: "15%" }}>
-          <Select
-            margin="dense"
-            placeholder="انتخاب سال"
-            value={this.state.yearID}
-            fullWidth={true}
-            onChange={event => this.handleChangeDropdown("year", event)}
-            inputProps={{
-              name: "year",
-              id: "demo-controlled-open-select",
-            }}
-            IconComponent={KeyboardArrowDown}
-            variant="outlined"
-          >
-            {this.renderDropDown(this.state.years)}
-          </Select>
-        </div>
+      <DKPortlet
+        headerToolbar={this.yearSelect()}
+        title={this.props.lang === "fa" ? "شایستگی‌ها" : "Competency Summary"}
+      >
+        <DKPortletToolbar></DKPortletToolbar>
+        <div className="dropdown mb-5" style={{ width: "15%" }}></div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <HighchartsReact callback={this.afterChartCreated} highcharts={Highcharts} options={options} />
@@ -206,4 +215,4 @@ class ResponsiveBulletClass extends React.Component {
   };
 }
 
-export default ResponsiveBulletClass;
+export default CompetencySummaryClass;
