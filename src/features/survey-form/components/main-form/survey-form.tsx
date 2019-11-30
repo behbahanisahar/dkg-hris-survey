@@ -532,7 +532,11 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
         };
       });
       if (saveFormat === "submit") toast.success("فرم با موفقیت ثبت شد", this.toastSubmitoptions);
-      else toast.success("فرم با موفقیت ثبت شد", { position: "bottom-left", toastId: "save" });
+      else
+        toast.success("اطلاعات در سیستم ذخیره شد. جهت تکمیل ارزیابی، از گزینه ثبت‌نهایی استفاده کنید ", {
+          position: "bottom-left",
+          toastId: "save",
+        });
     });
   };
 
