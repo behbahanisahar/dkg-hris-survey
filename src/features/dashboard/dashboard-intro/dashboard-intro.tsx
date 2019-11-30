@@ -1,5 +1,5 @@
 import React from "react";
-import { TableHead, TableRow, TableCell } from "@material-ui/core";
+import { TableHead, TableRow, TableCell, TextField } from "@material-ui/core";
 import { MDBTable, MDBTableBody } from "mdbreact";
 import IDashboardIntroProps from "./dashboard-intro-props";
 import IDashboardIntroState from "./dashboard-intro-state";
@@ -17,9 +17,15 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
 
     this.state = {
       showSpinner: true,
+      filterName: "",
+      order: "asc",
+      orderBy: "",
+      page: 0,
+      rowsPerPage: 5,
       items: {
         Users: [],
       },
+      users: [],
     };
   }
   public async componentDidMount() {
@@ -31,6 +37,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         ...current,
         items: response,
         showSpinner: false,
+        users: response.Users,
       }));
     });
   }
@@ -47,6 +54,14 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
                   <h3 className="kt-portlet__head-title">نیرو های تحت سرپرستی</h3>
                 </div>
               </div>
+              <TextField
+                id="Filter"
+                margin="dense"
+                fullWidth={true}
+                value={this.state.filterName}
+                onChange={this.onFilterTable}
+                placeholder="جستجو بر اساس نام خانوادگی"
+              />
               <div className="kt-portlet__body">
                 <MDBTable className="kt-datatable__table" borderless>
                   <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
@@ -70,14 +85,14 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         </TableRow>
       );
     } else {
-      return this.state.items.Users.map((n: IReportUsers, index: any) => {
+      return this.state.users.map((n: IReportUsers, index: any) => {
         return (
           <TableRow key={index} className="kt-datatable__row">
             <TableCell align="right" className="kt-datatable__cell">
               <div className="kt-user-card-v2">
                 <div className="kt-user-card-v2__pic">
                   {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
-                  {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
+                  {n.User.AvatarUrl !== null && <img alt={n.User.SPLatinFullName} src={n.User.AvatarUrl} />}
                 </div>
                 <div className="kt-user-card-v2__details">
                   <a
@@ -88,10 +103,10 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
                     }}
                     className="kt-user-card-v2__name pointer"
                   >
-                    {n.User.Title}
+                    {n.User.SPLatinFullName}
                   </a>
 
-                  <span className="kt-user-card-v2__name pointer">{n.User.Title}</span>
+                  <span className="kt-user-card-v2__name pointer">{n.User.SPLatinFullName}</span>
                 </div>{" "}
               </div>
             </TableCell>
@@ -116,5 +131,29 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
 
   private onShowItem = (ItemId: number) => {
     window.location.href = "#/surveyform/" + ItemId;
+  };
+  /************************************filter data********************************************************************** */
+  private onFilterTable = (event: any) => {
+    this.setState({
+      filterName: event.target.value,
+    });
+
+    this.filterBox();
+  };
+  private filterBox = () => {
+    console.log(this.state.filterName);
+    this.setState(prevState => {
+      let TableItems: any[] = this.state.users;
+      if (prevState.filterName) {
+        console.log(TableItems);
+        TableItems = prevState.filterName
+          ? TableItems.filter(i => i.SPLatinFullName.indexOf(prevState.filterName) > -1)
+          : TableItems;
+      }
+      return {
+        ...prevState,
+        users: TableItems,
+      };
+    });
   };
 }
