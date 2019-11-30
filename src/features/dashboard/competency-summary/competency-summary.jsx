@@ -10,7 +10,6 @@ import { DKSpinner } from "../../../core/components/spinner/spinner";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
-import { DKPortletToolbar } from "../../../core/components/portlet/portlet-header/portlet-header";
 
 class CompetencySummaryClass extends React.Component {
   constructor(props) {
@@ -163,7 +162,6 @@ class CompetencySummaryClass extends React.Component {
         headerToolbar={this.yearSelect()}
         title={this.props.lang === "fa" ? "شایستگی‌ها" : "Competency Summary"}
       >
-        <DKPortletToolbar></DKPortletToolbar>
         <div className="dropdown mb-5" style={{ width: "15%" }}></div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
