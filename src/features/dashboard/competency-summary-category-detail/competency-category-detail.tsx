@@ -8,7 +8,7 @@ import QuestionData from "../../../entities/category-score-questiondata";
 import "chartjs-plugin-datalabels";
 import { defaults } from "react-chartjs-2";
 import { Link } from "react-router-dom";
-import "./competency-summary-detail.css";
+import "./competency-category-detail.css";
 
 interface IProps {
   name?: string;
@@ -230,23 +230,22 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
   };
   /***************************************************************** */
   private OnRenderCategories = () => {
+    console.log(this.props.match.params.categoryId);
     return this.state.data.Categories.map((n: any, index: any) => {
       return (
         <Link
           className={
-            this.props.match.params.categoryId === n.Id ? "kt-grid-nav__item selected-category" : "kt-grid-nav__item"
+            this.props.match.params.categoryId == n.Id ? "kt-grid-nav__item selected-category" : "kt-grid-nav__item"
           }
           to={"/competency/" + this.state.itemId + "/" + n.Id + "/" + this.props.match.params.lang}
         >
-          <a href="#" className="kt-grid-nav__item">
-            <span className="kt-grid-nav__icon">
-              <img style={{ maxWidth: "80px" }} src={n.SignUrl}></img>
-            </span>
-            <span className="kt-grid-nav__title">
-              <span style={{ textAlign: "center", fontWeight: 400 }}>{n.Title}</span>
-            </span>
-            <span className="kt-grid-nav__desc">{n.TitleEn}</span>
-          </a>
+          <span className="kt-grid-nav__icon">
+            <img style={{ maxWidth: "80px" }} src={n.SignUrl}></img>
+          </span>
+          <span className="kt-grid-nav__title">
+            <span style={{ textAlign: "center", fontWeight: 400 }}>{n.Title}</span>
+          </span>
+          <span className="kt-grid-nav__desc">{n.TitleEn}</span>
         </Link>
       );
     });
