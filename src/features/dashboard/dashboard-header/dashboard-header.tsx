@@ -31,9 +31,9 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.state.itemId !== nextProps.itemId) {
-      this.getData(this.state.itemId);
-    }
+    //  if (this.state.itemId !== nextProps.itemId) {
+    this.getData(nextProps.itemId);
+    //  }
   }
   public async getData(NominationId: number) {
     await this.ReportServices.getReportHeaderData(NominationId).then(response => {

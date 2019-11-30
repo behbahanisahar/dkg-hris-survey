@@ -221,7 +221,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
                   : avgClassName + " average-bold text-align-left"
               }
             >
-              {this.props.match.params.lang === "fa" ? " میانگین :" : "Average:"} {n.Average}{" "}
+              {this.props.match.params.lang === "fa" ? " میانگین سایر ارزیابان :" : "Average:"} {n.Average}{" "}
             </span>
           </DKPortlet>
         </Grid>
@@ -233,7 +233,9 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
     return this.state.data.Categories.map((n: any, index: any) => {
       return (
         <Link
-          className="kt-grid-nav__item"
+          className={
+            this.props.match.params.categoryId === n.Id ? "kt-grid-nav__item selected-category" : "kt-grid-nav__item"
+          }
           to={"/competency/" + this.state.itemId + "/" + n.Id + "/" + this.props.match.params.lang}
         >
           <a href="#" className="kt-grid-nav__item">
