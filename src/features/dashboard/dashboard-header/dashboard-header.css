@@ -1,14 +1,13 @@
-.avatar-size {
-  width: 50px;
+.avatar {
+  width: 80px;
+}
+.avatar img,
+.avatar span {
+  width: 80px !important;
+  height: 80px;
+  max-width: 80px !important;
 }
 .gradient {
   background: linear-gradient(135deg, #acb6e5, #86fde8);
-}
-.gradient > span {
-  color: #f0f8ff !important;
-}
-.has-image {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  color: #fff !important;
 }

@@ -53,7 +53,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
         <>
           <div className="kt-widget kt-widget--user-profile-3">
             <div className="kt-widget__top">
-              <div className="kt-widget__media mx-3">
+              <div className="kt-widget__media kt-media avatar mx-3">
                 {this.state.userInfo.User.AvatarUrl === null && (
                   <span className="gradient">{this.state.userInfo.User.AvatarTextPlaceholder}</span>
                 )}
@@ -62,7 +62,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
                 )}
               </div>
 
-              <div className="kt-widget__content">
+              <div className="kt-widget__content mt-3">
                 <div className="kt-widget__head">
                   <span className="kt-widget__username">{this.state.userInfo.User.SPLatinFullName}</span>
                 </div>
@@ -74,7 +74,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
                       : "kt-widget__subhead text-align-left"
                   }
                 >
-                  <span>{this.state.userInfo.User.EmailAddress} | </span>
+                  <span>{this.state.userInfo.User.CLevel} | </span>
                   <span>{this.state.userInfo.User.Department} | </span>
                   <span>{this.state.userInfo.User.ReportedPost}</span>
                 </div>
