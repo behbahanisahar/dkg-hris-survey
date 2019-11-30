@@ -1,24 +1,9 @@
-/* .highcharts-color-0 {
-  fill: #ef394e !important;
+.kt-grid-nav > .kt-grid-nav__row > .kt-grid-nav__item {
+  padding: 2rem 1rem;
 }
-.highcharts-color-0 > rect {
-  fill: #ef394e !important;
+.kt-grid-nav .kt-grid-nav__row .kt-grid-nav__item .kt-grid-nav__title {
+  color: #607d8b;
 }
-
-.highcharts-color-1 {
-  fill: #19bfd3 !important;
+.kt-section .kt-section__content.kt-section__content--border {
+  border: 2px solid #ebedf2;
 }
-.highcharts-color-1 > rect {
-  fill: #19bfd3 !important;
-}
-
-.highcharts-color-2 {
-  fill: #636466 !important;
-}
-
-.highcharts-color-2:nth-child(2) {
-  fill: #636466 !important;
-} */
-/* g.highcharts-legend {
-  direction: rtl;
-} */
