@@ -60,7 +60,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
                 fullWidth={true}
                 value={this.state.filterName}
                 onChange={this.onFilterTable}
-                placeholder="جستجو بر اساس نام خانوادگی"
+                placeholder="جستجو    "
               />
               <div className="kt-portlet__body">
                 <MDBTable className="kt-datatable__table" borderless>
@@ -141,13 +141,19 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
     this.filterBox();
   };
   private filterBox = () => {
-    console.log(this.state.filterName);
+    console.log(this.state.users);
     this.setState(prevState => {
-      let TableItems: any[] = this.state.users;
+      // let TableItems: any[] = this.state.users;
+      let TableItems: any[] = this.state.items.Users;
       if (prevState.filterName) {
         console.log(TableItems);
-        TableItems = prevState.filterName
-          ? TableItems.filter(i => i.SPLatinFullName.indexOf(prevState.filterName) > -1)
+        TableItems = prevState.filterName.toLowerCase()
+          ? //  ? TableItems.filter(i => i.User.SPLatinFullName.indexOf(prevState.filterName) > -1)
+            TableItems.filter(function(i) {
+              if (i.User.SPLatinFullName !== null) {
+                return i.User.SPLatinFullName.toLowerCase().indexOf(prevState.filterName) > -1;
+              }
+            })
           : TableItems;
       }
       return {
