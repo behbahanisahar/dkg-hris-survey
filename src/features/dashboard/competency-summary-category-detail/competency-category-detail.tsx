@@ -221,7 +221,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
                   : avgClassName + " average-bold text-align-left"
               }
             >
-              {this.props.match.params.lang === "fa" ? " میانگین :" : "Average:"} {n.Average}{" "}
+              {this.props.match.params.lang === "fa" ? " میانگین سایر ارزیابان :" : "Average:"} {n.Average}{" "}
             </span>
           </DKPortlet>
         </Grid>

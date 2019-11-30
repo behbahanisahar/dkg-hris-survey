@@ -1,14 +1,15 @@
 import React from "react";
-import { TableHead, TableRow, TableCell, TextField } from "@material-ui/core";
+import { TableHead, TableRow, TableCell, TablePagination } from "@material-ui/core";
 import { MDBTable, MDBTableBody } from "mdbreact";
 import IDashboardIntroProps from "./dashboard-intro-props";
 import IDashboardIntroState from "./dashboard-intro-state";
 import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import ReportServices from "../../../services/report-services";
 import Spinner from "../../spinner/spinner";
+import "./dashboard-intro.css";
 
 import IReportUsers from "../../../entities/reports/report-intro-users";
-
+let allitems: any[] = [];
 export default class DashboardIntroPage extends React.Component<IDashboardIntroProps, IDashboardIntroState> {
   private ReportServices: ReportServices;
   public constructor(props: IDashboardIntroProps) {
@@ -40,6 +41,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         users: response.Users,
       }));
     });
+    allitems = this.state.items.Users;
   }
   public render() {
     return (
@@ -53,20 +55,38 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
                 <div className="kt-portlet__head-label">
                   <h3 className="kt-portlet__head-title">نیرو های تحت سرپرستی</h3>
                 </div>
+                <input
+                  value={this.state.filterName}
+                  onChange={this.onFilterTable}
+                  placeholder="جستجو    "
+                  className="form-control input-search"
+                />
               </div>
-              <TextField
-                id="Filter"
-                margin="dense"
-                fullWidth={true}
-                value={this.state.filterName}
-                onChange={this.onFilterTable}
-                placeholder="جستجو    "
-              />
+
               <div className="kt-portlet__body">
                 <MDBTable className="kt-datatable__table" borderless>
                   <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
                   <MDBTableBody className="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
                 </MDBTable>
+                <TablePagination
+                  // dir="ltr"
+                  className="kt-pagination  kt-pagination--brand"
+                  rowsPerPageOptions={[5, 10, 25]}
+                  component="div"
+                  count={this.state.items.Users.length}
+                  rowsPerPage={this.state.rowsPerPage}
+                  page={this.state.page}
+                  backIconButtonProps={{
+                    "aria-label": "Previous Page",
+                  }}
+                  nextIconButtonProps={{
+                    "aria-label": "Next Page",
+                  }}
+                  onChangePage={this.handleChangePage}
+                  onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                  labelRowsPerPage="تعداد آیتم در هر صفحه :"
+                  labelDisplayedRows={({ from, to, count }) => `${from}-${to} از ${count}`}
+                />
               </div>
             </div>
           )}
@@ -85,52 +105,57 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         </TableRow>
       );
     } else {
-      return this.state.users.map((n: IReportUsers, index: any) => {
-        return (
-          <TableRow key={index} className="kt-datatable__row">
-            <TableCell align="right" className="kt-datatable__cell">
-              <div className="kt-user-card-v2">
-                <div className="kt-user-card-v2__pic">
-                  {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
-                  {n.User.AvatarUrl !== null && <img alt={n.User.SPLatinFullName} src={n.User.AvatarUrl} />}
+      return this.stableSort(this.state.items.Users, this.getSorting(this.state.order, this.state.orderBy))
+        .slice(
+          this.state.page * this.state.rowsPerPage,
+          this.state.page * this.state.rowsPerPage + this.state.rowsPerPage,
+        )
+        .map((n: IReportUsers, index: any) => {
+          return (
+            <TableRow key={index} className="kt-datatable__row">
+              <TableCell align="right" className="kt-datatable__cell">
+                <div className="kt-user-card-v2">
+                  <div className="kt-user-card-v2__pic">
+                    {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
+                    {n.User.AvatarUrl !== null && <img alt={n.User.SPLatinFullName} src={n.User.AvatarUrl} />}
+                  </div>
+                  <div className="kt-user-card-v2__details">
+                    <a
+                      onClick={(e: any) => {
+                        this.onShowItem(n.NominationId);
+                        e.preventDefault();
+                        return false;
+                      }}
+                      className="kt-user-card-v2__name pointer"
+                    >
+                      {n.User.SPLatinFullName}
+                    </a>
+
+                    <span className="kt-user-card-v2__name pointer">{n.User.SPLatinFullName}</span>
+                  </div>{" "}
                 </div>
-                <div className="kt-user-card-v2__details">
-                  <a
-                    onClick={(e: any) => {
-                      this.onShowItem(n.NominationId);
-                      e.preventDefault();
-                      return false;
-                    }}
-                    className="kt-user-card-v2__name pointer"
-                  >
-                    {n.User.SPLatinFullName}
-                  </a>
+              </TableCell>
 
-                  <span className="kt-user-card-v2__name pointer">{n.User.SPLatinFullName}</span>
-                </div>{" "}
-              </div>
-            </TableCell>
-
-            <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
-              <button
-                className="btn btn-sm btn-bold btn-brand-hover"
-                onClick={(e: any) => {
-                  this.onShowItem(n.NominationId);
-                  e.preventDefault();
-                  return false;
-                }}
-              >
-                ارزیابی
-              </button>
-            </TableCell>
-          </TableRow>
-        );
-      });
+              <TableCell style={{ width: "10%" }} className="kt-datatable__cell" align="center">
+                <button
+                  className="btn btn-sm btn-bold btn-brand-hover"
+                  onClick={(e: any) => {
+                    this.onShowItem(n.NominationId);
+                    e.preventDefault();
+                    return false;
+                  }}
+                >
+                  مشاهده ارزیابی
+                </button>
+              </TableCell>
+            </TableRow>
+          );
+        });
     }
   };
 
   private onShowItem = (ItemId: number) => {
-    window.location.href = "#/surveyform/" + ItemId;
+    window.location.href = "#/dashboard/" + ItemId;
   };
   /************************************filter data********************************************************************** */
   private onFilterTable = (event: any) => {
@@ -141,15 +166,11 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
     this.filterBox();
   };
   private filterBox = () => {
-    console.log(this.state.users);
     this.setState(prevState => {
-      // let TableItems: any[] = this.state.users;
-      let TableItems: any[] = this.state.items.Users;
+      let TableItems: any[] = allitems; // this.state.items.Users;
       if (prevState.filterName) {
-        console.log(TableItems);
         TableItems = prevState.filterName.toLowerCase()
-          ? //  ? TableItems.filter(i => i.User.SPLatinFullName.indexOf(prevState.filterName) > -1)
-            TableItems.filter(function(i) {
+          ? TableItems.filter(function(i) {
               if (i.User.SPLatinFullName !== null) {
                 return i.User.SPLatinFullName.toLowerCase().indexOf(prevState.filterName) > -1;
               }
@@ -158,8 +179,44 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
       }
       return {
         ...prevState,
-        users: TableItems,
+        items: {
+          ...prevState.items,
+          Users: TableItems,
+        },
       };
     });
+  };
+  /************************** Pagination *********************************************** */
+  private desc(a: any, b: any, orderBy: any) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+  private stableSort(array: any, cmp: any) {
+    const stabilizedThis = array.map((el: any, index: any) => [el, index]);
+    stabilizedThis.sort((a: any, b: any) => {
+      const order = cmp(a[0], b[0]);
+      if (order !== 0) {
+        return order;
+      }
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el: any) => el[0]);
+  }
+
+  private getSorting(order: any, orderBy: any) {
+    return order === "desc"
+      ? (a: any, b: any) => this.desc(a, b, orderBy)
+      : (a: any, b: any) => -this.desc(a, b, orderBy);
+  }
+  private handleChangePage = (event: any, page: any) => {
+    this.setState({ page });
+  };
+  private handleChangeRowsPerPage = (event: any) => {
+    this.setState({ rowsPerPage: event.target.value });
   };
 }

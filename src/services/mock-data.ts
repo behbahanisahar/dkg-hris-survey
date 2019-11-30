@@ -1117,6 +1117,58 @@ export default class MockData {
     HasAccess: true,
   };
   public static ReportIntro: IReportIntro = {
-    Users: [],
+    Users: [
+      {
+        User: {
+          EmailAddress: "G.Daryadel@digikala.com",
+          CLevel: "COO",
+
+          Department: "Customer Services",
+
+          ReportedPost: "AS Expansion Supervisor",
+
+          SPLatinFullName: "Gohar Daryadel",
+          ItemId: 3211,
+          AvatarUrl: "",
+          AvatarTextPlaceholder: "GD",
+        },
+        NominationId: 14,
+        Category: "Self //TODO",
+      },
+      {
+        User: {
+          EmailAddress: "G.Daryadel@digikala.com",
+          CLevel: "COO",
+
+          Department: "Customer Services",
+
+          ReportedPost: "AS Expansion Supervisor",
+
+          SPLatinFullName: "sahar",
+          ItemId: 3211,
+          AvatarUrl: "",
+          AvatarTextPlaceholder: "GD",
+        },
+        NominationId: 15,
+        Category: "Self //TODO",
+      },
+      {
+        User: {
+          EmailAddress: "G.Daryadel@digikala.com",
+          CLevel: "COO",
+
+          Department: "Customer Services",
+
+          ReportedPost: "AS Expansion Supervisor",
+
+          SPLatinFullName: "test2",
+          ItemId: 3211,
+          AvatarUrl: "",
+          AvatarTextPlaceholder: "GD",
+        },
+        NominationId: 16,
+        Category: "Self //TODO",
+      },
+    ],
   };
 }
