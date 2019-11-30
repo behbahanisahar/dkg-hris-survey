@@ -233,7 +233,9 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
     return this.state.data.Categories.map((n: any, index: any) => {
       return (
         <Link
-          className="kt-grid-nav__item"
+          className={
+            this.props.match.params.categoryId === n.Id ? "kt-grid-nav__item selected-category" : "kt-grid-nav__item"
+          }
           to={"/competency/" + this.state.itemId + "/" + n.Id + "/" + this.props.match.params.lang}
         >
           <a href="#" className="kt-grid-nav__item">
