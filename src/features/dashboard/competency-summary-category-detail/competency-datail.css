@@ -1,3 +1,6 @@
+.ltr {
+  text-align: left;
+}
 .kt-grid-nav > .kt-grid-nav__row > .kt-grid-nav__item {
   padding: 2rem 1rem;
 }
