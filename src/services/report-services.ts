@@ -48,7 +48,7 @@ class ReportServices extends ServiceBase {
   /*******************get compare competency************************************* */
   public async getCompareCompetency(itemId: number, lang: string): Promise<ReportStructure> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("survey/report/compare?itemid=" + itemId + "&language=" + lang + "");
+      const items: any = await this.get("survey/report/compare?itemid=" + itemId + "&language=" + lang);
       console.log(items);
       return Promise.resolve(items.data);
     }
@@ -56,10 +56,10 @@ class ReportServices extends ServiceBase {
     return Promise.resolve(MockData.CompareCompetency);
   }
   /********************get competency category details************************* */
-  public async getCompetencyCategory(itemId: number, categoryId: number): Promise<ICategoryScore> {
+  public async getCompetencyCategory(itemId: number, categoryId: number, lang: string): Promise<ICategoryScore> {
     if (process.env.NODE_ENV === "production") {
       const items: any = await this.get(
-        "survey/report/categoryscores?itemid=" + itemId + "&categoryid=" + categoryId + "",
+        "survey/report/categoryscores?itemid=" + itemId + "&categoryid=" + categoryId + "&language=" + lang,
       );
 
       return Promise.resolve(items.data);

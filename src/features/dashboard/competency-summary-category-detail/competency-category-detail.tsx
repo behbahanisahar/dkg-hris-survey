@@ -59,22 +59,24 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
 
   public async getData(categoryid: number) {
     const itemId = this.props.match.params.itemId;
-    await this.ReportServices.getCompetencyCategory(itemId, categoryid).then((data: ICategoryScore) => {
-      const reportData = {
-        labels: data.CategoryChart.labels,
-        datasets: data.CategoryChart.datasets,
-      };
-      this.setState(prevState => {
-        return {
-          ...prevState,
-          data,
-          itemId,
-          reportData,
-          categoryid,
-          isFetch: true,
+    await this.ReportServices.getCompetencyCategory(itemId, categoryid, this.props.match.params.lang).then(
+      (data: ICategoryScore) => {
+        const reportData = {
+          labels: data.CategoryChart.labels,
+          datasets: data.CategoryChart.datasets,
         };
-      });
-    });
+        this.setState(prevState => {
+          return {
+            ...prevState,
+            data,
+            itemId,
+            reportData,
+            categoryid,
+            isFetch: true,
+          };
+        });
+      },
+    );
   }
   public render() {
     const options = {
@@ -120,17 +122,18 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
     };
     return (
       <div className={this.props.match.params.lang === "fa" ? "rtl" : "ltr"}>
-        <button
-          className="btn btn-secondary mx-2"
-          style={{ float: "left" }}
-          onClick={e => {
-            this.onBackToPrev();
-            e.preventDefault();
-            return false;
-          }}
-        >
-          بازگشت | Back
-        </button>
+        <div className="my-2 text-right">
+          <button
+            className="btn btn-sm btn-secondary mx-2"
+            onClick={e => {
+              this.onBackToPrev();
+              e.preventDefault();
+              return false;
+            }}
+          >
+            بازگشت | Back
+          </button>
+        </div>
         {this.state.isFetch === true && (
           <DKPortlet hasHeader={false} noborder={true}>
             <div className="kt-section">
@@ -242,7 +245,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
             <span className="kt-grid-nav__title">
               <span style={{ textAlign: "center", fontWeight: 400 }}>{n.Title}</span>
             </span>
-            <span className="kt-grid-nav__desc">Latest cases</span>
+            <span className="kt-grid-nav__desc">{n.TitleEn}</span>
           </a>
         </Link>
       );
