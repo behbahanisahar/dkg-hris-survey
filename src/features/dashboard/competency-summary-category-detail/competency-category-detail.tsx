@@ -135,15 +135,13 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
           </button>
         </div>
         {this.state.isFetch === true && (
-          <DKPortlet hasHeader={false} noborder={true}>
-            <div className="kt-section">
-              <div className="kt-section__content kt-section__content--border kt-section__content--fit">
-                <div className="kt-grid-nav kt-grid-nav--skin-light">
-                  <div className="kt-grid-nav__row">{this.OnRenderCategories()}</div>
-                </div>
+          <div className="kt-section bg-white">
+            <div className="kt-section__content kt-section__content--border kt-section__content--fit">
+              <div className="kt-grid-nav kt-grid-nav--skin-light">
+                <div className="kt-grid-nav__row">{this.OnRenderCategories()}</div>
               </div>
             </div>
-          </DKPortlet>
+          </div>
         )}
         <DKPortlet noborder={true} title={this.state.data.CategoryTitle}>
           <HorizontalBar height={40} options={options} data={this.state.reportData} />
