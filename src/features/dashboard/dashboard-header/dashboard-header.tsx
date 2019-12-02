@@ -1,8 +1,5 @@
 import * as React from "react";
 import "./dashboard-header.css";
-
-import { DKPortlet } from "../../../core/components/portlet/portlet";
-import "./dashboard-header.css";
 import CategorySummary from "../../../entities/reports/category-summary";
 import ReportServices from "../../../services/report-services";
 
@@ -49,40 +46,38 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
   }
   public render() {
     return (
-      <DKPortlet hasHeader={false}>
-        <>
-          <div className="kt-widget kt-widget--user-profile-3">
-            <div className="kt-widget__top">
-              <div className="kt-widget__media kt-media avatar mx-3">
-                {this.state.userInfo.User.AvatarUrl === null && (
-                  <span className="gradient">{this.state.userInfo.User.AvatarTextPlaceholder}</span>
-                )}
-                {this.state.userInfo.User.AvatarUrl !== null && (
-                  <img alt={this.state.userInfo.User.Title} src={this.state.userInfo.User.AvatarUrl}></img>
-                )}
+      <>
+        <div className="kt-widget kt-widget--user-profile-3 pt-5">
+          <div className="kt-widget__top">
+            <div className="kt-widget__media kt-media avatar mx-3">
+              {this.state.userInfo.User.AvatarUrl === null && (
+                <span className="gradient">{this.state.userInfo.User.AvatarTextPlaceholder}</span>
+              )}
+              {this.state.userInfo.User.AvatarUrl !== null && (
+                <img alt={this.state.userInfo.User.Title} src={this.state.userInfo.User.AvatarUrl}></img>
+              )}
+            </div>
+
+            <div className="kt-widget__content mt-3">
+              <div className="kt-widget__head">
+                <span className="kt-widget__username">{this.state.userInfo.User.SPLatinFullName}</span>
               </div>
 
-              <div className="kt-widget__content mt-3">
-                <div className="kt-widget__head">
-                  <span className="kt-widget__username">{this.state.userInfo.User.SPLatinFullName}</span>
-                </div>
-
-                <div
-                  className={
-                    this.props.lang === "fa"
-                      ? "kt-widget__subhead text-align-right"
-                      : "kt-widget__subhead text-align-left"
-                  }
-                >
-                  <span>{this.state.userInfo.User.CLevel} | </span>
-                  <span>{this.state.userInfo.User.Department} | </span>
-                  <span>{this.state.userInfo.User.ReportedPost}</span>
-                </div>
+              <div
+                className={
+                  this.props.lang === "fa"
+                    ? "kt-widget__subhead text-align-right"
+                    : "kt-widget__subhead text-align-left"
+                }
+              >
+                <span>{this.state.userInfo.User.CLevel} | </span>
+                <span>{this.state.userInfo.User.Department} | </span>
+                <span>{this.state.userInfo.User.ReportedPost}</span>
               </div>
             </div>
           </div>
-        </>
-      </DKPortlet>
+        </div>
+      </>
     );
   }
 }

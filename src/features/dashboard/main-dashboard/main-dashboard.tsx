@@ -11,7 +11,7 @@ import UkIcon from "../../../assets/img/en.png";
 import IRIcon from "../../../assets/img/fa.png";
 import DashboardHeader from "../dashboard-header/dashboard-header";
 import Authentication from "../../authentication/authentication";
-
+import "./main-dashboard.css";
 interface IProps {
   match: any;
 }
@@ -41,6 +41,7 @@ export default class MainDashboard extends React.Component<IProps, IState> {
 
   public async componentDidMount() {
     const itemId = this.props.match.params.itemId;
+    document.getElementById("root")!.className = "bg-header";
     await this.ReportServices.getReportAuthentication(itemId).then(response => {
       this.setState(current => ({
         ...current,
@@ -54,14 +55,14 @@ export default class MainDashboard extends React.Component<IProps, IState> {
     return (
       <div>
         {this.state.hasAccess && (
-          <div>
-            <div className=" mb-1 w-100 text-right">
+          <div className={this.state.lang === "fa" ? "rtl" : "ltr"}>
+            <div className={this.state.lang === "fa" ? "mb-1 text-right" : "mb-1 text-left"}>
               <img className="mx-2 pointer" src={UkIcon} onClick={(ev: any) => this.onChangeLang("en")}></img>
               <img className="mx-2 pointer" src={IRIcon} onClick={(ev: any) => this.onChangeLang("fa")}></img>
             </div>
-            <div className={this.state.lang === "fa" ? "rtl" : "ltr"}>
+            <div>
               <DashboardHeader lang={this.state.lang} itemId={this.state.itemId} />
-              <Grid container spacing={3}>
+              <Grid container spacing={3} className="mt-4">
                 <Grid item xs={12} sm={12}>
                   {/* <DashboardIntro></DashboardIntro> */}
                 </Grid>

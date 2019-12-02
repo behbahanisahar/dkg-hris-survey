@@ -31,6 +31,7 @@ export default class Comments extends React.Component<IProps, IState> {
       data: [],
       itemId: 0,
     };
+    const a = this.state.data[1]?.Title;
   }
   public async componentWillReceiveProps(nextProps: any) {
     // if (this.state.itemId !== nextProps.itemId) {
