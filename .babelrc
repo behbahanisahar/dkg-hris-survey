@@ -1,0 +1,9 @@
+{
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
+  },
+  "presets": ["react-app"],
+  "plugins": ["@babel/plugin-proposal-optional-chaining"]
+}

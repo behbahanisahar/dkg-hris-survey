@@ -9,6 +9,7 @@ import Spinner from "../../spinner/spinner";
 import "./dashboard-intro.css";
 
 import IReportUsers from "../../../entities/reports/report-intro-users";
+import { DKPortlet } from "../../../core/components/portlet/portlet";
 let allitems: any[] = [];
 export default class DashboardIntroPage extends React.Component<IDashboardIntroProps, IDashboardIntroState> {
   private ReportServices: ReportServices;
@@ -22,7 +23,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
       order: "asc",
       orderBy: "",
       page: 0,
-      rowsPerPage: 5,
+      rowsPerPage: 15,
       items: {
         Users: [],
       },
@@ -30,7 +31,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
     };
   }
   public async componentDidMount() {
-    document.title = "Report Intro";
+    document.title = "Dashoard Intro";
     var username = this.props.match.params.username;
     if (username == undefined) username = "";
     await this.ReportServices.getReportIntro(username).then(response => {
@@ -43,28 +44,23 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
     });
     allitems = this.state.items.Users;
   }
+
+
   public render() {
+    const searchBox = (<input
+      value={this.state.filterName}
+      onChange={this.onFilterTable}
+      placeholder="جستجو    "
+      className="form-control input-search"
+    />);
+
     return (
       <div className="rtl survey-intro">
         <div>content</div>
-        <div className="kt-portlet kt-portlet--height-fluid kt-sc-2">
-          {this.state.showSpinner && <Spinner />}
+        {this.state.showSpinner && <Spinner />}
           {!this.state.showSpinner && (
-            <div>
-              <div className="kt-portlet__head">
-                <div className="kt-portlet__head-label">
-                  <h3 className="kt-portlet__head-title">نیرو های تحت سرپرستی</h3>
-                </div>
-                <input
-                  value={this.state.filterName}
-                  onChange={this.onFilterTable}
-                  placeholder="جستجو    "
-                  className="form-control input-search"
-                />
-              </div>
-
-              <div className="kt-portlet__body">
-                <MDBTable className="kt-datatable__table" borderless>
+<DKPortlet headerToolbar={searchBox} title="ssss">
+<MDBTable className="kt-datatable__table" borderless>
                   <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
                   <MDBTableBody className="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
                 </MDBTable>
@@ -87,16 +83,13 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
                   labelRowsPerPage="تعداد آیتم در هر صفحه :"
                   labelDisplayedRows={({ from, to, count }) => `${from}-${to} از ${count}`}
                 />
-              </div>
-            </div>
-          )}
-        </div>
+</DKPortlet>)}
       </div>
     );
   }
 
   private onRenderRows = () => {
-    if (this.state.items.Users.length === 0) {
+    if (this.state.items.Users?.length === 0) {
       return (
         <TableRow>
           <TableCell align="center" colSpan={3} className="emptyRowLog">
