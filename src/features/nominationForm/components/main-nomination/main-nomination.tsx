@@ -26,7 +26,6 @@ class MainNomination extends React.Component<IProps, IAppState> {
     };
   }
   public async componentDidMount() {
-    console.log(this.props);
     const itemId = this.props.match.params.itemId;
     const NominationData: INominationData = await this.ListService.getNominationData(Number(itemId));
     this.setState(prevState => {

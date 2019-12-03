@@ -49,7 +49,6 @@ class ReportServices extends ServiceBase {
   public async getCompareCompetency(itemId: number, lang: string): Promise<ReportStructure> {
     if (process.env.NODE_ENV === "production") {
       const items: any = await this.get("survey/report/compare?itemid=" + itemId + "&language=" + lang);
-      console.log(items);
       return Promise.resolve(items.data);
     }
 

@@ -230,7 +230,6 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
   };
   /***************************************************************** */
   private OnRenderCategories = () => {
-    console.log(this.props.match.params.categoryId);
     return this.state.data.Categories.map((n: any, index: any) => {
       return (
         <Link

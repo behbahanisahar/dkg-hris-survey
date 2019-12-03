@@ -118,7 +118,6 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
 
   public render() {
     // const Subordinates = this.state.NominationData.Subordinates;
-    console.log(this.state);
     return (
       <div className="rtl">
         {this.state.showSpinner && <Spinner />}

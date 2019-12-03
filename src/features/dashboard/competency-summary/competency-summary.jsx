@@ -33,7 +33,6 @@ class CompetencySummaryClass extends React.Component {
     this.getData(nextProps.itemId, nextProps.lang, true, this.state.year);
   }
   async getData(NominationId, lang, isFetching, year) {
-    console.log(this.state);
     this.setState(state => ({
       isFetching,
     }));
@@ -171,8 +170,6 @@ class CompetencySummaryClass extends React.Component {
     );
   }
   afterChartCreated(chart) {
-    console.log("this.state.isFetching", this.state.isFetching);
-
     this.internalChart = chart;
     if (this.state.isFetching == false && this.internalChart.series.length >= 2) {
       this.internalChart.series[2].data.forEach(element => {

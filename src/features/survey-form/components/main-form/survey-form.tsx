@@ -148,7 +148,6 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
     if (this.state.SurveyFormData == null) {
       return null;
     }
-    console.log(this.state.SurveyFormData);
     return (
       <div>
         {this.state.showSpinner && <Spinner />}
@@ -497,7 +496,7 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
   private onSubmitForm = async (status: string, saveFormat: string) => {
     let currentUserId: number = 0;
     let impersonated: boolean = false;
-    console.log(this.state.userId);
+    
     if (this.state.userId == 0 || this.state.userId == null) {
       currentUserId = Context.userId;
       impersonated = false;

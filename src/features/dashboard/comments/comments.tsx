@@ -31,7 +31,6 @@ export default class Comments extends React.Component<IProps, IState> {
       data: [],
       itemId: 0,
     };
-    const a = this.state.data[1]?.Title;
   }
   public async componentWillReceiveProps(nextProps: any) {
     // if (this.state.itemId !== nextProps.itemId) {
@@ -60,7 +59,7 @@ export default class Comments extends React.Component<IProps, IState> {
         <Grid container spacing={3}>
           {this.state.data.map((comment, i) => (
             <Grid key={i} item xs={4}>
-              <DKPortlet title={comment.Title}>
+              <DKPortlet title={comment.Title} subtitle={comment.Description}>
                 {this.state.isFetching === true && <DKSpinner></DKSpinner>}
                 {this.state.isFetching === false && (
                   <div className="kt-scroll" data-scroll="true" data-height="200" data-scrollbar-shown="true">
