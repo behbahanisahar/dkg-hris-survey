@@ -48,12 +48,14 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
   }
 
   public async componentWillReceiveProps(nextProps: any) {
+    document.getElementById("root")!.className = "";
     if (this.props.match.params.categoryId !== nextProps.match.params.categoryId) {
       this.getData(nextProps.match.params.categoryId);
     }
   }
 
   public async componentDidMount() {
+    document.getElementById("root")!.className = "";
     this.getData(this.props.match.params.categoryId);
   }
 

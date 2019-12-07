@@ -19,6 +19,7 @@ interface IState {
   hasAccess: boolean;
   itemId: number;
   lang: string;
+  isFetched: boolean;
 }
 export default class MainDashboard extends React.Component<IProps, IState> {
   private ReportServices: ReportServices;
@@ -28,6 +29,7 @@ export default class MainDashboard extends React.Component<IProps, IState> {
     this.state = {
       hasAccess: false,
       itemId: 0,
+      isFetched: false,
       lang: "fa",
     };
   }
@@ -41,54 +43,60 @@ export default class MainDashboard extends React.Component<IProps, IState> {
 
   public async componentDidMount() {
     const itemId = this.props.match.params.itemId;
+    document.title = "Dashboard";
     document.getElementById("root")!.className = "bg-header";
     await this.ReportServices.getReportAuthentication(itemId).then(response => {
       this.setState(current => ({
         ...current,
         hasAccess: response.HasAccess,
         itemId: response.ItemId,
+        isFetched: true,
       }));
     });
   }
   public render() {
-    const hasNoAccess: number = 401;
+    const unauthorizedStatusCode: number = 401;
     return (
       <div>
-        {this.state.hasAccess && (
-          <div className={this.state.lang === "fa" ? "rtl" : "ltr"}>
-            <div className={this.state.lang === "fa" ? "mb-1 text-right" : "mb-1 text-left"}>
-              <img className="mx-2 pointer" src={UkIcon} onClick={(ev: any) => this.onChangeLang("en")}></img>
-              <img className="mx-2 pointer" src={IRIcon} onClick={(ev: any) => this.onChangeLang("fa")}></img>
-            </div>
-            <div>
-              <DashboardHeader lang={this.state.lang} itemId={this.state.itemId} />
-              <Grid container spacing={3} className="mt-4">
-                <Grid item xs={12} sm={12}>
-                  {/* <DashboardIntro></DashboardIntro> */}
-                </Grid>
-                <Grid item xs={4}>
-                  <RatersTable lang={this.state.lang} itemId={this.state.itemId} />
-                </Grid>
-                <Grid item xs={8}>
-                  <CompetencySummaryClass lang={this.state.lang} itemId={this.state.itemId} />
-                </Grid>
-                <Grid item xs={8}>
-                  <IndexReport lang={this.state.lang} itemId={this.state.itemId} />
-                </Grid>
-                <Grid item xs={4}>
-                  <DKValueRadarChart lang={this.state.lang} itemId={this.state.itemId} />
-                </Grid>
-                <Grid item xs={12}>
-                  <ComparingChart lang={this.state.lang} itemId={this.state.itemId} />
-                </Grid>
-                <Grid item xs={12}>
-                  <Comments lang={this.state.lang} itemId={this.state.itemId} />
-                </Grid>
-              </Grid>
-            </div>
+        {this.state.isFetched === true && (
+          <div>
+            {this.state.hasAccess && (
+              <div className={this.state.lang === "fa" ? "rtl" : "ltr"}>
+                <div className={this.state.lang === "fa" ? "mb-1 text-right" : "mb-1 text-left"}>
+                  <img className="mx-2 pointer" src={UkIcon} onClick={(ev: any) => this.onChangeLang("en")}></img>
+                  <img className="mx-2 pointer" src={IRIcon} onClick={(ev: any) => this.onChangeLang("fa")}></img>
+                </div>
+                <div>
+                  <DashboardHeader lang={this.state.lang} itemId={this.state.itemId} />
+                  <Grid container spacing={3} className="mt-4">
+                    <Grid item xs={12} sm={12}>
+                      {/* <DashboardIntro></DashboardIntro> */}
+                    </Grid>
+                    <Grid item xs={4}>
+                      <RatersTable lang={this.state.lang} itemId={this.state.itemId} />
+                    </Grid>
+                    <Grid item xs={8}>
+                      <CompetencySummaryClass lang={this.state.lang} itemId={this.state.itemId} />
+                    </Grid>
+                    <Grid item xs={8}>
+                      <IndexReport lang={this.state.lang} itemId={this.state.itemId} />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <DKValueRadarChart lang={this.state.lang} itemId={this.state.itemId} />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <ComparingChart lang={this.state.lang} itemId={this.state.itemId} />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Comments lang={this.state.lang} itemId={this.state.itemId} />
+                    </Grid>
+                  </Grid>
+                </div>
+              </div>
+            )}
+            {!this.state.hasAccess && <Authentication status={unauthorizedStatusCode} />}
           </div>
         )}
-        {!this.state.hasAccess && <Authentication status={hasNoAccess} />}
       </div>
     );
   }

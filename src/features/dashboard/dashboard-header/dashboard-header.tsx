@@ -11,6 +11,7 @@ interface IProps {
 interface IState {
   itemId: number;
   userInfo: CategorySummary;
+  isFetched: boolean;
 }
 
 export default class DashboardHeader extends React.Component<IProps, IState> {
@@ -20,7 +21,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
     this.ReportServices = new ReportServices();
     this.state = {
       itemId: 0,
-
+      isFetched: false,
       userInfo: {
         User: {},
         SurveyProgress: 0,
@@ -28,9 +29,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    //  if (this.state.itemId !== nextProps.itemId) {
     this.getData(nextProps.itemId);
-    //  }
   }
   public async getData(NominationId: number) {
     await this.ReportServices.getReportHeaderData(NominationId).then(response => {
@@ -38,7 +37,9 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
         ...current,
         userInfo: response,
         itemId: NominationId,
+        isFetched: true,
       }));
+      document.title = `Dashboard - ${response.User?.SPLatinFullName}` ?? "Dashboard";
     });
   }
   public async componentDidMount() {
@@ -47,36 +48,38 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
   public render() {
     return (
       <>
-        <div className="kt-widget kt-widget--user-profile-3 pt-5">
-          <div className="kt-widget__top">
-            <div className="kt-widget__media kt-media avatar mx-3">
-              {this.state.userInfo.User.AvatarUrl === null && (
-                <span className="gradient">{this.state.userInfo.User.AvatarTextPlaceholder}</span>
-              )}
-              {this.state.userInfo.User.AvatarUrl !== null && (
-                <img alt={this.state.userInfo.User.Title} src={this.state.userInfo.User.AvatarUrl}></img>
-              )}
-            </div>
-
-            <div className="kt-widget__content mt-3">
-              <div className="kt-widget__head">
-                <span className="kt-widget__username">{this.state.userInfo.User.SPLatinFullName}</span>
+        {this.state.isFetched && (
+          <div className="kt-widget kt-widget--user-profile-3 pt-5">
+            <div className="kt-widget__top">
+              <div className="kt-widget__media kt-media avatar mx-3">
+                {this.state.userInfo.User.AvatarUrl === null && (
+                  <span className="gradient">{this.state.userInfo.User.AvatarTextPlaceholder}</span>
+                )}
+                {this.state.userInfo.User.AvatarUrl !== null && (
+                  <img alt={this.state.userInfo.User.Title} src={this.state.userInfo.User.AvatarUrl}></img>
+                )}
               </div>
 
-              <div
-                className={
-                  this.props.lang === "fa"
-                    ? "kt-widget__subhead text-align-right"
-                    : "kt-widget__subhead text-align-left"
-                }
-              >
-                <span>{this.state.userInfo.User.CLevel} | </span>
-                <span>{this.state.userInfo.User.Department} | </span>
-                <span>{this.state.userInfo.User.ReportedPost}</span>
+              <div className="kt-widget__content mt-3">
+                <div className="kt-widget__head">
+                  <span className="kt-widget__username">{this.state.userInfo.User.SPLatinFullName}</span>
+                </div>
+
+                <div
+                  className={
+                    this.props.lang === "fa"
+                      ? "kt-widget__subhead text-align-right"
+                      : "kt-widget__subhead text-align-left"
+                  }
+                >
+                  <span>{this.state.userInfo.User.CLevel} | </span>
+                  <span>{this.state.userInfo.User.Department} | </span>
+                  <span>{this.state.userInfo.User.ReportedPost}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </>
     );
   }
