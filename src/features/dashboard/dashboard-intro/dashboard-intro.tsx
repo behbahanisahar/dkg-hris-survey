@@ -10,6 +10,7 @@ import "./dashboard-intro.css";
 
 import IReportUsers from "../../../entities/reports/report-intro-users";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
+import DKSVGIcon from "../../../core/components/svg-icon/svg-icon";
 let allitems: any[] = [];
 export default class DashboardIntroPage extends React.Component<IDashboardIntroProps, IDashboardIntroState> {
   private ReportServices: ReportServices;
@@ -23,7 +24,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
       order: "asc",
       orderBy: "",
       page: 0,
-      rowsPerPage: 15,
+      rowsPerPage: 10,
       items: {
         Users: [],
       },
@@ -31,10 +32,10 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
     };
   }
   public async componentDidMount() {
-    document.title = "Dashoard Intro";
     var username = this.props.match.params.username;
     if (username == undefined) username = "";
     await this.ReportServices.getReportIntro(username).then(response => {
+      document.title = "Dashoard Intro";
       this.setState(current => ({
         ...current,
         items: response,
@@ -45,45 +46,49 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
     allitems = this.state.items.Users;
   }
 
-
   public render() {
-    const searchBox = (<input
-      value={this.state.filterName}
-      onChange={this.onFilterTable}
-      placeholder="جستجو    "
-      className="form-control input-search"
-    />);
+    const searchBox = (
+      <input
+        value={this.state.filterName}
+        onChange={this.onFilterTable}
+        placeholder="جستجو    "
+        className="form-control input-search"
+      />
+    );
 
     return (
       <div className="rtl survey-intro">
         <div>content</div>
         {this.state.showSpinner && <Spinner />}
-          {!this.state.showSpinner && (
-<DKPortlet headerToolbar={searchBox} title="ssss">
-<MDBTable className="kt-datatable__table" borderless>
-                  <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
-                  <MDBTableBody className="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
-                </MDBTable>
-                <TablePagination
-                  // dir="ltr"
-                  className="kt-pagination  kt-pagination--brand"
-                  rowsPerPageOptions={[5, 10, 25]}
-                  component="div"
-                  count={this.state.items.Users.length}
-                  rowsPerPage={this.state.rowsPerPage}
-                  page={this.state.page}
-                  backIconButtonProps={{
-                    "aria-label": "Previous Page",
-                  }}
-                  nextIconButtonProps={{
-                    "aria-label": "Next Page",
-                  }}
-                  onChangePage={this.handleChangePage}
-                  onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                  labelRowsPerPage="تعداد آیتم در هر صفحه :"
-                  labelDisplayedRows={({ from, to, count }) => `${from}-${to} از ${count}`}
-                />
-</DKPortlet>)}
+        {!this.state.showSpinner && (
+          <DKPortlet headerToolbar={searchBox} title="">
+            <MDBTable className="kt-datatable__table" borderless>
+              <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
+              <MDBTableBody className="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
+            </MDBTable>
+            {this.state.users.length > this.state.rowsPerPage && (
+              <TablePagination
+                // dir="ltr"
+                className="kt-pagination kt-pagination--brand"
+                rowsPerPageOptions={[5, 15, 25]}
+                component="div"
+                count={this.state.items.Users.length}
+                rowsPerPage={this.state.rowsPerPage}
+                page={this.state.page}
+                backIconButtonProps={{
+                  "aria-label": "Next Page",
+                }}
+                nextIconButtonProps={{
+                  "aria-label": "Previous Page",
+                }}
+                onChangePage={this.handleChangePage}
+                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                labelRowsPerPage="تعداد آیتم در هر صفحه :"
+                labelDisplayedRows={({ from, to, count }) => `${from}-${to} از ${count}`}
+              />
+            )}
+          </DKPortlet>
+        )}
       </div>
     );
   }
@@ -106,6 +111,18 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         .map((n: IReportUsers, index: any) => {
           return (
             <TableRow key={index} className="kt-datatable__row">
+              <TableCell className="category-icon">
+                {n.Category == "1-Self" && (
+                  <span title="Self">
+                    <DKSVGIcon iconName="Star"></DKSVGIcon>
+                  </span>
+                )}
+                {n.Category == "2-Direct" && (
+                  <span title="Direct">
+                    <DKSVGIcon iconName="Group"></DKSVGIcon>
+                  </span>
+                )}
+              </TableCell>
               <TableCell align="right" className="kt-datatable__cell">
                 <div className="kt-user-card-v2">
                   <div className="kt-user-card-v2__pic">
@@ -121,12 +138,19 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
                       }}
                       className="kt-user-card-v2__name pointer"
                     >
-                      {n.User.SPLatinFullName}
+                      {n.User.Title}
                     </a>
-
-                    <span className="kt-user-card-v2__name pointer">{n.User.SPLatinFullName}</span>
-                  </div>{" "}
+                    <a className="kt-user-card-v2__email kt-link">{n.User.EmailAddress}</a>
+                  </div>
                 </div>
+              </TableCell>
+              <TableCell className={"kt-font-bold text-center " + n.User.CLevel}>
+                {n.User.CLevel} <span className="kt-badge kt-badge--dot"></span>
+              </TableCell>
+              <TableCell className="kt-datatable__cell text-center">
+                {n.User.ReportedPost}
+                {" @ "}
+                {n.User.Department}
               </TableCell>
 
               <TableCell style={{ width: "10%" }} className="kt-datatable__cell" align="center">
@@ -138,7 +162,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
                     return false;
                   }}
                 >
-                  مشاهده ارزیابی
+                  مشاهده گزارش
                 </button>
               </TableCell>
             </TableRow>
@@ -146,11 +170,9 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         });
     }
   };
-
   private onShowItem = (ItemId: number) => {
-    window.location.href = "#/dashboard/" + ItemId;
+    window.open("#/dashboard/" + ItemId, "_blank");
   };
-  /************************************filter data********************************************************************** */
   private onFilterTable = (event: any) => {
     this.setState({
       filterName: event.target.value,
@@ -164,9 +186,13 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
       if (prevState.filterName) {
         TableItems = prevState.filterName.toLowerCase()
           ? TableItems.filter(function(i) {
-              if (i.User.SPLatinFullName !== null) {
-                return i.User.SPLatinFullName.toLowerCase().indexOf(prevState.filterName) > -1;
-              }
+              return (
+                i.User.CLevel?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.User.Department?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.User.SPLatinFullName?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.User.Title?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.User.EmailAddress?.toLowerCase().indexOf(prevState.filterName) > -1
+              );
             })
           : TableItems;
       }
@@ -179,7 +205,6 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
       };
     });
   };
-  /************************** Pagination *********************************************** */
   private desc(a: any, b: any, orderBy: any) {
     if (b[orderBy] < a[orderBy]) {
       return -1;
@@ -190,7 +215,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
     return 0;
   }
   private stableSort(array: any, cmp: any) {
-    const stabilizedThis = array.map((el: any, index: any) => [el, index]);
+    const stabilizedThis = array?.map((el: any, index: any) => [el, index]);
     stabilizedThis.sort((a: any, b: any) => {
       const order = cmp(a[0], b[0]);
       if (order !== 0) {
@@ -200,7 +225,6 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
     });
     return stabilizedThis.map((el: any) => el[0]);
   }
-
   private getSorting(order: any, orderBy: any) {
     return order === "desc"
       ? (a: any, b: any) => this.desc(a, b, orderBy)

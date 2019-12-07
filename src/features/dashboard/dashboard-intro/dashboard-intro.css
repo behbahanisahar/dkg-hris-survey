@@ -1,4 +1,49 @@
 .input-search {
-  width: 30%;
-  margin: 2%;
+  width: 200px;
+}
+.MuiTablePagination-selectRoot,
+.MuiTablePagination-caption {
+  display: none;
+}
+
+.kt-pagination svg.MuiSvgIcon-root {
+  transform: rotate(180deg);
+}
+
+.kt-pagination {
+  justify-content: center !important;
+}
+.MuiIconButton-root:hover {
+  background-color: transparent;
+}
+
+.MuiIconButton-colorInherit:not(.Mui-disabled) svg {
+  fill: #ef5661;
+}
+
+.category-icon {
+  width: 15px;
+  padding: 20px 5px !important;
+}
+.category-icon i {
+  font-size: 1.5rem;
+}
+
+.COO {
+  color: #5867dd !important;
+}
+.CHRO {
+  color: #fd27eb !important;
+}
+.CEO {
+  color: #1dc9b7 !important;
+}
+.CMO {
+  color: #2786fb !important;
+}
+.CTO {
+  color: #ffb822 !important;
+}
+.CFO {
+  color: #f44336 !important;
 }

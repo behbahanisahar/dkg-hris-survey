@@ -1,5 +1,22 @@
+.question-box {
+  min-height: 100px;
+}
+
 .transform-header {
   transform: rotate(90deg);
+  color: #000;
+  font-weight: 700;
+  text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff,
+    -1px 1px 0 #fff;
+  font-size: 1rem;
+}
+.rtl .transform-header {
+  transform: rotate(90deg);
+}
+.ltr .transform-header {
+  transform: rotate(-90deg);
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 .table th {
   vertical-align: middle !important ;
@@ -15,16 +32,16 @@
   font-size: 0.9rem;
 }
 .table-dark-0 {
-  background-color: #6cbe45;
+  background-color: #4caf50;
 }
 .table-dark-1 {
-  background-color: #acd591;
+  background-color: #8bc34a;
 }
 
 .table-dark-2 {
-  background-color: #fbad18;
+  background-color: #ffc107;
 }
 
 .table-dark-3 {
-  background-color: #ffcd7e;
+  background-color: #ffeb3b;
 }

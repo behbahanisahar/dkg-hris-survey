@@ -20,7 +20,7 @@ class CompetencySummaryClass extends React.Component {
       isFetching: true,
       reportData: {},
       state: 0,
-      yearID: "",
+      yearID: "1397",
       year: "1397",
       years: [
         { key: "1396", text: "1396" },

@@ -1,4 +1,5 @@
 import IReportIntro from "../../../entities/reports/report-intro";
+import UserInfoItem from "../../../entities/user-info";
 
 export default interface IDashboardIntroState {
   showSpinner: boolean;
@@ -8,5 +9,5 @@ export default interface IDashboardIntroState {
   filterName: string;
   page: number;
   rowsPerPage: number;
-  users: any[];
+  users: UserInfoItem[];
 }
