@@ -32,9 +32,7 @@ export default class ComparingChart extends React.Component<IProps, IState> {
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    //   if (this.state.itemId !== nextProps.itemId) {
     this.getData(nextProps.itemId, nextProps.lang, true);
-    //   }
   }
   public async getData(NominationId: number, lang: string, isFetching: boolean) {
     this.setState(state => ({
@@ -113,7 +111,6 @@ export default class ComparingChart extends React.Component<IProps, IState> {
     return (
       <div className={this.props.lang === "fa" ? "rtl" : "ltr"}>
         <DKPortlet
-          // className={this.props.lang === "fa" ? "rtl" : "ltr"}
           title={this.props.lang === "fa" ? "امتیازات شما براساس ارزش های دیجی کالا" : "Results Based on DK Values"}
         >
           {this.state.isFetching === true && <DKSpinner></DKSpinner>}

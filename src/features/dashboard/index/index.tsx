@@ -30,9 +30,7 @@ export default class IndexReport extends React.Component<IProps, IState> {
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    //  if (this.state.itemId !== nextProps.itemId) {
     this.getData(nextProps.itemId, nextProps.lang, true);
-    // }
   }
   public async getData(NominationId: number, lang: string, isFetching: boolean) {
     this.setState(state => ({
@@ -65,7 +63,7 @@ export default class IndexReport extends React.Component<IProps, IState> {
       </DKPortlet>
     );
   }
-  /******************************************* */
+
   private onRenderTable = () => {
     return this.state.data.map((n: IndexData, index: any) => {
       return (
@@ -84,7 +82,6 @@ export default class IndexReport extends React.Component<IProps, IState> {
     });
   };
 
-  /********************************************************** */
   private onRenderQuestions = (Items: any[]) => {
     return Items.map((n: any, index: any) => {
       return (

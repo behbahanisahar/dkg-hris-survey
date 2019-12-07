@@ -33,9 +33,7 @@ export default class Comments extends React.Component<IProps, IState> {
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    // if (this.state.itemId !== nextProps.itemId) {
     this.getData(nextProps.itemId, nextProps.lang, true);
-    // }
   }
   public async getData(NominationId: number, lang: string, isFetching: boolean) {
     this.setState(state => ({

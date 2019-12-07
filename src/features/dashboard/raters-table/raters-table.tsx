@@ -84,7 +84,7 @@ class RatersTable extends React.Component<IProps, IState> {
       </DKPortlet>
     );
   }
-  /******************************************* */
+
   private onRenderTable = () => {
     return this.state.raters.map((n: Raters, index: any) => {
       return (

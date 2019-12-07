@@ -184,7 +184,6 @@ class CompetencySummaryClass extends React.Component {
     return items.map(item => {
       return (
         <MenuItem value={item.key} key={item.key}>
-          {" "}
           {item.text}
         </MenuItem>
       );
@@ -193,13 +192,7 @@ class CompetencySummaryClass extends React.Component {
   /*************************************************** */
   handleChangeDropdown = async (name, event) => {
     const dropdownId = name + "ID";
-    // this.setState(prevState => {
-    //   return {
-    //     ...prevState,
-    //     year: event.nativeEvent.target.outerText,
-    //     yearID: event.target.value,
-    //   };
-    // });
+
     this.setState(state => ({
       year: event.nativeEvent.target.outerText,
       yearID: event.target.value,
