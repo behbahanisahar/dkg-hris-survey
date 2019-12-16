@@ -670,7 +670,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       return {
         ...prevState,
         errorPeer: st,
-      }; 
+      };
     });
   };
   /***********props from advance select for add data to table********************************************* */
