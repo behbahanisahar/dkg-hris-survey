@@ -126,8 +126,12 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
               <TableCell align="right" className="kt-datatable__cell">
                 <div className="kt-user-card-v2">
                   <div className="kt-user-card-v2__pic">
-                    {n.user.avatarUrl === null && <p className="NoAvatar">{n.user.avatarTextPlaceholder}</p>}
-                    {n.user.avatarUrl !== null && <img alt={n.user.spLatinFullName} src={n.user.avatarUrl} />}
+                    {(n.user.avatarUrl === null || n.user.avatarUrl === undefined) && (
+                      <p className="NoAvatar">{n.user.avatarTextPlaceholder}</p>
+                    )}
+                    {(n.user.avatarUrl !== null || n.user.avatarUrl !== undefined) && (
+                      <img alt={n.user.spLatinFullName} src={n.user.avatarUrl} />
+                    )}
                   </div>
                   <div className="kt-user-card-v2__details">
                     <a
@@ -187,11 +191,11 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         TableItems = prevState.filterName.toLowerCase()
           ? TableItems.filter(function(i) {
               return (
-                i.User.CLevel?.toLowerCase().indexOf(prevState.filterName) > -1 ||
-                i.User.Department?.toLowerCase().indexOf(prevState.filterName) > -1 ||
-                i.User.SPLatinFullName?.toLowerCase().indexOf(prevState.filterName) > -1 ||
-                i.User.Title?.toLowerCase().indexOf(prevState.filterName) > -1 ||
-                i.User.EmailAddress?.toLowerCase().indexOf(prevState.filterName) > -1
+                i.User.cLevel?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.User.department?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.User.sPLatinFullName?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.User.title?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.User.emailAddress?.toLowerCase().indexOf(prevState.filterName) > -1
               );
             })
           : TableItems;
