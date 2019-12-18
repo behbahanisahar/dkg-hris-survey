@@ -63,6 +63,14 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
       tooltips: {
         enabled: true,
       },
+      legend: {
+        labels: {
+          fontFamily: "IRANYekan",
+        },
+        pointLabels: {
+          fontFamily: "IRANYekan",
+        },
+      },
       scales: {
         yAxes: [
           {
