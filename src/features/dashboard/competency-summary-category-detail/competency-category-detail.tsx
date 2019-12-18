@@ -236,17 +236,17 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
       return (
         <Link
           className={
-            this.props.match.params.categoryId == n.Id ? "kt-grid-nav__item selected-category" : "kt-grid-nav__item"
+            this.props.match.params.categoryId == n.id ? "kt-grid-nav__item selected-category" : "kt-grid-nav__item"
           }
-          to={"/competency/" + this.state.itemId + "/" + n.Id + "/" + this.props.match.params.lang}
+          to={"/competency/" + this.state.itemId + "/" + n.id + "/" + this.props.match.params.lang}
         >
           <span className="kt-grid-nav__icon">
-            <img style={{ maxWidth: "80px" }} src={n.SignUrl}></img>
+            <img style={{ maxWidth: "80px" }} src={n.signUrl}></img>
           </span>
           <span className="kt-grid-nav__title">
-            <span style={{ textAlign: "center", fontWeight: 400 }}>{n.Title}</span>
+            <span style={{ textAlign: "center", fontWeight: 400 }}>{n.title}</span>
           </span>
-          <span className="kt-grid-nav__desc">{n.TitleEn}</span>
+          <span className="kt-grid-nav__desc">{n.titleEn}</span>
         </Link>
       );
     });
