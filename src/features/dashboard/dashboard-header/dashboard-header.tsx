@@ -52,11 +52,10 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
           <div className="kt-widget kt-widget--user-profile-3 pt-5">
             <div className="kt-widget__top">
               <div className="kt-widget__media kt-media avatar mx-3">
-                {this.state.userInfo.user.avatarUrl === null ||
-                  (this.state.userInfo.user?.avatarUrl === undefined && (
-                    <span className="gradient">{this.state.userInfo.user.avatarTextPlaceholder}</span>
-                  ))}
-                {this.state.userInfo.user.avatarUrl !== null && (
+                {this.state.userInfo.user?.avatarUrl === undefined && (
+                  <span className="gradient">{this.state.userInfo.user.avatarTextPlaceholder}</span>
+                )}
+                {this.state.userInfo.user.avatarUrl !== undefined && (
                   <img alt={this.state.userInfo.user.title} src={this.state.userInfo.user.avatarUrl}></img>
                 )}
               </div>
