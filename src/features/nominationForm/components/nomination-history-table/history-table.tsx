@@ -26,6 +26,9 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
         NominationHistory: this.props.NominationHistory,
       };
     });
+    console.log("props", this.props.NominationHistory);
+
+    console.log("aa", this.state.NominationHistory);
   }
 
   public render() {
@@ -79,14 +82,14 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
     }
 
     for (let i = 0; i < items.length; ++i) {
-      return items[i].Changes?.map((n: any, index: any) => {
+      return items[i].changes?.map((n: any, index: any) => {
         let DeletedStr: string = "";
         let AddedStr: string = "";
-        if (n.Added !== null) {
-          AddedStr = n.Added.join();
+        if (n.added !== null) {
+          AddedStr = n.added?.join();
         }
-        if (n.Deleted !== null) {
-          DeletedStr = n.Deleted.join();
+        if (n.deleted !== null) {
+          DeletedStr = n.deleted?.join();
         }
 
         return (

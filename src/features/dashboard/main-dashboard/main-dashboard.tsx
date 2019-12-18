@@ -48,8 +48,8 @@ export default class MainDashboard extends React.Component<IProps, IState> {
     await this.ReportServices.getReportAuthentication(itemId).then(response => {
       this.setState(current => ({
         ...current,
-        hasAccess: response.HasAccess,
-        itemId: response.ItemId,
+        hasAccess: response.hasAccess,
+        itemId: response.itemId,
         isFetched: true,
       }));
     });

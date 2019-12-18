@@ -66,7 +66,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
               <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
               <MDBTableBody className="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
             </MDBTable>
-            {this.state.users.length > this.state.rowsPerPage && (
+            {this.state.users?.length > this.state.rowsPerPage && (
               <TablePagination
                 // dir="ltr"
                 className="kt-pagination kt-pagination--brand"
