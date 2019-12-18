@@ -2,12 +2,12 @@ import SubOrdinate from "./subOrdinate";
 import IUser from "./user";
 
 export default interface INominationData {
-  Status: string;
-  Subordinates: IUser[];
-  Other: IUser[];
-  Peer: IUser[];
-  User?: SubOrdinate;
-  LineManager?: SubOrdinate;
+  status: string;
+  subordinates: IUser[];
+  other: IUser[];
+  peer: IUser[];
+  user?: SubOrdinate;
+  lineManager?: SubOrdinate;
   statusCode?: number;
-  HasCoworker?: boolean;
+  hasCoworker?: boolean;
 }

@@ -1,4 +1,4 @@
 export interface IAppraiseeStatus {
-  Progress: number;
-  Status: string;
+  progress: number;
+  status: string;
 }

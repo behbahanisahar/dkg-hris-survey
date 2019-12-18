@@ -116,49 +116,49 @@ btn btn-sm btn-clean read-more  w-25"
               <TableCell align="right" className="kt-datatable__cell">
                 <div className="kt-user-card-v2">
                   <div className="kt-user-card-v2__pic">
-                    {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
-                    {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
+                    {n.user.avatarUrl === null && <p className="NoAvatar">{n.user.avatarTextPlaceholder}</p>}
+                    {n.user.avatarUrl !== null && <img alt={n.user.title} src={n.user.avatarUrl} />}
                   </div>
                   <div className="kt-user-card-v2__details">
-                    {n.Status.Status !== "تکمیل شده" && (
+                    {n.status.status !== "تکمیل شده" && (
                       <a
                         onClick={(e: any) => {
-                          this.onShowItem(n.NominationItemId);
+                          this.onShowItem(n.nominationItemId);
                           e.preventDefault();
                           return false;
                         }}
                         className="kt-user-card-v2__name pointer"
                       >
-                        {n.User.Title}
+                        {n.user.title}
                       </a>
                     )}
 
-                    {n.Status.Status === "تکمیل شده" && (
-                      <span className="kt-user-card-v2__name pointer">{n.User.Title}</span>
+                    {n.status.status === "تکمیل شده" && (
+                      <span className="kt-user-card-v2__name pointer">{n.user.title}</span>
                     )}
 
-                    <span className="kt-user-card-v2__desc">{n.HasCoworker === true ? "Colleague" : n.Relation}</span>
+                    <span className="kt-user-card-v2__desc">{n.hasCoworker === true ? "Colleague" : n.relation}</span>
                   </div>{" "}
                 </div>
               </TableCell>
 
               <TableCell style={{ width: "20%" }} className="kt-datatable__cell" align="left">
                 <div className="progress-details ">
-                  <span className="progress-status">{n.Status.Status}</span>
-                  <span className="progress-number">{n.Status.Status !== "تکمیل شده" ? n.Status.Progress : 100}%</span>
+                  <span className="progress-status">{n.status.status}</span>
+                  <span className="progress-number">{n.status.status !== "تکمیل شده" ? n.status.progress : 100}%</span>
                 </div>
                 <LinearProgress
-                  className={n.Status.Status === "تکمیل شده" ? "complete-progress" : "not-completed-progress"}
+                  className={n.status.status === "تکمیل شده" ? "complete-progress" : "not-completed-progress"}
                   variant="determinate"
-                  value={n.Status.Status !== "تکمیل شده" ? n.Status.Progress : 100}
+                  value={n.status.status !== "تکمیل شده" ? n.status.progress : 100}
                 />
               </TableCell>
-              {n.Status.Status !== "تکمیل شده" && (
+              {n.status.status !== "تکمیل شده" && (
                 <TableCell style={{ width: "2%" }} className="kt-datatable__cell" align="center">
                   <button
                     className="btn btn-sm btn-bold btn-brand-hover"
                     onClick={(e: any) => {
-                      this.onShowItem(n.NominationItemId);
+                      this.onShowItem(n.nominationItemId);
                       e.preventDefault();
                       return false;
                     }}

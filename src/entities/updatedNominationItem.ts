@@ -1,6 +1,6 @@
 export default interface IUpdatedData {
-  ItemId: number;
-  Peer: string[];
-  Other: string[];
-  Subordinate: string[];
+  itemId: number;
+  peer: string[];
+  other: string[];
+  subordinate: string[];
 }

@@ -155,21 +155,21 @@ Thank you in advance for your cooperation in the path toward DK’s excellence.
             <TableCell align="right" className="kt-datatable__cell">
               <div className="kt-user-card-v2">
                 <div className="kt-user-card-v2__pic">
-                  {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
-                  {n.User.AvatarUrl !== null && <img alt={n.User.Title} src={n.User.AvatarUrl} />}
+                  {n.user.avatarUrl === null && <p className="NoAvatar">{n.user.avatarTextPlaceholder}</p>}
+                  {n.user.avatarUrl !== null && <img alt={n.user.title} src={n.user.avatarUrl} />}
                 </div>
                 <div className="kt-user-card-v2__details">
                   <a
                     onClick={(e: any) => {
-                      this.onShowItem(n.ItemId);
+                      this.onShowItem(n.itemId);
                       e.preventDefault();
                       return false;
                     }}
                     className="kt-user-card-v2__name pointer"
                   >
-                    {n.Title}
+                    {n.title}
                   </a>
-                  <span className="kt-user-card-v2__desc">{n.User.ReportedPost}</span>
+                  <span className="kt-user-card-v2__desc">{n.user.reportedPost}</span>
                 </div>
               </div>
             </TableCell>
@@ -178,7 +178,7 @@ Thank you in advance for your cooperation in the path toward DK’s excellence.
               <button
                 className="btn btn-sm btn-bold btn-brand-hover"
                 onClick={(e: any) => {
-                  this.onShowItem(n.ItemId);
+                  this.onShowItem(n.itemId);
                   e.preventDefault();
                   return false;
                 }}

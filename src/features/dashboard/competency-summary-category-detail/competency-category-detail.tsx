@@ -32,14 +32,14 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
       itemId: 0,
       categoryid: 0,
       data: {
-        Categories: [],
-        CategoryTitle: "",
-        CategoryChart: {
+        categories: [],
+        categoryTitle: "",
+        categoryChart: {
           averageValue: 0,
           labels: [],
           datasets: [],
         },
-        QuestionsData: [],
+        questionsData: [],
       },
       reportData: {},
       isFetch: false,
@@ -64,8 +64,8 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
     await this.ReportServices.getCompetencyCategory(itemId, categoryid, this.props.match.params.lang).then(
       (data: ICategoryScore) => {
         const reportData = {
-          labels: data.CategoryChart.labels,
-          datasets: data.CategoryChart.datasets,
+          labels: data.categoryChart.labels,
+          datasets: data.categoryChart.datasets,
         };
         this.setState(prevState => {
           return {
@@ -145,7 +145,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
             </div>
           </div>
         )}
-        <DKPortlet noborder={true} title={this.state.data.CategoryTitle}>
+        <DKPortlet noborder={true} title={this.state.data.categoryTitle}>
           <HorizontalBar height={40} options={options} data={this.state.reportData} />
         </DKPortlet>
         <Grid container spacing={3}>
@@ -198,24 +198,24 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
         ],
       },
     };
-    return this.state.data.QuestionsData.map((n: QuestionData, index: any) => {
+    return this.state.data.questionsData.map((n: QuestionData, index: any) => {
       let avgClassName: string = "";
-      if (n.Average < 2) {
+      if (n.average < 2) {
         avgClassName = "average1";
-      } else if (n.Average > 1 && n.Average <= 2.5) {
+      } else if (n.average > 1 && n.average <= 2.5) {
         avgClassName = "average2";
-      } else if (n.Average > 2.5 && n.Average <= 3.5) {
+      } else if (n.average > 2.5 && n.average <= 3.5) {
         avgClassName = "average3";
-      } else if (n.Average > 3.5 && n.Average <= 4.5) {
+      } else if (n.average > 3.5 && n.average <= 4.5) {
         avgClassName = "average4";
-      } else if (n.Average > 4.5 && n.Average <= 5) {
+      } else if (n.average > 4.5 && n.average <= 5) {
         avgClassName = "average5";
       }
       return (
         <Grid item xs={6} sm={6}>
           <DKPortlet hasHeader={false} noborder={true}>
-            <span style={{ fontWeight: 400 }} dangerouslySetInnerHTML={{ __html: n.QuestionTitle }}></span>
-            <HorizontalBar height={80} options={options} data={n.QuestionChart} />
+            <span style={{ fontWeight: 400 }} dangerouslySetInnerHTML={{ __html: n.questionTitle }}></span>
+            <HorizontalBar height={80} options={options} data={n.questionChart} />
             <span
               className={
                 this.props.match.params.lang === "fa"
@@ -223,7 +223,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
                   : avgClassName + " average-bold text-align-left"
               }
             >
-              {this.props.match.params.lang === "fa" ? " میانگین سایر ارزیابان :" : "Average:"} {n.Average}{" "}
+              {this.props.match.params.lang === "fa" ? " میانگین سایر ارزیابان :" : "Average:"} {n.average}{" "}
             </span>
           </DKPortlet>
         </Grid>
@@ -232,7 +232,7 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
   };
   /***************************************************************** */
   private OnRenderCategories = () => {
-    return this.state.data.Categories.map((n: any, index: any) => {
+    return this.state.data.categories.map((n: any, index: any) => {
       return (
         <Link
           className={

@@ -2,11 +2,11 @@ import ICategory from "./categories";
 import SubOrdinate from "./subOrdinate";
 
 export default interface Isurvey {
-  User: SubOrdinate;
-  SurveyAnswerId: number;
-  Categories: ICategory[];
+  user: SubOrdinate;
+  surveyAnswerId: number;
+  categories: ICategory[];
   statusCode?: number;
-  ShouldBeStarted: string;
-  ShouldBeContinued: string;
-  ShouldBeStopped: string;
+  shouldBeStarted: string;
+  shouldBeContinued: string;
+  shouldBeStopped: string;
 }

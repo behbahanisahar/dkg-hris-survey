@@ -1,11 +1,11 @@
 export default interface SubOrdinate {
-  Title?: string;
-  AvatarUrl: string;
-  Id: number;
-  ItemId: number;
-  SPLatinFullName: string;
-  Department: string;
-  EmailAddress: string;
-  JobGrade: string;
-  ReportedPost: string;
+  title?: string;
+  avatarUrl: string;
+  id: number;
+  itemId: number;
+  sPLatinFullName: string;
+  department: string;
+  emailAddress: string;
+  jobGrade: string;
+  reportedPost: string;
 }

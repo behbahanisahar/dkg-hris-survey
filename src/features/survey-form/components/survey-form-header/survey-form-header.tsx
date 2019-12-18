@@ -11,9 +11,9 @@ export function SurveyFormHeader({ user, ...other }: SurveyFormHeaderProps) {
       <div className="content">
         <p className="user">
           <div className="page-header">فرم ارزیابی </div>
-          <div className="user-name">{user!.Title}</div>
+          <div className="user-name">{user!.title}</div>
           <h6>
-            {user!.EmailAddress} | {user!.Department} | {user!.ReportedPost}
+            {user!.emailAddress} | {user!.department} | {user!.reportedPost}
           </h6>
         </p>
       </div>

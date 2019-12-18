@@ -35,14 +35,14 @@ class ListServices extends ServiceBase {
         .top(20)
         .get();
       return Promise.resolve(
-        result.map(({ SPLatinFullName: label, Id, EmailAddress, SPLatinFullName, ReportedPost, Department }) => {
+        result.map(({ sPLatinFullName: label, id, emailAddress, sPLatinFullName, reportedPost, department }) => {
           return {
             label,
-            value: String(Id),
-            Department,
-            ReportedPost,
-            SPLatinFullName,
-            EmailAddress,
+            value: String(id),
+            department,
+            reportedPost,
+            sPLatinFullName,
+            emailAddress,
           };
         }),
       );
@@ -57,25 +57,25 @@ class ListServices extends ServiceBase {
       data = await this.get("survey/nomination?itemId=" + itemId + "")
         .then(response => {
           return {
-            Title: "",
-            HasCoworker: response.data.HasCoworker,
-            Status: response.data.Status,
-            Subordinates: response.data.Subordinates,
-            Other: response.data.Other,
-            Peer: response.data.Peer,
-            User: response.data.User,
-            LineManager: response.data.LineManager,
+            title: "",
+            hasCoworker: response.data.hasCoworker,
+            status: response.data.status,
+            subordinates: response.data.subordinates,
+            other: response.data.other,
+            peer: response.data.peer,
+            user: response.data.user,
+            lineManager: response.data.lineManager,
             statusCode: response.status,
           };
         })
         .catch(error => {
           return {
-            HasCoworker: false,
+            hasCoworker: false,
             statusCode: error.response.status,
-            Status: "",
-            Subordinates: [],
-            Other: [],
-            Peer: [],
+            status: "",
+            subordinates: [],
+            other: [],
+            peer: [],
           };
         });
 
@@ -102,25 +102,25 @@ class ListServices extends ServiceBase {
       const items: any = await this.get("survey?nominationItemId=" + itemId + "")
         .then(response => {
           return {
-            Categories: response.data.Categories,
-            SurveyAnswerId: response.data.SurveyAnswerId,
-            User: response.data.User,
+            categories: response.data.categories,
+            surveyAnswerId: response.data.surveyAnswerId,
+            user: response.data.user,
             statusCode: response.status,
-            ShouldBeContinued: response.data.ShouldBeContinued,
-            ShouldBeStarted: response.data.ShouldBeStarted,
-            ShouldBeStopped: response.data.ShouldBeStopped,
+            shouldBeContinued: response.data.shouldBeContinued,
+            shouldBeStarted: response.data.shouldBeStarted,
+            shouldBeStopped: response.data.shouldBeStopped,
           };
         })
 
         .catch(function(error) {
           return {
             statusCode: error.response.status,
-            Categories: [],
-            SurveyAnswerId: 0,
-            User: {},
-            ShouldBeContinued: "",
-            ShouldBeStarted: "",
-            ShouldBeStopped: "",
+            categories: [],
+            surveyAnswerId: 0,
+            user: {},
+            shouldBeContinued: "",
+            shouldBeStarted: "",
+            shouldBeStopped: "",
           };
         });
 

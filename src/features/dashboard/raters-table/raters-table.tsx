@@ -89,12 +89,12 @@ class RatersTable extends React.Component<IProps, IState> {
     return this.state.raters.map((n: Raters, index: any) => {
       return (
         <tr key={index}>
-          <th align="center">{n.RaterGroup}</th>
+          <th align="center">{n.raterGroup}</th>
           <td align="center">
-            {this.props.lang === "fa" ? Util.toPersianNumber(n.NominatedCount.toString()) : n.NominatedCount}
+            {this.props.lang === "fa" ? Util.toPersianNumber(n.nominatedCount.toString()) : n.nominatedCount}
           </td>
           <td align="center">
-            {this.props.lang === "fa" ? Util.toPersianNumber(n.CompletedCount.toString()) : n.CompletedCount}
+            {this.props.lang === "fa" ? Util.toPersianNumber(n.completedCount.toString()) : n.completedCount}
           </td>
         </tr>
       );

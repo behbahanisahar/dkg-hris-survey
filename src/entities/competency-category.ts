@@ -1,5 +1,5 @@
 export default interface CompetencyCategory {
-  SignUrl: string;
-  Id: number;
-  Title: string;
+  signUrl: string;
+  id: number;
+  title: string;
 }

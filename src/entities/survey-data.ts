@@ -5,8 +5,8 @@ export interface ISurveyData {
   currentUserId: number;
   status: string;
   answers: IAnswer[];
-  ShouldBeStarted: string;
-  ShouldBeContinued: string;
-  ShouldBeStopped: string;
+  shouldBeStarted: string;
+  shouldBeContinued: string;
+  shouldBeStopped: string;
   impersonated?: boolean;
 }

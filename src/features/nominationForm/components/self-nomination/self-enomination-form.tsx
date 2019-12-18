@@ -69,32 +69,32 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
       showSpinner: true,
       submittingForm: false,
       NominationData: {
-        HasCoworker: false,
-        Status: "",
-        Subordinates: [],
-        Other: [],
-        Peer: [],
-        User: {
-          Title: "",
-          AvatarUrl: "",
-          Id: 0,
-          ItemId: 894,
-          SPLatinFullName: "",
-          Department: "",
-          EmailAddress: "",
-          JobGrade: "",
-          ReportedPost: "",
+        hasCoworker: false,
+        status: "",
+        subordinates: [],
+        other: [],
+        peer: [],
+        user: {
+          title: "",
+          avatarUrl: "",
+          id: 0,
+          itemId: 894,
+          sPLatinFullName: "",
+          department: "",
+          emailAddress: "",
+          jobGrade: "",
+          reportedPost: "",
         },
-        LineManager: {
-          Title: "",
-          AvatarUrl: "",
-          Id: 0,
-          ItemId: 894,
-          SPLatinFullName: "",
-          Department: "",
-          EmailAddress: "",
-          JobGrade: "",
-          ReportedPost: "",
+        lineManager: {
+          title: "",
+          avatarUrl: "",
+          id: 0,
+          itemId: 894,
+          sPLatinFullName: "",
+          department: "",
+          emailAddress: "",
+          jobGrade: "",
+          reportedPost: "",
         },
       },
     };
@@ -128,7 +128,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
             )}
             {this.state.NominationData.statusCode === 200 && (
               <div className="col-sm rtl">
-                <NominationFormHeader user={this.state.NominationData.User}></NominationFormHeader>
+                <NominationFormHeader user={this.state.NominationData.user}></NominationFormHeader>
                 <MDBCard className="w-auto">
                   <div>
                     <MYStepper activeStep={this.state.activeStep} />
@@ -154,8 +154,8 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                             </h3>
                             :
                             <h5>
-                              {this.state.NominationData.LineManager != null
-                                ? this.state.NominationData.LineManager.Title
+                              {this.state.NominationData.lineManager != null
+                                ? this.state.NominationData.lineManager.title
                                 : "-"}
                             </h5>
                           </div>
@@ -173,14 +173,14 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
                               title={
                                 <React.Fragment>
                                   <Typography color="inherit">
-                                    {this.state.NominationData.HasCoworker === true ? "Colleague" : " Direct Report"}
+                                    {this.state.NominationData.hasCoworker === true ? "Colleague" : " Direct Report"}
                                   </Typography>
                                 </React.Fragment>
                               }
                             >
                               <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
-                            {this.state.NominationData.HasCoworker === true ? "همکار" : " نیروی مستقیم تحت سرپرستی"}
+                            {this.state.NominationData.hasCoworker === true ? "همکار" : " نیروی مستقیم تحت سرپرستی"}
                           </h3>
                           <div className="col-lg-3" />
                           <div className="col-lg-9">
@@ -415,19 +415,19 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
   private SubmitForm = async () => {
     toast.dismiss();
     let dataComparison: string = this.Compare(
-      this.state.NominationData.Peer,
-      this.state.NominationData.Other,
-      this.state.NominationData.Subordinates,
-      this.state.NominationData.LineManager,
-      this.state.NominationData.User,
+      this.state.NominationData.peer,
+      this.state.NominationData.other,
+      this.state.NominationData.subordinates,
+      this.state.NominationData.lineManager,
+      this.state.NominationData.user,
     );
     if (dataComparison === "") {
-      const subordinateLength = this.state.NominationData.Subordinates.length;
-      const Other = this.state.NominationData.Other.length;
-      const Peer = this.state.NominationData.Peer.length;
+      const subordinateLength = this.state.NominationData.subordinates.length;
+      const Other = this.state.NominationData.other.length;
+      const Peer = this.state.NominationData.peer.length;
 
       if (subordinateLength <= 2) {
-        this.state.NominationData.HasCoworker === true
+        this.state.NominationData.hasCoworker === true
           ? this.notifyError("errorSubordinate", "تعداد همکار نباید کمتر از ۳ نفر باشد")
           : this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
         this.setState(prevState => {
@@ -458,10 +458,10 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
         });
       } else if (subordinateLength >= 3 && Other >= 3 && Peer >= 3) {
         const UpdateItem: IUpdatedData = {
-          ItemId: this.state.itemId,
-          Peer: this.state.NominationData.Peer.map(x => x.ItemId.toString()),
-          Other: this.state.NominationData.Other.map(x => x.ItemId.toString()),
-          Subordinate: this.state.NominationData.Subordinates.map(x => x.ItemId.toString()),
+          itemId: this.state.itemId,
+          peer: this.state.NominationData.peer.map(x => x.itemId.toString()),
+          other: this.state.NominationData.other.map(x => x.itemId.toString()),
+          subordinate: this.state.NominationData.subordinates.map(x => x.itemId.toString()),
         };
         this.setState(prevState => {
           return {
@@ -520,7 +520,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
         ...prevState,
         NominationData: {
           ...prevState.NominationData,
-          Subordinates: st,
+          subordinates: st,
         },
       };
     });
@@ -531,7 +531,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
         ...prevState,
         NominationData: {
           ...prevState.NominationData,
-          Peer: st,
+          peer: st,
         },
       };
     });
@@ -542,7 +542,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
         ...prevState,
         NominationData: {
           ...prevState.NominationData,
-          Other: st,
+          other: st,
         },
       };
     });
