@@ -116,8 +116,8 @@ btn btn-sm btn-clean read-more  w-25"
               <TableCell align="right" className="kt-datatable__cell">
                 <div className="kt-user-card-v2">
                   <div className="kt-user-card-v2__pic">
-                    {n.user.avatarUrl === null && <p className="NoAvatar">{n.user.avatarTextPlaceholder}</p>}
-                    {n.user.avatarUrl !== null && <img alt={n.user.title} src={n.user.avatarUrl} />}
+                    {n.user.avatarUrl === undefined && <p className="NoAvatar">{n.user.avatarTextPlaceholder}</p>}
+                    {n.user.avatarUrl !== undefined && <img alt={n.user.title} src={n.user.avatarUrl} />}
                   </div>
                   <div className="kt-user-card-v2__details">
                     {n.status.status !== "تکمیل شده" && (
