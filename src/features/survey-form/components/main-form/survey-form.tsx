@@ -54,22 +54,22 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
       userId: 0,
       open: false,
       SurveyFormData: {
-        User: {
-          Title: "",
-          AvatarUrl: "",
-          Id: 0,
-          ItemId: 894,
-          SPLatinFullName: "",
-          Department: "",
-          EmailAddress: "",
-          JobGrade: "",
-          ReportedPost: "",
+        user: {
+          title: "",
+          avatarUrl: "",
+          id: 0,
+          itemId: 894,
+          sPLatinFullName: "",
+          department: "",
+          emailAddress: "",
+          jobGrade: "",
+          reportedPost: "",
         },
-        SurveyAnswerId: 0,
-        Categories: [],
-        ShouldBeStarted: "",
-        ShouldBeContinued: "",
-        ShouldBeStopped: "",
+        surveyAnswerId: 0,
+        categories: [],
+        shouldBeStarted: "",
+        shouldBeContinued: "",
+        shouldBeStopped: "",
       },
       score: "",
       radio: 1,
@@ -159,7 +159,7 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
             {this.state.SurveyFormData.statusCode === 200 && (
               <div className="rtl">
                 <div className="kt-portlet">
-                  <SurveyFormHeader user={this.state.SurveyFormData.User} />
+                  <SurveyFormHeader user={this.state.SurveyFormData.user} />
                   <div className="kt-portlet__head-label">
                     <span className="kt-portlet__head-icon kt-hidden">
                       <i className="la la-gear"></i>
@@ -207,7 +207,7 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
                             </InputLabel>
                             <TextField
                               id="outlined-email-input"
-                              value={this.state.SurveyFormData.ShouldBeStarted}
+                              value={this.state.SurveyFormData.shouldBeStarted}
                               onChange={(event: any) =>
                                 this.handleChangeTextField("ShouldBeStarted", event.target.value)
                               }
@@ -237,7 +237,7 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
                             <TextField
                               className="textarea"
                               id="outlined-email-input"
-                              value={this.state.SurveyFormData.ShouldBeContinued}
+                              value={this.state.SurveyFormData.shouldBeContinued}
                               onChange={(event: any) =>
                                 this.handleChangeTextField("ShouldBeContinued", event.target.value)
                               }
@@ -266,7 +266,7 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
                             <TextField
                               className="textarea"
                               id="outlined-email-input"
-                              value={this.state.SurveyFormData.ShouldBeStopped}
+                              value={this.state.SurveyFormData.shouldBeStopped}
                               onChange={(event: any) =>
                                 this.handleChangeTextField("ShouldBeStopped", event.target.value)
                               }
@@ -359,9 +359,9 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
   }
   /**********************render cards**************************************** */
   private onRenderCard = () => {
-    return this.state.SurveyFormData.Categories.map((n: ICategory, index: any) => {
+    return this.state.SurveyFormData.categories.map((n: ICategory, index: any) => {
       let categoryClassName = "";
-      switch (n.BaseCategoryId) {
+      switch (n.baseCategoryId) {
         case 1: {
           categoryClassName = "dk-brand-red";
           break;
@@ -385,19 +385,19 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
             <div className={categoryClassName + " kt-ribbon--clip kt-ribbon--left"}>
               <div className={categoryClassName + " kt-ribbon__target badge"}>
                 <span className="kt-ribbon__inner" />
-                {n.TitleFa}
+                {n.titleFa}
               </div>
             </div>
             <div className={categoryClassName + " kt-ribbon--clip kt-ribbon--right"}>
               <div className={categoryClassName + " kt-ribbon__target badge"}>
                 <span className="kt-ribbon__inner" />
-                {n.Title}
+                {n.title}
               </div>
             </div>
 
             <div className="row question-row"></div>
 
-            <MDBRow className="question-row">{this.onRenderQuestion(n.Questions, index)}</MDBRow>
+            <MDBRow className="question-row">{this.onRenderQuestion(n.questions, index)}</MDBRow>
           </div>
         </div>
       );
@@ -411,15 +411,15 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
           <li className="li-class">
             <div style={{ display: "inline-block" }}>
               <p style={{ display: "inline-block" }} className="mr-2">
-                {item.QuestionNumber}.
+                {item.questionNumber}.
               </p>
-              <span dangerouslySetInnerHTML={{ __html: item.QuestionFa }}></span>
+              <span dangerouslySetInnerHTML={{ __html: item.questionFa }}></span>
             </div>
             <HtmlTooltip
               title={
                 <React.Fragment>
                   <Typography color="inherit">
-                    <span dangerouslySetInnerHTML={{ __html: item.Question }}></span>{" "}
+                    <span dangerouslySetInnerHTML={{ __html: item.question }}></span>{" "}
                   </Typography>
                 </React.Fragment>
               }
@@ -430,13 +430,13 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
               <Slider
                 key={index}
                 className="slider"
-                defaultValue={this.onRenderSliderValue(item.Field)}
+                defaultValue={this.onRenderSliderValue(item.field)}
                 getAriaValueText={this.valuetext}
                 aria-labelledby="discrete-slider-custom"
                 step={1}
                 valueLabelDisplay="auto"
                 marks={this.state.marks}
-                onChangeCommitted={this.changedValue(item.Field)}
+                onChangeCommitted={this.changedValue(item.field)}
                 max={5}
                 min={0}
               />
@@ -449,11 +449,11 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
 
   private initializeAnwers = (data: Isurvey) => {
     if (data.statusCode === 200) {
-      data.Categories.forEach(element => {
-        element.Questions.forEach(q => {
+      data.categories.forEach(element => {
+        element.questions.forEach(q => {
           this.state.answers.push({
-            QuestionField: q.Field,
-            Value: q.Value,
+            questionField: q.field,
+            value: q.value,
           });
         });
       });
@@ -461,10 +461,10 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
   };
   /**************************render slider value***************************** */
   private onRenderSliderValue = (Field: any) => {
-    if (Field === null || this.state.answers.some(x => x.QuestionField === Field) === false) {
+    if (Field === null || this.state.answers.some(x => x.questionField === Field) === false) {
       return 0;
     } else {
-      return this.state.answers.filter(x => x.QuestionField === Field)[0].Value;
+      return this.state.answers.filter(x => x.questionField === Field)[0].value;
     }
   };
   /********************************************************** */
@@ -476,12 +476,12 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
   changedValue = (itemId: string) => (event: any, value: any) => {
     this.setState(prevState => {
       if (itemId !== "") {
-        if (prevState.answers.some(x => x.QuestionField === itemId)) {
-          prevState.answers.filter(x => x.QuestionField === itemId)[0].Value = value;
+        if (prevState.answers.some(x => x.questionField === itemId)) {
+          prevState.answers.filter(x => x.questionField === itemId)[0].value = value;
         } else
           prevState.answers.push({
-            QuestionField: itemId,
-            Value: value,
+            questionField: itemId,
+            value: value,
           });
       }
       return {
@@ -496,7 +496,7 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
   private onSubmitForm = async (status: string, saveFormat: string) => {
     let currentUserId: number = 0;
     let impersonated: boolean = false;
-    
+
     if (this.state.userId == 0 || this.state.userId == null) {
       currentUserId = Context.userId;
       impersonated = false;
@@ -510,9 +510,9 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
       impersonated: impersonated,
       status,
       answers: this.state.answers,
-      ShouldBeStopped: this.state.SurveyFormData.ShouldBeStopped,
-      ShouldBeContinued: this.state.SurveyFormData.ShouldBeContinued,
-      ShouldBeStarted: this.state.SurveyFormData.ShouldBeStarted,
+      shouldBeStopped: this.state.SurveyFormData.shouldBeStopped,
+      shouldBeContinued: this.state.SurveyFormData.shouldBeContinued,
+      shouldBeStarted: this.state.SurveyFormData.shouldBeStarted,
     };
 
     this.setState(prevState => {

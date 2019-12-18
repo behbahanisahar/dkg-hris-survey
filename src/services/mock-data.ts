@@ -50,186 +50,186 @@ export default class MockData {
     },
   ];
   public static NominationData: NominationData = {
-    Status: "notstarted",
+    status: "notstarted",
     statusCode: 200,
-    Subordinates: [
+    subordinates: [
       {
-        AvatarUrl: "/PublishingImages/760674.png",
-        Id: 0,
-        ItemId: 22,
-        SPLatinFullName: "test1",
-        ReportedPost: "administrator",
+        avatarUrl: "/PublishingImages/760674.png",
+        id: 0,
+        itemId: 22,
+        sPLatinFullName: "test1",
+        reportedPost: "administrator",
       },
       {
-        AvatarUrl: "/PublishingImages/760674.png",
-        Id: 0,
-        ItemId: 175,
-        SPLatinFullName: "test2",
-        ReportedPost: "administrator",
-      },
-    ],
-    Peer: [
-      {
-        AvatarUrl: "/PublishingImages/760674.png",
-        Id: 0,
-        ItemId: 50,
-        SPLatinFullName: "test3",
-        ReportedPost: "administrator",
-      },
-      {
-        AvatarUrl: "/PublishingImages/760674.png",
-        Id: 0,
-        ItemId: 56,
-        SPLatinFullName: "test4",
-        ReportedPost: "administrator",
+        avatarUrl: "/PublishingImages/760674.png",
+        id: 0,
+        itemId: 175,
+        sPLatinFullName: "test2",
+        reportedPost: "administrator",
       },
     ],
-    Other: [
+    peer: [
       {
-        AvatarUrl: "/PublishingImages/760674.png",
-        Id: 0,
-        ItemId: 60,
-        SPLatinFullName: "sahar5",
-        ReportedPost: "administrator",
+        avatarUrl: "/PublishingImages/760674.png",
+        id: 0,
+        itemId: 50,
+        sPLatinFullName: "test3",
+        reportedPost: "administrator",
       },
       {
-        AvatarUrl: "/PublishingImages/760674.png",
-        Id: 0,
-        ItemId: 70,
-        SPLatinFullName: "ali2",
-        ReportedPost: "administrator",
+        avatarUrl: "/PublishingImages/760674.png",
+        id: 0,
+        itemId: 56,
+        sPLatinFullName: "test4",
+        reportedPost: "administrator",
       },
     ],
-    User: {
-      AvatarUrl: "/PublishingImages/760674.png",
-      Id: 0,
-      ItemId: 10,
-      SPLatinFullName: "Abdolhossin Mohammbgnhnad Hashemi",
-      Department: "HR",
-      EmailAddress: "sa.behbahani@digikala.com",
-      JobGrade: "specialist",
-      Title: "سحر بهبهانی",
-      ReportedPost: "developer",
+    other: [
+      {
+        avatarUrl: "/PublishingImages/760674.png",
+        id: 0,
+        itemId: 60,
+        sPLatinFullName: "sahar5",
+        reportedPost: "administrator",
+      },
+      {
+        avatarUrl: "/PublishingImages/760674.png",
+        id: 0,
+        itemId: 70,
+        sPLatinFullName: "ali2",
+        reportedPost: "administrator",
+      },
+    ],
+    user: {
+      avatarUrl: "/PublishingImages/760674.png",
+      id: 0,
+      itemId: 10,
+      sPLatinFullName: "Abdolhossin Mohammbgnhnad Hashemi",
+      department: "HR",
+      emailAddress: "sa.behbahani@digikala.com",
+      jobGrade: "specialist",
+      title: "سحر بهبهانی",
+      reportedPost: "developer",
     },
 
-    LineManager: {
-      AvatarUrl: "/PublishingImages/760674.png",
-      Id: 0,
-      ItemId: 14,
-      SPLatinFullName: "Abdolhossin Mohvfvfammad Hashemi",
-      Department: "HR",
-      EmailAddress: "sa.behbahani@digikala.com",
-      JobGrade: "specialist",
-      Title: "علی نوش آبادی",
-      ReportedPost: "developer",
+    lineManager: {
+      avatarUrl: "/PublishingImages/760674.png",
+      id: 0,
+      itemId: 14,
+      sPLatinFullName: "Abdolhossin Mohvfvfammad Hashemi",
+      department: "HR",
+      emailAddress: "sa.behbahani@digikala.com",
+      jobGrade: "specialist",
+      title: "علی نوش آبادی",
+      reportedPost: "developer",
     },
   };
   public static NominationHistory: IHistory[] = [
     {
-      Field: "Other",
+      field: "Other",
 
-      Changes: [
+      changes: [
         {
-          Added: [" Shahbazi"],
-          Deleted: [""],
-          Id: 20,
-          ModifiedBy: "Ali Nooshabadi",
-          ModifiedDate: "/Date(1569016495000-0000)/",
-          ModifiedDateShamsi: "1398/06/30 02:24",
+          added: [" Shahbazi"],
+          deleted: [""],
+          id: 20,
+          modifiedBy: "Ali Nooshabadi",
+          modifiedDate: "/Date(1569016495000-0000)/",
+          modifiedDateShamsi: "1398/06/30 02:24",
         },
       ],
     },
     {
-      Field: "Subordinate",
-      Changes: [
+      field: "Subordinate",
+      changes: [
         {
-          Added: ["gholami"],
-          Deleted: ["nooshabadi"],
-          Id: 22,
-          ModifiedBy: "sahar behbahani",
-          ModifiedDate: "/Date(1569016495000-0000)/",
-          ModifiedDateShamsi: "1398/06/31 02:24",
+          added: ["gholami"],
+          deleted: ["nooshabadi"],
+          id: 22,
+          modifiedBy: "sahar behbahani",
+          modifiedDate: "/Date(1569016495000-0000)/",
+          modifiedDateShamsi: "1398/06/31 02:24",
         },
       ],
     },
   ];
 
   public static SurveyFormData: Isurvey = {
-    User: {
-      AvatarUrl: "/PublishingImages/760674.png",
-      Id: 0,
-      ItemId: 10,
-      SPLatinFullName: "Abdolhossin Mohammbgnhnad Hashemi",
-      Department: "HR",
-      EmailAddress: "sa.behbahani@digikala.com",
-      JobGrade: "specialist",
-      Title: "سحر بهبهانی",
-      ReportedPost: "developer",
+    user: {
+      avatarUrl: "/PublishingImages/760674.png",
+      id: 0,
+      itemId: 10,
+      sPLatinFullName: "Abdolhossin Mohammbgnhnad Hashemi",
+      department: "HR",
+      emailAddress: "sa.behbahani@digikala.com",
+      jobGrade: "specialist",
+      title: "سحر بهبهانی",
+      reportedPost: "developer",
     },
-    ShouldBeStarted: "",
-    ShouldBeContinued: "",
-    ShouldBeStopped: "",
-    SurveyAnswerId: 0,
+    shouldBeStarted: "",
+    shouldBeContinued: "",
+    shouldBeStopped: "",
+    surveyAnswerId: 0,
     statusCode: 200,
-    Categories: [
+    categories: [
       {
-        Title: "Builder Approach & Result Oriented",
-        BaseCategory: "Core Values",
-        BaseCategoryId: 2,
-        BaseCategoryFa: "کتگوری ۱",
-        TitleFa: "مشتری محوری",
+        title: "Builder Approach & Result Oriented",
+        baseCategory: "Core Values",
+        baseCategoryId: 2,
+        baseCategoryFa: "کتگوری ۱",
+        titleFa: "مشتری محوری",
         SignUrl: "",
-        Questions: [
+        questions: [
           {
-            ItemId: 1,
-            Question:
+            itemId: 1,
+            question:
               "Focusing self and others on providing a prompt, professional and timely service to enhance customer experience",
-            QuestionFa:
+            questionFa:
               "بر ارائه خدمات به صورت سریع، حرفه ای و به موقع در راستای ایجاد بهترین تجربه برای مشتریان، توجه دارد و دیگران را نیز در این راستا تشویق می کند.",
-            Field: "Question1",
-            Category: "",
-            Value: 5,
-            QuestionNumber: "1",
+            field: "Question1",
+            category: "",
+            value: 5,
+            questionNumber: "1",
           },
           {
-            ItemId: 3,
-            Question: "ss",
-            QuestionFa: "ss",
-            Field: "Question2",
-            Category: "",
-            Value: 2,
-            QuestionNumber: "2",
+            itemId: 3,
+            question: "ss",
+            questionFa: "ss",
+            field: "Question2",
+            category: "",
+            value: 2,
+            questionNumber: "2",
           },
         ],
       },
 
       {
-        Title: "Builder Approach & Result Oriented",
-        BaseCategory: "Leadership Competencies",
-        BaseCategoryId: 2,
-        BaseCategoryFa: "کتگوری ۲",
-        TitleFa: "نتیجه گرایی",
+        title: "Builder Approach & Result Oriented",
+        baseCategory: "Leadership Competencies",
+        baseCategoryId: 2,
+        baseCategoryFa: "کتگوری ۲",
+        titleFa: "نتیجه گرایی",
         SignUrl: "",
-        Questions: [
+        questions: [
           {
-            ItemId: 2,
-            Question:
+            itemId: 2,
+            question:
               "Focusing self and others on providing a prompt, professional and timely service to enhance customer experience",
-            QuestionFa:
+            questionFa:
               "بر ارائه خدمات به صورت سریع، حرفه ای و به موقع در راستای ایجاد بهترین تجربه برای مشتریان، توجه دارد و دیگران را نیز در این راستا تشویق می کند.",
-            Field: "Question3",
-            Category: "",
-            Value: 2,
-            QuestionNumber: "3",
+            field: "Question3",
+            category: "",
+            value: 2,
+            questionNumber: "3",
           },
           {
-            ItemId: 4,
-            Question: "ss",
-            QuestionFa: "ss",
-            Field: "Question4",
-            Category: "",
-            Value: 7,
-            QuestionNumber: "4",
+            itemId: 4,
+            question: "ss",
+            questionFa: "ss",
+            field: "Question4",
+            category: "",
+            value: 7,
+            questionNumber: "4",
           },
         ],
       },
@@ -238,33 +238,33 @@ export default class MockData {
 
   public static Appraisee: IAppraisee[] = [
     {
-      NominationItemId: 2,
-      Relation: "Peer",
-      Status: { Status: "NotStarted", Progress: 40 },
-      User: {},
-      HasCoworker: false,
+      nominationItemId: 2,
+      relation: "Peer",
+      status: { status: "NotStarted", progress: 40 },
+      user: {},
+      hasCoworker: false,
     },
     {
-      NominationItemId: 4,
-      Relation: "Line Manager",
-      Status: { Status: "NotStarted", Progress: 40 },
-      User: {},
-      HasCoworker: false,
+      nominationItemId: 4,
+      relation: "Line Manager",
+      status: { status: "NotStarted", progress: 40 },
+      user: {},
+      hasCoworker: false,
     },
     {
-      NominationItemId: 5,
-      Relation: "Self",
-      Status: { Status: "NotStarted", Progress: 40 },
-      User: {},
-      HasCoworker: false,
+      nominationItemId: 5,
+      relation: "Self",
+      status: { status: "NotStarted", progress: 40 },
+      user: {},
+      hasCoworker: false,
     },
   ];
   public static NominationTaks: UserTasks[] = [
     {
-      ItemId: 2,
-      Status: "",
-      Title: "",
-      User: {},
+      itemId: 2,
+      status: "",
+      title: "",
+      user: {},
     },
   ];
   /*********************************reports mock data**************************************************** */
@@ -390,50 +390,50 @@ export default class MockData {
   };
 
   public static CompetencyCategories: ICategoryScore = {
-    Categories: [
+    categories: [
       {
-        Id: 1,
-        Title: "کار گروهـــــــــی",
-        SignUrl: "/SiteAssets/Pics/Survey/Team%20Working.png",
+        id: 1,
+        title: "کار گروهـــــــــی",
+        signUrl: "/SiteAssets/Pics/Survey/Team%20Working.png",
       },
       {
-        Id: 2,
-        Title: "مشتری محوری",
-        SignUrl: "/SiteAssets/Pics/Survey/Customer%20Centric.png",
+        id: 2,
+        title: "مشتری محوری",
+        signUrl: "/SiteAssets/Pics/Survey/Customer%20Centric.png",
       },
       {
-        Id: 3,
-        Title: "نتیــــــــــــجه گرایی",
-        SignUrl: "/SiteAssets/Pics/Survey/Result%20Oriented.png",
+        id: 3,
+        title: "نتیــــــــــــجه گرایی",
+        signUrl: "/SiteAssets/Pics/Survey/Result%20Oriented.png",
       },
       {
-        Id: 4,
-        Title: "اشتیاق برای تعـــــــــالی",
-        SignUrl: "/SiteAssets/Pics/Survey/Drive%20For%20Excellence.png",
+        id: 4,
+        title: "اشتیاق برای تعـــــــــالی",
+        signUrl: "/SiteAssets/Pics/Survey/Drive%20For%20Excellence.png",
       },
       {
-        Id: 5,
-        Title: "مدیریت و توسعه افراد",
-        SignUrl: "http://hq-spsrv03:90/SiteAssets/Pics/Survey/People%20Development.png",
+        id: 5,
+        title: "مدیریت و توسعه افراد",
+        signUrl: "http://hq-spsrv03:90/SiteAssets/Pics/Survey/People%20Development.png",
       },
       {
-        Id: 6,
-        Title: "ایجاد و توسعه چشم انداز مشترک",
-        SignUrl: "/SiteAssets/Pics/Survey/Vision.png",
+        id: 6,
+        title: "ایجاد و توسعه چشم انداز مشترک",
+        signUrl: "/SiteAssets/Pics/Survey/Vision.png",
       },
       {
-        Id: 7,
-        Title: "شم تجــــــــــــاری",
-        SignUrl: "http://hq-spsrv03:90/SiteAssets/Pics/Survey/Business%20Acumen.png",
+        id: 7,
+        title: "شم تجــــــــــــاری",
+        signUrl: "http://hq-spsrv03:90/SiteAssets/Pics/Survey/Business%20Acumen.png",
       },
       {
-        Id: 8,
-        Title: "تصمیـــــم گیری",
-        SignUrl: "/SiteAssets/Pics/Survey/Decision%20Making.png",
+        id: 8,
+        title: "تصمیـــــم گیری",
+        signUrl: "/SiteAssets/Pics/Survey/Decision%20Making.png",
       },
     ],
-    CategoryTitle: "کار گروهـــــــــی",
-    CategoryChart: {
+    categoryTitle: "کار گروهـــــــــی",
+    categoryChart: {
       averageValue: 0,
       labels: ["خودفرد", "مدیر مستقیم", "همکار همرده", "همکار", "سایرین"],
       datasets: [
@@ -453,11 +453,11 @@ export default class MockData {
         },
       ],
     },
-    QuestionsData: [
+    questionsData: [
       {
-        QuestionTitle: "در ﺑﯿﻦ ﻫﻤﮑﺎران راﺑﻄﻪ ﺑﯿﻦb ﻓﺮدي ﻗﻮي اﯾﺠﺎد ﮐﺮده و ﺑﻪ ﺗﻮﺳﻌﻪ رواﺑﻂ/b ﮐﻤﮏ ﻣﯽ ﮐﻨﺪ.",
-        Average: 0,
-        QuestionChart: {
+        questionTitle: "در ﺑﯿﻦ ﻫﻤﮑﺎران راﺑﻄﻪ ﺑﯿﻦb ﻓﺮدي ﻗﻮي اﯾﺠﺎد ﮐﺮده و ﺑﻪ ﺗﻮﺳﻌﻪ رواﺑﻂ/b ﮐﻤﮏ ﻣﯽ ﮐﻨﺪ.",
+        average: 0,
+        questionChart: {
           averageValue: 0,
           labels: ["خودفرد", "مدیر مستقیم", "همکار همرده", "همکار", "سایرین"],
           datasets: [
@@ -479,10 +479,10 @@ export default class MockData {
         },
       },
       {
-        QuestionTitle:
+        questionTitle:
           "از ﻃﺮﯾﻖ ﭘﺬﯾﺮا ﺑﻮدن ﻧﻈﺮات دﯾﮕﺮان و ﺑﻪ اﺷﺘﺮاك ﮔﺬاري اﻃﻼﻋﺎت ﻣﺮﺗﺒﻂ ﺑﺎ ﮐﺎرﺷﺎن، ﺑﺎ آﻧﻬﺎ ﺑﻪ اﯾﺠﺎد ﺳﻄﺢ ﺑﺎﻻﯾﯽ از ﺷﻔﺎﻓﯿﺖ و اﻋﺘﻤﺎد در ﻣﺤﯿﻂ ﮐﺎر ﮐﻤﮏ ﻣﯽ ﮐﻨﺪ.",
-        Average: 0,
-        QuestionChart: {
+        average: 0,
+        questionChart: {
           averageValue: 0,
           labels: ["خودفرد", "مدیر مستقیم", "همکار همرده", "همکار", "سایرین"],
           datasets: [
@@ -504,10 +504,10 @@ export default class MockData {
         },
       },
       {
-        QuestionTitle:
+        questionTitle:
           "ﺑﻪ دﺳﺘﯿﺎﺑﯽ ﺑﻪ اﻫﺪاف ﮔﺮوه و ﺗﻼش در اﯾﻦ زﻣﯿﻨﻪ ﻣﺘﻌﻬﺪ اﺳﺖ ﺣﺘﯽ اﮔﺮ اﯾﻦ اﻫﺪاف ﺑﺎ ﻧﻈﺮات و ﻋﻼﯾﻖ ﺷﺨﺼﯽ اش در ﺗﻀﺎد ﺑﺎﺷﻨﺪ.",
-        Average: 0,
-        QuestionChart: {
+        average: 0,
+        questionChart: {
           averageValue: 0,
           labels: ["خودفرد", "مدیر مستقیم", "همکار همرده", "همکار", "سایرین"],
           datasets: [

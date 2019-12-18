@@ -1,6 +1,6 @@
 export interface IComment {
-  Title: string;
-  Value: string;
-  Description: string;
-  Comments: string[];
+  title: string;
+  value: string;
+  description: string;
+  comments: string[];
 }

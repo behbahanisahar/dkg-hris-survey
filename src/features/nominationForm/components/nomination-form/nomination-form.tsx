@@ -67,38 +67,38 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
       submittingForm: false,
       activeStep: 0,
       NominationData: {
-        Status: "",
-        Subordinates: [],
-        Other: [],
-        Peer: [],
-        User: {
-          Title: "",
-          AvatarUrl: "",
-          Id: 0,
-          ItemId: 894,
-          SPLatinFullName: "",
-          Department: "",
-          EmailAddress: "",
-          JobGrade: "",
-          ReportedPost: "",
+        status: "",
+        subordinates: [],
+        other: [],
+        peer: [],
+        user: {
+          title: "",
+          avatarUrl: "",
+          id: 0,
+          itemId: 894,
+          sPLatinFullName: "",
+          department: "",
+          emailAddress: "",
+          jobGrade: "",
+          reportedPost: "",
         },
-        LineManager: {
-          Title: "",
-          AvatarUrl: "",
-          Id: 0,
-          ItemId: 894,
-          SPLatinFullName: "",
-          Department: "",
-          EmailAddress: "",
-          JobGrade: "",
-          ReportedPost: "",
+        lineManager: {
+          title: "",
+          avatarUrl: "",
+          id: 0,
+          itemId: 894,
+          sPLatinFullName: "",
+          department: "",
+          emailAddress: "",
+          jobGrade: "",
+          reportedPost: "",
         },
         statusCode: 0,
       },
       NominationHistory: [
         {
-          Changes: [],
-          Field: "",
+          changes: [],
+          field: "",
         },
       ],
       HideSubordinateHistory: true,
@@ -115,7 +115,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     const NominationData: INominationData = this.props.NominationData;
     const NominationHistory: IHistory[] = await this.ListService.getNominationHistory(Number(itemId));
     let activeStep: number = 0;
-    switch (NominationData.Status) {
+    switch (NominationData.status) {
       case "LineManagerApproval": {
         activeStep = 1;
         break;
@@ -155,7 +155,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
             )}
             {this.state.NominationData.statusCode === 200 && (
               <div className="col-lg">
-                <NominationFormHeader user={this.state.NominationData.User}></NominationFormHeader>
+                <NominationFormHeader user={this.state.NominationData.user}></NominationFormHeader>
                 <div>
                   <div className="kt-portlet kt-sc-2">
                     <div className="kt-portlet__body">
@@ -177,8 +177,8 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                           </h3>
                           :
                           <h5>
-                            {this.state.NominationData.LineManager != null
-                              ? this.state.NominationData.LineManager!.Title
+                            {this.state.NominationData.lineManager != null
+                              ? this.state.NominationData.lineManager!.title
                               : "-"}
                           </h5>
                         </div>
@@ -202,7 +202,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
                             >
                               <Explicit className="mr-3" color="primary" />
                             </HtmlTooltip>
-                            {this.state.NominationData.HasCoworker === true ? "همکار" : " نیروی مستقیم تحت سرپرستی"}
+                            {this.state.NominationData.hasCoworker === true ? "همکار" : " نیروی مستقیم تحت سرپرستی"}
                           </h3>
                         </div>
                         <div className="kt-section__body">
@@ -520,19 +520,19 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   private SubmitForm = () => {
     toast.dismiss();
     let dataComparison: string = this.Compare(
-      this.state.NominationData.Peer,
-      this.state.NominationData.Other,
-      this.state.NominationData.Subordinates,
-      this.state.NominationData.LineManager,
-      this.state.NominationData.User,
+      this.state.NominationData.peer,
+      this.state.NominationData.other,
+      this.state.NominationData.subordinates,
+      this.state.NominationData.lineManager,
+      this.state.NominationData.user,
     );
 
     if (dataComparison === "") {
-      const subordinateLength = this.state.NominationData.Subordinates.length;
-      const Other = this.state.NominationData.Other.length;
-      const Peer = this.state.NominationData.Peer.length;
+      const subordinateLength = this.state.NominationData.subordinates.length;
+      const Other = this.state.NominationData.other.length;
+      const Peer = this.state.NominationData.peer.length;
       if (subordinateLength <= 2) {
-        this.state.NominationData.HasCoworker === true
+        this.state.NominationData.hasCoworker === true
           ? this.notifyError("errorSubordinate", "تعداد همکار نباید کمتر از ۳ نفر باشد")
           : this.notifyError("errorSubordinate", "تعداد نیروی مستقیم تحت سرپرستی نباید کمتر از ۳ نفر باشد");
 
@@ -562,10 +562,10 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         });
       } else if (subordinateLength >= 3 && Other >= 3 && Peer >= 3) {
         const UpdateItem: IUpdatedData = {
-          ItemId: this.state.itemId,
-          Peer: this.state.NominationData.Peer.map(x => x.ItemId.toString()),
-          Other: this.state.NominationData.Other.map(x => x.ItemId.toString()),
-          Subordinate: this.state.NominationData.Subordinates.map(x => x.ItemId.toString()),
+          itemId: this.state.itemId,
+          peer: this.state.NominationData.peer.map(x => x.itemId.toString()),
+          other: this.state.NominationData.other.map(x => x.itemId.toString()),
+          subordinate: this.state.NominationData.subordinates.map(x => x.itemId.toString()),
         };
         this.setState(prevState => {
           return {
@@ -621,7 +621,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         ...prevState,
         NominationData: {
           ...prevState.NominationData,
-          Subordinates: st,
+          subordinates: st,
         },
       };
     });
@@ -632,7 +632,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         ...prevState,
         NominationData: {
           ...prevState.NominationData,
-          Peer: st,
+          peer: st,
         },
       };
     });
@@ -643,7 +643,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
         ...prevState,
         NominationData: {
           ...prevState.NominationData,
-          Other: st,
+          other: st,
         },
       };
     });

@@ -45,31 +45,31 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
       SelectedSubOrdinate: "",
       SelectedSubOrdinateID: 0,
       NominationData: {
-        Status: "",
-        Subordinates: [],
-        Other: [],
-        Peer: [],
-        User: {
-          Title: "",
-          AvatarUrl: "",
-          Id: 0,
-          ItemId: 894,
-          SPLatinFullName: "",
-          Department: "",
-          EmailAddress: "",
-          JobGrade: "",
-          ReportedPost: "",
+        status: "",
+        subordinates: [],
+        other: [],
+        peer: [],
+        user: {
+          title: "",
+          avatarUrl: "",
+          id: 0,
+          itemId: 894,
+          sPLatinFullName: "",
+          department: "",
+          emailAddress: "",
+          jobGrade: "",
+          reportedPost: "",
         },
-        LineManager: {
-          Title: "",
-          AvatarUrl: "",
-          Id: 0,
-          ItemId: 894,
-          SPLatinFullName: "",
-          Department: "",
-          EmailAddress: "",
-          JobGrade: "",
-          ReportedPost: "",
+        lineManager: {
+          title: "",
+          avatarUrl: "",
+          id: 0,
+          itemId: 894,
+          sPLatinFullName: "",
+          department: "",
+          emailAddress: "",
+          jobGrade: "",
+          reportedPost: "",
         },
       },
       SelectedPeers: [],
@@ -159,13 +159,13 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
   /*********************************add item to table****************************************************** */
   private AddItem = (FieldName: string) => {
     if (FieldName === "SelectedOther") {
-      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Other);
+      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.other);
       if (ValidTableLength === false) {
-        const NewItem: IUser[] = this.state.NominationData.Other;
+        const NewItem: IUser[] = this.state.NominationData.other;
         if (NewItem.length >= 2) {
           this.props.onError(false);
         }
-        const index = NewItem.findIndex(x => x.ItemId === this.state.SelectedOtherID);
+        const index = NewItem.findIndex(x => x.itemId === this.state.SelectedOtherID);
         if (index > -1) {
           this.setState(prevState => {
             return {
@@ -178,9 +178,9 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         } else {
           if (this.state.SelectedOther !== "")
             NewItem.push({
-              SPLatinFullName: this.state.SelectedOther,
-              ItemId: this.state.SelectedOtherID,
-              ReportedPost: this.state.SelectedOtherReportPost,
+              sPLatinFullName: this.state.SelectedOther,
+              itemId: this.state.SelectedOtherID,
+              reportedPost: this.state.SelectedOtherReportPost,
             });
           this.props.onAddField(NewItem);
           this.setState(prevState => {
@@ -192,13 +192,13 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         }
       }
     } else if (FieldName === "SelectedPeer") {
-      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Peer);
+      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.peer);
       if (ValidTableLength === false) {
-        const NewItem: IUser[] = this.state.NominationData.Peer;
+        const NewItem: IUser[] = this.state.NominationData.peer;
         if (NewItem.length >= 2) {
           this.props.onError(false);
         }
-        const index = NewItem.findIndex(x => x.ItemId === this.state.SelectedPeerID);
+        const index = NewItem.findIndex(x => x.itemId === this.state.SelectedPeerID);
         if (index > -1) {
           this.setState(prevState => {
             return {
@@ -211,9 +211,9 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         } else {
           if (this.state.SelectedPeer !== "")
             NewItem.push({
-              SPLatinFullName: this.state.SelectedPeer,
-              ItemId: this.state.SelectedPeerID,
-              ReportedPost: this.state.SelectedPeerReportPost,
+              sPLatinFullName: this.state.SelectedPeer,
+              itemId: this.state.SelectedPeerID,
+              reportedPost: this.state.SelectedPeerReportPost,
             });
           this.props.onAddField(NewItem);
           this.setState(prevState => {
@@ -225,13 +225,13 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         }
       }
     } else {
-      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.Subordinates);
+      const ValidTableLength = this.TableLengthValidation(this.state.NominationData.subordinates);
       if (ValidTableLength === false) {
-        const NewItem: IUser[] = this.state.NominationData.Subordinates;
+        const NewItem: IUser[] = this.state.NominationData.subordinates;
         if (NewItem.length >= 2) {
           this.props.onError(false);
         }
-        const index = NewItem.findIndex(x => x.ItemId === this.state.SelectedSubOrdinateID);
+        const index = NewItem.findIndex(x => x.itemId === this.state.SelectedSubOrdinateID);
         if (index > -1) {
           this.setState(prevState => {
             return {
@@ -244,9 +244,9 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         } else {
           if (this.state.SelectedSubOrdinate !== "")
             NewItem.push({
-              SPLatinFullName: this.state.SelectedSubOrdinate,
-              ItemId: this.state.SelectedSubOrdinateID,
-              ReportedPost: this.state.SelectedSubOrdinateReportPost,
+              sPLatinFullName: this.state.SelectedSubOrdinate,
+              itemId: this.state.SelectedSubOrdinateID,
+              reportedPost: this.state.SelectedSubOrdinateReportPost,
             });
           this.props.onAddField(NewItem);
           this.setState(prevState => {
@@ -303,19 +303,19 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
     let items: any[] = [];
     switch (TableName) {
       case "Subordinates": {
-        items = this.state.NominationData.Subordinates;
+        items = this.state.NominationData.subordinates;
         break;
       }
       case "Peer": {
-        items = this.state.NominationData.Peer;
+        items = this.state.NominationData.peer;
         break;
       }
       case "Other": {
-        items = this.state.NominationData.Other;
+        items = this.state.NominationData.other;
         break;
       }
       default:
-        items = this.state.NominationData.Subordinates;
+        items = this.state.NominationData.subordinates;
     }
 
     if (items.length === 0) {
@@ -325,7 +325,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
             کسی انتخاب نشده است!
           </TableCell>
         </TableRow>
-      ); 
+      );
     } else {
       return items.map((n: any, index: any) => {
         return (
@@ -334,13 +334,13 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
               {index + 1}
             </TableCell>
             <TableCell align="center">
-              <div style={{ fontWeight: 500, fontSize: "13px" }}>{n.SPLatinFullName}</div>
-              <div style={{ fontStyle: "italic", color: "dimgrey" }}>{n.ReportedPost}</div>
+              <div style={{ fontWeight: 500, fontSize: "13px" }}>{n.sPLatinFullName}</div>
+              <div style={{ fontStyle: "italic", color: "dimgrey" }}>{n.reportedPost}</div>
             </TableCell>
             <TableCell align="center" style={{ width: "3%" }}>
               <Delete
                 className="flaticon-pie-chart-1 kt-font-info kt-label-font-color-2"
-                onClick={() => this.DeleteItem(n.SPLatinFullName, TableName)}
+                onClick={() => this.DeleteItem(n.sPLatinFullName, TableName)}
                 cursor="pointer"
               />
             </TableCell>
@@ -355,22 +355,22 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
       let prevValues = [];
       switch (TableName) {
         case "Subordinates": {
-          prevValues = prevState.NominationData.Subordinates || [];
+          prevValues = prevState.NominationData.subordinates || [];
           break;
         }
         case "Peer": {
-          prevValues = prevState.NominationData.Peer || [];
+          prevValues = prevState.NominationData.peer || [];
           break;
         }
         case "Other": {
-          prevValues = prevState.NominationData.Other || [];
+          prevValues = prevState.NominationData.other || [];
           break;
         }
         default:
-          prevValues = prevState.NominationData.Subordinates || [];
+          prevValues = prevState.NominationData.subordinates || [];
       }
 
-      const newValue = prevValues.filter(el => el.SPLatinFullName !== currentItem);
+      const newValue = prevValues.filter(el => el.sPLatinFullName !== currentItem);
       this.props.onChangeDataTableValue(newValue);
       return {
         ...prevState,

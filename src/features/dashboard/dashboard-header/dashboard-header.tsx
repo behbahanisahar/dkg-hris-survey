@@ -23,8 +23,8 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
       itemId: 0,
       isFetched: false,
       userInfo: {
-        User: {},
-        SurveyProgress: 0,
+        user: {},
+        surveyProgress: 0,
       },
     };
   }
@@ -39,7 +39,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
         itemId: NominationId,
         isFetched: true,
       }));
-      document.title = `Dashboard - ${response.User?.SPLatinFullName}` ?? "Dashboard";
+      document.title = `Dashboard - ${response.user?.sPLatinFullName}` ?? "Dashboard";
     });
   }
   public async componentDidMount() {
@@ -52,17 +52,17 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
           <div className="kt-widget kt-widget--user-profile-3 pt-5">
             <div className="kt-widget__top">
               <div className="kt-widget__media kt-media avatar mx-3">
-                {this.state.userInfo.User.AvatarUrl === null && (
-                  <span className="gradient">{this.state.userInfo.User.AvatarTextPlaceholder}</span>
+                {this.state.userInfo.user.avatarUrl === null && (
+                  <span className="gradient">{this.state.userInfo.user.avatarTextPlaceholder}</span>
                 )}
-                {this.state.userInfo.User.AvatarUrl !== null && (
-                  <img alt={this.state.userInfo.User.Title} src={this.state.userInfo.User.AvatarUrl}></img>
+                {this.state.userInfo.user.avatarUrl !== null && (
+                  <img alt={this.state.userInfo.user.title} src={this.state.userInfo.user.avatarUrl}></img>
                 )}
               </div>
 
               <div className="kt-widget__content mt-3">
                 <div className="kt-widget__head">
-                  <span className="kt-widget__username">{this.state.userInfo.User.SPLatinFullName}</span>
+                  <span className="kt-widget__username">{this.state.userInfo.user.sPLatinFullName}</span>
                 </div>
 
                 <div
@@ -72,9 +72,9 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
                       : "kt-widget__subhead text-align-left"
                   }
                 >
-                  <span>{this.state.userInfo.User.CLevel} | </span>
-                  <span>{this.state.userInfo.User.Department} | </span>
-                  <span>{this.state.userInfo.User.ReportedPost}</span>
+                  <span>{this.state.userInfo.user.cLevel} | </span>
+                  <span>{this.state.userInfo.user.department} | </span>
+                  <span>{this.state.userInfo.user.reportedPost}</span>
                 </div>
               </div>
             </div>

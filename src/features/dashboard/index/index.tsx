@@ -69,12 +69,12 @@ export default class IndexReport extends React.Component<IProps, IState> {
       return (
         <tr key={index}>
           <th className={"table-dark" + "-" + index}>
-            <div className="transform-header">{n.Title}</div>
+            <div className="transform-header">{n.title}</div>
           </th>
           <td align={this.props.lang === "fa" ? "right" : "left"}>
             <div className="question-box">
-              <div className="desc-questions">{n.Description}</div>
-              <ul>{this.onRenderQuestions(n.Items)}</ul>
+              <div className="desc-questions">{n.description}</div>
+              <ul>{this.onRenderQuestions(n.items)}</ul>
             </div>
           </td>
         </tr>

@@ -55,9 +55,9 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
   };
 
   private onRenderHistoryRows = (tableName: string) => {
-    const Subordinates = this.state.NominationHistory.filter(el => el.Field === "Subordinate");
-    const Peer = this.state.NominationHistory.filter(el => el.Field === "Peer");
-    const Other = this.state.NominationHistory.filter(el => el.Field === "Other");
+    const Subordinates = this.state.NominationHistory.filter(el => el.field === "Subordinate");
+    const Peer = this.state.NominationHistory.filter(el => el.field === "Peer");
+    const Other = this.state.NominationHistory.filter(el => el.field === "Other");
     let items: any[] = [];
     switch (tableName) {
       case "Subordinate": {

@@ -1,8 +1,8 @@
-export interface IChangedField{
-    Added:string[];
-    Deleted:string[];
-    Id:number;
-   ModifiedBy:string;
-   ModifiedDate:string;
-   ModifiedDateShamsi:string;
+export interface IChangedField {
+  added: string[];
+  deleted: string[];
+  id: number;
+  modifiedBy: string;
+  modifiedDate: string;
+  modifiedDateShamsi: string;
 }

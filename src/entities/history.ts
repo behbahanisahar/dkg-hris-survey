@@ -1,7 +1,6 @@
 import { IChangedField } from "./changedFiled";
 
-export default interface IHistory{
-  
-   Changes:IChangedField[];
-   Field:string;
+export default interface IHistory {
+  changes: IChangedField[];
+  field: string;
 }

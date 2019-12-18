@@ -26,7 +26,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
       page: 0,
       rowsPerPage: 10,
       items: {
-        Users: [],
+        users: [],
       },
       users: [],
     };
@@ -43,7 +43,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         users: response.Users,
       }));
     });
-    allitems = this.state.items.Users;
+    allitems = this.state.items.users;
   }
 
   public render() {
@@ -72,7 +72,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
                 className="kt-pagination kt-pagination--brand"
                 rowsPerPageOptions={[5, 15, 25]}
                 component="div"
-                count={this.state.items.Users.length}
+                count={this.state.items.users.length}
                 rowsPerPage={this.state.rowsPerPage}
                 page={this.state.page}
                 backIconButtonProps={{
@@ -94,7 +94,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
   }
 
   private onRenderRows = () => {
-    if (this.state.items.Users?.length === 0) {
+    if (this.state.items.users?.length === 0) {
       return (
         <TableRow>
           <TableCell align="center" colSpan={3} className="emptyRowLog">
@@ -103,7 +103,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         </TableRow>
       );
     } else {
-      return this.stableSort(this.state.items.Users, this.getSorting(this.state.order, this.state.orderBy))
+      return this.stableSort(this.state.items.users, this.getSorting(this.state.order, this.state.orderBy))
         .slice(
           this.state.page * this.state.rowsPerPage,
           this.state.page * this.state.rowsPerPage + this.state.rowsPerPage,
@@ -112,12 +112,12 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
           return (
             <TableRow key={index} className="kt-datatable__row">
               <TableCell className="category-icon">
-                {n.Category == "1-Self" && (
+                {n.category == "1-Self" && (
                   <span title="Self">
                     <DKSVGIcon iconName="Star"></DKSVGIcon>
                   </span>
                 )}
-                {n.Category == "2-Direct" && (
+                {n.category == "2-Direct" && (
                   <span title="Direct">
                     <DKSVGIcon iconName="Group"></DKSVGIcon>
                   </span>
@@ -126,38 +126,38 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
               <TableCell align="right" className="kt-datatable__cell">
                 <div className="kt-user-card-v2">
                   <div className="kt-user-card-v2__pic">
-                    {n.User.AvatarUrl === null && <p className="NoAvatar">{n.User.AvatarTextPlaceholder}</p>}
-                    {n.User.AvatarUrl !== null && <img alt={n.User.SPLatinFullName} src={n.User.AvatarUrl} />}
+                    {n.user.avatarUrl === null && <p className="NoAvatar">{n.user.avatarTextPlaceholder}</p>}
+                    {n.user.avatarUrl !== null && <img alt={n.user.sPLatinFullName} src={n.user.avatarUrl} />}
                   </div>
                   <div className="kt-user-card-v2__details">
                     <a
                       onClick={(e: any) => {
-                        this.onShowItem(n.NominationId);
+                        this.onShowItem(n.nominationId);
                         e.preventDefault();
                         return false;
                       }}
                       className="kt-user-card-v2__name pointer"
                     >
-                      {n.User.Title}
+                      {n.user.title}
                     </a>
-                    <a className="kt-user-card-v2__email kt-link">{n.User.EmailAddress}</a>
+                    <a className="kt-user-card-v2__email kt-link">{n.user.emailAddress}</a>
                   </div>
                 </div>
               </TableCell>
-              <TableCell className={"kt-font-bold text-center " + n.User.CLevel}>
-                {n.User.CLevel} <span className="kt-badge kt-badge--dot"></span>
+              <TableCell className={"kt-font-bold text-center " + n.user.cLevel}>
+                {n.user.cLevel} <span className="kt-badge kt-badge--dot"></span>
               </TableCell>
               <TableCell className="kt-datatable__cell text-center">
-                {n.User.ReportedPost}
+                {n.user.reportedPost}
                 {" @ "}
-                {n.User.Department}
+                {n.user.department}
               </TableCell>
 
               <TableCell style={{ width: "10%" }} className="kt-datatable__cell" align="center">
                 <button
                   className="btn btn-sm btn-bold btn-brand-hover"
                   onClick={(e: any) => {
-                    this.onShowItem(n.NominationId);
+                    this.onShowItem(n.nominationId);
                     e.preventDefault();
                     return false;
                   }}
@@ -200,7 +200,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         ...prevState,
         items: {
           ...prevState.items,
-          Users: TableItems,
+          users: TableItems,
         },
       };
     });
