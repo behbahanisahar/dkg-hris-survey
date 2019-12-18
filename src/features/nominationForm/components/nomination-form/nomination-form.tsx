@@ -108,6 +108,8 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   }
 
   public async componentDidMount() {
+    console.log("Form");
+
     document.title = "Nomination Form";
     const itemId = this.props.itemId;
     await this.loadUsers();

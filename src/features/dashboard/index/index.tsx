@@ -86,7 +86,7 @@ export default class IndexReport extends React.Component<IProps, IState> {
     return Items.map((n: any, index: any) => {
       return (
         <li>
-          <span className="question" dangerouslySetInnerHTML={{ __html: n.Question }}></span>{" "}
+          <span className="question" dangerouslySetInnerHTML={{ __html: n.question }}></span>{" "}
         </li>
       );
     });
