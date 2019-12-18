@@ -55,6 +55,8 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
   };
 
   private onRenderHistoryRows = (tableName: string) => {
+    console.log(this.state.NominationHistory);
+
     const Subordinates = this.state.NominationHistory.filter(el => el.field === "Subordinate");
     const Peer = this.state.NominationHistory.filter(el => el.field === "Peer");
     const Other = this.state.NominationHistory.filter(el => el.field === "Other");
@@ -77,7 +79,7 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
     }
 
     for (let i = 0; i < items.length; ++i) {
-      return items[i].Changes.map((n: any, index: any) => {
+      return items[i].Changes?.map((n: any, index: any) => {
         let DeletedStr: string = "";
         let AddedStr: string = "";
         if (n.Added !== null) {
@@ -89,8 +91,8 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
 
         return (
           <TableRow key={index}>
-            <TableCell align="center">{n.ModifiedBy}</TableCell>
-            <TableCell align="center">{n.ModifiedDateShamsi}</TableCell>
+            <TableCell align="center">{n.modifiedBy}</TableCell>
+            <TableCell align="center">{n.modifiedDateShamsi}</TableCell>
             <TableCell align="center" className={AddedStr !== "" ? "kt-font-bold dk-brand-text-green" : ""}>
               {AddedStr}
             </TableCell>
