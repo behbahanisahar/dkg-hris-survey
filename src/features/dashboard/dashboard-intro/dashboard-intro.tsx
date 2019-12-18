@@ -187,11 +187,11 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         TableItems = prevState.filterName.toLowerCase()
           ? TableItems.filter(function(i) {
               return (
-                i.User.cLevel?.toLowerCase().indexOf(prevState.filterName) > -1 ||
-                i.User.department?.toLowerCase().indexOf(prevState.filterName) > -1 ||
-                i.User.sPLatinFullName?.toLowerCase().indexOf(prevState.filterName) > -1 ||
-                i.User.title?.toLowerCase().indexOf(prevState.filterName) > -1 ||
-                i.User.emailAddress?.toLowerCase().indexOf(prevState.filterName) > -1
+                i.user?.cLevel?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.user?.department?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.user?.spLatinFullName?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.user?.title?.toLowerCase().indexOf(prevState.filterName) > -1 ||
+                i.user?.emailAddress?.toLowerCase().indexOf(prevState.filterName) > -1
               );
             })
           : TableItems;
