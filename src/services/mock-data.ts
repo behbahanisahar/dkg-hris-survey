@@ -5,6 +5,7 @@ import { IAppraisee } from "../entities/appraisee";
 import UserTasks from "../entities/user-task";
 import ReportStructure from "../entities/reportData";
 import ICategoryScore from "../entities/category-scores";
+import { IComment } from "./../entities/reports/comments";
 
 export default class MockData {
   public static getUserInfo: any[] = [
@@ -57,14 +58,14 @@ export default class MockData {
         avatarUrl: "/PublishingImages/760674.png",
         id: 0,
         itemId: 22,
-        sPLatinFullName: "test1",
+        spLatinFullName: "test1",
         reportedPost: "administrator",
       },
       {
         avatarUrl: "/PublishingImages/760674.png",
         id: 0,
         itemId: 175,
-        sPLatinFullName: "test2",
+        spLatinFullName: "test2",
         reportedPost: "administrator",
       },
     ],
@@ -73,14 +74,14 @@ export default class MockData {
         avatarUrl: "/PublishingImages/760674.png",
         id: 0,
         itemId: 50,
-        sPLatinFullName: "test3",
+        spLatinFullName: "test3",
         reportedPost: "administrator",
       },
       {
         avatarUrl: "/PublishingImages/760674.png",
         id: 0,
         itemId: 56,
-        sPLatinFullName: "test4",
+        spLatinFullName: "test4",
         reportedPost: "administrator",
       },
     ],
@@ -89,14 +90,14 @@ export default class MockData {
         avatarUrl: "/PublishingImages/760674.png",
         id: 0,
         itemId: 60,
-        sPLatinFullName: "sahar5",
+        spLatinFullName: "sahar5",
         reportedPost: "administrator",
       },
       {
         avatarUrl: "/PublishingImages/760674.png",
         id: 0,
         itemId: 70,
-        sPLatinFullName: "ali2",
+        spLatinFullName: "ali2",
         reportedPost: "administrator",
       },
     ],
@@ -104,7 +105,7 @@ export default class MockData {
       avatarUrl: "/PublishingImages/760674.png",
       id: 0,
       itemId: 10,
-      sPLatinFullName: "Abdolhossin Mohammbgnhnad Hashemi",
+      spLatinFullName: "Abdolhossin Mohammbgnhnad Hashemi",
       department: "HR",
       emailAddress: "sa.behbahani@digikala.com",
       jobGrade: "specialist",
@@ -116,7 +117,7 @@ export default class MockData {
       avatarUrl: "/PublishingImages/760674.png",
       id: 0,
       itemId: 14,
-      sPLatinFullName: "Abdolhossin Mohvfvfammad Hashemi",
+      spLatinFullName: "Abdolhossin Mohvfvfammad Hashemi",
       department: "HR",
       emailAddress: "sa.behbahani@digikala.com",
       jobGrade: "specialist",
@@ -159,7 +160,7 @@ export default class MockData {
       avatarUrl: "/PublishingImages/760674.png",
       id: 0,
       itemId: 10,
-      sPLatinFullName: "Abdolhossin Mohammbgnhnad Hashemi",
+      spLatinFullName: "Abdolhossin Mohammbgnhnad Hashemi",
       department: "HR",
       emailAddress: "sa.behbahani@digikala.com",
       jobGrade: "specialist",
@@ -719,21 +720,24 @@ export default class MockData {
     ],
   };
 
-  public static Comments: any = [
+  public static Comments: IComment[] = [
     {
-      Title: "ادامه - عادات و رفتاریهایی موثری که می‌بایست ادامه پیدا کنند",
-      Value: "Continue",
-      Comments: ["ادامه ۱", "ادامه ۲"],
+      title: "ادامه - عادات و رفتاریهایی موثری که می‌بایست ادامه پیدا کنند",
+      value: "continue",
+      comments: ["ادامه ۱", "ادامه ۲"],
+      description: "",
     },
     {
-      Title: "شروع - عادات و رفتارهایی که می‌بایست شروع شوند",
-      Value: "Start",
-      Comments: ["شروع ۳", "شروع ۲", "شروع ۱"],
+      title: "شروع - عادات و رفتارهایی که می‌بایست شروع شوند",
+      value: "start",
+      comments: ["شروع ۳", "شروع ۲", "شروع ۱"],
+      description: "",
     },
     {
-      Title: "توقف - رفتاریهایی که می‌بایست متوقف شده یا به نحو دیگری صورت پذیرند",
-      Value: "Stop",
-      Comments: ["توقف ۱", "S​top"],
+      title: "توقف - رفتاریهایی که می‌بایست متوقف شده یا به نحو دیگری صورت پذیرند",
+      value: "stop",
+      comments: ["توقف ۱", "s​top"],
+      description: "",
     },
   ];
   public static Index: any[] = [

@@ -43,7 +43,7 @@ export default interface UserInfoItem {
   reportedPost?: string;
   directManagerSystemCode?: string;
   latinFullName?: string;
-  sPLatinFullName?: string;
+  spLatinFullName?: string;
   directManager?: UserInfoItem;
   itemId?: number;
   title?: string;

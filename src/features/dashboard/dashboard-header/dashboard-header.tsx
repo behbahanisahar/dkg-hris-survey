@@ -39,7 +39,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
         itemId: NominationId,
         isFetched: true,
       }));
-      document.title = `Dashboard - ${response.user?.sPLatinFullName}` ?? "Dashboard";
+      document.title = `Dashboard - ${response.user?.spLatinFullName}` ?? "Dashboard";
     });
   }
   public async componentDidMount() {
@@ -63,7 +63,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
 
               <div className="kt-widget__content mt-3">
                 <div className="kt-widget__head">
-                  <span className="kt-widget__username">{this.state.userInfo.user.sPLatinFullName}</span>
+                  <span className="kt-widget__username">{this.state.userInfo.user.spLatinFullName}</span>
                 </div>
 
                 <div

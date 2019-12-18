@@ -59,7 +59,7 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
           avatarUrl: "",
           id: 0,
           itemId: 894,
-          sPLatinFullName: "",
+          spLatinFullName: "",
           department: "",
           emailAddress: "",
           jobGrade: "",

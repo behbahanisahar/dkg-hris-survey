@@ -127,7 +127,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
                 <div className="kt-user-card-v2">
                   <div className="kt-user-card-v2__pic">
                     {n.user.avatarUrl === null && <p className="NoAvatar">{n.user.avatarTextPlaceholder}</p>}
-                    {n.user.avatarUrl !== null && <img alt={n.user.sPLatinFullName} src={n.user.avatarUrl} />}
+                    {n.user.avatarUrl !== null && <img alt={n.user.spLatinFullName} src={n.user.avatarUrl} />}
                   </div>
                   <div className="kt-user-card-v2__details">
                     <a

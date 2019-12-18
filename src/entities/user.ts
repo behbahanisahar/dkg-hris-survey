@@ -1,6 +1,6 @@
 export default interface IUser {
   itemId: number;
-  sPLatinFullName: string;
+  spLatinFullName: string;
   avatarUrl?: string;
   id?: number;
   reportedPost?: string;

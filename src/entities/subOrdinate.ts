@@ -3,7 +3,7 @@ export default interface SubOrdinate {
   avatarUrl: string;
   id: number;
   itemId: number;
-  sPLatinFullName: string;
+  spLatinFullName: string;
   department: string;
   emailAddress: string;
   jobGrade: string;

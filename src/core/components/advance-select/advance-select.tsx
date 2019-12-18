@@ -17,7 +17,7 @@ const RenderOption = (option: any) => (
     <span className="selector-item">{option.label}</span>
     <div>
       <small>
-        <i>{option.EmailAddress}</i> | <span>{option.Department}</span> | <span>{option.ReportedPost}</span>
+        <i>{option.emailAddress}</i> | <span>{option.department}</span> | <span>{option.reportedPost}</span>
       </small>
     </div>
   </div>
@@ -54,7 +54,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           avatarUrl: "",
           id: 0,
           itemId: 894,
-          sPLatinFullName: "",
+          spLatinFullName: "",
           department: "",
           emailAddress: "",
           jobGrade: "",
@@ -65,7 +65,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           avatarUrl: "",
           id: 0,
           itemId: 894,
-          sPLatinFullName: "",
+          spLatinFullName: "",
           department: "",
           emailAddress: "",
           jobGrade: "",
@@ -145,13 +145,13 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
   /*********************************************************************** */
   private onSelectAutoComplete = async (event: any, dropdownName: string) => {
     const dropdownId = dropdownName + "ID";
-    const dropdownReportPost = dropdownName + "ReportPost";
+    const dropdownReportPost = dropdownName + "reportPost";
     await this.setState(prevState => {
       return {
         ...prevState,
         [dropdownName]: event === null ? "" : event.label,
         [dropdownId]: event === null ? 0 : Number(event.value),
-        [dropdownReportPost]: event === null ? "" : event.ReportedPost,
+        [dropdownReportPost]: event === null ? "" : event.reportedPost,
       };
     });
   };
@@ -178,7 +178,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         } else {
           if (this.state.SelectedOther !== "")
             NewItem.push({
-              sPLatinFullName: this.state.SelectedOther,
+              spLatinFullName: this.state.SelectedOther,
               itemId: this.state.SelectedOtherID,
               reportedPost: this.state.SelectedOtherReportPost,
             });
@@ -211,7 +211,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         } else {
           if (this.state.SelectedPeer !== "")
             NewItem.push({
-              sPLatinFullName: this.state.SelectedPeer,
+              spLatinFullName: this.state.SelectedPeer,
               itemId: this.state.SelectedPeerID,
               reportedPost: this.state.SelectedPeerReportPost,
             });
@@ -244,7 +244,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
         } else {
           if (this.state.SelectedSubOrdinate !== "")
             NewItem.push({
-              sPLatinFullName: this.state.SelectedSubOrdinate,
+              spLatinFullName: this.state.SelectedSubOrdinate,
               itemId: this.state.SelectedSubOrdinateID,
               reportedPost: this.state.SelectedSubOrdinateReportPost,
             });
@@ -334,13 +334,13 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
               {index + 1}
             </TableCell>
             <TableCell align="center">
-              <div style={{ fontWeight: 500, fontSize: "13px" }}>{n.sPLatinFullName}</div>
+              <div style={{ fontWeight: 500, fontSize: "13px" }}>{n.spLatinFullName}</div>
               <div style={{ fontStyle: "italic", color: "dimgrey" }}>{n.reportedPost}</div>
             </TableCell>
             <TableCell align="center" style={{ width: "3%" }}>
               <Delete
                 className="flaticon-pie-chart-1 kt-font-info kt-label-font-color-2"
-                onClick={() => this.DeleteItem(n.sPLatinFullName, TableName)}
+                onClick={() => this.DeleteItem(n.spLatinFullName, TableName)}
                 cursor="pointer"
               />
             </TableCell>
@@ -370,7 +370,7 @@ class AdvanceSelect extends React.Component<IAdvanceSelectProps, IAdvanceSelectS
           prevValues = prevState.NominationData.subordinates || [];
       }
 
-      const newValue = prevValues.filter(el => el.sPLatinFullName !== currentItem);
+      const newValue = prevValues.filter(el => el.spLatinFullName !== currentItem);
       this.props.onChangeDataTableValue(newValue);
       return {
         ...prevState,
