@@ -35,14 +35,14 @@ class ListServices extends ServiceBase {
         .top(20)
         .get();
       return Promise.resolve(
-        result.map(({ sPLatinFullName: label, id, emailAddress, sPLatinFullName, reportedPost, department }) => {
+        result.map(({ SPLatinFullName: label, Id, EmailAddress, SPLatinFullName, ReportedPost, Department }) => {
           return {
             label,
-            value: String(id),
-            department,
-            reportedPost,
-            sPLatinFullName,
-            emailAddress,
+            value: String(Id),
+            Department,
+            ReportedPost,
+            SPLatinFullName,
+            EmailAddress,
           };
         }),
       );
