@@ -126,10 +126,10 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
               <TableCell align="right" className="kt-datatable__cell">
                 <div className="kt-user-card-v2">
                   <div className="kt-user-card-v2__pic">
-                    {(n.user.avatarUrl === null || n.user.avatarUrl === undefined) && (
+                    {(n.user.avatarUrl === undefined) && (
                       <p className="NoAvatar">{n.user.avatarTextPlaceholder}</p>
                     )}
-                    {(n.user.avatarUrl !== null || n.user.avatarUrl !== undefined) && (
+                    {( n.user.avatarUrl !== undefined) && (
                       <img alt={n.user.sPLatinFullName} src={n.user.avatarUrl} />
                     )}
                   </div>
