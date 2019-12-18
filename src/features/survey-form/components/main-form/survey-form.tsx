@@ -381,7 +381,7 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
       return (
         <div className="kt-section my-5 py-5 kt-ribbon  kt-ribbon--clip" key={index}>
           <div className={" kt-section__content kt-section__content--solid "}>
-            <img src={n.SignUrl} alt="" className="Image"></img>
+            <img src={n.signUrl} alt="" className="Image"></img>
             <div className={categoryClassName + " kt-ribbon--clip kt-ribbon--left"}>
               <div className={categoryClassName + " kt-ribbon__target badge"}>
                 <span className="kt-ribbon__inner" />

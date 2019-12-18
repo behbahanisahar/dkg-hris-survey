@@ -179,7 +179,7 @@ export default class MockData {
         baseCategoryId: 2,
         baseCategoryFa: "کتگوری ۱",
         titleFa: "مشتری محوری",
-        SignUrl: "",
+        signUrl: "",
         questions: [
           {
             itemId: 1,
@@ -210,7 +210,7 @@ export default class MockData {
         baseCategoryId: 2,
         baseCategoryFa: "کتگوری ۲",
         titleFa: "نتیجه گرایی",
-        SignUrl: "",
+        signUrl: "",
         questions: [
           {
             itemId: 2,
