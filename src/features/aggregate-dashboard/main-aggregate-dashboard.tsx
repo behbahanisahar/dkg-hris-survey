@@ -1,5 +1,7 @@
 import * as React from "react";
 import ParticipantComparison from "./participant-comparison/participant-comparison";
+import ClevelParticipation from "./clevel-participation/clevel-participation";
+import { Grid } from "@material-ui/core";
 interface IProps {}
 interface IState {}
 export default class MainAggregateDashboard extends React.Component<IProps, IState> {
@@ -13,7 +15,14 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   public render() {
     return (
       <div>
-        <ParticipantComparison />
+        <Grid container spacing={3} className="mt-4">
+          <Grid item xs={6} sm={6}>
+            <ParticipantComparison />
+          </Grid>
+          <Grid item xs={6} sm={6}>
+            <ClevelParticipation />
+          </Grid>
+        </Grid>
       </div>
     );
   }
