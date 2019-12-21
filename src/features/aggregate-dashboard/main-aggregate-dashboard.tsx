@@ -1,4 +1,5 @@
 import * as React from "react";
+import ParticipantComparison from "./participant-comparison/participant-comparison";
 interface IProps {}
 interface IState {}
 export default class MainAggregateDashboard extends React.Component<IProps, IState> {
@@ -6,8 +7,14 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
     super(props);
   }
 
-  public async componentDidMount() {}
+  public async componentDidMount() {
+    document.title = "DKDashboard";
+  }
   public render() {
-    return <div>MainAggregateDashboard</div>;
+    return (
+      <div>
+        <ParticipantComparison />
+      </div>
+    );
   }
 }
