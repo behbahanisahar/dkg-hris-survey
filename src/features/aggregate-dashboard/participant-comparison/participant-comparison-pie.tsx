@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { DKPortlet } from "../../../core/components/portlet/portlet";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { statistics } from "../../../entities/aggregate-report/statistics";
-import "./participant-comparison.css";
+import { Pie } from "react-chartjs-2";
 interface IProps {}
+
 interface IState {
   data: statistics;
   isFetching: boolean;
@@ -32,18 +32,22 @@ export default class ParticipantComparisonPie extends React.Component<IProps, IS
         isFetching: false,
       })),
     );
-    // const data = {
-    //   labels: ["Red", "green"],
-    //   datasets: [
-    //     {
-    //       data: [300, 50, 100],
-    //       backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-    //       hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-    //     },
-    //   ],
-    // };
   }
   public render() {
-    return <DKPortlet title="Number of Participants" noborder={true}></DKPortlet>;
+    const Completed = ((this.state.data.completed / this.state.data.totalNominated) * 100).toFixed(2);
+    const unCompleted = ((this.state.data.uncompleted / this.state.data.totalNominated) * 100).toFixed(2);
+    console.log(Completed);
+    console.log(unCompleted);
+    const Piedata = {
+      labels: ["Completed", "UnCompleted"],
+      datasets: [
+        {
+          data: [Completed, unCompleted],
+          backgroundColor: ["#19BFD3", "#EF394E"],
+          hoverBackgroundColor: ["#19BFD3", "#EF394E"],
+        },
+      ],
+    };
+    return <Pie data={Piedata} />;
   }
 }

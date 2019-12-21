@@ -2,9 +2,9 @@ import { statistics } from "./../../entities/aggregate-report/statistics";
 import ParticipationRate from "../../entities/aggregate-report/paticipation-rate";
 export default class MockAggregateData {
   public static statisticMock: statistics = {
-    completed: 123,
-    uncompleted: 333,
-    totalNominated: 3323,
+    completed: 24,
+    uncompleted: 32,
+    totalNominated: 56,
   };
   public static MockParticipationRate: ParticipationRate[] = [
     {
