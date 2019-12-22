@@ -5,7 +5,7 @@ export function NoContent() {
   return (
     <div className="no-content-row">
       <b> موردی برای نمایش وجود ندارد</b>
-      <img src={NoContentImage}></img>
+      <img alt="no-content" src={NoContentImage}></img>
     </div>
   );
 }

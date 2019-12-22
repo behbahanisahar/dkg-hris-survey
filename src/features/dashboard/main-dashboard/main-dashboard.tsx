@@ -63,8 +63,18 @@ export default class MainDashboard extends React.Component<IProps, IState> {
             {this.state.hasAccess && (
               <div className={this.state.lang === "fa" ? "rtl" : "ltr"}>
                 <div className={this.state.lang === "fa" ? "mb-1 text-right" : "mb-1 text-left"}>
-                  <img className="mx-2 pointer" src={UkIcon} onClick={(ev: any) => this.onChangeLang("en")}></img>
-                  <img className="mx-2 pointer" src={IRIcon} onClick={(ev: any) => this.onChangeLang("fa")}></img>
+                  <img
+                    className="mx-2 pointer"
+                    alt="en"
+                    src={UkIcon}
+                    onClick={(ev: any) => this.onChangeLang("en")}
+                  ></img>
+                  <img
+                    className="mx-2 pointer"
+                    alt="fa"
+                    src={IRIcon}
+                    onClick={(ev: any) => this.onChangeLang("fa")}
+                  ></img>
                 </div>
                 <div>
                   <DashboardHeader lang={this.state.lang} itemId={this.state.itemId} />

@@ -5,7 +5,7 @@ export function Final() {
   return (
     <div className="no-content-row">
       <b> مهلت شرکت در نظر سنجی به اتمام رسیده است.</b>
-      <img src={NoContentImage}></img>
+      <img alt="no-content" src={NoContentImage}></img>
     </div>
   );
 }
