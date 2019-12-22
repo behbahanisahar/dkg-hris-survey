@@ -8,6 +8,7 @@ import ClevelParticipation from "./clevel-participation/clevel-participation";
 import ParticipantComparison from "./participant-comparison/participant-comparison";
 import QuestionComparison from "./comparing-questions/comparing-questions";
 import { DKPortlet } from "../../core/components/portlet/portlet";
+import HeatMap from "./heatmap/heatmap";
 interface IProps {}
 interface IState {
   reportType: number;
@@ -78,6 +79,9 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
               <QuestionComparison reportType={this.state.reportTypeText} comparingType="bottom" />
             </DKPortlet>
           </Grid>
+        </Grid>
+        <Grid container spacing={3} className="mt-4">
+          <HeatMap reportType={this.state.reportTypeText} />
         </Grid>
       </div>
     );
