@@ -35,7 +35,15 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       },
       {
         key: 2,
-        text: "other",
+        text: "all",
+      },
+      {
+        key: 3,
+        text: "cto",
+      },
+      {
+        key: 4,
+        text: "chro",
       },
     ];
     return (

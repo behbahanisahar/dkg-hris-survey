@@ -4,6 +4,7 @@ import MockAggregateData from "./aggregate-mock";
 import ParticipationRate from "./../../entities/aggregate-report/paticipation-rate";
 import ComparisonCompetency from "../../entities/aggregate-report/comparison-competency";
 import ComparisonQuestions from "../../entities/aggregate-report/comparison-questions";
+import Heatmap from "./../../entities/aggregate-report/heatmap";
 
 class AggregateServices extends ServiceBase {
   public constructor() {
@@ -42,6 +43,14 @@ class AggregateServices extends ServiceBase {
     }
 
     return Promise.resolve(MockAggregateData.MockComparingQuestion);
+  }
+  public async getHeatmap(level: string): Promise<Heatmap[]> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/aggregate/heatmap/" + level);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockAggregateData.MockHeat);
   }
 }
 export default AggregateServices;
