@@ -3,7 +3,9 @@ import * as React from "react";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { statistics } from "../../../entities/aggregate-report/statistics";
 import { Pie } from "react-chartjs-2";
-interface IProps {}
+interface IProps {
+  reportType: string;
+}
 
 interface IState {
   data: statistics;
@@ -23,9 +25,13 @@ export default class ParticipantComparisonPie extends React.Component<IProps, IS
       },
     };
   }
-
-  public async componentDidMount() {
-    await this.AggregateServices.getStatistics("Clevel").then(response =>
+  public async componentWillReceiveProps(nextProps: any) {
+    if (this.props.reportType !== nextProps.reportType) {
+      this.getData(nextProps.reportType);
+    }
+  }
+  public async getData(props: string) {
+    await this.AggregateServices.getStatistics(props).then(response =>
       this.setState(current => ({
         ...current,
         data: response,
@@ -33,11 +39,13 @@ export default class ParticipantComparisonPie extends React.Component<IProps, IS
       })),
     );
   }
+  public async componentDidMount() {
+    this.getData(this.props.reportType);
+  }
   public render() {
     const Completed = ((this.state.data.completed / this.state.data.totalNominated) * 100).toFixed(2);
     const unCompleted = ((this.state.data.uncompleted / this.state.data.totalNominated) * 100).toFixed(2);
-    console.log(Completed);
-    console.log(unCompleted);
+
     const Piedata = {
       labels: ["Completed", "UnCompleted"],
       datasets: [

@@ -4,7 +4,9 @@ import { DKPortlet } from "../../../core/components/portlet/portlet";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { statistics } from "../../../entities/aggregate-report/statistics";
 import "./participant-comparison.css";
-interface IProps {}
+interface IProps {
+  reportType: string;
+}
 interface IState {
   data: statistics;
   isFetching: boolean;
@@ -23,15 +25,23 @@ export default class ParticipantComparison extends React.Component<IProps, IStat
       },
     };
   }
-
-  public async componentDidMount() {
-    await this.AggregateServices.getStatistics("Clevel").then(response =>
+  public async componentWillReceiveProps(nextProps: any) {
+    if (this.props.reportType !== nextProps.reportType) {
+      this.getData(nextProps.reportType);
+    }
+  }
+  public async getData(props: string) {
+    await this.AggregateServices.getStatistics(props).then(response =>
       this.setState(current => ({
         ...current,
         data: response,
         isFetching: false,
       })),
     );
+  }
+
+  public async componentDidMount() {
+    this.getData(this.props.reportType);
   }
   public render() {
     return (
