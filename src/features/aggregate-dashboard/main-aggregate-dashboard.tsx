@@ -39,7 +39,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       },
     ];
     return (
-      <div>
+      <div className="ltr">
         <Grid container spacing={3} className="mt-4">
           <Grid item xs={3} sm={3}>
             <Select
@@ -61,8 +61,10 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         </Grid>
         <Grid container spacing={3} className="mt-4">
           <Grid item xs={6} sm={6}>
-            <ParticipantComparisonPie reportType={this.state.reportTypeText} />
-            <ParticipantComparison reportType={this.state.reportTypeText} />
+            <DKPortlet title="Number of Participants">
+              <ParticipantComparisonPie reportType={this.state.reportTypeText} />
+              <ParticipantComparison reportType={this.state.reportTypeText} />
+            </DKPortlet>
           </Grid>
           <Grid item xs={6} sm={6}>
             <ClevelParticipation reportType={this.state.reportTypeText} />

@@ -1,8 +1,7 @@
-import * as React from "react";
 import { Table, TableBody } from "@material-ui/core";
-import { DKPortlet } from "../../../core/components/portlet/portlet";
-import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
+import * as React from "react";
 import { statistics } from "../../../entities/aggregate-report/statistics";
+import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import "./participant-comparison.css";
 interface IProps {
   reportType: string;
@@ -45,24 +44,22 @@ export default class ParticipantComparison extends React.Component<IProps, IStat
   }
   public render() {
     return (
-      <DKPortlet title="Number of Participants" noborder={true}>
-        <Table className="table table-bordered mt-3 ltr">
-          <TableBody className="table-row">
-            <tr>
-              <td>Completed</td>
-              <td align="left">{this.state.data.completed}</td>
-            </tr>
-            <tr>
-              <td>Uncompleted </td>
-              <td align="left">{this.state.data.uncompleted}</td>
-            </tr>
-            <tr className="total">
-              <td>Total Nominated </td>
-              <td align="left">{this.state.data.totalNominated}</td>
-            </tr>
-          </TableBody>
-        </Table>
-      </DKPortlet>
+      <Table className="table table-bordered mt-3 ltr">
+        <TableBody className="table-row">
+          <tr>
+            <td>Completed</td>
+            <td align="left">{this.state.data.completed}</td>
+          </tr>
+          <tr>
+            <td>Uncompleted </td>
+            <td align="left">{this.state.data.uncompleted}</td>
+          </tr>
+          <tr className="total">
+            <td>Total Nominated </td>
+            <td align="left">{this.state.data.totalNominated}</td>
+          </tr>
+        </TableBody>
+      </Table>
     );
   }
 }
