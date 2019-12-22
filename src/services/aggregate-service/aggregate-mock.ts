@@ -3,6 +3,7 @@ import ParticipationRate from "../../entities/aggregate-report/paticipation-rate
 import ComparisonCompetency from "../../entities/aggregate-report/comparison-competency";
 import ComparisonQuestions from "../../entities/aggregate-report/comparison-questions";
 import Heatmap from "./../../entities/aggregate-report/heatmap";
+import RadarCoreValues from "../../entities/aggregate-report/core-calues-radar";
 export default class MockAggregateData {
   public static statisticMock: statistics = {
     completed: 24,
@@ -541,4 +542,82 @@ export default class MockAggregateData {
       totalAverage: 0,
     },
   ];
+
+  public static MockRadarCoreValues: RadarCoreValues = {
+    averageValue: 0,
+    labels: [
+      "Teamwork",
+      "Customer Centric",
+      "Builder approach & Result oriented",
+      "Drive for Excellence",
+      "Managing & Developing People",
+      "Inspire a Shared Vision",
+      "Business Acumen",
+      "Decision Making",
+    ],
+    datasets: [
+      {
+        borderDash: [0, 0],
+        fill: false,
+        lineTension: 0,
+        label: "Self",
+        drilldownData: "",
+        backgroundColor: [
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+        ],
+        borderColor: "rgba(25, 191, 211, 1)",
+        hoverBackgroundColor: [
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+        ],
+        hoverBorderColor: "rgba(25, 191, 211, 1)",
+        borderWidth: 3,
+        data: [4.3, 4.3, 4, 3.7, 3.8, 4.3, 3.7, 4.3],
+      },
+      {
+        borderDash: [0, 0],
+        fill: false,
+        lineTension: 0,
+        label: "Raters",
+        drilldownData: "",
+        backgroundColor: [
+          "rgba(239, 57, 78, 0)",
+          "rgba(239, 57, 78, 0)",
+          "rgba(239, 57, 78, 0)",
+          "rgba(239, 57, 78, 0)",
+          "rgba(239, 57, 78, 0)",
+          "rgba(239, 57, 78, 0)",
+          "rgba(239, 57, 78, 0)",
+          "rgba(239, 57, 78, 0)",
+        ],
+        borderColor: "rgba(239, 57, 78, 1)",
+        hoverBackgroundColor: [
+          "rgba(239, 57, 78, 0.4)",
+          "rgba(239, 57, 78, 0.4)",
+          "rgba(239, 57, 78, 0.4)",
+          "rgba(239, 57, 78, 0.4)",
+          "rgba(239, 57, 78, 0.4)",
+          "rgba(239, 57, 78, 0.4)",
+          "rgba(239, 57, 78, 0.4)",
+          "rgba(239, 57, 78, 0.4)",
+        ],
+        hoverBorderColor: "rgba(239, 57, 78, 1)",
+        borderWidth: 3,
+        data: [4.3, 4.3, 4.4, 4.2, 4.2, 4, 4.3, 4.1],
+      },
+    ],
+  };
 }
