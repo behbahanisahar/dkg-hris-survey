@@ -48,11 +48,11 @@ export default class HeatMap extends React.Component<IProps, IState> {
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <div className="mb-5">
-            <Table className="table table-bordered mt-3 ltr">
+            <Table className="table table-bordered mt-3 ltr table-sm">
               <thead className="thead-dark">
                 <tr>
                   <th className="none-thead"> </th>
-
+                  <th className="none-thead"> </th>
                   <th>Customer Centric</th>
                   <th> Builder approach and Result oriented</th>
                   <th> Drive for Excellence</th>
@@ -85,8 +85,11 @@ export default class HeatMap extends React.Component<IProps, IState> {
       return this.state.data?.map((n: Heatmap, index: any) => {
         return (
           <tr key={index}>
-            <td style={{ width: "12%" }} align="left">
-              {index + 1} {"-"} {n.title}
+            <td style={{ width: "1%" }} align="left">
+              {index + 1}
+            </td>
+            <td style={{ width: "14%" }} align="left">
+              {n.title}
             </td>
             <td className={this.averageClass(n.category1, false)} align="center">
               {n.category1}
