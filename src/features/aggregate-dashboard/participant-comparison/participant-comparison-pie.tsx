@@ -3,6 +3,7 @@ import * as React from "react";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { statistics } from "../../../entities/aggregate-report/statistics";
 import { Pie } from "react-chartjs-2";
+import { DKPortlet } from "../../../core/components/portlet/portlet";
 interface IProps {
   reportType: string;
 }
@@ -56,6 +57,10 @@ export default class ParticipantComparisonPie extends React.Component<IProps, IS
         },
       ],
     };
-    return <Pie data={Piedata} />;
+    return (
+      <DKPortlet hasHeader={false}>
+        <Pie data={Piedata} />
+      </DKPortlet>
+    );
   }
 }

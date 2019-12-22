@@ -6,6 +6,8 @@ import CompetencyCompetency from "./competencies-comparison/competencies-compari
 import ParticipantComparisonPie from "./participant-comparison/participant-comparison-pie";
 import ClevelParticipation from "./clevel-participation/clevel-participation";
 import ParticipantComparison from "./participant-comparison/participant-comparison";
+import QuestionComparison from "./comparing-questions/comparing-questions";
+import { DKPortlet } from "../../core/components/portlet/portlet";
 interface IProps {}
 interface IState {
   reportType: number;
@@ -70,7 +72,11 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             <CompetencyCompetency reportType={this.state.reportTypeText} />
           </Grid>
           <Grid item xs={6} sm={6}>
-            test
+            <DKPortlet hasHeader={false}>
+              <QuestionComparison reportType={this.state.reportTypeText} comparingType="top" />
+
+              <QuestionComparison reportType={this.state.reportTypeText} comparingType="bottom" />
+            </DKPortlet>
           </Grid>
         </Grid>
       </div>

@@ -3,6 +3,7 @@ import { statistics } from "../../entities/aggregate-report/statistics";
 import MockAggregateData from "./aggregate-mock";
 import ParticipationRate from "./../../entities/aggregate-report/paticipation-rate";
 import ComparisonCompetency from "../../entities/aggregate-report/comparison-competency";
+import ComparisonQuestions from "../../entities/aggregate-report/comparison-questions";
 
 class AggregateServices extends ServiceBase {
   public constructor() {
@@ -32,6 +33,15 @@ class AggregateServices extends ServiceBase {
     }
 
     return Promise.resolve(MockAggregateData.MockComparisonCompetency);
+  }
+
+  public async getComparisonQuestions(level: string): Promise<ComparisonQuestions> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/aggregate/questions/" + level);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockAggregateData.MockComparingQuestion);
   }
 }
 export default AggregateServices;
