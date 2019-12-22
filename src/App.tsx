@@ -53,7 +53,7 @@ class App extends React.Component<{}, IAppState> {
           <MuiThemeProvider theme={theme}>
             {this.state.page.toLowerCase() === "nominationintro" && <NominationIntroPage />}
             {this.state.page.toLowerCase() === "surveyintro" && <SurveyIntroPage />}
-            {this.state.page == "" && (
+            {this.state.page === "" && (
               <Router>
                 <div>
                   <Switch>

@@ -68,7 +68,7 @@ export default class IndexReport extends React.Component<IProps, IState> {
     return this.state.data.map((n: IndexData, index: any) => {
       return (
         <tr key={index}>
-          <th className={"table-dark" + "-" + index}>
+          <th className={"table-dark-" + index}>
             <div className="transform-header">{n.title}</div>
           </th>
           <td align={this.props.lang === "fa" ? "right" : "left"}>

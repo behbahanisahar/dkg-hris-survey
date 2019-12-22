@@ -33,7 +33,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
   }
   public async componentDidMount() {
     var username = this.props.match.params.username;
-    if (username == undefined) username = "";
+    if (username === undefined || username === null) username = "";
     await this.ReportServices.getReportIntro(username).then(response => {
       document.title = "Dashoard Intro";
       this.setState(current => ({
@@ -112,12 +112,12 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
           return (
             <TableRow key={index} className="kt-datatable__row">
               <TableCell className="category-icon">
-                {n.category == "1-Self" && (
+                {n.category === "1-Self" && (
                   <span title="Self">
                     <DKSVGIcon iconName="Star"></DKSVGIcon>
                   </span>
                 )}
-                {n.category == "2-Direct" && (
+                {n.category === "2-Direct" && (
                   <span title="Direct">
                     <DKSVGIcon iconName="Group"></DKSVGIcon>
                   </span>
