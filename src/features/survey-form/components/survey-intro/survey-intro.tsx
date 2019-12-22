@@ -100,14 +100,7 @@ btn btn-sm btn-clean read-more  w-25"
   }
 
   private onRenderRows = () => {
-    if (
-      Context.userId === 1824 ||
-      Context.userId === 3313 ||
-      Context.userId === 9 ||
-      Context.userId === 2031 ||
-      Context.userId === 2 ||
-      Context.userId === 3
-    ) {
+    if (Context.userId === 9 || Context.userId === 2 || Context.userId === 3) {
       if (this.state.appraisee.length === 0) {
         return (
           <TableRow>

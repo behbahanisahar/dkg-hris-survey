@@ -1,10 +1,11 @@
 import * as React from "react";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
-import { Table, TableBody } from "@material-ui/core";
+import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import ParticipationRate from "./../../../entities/aggregate-report/paticipation-rate";
 import "./clevel-participation.css";
+import { NoContent } from "../../nominationForm/components/no-content/no-content";
 
 interface IProps {
   reportType: string;
@@ -61,10 +62,17 @@ class ClevelParticipation extends React.Component<IProps, IState> {
   }
 
   private onRenderTable = () => {
-    if (this.state.data.length === 0) {
-      return <tr>Nothing to Display</tr>;
+    if (this.state.data?.length === 0) {
+      return (
+        <TableRow>
+          <TableCell align="center" colSpan={3} className="emptyRowLog">
+            <NoContent></NoContent>
+          </TableCell>
+        </TableRow>
+      );
     } else {
-      return this.state.data.map((n: ParticipationRate, index: any) => {
+      console.log(this.state.data);
+      return this.state.data?.map((n: ParticipationRate, index: any) => {
         return (
           <tr className={n.isTotal ? "total" : ""} key={index}>
             <th align="center">{n.title}</th>

@@ -102,7 +102,7 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
         }
       >
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
-        {this.state.isFetching === false && <Line options={options} height={60} data={this.state.data} />}
+        {this.state.isFetching === false && <Line options={options} height={100} data={this.state.data} />}
       </DKPortlet>
     );
   }

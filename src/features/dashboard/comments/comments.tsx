@@ -65,9 +65,7 @@ export default class Comments extends React.Component<IProps, IState> {
                       {comment.comments.map((text, i) => (
                         <div key={i} className="kt-widget2__item ">
                           <div className="kt-widget2__info">
-                            <a href="#" className="kt-widget2__title">
-                              {text}
-                            </a>
+                            <span className="kt-widget2__title">{text}</span>
                           </div>
                         </div>
                       ))}
