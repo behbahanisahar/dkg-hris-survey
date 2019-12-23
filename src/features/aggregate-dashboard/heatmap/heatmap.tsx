@@ -94,37 +94,35 @@ export default class HeatMap extends React.Component<IProps, IState> {
       return this.state.data?.map((n: Heatmap, index: any) => {
         return (
           <tr key={index}>
-            <td style={{ width: "1%" }} align="left">
+            <td style={{ width: "1%" }} align="center">
               {index + 1}
             </td>
-            <td style={{ width: "14%" }} align="left">
-              {n.title}
-            </td>
-            <td className={this.averageClass(n.category1, false)} align="center">
+            <td align="left">{n.title}</td>
+            <td style={{ width: "8%" }} className={this.averageClass(n.category1, false)} align="center">
               {n.category1}
             </td>
-            <td className={this.averageClass(n.category2, false)} align="center">
+            <td style={{ width: "8%" }} className={this.averageClass(n.category2, false)} align="center">
               {n.category2}
             </td>
-            <td className={this.averageClass(n.category3, false)} align="center">
+            <td style={{ width: "8%" }} className={this.averageClass(n.category3, false)} align="center">
               {n.category3}
             </td>
-            <td className={this.averageClass(n.category4, false)} align="center">
+            <td style={{ width: "8%" }} className={this.averageClass(n.category4, false)} align="center">
               {n.category4}
             </td>
-            <td className={this.averageClass(n.category5, false)} align="center">
+            <td style={{ width: "8%" }} className={this.averageClass(n.category5, false)} align="center">
               {n.category5}
             </td>
-            <td className={this.averageClass(n.category6, false)} align="center">
+            <td style={{ width: "8%" }} className={this.averageClass(n.category6, false)} align="center">
               {n.category6}
             </td>
-            <td className={this.averageClass(n.category7, false)} align="center">
+            <td style={{ width: "8%" }} className={this.averageClass(n.category7, false)} align="center">
               {n.category7}
             </td>
-            <td className={this.averageClass(n.category8, false)} align="center">
+            <td style={{ width: "8%" }} className={this.averageClass(n.category8, false)} align="center">
               {n.category8}
             </td>
-            <td className={this.averageClass(n.totalAverage, true)} align="center">
+            <td style={{ width: "12%" }} className={this.averageClass(n.totalAverage, true)} align="center">
               {n.totalAverage}
             </td>
           </tr>
