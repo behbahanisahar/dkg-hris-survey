@@ -40,6 +40,8 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   }
 
   public async componentDidMount() {
+    //  const myelement = document.getElementsByClassName("kt-container") as HTMLCollectionOf<HTMLElement>;
+    document.getElementsByClassName("kt-container")[0].className = "dashboardContainer";
     document.title = "DKDashboard";
     let username = this.props.match != undefined ? this.props.match.params.username : "";
     if (username == null) username = "";
