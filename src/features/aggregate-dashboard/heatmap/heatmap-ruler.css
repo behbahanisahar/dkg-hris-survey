@@ -6,7 +6,7 @@
 .ruler .cm,
 .ruler .mm {
   position: absolute;
-  border-left: 1px solid #555;
+  border-left: 1px solid #4c5559;
   height: 14px;
   width: 12.5%;
 }
@@ -16,6 +16,8 @@
   left: -3px;
   text-align: center;
   font-weight: 400;
+  color: #4c5559;
+  font-size: 0.8rem;
 }
 .ruler .mm {
   height: 5px;
