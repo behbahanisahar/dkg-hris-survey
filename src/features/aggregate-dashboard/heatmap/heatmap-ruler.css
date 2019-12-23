@@ -1,6 +1,6 @@
 .ruler {
   position: relative;
-  margin: 20px auto;
+  margin: 0 auto 35px;
   height: 14px;
 }
 .ruler .cm,

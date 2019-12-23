@@ -56,7 +56,7 @@ export default class HeatMap extends React.Component<IProps, IState> {
       <div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <DKPortlet hasHeader={false}>
+          <DKPortlet title={}>
             <HeataMapLegend></HeataMapLegend>
             <Table className="table table-bordered mt-3 ltr table-sm">
               <thead className="thead-dark">
