@@ -103,26 +103,32 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
           </Grid>
         </Grid>
         <Grid container spacing={3} className="mt-4">
-          <Grid item xs={6} sm={6}>
+          <Grid item xs={6} sm={8}>
             <CompetencyCompetency reportType={this.state.reportTypeText} />
           </Grid>
+          <Grid item xs={6} sm={4}>
+            <RadarCoreValue reportType={this.state.reportTypeText} />
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} className="mt-4">
           <Grid item xs={6} sm={6}>
             <DKPortlet hasHeader={false}>
               <QuestionComparison reportType={this.state.reportTypeText} comparingType="top" />
-
+            </DKPortlet>
+          </Grid>
+          <Grid item xs={6} sm={6}>
+            <DKPortlet hasHeader={false}>
               <QuestionComparison reportType={this.state.reportTypeText} comparingType="bottom" />
             </DKPortlet>
           </Grid>
         </Grid>
+
         <Grid container spacing={3} className="mt-4">
           <HeatMap reportType={this.state.reportTypeText} />
         </Grid>
         <Grid container spacing={3} className="mt-4">
-          <Grid item xs={6} sm={6}>
-            <RadarCoreValue reportType={this.state.reportTypeText} />
-          </Grid>
           {this.state.reportTypeText === "All" && (
-            <Grid item xs={6} sm={6}>
+            <Grid item xs={12} sm={12}>
               <CompetencyAvgComparison reportType={this.state.reportTypeText} />
             </Grid>
           )}
