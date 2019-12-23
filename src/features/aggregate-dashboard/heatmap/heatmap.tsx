@@ -53,7 +53,7 @@ export default class HeatMap extends React.Component<IProps, IState> {
   }
   public render() {
     return (
-      <DKPortlet hasHeader={false}>
+      <DKPortlet title="Heatmap">
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <div>
@@ -64,13 +64,13 @@ export default class HeatMap extends React.Component<IProps, IState> {
                   <th className="none-thead"> </th>
                   <th className="none-thead"> </th>
                   <th>Customer Centric</th>
-                  <th> Builder approach and Result oriented</th>
-                  <th> Drive for Excellence</th>
-                  <th> Teamwork</th>
+                  <th>Builder approach and Result oriented</th>
+                  <th>Drive for Excellence</th>
+                  <th>Teamwork</th>
                   <th>Decision Making</th>
-                  <th> Managing People</th>
-                  <th> Developing Vision & Strategy</th>
-                  <th> Business Acumen</th>
+                  <th>Managing People</th>
+                  <th>Developing Vision & Strategy</th>
+                  <th>Business Acumen</th>
                   <th>Total Average Rate</th>
                 </tr>
               </thead>
@@ -93,7 +93,7 @@ export default class HeatMap extends React.Component<IProps, IState> {
     } else {
       return this.state.data?.map((n: Heatmap, index: any) => {
         return (
-          <tr key={index}>
+          <tr key={index} className={index > 20 ? "hidden-row" : ""}>
             <td style={{ width: "1%" }} align="center">
               {index + 1}
             </td>
