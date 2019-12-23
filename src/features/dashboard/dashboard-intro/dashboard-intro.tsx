@@ -1,16 +1,16 @@
-import React from "react";
-import { TableHead, TableRow, TableCell, TablePagination } from "@material-ui/core";
+import { TableCell, TableHead, TablePagination, TableRow } from "@material-ui/core";
 import { MDBTable, MDBTableBody } from "mdbreact";
+import React from "react";
+import { DKPortlet } from "../../../core/components/portlet/portlet";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
+import DKSVGIcon from "../../../core/components/svg-icon/svg-icon";
+import IReportUsers from "../../../entities/reports/report-intro-users";
+import ReportServices from "../../../services/report-services";
+import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import IDashboardIntroProps from "./dashboard-intro-props";
 import IDashboardIntroState from "./dashboard-intro-state";
-import { NoContent } from "../../nominationForm/components/no-content/no-content";
-import ReportServices from "../../../services/report-services";
-import Spinner from "../../spinner/spinner";
 import "./dashboard-intro.css";
 
-import IReportUsers from "../../../entities/reports/report-intro-users";
-import { DKPortlet } from "../../../core/components/portlet/portlet";
-import DKSVGIcon from "../../../core/components/svg-icon/svg-icon";
 let allitems: any[] = [];
 export default class DashboardIntroPage extends React.Component<IDashboardIntroProps, IDashboardIntroState> {
   private ReportServices: ReportServices;
@@ -59,7 +59,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
     return (
       <div className="rtl survey-intro">
         <div>content</div>
-        {this.state.showSpinner && <Spinner />}
+        {this.state.showSpinner && <DKSpinner />}
         {!this.state.showSpinner && (
           <DKPortlet headerToolbar={searchBox} title="">
             <MDBTable className="kt-datatable__table" borderless>

@@ -2,7 +2,6 @@ import React from "react";
 import "./survey-intro.less";
 import ISurveyIntroState from "./survey-intro-state";
 import ListServices from "../../../../services/list-services";
-import Spinner from "../../../spinner/spinner";
 import { IAppraisee } from "../../../../entities/appraisee";
 import { TableHead, TableRow, TableCell, LinearProgress } from "@material-ui/core";
 import { MDBTable, MDBTableBody } from "mdbreact";
@@ -12,6 +11,7 @@ import ISurveyIntroProps from "./survey-intro-props";
 
 import Context from "../../../../utilities/context";
 import { Final } from "../../../nominationForm/components/no-content/Final-survey";
+import { DKSpinner } from "../../../../core/components/spinner/spinner";
 
 export default class SurveyIntroPage extends React.Component<ISurveyIntroProps, ISurveyIntroState> {
   private ListService: ListServices;
@@ -78,7 +78,7 @@ btn btn-sm btn-clean read-more  w-25"
           </button>
         </div>
         <div className="kt-portlet kt-portlet--height-fluid kt-sc-2">
-          {this.state.showSpinner && <Spinner />}
+          {this.state.showSpinner && <DKSpinner />}
           {!this.state.showSpinner && (
             <div>
               <div className="kt-portlet__head">

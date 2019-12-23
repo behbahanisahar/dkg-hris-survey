@@ -1,32 +1,32 @@
-import React from "react";
-import ISurveyFromState from "./survey-form-state";
-import ListServices from "../../../../services/list-services";
-import { MDBRow, MDBIcon } from "mdbreact";
-import "./survey-form.css";
-import IQuestion from "../../../../entities/survey-questions";
 import {
-  Slider,
-  Tooltip,
-  withStyles,
-  Theme,
-  Typography,
-  InputLabel,
-  TextField,
   Dialog,
-  DialogTitle,
+  DialogActions,
   DialogContent,
   DialogContentText,
-  DialogActions,
+  DialogTitle,
+  InputLabel,
+  Slider,
+  TextField,
+  Theme,
+  Tooltip,
+  Typography,
+  withStyles,
 } from "@material-ui/core";
-import ICategory from "../../../../entities/categories";
-import { ISurveyData } from "../../../../entities/survey-data";
-import Context from "../../../../utilities/context";
 import Info from "@material-ui/icons/Explicit";
+import { MDBIcon, MDBRow } from "mdbreact";
+import React from "react";
+import { toast, ToastOptions } from "react-toastify";
+import ICategory from "../../../../entities/categories";
 import Isurvey from "../../../../entities/survey";
-import Spinner from "../../../spinner/spinner";
+import { ISurveyData } from "../../../../entities/survey-data";
+import IQuestion from "../../../../entities/survey-questions";
+import ListServices from "../../../../services/list-services";
+import Context from "../../../../utilities/context";
 import Authentication from "../../../authentication/authentication";
-import { ToastOptions, toast } from "react-toastify";
 import { SurveyFormHeader } from "../survey-form-header/survey-form-header";
+import ISurveyFromState from "./survey-form-state";
+import "./survey-form.css";
+import { DKSpinner } from "../../../../core/components/spinner/spinner";
 
 // const sleep = (ms: any) => new Promise(resolve => setTimeout(resolve, ms));
 const HtmlTooltip = withStyles((theme: Theme) => ({
@@ -150,7 +150,7 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
     }
     return (
       <div>
-        {this.state.showSpinner && <Spinner />}
+        {this.state.showSpinner && <DKSpinner />}
         {!this.state.showSpinner && (
           <div>
             {this.state.SurveyFormData.statusCode !== 200 && (
@@ -497,7 +497,7 @@ class FormSurvey extends React.Component<IProps, ISurveyFromState> {
     let currentUserId: number = 0;
     let impersonated: boolean = false;
 
-    if (this.state.userId == 0 || this.state.userId == null) {
+    if (this.state.userId === 0 || this.state.userId == null) {
       currentUserId = Context.userId;
       impersonated = false;
     } else {

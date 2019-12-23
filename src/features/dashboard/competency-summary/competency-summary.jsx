@@ -1,15 +1,13 @@
-import React, { Component } from "react";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import ReportServices from "../../../services/report-services";
-import Util from "../../../utilities/utilities";
-import { borderRight } from "@material-ui/system";
-import "./competency-summary.css";
+import React from "react";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
+import ReportServices from "../../../services/report-services";
+import "./competency-summary.css";
 
 class CompetencySummaryClass extends React.Component {
   constructor(props) {

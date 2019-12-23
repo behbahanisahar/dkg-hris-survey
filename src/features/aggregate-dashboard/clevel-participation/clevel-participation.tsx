@@ -1,11 +1,11 @@
+import { Table, TableBody, TableCell, TableRow } from "@material-ui/core";
 import * as React from "react";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
-import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
+import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import ParticipationRate from "./../../../entities/aggregate-report/paticipation-rate";
 import "./clevel-participation.css";
-import { NoContent } from "../../nominationForm/components/no-content/no-content";
 
 interface IProps {
   reportType: string;

@@ -9,7 +9,6 @@ import INominationData from "../../../../entities/nomination";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
 import MYStepper from "../../../stepper/stepper";
 import IHistory from "../../../../entities/history";
-import Spinner from "../../../spinner/spinner";
 import Authentication from "../../../authentication/authentication";
 import { NominationFormHeader } from "../nomination-form-header/nomination-form-header";
 import HistoryTable from "../nomination-history-table/history-table";
@@ -18,6 +17,7 @@ import { withStyles } from "@material-ui/styles";
 import { Theme, Tooltip, Typography } from "@material-ui/core";
 import Explicit from "@material-ui/icons/Explicit";
 import { ToastOptions, toast } from "react-toastify";
+import { DKSpinner } from "../../../../core/components/spinner/spinner";
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
     backgroundColor: "#77787B",
@@ -150,7 +150,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   public render() {
     return (
       <div className="rtl">
-        {this.state.showSpinner && <Spinner />}
+        {this.state.showSpinner && <DKSpinner />}
         {!this.state.showSpinner && (
           <div>
             {this.state.NominationData.statusCode !== 200 && (

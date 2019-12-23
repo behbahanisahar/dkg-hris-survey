@@ -1,13 +1,13 @@
-import React from "react";
-import INominationIntroState from "./nomination-intro-state";
-import ListServices from "../../../../services/list-services";
-import { TableRow, TableCell } from "@material-ui/core";
-import UserTasks from "../../../../entities/user-task";
+import { TableCell, TableRow } from "@material-ui/core";
 import { MDBTable, MDBTableBody } from "mdbreact";
+import React from "react";
+import { DKSpinner } from "../../../../core/components/spinner/spinner";
+import UserTasks from "../../../../entities/user-task";
+import ListServices from "../../../../services/list-services";
+import { NoContent } from "../no-content/no-content";
+import INominationIntroState from "./nomination-intro-state";
 import "./nomination-intro.css";
 
-import Spinner from "../../../spinner/spinner";
-import { NoContent } from "../no-content/no-content";
 interface IState {
   match?: any;
 }
@@ -126,7 +126,7 @@ Thank you in advance for your cooperation in the path toward DK’s excellence.
               </div>
             </div>
             <div className="kt-portlet__body">
-              {this.state.showSpinner && <Spinner className="spinner" />}
+              {this.state.showSpinner && <DKSpinner className="spinner" />}
               {!this.state.showSpinner && (
                 <MDBTable className="kt-datatable__table" borderless>
                   <MDBTableBody className="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>

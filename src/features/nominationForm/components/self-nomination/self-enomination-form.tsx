@@ -10,7 +10,6 @@ import SnackBarMessage from "../snakbar-message/snackbar-message";
 import INominationData from "../../../../entities/nomination";
 import IUpdatedData from "../../../../entities/updatedNominationItem";
 import MYStepper from "../../../stepper/stepper";
-import Spinner from "../../../spinner/spinner";
 import Authentication from "../../../authentication/authentication";
 import { NominationFormHeader } from "../nomination-form-header/nomination-form-header";
 import AdvanceSelect from "../../../../core/components/advance-select/advance-select";
@@ -18,6 +17,7 @@ import { withStyles } from "@material-ui/styles";
 import { Theme, Tooltip, Typography } from "@material-ui/core";
 import Explicit from "@material-ui/icons/Explicit";
 import { toast, ToastOptions } from "react-toastify";
+import { DKSpinner } from "../../../../core/components/spinner/spinner";
 const HtmlTooltip = withStyles((theme: Theme) => ({
   tooltip: {
     backgroundColor: "#77787B",
@@ -120,7 +120,7 @@ export default class SelfNomination extends React.Component<ISurveyProps, ISurve
     // const Subordinates = this.state.NominationData.Subordinates;
     return (
       <div className="rtl">
-        {this.state.showSpinner && <Spinner />}
+        {this.state.showSpinner && <DKSpinner />}
         {!this.state.showSpinner && (
           <div>
             {this.state.NominationData.statusCode !== 200 && (
