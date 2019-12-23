@@ -53,10 +53,10 @@ export default class HeatMap extends React.Component<IProps, IState> {
   }
   public render() {
     return (
-      <div>
+      <DKPortlet hasHeader={false}>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <DKPortlet hasHeader={false}>
+          <div>
             <HeataMapLegend></HeataMapLegend>
             <Table className="table table-bordered mt-3 ltr table-sm">
               <thead className="thead-dark">
@@ -76,9 +76,9 @@ export default class HeatMap extends React.Component<IProps, IState> {
               </thead>
               <TableBody>{this.onRenderTable()}</TableBody>
             </Table>
-          </DKPortlet>
+          </div>
         )}
-      </div>
+      </DKPortlet>
     );
   }
   private onRenderTable = () => {
