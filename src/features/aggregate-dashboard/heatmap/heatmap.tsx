@@ -1,13 +1,18 @@
 import * as React from "react";
 
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
-import ComparisonQuestions from "../../../entities/aggregate-report/comparison-questions";
+import Heatmap from "./../../../entities/aggregate-report/heatmap";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
+import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
+import { NoContent } from "../../nominationForm/components/no-content/no-content";
+import "./heatmap.css";
+import { DKPortlet } from "../../../core/components/portlet/portlet";
 
 interface IProps {
   reportType: string;
 }
 interface IState {
-  data: ComparisonQuestions;
+  data: Heatmap[];
   isFetching: boolean;
 }
 export default class HeatMap extends React.Component<IProps, IState> {
@@ -17,10 +22,7 @@ export default class HeatMap extends React.Component<IProps, IState> {
     this.AggregateServices = new AggregateServices();
     this.state = {
       isFetching: true,
-      data: {
-        top: [],
-        bottom: [],
-      },
+      data: [],
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
@@ -29,12 +31,19 @@ export default class HeatMap extends React.Component<IProps, IState> {
     }
   }
   public async getData(props: string) {
-    await this.AggregateServices.getComparisonQuestions(props).then(response =>
-      this.setState(current => ({
-        ...current,
-        data: response,
-        isFetching: false,
-      })),
+    this.setState(current => ({
+      ...current,
+      isFetching: true,
+    }));
+    await this.AggregateServices.getHeatmap(props).then(response =>
+      this.setState(prevState => {
+        return {
+          ...prevState,
+
+          isFetching: false,
+          data: response,
+        };
+      }),
     );
   }
 
@@ -44,59 +53,112 @@ export default class HeatMap extends React.Component<IProps, IState> {
   public render() {
     return (
       <div>
-        {/* {this.state.isFetching === true && <DKSpinner></DKSpinner>}
+        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <div className="mb-5">
-            <h4 className="ltr">{this.props.comparingType === "top" ? "Strengths" : "improvement Areas"} </h4>
-            <Table className="table table-bordered mt-3 ltr">
+          <DKPortlet hasHeader={false}>
+            <Table className="table table-bordered mt-3 ltr table-sm">
               <thead className="thead-dark">
                 <tr>
-                  <th>Rank </th>
-                  <th>Statements </th>
-                  <th> Competency</th>
-                  <th> Average Rating</th>
+                  <th className="none-thead"> </th>
+                  <th className="none-thead"> </th>
+                  <th>Customer Centric</th>
+                  <th> Builder approach and Result oriented</th>
+                  <th> Drive for Excellence</th>
+                  <th> Teamwork</th>
+                  <th>Decision Making</th>
+                  <th> Managing People</th>
+                  <th> Developing Vision & Strategy</th>
+                  <th> Business Acumen</th>
+                  <th>Total Average Rate</th>
                 </tr>
               </thead>
               <TableBody>{this.onRenderTable()}</TableBody>
             </Table>
-          </div>
-        )} */}
-        test
+          </DKPortlet>
+        )}
       </div>
     );
   }
-  //   private onRenderTable = () => {
-  //     let Questions: QuestionDetail[] = [];
+  private onRenderTable = () => {
+    if (this.state.data.length === 0) {
+      return (
+        <TableRow>
+          <TableCell align="center" colSpan={3} className="emptyRowLog">
+            <NoContent></NoContent>
+          </TableCell>
+        </TableRow>
+      );
+    } else {
+      return this.state.data?.map((n: Heatmap, index: any) => {
+        return (
+          <tr key={index}>
+            <td style={{ width: "1%" }} align="left">
+              {index + 1}
+            </td>
+            <td style={{ width: "14%" }} align="left">
+              {n.title}
+            </td>
+            <td className={this.averageClass(n.category1, false)} align="center">
+              {n.category1}
+            </td>
+            <td className={this.averageClass(n.category2, false)} align="center">
+              {n.category2}
+            </td>
+            <td className={this.averageClass(n.category3, false)} align="center">
+              {n.category3}
+            </td>
+            <td className={this.averageClass(n.category4, false)} align="center">
+              {n.category4}
+            </td>
+            <td className={this.averageClass(n.category5, false)} align="center">
+              {n.category5}
+            </td>
+            <td className={this.averageClass(n.category6, false)} align="center">
+              {n.category6}
+            </td>
+            <td className={this.averageClass(n.category7, false)} align="center">
+              {n.category7}
+            </td>
+            <td className={this.averageClass(n.category8, false)} align="center">
+              {n.category8}
+            </td>
+            <td className={this.averageClass(n.totalAverage, true)} align="center">
+              {n.totalAverage}
+            </td>
+          </tr>
+        );
+      });
+    }
+  };
 
-  //     if (this.props.comparingType === "top") {
-  //       Questions = this.state.data.top;
-  //     } else {
-  //       Questions = this.state.data.bottom;
-  //     }
-  //     if (Questions.length === 0) {
-  //       return (
-  //         <TableRow>
-  //           <TableCell align="center" colSpan={3} className="emptyRowLog">
-  //             <NoContent></NoContent>
-  //           </TableCell>
-  //         </TableRow>
-  //       );
-  //     } else {
-  //       return Questions?.map((n: QuestionDetail, index: any) => {
-  //         return (
-  //           <tr key={index}>
-  //             <th className={this.props.comparingType === "top" ? "top" : "bottom"} align="center">
-  //               {n.rank}
-  //             </th>
-  //             <th align="center">
-  //               {" "}
-  //               <span dangerouslySetInnerHTML={{ __html: n.statements }}></span>
-  //             </th>
-  //             <td align="center">{n.competency}</td>
-  //             <td align="center">{n.averageRating}</td>
-  //           </tr>
-  //         );
-  //       });
-  //     }
-  //   };
+  public averageClass = (category: number, isTotal: boolean) => {
+    let avgClassName: string = "";
+    if (isTotal) {
+      if (category <= 2) {
+        avgClassName = "average1 average-bold ";
+      } else if (category > 2 && category <= 3) {
+        avgClassName = "average2 average-bold ";
+      } else if (category > 3 && category <= 4) {
+        avgClassName = "average3 average-bold ";
+      } else if (category > 4 && category <= 4.5) {
+        avgClassName = "average4 average-bold ";
+      } else if (category > 4.5 && category <= 5) {
+        avgClassName = "average5 average-bold ";
+      }
+      return avgClassName;
+    } else {
+      if (category <= 2) {
+        avgClassName = "averageBackground1 ";
+      } else if (category > 2 && category <= 3) {
+        avgClassName = "averageBackground2 ";
+      } else if (category > 3 && category <= 4) {
+        avgClassName = "averageBackground3 ";
+      } else if (category > 4 && category <= 4.5) {
+        avgClassName = "averageBackground4 ";
+      } else if (category > 4.5 && category <= 5) {
+        avgClassName = "averageBackground5 ";
+      }
+      return avgClassName;
+    }
+  };
 }

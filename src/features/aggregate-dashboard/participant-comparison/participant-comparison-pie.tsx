@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import { statistics } from "../../../entities/aggregate-report/statistics";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
 
 interface IProps {
   reportType: string;
@@ -31,12 +32,19 @@ export default class ParticipantComparisonPie extends React.Component<IProps, IS
     }
   }
   public async getData(props: string) {
+    this.setState(current => ({
+      ...current,
+      isFetching: true,
+    }));
     await this.AggregateServices.getStatistics(props).then(response =>
-      this.setState(current => ({
-        ...current,
-        data: response,
-        isFetching: false,
-      })),
+      this.setState(prevState => {
+        return {
+          ...prevState,
+
+          data: response,
+          isFetching: false,
+        };
+      }),
     );
   }
   public async componentDidMount() {
@@ -56,6 +64,20 @@ export default class ParticipantComparisonPie extends React.Component<IProps, IS
         },
       ],
     };
-    return <Pie data={Piedata} />;
+    return (
+      <div>
+        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
+        {this.state.isFetching === false && (
+          <Doughnut
+            options={{
+              responsive: true,
+              maintainAspectRatio: true,
+              weight: 2,
+            }}
+            data={Piedata}
+          />
+        )}
+      </div>
+    );
   }
 }

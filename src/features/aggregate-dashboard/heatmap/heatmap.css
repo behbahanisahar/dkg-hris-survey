@@ -1,0 +1,43 @@
+.average1 {
+  color: #ed145a;
+}
+.average2 {
+  color: #f15d5d;
+}
+.average3 {
+  color: #fdb740;
+}
+
+.average4 {
+  color: #97cd78;
+}
+
+.average5 {
+  color: #12b259;
+}
+
+.averageBackground1 {
+  background-color: #ed145a;
+}
+.averageBackground2 {
+  background-color: #f15d5d;
+}
+.averageBackground3 {
+  background-color: #fdb740;
+}
+
+.averageBackground4 {
+  background-color: #97cd78;
+}
+
+.averageBackground5 {
+  background-color: #12b259;
+}
+
+.average-bold {
+  font-weight: 600 !important;
+}
+.none-thead {
+  background: transparent !important;
+  border-color: transparent transparent #ebedf2 transparent !important;
+}

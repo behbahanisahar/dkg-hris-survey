@@ -9,6 +9,8 @@ import ParticipantComparison from "./participant-comparison/participant-comparis
 import QuestionComparison from "./comparing-questions/comparing-questions";
 import { DKPortlet } from "../../core/components/portlet/portlet";
 import HeatMap from "./heatmap/heatmap";
+import RadarCoreValue from "./radar-corevalue/radar-coreValue";
+import CompetencyAvgComparison from "./competencies-average/competencies-avg-comparison";
 interface IProps {}
 interface IState {
   reportType: number;
@@ -35,7 +37,15 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       },
       {
         key: 2,
-        text: "other",
+        text: "all",
+      },
+      {
+        key: 3,
+        text: "cto",
+      },
+      {
+        key: 4,
+        text: "chro",
       },
     ];
     return (
@@ -84,6 +94,14 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         </Grid>
         <Grid container spacing={3} className="mt-4">
           <HeatMap reportType={this.state.reportTypeText} />
+        </Grid>
+        <Grid container spacing={3} className="mt-4">
+          <Grid item xs={6} sm={6}>
+            <RadarCoreValue reportType={this.state.reportTypeText} />
+          </Grid>
+          <Grid item xs={6} sm={6}>
+            <CompetencyAvgComparison reportType={this.state.reportTypeText} />
+          </Grid>
         </Grid>
       </div>
     );

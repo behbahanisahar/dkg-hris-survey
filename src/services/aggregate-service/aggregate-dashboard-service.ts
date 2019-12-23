@@ -4,6 +4,9 @@ import MockAggregateData from "./aggregate-mock";
 import ParticipationRate from "./../../entities/aggregate-report/paticipation-rate";
 import ComparisonCompetency from "../../entities/aggregate-report/comparison-competency";
 import ComparisonQuestions from "../../entities/aggregate-report/comparison-questions";
+import Heatmap from "./../../entities/aggregate-report/heatmap";
+import RadarCoreValues from "../../entities/aggregate-report/core-calues-radar";
+import AverageCompetency from "../../entities/aggregate-report/average-competency";
 
 class AggregateServices extends ServiceBase {
   public constructor() {
@@ -42,6 +45,30 @@ class AggregateServices extends ServiceBase {
     }
 
     return Promise.resolve(MockAggregateData.MockComparingQuestion);
+  }
+  public async getHeatmap(level: string): Promise<Heatmap[]> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/aggregate/heatmap/" + level);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockAggregateData.MockHeat);
+  }
+  public async getRadarCoreValues(level: string): Promise<RadarCoreValues> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/aggregate/values/chart/" + level);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockAggregateData.MockRadarCoreValues);
+  }
+  public async getAverageCompetency(level: string): Promise<AverageCompetency> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/aggregate/overall/comparison/" + level);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockAggregateData.MockAvgCompetency);
   }
 }
 export default AggregateServices;

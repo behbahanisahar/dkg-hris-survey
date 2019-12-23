@@ -30,12 +30,19 @@ export default class ParticipantComparison extends React.Component<IProps, IStat
     }
   }
   public async getData(props: string) {
+    this.setState(current => ({
+      ...current,
+      isFetching: true,
+    }));
     await this.AggregateServices.getStatistics(props).then(response =>
-      this.setState(current => ({
-        ...current,
-        data: response,
-        isFetching: false,
-      })),
+      this.setState(prevState => {
+        return {
+          ...prevState,
+
+          data: response,
+          isFetching: false,
+        };
+      }),
     );
   }
 

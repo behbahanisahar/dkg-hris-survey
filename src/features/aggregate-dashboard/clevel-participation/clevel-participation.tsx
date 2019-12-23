@@ -30,12 +30,19 @@ class ClevelParticipation extends React.Component<IProps, IState> {
     }
   }
   public async getData(props: string) {
+    this.setState(current => ({
+      ...current,
+      isFetching: true,
+    }));
     await this.AggregateServices.getParticipationRate(props).then(response =>
-      this.setState(current => ({
-        ...current,
-        data: response,
-        isFetching: false,
-      })),
+      this.setState(prevState => {
+        return {
+          ...prevState,
+
+          data: response,
+          isFetching: false,
+        };
+      }),
     );
   }
   public async componentDidMount() {
