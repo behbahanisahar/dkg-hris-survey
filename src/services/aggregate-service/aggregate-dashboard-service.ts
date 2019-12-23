@@ -6,6 +6,7 @@ import ComparisonCompetency from "../../entities/aggregate-report/comparison-com
 import ComparisonQuestions from "../../entities/aggregate-report/comparison-questions";
 import Heatmap from "./../../entities/aggregate-report/heatmap";
 import RadarCoreValues from "../../entities/aggregate-report/core-calues-radar";
+import AverageCompetency from "../../entities/aggregate-report/average-competency";
 
 class AggregateServices extends ServiceBase {
   public constructor() {
@@ -60,6 +61,14 @@ class AggregateServices extends ServiceBase {
     }
 
     return Promise.resolve(MockAggregateData.MockRadarCoreValues);
+  }
+  public async getAverageCompetency(level: string): Promise<AverageCompetency> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/aggregate/overall/comparison/" + level);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockAggregateData.MockAvgCompetency);
   }
 }
 export default AggregateServices;

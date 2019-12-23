@@ -4,6 +4,7 @@ import ComparisonCompetency from "../../entities/aggregate-report/comparison-com
 import ComparisonQuestions from "../../entities/aggregate-report/comparison-questions";
 import Heatmap from "./../../entities/aggregate-report/heatmap";
 import RadarCoreValues from "../../entities/aggregate-report/core-calues-radar";
+import AverageCompetency from "./../../entities/aggregate-report/average-competency";
 export default class MockAggregateData {
   public static statisticMock: statistics = {
     completed: 24,
@@ -617,6 +618,58 @@ export default class MockAggregateData {
         hoverBorderColor: "rgba(239, 57, 78, 1)",
         borderWidth: 3,
         data: [4.3, 4.3, 4.4, 4.2, 4.2, 4, 4.3, 4.1],
+      },
+    ],
+  };
+  public static MockAvgCompetency: AverageCompetency = {
+    averageValue: 3.86,
+    labels: ["CCO", "CTO", "COO", "CMO", "CEO", "CHRO", "CFO", "Fidibo", "Digipay"],
+    datasets: [
+      {
+        borderDash: [0, 0],
+        fill: false,
+        lineTension: 0,
+        label: "Self",
+        drilldownData: "",
+        backgroundColor: [
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+          "rgba(25, 191, 211, 0)",
+        ],
+        borderColor: "rgba(25, 191, 211, 1)",
+        hoverBackgroundColor: [
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+          "rgba(25, 191, 211, 0.4)",
+        ],
+        hoverBorderColor: "rgba(25, 191, 211, 1)",
+        borderWidth: 3,
+        data: [
+          3.92472820441798,
+          3.96054929353866,
+          3.94308995389729,
+          3.78152598812799,
+          4.24252651880424,
+          3.80172146401985,
+          3.78072044647387,
+          3.53255528255528,
+          3.61262683201804,
+          4.72,
+        ],
       },
     ],
   };
