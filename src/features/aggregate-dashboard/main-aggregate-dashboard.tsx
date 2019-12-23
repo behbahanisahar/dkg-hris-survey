@@ -11,62 +11,84 @@ import { DKPortlet } from "../../core/components/portlet/portlet";
 import HeatMap from "./heatmap/heatmap";
 import RadarCoreValue from "./radar-corevalue/radar-coreValue";
 import CompetencyAvgComparison from "./competencies-average/competencies-avg-comparison";
-interface IProps {}
+import AggregateServices from "../../services/aggregate-service/aggregate-dashboard-service";
+import DashboardInfo from "../../entities/aggregate-report/dashboard-info";
+import DropDownModel from "./../../entities/dropdown";
+interface IProps {
+  match: any;
+}
 interface IState {
   reportType: number;
   reportTypeText: string;
+  dashboardInfo: DashboardInfo;
+  ReportTypes: DropDownModel[];
 }
 export default class MainAggregateDashboard extends React.Component<IProps, IState> {
+  private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
+    this.AggregateServices = new AggregateServices();
     this.state = {
       reportType: 1,
+      ReportTypes: [],
       reportTypeText: "clevel",
+      dashboardInfo: {
+        dropdownValues: [],
+        userClevel: "",
+      },
     };
   }
 
   public async componentDidMount() {
     document.title = "DKDashboard";
+    let username = this.props.match != undefined ? this.props.match.params.username : "";
+    if (username == null) username = "";
+    await this.AggregateServices.getInfo(username).then(response => {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          dashboardInfo: response,
+        };
+      });
+    });
+    if (this.state.dashboardInfo.dropdownValues !== undefined) {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          ReportTypes: this.state.dashboardInfo.dropdownValues,
+        };
+      });
+    } else {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          reportTypeText: this.state.dashboardInfo.userClevel,
+        };
+      });
+    }
   }
   public render() {
-    console.log(this.state.reportTypeText);
-    const ReportTypes = [
-      {
-        key: 1,
-        text: "clevel",
-      },
-      {
-        key: 2,
-        text: "all",
-      },
-      {
-        key: 3,
-        text: "cto",
-      },
-      {
-        key: 4,
-        text: "chro",
-      },
-    ];
     return (
       <div className="ltr">
         <Grid container spacing={3} className="mt-4">
           <Grid item xs={3} sm={3}>
-            <Select
-              margin="dense"
-              dir="ltr"
-              value={this.state.reportType}
-              fullWidth={true}
-              onChange={event => this.onChangeFields("reportTypeText", "reportType", event)}
-              inputProps={{
-                name: "ReportType",
-                id: "demo-controlled-open-select",
-              }}
-              // IconComponent={KeyboardArrowDown}
-              variant="outlined"
-            >
-              {this.renderDropDown(ReportTypes)}
-            </Select>
+            {this.state.dashboardInfo.dropdownValues !== undefined && (
+              <Select
+                margin="dense"
+                dir="ltr"
+                value={this.state.reportType}
+                fullWidth={true}
+                onChange={event => this.onChangeFields("reportTypeText", "reportType", event)}
+                inputProps={{
+                  name: "ReportType",
+                  id: "demo-controlled-open-select",
+                }}
+                // IconComponent={KeyboardArrowDown}
+                variant="outlined"
+              >
+                {this.renderDropDown(this.state.ReportTypes)}
+              </Select>
+            )}
           </Grid>
         </Grid>
         <Grid container spacing={3} className="mt-4">
@@ -99,9 +121,11 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
           <Grid item xs={6} sm={6}>
             <RadarCoreValue reportType={this.state.reportTypeText} />
           </Grid>
-          <Grid item xs={6} sm={6}>
-            <CompetencyAvgComparison reportType={this.state.reportTypeText} />
-          </Grid>
+          {this.state.reportTypeText === "All" && (
+            <Grid item xs={6} sm={6}>
+              <CompetencyAvgComparison reportType={this.state.reportTypeText} />
+            </Grid>
+          )}
         </Grid>
       </div>
     );

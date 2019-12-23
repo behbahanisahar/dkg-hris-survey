@@ -83,8 +83,7 @@ class ClevelParticipation extends React.Component<IProps, IState> {
         return (
           <tr className={n.isTotal ? "total" : ""} key={index}>
             <th align="center">{n.title}</th>
-            {!n.isTotal && <td align="center">{n.rate}</td>}
-            {n.isTotal && <td align="center">{n.rate}</td>}
+            <td align="center">{n.rate}</td>
           </tr>
         );
       });

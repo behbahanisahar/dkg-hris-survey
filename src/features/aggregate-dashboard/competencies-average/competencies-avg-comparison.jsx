@@ -96,6 +96,33 @@ export default class CompetencyAvgComparison extends React.Component {
     };
 
     var options = {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: false,
+              stepSize: 0.5,
+              min: 1,
+              max: 5,
+            },
+          },
+        ],
+        xAxes: [
+          {
+            ticks: {
+              beginAtZero: false,
+              stepSize: 0.5,
+
+              min: 1,
+              max: 5,
+            },
+          },
+        ],
+      },
+
+      legend: {
+        display: false,
+      },
       annotation: {
         annotations: [
           {
@@ -112,7 +139,7 @@ export default class CompetencyAvgComparison extends React.Component {
     };
     return (
       <div className="ltr">
-        <DKPortlet title="Results based on DK Core Values">
+        <DKPortlet title="Competencies Average Rates Comparison">
           {this.state.isFetching === true && <DKSpinner></DKSpinner>}
           {this.state.isFetching === false && <Bar type="bar" data={this.state.barChartData} options={options} />}
         </DKPortlet>
