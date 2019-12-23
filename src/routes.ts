@@ -81,6 +81,11 @@ const routes: RouteTypes[] = [
   },
   {
     exact: false,
+    path: "/DKDashboard/:username",
+    component: MainAggregateDashboard,
+  },
+  {
+    exact: true,
     path: "/DKDashboard",
     component: MainAggregateDashboard,
   },

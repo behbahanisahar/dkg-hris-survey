@@ -5,6 +5,7 @@ import ComparisonQuestions from "../../entities/aggregate-report/comparison-ques
 import Heatmap from "./../../entities/aggregate-report/heatmap";
 import RadarCoreValues from "../../entities/aggregate-report/core-calues-radar";
 import AverageCompetency from "./../../entities/aggregate-report/average-competency";
+import DashboardInfo from "../../entities/aggregate-report/dashboard-info";
 export default class MockAggregateData {
   public static statisticMock: statistics = {
     completed: 24,
@@ -672,5 +673,55 @@ export default class MockAggregateData {
         ],
       },
     ],
+  };
+
+  public static MockDashboardInfo: DashboardInfo = {
+    dropdownValues: [
+      {
+        key: "Clevel",
+        text: "Clevel",
+      },
+      {
+        key: "All",
+        text: "All",
+      },
+      {
+        key: "CCO",
+        text: "CCO",
+      },
+      {
+        key: "CEO",
+        text: "CEO",
+      },
+      {
+        key: "CFO",
+        text: "CFO",
+      },
+      {
+        key: "CHRO",
+        text: "CHRO",
+      },
+      {
+        key: "CMO",
+        text: "CMO",
+      },
+      {
+        key: "COO",
+        text: "COO",
+      },
+      {
+        key: "CTO",
+        text: "CTO",
+      },
+      {
+        key: "Fidibo",
+        text: "Fidibo",
+      },
+      {
+        key: "DigiPay",
+        text: "DigiPay",
+      },
+    ],
+    userClevel: "CEO",
   };
 }
