@@ -6,6 +6,7 @@ import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
 import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import "./heatmap.css";
+import { DKPortlet } from "../../../core/components/portlet/portlet";
 
 interface IProps {
   reportType: string;
@@ -30,12 +31,19 @@ export default class HeatMap extends React.Component<IProps, IState> {
     }
   }
   public async getData(props: string) {
+    this.setState(current => ({
+      ...current,
+      isFetching: true,
+    }));
     await this.AggregateServices.getHeatmap(props).then(response =>
-      this.setState(current => ({
-        ...current,
-        data: response,
-        isFetching: false,
-      })),
+      this.setState(prevState => {
+        return {
+          ...prevState,
+
+          isFetching: false,
+          data: response,
+        };
+      }),
     );
   }
 
@@ -47,7 +55,7 @@ export default class HeatMap extends React.Component<IProps, IState> {
       <div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <div className="mb-5">
+          <DKPortlet hasHeader={false}>
             <Table className="table table-bordered mt-3 ltr table-sm">
               <thead className="thead-dark">
                 <tr>
@@ -66,9 +74,8 @@ export default class HeatMap extends React.Component<IProps, IState> {
               </thead>
               <TableBody>{this.onRenderTable()}</TableBody>
             </Table>
-          </div>
+          </DKPortlet>
         )}
-        test
       </div>
     );
   }

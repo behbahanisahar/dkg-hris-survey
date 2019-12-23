@@ -27,11 +27,19 @@ class CompetencyCompetency extends React.Component {
     }
   }
   async getData(props) {
+    this.setState(current => ({
+      ...current,
+      isFetching: true,
+    }));
     await this.AggregateServices.getComparisonCompetency(props).then(response =>
-      this.setState(state => ({
-        isFetching: false,
-        reportData: response,
-      })),
+      this.setState(prevState => {
+        return {
+          ...prevState,
+
+          isFetching: false,
+          reportData: response,
+        };
+      }),
     );
   }
   async componentDidMount() {

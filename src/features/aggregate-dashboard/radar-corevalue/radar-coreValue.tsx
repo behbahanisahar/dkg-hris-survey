@@ -34,6 +34,10 @@ export default class RadarCoreValue extends React.Component<IProps, IState> {
     }
   }
   public async getData(props: string) {
+    this.setState(current => ({
+      ...current,
+      isFetching: true,
+    }));
     await this.AggregateServices.getRadarCoreValues(props).then(response => {
       const newDataSet = response.datasets.map(
         ({
