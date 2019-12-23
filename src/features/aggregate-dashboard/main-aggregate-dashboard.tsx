@@ -106,10 +106,17 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
           <Grid item xs={6} sm={6}>
             <CompetencyCompetency reportType={this.state.reportTypeText} />
           </Grid>
-          <Grid item xs={6} sm={6}>
+        </Grid>
+        <Grid container spacing={3} className="mt-4">
+          <Grid item xs={6} sm={12}>
             <DKPortlet hasHeader={false}>
               <QuestionComparison reportType={this.state.reportTypeText} comparingType="top" />
-
+            </DKPortlet>
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} className="mt-4">
+          <Grid item xs={6} sm={12}>
+            <DKPortlet hasHeader={false}>
               <QuestionComparison reportType={this.state.reportTypeText} comparingType="bottom" />
             </DKPortlet>
           </Grid>
