@@ -15,11 +15,9 @@ import { DKSpinner } from "../../../../core/components/spinner/spinner";
 
 export default class SurveyIntroPage extends React.Component<ISurveyIntroProps, ISurveyIntroState> {
   private ListService: ListServices;
-  // private Util: Utilities;
   public constructor(props: any) {
     super(props);
     this.ListService = new ListServices();
-    //  this.Util = new Utilities();
 
     this.state = {
       appraisee: [],
@@ -186,10 +184,7 @@ btn btn-sm btn-clean read-more  w-25"
     window.location.href = "#/surveyform/" + ItemId;
   };
   private showContent = () => {
-    // let classNameDiv = document.getElementById("expand").className;
-
     const myComponent = document.getElementById("expand");
-    // At this point `myComponent` is of type HTMLElement | null
     if (myComponent) {
       if (myComponent.className === "collapse") {
         const collapsableLength = document.getElementsByClassName("collapse").length;
@@ -219,7 +214,5 @@ btn btn-sm btn-clean read-more  w-25"
         }
       }
     }
-
-    // document.getElementsByClassName("collapse")[1].className = "collapse-show";
   };
 }

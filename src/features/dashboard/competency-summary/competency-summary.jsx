@@ -68,7 +68,6 @@ class CompetencySummaryClass extends React.Component {
   }
 
   render() {
-    const colors = ["#3B86FF", "#77E5AA", "#093fb9", "#6d00f6", "#FF006E", "#FFBE0B", "#1EFFBC", "#ff8b12"];
     const itemId = this.props.itemId;
     const lang = this.props.lang;
     const options = {
@@ -169,7 +168,7 @@ class CompetencySummaryClass extends React.Component {
   }
   afterChartCreated(chart) {
     this.internalChart = chart;
-    if (this.state.isFetching == false && this.internalChart.series.length >= 2) {
+    if (this.state.isFetching === false && this.internalChart.series.length >= 2) {
       this.internalChart.series[2].data.forEach(element => {
         element.graphic.translate(6, 0);
       });

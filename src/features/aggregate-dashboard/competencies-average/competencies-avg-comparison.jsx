@@ -1,12 +1,9 @@
+import "chartjs-plugin-annotation";
 import * as React from "react";
 import { Bar } from "react-chartjs-2";
-
-import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
-import { DKSpinner } from "../../../core/components/spinner/spinner";
-import AverageCompetency from "../../../entities/aggregate-report/average-competency";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
-import { Chart } from "chartjs-lines-plugin";
-import "chartjs-plugin-annotation";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
+import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 
 export default class CompetencyAvgComparison extends React.Component {
   constructor(props) {
@@ -71,7 +68,6 @@ export default class CompetencyAvgComparison extends React.Component {
       this.setState(prevState => {
         return {
           ...prevState,
-
           data,
           isFetching: false,
           barChartData,

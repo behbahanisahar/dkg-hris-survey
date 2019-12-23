@@ -107,7 +107,7 @@ class ReportServices extends ServiceBase {
   public async getReportIntro(username: string): Promise<any> {
     if (process.env.NODE_ENV === "production") {
       let items: any;
-      if (username != "") items = await this.get("survey/report/intro?username=" + username);
+      if (username !== "") items = await this.get("survey/report/intro?username=" + username);
       else items = await this.get("survey/report/intro");
       return Promise.resolve(items.data);
     }
