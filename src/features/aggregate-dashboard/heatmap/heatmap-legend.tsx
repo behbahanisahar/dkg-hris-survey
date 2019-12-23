@@ -7,15 +7,15 @@ export function HeataMapLegend() {
       <div className="row mx-5 legend py-3">
         <div className="col-6">
           <div className="row">
-            <div className="col-6 averageBackground1">Clear Development Nees</div>
-            <div className="col-6 averageBackground2">Development Need</div>
+            <div className="col-6 averageBackground1 grow">Clear Development Need</div>
+            <div className="col-6 averageBackground2 grow">Development Need</div>
           </div>
         </div>
         <div className="col-6">
           <div className="row">
-            <div className="col-6 averageBackground3">Average</div>
-            <div className="col-3 averageBackground4">Strong</div>
-            <div className="col-3 averageBackground5">Expert</div>
+            <div className="col-6 averageBackground3 grow">Average</div>
+            <div className="col-3 averageBackground4 grow">Strong</div>
+            <div className="col-3 averageBackground5 grow">Expert</div>
           </div>
         </div>
       </div>
