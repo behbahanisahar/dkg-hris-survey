@@ -7,6 +7,7 @@ import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
 import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import "./heatmap.css";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
+import { HeataMapLegend } from "./heatmap-legend";
 
 interface IProps {
   reportType: string;
@@ -56,6 +57,7 @@ export default class HeatMap extends React.Component<IProps, IState> {
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <DKPortlet hasHeader={false}>
+            <HeataMapLegend></HeataMapLegend>
             <Table className="table table-bordered mt-3 ltr table-sm">
               <thead className="thead-dark">
                 <tr>

@@ -37,7 +37,16 @@
 .average-bold {
   font-weight: 600 !important;
 }
+
 .none-thead {
   background: transparent !important;
   border-color: transparent transparent #ebedf2 transparent !important;
+}
+.legend {
+  color: #fff;
+}
+.legend .col-6 {
+  text-align: center;
+  font-weight: 500;
+  line-height: 3rem;
 }
