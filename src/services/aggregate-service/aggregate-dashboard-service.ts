@@ -70,5 +70,13 @@ class AggregateServices extends ServiceBase {
 
     return Promise.resolve(MockAggregateData.MockAvgCompetency);
   }
+  public async getInfo(username: string): Promise<AverageCompetency> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/aggregate/info?username=" + username);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockAggregateData.MockAvgCompetency);
+  }
 }
 export default AggregateServices;
