@@ -8,38 +8,24 @@ interface IState {
   isFetching: boolean;
 }
 export default class OverallImprovement extends React.Component<AggregateReportProps, IState> {
-  // private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
-    // this.AggregateServices = new AggregateServices();
     this.state = {
       isFetching: true,
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.props.reportType !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+    this.getData(nextProps.reportType);
   }
-  public async getData(props: string) {
+  public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
       isFetching: false,
     }));
-    // await this.AggregateServices.getStatistics(props).then(response =>
-    //   this.setState(prevState => {
-    //     return {
-    //       ...prevState,
-
-    //       data: response,
-    //       isFetching: false,
-    //     };
-    //   }),
-    // );
   }
 
   public async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
   public render() {
     const data = {
