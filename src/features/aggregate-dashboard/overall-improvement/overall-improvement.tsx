@@ -25,11 +25,13 @@ export default class OverallImprovement extends React.Component<AggregateReportP
   }
 
   public async componentDidMount() {
+    //  Chart.defaults.global.elements.point = "triangle";
     this.getData(this.props);
   }
   public render() {
     const data = {
       labels: ["1396", "1397"],
+      pointStyle: "triangle",
       datasets: [
         {
           fill: false,
@@ -44,6 +46,7 @@ export default class OverallImprovement extends React.Component<AggregateReportP
           pointBorderColor: "rgba(75,192,192,1)",
           pointBackgroundColor: "#fff",
           pointBorderWidth: 1,
+          pointStyle: "triangle",
           pointHoverRadius: 5,
           pointHoverBackgroundColor: "rgba(75,192,192,1)",
           pointHoverBorderColor: "rgba(220,220,220,1)",
