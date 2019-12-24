@@ -93,7 +93,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                     dir="ltr"
                     value={this.state.reportType}
                     fullWidth={true}
-                    onChange={event => this.onChangeFields("reportTypeText", "reportType", event)}
+                    onChange={event => this.onChangeFields(event)}
                     inputProps={{
                       name: "ReportType",
                       id: "demo-controlled-open-select",
@@ -170,7 +170,10 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             <Grid container spacing={3} className="mt-4">
               {this.state.reportTypeText === "All" && (
                 <Grid item xs={12} sm={12}>
-                  <CompetencyAvgComparison reportType={this.state.reportTypeText} />
+                  <CompetencyAvgComparison
+                    viewAs={this.state.reportProps.viewAs}
+                    level={this.state.reportProps.level}
+                  />
                 </Grid>
               )}
             </Grid>
@@ -180,14 +183,17 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
     );
   }
 
-  private onChangeFields = (Field: string, key: string, event: any): void => {
+  private onChangeFields = (event: any): void => {
     this.setState(prevState => {
       return {
         ...prevState,
-        [Field]: event.nativeEvent.target.outerText,
-        [key]: event.target.value,
+        reportProps: {
+          ...prevState.reportProps,
+          level: event.nativeEvent.target.outerText,
+        },
       };
     });
+    console.log(this.state.reportProps.level);
   };
 
   public renderDropDown = (items: any[]): JSX.Element[] => {

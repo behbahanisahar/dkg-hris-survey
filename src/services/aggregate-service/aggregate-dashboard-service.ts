@@ -14,7 +14,14 @@ class AggregateServices extends ServiceBase {
   public constructor() {
     super();
   }
+  public async getInfo(username: string): Promise<DashboardInfo> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get("survey/aggregate/info?viewAs=" + username);
+      return Promise.resolve(items.data);
+    }
 
+    return Promise.resolve(MockAggregateData.MockDashboardInfo);
+  }
   public async getStatistics(props: AggregateReportProps): Promise<statistics> {
     if (process.env.NODE_ENV === "production") {
       const items: any = await this.get(`survey/aggregate/statistics/${props.level}?viewAs=${props.viewAs}`);
@@ -73,14 +80,6 @@ class AggregateServices extends ServiceBase {
     }
 
     return Promise.resolve(MockAggregateData.MockAvgCompetency);
-  }
-  public async getInfo(username: string): Promise<DashboardInfo> {
-    if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("survey/aggregate/info?viewAs=" + username);
-      return Promise.resolve(items.data);
-    }
-
-    return Promise.resolve(MockAggregateData.MockDashboardInfo);
   }
 }
 export default AggregateServices;

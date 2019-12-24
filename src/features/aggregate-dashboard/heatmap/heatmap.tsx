@@ -29,16 +29,15 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
       filterName: "",
     };
   }
-  public async componentWillReceiveProps(nextProps: any) {
-    if (this.props.level !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+  public async componentWillReceiveProps(nextProps: AggregateReportProps) {
+    this.getData(nextProps);
   }
   public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
       isFetching: true,
     }));
+    console.log("heatmap", props);
     await this.AggregateServices.getHeatmap(props).then(response =>
       this.setState(prevState => {
         return {
