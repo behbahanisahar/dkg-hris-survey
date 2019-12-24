@@ -16,6 +16,9 @@ import DashboardInfo from "../../entities/aggregate-report/dashboard-info";
 import DropDownModel from "./../../entities/dropdown";
 
 import ParticipantComparisonSummary from "./participant-comparison/participant-comparison-summary";
+import TotalParticipant from "./total-participant/total-participant";
+import OverallImprovement from "./overall-improvement/overall-improvement";
+import DashboardSummary from "./dashboard-summary/dashboard-summary";
 interface IProps {
   match: any;
 }
@@ -97,11 +100,18 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         </Grid>
         <Grid container spacing={3} className="mt-4">
           <Grid item xs={3} sm={3}>
+            <DashboardSummary reportType={this.state.reportTypeText} />
+          </Grid>
+          <Grid item xs={3} sm={3}>
+            <TotalParticipant reportType={this.state.reportTypeText} />
+          </Grid>
+          <Grid item xs={3} sm={3}>
+            <OverallImprovement reportType={this.state.reportTypeText} />{" "}
+          </Grid>
+          <Grid item xs={3} sm={3}>
+            {" "}
             <ParticipantComparisonSummary reportType={this.state.reportTypeText} />
           </Grid>
-          <Grid item xs={3} sm={3}></Grid>
-          <Grid item xs={3} sm={3}></Grid>
-          <Grid item xs={3} sm={3}></Grid>
         </Grid>
         <Grid container spacing={3} className="mt-4">
           <Grid item xs={6} sm={6}>

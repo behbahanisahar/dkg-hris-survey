@@ -2,10 +2,8 @@ import * as React from "react";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { statistics } from "../../../entities/aggregate-report/statistics";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
-import "./participant-comparison.css";
-import ParticipantComparisonPie from "./participant-comparison-pie";
 import { DKPortletSummary } from "../../../core/components/portlet/summary-portlet";
-
+import pic from "./../../../assets/img/Artboards.png";
 interface IProps {
   reportType: string;
 }
@@ -13,7 +11,7 @@ interface IState {
   data: statistics;
   isFetching: boolean;
 }
-export default class ParticipantComparisonSummary extends React.Component<IProps, IState> {
+export default class DashboardSummary extends React.Component<IProps, IState> {
   private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
@@ -57,22 +55,27 @@ export default class ParticipantComparisonSummary extends React.Component<IProps
       <div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <DKPortletSummary background="#06BDCD" title="Number Of Assessors">
+          <DKPortletSummary background="#F05B71" title=" 360̊ Feedback Aggregate Report">
             <div style={{ color: "black" }} className="kt-widget17__items">
-              <div style={{ textAlign: "center" }} className="kt-widget17__item">
-                {" "}
-                <span>Completed</span> <h3>{this.state.data?.completed}</h3>
-              </div>
-              <div style={{ textAlign: "center" }} className="kt-widget17__item">
-                {" "}
-                <span>UnCompleted</span> <h3>{this.state.data?.uncompleted}</h3>
+              <div style={{ textAlign: "center", fontSize: "2.1rem" }} className="kt-widget17__item">
+                Level Of Leaders
+                <img src={pic} style={{ width: "84%" }} />
               </div>
             </div>
-            <div style={{ color: "black" }} className="kt-widget17__items">
+            <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
               <div className="kt-widget17__item">
-                <div>
-                  <ParticipantComparisonPie reportType={this.props.reportType} />
-                </div>
+                <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>Directors</span>{" "}
+              </div>
+              <div className="kt-widget17__item">
+                <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>SMs</span>{" "}
+              </div>
+            </div>
+            <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
+              <div className="kt-widget17__item">
+                <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>MMs</span>{" "}
+              </div>
+              <div className="kt-widget17__item">
+                <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>Supervisors</span>{" "}
               </div>
             </div>
           </DKPortletSummary>
