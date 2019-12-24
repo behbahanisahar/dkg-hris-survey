@@ -1,26 +1,23 @@
+import { Table, TableBody, TableCell, TableRow } from "@material-ui/core";
 import * as React from "react";
-
-import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
-import Heatmap from "./../../../entities/aggregate-report/heatmap";
-import { DKSpinner } from "../../../core/components/spinner/spinner";
-import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
-
-import "./heatmap.css";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
-import { HeataMapLegend } from "./heatmap-legend";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
+import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { NoContentEnglish } from "../../nominationForm/components/no-content/no-content-english";
+import { AggregateReportProps } from "../aggregate-report-props";
+import Heatmap from "./../../../entities/aggregate-report/heatmap";
+import { HeataMapLegend } from "./heatmap-legend";
+import "./heatmap.css";
 
 let allitems: any[] = [];
-interface IProps {
-  reportType: string;
-}
+
 interface IState {
   data: Heatmap[];
   isFetching: boolean;
   buttonText: string;
   filterName: string;
 }
-export default class HeatMap extends React.Component<IProps, IState> {
+export default class HeatMap extends React.Component<AggregateReportProps, IState> {
   private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
@@ -33,11 +30,11 @@ export default class HeatMap extends React.Component<IProps, IState> {
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.props.reportType !== nextProps.reportType) {
+    if (this.props.level !== nextProps.reportType) {
       this.getData(nextProps.reportType);
     }
   }
-  public async getData(props: string) {
+  public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
       isFetching: true,
@@ -46,7 +43,6 @@ export default class HeatMap extends React.Component<IProps, IState> {
       this.setState(prevState => {
         return {
           ...prevState,
-
           isFetching: false,
           data: response,
         };
@@ -56,7 +52,7 @@ export default class HeatMap extends React.Component<IProps, IState> {
   }
 
   public async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
   public render() {
     return (

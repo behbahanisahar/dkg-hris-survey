@@ -3,15 +3,14 @@ import * as React from "react";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { statistics } from "../../../entities/aggregate-report/statistics";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
+import { AggregateReportProps } from "../aggregate-report-props";
 import "./participant-comparison.css";
-interface IProps {
-  reportType: string;
-}
+
 interface IState {
   data: statistics;
   isFetching: boolean;
 }
-export default class ParticipantComparison extends React.Component<IProps, IState> {
+export default class ParticipantComparison extends React.Component<AggregateReportProps, IState> {
   private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
@@ -26,11 +25,9 @@ export default class ParticipantComparison extends React.Component<IProps, IStat
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.props.reportType !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+    this.getData(nextProps.reportType);
   }
-  public async getData(props: string) {
+  public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
       isFetching: true,
@@ -48,7 +45,7 @@ export default class ParticipantComparison extends React.Component<IProps, IStat
   }
 
   public async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
   public render() {
     return (

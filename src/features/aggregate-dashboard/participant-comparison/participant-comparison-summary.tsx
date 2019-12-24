@@ -2,17 +2,15 @@ import * as React from "react";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { statistics } from "../../../entities/aggregate-report/statistics";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
-import "./participant-comparison.css";
+import { AggregateReportProps } from "../aggregate-report-props";
 import ParticipantComparisonPie from "./participant-comparison-pie";
+import "./participant-comparison.css";
 
-interface IProps {
-  reportType: string;
-}
 interface IState {
   data: statistics;
   isFetching: boolean;
 }
-export default class ParticipantComparisonSummary extends React.Component<IProps, IState> {
+export default class ParticipantComparisonSummary extends React.Component<AggregateReportProps, IState> {
   private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
@@ -27,11 +25,9 @@ export default class ParticipantComparisonSummary extends React.Component<IProps
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.props.reportType !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+    this.getData(nextProps.reportType);
   }
-  public async getData(props: string) {
+  public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
       isFetching: true,
@@ -49,7 +45,7 @@ export default class ParticipantComparisonSummary extends React.Component<IProps
   }
 
   public async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
   public render() {
     return (
@@ -82,7 +78,7 @@ export default class ParticipantComparisonSummary extends React.Component<IProps
                   <div style={{ color: "black" }} className="kt-widget17__items">
                     <div className="kt-widget17__item">
                       <div>
-                        <ParticipantComparisonPie reportType={this.props.reportType} />
+                        <ParticipantComparisonPie viewAs={this.props.viewAs} level={this.props.level} />
                       </div>
                     </div>
                   </div>

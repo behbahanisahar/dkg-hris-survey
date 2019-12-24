@@ -6,16 +6,13 @@ import RadarCoreValues from "../../../entities/aggregate-report/core-calues-rada
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import "chartjs-plugin-datalabels";
-
-interface IProps {
-  reportType: string;
-}
+import { AggregateReportProps } from "../aggregate-report-props";
 
 interface IState {
   data: RadarCoreValues;
   isFetching: boolean;
 }
-export default class RadarCoreValue extends React.Component<IProps, IState> {
+export default class RadarCoreValue extends React.Component<AggregateReportProps, IState> {
   private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
@@ -30,11 +27,10 @@ export default class RadarCoreValue extends React.Component<IProps, IState> {
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.props.reportType !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+    this.getData(nextProps.reportType);
   }
-  public async getData(props: string) {
+
+  public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
       isFetching: true,
@@ -82,7 +78,7 @@ export default class RadarCoreValue extends React.Component<IProps, IState> {
     });
   }
   public async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
   public render() {
     const options = {

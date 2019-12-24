@@ -1,22 +1,23 @@
+import { Table, TableBody, TableCell, TableRow } from "@material-ui/core";
 import * as React from "react";
-import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
-
-import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
-import ComparisonQuestions from "../../../entities/aggregate-report/comparison-questions";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
-import { NoContent } from "../../nominationForm/components/no-content/no-content";
+import ComparisonQuestions from "../../../entities/aggregate-report/comparison-questions";
 import QuestionDetail from "../../../entities/aggregate-report/question-detail";
+import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
+import { NoContent } from "../../nominationForm/components/no-content/no-content";
+import { AggregateReportProps } from "../aggregate-report-props";
 import "./comparing-questions.css";
 
 interface IProps {
-  reportType: string;
   comparingType: string;
 }
+
 interface IState {
   data: ComparisonQuestions;
   isFetching: boolean;
 }
-export default class QuestionComparison extends React.Component<IProps, IState> {
+
+export default class QuestionComparison extends React.Component<AggregateReportProps & IProps, IState> {
   private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
@@ -30,11 +31,9 @@ export default class QuestionComparison extends React.Component<IProps, IState> 
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.props.reportType !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+    this.getData(nextProps.reportType);
   }
-  public async getData(props: string) {
+  public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
       isFetching: true,
@@ -52,7 +51,7 @@ export default class QuestionComparison extends React.Component<IProps, IState> 
   }
 
   public async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
   public render() {
     return (
