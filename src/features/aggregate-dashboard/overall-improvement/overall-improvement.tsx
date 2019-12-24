@@ -2,46 +2,30 @@ import * as React from "react";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { DKPortletSummary } from "../../../core/components/portlet/summary-portlet";
 import { Line } from "react-chartjs-2";
+import { AggregateReportProps } from "../aggregate-report-props";
 
-interface IProps {
-  reportType: string;
-}
 interface IState {
   isFetching: boolean;
 }
-export default class OverallImprovement extends React.Component<IProps, IState> {
-  // private AggregateServices: AggregateServices;
+export default class OverallImprovement extends React.Component<AggregateReportProps, IState> {
   public constructor(props: any) {
     super(props);
-    // this.AggregateServices = new AggregateServices();
     this.state = {
       isFetching: true,
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.props.reportType !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+    this.getData(nextProps.reportType);
   }
-  public async getData(props: string) {
+  public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
       isFetching: false,
     }));
-    // await this.AggregateServices.getStatistics(props).then(response =>
-    //   this.setState(prevState => {
-    //     return {
-    //       ...prevState,
-
-    //       data: response,
-    //       isFetching: false,
-    //     };
-    //   }),
-    // );
   }
 
   public async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
   public render() {
     const data = {

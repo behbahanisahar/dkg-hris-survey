@@ -1,18 +1,15 @@
 import * as React from "react";
 import { Doughnut } from "react-chartjs-2";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { statistics } from "../../../entities/aggregate-report/statistics";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
-import { DKSpinner } from "../../../core/components/spinner/spinner";
-
-interface IProps {
-  reportType: string;
-}
+import { AggregateReportProps } from "../aggregate-report-props";
 
 interface IState {
   data: statistics;
   isFetching: boolean;
 }
-export default class ParticipantComparisonPie extends React.Component<IProps, IState> {
+export default class ParticipantComparisonPie extends React.Component<AggregateReportProps, IState> {
   private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
@@ -27,11 +24,9 @@ export default class ParticipantComparisonPie extends React.Component<IProps, IS
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.props.reportType !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+    this.getData(nextProps.reportType);
   }
-  public async getData(props: string) {
+  public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
       isFetching: true,
@@ -48,7 +43,7 @@ export default class ParticipantComparisonPie extends React.Component<IProps, IS
     );
   }
   public async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
   public render() {
     const Completed = ((this.state.data.completed / this.state.data.totalNominated) * 100).toFixed(2);

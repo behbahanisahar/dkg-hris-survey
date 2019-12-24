@@ -6,15 +6,13 @@ import AggregateServices from "../../../services/aggregate-service/aggregate-das
 import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import ParticipationRate from "./../../../entities/aggregate-report/paticipation-rate";
 import "./clevel-participation.css";
+import { AggregateReportProps } from "../aggregate-report-props";
 
-interface IProps {
-  reportType: string;
-}
 interface IState {
   isFetching: boolean;
   data: ParticipationRate[];
 }
-class ClevelParticipation extends React.Component<IProps, IState> {
+class ClevelParticipation extends React.Component<AggregateReportProps, IState> {
   private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
@@ -25,20 +23,18 @@ class ClevelParticipation extends React.Component<IProps, IState> {
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.props.reportType !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+    this.getData(nextProps.reportType);
   }
-  public async getData(props: string) {
+  public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
       isFetching: true,
     }));
+
     await this.AggregateServices.getParticipationRate(props).then(response =>
       this.setState(prevState => {
         return {
           ...prevState,
-
           data: response,
           isFetching: false,
         };
@@ -46,7 +42,7 @@ class ClevelParticipation extends React.Component<IProps, IState> {
     );
   }
   public async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
 
   public render() {

@@ -4,14 +4,13 @@ import { statistics } from "../../../entities/aggregate-report/statistics";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { DKPortletSummary } from "../../../core/components/portlet/summary-portlet";
 import pic from "./../../../assets/img/Artboards.png";
-interface IProps {
-  reportType: string;
-}
+import { AggregateReportProps } from "../aggregate-report-props";
+
 interface IState {
   data: statistics;
   isFetching: boolean;
 }
-export default class DashboardSummary extends React.Component<IProps, IState> {
+export default class DashboardSummary extends React.Component<AggregateReportProps, IState> {
   private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
@@ -26,11 +25,9 @@ export default class DashboardSummary extends React.Component<IProps, IState> {
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
-    if (this.props.reportType !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+    this.getData(nextProps.reportType);
   }
-  public async getData(props: string) {
+  public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
       isFetching: true,
@@ -48,7 +45,7 @@ export default class DashboardSummary extends React.Component<IProps, IState> {
   }
 
   public async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
   public render() {
     return (
