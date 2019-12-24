@@ -2,14 +2,12 @@ import * as React from "react";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { DKPortletSummary } from "../../../core/components/portlet/summary-portlet";
 import { Line } from "react-chartjs-2";
+import { AggregateReportProps } from "../aggregate-report-props";
 
-interface IProps {
-  reportType: string;
-}
 interface IState {
   isFetching: boolean;
 }
-export default class OverallImprovement extends React.Component<IProps, IState> {
+export default class OverallImprovement extends React.Component<AggregateReportProps, IState> {
   // private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
