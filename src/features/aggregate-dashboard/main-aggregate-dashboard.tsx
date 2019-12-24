@@ -16,6 +16,10 @@ import ParticipantComparisonPie from "./participant-comparison/participant-compa
 import ParticipantComparisonSummary from "./participant-comparison/participant-comparison-summary";
 import RadarCoreValue from "./radar-corevalue/radar-coreValue";
 
+import ParticipantComparisonSummary from "./participant-comparison/participant-comparison-summary";
+import TotalParticipant from "./total-participant/total-participant";
+import OverallImprovement from "./overall-improvement/overall-improvement";
+import DashboardSummary from "./dashboard-summary/dashboard-summary";
 interface IProps {
   match: any;
 }
@@ -79,61 +83,81 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   public render() {
     return (
       <div className="ltr">
-        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
-        {this.state.isFetching === false && (
-          <>
-            <Grid container spacing={3} className="mt-4">
-              <Grid item xs={3} sm={3}>
-                {this.state.dashboardInfo.dropdownValues.length > 1 && (
-                  <Select
-                    margin="dense"
-                    dir="ltr"
-                    value={this.state.reportType}
-                    fullWidth={true}
-                    onChange={event => this.onChangeFields("reportTypeText", "reportType", event)}
-                    inputProps={{
-                      name: "ReportType",
-                      id: "demo-controlled-open-select",
-                    }}
-                    variant="outlined"
-                  >
-                    {this.renderDropDown(this.state.reportTypes)}
-                  </Select>
-                )}
-              </Grid>
-            </Grid>
-            <Grid container spacing={3} className="mt-4">
-              <Grid item xs={3} sm={3}>
-                <ParticipantComparisonSummary
-                  viewAs={this.state.reportProps.viewAs}
-                  level={this.state.reportProps.level}
-                />
-              </Grid>
-              <Grid item xs={3} sm={3}></Grid>
-              <Grid item xs={3} sm={3}></Grid>
-              <Grid item xs={3} sm={3}></Grid>
-            </Grid>
-            <Grid container spacing={3} className="mt-4">
-              <Grid item xs={6} sm={6}>
-                <DKPortlet title="Number of Assessors">
-                  <ParticipantComparisonPie
-                    viewAs={this.state.reportProps.viewAs}
-                    level={this.state.reportProps.level}
-                  />
-                  <ParticipantComparison viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
-                </DKPortlet>
-              </Grid>
-              <Grid item xs={6} sm={6}>
-                <ClevelParticipation viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
-              </Grid>
-            </Grid>
-            <Grid container spacing={3} className="mt-4">
-              <Grid item xs={6} sm={8}>
-                <CompetencyCompetency viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
-              </Grid>
-              <Grid item xs={6} sm={4}>
-                <RadarCoreValue viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
-              </Grid>
+        <Grid container spacing={3} className="mt-4">
+          <Grid item xs={3} sm={3}>
+            {this.state.dashboardInfo.dropdownValues !== undefined && (
+              <Select
+                margin="dense"
+                dir="ltr"
+                value={this.state.reportType}
+                fullWidth={true}
+                onChange={event => this.onChangeFields("reportTypeText", "reportType", event)}
+                inputProps={{
+                  name: "ReportType",
+                  id: "demo-controlled-open-select",
+                }}
+                // IconComponent={KeyboardArrowDown}
+                variant="outlined"
+              >
+                {this.renderDropDown(this.state.ReportTypes)}
+              </Select>
+            )}
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} className="mt-4">
+          <Grid item xs={3} sm={3}>
+            <DashboardSummary reportType={this.state.reportTypeText} />
+          </Grid>
+          <Grid item xs={3} sm={3}>
+            <TotalParticipant reportType={this.state.reportTypeText} />
+          </Grid>
+          <Grid item xs={3} sm={3}>
+            <OverallImprovement reportType={this.state.reportTypeText} />{" "}
+          </Grid>
+          <Grid item xs={3} sm={3}>
+            {" "}
+            <ParticipantComparisonSummary reportType={this.state.reportTypeText} />
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} className="mt-4">
+          <Grid item xs={6} sm={6}>
+            <DKPortlet title="Number of Assessors">
+              <ParticipantComparisonPie reportType={this.state.reportTypeText} />
+              <ParticipantComparison reportType={this.state.reportTypeText} />
+            </DKPortlet>
+          </Grid>
+          <Grid item xs={6} sm={6}>
+            <ClevelParticipation reportType={this.state.reportTypeText} />
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} className="mt-4">
+          <Grid item xs={6} sm={8}>
+            <CompetencyCompetency reportType={this.state.reportTypeText} />
+          </Grid>
+          <Grid item xs={6} sm={4}>
+            <RadarCoreValue reportType={this.state.reportTypeText} />
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} className="mt-4">
+          <Grid item xs={6} sm={6}>
+            <DKPortlet title="Top5-Strengths">
+              <QuestionComparison reportType={this.state.reportTypeText} comparingType="top" />
+            </DKPortlet>
+          </Grid>
+          <Grid item xs={6} sm={6}>
+            <DKPortlet title="Bottom5-Improvement Areas">
+              <QuestionComparison reportType={this.state.reportTypeText} comparingType="bottom" />
+            </DKPortlet>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={3} className="mt-4">
+          <HeatMap reportType={this.state.reportTypeText} />
+        </Grid>
+        <Grid container spacing={3} className="mt-4">
+          {this.state.reportTypeText === "All" && (
+            <Grid item xs={12} sm={12}>
+              <CompetencyAvgComparison reportType={this.state.reportTypeText} />
             </Grid>
             <Grid container spacing={3} className="mt-4">
               <Grid item xs={6} sm={6}>

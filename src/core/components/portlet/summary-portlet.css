@@ -1,0 +1,9 @@
+.header {
+  color: #fff;
+  font-weight: 500;
+  margin-top: 3%;
+  font-size: 1.2rem;
+}
+.summary-height {
+  height: 390px !important;
+}
