@@ -55,6 +55,7 @@ export default class OverallImprovement extends React.Component<IProps, IState> 
           borderCapStyle: "butt",
           borderDash: [],
           borderDashOffset: 0.0,
+          borderWidth: 5,
           borderJoinStyle: "miter",
           pointBorderColor: "rgba(75,192,192,1)",
           pointBackgroundColor: "#fff",
