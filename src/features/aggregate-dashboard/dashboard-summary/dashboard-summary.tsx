@@ -59,7 +59,7 @@ export default class DashboardSummary extends React.Component<IProps, IState> {
             <div style={{ color: "black" }} className="kt-widget17__items">
               <div style={{ textAlign: "center", fontSize: "2.1rem" }} className="kt-widget17__item">
                 Level Of Leaders
-                <img src={pic} style={{ width: "84%" }} />
+                <img src={pic} style={{ width: "50%" }} />
               </div>
             </div>
             <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
