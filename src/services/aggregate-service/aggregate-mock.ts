@@ -8,9 +8,14 @@ import AverageCompetency from "./../../entities/aggregate-report/average-compete
 import DashboardInfo from "../../entities/aggregate-report/dashboard-info";
 export default class MockAggregateData {
   public static statisticMock: statistics = {
-    completed: 24,
-    uncompleted: 32,
-    totalNominated: 56,
+    completed: 213,
+    uncompleted: 41,
+    totalNominated: 254,
+    participationRate: 50,
+    overallImprovement: 10,
+    total98Score: 3.8,
+    total97Score: 3.5,
+    numberOfAsseses: 300,
   };
   public static MockParticipationRate: ParticipationRate[] = [
     {

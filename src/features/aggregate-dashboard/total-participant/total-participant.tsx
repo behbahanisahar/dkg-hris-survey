@@ -3,11 +3,15 @@ import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { DKPortletSummary } from "../../../core/components/portlet/summary-portlet";
 import pic from "./../../../assets/img/users.png";
 import { AggregateReportProps } from "../aggregate-report-props";
+import { statistics } from "../../../entities/aggregate-report/statistics";
 
 interface IState {
   isFetching: boolean;
 }
-export default class TotalParticipant extends React.Component<AggregateReportProps, IState> {
+interface IProps {
+  data: statistics;
+}
+export default class TotalParticipant extends React.Component<IProps & AggregateReportProps, IState> {
   // private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
@@ -45,11 +49,7 @@ export default class TotalParticipant extends React.Component<AggregateReportPro
             <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
               <div className="kt-widget17__item">
                 <span style={{ fontSize: "1rem", marginTop: "2%", fontWeight: 600 }}>Total</span>{" "}
-                <h3 style={{ fontSize: "1.3rem", color: "#FEC465" }}>386</h3>
-              </div>
-              <div className="kt-widget17__item">
-                <span style={{ fontSize: "1rem", marginTop: "2%", fontWeight: 600 }}>Participation Rate</span>{" "}
-                <h3 style={{ fontSize: "1.3rem", color: "#FEC465" }}>87%</h3>
+                <h3 style={{ fontSize: "1.3rem", color: "#FEC465" }}>{this.props.data.numberOfAsseses}</h3>
               </div>
             </div>
           </DKPortletSummary>

@@ -1,27 +1,20 @@
 import * as React from "react";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
-import { statistics } from "../../../entities/aggregate-report/statistics";
-import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
+
 import { DKPortletSummary } from "../../../core/components/portlet/summary-portlet";
 import pic from "./../../../assets/img/Artboards.png";
 import { AggregateReportProps } from "../aggregate-report-props";
 
 interface IState {
-  data: statistics;
   isFetching: boolean;
 }
 export default class DashboardSummary extends React.Component<AggregateReportProps, IState> {
-  private AggregateServices: AggregateServices;
+  // private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
-    this.AggregateServices = new AggregateServices();
+    //   this.AggregateServices = new AggregateServices();
     this.state = {
       isFetching: true,
-      data: {
-        completed: 0,
-        uncompleted: 0,
-        totalNominated: 0,
-      },
     };
   }
   public async componentWillReceiveProps(nextProps: AggregateReportProps) {
@@ -31,18 +24,8 @@ export default class DashboardSummary extends React.Component<AggregateReportPro
   public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
-      isFetching: true,
+      isFetching: false,
     }));
-    await this.AggregateServices.getStatistics(props).then(response =>
-      this.setState(prevState => {
-        return {
-          ...prevState,
-
-          data: response,
-          isFetching: false,
-        };
-      }),
-    );
   }
 
   public async componentDidMount() {

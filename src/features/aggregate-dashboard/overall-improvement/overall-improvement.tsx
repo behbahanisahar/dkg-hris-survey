@@ -3,11 +3,15 @@ import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { DKPortletSummary } from "../../../core/components/portlet/summary-portlet";
 import { Line } from "react-chartjs-2";
 import { AggregateReportProps } from "../aggregate-report-props";
+import { statistics } from "../../../entities/aggregate-report/statistics";
 
 interface IState {
   isFetching: boolean;
 }
-export default class OverallImprovement extends React.Component<AggregateReportProps, IState> {
+interface IProps {
+  data: statistics;
+}
+export default class OverallImprovement extends React.Component<IProps & AggregateReportProps, IState> {
   public constructor(props: any) {
     super(props);
     this.state = {
@@ -31,8 +35,9 @@ export default class OverallImprovement extends React.Component<AggregateReportP
     this.getData(this.props);
   }
   public render() {
+    const overallData = [this.props.data.total97Score, this.props.data.total98Score];
     const data = {
-      labels: ["1396", "1397"],
+      labels: ["1397", "1398"],
       pointStyle: "triangle",
       datasets: [
         {
@@ -55,7 +60,7 @@ export default class OverallImprovement extends React.Component<AggregateReportP
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [3.58, 3.86],
+          data: overallData,
         },
       ],
     };
@@ -97,7 +102,7 @@ export default class OverallImprovement extends React.Component<AggregateReportP
             <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
               <div className="kt-widget17__item">
                 <span style={{ fontSize: "1.5rem", marginTop: "2%", fontWeight: 500 }}>Overall Improvement</span>{" "}
-                <h3 style={{ fontSize: "1.3rem", color: "#4DBA6D" }}>9%</h3>
+                <h3 style={{ fontSize: "1.3rem", color: "#4DBA6D" }}>{this.props.data.overallImprovement}%</h3>
               </div>
             </div>
           </DKPortletSummary>

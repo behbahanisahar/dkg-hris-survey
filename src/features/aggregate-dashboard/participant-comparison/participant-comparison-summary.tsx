@@ -1,28 +1,24 @@
 import * as React from "react";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { statistics } from "../../../entities/aggregate-report/statistics";
-import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
+
 import { AggregateReportProps } from "../aggregate-report-props";
-import ParticipantComparisonPie from "./participant-comparison-pie";
+
 import "./participant-comparison.css";
 import { DKPortletSummary } from "../../../core/components/portlet/summary-portlet";
 
 interface IState {
-  data: statistics;
   isFetching: boolean;
 }
-export default class ParticipantComparisonSummary extends React.Component<AggregateReportProps, IState> {
-  private AggregateServices: AggregateServices;
+interface IProps {
+  data: statistics;
+}
+export default class ParticipantComparisonSummary extends React.Component<IProps & AggregateReportProps, IState> {
   public constructor(props: any) {
     super(props);
-    this.AggregateServices = new AggregateServices();
+
     this.state = {
       isFetching: true,
-      data: {
-        completed: 0,
-        uncompleted: 0,
-        totalNominated: 0,
-      },
     };
   }
 
@@ -33,18 +29,8 @@ export default class ParticipantComparisonSummary extends React.Component<Aggreg
   public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
-      isFetching: true,
+      isFetching: false,
     }));
-    await this.AggregateServices.getStatistics(props).then(response =>
-      this.setState(prevState => {
-        return {
-          ...prevState,
-
-          data: response,
-          isFetching: false,
-        };
-      }),
-    );
   }
 
   public async componentDidMount() {
@@ -59,18 +45,21 @@ export default class ParticipantComparisonSummary extends React.Component<Aggreg
             <div style={{ color: "black" }} className="kt-widget17__items">
               <div style={{ textAlign: "center" }} className="kt-widget17__item">
                 {" "}
-                <span>Completed</span> <h3>{this.state.data?.completed}</h3>
+                <span>Completed</span> <h3>{this.props.data?.completed}</h3>
               </div>
               <div style={{ textAlign: "center" }} className="kt-widget17__item">
                 {" "}
-                <span>UnCompleted</span> <h3>{this.state.data?.uncompleted}</h3>
+                <span>UnCompleted</span> <h3>{this.props.data?.uncompleted}</h3>
               </div>
             </div>
-            <div style={{ color: "black" }} className="kt-widget17__items">
+            <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
               <div className="kt-widget17__item">
-                <div>
-                  <ParticipantComparisonPie viewAs={this.props.viewAs} level={this.props.level} />
-                </div>
+                <span style={{ fontSize: "1rem", marginTop: "2%", fontWeight: 600 }}>Total Nominated </span>{" "}
+                <h3 style={{ fontSize: "1.3rem", color: "#FEC465" }}>{this.props.data.totalNominated}</h3>
+              </div>
+              <div className="kt-widget17__item">
+                <span style={{ fontSize: "1rem", marginTop: "2%", fontWeight: 600 }}>Participation Rate</span>{" "}
+                <h3 style={{ fontSize: "1.3rem", color: "#FEC465" }}>{this.props.data.participationRate}</h3>
               </div>
             </div>
           </DKPortletSummary>

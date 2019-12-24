@@ -1,16 +1,18 @@
-import { Table, TableBody } from "@material-ui/core";
 import * as React from "react";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { statistics } from "../../../entities/aggregate-report/statistics";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { AggregateReportProps } from "../aggregate-report-props";
-import "./participant-comparison.css";
+import TotalParticipant from "../total-participant/total-participant";
+import OverallImprovement from "../overall-improvement/overall-improvement";
+import ParticipantComparisonSummary from "../participant-comparison/participant-comparison-summary";
+import { Grid } from "@material-ui/core";
 
 interface IState {
   data: statistics;
   isFetching: boolean;
 }
-export default class ParticipantComparison extends React.Component<AggregateReportProps, IState> {
+export default class MainSummary extends React.Component<AggregateReportProps, IState> {
   private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
@@ -59,22 +61,21 @@ export default class ParticipantComparison extends React.Component<AggregateRepo
       <div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <Table className="table table-bordered mt-3 ltr">
-            <TableBody className="table-row">
-              <tr>
-                <td>Completed</td>
-                <td align="left">{this.state.data.completed}</td>
-              </tr>
-              <tr>
-                <td>Uncompleted </td>
-                <td align="left">{this.state.data.uncompleted}</td>
-              </tr>
-              <tr className="total">
-                <td>Total Nominated </td>
-                <td align="left">{this.state.data.totalNominated}</td>
-              </tr>
-            </TableBody>
-          </Table>
+          <Grid container spacing={3}>
+            <Grid item xs={4} sm={4}>
+              <TotalParticipant data={this.state.data} viewAs={this.props.viewAs} level={this.props.level} />
+            </Grid>
+            <Grid item xs={4} sm={4}>
+              <OverallImprovement data={this.state.data} viewAs={this.props.viewAs} level={this.props.level} />
+            </Grid>
+            <Grid item xs={4} sm={4}>
+              <ParticipantComparisonSummary
+                data={this.state.data}
+                viewAs={this.props.viewAs}
+                level={this.props.level}
+              />
+            </Grid>
+          </Grid>
         )}
       </div>
     );

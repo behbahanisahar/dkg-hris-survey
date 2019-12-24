@@ -10,14 +10,12 @@ import ClevelParticipation from "./clevel-participation/clevel-participation";
 import QuestionComparison from "./comparing-questions/comparing-questions";
 import CompetencyAvgComparison from "./competencies-average/competencies-avg-comparison";
 import CompetencyCompetency from "./competencies-comparison/competencies-comparison";
-import DashboardSummary from "./dashboard-summary/dashboard-summary";
+
 import HeatMap from "./heatmap/heatmap";
-import OverallImprovement from "./overall-improvement/overall-improvement";
-import ParticipantComparison from "./participant-comparison/participant-comparison";
-import ParticipantComparisonPie from "./participant-comparison/participant-comparison-pie";
-import ParticipantComparisonSummary from "./participant-comparison/participant-comparison-summary";
+
 import RadarCoreValue from "./radar-corevalue/radar-coreValue";
-import TotalParticipant from "./total-participant/total-participant";
+import MainSummary from "./main-summary/main-summary";
+import { DKPortletSummary } from "../../core/components/portlet/summary-portlet";
 
 interface IProps {
   match: any;
@@ -86,55 +84,69 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         {this.state.isFetching === false && (
           <>
             <Grid container spacing={3} className="mt-4">
-              <Grid item xs={3} sm={3}>
-                {this.state.dashboardInfo.dropdownValues.length > 1 && (
-                  <Select
-                    margin="dense"
-                    dir="ltr"
-                    value={this.state.reportType}
-                    fullWidth={true}
-                    onChange={event => this.onChangeFields(event)}
-                    inputProps={{
-                      name: "ReportType",
-                      id: "demo-controlled-open-select",
-                    }}
-                    variant="outlined"
-                  >
-                    {this.renderDropDown(this.state.reportTypes)}
-                  </Select>
-                )}
-              </Grid>
+              <Grid item xs={3} sm={3}></Grid>
             </Grid>
             <Grid container spacing={3} className="mt-4">
               <Grid item xs={3} sm={3}>
-                <DashboardSummary viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+                {/* <DashboardSummary viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} /> */}
+                <DKPortletSummary background="#F05B71" title=" 360̊ Feedback Aggregate Report">
+                  <div style={{ color: "black" }} className="kt-widget17__items">
+                    <div style={{ textAlign: "center", fontSize: "2.1rem" }} className="kt-widget17__item">
+                      Level Of Leaders
+                      {this.state.dashboardInfo.dropdownValues.length > 1 && (
+                        <Select
+                          margin="dense"
+                          dir="ltr"
+                          value={this.state.reportType}
+                          fullWidth={true}
+                          onChange={event => this.onChangeFields(event)}
+                          inputProps={{
+                            name: "ReportType",
+                            id: "demo-controlled-open-select",
+                          }}
+                          variant="outlined"
+                        >
+                          {this.renderDropDown(this.state.reportTypes)}
+                        </Select>
+                      )}
+                    </div>
+                  </div>
+                  <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
+                    <div className="kt-widget17__item">
+                      <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>Directors</span>{" "}
+                    </div>
+                    <div className="kt-widget17__item">
+                      <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>SMs</span>{" "}
+                    </div>
+                  </div>
+                  <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
+                    <div className="kt-widget17__item">
+                      <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>MMs</span>{" "}
+                    </div>
+                    <div className="kt-widget17__item">
+                      <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>Supervisors</span>{" "}
+                    </div>
+                  </div>
+                </DKPortletSummary>
               </Grid>
-              <Grid item xs={3} sm={3}>
-                <TotalParticipant viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
-              </Grid>
-              <Grid item xs={3} sm={3}>
-                <OverallImprovement viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
-              </Grid>
-              <Grid item xs={3} sm={3}>
-                <ParticipantComparisonSummary
-                  viewAs={this.state.reportProps.viewAs}
-                  level={this.state.reportProps.level}
-                />
+              <Grid item xs={9} sm={9}>
+                <MainSummary viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
               </Grid>
             </Grid>
             <Grid container spacing={3} className="mt-4">
-              <Grid item xs={6} sm={6}>
-                <DKPortlet title="Number of Assessors">
-                  <ParticipantComparisonPie
+              {this.state.reportProps.level === "All" && (
+                <Grid item xs={9} sm={9}>
+                  <CompetencyAvgComparison
                     viewAs={this.state.reportProps.viewAs}
                     level={this.state.reportProps.level}
                   />
-                  <ParticipantComparison viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
-                </DKPortlet>
-              </Grid>
-              <Grid item xs={6} sm={6}>
-                <ClevelParticipation viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
-              </Grid>
+                </Grid>
+              )}
+              {this.state.reportProps.level === "All" && (
+                <Grid item xs={6} sm={3}>
+                  <ClevelParticipation viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+                </Grid>
+              )}
             </Grid>
             <Grid container spacing={3} className="mt-4">
               <Grid item xs={6} sm={8}>
@@ -167,16 +179,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             <Grid container spacing={3} className="mt-4">
               <HeatMap viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
             </Grid>
-            <Grid container spacing={3} className="mt-4">
-              {this.state.reportTypeText === "All" && (
-                <Grid item xs={12} sm={12}>
-                  <CompetencyAvgComparison
-                    viewAs={this.state.reportProps.viewAs}
-                    level={this.state.reportProps.level}
-                  />
-                </Grid>
-              )}
-            </Grid>
+            <Grid container spacing={3} className="mt-4"></Grid>
           </>
         )}
       </div>
