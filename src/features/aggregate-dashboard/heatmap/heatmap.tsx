@@ -15,6 +15,7 @@ interface IProps {
 interface IState {
   data: Heatmap[];
   isFetching: boolean;
+  buttonText: string;
 }
 export default class HeatMap extends React.Component<IProps, IState> {
   private AggregateServices: AggregateServices;
@@ -24,6 +25,7 @@ export default class HeatMap extends React.Component<IProps, IState> {
     this.state = {
       isFetching: true,
       data: [],
+      buttonText: "Show All",
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
@@ -61,8 +63,20 @@ export default class HeatMap extends React.Component<IProps, IState> {
             <Table className="table table-bordered mt-3 ltr table-sm">
               <thead className="thead-dark">
                 <tr>
-                  <th className="none-thead"> </th>
-                  <th className="none-thead"> </th>
+                  <th className="none-thead"></th>
+                  <th className="none-thead">
+                    {" "}
+                    <button
+                      className="btn btn-sm btn-bold btn-brand-hover"
+                      onClick={(e: any) => {
+                        this.onShowItem();
+                        e.preventDefault();
+                        return false;
+                      }}
+                    >
+                      {this.state.buttonText}
+                    </button>{" "}
+                  </th>
                   <th>Customer Centric</th>
                   <th>Builder approach and Result oriented</th>
                   <th>Drive for Excellence</th>
@@ -93,7 +107,7 @@ export default class HeatMap extends React.Component<IProps, IState> {
     } else {
       return this.state.data?.map((n: Heatmap, index: any) => {
         return (
-          <tr key={index} className={index > 20 ? "hidden-row" : ""}>
+          <tr key={index} className={this.ChangeTrClass(index)}>
             <td style={{ width: "1%" }} align="center">
               {index + 1}
             </td>
@@ -159,6 +173,40 @@ export default class HeatMap extends React.Component<IProps, IState> {
         avgClassName = "averageBackground5 ";
       }
       return avgClassName;
+    }
+  };
+  /****************************************************** */
+  public ChangeTrClass = (index: number) => {
+    if (index < 20 || index > this.state.data.length - 20) {
+      return "";
+    } else {
+      return "hidden-row";
+    }
+  };
+
+  public onShowItem = () => {
+    const hideRow = document.getElementsByClassName("hidden-row").length;
+    if (hideRow !== 0) {
+      for (let i = 0; i < hideRow; ++i) {
+        document.getElementsByClassName("hidden-row")[0].className = "show-row";
+      }
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          buttonText: "Show Tops",
+        };
+      });
+    } else {
+      const showRow = document.getElementsByClassName("show-row").length;
+      for (let i = 0; i < showRow; ++i) {
+        document.getElementsByClassName("show-row")[0].className = "hidden-row";
+      }
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          buttonText: "Show All",
+        };
+      });
     }
   };
 }
