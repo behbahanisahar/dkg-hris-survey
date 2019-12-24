@@ -30,9 +30,11 @@ export default class QuestionComparison extends React.Component<AggregateReportP
       },
     };
   }
-  public async componentWillReceiveProps(nextProps: any) {
-    this.getData(nextProps.reportType);
+
+  public async componentWillReceiveProps(nextProps: AggregateReportProps) {
+    this.getData(nextProps);
   }
+
   public async getData(props: AggregateReportProps) {
     this.setState(current => ({
       ...current,
