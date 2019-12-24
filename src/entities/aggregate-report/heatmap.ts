@@ -9,4 +9,7 @@ export default interface Heatmap {
   category7: number;
   category8: number;
   totalAverage: number;
+  nominationId: number;
+  numberOfAssessors: number;
+  improvement: number;
 }

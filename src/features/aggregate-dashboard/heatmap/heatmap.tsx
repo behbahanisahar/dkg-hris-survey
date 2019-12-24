@@ -4,11 +4,13 @@ import AggregateServices from "../../../services/aggregate-service/aggregate-das
 import Heatmap from "./../../../entities/aggregate-report/heatmap";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { Table, TableBody, TableRow, TableCell } from "@material-ui/core";
-import { NoContent } from "../../nominationForm/components/no-content/no-content";
+
 import "./heatmap.css";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { HeataMapLegend } from "./heatmap-legend";
+import { NoContentEnglish } from "../../nominationForm/components/no-content/no-content-english";
 
+let allitems: any[] = [];
 interface IProps {
   reportType: string;
 }
@@ -16,6 +18,7 @@ interface IState {
   data: Heatmap[];
   isFetching: boolean;
   buttonText: string;
+  filterName: string;
 }
 export default class HeatMap extends React.Component<IProps, IState> {
   private AggregateServices: AggregateServices;
@@ -26,6 +29,7 @@ export default class HeatMap extends React.Component<IProps, IState> {
       isFetching: true,
       data: [],
       buttonText: "Show All",
+      filterName: "",
     };
   }
   public async componentWillReceiveProps(nextProps: any) {
@@ -48,6 +52,7 @@ export default class HeatMap extends React.Component<IProps, IState> {
         };
       }),
     );
+    allitems = this.state.data;
   }
 
   public async componentDidMount() {
@@ -60,22 +65,31 @@ export default class HeatMap extends React.Component<IProps, IState> {
         {this.state.isFetching === false && (
           <div>
             <HeataMapLegend></HeataMapLegend>
-            <Table className="table table-bordered mt-3 ltr table-sm">
+            <Table className=" heatmap-table table table-bordered mt-3 ltr table-sm">
               <thead className="thead-dark">
                 <tr>
-                  <th className="none-thead"></th>
                   <th className="none-thead">
                     {" "}
-                    <button
-                      className="btn btn-sm btn-bold btn-brand-hover"
-                      onClick={(e: any) => {
-                        this.onShowItem();
-                        e.preventDefault();
-                        return false;
-                      }}
-                    >
-                      {this.state.buttonText}
-                    </button>{" "}
+                    {this.state.data?.length >= 40 && (
+                      <button
+                        className="btn btn-sm btn-bold btn-brand-hover"
+                        onClick={(e: any) => {
+                          this.onShowItem();
+                          e.preventDefault();
+                          return false;
+                        }}
+                      >
+                        {this.state.buttonText}
+                      </button>
+                    )}
+                  </th>
+                  <th className="none-thead">
+                    <input
+                      value={this.state.filterName}
+                      onChange={this.onFilterTable}
+                      placeholder="Search...    "
+                      className="form-control input-search"
+                    />
                   </th>
                   <th>Customer Centric</th>
                   <th>Builder approach and Result oriented</th>
@@ -86,6 +100,8 @@ export default class HeatMap extends React.Component<IProps, IState> {
                   <th>Developing Vision & Strategy</th>
                   <th>Business Acumen</th>
                   <th>Total Average Rate</th>
+                  <th>Number of Assessors</th>
+                  <th>Improvement</th>
                 </tr>
               </thead>
               <TableBody>{this.onRenderTable()}</TableBody>
@@ -99,8 +115,8 @@ export default class HeatMap extends React.Component<IProps, IState> {
     if (this.state.data.length === 0) {
       return (
         <TableRow>
-          <TableCell align="center" colSpan={3} className="emptyRowLog">
-            <NoContent></NoContent>
+          <TableCell align="center" colSpan={12}>
+            <NoContentEnglish />
           </TableCell>
         </TableRow>
       );
@@ -111,33 +127,43 @@ export default class HeatMap extends React.Component<IProps, IState> {
             <td style={{ width: "1%" }} align="center">
               {index + 1}
             </td>
-            <td align="left">{n.title}</td>
+            <td align="left">
+              <a target="_blank" href={"#/dashboard/" + n.nominationId}>
+                {n.title}
+              </a>
+            </td>
             <td style={{ width: "8%" }} className={this.averageClass(n.category1, false)} align="center">
-              {n.category1}
+              {n.category1.toFixed(2)}
             </td>
             <td style={{ width: "8%" }} className={this.averageClass(n.category2, false)} align="center">
-              {n.category2}
+              {n.category2.toFixed(2)}
             </td>
             <td style={{ width: "8%" }} className={this.averageClass(n.category3, false)} align="center">
-              {n.category3}
+              {n.category3.toFixed(2)}
             </td>
             <td style={{ width: "8%" }} className={this.averageClass(n.category4, false)} align="center">
-              {n.category4}
+              {n.category4.toFixed(2)}
             </td>
             <td style={{ width: "8%" }} className={this.averageClass(n.category5, false)} align="center">
-              {n.category5}
+              {n.category5.toFixed(2)}
             </td>
             <td style={{ width: "8%" }} className={this.averageClass(n.category6, false)} align="center">
-              {n.category6}
+              {n.category6.toFixed(2)}
             </td>
             <td style={{ width: "8%" }} className={this.averageClass(n.category7, false)} align="center">
-              {n.category7}
+              {n.category7.toFixed(2)}
             </td>
             <td style={{ width: "8%" }} className={this.averageClass(n.category8, false)} align="center">
-              {n.category8}
+              {n.category8.toFixed(2)}
             </td>
-            <td style={{ width: "12%" }} className={this.averageClass(n.totalAverage, true)} align="center">
-              {n.totalAverage}
+            <td style={{ width: "6%" }} className={this.averageClass(n.totalAverage, true)} align="center">
+              {n.totalAverage.toFixed(2)}
+            </td>
+            <td style={{ width: "8%" }} align="center">
+              {n.numberOfAssessors}
+            </td>
+            <td style={{ width: "6%" }} align="center">
+              {n.improvement}
             </td>
           </tr>
         );
@@ -196,8 +222,26 @@ export default class HeatMap extends React.Component<IProps, IState> {
           buttonText: "Show Tops",
         };
       });
+      // var heatmapTable = document.getElementsByClassName("heatmap-table")[0] as HTMLTableElement;
+      // heatmapTable.deleteRow(21);
+      var row = document.getElementsByClassName("empty-row")[0] as HTMLTableRowElement;
+      row?.parentNode?.removeChild(row);
     } else {
       const showRow = document.getElementsByClassName("show-row").length;
+
+      var tableRef = document.getElementsByClassName("heatmap-table")[0].getElementsByTagName("tbody")[0];
+
+      // Insert a row in the table at the last row
+      var newRow = tableRef.insertRow(20);
+
+      // Insert a cell in the row at index 0
+      var newCell = newRow.insertCell(0);
+      newCell.className = "empty-row";
+
+      // Append a text node to the cell
+      var newText = document.createTextNode("...");
+      newCell.appendChild(newText);
+
       for (let i = 0; i < showRow; ++i) {
         document.getElementsByClassName("show-row")[0].className = "hidden-row";
       }
@@ -208,5 +252,29 @@ export default class HeatMap extends React.Component<IProps, IState> {
         };
       });
     }
+  };
+  /*************************************************************************** */
+  private onFilterTable = (event: any) => {
+    this.setState({
+      filterName: event.target.value,
+    });
+
+    this.filterBox();
+  };
+  private filterBox = () => {
+    this.setState(prevState => {
+      let TableItems: Heatmap[] = allitems;
+      if (prevState.filterName) {
+        TableItems = prevState.filterName.toLowerCase()
+          ? TableItems.filter(function(i) {
+              return i.title?.toLowerCase().indexOf(prevState.filterName) > -1;
+            })
+          : TableItems;
+      }
+      return {
+        ...prevState,
+        data: TableItems,
+      };
+    });
   };
 }

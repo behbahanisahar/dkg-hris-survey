@@ -14,6 +14,8 @@ import CompetencyAvgComparison from "./competencies-average/competencies-avg-com
 import AggregateServices from "../../services/aggregate-service/aggregate-dashboard-service";
 import DashboardInfo from "../../entities/aggregate-report/dashboard-info";
 import DropDownModel from "./../../entities/dropdown";
+
+import ParticipantComparisonSummary from "./participant-comparison/participant-comparison-summary";
 interface IProps {
   match: any;
 }
@@ -94,8 +96,16 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
           </Grid>
         </Grid>
         <Grid container spacing={3} className="mt-4">
+          <Grid item xs={3} sm={3}>
+            <ParticipantComparisonSummary reportType={this.state.reportTypeText} />
+          </Grid>
+          <Grid item xs={3} sm={3}></Grid>
+          <Grid item xs={3} sm={3}></Grid>
+          <Grid item xs={3} sm={3}></Grid>
+        </Grid>
+        <Grid container spacing={3} className="mt-4">
           <Grid item xs={6} sm={6}>
-            <DKPortlet title="Number of Participants">
+            <DKPortlet title="Number of Assessors">
               <ParticipantComparisonPie reportType={this.state.reportTypeText} />
               <ParticipantComparison reportType={this.state.reportTypeText} />
             </DKPortlet>
@@ -114,12 +124,12 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         </Grid>
         <Grid container spacing={3} className="mt-4">
           <Grid item xs={6} sm={6}>
-            <DKPortlet title="Strengths">
+            <DKPortlet title="Top5-Strengths">
               <QuestionComparison reportType={this.state.reportTypeText} comparingType="top" />
             </DKPortlet>
           </Grid>
           <Grid item xs={6} sm={6}>
-            <DKPortlet title="Improvement Areas">
+            <DKPortlet title="Bottom5-Improvement Areas">
               <QuestionComparison reportType={this.state.reportTypeText} comparingType="bottom" />
             </DKPortlet>
           </Grid>

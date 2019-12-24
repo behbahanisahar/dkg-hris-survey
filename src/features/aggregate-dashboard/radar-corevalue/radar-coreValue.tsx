@@ -5,6 +5,7 @@ import AggregateServices from "../../../services/aggregate-service/aggregate-das
 import RadarCoreValues from "../../../entities/aggregate-report/core-calues-radar";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
+import "chartjs-plugin-datalabels";
 
 interface IProps {
   reportType: string;
@@ -98,13 +99,35 @@ export default class RadarCoreValue extends React.Component<IProps, IState> {
           fontFamily: "IRANYekan",
         },
       },
-      legend: {
-        labels: {
-          fontFamily: "IRANYekan",
+      // legend: {
+      //   labels: {
+      //     fontFamily: "IRANYekan",
+      //   },
+      //   pointLabels: {
+      //     fontFamily: "IRANYekan",
+      //     anchor: "start",
+      //     align: "right",
+      //   },
+      // },
+      // datalabels: {
+      //   //  anchor: "start",
+      //   //   clamp: true,
+      //   align: "right",
+      //   Rotation: "10",
+      // },
+      datalabels: {
+        anchor: "end",
+        backgroundColor: null,
+        borderColor: null,
+        borderRadius: 4,
+        borderWidth: 1,
+        color: "#223388",
+        font: {
+          size: 11,
+          weight: 600,
         },
-        pointLabels: {
-          fontFamily: "IRANYekan",
-        },
+        offset: 4,
+        padding: 0,
       },
     };
     return (
@@ -112,7 +135,7 @@ export default class RadarCoreValue extends React.Component<IProps, IState> {
         <DKPortlet title="Results based on DK Core Values">
           {this.state.isFetching === true && <DKSpinner></DKSpinner>}
           {this.state.isFetching === false && (
-            <Radar data={this.state.data} options={options} width={400} height={350}></Radar>
+            <Radar data={this.state.data} options={options} width={450} height={350}></Radar>
           )}
         </DKPortlet>
       </div>
