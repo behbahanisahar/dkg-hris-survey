@@ -104,7 +104,7 @@ export default class OverallImprovement extends React.Component<AggregateReportP
             </div>
             <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
               <div className="kt-widget17__item">
-                <span style={{ fontSize: "1.9rem", marginTop: "2%" }}>Overall Improvement</span>{" "}
+                <span style={{ fontSize: "1.5rem", marginTop: "2%", fontWeight: 500 }}>Overall Improvement</span>{" "}
                 <h3 style={{ fontSize: "1.3rem", color: "#4DBA6D" }}>9%</h3>
               </div>
             </div>

@@ -34,7 +34,7 @@ export default class TotalParticipant extends React.Component<AggregateReportPro
       <div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <DKPortletSummary background="#FEC465" title="assessees">
+          <DKPortletSummary background="#FEC465" title="Assessees">
             <div style={{ color: "black" }} className="kt-widget17__items">
               <div style={{ textAlign: "center" }} className="kt-widget17__item">
                 <img style={{ width: "45%" }} src={pic} />
