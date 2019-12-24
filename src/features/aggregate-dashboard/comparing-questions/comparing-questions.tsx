@@ -60,14 +60,14 @@ export default class QuestionComparison extends React.Component<IProps, IState> 
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <div className="mb-5">
-            <h4 className="ltr">{this.props.comparingType === "top" ? "Strengths" : "improvement Areas"} </h4>
+            {/* <h4 className="ltr">{this.props.comparingType === "top" ? "Strengths" : "improvement Areas"} </h4> */}
             <Table className="table table-bordered mt-3 ltr">
-              <thead className="thead-dark">
+              <thead className="dk-brand-grey">
                 <tr>
-                  <th>Rank </th>
-                  <th>Statements </th>
-                  <th> Competency</th>
-                  <th> Average Rating</th>
+                  <th>Rank</th>
+                  <th>Statements</th>
+                  <th>Competency</th>
+                  <th>Average Rating</th>
                 </tr>
               </thead>
               <TableBody>{this.onRenderTable()}</TableBody>
@@ -97,15 +97,18 @@ export default class QuestionComparison extends React.Component<IProps, IState> 
       return Questions?.map((n: QuestionDetail, index: any) => {
         return (
           <tr key={index}>
-            <th className={this.props.comparingType === "top" ? "top" : "bottom"} align="center">
+            <td className={this.props.comparingType === "top" ? "top" : "bottom"} align="center">
               {n.rank}
-            </th>
-            <th align="center">
-              {" "}
+            </td>
+            <td align="left">
               <span dangerouslySetInnerHTML={{ __html: n.statements }}></span>
-            </th>
-            <td align="center">{n.competency}</td>
-            <td align="center">{n.averageRating}</td>
+            </td>
+            <td align="center" style={{ width: "20%" }}>
+              {n.competency}
+            </td>
+            <td align="center" style={{ width: "8%" }}>
+              {n.averageRating}
+            </td>
           </tr>
         );
       });
