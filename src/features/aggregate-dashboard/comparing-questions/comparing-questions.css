@@ -14,3 +14,8 @@
     -1px 1px 0 #fff;
   font-size: 1rem;
 }
+
+.table-questions td {
+  height: 75px !important;
+  vertical-align: middle;
+}

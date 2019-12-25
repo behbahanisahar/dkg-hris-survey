@@ -13,7 +13,6 @@ import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 class CompetencyCompetency extends React.Component {
   constructor(props) {
     super(props);
-    //  this.afterChartCreated = this.afterChartCreated.bind(this);
 
     this.AggregateServices = new AggregateServices();
     this.state = {
@@ -22,9 +21,7 @@ class CompetencyCompetency extends React.Component {
     };
   }
   async componentWillReceiveProps(nextProps) {
-    if (this.props.reportType !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+    this.getData(nextProps);
   }
   async getData(props) {
     this.setState(current => ({
@@ -43,7 +40,7 @@ class CompetencyCompetency extends React.Component {
     );
   }
   async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
 
   render() {
@@ -117,9 +114,7 @@ class CompetencyCompetency extends React.Component {
           },
           point: {
             events: {
-              click: function() {
-                //   window.location.href = "#/competency/" + itemId + "/" + this.options.query + "/" + lang;
-              },
+              click: function() {},
             },
           },
         },

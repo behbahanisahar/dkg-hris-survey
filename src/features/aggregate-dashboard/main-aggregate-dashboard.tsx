@@ -1,6 +1,7 @@
 import { Grid, MenuItem, Select } from "@material-ui/core";
 import * as React from "react";
 import { DKPortlet } from "../../core/components/portlet/portlet";
+import { DKPortletSummary } from "../../core/components/portlet/summary-portlet";
 import { DKSpinner } from "../../core/components/spinner/spinner";
 import DashboardInfo from "../../entities/aggregate-report/dashboard-info";
 import AggregateServices from "../../services/aggregate-service/aggregate-dashboard-service";
@@ -10,12 +11,9 @@ import ClevelParticipation from "./clevel-participation/clevel-participation";
 import QuestionComparison from "./comparing-questions/comparing-questions";
 import CompetencyAvgComparison from "./competencies-average/competencies-avg-comparison";
 import CompetencyCompetency from "./competencies-comparison/competencies-comparison";
-
 import HeatMap from "./heatmap/heatmap";
-
-import RadarCoreValue from "./radar-corevalue/radar-coreValue";
 import MainSummary from "./main-summary/main-summary";
-import { DKPortletSummary } from "../../core/components/portlet/summary-portlet";
+import RadarCoreValue from "./radar-corevalue/radar-coreValue";
 
 interface IProps {
   match: any;
@@ -133,21 +131,19 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                 <MainSummary viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
               </Grid>
             </Grid>
-            <Grid container spacing={3} className="mt-4">
-              {this.state.reportProps.level === "All" && (
-                <Grid item xs={9} sm={9}>
+            {this.state.reportProps.level === "All" && (
+              <Grid container spacing={3} className="mt-4">
+                <Grid item xs={9} sm={8}>
                   <CompetencyAvgComparison
                     viewAs={this.state.reportProps.viewAs}
                     level={this.state.reportProps.level}
                   />
                 </Grid>
-              )}
-              {this.state.reportProps.level === "All" && (
-                <Grid item xs={6} sm={3}>
+                <Grid item xs={6} sm={4}>
                   <ClevelParticipation viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
                 </Grid>
-              )}
-            </Grid>
+              </Grid>
+            )}
             <Grid container spacing={3} className="mt-4">
               <Grid item xs={6} sm={8}>
                 <CompetencyCompetency viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
@@ -158,7 +154,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             </Grid>
             <Grid container spacing={3} className="mt-4">
               <Grid item xs={6} sm={6}>
-                <DKPortlet title="Top5-Strengths">
+                <DKPortlet title="Top5 / Strengths">
                   <QuestionComparison
                     viewAs={this.state.reportProps.viewAs}
                     level={this.state.reportProps.level}
@@ -167,7 +163,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                 </DKPortlet>
               </Grid>
               <Grid item xs={6} sm={6}>
-                <DKPortlet title="Bottom5-Improvement Areas">
+                <DKPortlet title="Bottom5 / Improvement Areas">
                   <QuestionComparison
                     viewAs={this.state.reportProps.viewAs}
                     level={this.state.reportProps.level}

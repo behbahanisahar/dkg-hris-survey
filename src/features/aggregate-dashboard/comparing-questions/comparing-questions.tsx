@@ -44,7 +44,6 @@ export default class QuestionComparison extends React.Component<AggregateReportP
       this.setState(prevState => {
         return {
           ...prevState,
-
           data: response,
           isFetching: false,
         };
@@ -57,25 +56,22 @@ export default class QuestionComparison extends React.Component<AggregateReportP
   }
   public render() {
     return (
-      <div>
+      <>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <div className="mb-5">
-            {/* <h4 className="ltr">{this.props.comparingType === "top" ? "Strengths" : "improvement Areas"} </h4> */}
-            <Table className="table table-bordered mt-3 ltr">
-              <thead className="dk-brand-grey">
-                <tr>
-                  <th>Rank</th>
-                  <th>Statements</th>
-                  <th>Competency</th>
-                  <th>Average Rating</th>
-                </tr>
-              </thead>
-              <TableBody>{this.onRenderTable()}</TableBody>
-            </Table>
-          </div>
+          <Table className="table table-questions table-bordered">
+            <thead className="dk-brand-grey">
+              <tr>
+                <th>Rank</th>
+                <th>Statements</th>
+                <th>Competency</th>
+                <th>Average Rating</th>
+              </tr>
+            </thead>
+            <TableBody>{this.onRenderTable()}</TableBody>
+          </Table>
         )}
-      </div>
+      </>
     );
   }
   private onRenderTable = () => {

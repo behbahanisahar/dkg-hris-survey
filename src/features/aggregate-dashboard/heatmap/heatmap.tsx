@@ -60,11 +60,10 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
         {this.state.isFetching === false && (
           <div>
             <HeataMapLegend></HeataMapLegend>
-            <Table className=" heatmap-table table table-bordered mt-3 ltr table-sm">
-              <thead className="thead-dark">
+            <Table className="heatmap-table table mt-3 table-sm">
+              <thead className="dk-brand-grey">
                 <tr>
-                  <th className="none-thead">
-                    {" "}
+                  <th className="none-thead" style={{ backgroundColor: "#fff!important" }}>
                     {this.state.data?.length >= 40 && (
                       <button
                         className="btn btn-sm btn-bold btn-brand-hover"
@@ -78,7 +77,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                       </button>
                     )}
                   </th>
-                  <th className="none-thead">
+                  <th className="none-thead" style={{ backgroundColor: "#fff!important" }}>
                     <input
                       value={this.state.filterName}
                       onChange={this.onFilterTable}
@@ -123,7 +122,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
               {index + 1}
             </td>
             <td align="left">
-              <a target="_blank" href={"#/dashboard/" + n.nominationId}>
+              <a target="_blank" className="title-link" href={"#/dashboard/" + n.nominationId}>
                 {n.title}
               </a>
             </td>
