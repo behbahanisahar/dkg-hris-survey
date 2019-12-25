@@ -75,6 +75,7 @@
 }
 .ruler .cm:nth-of-type(9) {
   left: 100%;
+  width: 5%;
 }
 .ruler .cm:nth-of-type(9):after {
   content: "5";
