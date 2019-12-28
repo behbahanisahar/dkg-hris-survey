@@ -42,14 +42,22 @@
   background: #fff !important;
   border-color: #fff !important;
 }
+
+.legend-container {
+  padding-left: 17%;
+  padding-right: 0%;
+}
+
 .legend {
   color: #fff;
 }
 .legend .col-6 {
   text-align: center;
-  font-weight: 500;
-  line-height: 3rem;
+  font-weight: 100;
+  line-height: 2rem;
+  font-size: 0.8rem;
 }
+
 .hidden-row {
   display: none;
   visibility: hidden;

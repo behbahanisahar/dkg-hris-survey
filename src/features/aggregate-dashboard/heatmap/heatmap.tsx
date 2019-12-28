@@ -8,6 +8,7 @@ import { AggregateReportProps } from "../aggregate-report-props";
 import Heatmap from "./../../../entities/aggregate-report/heatmap";
 import { HeataMapLegend } from "./heatmap-legend";
 import "./heatmap.css";
+import { HeataImprovement } from "./heatmap-improvement";
 
 let allitems: any[] = [];
 
@@ -58,7 +59,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
       <DKPortlet title="Heatmap">
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <div>
+          <>
             <HeataMapLegend></HeataMapLegend>
             <Table className="heatmap-table table mt-3 table-sm">
               <thead className="dk-brand-grey">
@@ -94,13 +95,13 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                   <th>Developing Vision & Strategy</th>
                   <th>Business Acumen</th>
                   <th>Total Average Rate</th>
-                  <th>Number of Assessors</th>
+                  <th>#Assessors</th>
                   <th>Improvement</th>
                 </tr>
               </thead>
               <TableBody>{this.onRenderTable()}</TableBody>
             </Table>
-          </div>
+          </>
         )}
       </DKPortlet>
     );
@@ -157,7 +158,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
               {n.numberOfAssessors}
             </td>
             <td style={{ width: "6%" }} align="center">
-              {n.improvement}
+              <HeataImprovement value={n.improvement}></HeataImprovement>
             </td>
           </tr>
         );
