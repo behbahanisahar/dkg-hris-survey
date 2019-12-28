@@ -3,8 +3,8 @@ import { HeataMapRuler } from "./heatmap-ruler";
 
 export function HeataMapLegend() {
   return (
-    <div>
-      <div className="row mx-5 legend py-3">
+    <div className="legend-container">
+      <div className="row mx-5 legend py-1">
         <div className="col-6">
           <div className="row">
             <div className="col-6 averageBackground1 grow">Clear Development Need</div>
