@@ -215,7 +215,7 @@ export default class MockAggregateData {
       category8: 4.43,
       numberOfAssessors: 17,
       totalAverage: 4.45,
-      improvement: 0,
+      improvement: 1,
     },
     {
       nominationId: 486,
@@ -230,7 +230,7 @@ export default class MockAggregateData {
       category8: 4.43,
       numberOfAssessors: 17,
       totalAverage: 4.45,
-      improvement: 0,
+      improvement: 13,
     },
     {
       nominationId: 486,
@@ -245,7 +245,7 @@ export default class MockAggregateData {
       category8: 4.43,
       numberOfAssessors: 17,
       totalAverage: 4.45,
-      improvement: 0,
+      improvement: -4,
     },
     {
       nominationId: 486,
@@ -276,7 +276,7 @@ export default class MockAggregateData {
       category8: 4.43,
       numberOfAssessors: 17,
       totalAverage: 4.45,
-      improvement: 0,
+      improvement: 20,
     },
     {
       nominationId: 486,

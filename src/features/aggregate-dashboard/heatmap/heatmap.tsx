@@ -8,6 +8,7 @@ import { AggregateReportProps } from "../aggregate-report-props";
 import Heatmap from "./../../../entities/aggregate-report/heatmap";
 import { HeataMapLegend } from "./heatmap-legend";
 import "./heatmap.css";
+import { HeataImprovement } from "./heatmap-improvement";
 
 let allitems: any[] = [];
 
@@ -157,7 +158,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
               {n.numberOfAssessors}
             </td>
             <td style={{ width: "6%" }} align="center">
-              {n.improvement}
+              <HeataImprovement value={n.improvement}></HeataImprovement>
             </td>
           </tr>
         );
