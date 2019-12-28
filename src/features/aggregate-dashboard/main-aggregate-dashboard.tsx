@@ -14,7 +14,6 @@ import CompetencyCompetency from "./competencies-comparison/competencies-compari
 import HeatMap from "./heatmap/heatmap";
 import MainSummary from "./main-summary/main-summary";
 import RadarCoreValue from "./radar-corevalue/radar-coreValue";
-import avatar from "./../../assets/img/DefaultAvatar.png";
 import "./aggregate-dashboard.css";
 import TotalLeaders from "./number-of-leaders/num-of-leaders";
 import CompetencyAvgRate from "./competency-avg-rate/competency-avg-rate";
@@ -47,6 +46,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         dropdownValues: [],
         title: "",
         userClevel: "",
+        user: {},
       },
     };
   }
@@ -97,15 +97,26 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                       <Grid container>
                         <Grid item xs={3} sm={3}>
                           <div className=".kt-widget.kt-widget--user-profile-3 .kt-widget__top .kt-widget__media">
-                            <img style={{ width: "60px", borderRadius: "8px", float: "left" }} src={avatar} />
+                            {this.state.dashboardInfo.user?.avatarUrl !== undefined && (
+                              <img
+                                style={{ width: "60px", borderRadius: "8px", float: "left" }}
+                                src={this.state.dashboardInfo.user?.avatarUrl}
+                              />
+                            )}
+                            {this.state.dashboardInfo.user?.avatarUrl === undefined && (
+                              <span style={{ width: "60px", borderRadius: "8px", float: "left" }}>
+                                {" "}
+                                {this.state.dashboardInfo.user?.avatarTextPlaceholder}
+                              </span>
+                            )}
                           </div>
                         </Grid>
                         <Grid item xs={9} sm={9}>
                           <div className="kt-widget__content">
                             <div className="head">
-                              <p className="kt-widget__username">Saeid Mohammadi</p>
+                              <p className="kt-widget__username">{this.state.dashboardInfo.user?.spLatinFullName}</p>
                             </div>
-                            <div className="sub-head">s.mohammadi@digikala.com / CEO</div>
+                            <div className="sub-head">{this.state.dashboardInfo.user?.emailAddress}</div>
                           </div>
                         </Grid>
                       </Grid>
@@ -142,14 +153,14 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             </Grid>
             {this.state.reportProps.level == "All" && (
               <Grid container spacing={3} className="mt-4">
+                <Grid item xs={6} sm={3}>
+                  <ClevelParticipation viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+                </Grid>
                 <Grid item xs={9} sm={5}>
                   <CompetencyAvgComparison
                     viewAs={this.state.reportProps.viewAs}
                     level={this.state.reportProps.level}
                   />
-                </Grid>
-                <Grid item xs={6} sm={3}>
-                  <ClevelParticipation viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
                 </Grid>
                 <Grid item xs={6} sm={4}>
                   <CompetencyAvgRate viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />

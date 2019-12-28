@@ -139,7 +139,7 @@ export default class CompetencyAvgComparison extends React.Component {
       <DKPortlet title="Competencies Average Rates Comparison">
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <Bar height={80} type="bar" data={this.state.barChartData} options={options} />
+          <Bar height={150} type="bar" data={this.state.barChartData} options={options} />
         )}
       </DKPortlet>
     );

@@ -110,7 +110,7 @@ export default class ComparingChart extends React.Component<IProps, IState> {
     };
     return (
       <DKPortlet
-        className={this.props.lang === "fa" ? "rtl" : "ltr"}
+        extraClass={this.props.lang === "fa" ? "rtl" : "ltr"}
         title={this.props.lang === "fa" ? "امتیازات شما براساس ارزش های دیجی کالا" : "Results Based on DK Values"}
       >
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
