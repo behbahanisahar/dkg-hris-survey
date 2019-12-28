@@ -6,6 +6,8 @@ import Heatmap from "./../../entities/aggregate-report/heatmap";
 import RadarCoreValues from "../../entities/aggregate-report/core-calues-radar";
 import AverageCompetency from "./../../entities/aggregate-report/average-competency";
 import DashboardInfo from "../../entities/aggregate-report/dashboard-info";
+import NumberOfLeaders from "../../entities/aggregate-report/leader-number";
+import CompetencyAvg from "../../entities/aggregate-report/competency-avg";
 export default class MockAggregateData {
   public static statisticMock: statistics = {
     completed: 213,
@@ -202,7 +204,7 @@ export default class MockAggregateData {
   public static MockHeat: Heatmap[] = [
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -217,7 +219,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -232,7 +234,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -247,7 +249,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -263,7 +265,7 @@ export default class MockAggregateData {
 
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -278,7 +280,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -293,7 +295,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -308,7 +310,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -323,7 +325,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -338,7 +340,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -353,7 +355,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -368,7 +370,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -383,7 +385,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -398,7 +400,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -413,7 +415,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -428,7 +430,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -443,7 +445,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -458,7 +460,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -473,7 +475,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -488,7 +490,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -503,7 +505,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -518,7 +520,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 486,
-      title: "Saeid Mohammadi",
+      title: "ali nooshabadi",
       category1: 4.5,
       category2: 4.59,
       category3: 4.46,
@@ -533,7 +535,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 485,
-      title: "Hamid Mohammadi",
+      title: "mohebat shole",
       category1: 4.08,
       category2: 4.58,
       category3: 4.36,
@@ -548,7 +550,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 428,
-      title: "Kaveh Ehsani",
+      title: "pouyan feyzian",
       category1: 4.13,
       category2: 4.28,
       category3: 4.48,
@@ -578,7 +580,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 453,
-      title: "Mohsen Mokremi",
+      title: "pouyan feyzian",
       category1: 4.21,
       category2: 4.12,
       category3: 4.28,
@@ -593,7 +595,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 552,
-      title: "Hooman Amini",
+      title: "pouyan feyzian",
       category1: 3.64,
       category2: 4.12,
       category3: 4.19,
@@ -638,7 +640,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 419,
-      title: "Soheil Haji Moughadam",
+      title: "Soheil Azimi",
       category1: 3.75,
       category2: 4.04,
       category3: 3.94,
@@ -653,7 +655,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 488,
-      title: "Majid Ghasemi",
+      title: "Majid tavakoli",
       category1: 3.41,
       category2: 3.92,
       category3: 3.89,
@@ -668,7 +670,7 @@ export default class MockAggregateData {
     },
     {
       nominationId: 360,
-      title: "Amir Pashazanous",
+      title: "Amir gholami",
       category1: 3.77,
       category2: 3.66,
       category3: 3.36,
@@ -861,5 +863,191 @@ export default class MockAggregateData {
       },
     ],
     userClevel: "CEO",
+    title: "Directors/SMs/MMs",
   };
+  public static MockNumberOfLeaders: NumberOfLeaders[] = [
+    {
+      title: "COO",
+      count: 112,
+      departments: [
+        {
+          count: 111,
+        },
+        {
+          title: "COO",
+          count: 1,
+        },
+      ],
+    },
+    {
+      title: "CFO",
+      count: 22,
+      departments: [
+        {
+          title: "CFO",
+          count: 1,
+        },
+        {
+          count: 21,
+        },
+      ],
+    },
+    {
+      title: "CMO",
+      count: 15,
+      departments: [
+        {
+          title: "CMO",
+          count: 1,
+        },
+        {
+          count: 14,
+        },
+      ],
+    },
+    {
+      title: "CCO",
+      count: 40,
+      departments: [
+        {
+          title: "D",
+          count: 13,
+        },
+        {
+          title: "C",
+          count: 11,
+        },
+        {
+          title: "B",
+          count: 7,
+        },
+        {
+          title: "CCO",
+          count: 2,
+        },
+        {
+          title: "A",
+          count: 7,
+        },
+      ],
+    },
+    {
+      title: "CEO",
+      count: 5,
+      departments: [
+        {
+          count: 3,
+        },
+        {
+          title: "CEO",
+          count: 2,
+        },
+      ],
+    },
+    {
+      title: "CTO",
+      count: 32,
+      departments: [
+        {
+          count: 31,
+        },
+        {
+          title: "CTO",
+          count: 1,
+        },
+      ],
+    },
+    {
+      title: "Fidibo",
+      count: 5,
+      departments: [
+        {
+          title: "Fidibo",
+          count: 5,
+        },
+      ],
+    },
+    {
+      title: "CHRO",
+      count: 26,
+      departments: [
+        {
+          count: 25,
+        },
+        {
+          title: "CHRO",
+          count: 1,
+        },
+      ],
+    },
+    {
+      title: "Digipay",
+      count: 21,
+      departments: [
+        {
+          title: "Digipay",
+          count: 20,
+        },
+        {
+          count: 1,
+        },
+      ],
+    },
+  ];
+  public static MockCompetencyAvg: CompetencyAvg[] = [
+    {
+      title: "Teamwork",
+      average97: 4,
+      average98: 3.89,
+      isTotal: false,
+    },
+    {
+      title: "Customer Centric",
+      average97: 4,
+      average98: 4,
+      isTotal: false,
+    },
+    {
+      title: "Builder approach & Result oriented",
+      average97: 4,
+      average98: 4.07,
+      isTotal: false,
+    },
+    {
+      title: "Drive for Excellence",
+      average97: 4,
+      average98: 3.88,
+      isTotal: false,
+    },
+    {
+      title: "Managing & Developing People",
+      average97: 4,
+      average98: 3.7,
+      isTotal: false,
+    },
+    {
+      title: "Inspire a Shared Vision",
+      average97: 4,
+      average98: 3.81,
+      isTotal: false,
+    },
+    {
+      title: "Business Acumen",
+      average97: 4,
+      average98: 3.9,
+      isTotal: false,
+    },
+    {
+      title: "Decision Making",
+      average97: 4,
+      average98: 3.89,
+      isTotal: false,
+    },
+    {
+      title: "Total",
+      average97: 4,
+      average98: 3.89,
+      isTotal: true,
+    },
+  ];
 }

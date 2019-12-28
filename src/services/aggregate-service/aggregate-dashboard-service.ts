@@ -9,6 +9,8 @@ import RadarCoreValues from "../../entities/aggregate-report/core-calues-radar";
 import AverageCompetency from "../../entities/aggregate-report/average-competency";
 import DashboardInfo from "../../entities/aggregate-report/dashboard-info";
 import { AggregateReportProps } from "../../features/aggregate-dashboard/aggregate-report-props";
+import NumberOfLeaders from "../../entities/aggregate-report/leader-number";
+import CompetencyAvg from "../../entities/aggregate-report/competency-avg";
 
 class AggregateServices extends ServiceBase {
   public constructor() {
@@ -80,6 +82,23 @@ class AggregateServices extends ServiceBase {
     }
 
     return Promise.resolve(MockAggregateData.MockAvgCompetency);
+  }
+
+  public async getNumberOfLeaders(props: AggregateReportProps): Promise<NumberOfLeaders[]> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get(`survey/aggregate/numberOfLeaders/${props.level}?viewAs=${props.viewAs}`);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockAggregateData.MockNumberOfLeaders);
+  }
+  public async getCompetencyAverageRate(props: AggregateReportProps): Promise<CompetencyAvg[]> {
+    if (process.env.NODE_ENV === "production") {
+      const items: any = await this.get(`survey/aggregate/competencies/table/${props.level}?viewAs=${props.viewAs}`);
+      return Promise.resolve(items.data);
+    }
+
+    return Promise.resolve(MockAggregateData.MockCompetencyAvg);
   }
 }
 export default AggregateServices;

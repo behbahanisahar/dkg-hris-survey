@@ -20,9 +20,7 @@ export default class CompetencyAvgComparison extends React.Component {
     };
   }
   async componentWillReceiveProps(nextProps) {
-    if (this.props.reportType !== nextProps.reportType) {
-      this.getData(nextProps.reportType);
-    }
+    this.getData(nextProps);
   }
   async getData(props) {
     this.setState(current => ({
@@ -76,7 +74,7 @@ export default class CompetencyAvgComparison extends React.Component {
     });
   }
   async componentDidMount() {
-    this.getData(this.props.reportType);
+    this.getData(this.props);
   }
   render() {
     var data = {
@@ -138,14 +136,12 @@ export default class CompetencyAvgComparison extends React.Component {
       },
     };
     return (
-      <div className="ltr">
-        <DKPortlet title="Competencies Average Rates Comparison">
-          {this.state.isFetching === true && <DKSpinner></DKSpinner>}
-          {this.state.isFetching === false && (
-            <Bar height={80} type="bar" data={this.state.barChartData} options={options} />
-          )}
-        </DKPortlet>
-      </div>
+      <DKPortlet title="Competencies Average Rates Comparison">
+        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
+        {this.state.isFetching === false && (
+          <Bar height={80} type="bar" data={this.state.barChartData} options={options} />
+        )}
+      </DKPortlet>
     );
   }
 }

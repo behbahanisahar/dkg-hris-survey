@@ -8,6 +8,7 @@ export interface DKPortletProps extends React.HTMLAttributes<HTMLDivElement> {
   headerToolbar?: React.ReactNode;
   children?: React.ReactNode;
   hasHeader?: boolean;
+  extraClass?: string;
 }
 
 export function DKPortlet({
@@ -24,8 +25,9 @@ export function DKPortlet({
       {hasHeader && (
         <div className={"kt-portlet__head " + (noborder ? "kt-portlet__head--noborder" : "")}>
           <div className="kt-portlet__head-label">
-            <h3 className="kt-portlet__head-title">{title}
-            <small className="kt-portlet__head-title">{" "+subtitle}</small>
+            <h3 className="kt-portlet__head-title">
+              {title}
+              <small className="kt-portlet__head-title">{" " + subtitle}</small>
             </h3>
           </div>
           <div className="kt-portlet__head-toolbar"> {headerToolbar}</div>

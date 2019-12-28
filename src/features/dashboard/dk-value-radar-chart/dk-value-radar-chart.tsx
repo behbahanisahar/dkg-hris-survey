@@ -109,16 +109,15 @@ export default class ComparingChart extends React.Component<IProps, IState> {
       },
     };
     return (
-      <div className={this.props.lang === "fa" ? "rtl" : "ltr"}>
-        <DKPortlet
-          title={this.props.lang === "fa" ? "امتیازات شما براساس ارزش های دیجی کالا" : "Results Based on DK Values"}
-        >
-          {this.state.isFetching === true && <DKSpinner></DKSpinner>}
-          {this.state.isFetching === false && (
-            <Radar data={this.state.data} options={options} width={400} height={350}></Radar>
-          )}
-        </DKPortlet>
-      </div>
+      <DKPortlet
+        className={this.props.lang === "fa" ? "rtl" : "ltr"}
+        title={this.props.lang === "fa" ? "امتیازات شما براساس ارزش های دیجی کالا" : "Results Based on DK Values"}
+      >
+        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
+        {this.state.isFetching === false && (
+          <Radar data={this.state.data} options={options} width={400} height={350}></Radar>
+        )}
+      </DKPortlet>
     );
   }
 }

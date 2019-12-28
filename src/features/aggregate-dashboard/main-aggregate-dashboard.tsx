@@ -14,7 +14,10 @@ import CompetencyCompetency from "./competencies-comparison/competencies-compari
 import HeatMap from "./heatmap/heatmap";
 import MainSummary from "./main-summary/main-summary";
 import RadarCoreValue from "./radar-corevalue/radar-coreValue";
-
+import avatar from "./../../assets/img/DefaultAvatar.png";
+import "./aggregate-dashboard.css";
+import TotalLeaders from "./number-of-leaders/num-of-leaders";
+import CompetencyAvgRate from "./competency-avg-rate/competency-avg-rate";
 interface IProps {
   match: any;
 }
@@ -42,6 +45,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       reportTypeText: "clevel",
       dashboardInfo: {
         dropdownValues: [],
+        title: "",
         userClevel: "",
       },
     };
@@ -89,8 +93,27 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                 {/* <DashboardSummary viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} /> */}
                 <DKPortletSummary background="#F05B71" title=" 360̊ Feedback Aggregate Report">
                   <div style={{ color: "black" }} className="kt-widget17__items">
-                    <div style={{ textAlign: "center", fontSize: "2.1rem" }} className="kt-widget17__item">
-                      Level Of Leaders
+                    <div className="kt-widget17__item">
+                      <Grid container>
+                        <Grid item xs={3} sm={3}>
+                          <div className=".kt-widget.kt-widget--user-profile-3 .kt-widget__top .kt-widget__media">
+                            <img style={{ width: "60px", borderRadius: "8px", float: "left" }} src={avatar} />
+                          </div>
+                        </Grid>
+                        <Grid item xs={9} sm={9}>
+                          <div className="kt-widget__content">
+                            <div className="head">
+                              <p className="kt-widget__username">Saeid Mohammadi</p>
+                            </div>
+                            <div className="sub-head">s.mohammadi@digikala.com / CEO</div>
+                          </div>
+                        </Grid>
+                      </Grid>
+                    </div>
+                  </div>
+                  <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items"></div>
+                  <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
+                    <div className="kt-widget17__item">
                       {this.state.dashboardInfo.dropdownValues.length > 1 && (
                         <Select
                           margin="dense"
@@ -107,22 +130,8 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                           {this.renderDropDown(this.state.reportTypes)}
                         </Select>
                       )}
-                    </div>
-                  </div>
-                  <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
-                    <div className="kt-widget17__item">
-                      <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>Directors</span>{" "}
-                    </div>
-                    <div className="kt-widget17__item">
-                      <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>SMs</span>{" "}
-                    </div>
-                  </div>
-                  <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
-                    <div className="kt-widget17__item">
-                      <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>MMs</span>{" "}
-                    </div>
-                    <div className="kt-widget17__item">
-                      <span style={{ fontSize: "1.2rem", marginTop: "2%", fontWeight: 600 }}>Supervisors</span>{" "}
+                      <h4>Level Of Leaders</h4>
+                      <span>{this.state.dashboardInfo.title}</span>
                     </div>
                   </div>
                 </DKPortletSummary>
@@ -131,16 +140,19 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                 <MainSummary viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
               </Grid>
             </Grid>
-            {this.state.reportProps.level === "All" && (
+            {this.state.reportProps.level == "All" && (
               <Grid container spacing={3} className="mt-4">
-                <Grid item xs={9} sm={8}>
+                <Grid item xs={9} sm={5}>
                   <CompetencyAvgComparison
                     viewAs={this.state.reportProps.viewAs}
                     level={this.state.reportProps.level}
                   />
                 </Grid>
-                <Grid item xs={6} sm={4}>
+                <Grid item xs={6} sm={3}>
                   <ClevelParticipation viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+                </Grid>
+                <Grid item xs={6} sm={4}>
+                  <CompetencyAvgRate viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
                 </Grid>
               </Grid>
             )}
@@ -150,6 +162,11 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
               </Grid>
               <Grid item xs={6} sm={4}>
                 <RadarCoreValue viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+              </Grid>
+            </Grid>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={12}>
+                <TotalLeaders />
               </Grid>
             </Grid>
             <Grid container spacing={3} className="mt-4">
@@ -172,10 +189,10 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                 </DKPortlet>
               </Grid>
             </Grid>
+
             <Grid container spacing={3} className="mt-4">
               <HeatMap viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
             </Grid>
-            <Grid container spacing={3} className="mt-4"></Grid>
           </>
         )}
       </div>
