@@ -19,6 +19,7 @@ export function HeataImprovement({ value = "0" }: Props) {
           {value} %
         </span>
       )}
+      {value == "-" && <span className="dk-brand-text">{value}</span>}
     </div>
   );
 }

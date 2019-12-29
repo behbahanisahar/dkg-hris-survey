@@ -67,6 +67,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
         {this.state.isFetching === false && (
           <>
             <HeataMapLegend></HeataMapLegend>
+
             <Table className="heatmap-table table mt-3 table-sm">
               <thead className="dk-brand-grey">
                 <tr>
