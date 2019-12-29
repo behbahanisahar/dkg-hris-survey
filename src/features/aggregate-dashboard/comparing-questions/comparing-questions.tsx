@@ -1,12 +1,10 @@
-import { Table, TableBody, TableCell, TableRow } from "@material-ui/core";
+import { Table, TableBody } from "@material-ui/core";
 import * as React from "react";
-
 import ComparisonQuestions from "../../../entities/aggregate-report/comparison-questions";
 import QuestionDetail from "../../../entities/aggregate-report/question-detail";
-
 import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import { AggregateReportProps } from "../aggregate-report-props";
-import "./comparing-questions.css";
+import "./comparing-questions.less";
 
 interface IProps {
   comparingType: string;
@@ -27,7 +25,7 @@ export default class QuestionComparison extends React.Component<AggregateReportP
     return (
       <>
         <Table className="table table-questions table-bordered">
-          <thead className="dk-brand-grey">
+          <thead className={this.props.comparingType === "top" ? "top" : "bottom"}>
             <tr>
               <th>Rank</th>
               <th>Statements</th>
@@ -50,19 +48,17 @@ export default class QuestionComparison extends React.Component<AggregateReportP
     }
     if (Questions.length === 0) {
       return (
-        <TableRow>
-          <TableCell align="center" colSpan={3} className="emptyRowLog">
+        <tr>
+          <td align="center" colSpan={3} className="emptyRowLog">
             <NoContent></NoContent>
-          </TableCell>
-        </TableRow>
+          </td>
+        </tr>
       );
     } else {
       return Questions?.map((n: QuestionDetail, index: any) => {
         return (
           <tr key={index}>
-            <td className={this.props.comparingType === "top" ? "top" : "bottom"} align="center">
-              {n.rank}
-            </td>
+            <td align="center">{n.rank}</td>
             <td align="left">
               <span dangerouslySetInnerHTML={{ __html: n.statements }}></span>
             </td>

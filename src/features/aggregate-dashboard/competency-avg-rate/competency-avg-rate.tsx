@@ -1,11 +1,10 @@
-import { Table, TableBody, TableCell, TableRow } from "@material-ui/core";
 import * as React from "react";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
+import CompetencyAvg from "../../../entities/aggregate-report/competency-avg";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { NoContentEnglish } from "../../nominationForm/components/no-content/no-content-english";
 import { AggregateReportProps } from "../aggregate-report-props";
-import CompetencyAvg from "../../../entities/aggregate-report/competency-avg";
 
 interface IState {
   data: CompetencyAvg[];
@@ -50,21 +49,21 @@ export default class CompetencyAvgRate extends React.Component<AggregateReportPr
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <div>
-            <Table className="table mt-3 table-sm table-bordered">
+            <table className="table table-striped table-hover table-sm table-bordered">
               <thead className="dk-brand-grey">
                 {/* <tr>
                   <th className="none-thead" style={{ backgroundColor: "#fff!important" }}></th>
                   <th colSpan={2}>Average Rating</th>
                 </tr> */}
                 <tr>
-                  <th className="none-thead" style={{ backgroundColor: "#fff!important" }}></th>
-
+                  {/* <th className="none-thead" style={{ backgroundColor: "#fff!important" }}></th> */}
+                  <th>Title</th>
                   <th>1397</th>
                   <th>1398</th>
                 </tr>
               </thead>
-              <TableBody>{this.onRenderTable()}</TableBody>
-            </Table>
+              <tbody>{this.onRenderTable()}</tbody>
+            </table>
           </div>
         )}
       </DKPortlet>
@@ -73,16 +72,16 @@ export default class CompetencyAvgRate extends React.Component<AggregateReportPr
   private onRenderTable = () => {
     if (this.state.data.length === 0) {
       return (
-        <TableRow>
-          <TableCell align="center" colSpan={12}>
+        <tr>
+          <td align="center" colSpan={12}>
             <NoContentEnglish />
-          </TableCell>
-        </TableRow>
+          </td>
+        </tr>
       );
     } else {
       return this.state.data?.map((n: CompetencyAvg, index: any) => {
         return (
-          <tr className={n.isTotal ? "total" : ""} key={index}>
+          <tr className={n.isTotal ? "footer" : ""} key={index}>
             <td align="left">{n.title}</td>
             <td align="center">{n.average97.toFixed(2)}</td>
             <td align="center">{n.average98.toFixed(2)}</td>

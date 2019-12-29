@@ -3,7 +3,7 @@ import React from "react";
 import ComparisonQuestions from "../../../entities/aggregate-report/comparison-questions";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { AggregateReportProps } from "../aggregate-report-props";
-import "./comparing-questions.css";
+import "./comparing-questions.less";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import QuestionComparison from "./comparing-questions";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
