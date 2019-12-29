@@ -4,17 +4,7 @@ import React from "react";
 import addTreemapModule from "highcharts/modules/treemap";
 addTreemapModule(Highcharts);
 class TotalLeaders extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  async componentDidMount() {
-    //  this.getData(this.props.itemId, this.props.lang, this.state.isFetching, this.state.year);
-  }
-
   render() {
-    const itemId = this.props.itemId;
-    const lang = this.props.lang;
     const options = {
       plotOptions: {
         treemap: {

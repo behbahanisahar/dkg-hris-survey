@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableRow } from "@material-ui/core";
+import { Table, TableBody, TableCell, TableRow, Tooltip } from "@material-ui/core";
 import * as React from "react";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
@@ -9,6 +9,7 @@ import Heatmap from "./../../../entities/aggregate-report/heatmap";
 import { HeataMapLegend } from "./heatmap-legend";
 import "./heatmap.css";
 import { HeataImprovement } from "./heatmap-improvement";
+import Sort from "@material-ui/icons/Sort";
 
 let allitems: any[] = [];
 
@@ -18,6 +19,8 @@ interface IState {
   isFetching: boolean;
   buttonText: string;
   filterName: string;
+  order: string;
+  orderBy: string;
 }
 export default class HeatMap extends React.Component<AggregateReportProps, IState> {
   private AggregateServices: AggregateServices;
@@ -30,6 +33,8 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
       data: [],
       buttonText: "Show All",
       filterName: "",
+      order: "asc",
+      orderBy: "rank",
     };
   }
   public async componentWillReceiveProps(nextProps: AggregateReportProps) {
@@ -65,8 +70,8 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
             <Table className="heatmap-table table mt-3 table-sm">
               <thead className="dk-brand-grey">
                 <tr>
-                  {/* <th className="none-thead" style={{ backgroundColor: "#fff!important" }}>
-                    {this.state.data?.length >= 40 && (
+                  <th className="none-thead" style={{ backgroundColor: "#fff!important" }}>
+                    {/* {this.state.data?.length >= 40 && (
                       <button
                         className="btn btn-sm btn-bold btn-brand-hover"
                         onClick={(e: any) => {
@@ -77,9 +82,16 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                       >
                         {this.state.buttonText}
                       </button>
-                    )}
-                  </th> */}
-                  <th colSpan={2} className="none-thead" style={{ backgroundColor: "#fff!important" }}>
+                    )} */}
+                    <Tooltip title="Sort By Rank" aria-label="sort" arrow>
+                      <Sort
+                        style={{ color: "black", cursor: "pointer" }}
+                        onClick={(event: any) => this.onChangeSorting()}
+                      />
+                    </Tooltip>
+                  </th>
+
+                  <th colSpan={1} className="none-thead" style={{ backgroundColor: "#fff!important" }}>
                     <input
                       value={this.state.filterName}
                       onChange={this.onFilterTable}
@@ -100,6 +112,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                   <th></th>
                 </tr>
               </thead>
+
               <TableBody>{this.onRenderTable()}</TableBody>
             </Table>
           </>
@@ -117,72 +130,74 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
         </TableRow>
       );
     } else {
-      return this.state.data?.map((n: Heatmap, index: number) => {
-        return (
-          <>
-            {this.state.data.length > 40 && this.state.showAll === false && index == 21 && (
-              <tr className="showmore">
-                <td className="text-center p-0" colSpan={13}>
-                  <section className="seeMore">
-                    <span
-                      onClick={(e: any) => {
-                        this.onShowItem();
-                        e.preventDefault();
-                        return false;
-                      }}
-                    >
-                      Show all
-                    </span>
-                  </section>
+      return this.stableSort(this.state.data, this.getSorting(this.state.order, this.state.orderBy)).map(
+        (n: Heatmap, index: number) => {
+          return (
+            <>
+              {this.state.data.length > 40 && this.state.showAll === false && index == 21 && (
+                <tr className="showmore">
+                  <td className="text-center p-0" colSpan={13}>
+                    <section className="seeMore">
+                      <span
+                        onClick={(e: any) => {
+                          this.onShowItem();
+                          e.preventDefault();
+                          return false;
+                        }}
+                      >
+                        Show all
+                      </span>
+                    </section>
+                  </td>
+                </tr>
+              )}
+              <tr key={index} className={this.ChangeTrClass(index)}>
+                <td style={{ width: "1%" }} align="center">
+                  {n.rank + 1 ?? 0}
+                </td>
+                <td align="left">
+                  <a target="_blank" className="title-link" href={"#/dashboard/" + n.nominationId}>
+                    {n.title}
+                  </a>
+                </td>
+                <td style={{ width: "8%" }} className={this.averageClass(n.category1, false)} align="center">
+                  {n.category1.toFixed(2)}
+                </td>
+                <td style={{ width: "8%" }} className={this.averageClass(n.category2, false)} align="center">
+                  {n.category2.toFixed(2)}
+                </td>
+                <td style={{ width: "8%" }} className={this.averageClass(n.category3, false)} align="center">
+                  {n.category3.toFixed(2)}
+                </td>
+                <td style={{ width: "8%" }} className={this.averageClass(n.category4, false)} align="center">
+                  {n.category4.toFixed(2)}
+                </td>
+                <td style={{ width: "8%" }} className={this.averageClass(n.category5, false)} align="center">
+                  {n.category5.toFixed(2)}
+                </td>
+                <td style={{ width: "8%" }} className={this.averageClass(n.category6, false)} align="center">
+                  {n.category6.toFixed(2)}
+                </td>
+                <td style={{ width: "8%" }} className={this.averageClass(n.category7, false)} align="center">
+                  {n.category7.toFixed(2)}
+                </td>
+                <td style={{ width: "8%" }} className={this.averageClass(n.category8, false)} align="center">
+                  {n.category8.toFixed(2)}
+                </td>
+                <td style={{ width: "6%" }} className={this.averageClass(n.totalAverage, true)} align="center">
+                  {n.totalAverage.toFixed(2)}
+                </td>
+                <td style={{ width: "8%" }} align="center">
+                  {n.numberOfAssessors}
+                </td>
+                <td style={{ width: "6%" }} align="center">
+                  <HeataImprovement value={n.improvement}></HeataImprovement>
                 </td>
               </tr>
-            )}
-            <tr key={index} className={this.ChangeTrClass(index)}>
-              <td style={{ width: "1%" }} align="center">
-                {n.rank + 1 ?? 0}
-              </td>
-              <td align="left">
-                <a target="_blank" className="title-link" href={"#/dashboard/" + n.nominationId}>
-                  {n.title}
-                </a>
-              </td>
-              <td style={{ width: "8%" }} className={this.averageClass(n.category1, false)} align="center">
-                {n.category1.toFixed(2)}
-              </td>
-              <td style={{ width: "8%" }} className={this.averageClass(n.category2, false)} align="center">
-                {n.category2.toFixed(2)}
-              </td>
-              <td style={{ width: "8%" }} className={this.averageClass(n.category3, false)} align="center">
-                {n.category3.toFixed(2)}
-              </td>
-              <td style={{ width: "8%" }} className={this.averageClass(n.category4, false)} align="center">
-                {n.category4.toFixed(2)}
-              </td>
-              <td style={{ width: "8%" }} className={this.averageClass(n.category5, false)} align="center">
-                {n.category5.toFixed(2)}
-              </td>
-              <td style={{ width: "8%" }} className={this.averageClass(n.category6, false)} align="center">
-                {n.category6.toFixed(2)}
-              </td>
-              <td style={{ width: "8%" }} className={this.averageClass(n.category7, false)} align="center">
-                {n.category7.toFixed(2)}
-              </td>
-              <td style={{ width: "8%" }} className={this.averageClass(n.category8, false)} align="center">
-                {n.category8.toFixed(2)}
-              </td>
-              <td style={{ width: "6%" }} className={this.averageClass(n.totalAverage, true)} align="center">
-                {n.totalAverage.toFixed(2)}
-              </td>
-              <td style={{ width: "8%" }} align="center">
-                {n.numberOfAssessors}
-              </td>
-              <td style={{ width: "6%" }} align="center">
-                <HeataImprovement value={n.improvement}></HeataImprovement>
-              </td>
-            </tr>
-          </>
-        );
-      });
+            </>
+          );
+        },
+      );
     }
   };
 
@@ -292,5 +307,49 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
         data: TableItems,
       };
     });
+  };
+  /**************************sorting functions*********************************************** */
+  private desc(a: any, b: any, orderBy: any) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+  private stableSort(array: any, cmp: any) {
+    const stabilizedThis = array.map((el: any, index: any) => [el, index]);
+    stabilizedThis.sort((a: any, b: any) => {
+      const order = cmp(a[0], b[0]);
+      if (order !== 0) {
+        return order;
+      }
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el: any) => el[0]);
+  }
+
+  private getSorting(order: any, orderBy: any) {
+    return order === "desc"
+      ? (a: any, b: any) => this.desc(a, b, orderBy)
+      : (a: any, b: any) => -this.desc(a, b, orderBy);
+  }
+  private onChangeSorting = () => {
+    if (this.state.order === "asc") {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          order: "desc",
+        };
+      });
+    } else {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          order: "asc",
+        };
+      });
+    }
   };
 }
