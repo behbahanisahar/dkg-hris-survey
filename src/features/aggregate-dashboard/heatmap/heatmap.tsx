@@ -14,6 +14,7 @@ let allitems: any[] = [];
 
 interface IState {
   data: Heatmap[];
+  showAll: boolean;
   isFetching: boolean;
   buttonText: string;
   filterName: string;
@@ -24,6 +25,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
     super(props);
     this.AggregateServices = new AggregateServices();
     this.state = {
+      showAll: false,
       isFetching: true,
       data: [],
       buttonText: "Show All",
@@ -38,7 +40,6 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
       ...current,
       isFetching: true,
     }));
-    console.log("heatmap", props);
     await this.AggregateServices.getHeatmap(props).then(response =>
       this.setState(prevState => {
         return {
@@ -64,7 +65,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
             <Table className="heatmap-table table mt-3 table-sm">
               <thead className="dk-brand-grey">
                 <tr>
-                  <th className="none-thead" style={{ backgroundColor: "#fff!important" }}>
+                  {/* <th className="none-thead" style={{ backgroundColor: "#fff!important" }}>
                     {this.state.data?.length >= 40 && (
                       <button
                         className="btn btn-sm btn-bold btn-brand-hover"
@@ -77,8 +78,8 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                         {this.state.buttonText}
                       </button>
                     )}
-                  </th>
-                  <th className="none-thead" style={{ backgroundColor: "#fff!important" }}>
+                  </th> */}
+                  <th colSpan={2} className="none-thead" style={{ backgroundColor: "#fff!important" }}>
                     <input
                       value={this.state.filterName}
                       onChange={this.onFilterTable}
@@ -94,9 +95,9 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                   <th>Managing People</th>
                   <th>Developing Vision & Strategy</th>
                   <th>Business Acumen</th>
-                  <th>Total Average Rate</th>
+                  <th>Average Rate</th>
                   <th>#Assessors</th>
-                  <th>Improvement</th>
+                  <th></th>
                 </tr>
               </thead>
               <TableBody>{this.onRenderTable()}</TableBody>
@@ -116,51 +117,70 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
         </TableRow>
       );
     } else {
-      return this.state.data?.map((n: Heatmap, index: any) => {
+      return this.state.data?.map((n: Heatmap, index: number) => {
         return (
-          <tr key={index} className={this.ChangeTrClass(index)}>
-            <td style={{ width: "1%" }} align="center">
-              {index + 1}
-            </td>
-            <td align="left">
-              <a target="_blank" className="title-link" href={"#/dashboard/" + n.nominationId}>
-                {n.title}
-              </a>
-            </td>
-            <td style={{ width: "8%" }} className={this.averageClass(n.category1, false)} align="center">
-              {n.category1.toFixed(2)}
-            </td>
-            <td style={{ width: "8%" }} className={this.averageClass(n.category2, false)} align="center">
-              {n.category2.toFixed(2)}
-            </td>
-            <td style={{ width: "8%" }} className={this.averageClass(n.category3, false)} align="center">
-              {n.category3.toFixed(2)}
-            </td>
-            <td style={{ width: "8%" }} className={this.averageClass(n.category4, false)} align="center">
-              {n.category4.toFixed(2)}
-            </td>
-            <td style={{ width: "8%" }} className={this.averageClass(n.category5, false)} align="center">
-              {n.category5.toFixed(2)}
-            </td>
-            <td style={{ width: "8%" }} className={this.averageClass(n.category6, false)} align="center">
-              {n.category6.toFixed(2)}
-            </td>
-            <td style={{ width: "8%" }} className={this.averageClass(n.category7, false)} align="center">
-              {n.category7.toFixed(2)}
-            </td>
-            <td style={{ width: "8%" }} className={this.averageClass(n.category8, false)} align="center">
-              {n.category8.toFixed(2)}
-            </td>
-            <td style={{ width: "6%" }} className={this.averageClass(n.totalAverage, true)} align="center">
-              {n.totalAverage.toFixed(2)}
-            </td>
-            <td style={{ width: "8%" }} align="center">
-              {n.numberOfAssessors}
-            </td>
-            <td style={{ width: "6%" }} align="center">
-              <HeataImprovement value={n.improvement}></HeataImprovement>
-            </td>
-          </tr>
+          <>
+            {this.state.data.length > 40 && this.state.showAll === false && index == 21 && (
+              <tr className="showmore">
+                <td className="text-center p-0" colSpan={13}>
+                  <section className="seeMore">
+                    <span
+                      onClick={(e: any) => {
+                        this.onShowItem();
+                        e.preventDefault();
+                        return false;
+                      }}
+                    >
+                      Show all
+                    </span>
+                  </section>
+                </td>
+              </tr>
+            )}
+            <tr key={index} className={this.ChangeTrClass(index)}>
+              <td style={{ width: "1%" }} align="center">
+                {n.rank + 1 ?? 0}
+              </td>
+              <td align="left">
+                <a target="_blank" className="title-link" href={"#/dashboard/" + n.nominationId}>
+                  {n.title}
+                </a>
+              </td>
+              <td style={{ width: "8%" }} className={this.averageClass(n.category1, false)} align="center">
+                {n.category1.toFixed(2)}
+              </td>
+              <td style={{ width: "8%" }} className={this.averageClass(n.category2, false)} align="center">
+                {n.category2.toFixed(2)}
+              </td>
+              <td style={{ width: "8%" }} className={this.averageClass(n.category3, false)} align="center">
+                {n.category3.toFixed(2)}
+              </td>
+              <td style={{ width: "8%" }} className={this.averageClass(n.category4, false)} align="center">
+                {n.category4.toFixed(2)}
+              </td>
+              <td style={{ width: "8%" }} className={this.averageClass(n.category5, false)} align="center">
+                {n.category5.toFixed(2)}
+              </td>
+              <td style={{ width: "8%" }} className={this.averageClass(n.category6, false)} align="center">
+                {n.category6.toFixed(2)}
+              </td>
+              <td style={{ width: "8%" }} className={this.averageClass(n.category7, false)} align="center">
+                {n.category7.toFixed(2)}
+              </td>
+              <td style={{ width: "8%" }} className={this.averageClass(n.category8, false)} align="center">
+                {n.category8.toFixed(2)}
+              </td>
+              <td style={{ width: "6%" }} className={this.averageClass(n.totalAverage, true)} align="center">
+                {n.totalAverage.toFixed(2)}
+              </td>
+              <td style={{ width: "8%" }} align="center">
+                {n.numberOfAssessors}
+              </td>
+              <td style={{ width: "6%" }} align="center">
+                <HeataImprovement value={n.improvement}></HeataImprovement>
+              </td>
+            </tr>
+          </>
         );
       });
     }
@@ -214,6 +234,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
       this.setState(prevState => {
         return {
           ...prevState,
+          showAll: !prevState.showAll,
           buttonText: "Show Tops",
         };
       });

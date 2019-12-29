@@ -1,4 +1,5 @@
 export default interface Heatmap {
+  rank: number;
   title: string;
   category1: number;
   category2: number;
@@ -11,5 +12,5 @@ export default interface Heatmap {
   totalAverage: number;
   nominationId: number;
   numberOfAssessors: number;
-  improvement: number;
+  improvement: string;
 }
