@@ -18,7 +18,7 @@ export function DKPortletSummary({
   return (
     <div
       style={{ backgroundColor: PortletBackground }}
-      className=" summary-height kt-portlet kt-portlet--fit kt-portlet--head-lg kt-portlet--head-overlay kt-portlet--skin-solid kt-portlet--height-fluid"
+      className=" summary-height   kt-iconbox--animate-slower kt-iconbox--brand    kt-portlet kt-portlet--fit kt-portlet--head-lg kt-portlet--head-overlay kt-portlet--skin-solid kt-portlet--height-fluid"
     >
       <div className="kt-portlet__head kt-portlet__head--noborder kt-portlet__space-x">
         <div className="header">{title}</div>

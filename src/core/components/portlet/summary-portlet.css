@@ -7,3 +7,14 @@
 .summary-height {
   height: 390px !important;
 }
+.kt-iconbox--animate-slower:after {
+  bottom: 40% !important;
+}
+
+.kt-iconbox--brand.kt-iconbox--animate,
+.kt-iconbox--brand.kt-iconbox--animate-fast,
+.kt-iconbox--brand.kt-iconbox--animate-faster,
+.kt-iconbox--brand.kt-iconbox--animate-slow,
+.kt-iconbox--brand.kt-iconbox--animate-slower {
+  background-color: rgba(158, 160, 161, 0.07) !important;
+}

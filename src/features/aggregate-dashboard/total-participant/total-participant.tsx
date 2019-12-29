@@ -48,7 +48,9 @@ export default class TotalParticipant extends React.Component<IProps & Aggregate
             </div>
             <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
               <div className="kt-widget17__item">
-                <span style={{ fontSize: "1rem", marginTop: "2%", fontWeight: 600 }}>Total</span>{" "}
+                <span className="mb-2" style={{ fontSize: "1.5rem", marginTop: "2%", fontWeight: 500 }}>
+                  Total
+                </span>
                 <h3 style={{ fontSize: "1.3rem", color: "#FEC465" }}>{this.props.data.numberOfAsseses}</h3>
               </div>
             </div>

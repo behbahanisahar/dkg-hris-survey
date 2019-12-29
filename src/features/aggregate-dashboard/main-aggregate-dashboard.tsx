@@ -123,7 +123,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                     </div>
                   </div>
                   <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
-                    <div className="kt-widget17__item">
+                    <div className="kt-widget17__item" style={{ height: "80px" }}>
                       <h3 style={{ color: "#F27581", fontWeight: 600 }}>Level Of Leaders</h3>
                       <span>{this.state.dashboardInfo.title}</span>
                     </div>
@@ -132,7 +132,9 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                     <div className="kt-widget17__item">
                       {this.state.dashboardInfo.dropdownValues.length > 1 && (
                         <div>
-                          <h4>Report Types</h4>
+                          <span className="mb-2" style={{ fontSize: "1.5rem", marginTop: "2%", fontWeight: 500 }}>
+                            Report Types
+                          </span>
                           <Select
                             margin="dense"
                             dir="ltr"
