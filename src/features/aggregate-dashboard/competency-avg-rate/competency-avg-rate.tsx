@@ -50,8 +50,12 @@ export default class CompetencyAvgRate extends React.Component<AggregateReportPr
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <div>
-            <Table className=" table mt-3 table-sm">
+            <Table className="table mt-3 table-sm table-bordered">
               <thead className="dk-brand-grey">
+                {/* <tr>
+                  <th className="none-thead" style={{ backgroundColor: "#fff!important" }}></th>
+                  <th colSpan={2}>Average Rating</th>
+                </tr> */}
                 <tr>
                   <th className="none-thead" style={{ backgroundColor: "#fff!important" }}></th>
 
@@ -78,7 +82,7 @@ export default class CompetencyAvgRate extends React.Component<AggregateReportPr
     } else {
       return this.state.data?.map((n: CompetencyAvg, index: any) => {
         return (
-          <tr key={index}>
+          <tr className={n.isTotal ? "total" : ""} key={index}>
             <td align="left">{n.title}</td>
             <td align="center">{n.average97}</td>
             <td align="center">{n.average98}</td>

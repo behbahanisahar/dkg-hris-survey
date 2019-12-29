@@ -42,11 +42,11 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
       datasets: [
         {
           fill: false,
-          lineTension: 0.1,
+          lineTension: 10,
           backgroundColor: "#4DBA6D",
           borderColor: "#4DBA6D",
           borderCapStyle: "butt",
-          borderDash: [],
+          borderDash: [10, 5],
           borderDashOffset: 0.0,
           borderWidth: 5,
           borderJoinStyle: "miter",

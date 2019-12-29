@@ -55,11 +55,11 @@ export default class ParticipantComparisonSummary extends React.Component<IProps
             <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
               <div className="kt-widget17__item">
                 <span style={{ fontSize: "1rem", marginTop: "2%", fontWeight: 600 }}>Total Nominated </span>{" "}
-                <h3 style={{ fontSize: "1.3rem", color: "#FEC465" }}>{this.props.data.totalNominated}</h3>
+                <h3 style={{ fontSize: "1.3rem", color: "#06BDCD" }}>{this.props.data.totalNominated}</h3>
               </div>
               <div className="kt-widget17__item">
                 <span style={{ fontSize: "1rem", marginTop: "2%", fontWeight: 600 }}>Participation Rate</span>{" "}
-                <h3 style={{ fontSize: "1.3rem", color: "#FEC465" }}>{this.props.data.participationRate}</h3>
+                <h3 style={{ fontSize: "1.3rem", color: "#06BDCD" }}>{this.props.data.participationRate}</h3>
               </div>
             </div>
           </DKPortletSummary>

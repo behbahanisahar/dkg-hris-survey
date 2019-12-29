@@ -18,10 +18,14 @@ export function DKPortlet({
   noborder = false,
   title = "",
   subtitle = "",
+  extraClass = "",
   ...other
 }: DKPortletProps) {
   return (
-    <div className={"kt-portlet kt-portlet--height-fluid " + (noborder ? "kt-portlet__head--noborder" : "")} {...other}>
+    <div
+      className={"kt-portlet kt-portlet--height-fluid " + (noborder ? "kt-portlet__head--noborder" + extraClass : "")}
+      {...other}
+    >
       {hasHeader && (
         <div className={"kt-portlet__head " + (noborder ? "kt-portlet__head--noborder" : "")}>
           <div className="kt-portlet__head-label">

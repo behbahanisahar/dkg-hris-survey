@@ -128,14 +128,12 @@ export default class RadarCoreValue extends React.Component<AggregateReportProps
       },
     };
     return (
-      <div className="ltr">
-        <DKPortlet title="Results based on DK Core Values">
-          {this.state.isFetching === true && <DKSpinner></DKSpinner>}
-          {this.state.isFetching === false && (
-            <Radar data={this.state.data} options={options} width={450} height={350}></Radar>
-          )}
-        </DKPortlet>
-      </div>
+      <DKPortlet title="Results based on DK Core Values">
+        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
+        {this.state.isFetching === false && (
+          <Radar data={this.state.data} options={options} width={450} height={350}></Radar>
+        )}
+      </DKPortlet>
     );
   }
 }
