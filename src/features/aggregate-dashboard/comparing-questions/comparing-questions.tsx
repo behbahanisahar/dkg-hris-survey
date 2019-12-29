@@ -1,76 +1,42 @@
 import { Table, TableBody, TableCell, TableRow } from "@material-ui/core";
 import * as React from "react";
-import { DKSpinner } from "../../../core/components/spinner/spinner";
+
 import ComparisonQuestions from "../../../entities/aggregate-report/comparison-questions";
 import QuestionDetail from "../../../entities/aggregate-report/question-detail";
-import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
+
 import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import { AggregateReportProps } from "../aggregate-report-props";
 import "./comparing-questions.css";
 
 interface IProps {
   comparingType: string;
+  data: ComparisonQuestions;
 }
 
-interface IState {
-  data: ComparisonQuestions;
-  isFetching: boolean;
-}
+interface IState {}
 
 export default class QuestionComparison extends React.Component<AggregateReportProps & IProps, IState> {
-  private AggregateServices: AggregateServices;
   public constructor(props: any) {
     super(props);
-    this.AggregateServices = new AggregateServices();
-    this.state = {
-      isFetching: true,
-      data: {
-        top: [],
-        bottom: [],
-      },
-    };
   }
 
-  public async componentWillReceiveProps(nextProps: AggregateReportProps) {
-    this.getData(nextProps);
-  }
+  public async componentWillReceiveProps(nextProps: AggregateReportProps) {}
 
-  public async getData(props: AggregateReportProps) {
-    this.setState(current => ({
-      ...current,
-      isFetching: true,
-    }));
-    await this.AggregateServices.getComparisonQuestions(props).then(response =>
-      this.setState(prevState => {
-        return {
-          ...prevState,
-          data: response,
-          isFetching: false,
-        };
-      }),
-    );
-  }
-
-  public async componentDidMount() {
-    this.getData(this.props);
-  }
+  public async componentDidMount() {}
   public render() {
     return (
       <>
-        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
-        {this.state.isFetching === false && (
-          <Table className="table table-questions table-bordered">
-            <thead className="dk-brand-grey">
-              <tr>
-                <th>Rank</th>
-                <th>Statements</th>
-                <th>Competency</th>
-                <th>Average Rating</th>
-              </tr>
-            </thead>
-            <TableBody>{this.onRenderTable()}</TableBody>
-          </Table>
-        )}
+        <Table className="table table-questions table-bordered">
+          <thead className="dk-brand-grey">
+            <tr>
+              <th>Rank</th>
+              <th>Statements</th>
+              <th>Competency</th>
+              <th>Average Rating</th>
+            </tr>
+          </thead>
+          <TableBody>{this.onRenderTable()}</TableBody>
+        </Table>
       </>
     );
   }
@@ -78,9 +44,9 @@ export default class QuestionComparison extends React.Component<AggregateReportP
     let Questions: QuestionDetail[] = [];
 
     if (this.props.comparingType === "top") {
-      Questions = this.state.data.top;
+      Questions = this.props.data.top;
     } else {
-      Questions = this.state.data.bottom;
+      Questions = this.props.data.bottom;
     }
     if (Questions.length === 0) {
       return (

@@ -1,6 +1,5 @@
 import { Grid, MenuItem, Select } from "@material-ui/core";
 import * as React from "react";
-import { DKPortlet } from "../../core/components/portlet/portlet";
 import { DKPortletSummary } from "../../core/components/portlet/summary-portlet";
 import { DKSpinner } from "../../core/components/spinner/spinner";
 import DashboardInfo from "../../entities/aggregate-report/dashboard-info";
@@ -8,7 +7,6 @@ import AggregateServices from "../../services/aggregate-service/aggregate-dashbo
 import DropDownModel from "./../../entities/dropdown";
 import { AggregateReportProps } from "./aggregate-report-props";
 import ClevelParticipation from "./clevel-participation/clevel-participation";
-import QuestionComparison from "./comparing-questions/comparing-questions";
 import CompetencyAvgComparison from "./competencies-average/competencies-avg-comparison";
 import CompetencyCompetency from "./competencies-comparison/competencies-comparison";
 import HeatMap from "./heatmap/heatmap";
@@ -18,6 +16,7 @@ import "./aggregate-dashboard.css";
 import TotalLeaders from "./number-of-leaders/num-of-leaders";
 import CompetencyAvgRate from "./competency-avg-rate/competency-avg-rate";
 import "./aggregate-dashboard.css";
+import MainQuestionComparison from "./comparing-questions/main-questions-comparison";
 interface IProps {
   match: any;
 }
@@ -187,26 +186,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                 <TotalLeaders />
               </Grid>
             </Grid>
-            <Grid container spacing={3} className="mt-4">
-              <Grid item xs={6} sm={6}>
-                <DKPortlet title="Top5 / Strengths">
-                  <QuestionComparison
-                    viewAs={this.state.reportProps.viewAs}
-                    level={this.state.reportProps.level}
-                    comparingType="top"
-                  />
-                </DKPortlet>
-              </Grid>
-              <Grid item xs={6} sm={6}>
-                <DKPortlet title="Bottom5 / Improvement Areas">
-                  <QuestionComparison
-                    viewAs={this.state.reportProps.viewAs}
-                    level={this.state.reportProps.level}
-                    comparingType="bottom"
-                  />
-                </DKPortlet>
-              </Grid>
-            </Grid>
+            <MainQuestionComparison viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
 
             <Grid container spacing={3} className="mt-4">
               <HeatMap viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
