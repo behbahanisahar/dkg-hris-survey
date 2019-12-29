@@ -8,3 +8,12 @@
   text-align: left;
   text-align: left;
 }
+
+.dashboard-img {
+  border-radius: 8px;
+  float: left;
+  background-color: #f27581;
+  padding: 18px;
+  color: white;
+  font-weight: 600;
+}

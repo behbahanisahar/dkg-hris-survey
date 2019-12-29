@@ -862,8 +862,24 @@ export default class MockAggregateData {
         text: "DigiPay",
       },
     ],
-    userClevel: "CEO",
-    title: "Directors/SMs/MMs",
+    title: "test/test/test",
+    user: {
+      title: "حمید محمدی",
+      perssonelCode: "1000",
+      fatherName: "ولی اله",
+      nationalId: "0064388573",
+      birthDate: "1979-07-03",
+      strBirthDate: "1358/4/12",
+      emailAddress: "h.mohammadi@digikala.com",
+      cLevel: "CEO",
+      department: "Managing Directors",
+      socialSecurityJob: "مدیرعامل",
+      dateOfEmployment: "1391/11/30",
+      reportedPost: "Cofounder and Chief Executive Officer",
+      spLatinFullName: "Hamid Mohammadi",
+      itemId: 3544,
+      avatarTextPlaceholder: "HM",
+    },
   };
   public static MockNumberOfLeaders: NumberOfLeaders[] = [
     {

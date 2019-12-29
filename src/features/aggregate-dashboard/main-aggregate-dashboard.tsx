@@ -17,6 +17,7 @@ import RadarCoreValue from "./radar-corevalue/radar-coreValue";
 import "./aggregate-dashboard.css";
 import TotalLeaders from "./number-of-leaders/num-of-leaders";
 import CompetencyAvgRate from "./competency-avg-rate/competency-avg-rate";
+import "./aggregate-dashboard.css";
 interface IProps {
   match: any;
 }
@@ -104,7 +105,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                               />
                             )}
                             {this.state.dashboardInfo.user?.avatarUrl === undefined && (
-                              <span style={{ width: "60px", borderRadius: "8px", float: "left" }}>
+                              <span className="dashboard-img">
                                 {" "}
                                 {this.state.dashboardInfo.user?.avatarTextPlaceholder}
                               </span>
@@ -122,27 +123,33 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                       </Grid>
                     </div>
                   </div>
-                  <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items"></div>
+                  <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
+                    <div className="kt-widget17__item">
+                      <h3 style={{ color: "#F27581", fontWeight: 600 }}>Level Of Leaders</h3>
+                      <span>{this.state.dashboardInfo.title}</span>
+                    </div>
+                  </div>
                   <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
                     <div className="kt-widget17__item">
                       {this.state.dashboardInfo.dropdownValues.length > 1 && (
-                        <Select
-                          margin="dense"
-                          dir="ltr"
-                          value={this.state.reportType}
-                          fullWidth={true}
-                          onChange={event => this.onChangeFields(event)}
-                          inputProps={{
-                            name: "ReportType",
-                            id: "demo-controlled-open-select",
-                          }}
-                          variant="outlined"
-                        >
-                          {this.renderDropDown(this.state.reportTypes)}
-                        </Select>
+                        <div>
+                          <h4>Report Types</h4>
+                          <Select
+                            margin="dense"
+                            dir="ltr"
+                            value={this.state.reportProps.level}
+                            fullWidth={true}
+                            onChange={event => this.onChangeFields(event)}
+                            inputProps={{
+                              name: "ReportType",
+                              id: "demo-controlled-open-select",
+                            }}
+                            variant="outlined"
+                          >
+                            {this.renderDropDown(this.state.reportTypes)}
+                          </Select>
+                        </div>
                       )}
-                      <h4>Level Of Leaders</h4>
-                      <span>{this.state.dashboardInfo.title}</span>
                     </div>
                   </div>
                 </DKPortletSummary>
