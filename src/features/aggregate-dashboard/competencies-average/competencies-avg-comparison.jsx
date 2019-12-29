@@ -57,7 +57,7 @@ export default class CompetencyAvgComparison extends React.Component {
       const data = {
         labels: response.labels,
         datasets: newDataSet,
-        averageValue: response.averageValue,
+        averageValue: response.averageValue.toFixed(2),
       };
       const barChartData = {
         labels: response.labels,
@@ -77,22 +77,6 @@ export default class CompetencyAvgComparison extends React.Component {
     this.getData(this.props);
   }
   render() {
-    var data = {
-      labels: ["2010", "2011", "2012", "2013", "2014", "2015", "2016"],
-      datasets: [
-        {
-          label: "My Second dataset",
-          fillColor: "rgba(0,191,255,0.5)",
-          strokeColor: "rgba(0,191,255,0.8)",
-          highlightFill: "rgba(100,149,237,0.75)",
-          highlightStroke: "rgba(100,149,237,1)",
-          data: [60, 50, 40, 30, 20, 10, 20],
-          borderColor: "grey",
-          borderWidth: 1,
-        },
-      ],
-    };
-
     var options = {
       scales: {
         yAxes: [

@@ -209,7 +209,6 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         },
       };
     });
-    console.log(this.state.reportProps.level);
   };
 
   public renderDropDown = (items: any[]): JSX.Element[] => {

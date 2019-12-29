@@ -16,7 +16,7 @@
 .kt-iconbox--brand.kt-iconbox--animate-faster,
 .kt-iconbox--brand.kt-iconbox--animate-slow,
 .kt-iconbox--brand.kt-iconbox--animate-slower {
-  background-color: rgba(158, 160, 161, 0.07) !important;
+  background-color: rgba(7, 11, 13, 0.07) !important;
 }
 .kt-portlet__head {
   z-index: 2 !important;

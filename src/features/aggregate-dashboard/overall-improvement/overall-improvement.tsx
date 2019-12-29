@@ -35,9 +35,7 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
     this.getData(this.props);
   }
   public render() {
-    const overallData = [this.props.data.total97Score, this.props.data.total98Score];
-    var yourImage = new Image();
-    yourImage.src = "https://www.brandeps.com/icon-download/T/Triangle-right-icon-vector-01.svg";
+    const overallData = [this.props.data.total97Score.toFixed(2), this.props.data.total98Score.toFixed(2)];
     const data = {
       labels: ["1397", "1398"],
       datasets: [
@@ -54,7 +52,7 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
           pointBorderColor: "rgba(75,192,192,1)",
           pointBackgroundColor: "#fff",
           pointBorderWidth: 1,
-          pointStyle: ["", yourImage],
+          // pointStyle: ["", yourImage],
           pointHoverRadius: 5,
           pointHoverBackgroundColor: "rgba(75,192,192,1)",
           pointHoverBorderColor: "rgba(220,220,220,1)",

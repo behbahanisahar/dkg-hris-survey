@@ -70,7 +70,7 @@ export default class QuestionComparison extends React.Component<AggregateReportP
               {n.competency}
             </td>
             <td align="center" style={{ width: "8%" }}>
-              {n.averageRating}
+              {n.averageRating.toFixed(2)}
             </td>
           </tr>
         );
