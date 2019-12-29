@@ -114,12 +114,12 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
               <TableCell className="category-icon">
                 {n.category === "1-Self" && (
                   <span title="Self">
-                    <DKSVGIcon iconName="Star"></DKSVGIcon>
+                    <DKSVGIcon iconName="Star" width="24px" height="24px"></DKSVGIcon>
                   </span>
                 )}
                 {n.category === "2-Direct" && (
                   <span title="Direct">
-                    <DKSVGIcon iconName="Group"></DKSVGIcon>
+                    <DKSVGIcon iconName="Group" width="24px" height="24px"></DKSVGIcon>
                   </span>
                 )}
               </TableCell>

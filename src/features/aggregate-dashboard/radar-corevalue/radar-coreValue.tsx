@@ -1,11 +1,10 @@
+// import "chartjs-plugin-datalabels";
 import * as React from "react";
 import { Radar } from "react-chartjs-2";
-
-import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
-import RadarCoreValues from "../../../entities/aggregate-report/core-calues-radar";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
-import "chartjs-plugin-datalabels";
+import RadarCoreValues from "../../../entities/aggregate-report/core-calues-radar";
+import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { AggregateReportProps } from "../aggregate-report-props";
 
 interface IState {
@@ -83,48 +82,44 @@ export default class RadarCoreValue extends React.Component<AggregateReportProps
   }
   public render() {
     const options = {
+      plugins: {
+        datalabels: {
+          display: false,
+          // anchor: "end",
+          clamp: false,
+          color: "#404244",
+          font: {
+            family: "Poppins",
+            size: 12,
+            weight: 500,
+          },
+          align: "start",
+          // offset: 40,
+          // padding: 10,
+        },
+      },
       scale: {
         reverse: false,
         ticks: {
+          //display: false,
           beginAtZero: false,
           min: 0,
           max: 5,
           stepSize: 1,
         },
-        scaleLabel: { fontFamily: "IRANYekan" },
+        scaleLabel: { fontFamily: "Poppins" },
         labels: {
-          fontFamily: "IRANYekan",
+          fontFamily: "Poppins",
         },
       },
-      // legend: {
-      //   labels: {
-      //     fontFamily: "IRANYekan",
-      //   },
-      //   pointLabels: {
-      //     fontFamily: "IRANYekan",
-      //     anchor: "start",
-      //     align: "right",
-      //   },
-      // },
-      // datalabels: {
-      //   //  anchor: "start",
-      //   //   clamp: true,
-      //   align: "right",
-      //   Rotation: "10",
-      // },
-      datalabels: {
-        anchor: "end",
-        backgroundColor: null,
-        borderColor: null,
-        borderRadius: 4,
-        borderWidth: 1,
-        color: "#223388",
-        font: {
-          size: 11,
-          weight: 600,
+
+      legend: {
+        labels: {
+          fontFamily: "Poppins",
         },
-        offset: 4,
-        padding: 0,
+        pointLabels: {
+          fontFamily: "Poppins",
+        },
       },
     };
     return (
