@@ -20,7 +20,7 @@ export default class RadarCoreValue extends React.Component<AggregateReportProps
     this.state = {
       isFetching: true,
       data: {
-        averageValue: 0,
+        averageValue: 5,
         labels: [],
         datasets: [],
       },
@@ -66,7 +66,7 @@ export default class RadarCoreValue extends React.Component<AggregateReportProps
       const data = {
         labels: response.labels.slice(0, 4),
         datasets: newDataSet,
-        averageValue: response.averageValue,
+        averageValue: Number(response.averageValue.toFixed(2)),
       };
       this.setState(prevState => {
         return {

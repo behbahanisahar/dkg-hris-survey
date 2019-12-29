@@ -35,7 +35,7 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
     this.getData(this.props);
   }
   public render() {
-    const overallData = [this.props.data.total97Score, this.props.data.total98Score];
+    const overallData = [this.props.data.total97Score.toFixed(2), this.props.data.total98Score.toFixed(2)];
     const data = {
       labels: ["1397", "1398"],
       pointStyle: "triangle",
