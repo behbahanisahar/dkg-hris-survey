@@ -1,4 +1,4 @@
-import "chartjs-plugin-datalabels";
+// import "chartjs-plugin-datalabels";
 import * as React from "react";
 import { Radar } from "react-chartjs-2";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
@@ -84,6 +84,7 @@ export default class RadarCoreValue extends React.Component<AggregateReportProps
     const options = {
       plugins: {
         datalabels: {
+          display: false,
           // anchor: "end",
           clamp: false,
           color: "#404244",
@@ -100,9 +101,9 @@ export default class RadarCoreValue extends React.Component<AggregateReportProps
       scale: {
         reverse: false,
         ticks: {
-          display: false,
+          //display: false,
           beginAtZero: false,
-          min: 1,
+          min: 0,
           max: 5,
           stepSize: 1,
         },
@@ -111,6 +112,7 @@ export default class RadarCoreValue extends React.Component<AggregateReportProps
           fontFamily: "Poppins",
         },
       },
+
       legend: {
         labels: {
           fontFamily: "Poppins",
