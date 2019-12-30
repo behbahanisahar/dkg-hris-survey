@@ -51,7 +51,7 @@ class RatersTable extends React.Component<IProps, IState> {
 
   public render() {
     return (
-      <DKPortlet title={this.props.lang === "fa" ? "دسته بندی ارزیابان" : "Rater Categories"}>
+      <DKPortlet title={this.props.lang === "fa" ? "دسته‌بندی ارزیابان" : "Rater Categories"}>
         <div className={this.props.lang === "fa" ? "text-align-right" : "text-align-left"}>
           {" "}
           {this.props.lang === "fa"
@@ -63,7 +63,7 @@ class RatersTable extends React.Component<IProps, IState> {
           <Table
             className={this.props.lang === "fa" ? "table table-bordered mt-3 rtl" : "table table-bordered mt-3 ltr"}
           >
-            <thead className="thead-dark">
+            <thead className="dk-brand-grey">
               {this.props.lang === "fa" ? (
                 <tr>
                   <th>گروه ارزیاﺏ</th>

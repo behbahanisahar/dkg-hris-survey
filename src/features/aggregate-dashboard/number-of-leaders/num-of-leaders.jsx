@@ -1,8 +1,9 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import React from "react";
 import addTreemapModule from "highcharts/modules/treemap";
+import React from "react";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
+import { DKPortlet } from "../../../core/components/portlet/portlet";
 
 addTreemapModule(Highcharts);
 class TotalLeaders extends React.Component {
@@ -71,7 +72,7 @@ class TotalLeaders extends React.Component {
       },
 
       title: {
-        text: "Number of Leaders",
+        text: "",
       },
       series: [
         {
@@ -239,9 +240,9 @@ class TotalLeaders extends React.Component {
     };
 
     return (
-      <div>
+      <DKPortlet title="Number of Leaders">
         <HighchartsReact style={{ height: "600px" }} highcharts={Highcharts} options={options} />
-      </div>
+      </DKPortlet>
     );
   }
 }
