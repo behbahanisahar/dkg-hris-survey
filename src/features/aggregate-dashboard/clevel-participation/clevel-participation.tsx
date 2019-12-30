@@ -50,7 +50,7 @@ class ClevelParticipation extends React.Component<AggregateReportProps, IState> 
       <DKPortlet title="Participation Rate">
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <table className="table table-striped table-bordered table-hover">
+          <table className="table table-striped table-sm table-bordered table-hover">
             <thead className="dk-brand-grey">
               <tr>
                 <th>CXO </th>
