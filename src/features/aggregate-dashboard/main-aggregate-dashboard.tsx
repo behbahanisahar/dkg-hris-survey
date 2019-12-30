@@ -53,7 +53,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
 
   public async componentDidMount() {
     document.getElementsByClassName("kt-container")[0].className = "dashboardContainer";
-    document.title = "Digikala - 360-Degree Dashboard";
+    document.title = "Digikala - 360 Degree Dashboard";
 
     await this.getInfoData();
   }
@@ -63,7 +63,6 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
     if (username == null) username = "";
 
     await this.AggregateServices.getInfo(username).then(response => {
-      debugger;
       this.setState(prevState => {
         return {
           ...prevState,
@@ -92,8 +91,8 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             <Grid container spacing={3} className="mt-4">
               <Grid item xs={3} sm={3}>
                 {/* <DashboardSummary viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} /> */}
-                <DKPortletSummary background="#F05B71" title=" 360̊ Feedback Aggregate Report">
-                  <div style={{ color: "black" }} className="kt-widget17__items">
+                <DKPortletSummary background="#F05B71" title=" 360̊  Feedback Aggregate Report">
+                  <div style={{ color: "black", display: "none" }} className="kt-widget17__items">
                     <div className="kt-widget17__item">
                       <Grid container>
                         <Grid item xs={3} sm={3}>
@@ -125,13 +124,13 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                   </div>
                   <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
                     <div className="kt-widget17__item" style={{ height: "80px" }}>
-                      <h3 style={{ color: "#F27581", fontWeight: 600 }}>Level Of Leaders</h3>
-                      <span>{this.state.dashboardInfo.title}</span>
+                      <span>Level Of Leadership</span>
+                      <h3 style={{ color: "#F27581", fontWeight: 600 }}>{this.state.dashboardInfo.title}</h3>
                     </div>
                   </div>
-                  <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
-                    <div className="kt-widget17__item">
-                      {this.state.dashboardInfo.dropdownValues.length > 1 && (
+                  {this.state.dashboardInfo.dropdownValues.length > 1 && (
+                    <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
+                      <div className="kt-widget17__item">
                         <div>
                           <span className="mb-2" style={{ fontSize: "1.5rem", marginTop: "2%", fontWeight: 500 }}>
                             Report Types
@@ -151,9 +150,9 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                             {this.renderDropDown(this.state.reportTypes)}
                           </Select>
                         </div>
-                      )}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </DKPortletSummary>
               </Grid>
               <Grid item xs={9} sm={9}>
@@ -202,9 +201,29 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   }
 
   private onChangeFields = (event: any): void => {
+    var reportTitle = "";
+    switch (event.nativeEvent.target.outerText) {
+      case "All": {
+        reportTitle = "All Leaders";
+        break;
+      }
+      case "Clevel": {
+        reportTitle = "C-levels";
+        break;
+      }
+      default: {
+        reportTitle = `${event.nativeEvent.target.outerText} Group Departments`;
+        break;
+      }
+    }
+
     this.setState(prevState => {
       return {
         ...prevState,
+        dashboardInfo: {
+          ...prevState.dashboardInfo,
+          title: reportTitle,
+        },
         reportProps: {
           ...prevState.reportProps,
           level: event.nativeEvent.target.outerText,

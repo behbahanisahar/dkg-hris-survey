@@ -3,7 +3,6 @@ import { HorizontalBar } from "react-chartjs-2";
 
 export default class SurveyReport extends React.Component<{}> {
   public render() {
-    debugger;
     const data = {
       labels: ["January", "February", "March", "April", "May", "June", "July"],
       datasets: [
