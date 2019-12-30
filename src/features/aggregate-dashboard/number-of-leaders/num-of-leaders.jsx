@@ -9,6 +9,7 @@ addTreemapModule(Highcharts);
 class TotalLeaders extends React.Component {
   constructor(props) {
     super(props);
+
     this.AggregateServices = new AggregateServices();
     this.state = {
       isFetching: true,

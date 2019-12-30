@@ -4823,13 +4823,9 @@ export default class MockAggregateData {
       color: "#02bcd5",
     },
     {
-      parent: "COO",
-      value: 111,
-    },
-    {
       name: "COO",
       parent: "COO",
-      value: 1,
+      value: 112,
     },
     {
       id: "CFO",
@@ -4839,11 +4835,7 @@ export default class MockAggregateData {
     {
       name: "CFO",
       parent: "CFO",
-      value: 1,
-    },
-    {
-      parent: "CFO",
-      value: 21,
+      value: 22,
     },
     {
       id: "CMO",
@@ -4853,11 +4845,7 @@ export default class MockAggregateData {
     {
       name: "CMO",
       parent: "CMO",
-      value: 1,
-    },
-    {
-      parent: "CMO",
-      value: 14,
+      value: 15,
     },
     {
       id: "CCO",
@@ -4865,29 +4853,9 @@ export default class MockAggregateData {
       color: "#f34336",
     },
     {
-      name: "D",
-      parent: "CCO",
-      value: 13,
-    },
-    {
-      name: "C",
-      parent: "CCO",
-      value: 11,
-    },
-    {
-      name: "B",
-      parent: "CCO",
-      value: 7,
-    },
-    {
       name: "CCO",
       parent: "CCO",
-      value: 2,
-    },
-    {
-      name: "A",
-      parent: "CCO",
-      value: 7,
+      value: 40,
     },
     {
       id: "CEO",
@@ -4895,13 +4863,9 @@ export default class MockAggregateData {
       color: "#9c26b0",
     },
     {
-      parent: "CEO",
-      value: 3,
-    },
-    {
       name: "CEO",
       parent: "CEO",
-      value: 2,
+      value: 5,
     },
     {
       id: "CTO",
@@ -4909,13 +4873,9 @@ export default class MockAggregateData {
       color: "#e75112",
     },
     {
-      parent: "CTO",
-      value: 31,
-    },
-    {
       name: "CTO",
       parent: "CTO",
-      value: 1,
+      value: 32,
     },
     {
       id: "Fidibo",
@@ -4933,13 +4893,9 @@ export default class MockAggregateData {
       color: "#0078d7",
     },
     {
-      parent: "CHRO",
-      value: 25,
-    },
-    {
       name: "CHRO",
       parent: "CHRO",
-      value: 1,
+      value: 26,
     },
     {
       id: "Digipay",
@@ -4947,18 +4903,9 @@ export default class MockAggregateData {
       color: "#339933",
     },
     {
-      name: "DigiPay",
-      parent: "Digipay",
-      value: 13,
-    },
-    {
       name: "Digipay",
       parent: "Digipay",
-      value: 7,
-    },
-    {
-      parent: "Digipay",
-      value: 1,
+      value: 21,
     },
   ];
   public static MockCompetencyAvg: CompetencyAvg[] = [

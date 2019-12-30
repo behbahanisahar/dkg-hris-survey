@@ -9,7 +9,10 @@ import ReportServices from "../../../services/report-services";
 import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import IDashboardIntroProps from "./dashboard-intro-props";
 import IDashboardIntroState from "./dashboard-intro-state";
+import UkIcon from "../../../assets/img/en.png";
+import IRIcon from "../../../assets/img/fa.png";
 import "./dashboard-intro.css";
+import { getDashboardIntroTextFa, getDashboardIntroTextEn } from "./dashboard-intro-text";
 
 let allitems: any[] = [];
 export default class DashboardIntroPage extends React.Component<IDashboardIntroProps, IDashboardIntroState> {
@@ -20,6 +23,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
 
     this.state = {
       showSpinner: true,
+      lang: "fa",
       filterName: "",
       order: "asc",
       orderBy: "",
@@ -58,7 +62,16 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
 
     return (
       <div className="rtl survey-intro">
-        <div>content</div>
+        <div>
+          <div className={this.state.lang === "fa" ? "mb-1 text-right" : "mb-1 text-left"}>
+            <img className="mx-2 pointer" alt="en" src={UkIcon} onClick={(ev: any) => this.onChangeLang("en")}></img>
+            <img className="mx-2 pointer" alt="fa" src={IRIcon} onClick={(ev: any) => this.onChangeLang("fa")}></img>
+          </div>
+          <DKPortlet hasHeader={false}>
+            {this.state.lang === "fa" && <p dangerouslySetInnerHTML={{ __html: getDashboardIntroTextFa() }}></p>}
+            {this.state.lang === "en" && <p dangerouslySetInnerHTML={{ __html: getDashboardIntroTextEn() }}></p>}
+          </DKPortlet>
+        </div>
         {this.state.showSpinner && <DKSpinner />}
         {!this.state.showSpinner && (
           <DKPortlet headerToolbar={searchBox} title="">
@@ -94,6 +107,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
   }
 
   private onRenderRows = () => {
+    console.log(this.state.items);
     if (this.state.items.users?.length === 0) {
       return (
         <TableRow>
@@ -103,7 +117,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         </TableRow>
       );
     } else {
-      return this.stableSort(this.state.items.users, this.getSorting(this.state.order, this.state.orderBy))
+      return this.stableSort(this.state.items?.users, this.getSorting(this.state?.order, this.state.orderBy))
         .slice(
           this.state.page * this.state.rowsPerPage,
           this.state.page * this.state.rowsPerPage + this.state.rowsPerPage,
@@ -216,14 +230,14 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
   }
   private stableSort(array: any, cmp: any) {
     const stabilizedThis = array?.map((el: any, index: any) => [el, index]);
-    stabilizedThis.sort((a: any, b: any) => {
+    stabilizedThis?.sort((a: any, b: any) => {
       const order = cmp(a[0], b[0]);
       if (order !== 0) {
         return order;
       }
       return a[1] - b[1];
     });
-    return stabilizedThis.map((el: any) => el[0]);
+    return stabilizedThis?.map((el: any) => el[0]);
   }
   private getSorting(order: any, orderBy: any) {
     return order === "desc"
@@ -235,5 +249,12 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
   };
   private handleChangeRowsPerPage = (event: any) => {
     this.setState({ rowsPerPage: event.target.value });
+  };
+  /********************************************************* */
+  private onChangeLang = (lang: string) => {
+    this.setState(current => ({
+      ...current,
+      lang,
+    }));
   };
 }
