@@ -1,12 +1,10 @@
 import * as React from "react";
-import { DKSpinner } from "../../../core/components/spinner/spinner";
-import { statistics } from "../../../entities/aggregate-report/statistics";
-
-import { AggregateReportProps } from "../aggregate-report-props";
-
-import "./participant-comparison.css";
 import { DKPortletSummary } from "../../../core/components/portlet/summary-portlet";
+import { DKSpinner } from "../../../core/components/spinner/spinner";
 import DKSVGIcon from "../../../core/components/svg-icon/svg-icon";
+import { statistics } from "../../../entities/aggregate-report/statistics";
+import { AggregateReportProps } from "../aggregate-report-props";
+import "./participant-comparison.css";
 
 interface IState {
   isFetching: boolean;
@@ -37,6 +35,7 @@ export default class ParticipantComparisonSummary extends React.Component<IProps
   public async componentDidMount() {
     this.getData(this.props);
   }
+
   public render() {
     return (
       <div>
