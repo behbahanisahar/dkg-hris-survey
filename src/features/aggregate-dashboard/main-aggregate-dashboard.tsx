@@ -185,7 +185,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             </Grid>
             <Grid container spacing={3}>
               <Grid item xs={12} sm={12}>
-                <TotalLeaders />
+                <TotalLeaders viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
               </Grid>
             </Grid>
             <MainQuestionComparison viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
