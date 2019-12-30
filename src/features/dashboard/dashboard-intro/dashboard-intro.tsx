@@ -55,7 +55,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
       <input
         value={this.state.filterName}
         onChange={this.onFilterTable}
-        placeholder="جستجو    "
+        placeholder={this.state.lang === "fa" ? "جستجو" : "Search"} //"جستجو    "
         className="form-control input-search"
       />
     );
@@ -74,7 +74,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
         </div>
         {this.state.showSpinner && <DKSpinner />}
         {!this.state.showSpinner && (
-          <DKPortlet headerToolbar={searchBox} title="">
+          <DKPortlet dir={this.state.lang === "fa" ? "rtl" : "ltr"} headerToolbar={searchBox} title="">
             <MDBTable className="kt-datatable__table" borderless>
               <TableHead>{/* <TableRow>{this.renderHeader(this.tableHeaders)}</TableRow> */}</TableHead>
               <MDBTableBody className="kt-datatable__body">{this.onRenderRows()}</MDBTableBody>
@@ -96,7 +96,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
                 }}
                 onChangePage={this.handleChangePage}
                 onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                labelRowsPerPage="تعداد آیتم در هر صفحه :"
+                labelRowsPerPage={this.state.lang === "fa" ? "تعداد آیتم در هر صفحه :" : " Items Per Page"} //"تعداد آیتم در هر صفحه :"
                 labelDisplayedRows={({ from, to, count }) => `${from}-${to} از ${count}`}
               />
             )}
@@ -176,7 +176,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
                     return false;
                   }}
                 >
-                  مشاهده گزارش
+                  {this.state.lang === "fa" ? " مشاهده گزارش" : "View Report"}
                 </button>
               </TableCell>
             </TableRow>

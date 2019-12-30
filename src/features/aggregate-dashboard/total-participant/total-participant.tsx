@@ -40,7 +40,7 @@ export default class TotalParticipant extends React.Component<IProps & Aggregate
         {this.state.isFetching === false && (
           <DKPortletSummary background="#FEC465" title="Assessees">
             <div style={{ color: "black" }} className="kt-widget17__items">
-              <div style={{ textAlign: "center" }} className="kt-widget17__item">
+              <div style={{ textAlign: "center", height: "190px" }} className="kt-widget17__item">
                 <DKSVGIcon iconName="Group" width="96px" height="96px" color="yellow"></DKSVGIcon>
               </div>
             </div>

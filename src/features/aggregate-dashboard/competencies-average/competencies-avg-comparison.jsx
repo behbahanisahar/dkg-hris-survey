@@ -112,6 +112,12 @@ export default class CompetencyAvgComparison extends React.Component {
             mode: "horizontal",
             scaleID: "y-axis-0",
             value: this.state.data.averageValue,
+            dataLebel: this.state.data.averageValue,
+            label: {
+              enabled: true,
+              content: this.state.data.averageValue,
+              backgroundColor: "#ED145A",
+            },
             borderColor: "#ED145A",
             borderWidth: 3,
           },
