@@ -1,4 +1,4 @@
-import { Grid, MenuItem, Select, ListSubheader } from "@material-ui/core";
+import { Grid, MenuItem, Select } from "@material-ui/core";
 import * as React from "react";
 import { DKPortletSummary } from "../../core/components/portlet/summary-portlet";
 import { DKSpinner } from "../../core/components/spinner/spinner";
@@ -41,7 +41,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       isFetching: true,
       reportType: 1,
       reportTypes: [],
-      reportTypeText: "clevel",
+      reportTypeText: "All",
       dashboardInfo: {
         dropdownValues: [],
         title: "",
@@ -63,6 +63,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
     if (username == null) username = "";
 
     await this.AggregateServices.getInfo(username).then(response => {
+      debugger;
       this.setState(prevState => {
         return {
           ...prevState,
@@ -173,6 +174,11 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                 <Grid item xs={6} sm={4}>
                   <CompetencyAvgRate viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
                 </Grid>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={12}>
+                    <TotalLeaders viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+                  </Grid>
+                </Grid>
               </Grid>
             )}
             <Grid container spacing={3} className="mt-4">
@@ -183,11 +189,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                 <RadarCoreValue viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
               </Grid>
             </Grid>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={12}>
-                <TotalLeaders viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
-              </Grid>
-            </Grid>
+
             <MainQuestionComparison viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
 
             <Grid container spacing={3} className="mt-4">
@@ -214,14 +216,9 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   public renderDropDown = (items: any[]): JSX.Element[] => {
     return items.map(item => {
       return (
-        <div>
-          <ListSubheader style={{ textAlign: "left" }} dir="ltr">
-            Departments
-          </ListSubheader>
-          <MenuItem value={item.key} key={item.key}>
-            {item.text}
-          </MenuItem>
-        </div>
+        <MenuItem value={item.key} key={item.key}>
+          {item.text}
+        </MenuItem>
       );
     });
   };

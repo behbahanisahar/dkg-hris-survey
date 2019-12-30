@@ -10,4 +10,5 @@ export default interface IDashboardIntroState {
   page: number;
   rowsPerPage: number;
   users: UserInfoItem[];
+  lang: string;
 }
