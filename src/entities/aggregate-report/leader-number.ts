@@ -1,5 +1,7 @@
 export default interface NumberOfLeaders {
-  title?: string;
-  count?: number;
-  departments?: NumberOfLeaders[];
+  id?: string;
+  name?: string;
+  color?: string;
+  parent?: string;
+  value?: number;
 }

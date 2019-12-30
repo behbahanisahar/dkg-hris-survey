@@ -4818,131 +4818,147 @@ export default class MockAggregateData {
   };
   public static MockNumberOfLeaders: NumberOfLeaders[] = [
     {
-      title: "COO",
-      count: 112,
-      departments: [
-        {
-          count: 111,
-        },
-        {
-          title: "COO",
-          count: 1,
-        },
-      ],
+      id: "COO",
+      name: "COO",
+      color: "#02bcd5",
     },
     {
-      title: "CFO",
-      count: 22,
-      departments: [
-        {
-          title: "CFO",
-          count: 1,
-        },
-        {
-          count: 21,
-        },
-      ],
+      parent: "COO",
+      value: 111,
     },
     {
-      title: "CMO",
-      count: 15,
-      departments: [
-        {
-          title: "CMO",
-          count: 1,
-        },
-        {
-          count: 14,
-        },
-      ],
+      name: "COO",
+      parent: "COO",
+      value: 1,
     },
     {
-      title: "CCO",
-      count: 40,
-      departments: [
-        {
-          title: "D",
-          count: 13,
-        },
-        {
-          title: "C",
-          count: 11,
-        },
-        {
-          title: "B",
-          count: 7,
-        },
-        {
-          title: "CCO",
-          count: 2,
-        },
-        {
-          title: "A",
-          count: 7,
-        },
-      ],
+      id: "CFO",
+      name: "CFO",
+      color: "#8bc24b",
     },
     {
-      title: "CEO",
-      count: 5,
-      departments: [
-        {
-          count: 3,
-        },
-        {
-          title: "CEO",
-          count: 2,
-        },
-      ],
+      name: "CFO",
+      parent: "CFO",
+      value: 1,
     },
     {
-      title: "CTO",
-      count: 32,
-      departments: [
-        {
-          count: 31,
-        },
-        {
-          title: "CTO",
-          count: 1,
-        },
-      ],
+      parent: "CFO",
+      value: 21,
     },
     {
-      title: "Fidibo",
-      count: 5,
-      departments: [
-        {
-          title: "Fidibo",
-          count: 5,
-        },
-      ],
+      id: "CMO",
+      name: "CMO",
+      color: "#ffc208",
     },
     {
-      title: "CHRO",
-      count: 26,
-      departments: [
-        {
-          count: 25,
-        },
-        {
-          title: "CHRO",
-          count: 1,
-        },
-      ],
+      name: "CMO",
+      parent: "CMO",
+      value: 1,
     },
     {
-      title: "Digipay",
-      count: 21,
-      departments: [
-        {
-          title: "Digipay",
-          count: 20,
-        },
-        {
-          count: 1,
-        },
-      ],
+      parent: "CMO",
+      value: 14,
+    },
+    {
+      id: "CCO",
+      name: "CCO",
+      color: "#f34336",
+    },
+    {
+      name: "D",
+      parent: "CCO",
+      value: 13,
+    },
+    {
+      name: "C",
+      parent: "CCO",
+      value: 11,
+    },
+    {
+      name: "B",
+      parent: "CCO",
+      value: 7,
+    },
+    {
+      name: "CCO",
+      parent: "CCO",
+      value: 2,
+    },
+    {
+      name: "A",
+      parent: "CCO",
+      value: 7,
+    },
+    {
+      id: "CEO",
+      name: "CEO",
+      color: "#9c26b0",
+    },
+    {
+      parent: "CEO",
+      value: 3,
+    },
+    {
+      name: "CEO",
+      parent: "CEO",
+      value: 2,
+    },
+    {
+      id: "CTO",
+      name: "CTO",
+      color: "#e75112",
+    },
+    {
+      parent: "CTO",
+      value: 31,
+    },
+    {
+      name: "CTO",
+      parent: "CTO",
+      value: 1,
+    },
+    {
+      id: "Fidibo",
+      name: "Fidibo",
+      color: "#1c456f",
+    },
+    {
+      name: "Fidibo",
+      parent: "Fidibo",
+      value: 5,
+    },
+    {
+      id: "CHRO",
+      name: "CHRO",
+      color: "#0078d7",
+    },
+    {
+      parent: "CHRO",
+      value: 25,
+    },
+    {
+      name: "CHRO",
+      parent: "CHRO",
+      value: 1,
+    },
+    {
+      id: "Digipay",
+      name: "Digipay",
+      color: "#339933",
+    },
+    {
+      name: "DigiPay",
+      parent: "Digipay",
+      value: 13,
+    },
+    {
+      name: "Digipay",
+      parent: "Digipay",
+      value: 7,
+    },
+    {
+      parent: "Digipay",
+      value: 1,
     },
   ];
   public static MockCompetencyAvg: CompetencyAvg[] = [

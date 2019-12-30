@@ -1,4 +1,4 @@
-import { Grid, MenuItem, Select } from "@material-ui/core";
+import { Grid, MenuItem, Select, ListSubheader } from "@material-ui/core";
 import * as React from "react";
 import { DKPortletSummary } from "../../core/components/portlet/summary-portlet";
 import { DKSpinner } from "../../core/components/spinner/spinner";
@@ -214,9 +214,14 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   public renderDropDown = (items: any[]): JSX.Element[] => {
     return items.map(item => {
       return (
-        <MenuItem value={item.key} key={item.key}>
-          {item.text}
-        </MenuItem>
+        <div>
+          <ListSubheader style={{ textAlign: "left" }} dir="ltr">
+            Departments
+          </ListSubheader>
+          <MenuItem value={item.key} key={item.key}>
+            {item.text}
+          </MenuItem>
+        </div>
       );
     });
   };

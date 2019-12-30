@@ -1,9 +1,11 @@
 import * as React from "react";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { DKPortletSummary } from "../../../core/components/portlet/summary-portlet";
-import { Line } from "react-chartjs-2";
+
 import { AggregateReportProps } from "../aggregate-report-props";
 import { statistics } from "../../../entities/aggregate-report/statistics";
+import upward from "../../../assets/img/line-chart.svg";
+import downward from "../../../assets/img/loss.svg";
 
 interface IState {
   isFetching: boolean;
@@ -31,63 +33,15 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
   }
 
   public async componentDidMount() {
-    //  Chart.defaults.global.elements.point = "triangle";
     this.getData(this.props);
   }
   public render() {
-    const overallData = [this.props.data.total97Score.toFixed(2), this.props.data.total98Score.toFixed(2)];
-    const data = {
-      labels: ["1397", "1398"],
-      datasets: [
-        {
-          fill: false,
-          lineTension: 10,
-          backgroundColor: "#4DBA6D",
-          borderColor: "#4DBA6D",
-          borderCapStyle: "butt",
-          borderDash: [10, 5],
-          borderDashOffset: 0.0,
-          borderWidth: 5,
-          borderJoinStyle: "miter",
-          pointBorderColor: "rgba(75,192,192,1)",
-          pointBackgroundColor: "#fff",
-          pointBorderWidth: 1,
-          // pointStyle: ["", yourImage],
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgba(75,192,192,1)",
-          pointHoverBorderColor: "rgba(220,220,220,1)",
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: overallData,
-        },
-      ],
-    };
-    const options = {
-      scales: {
-        showScale: false,
-        yAxes: [
-          {
-            gridLines: {
-              display: false,
-            },
-            ticks: {
-              display: false,
-            },
-          },
-        ],
-        xAxes: [
-          {
-            gridLines: {
-              display: false,
-            },
-          },
-        ],
-      },
-      legend: {
-        display: false,
-      },
-    };
+    let color = "";
+    if (this.props.data.total98Score < this.props.data.total97Score) {
+      color = "#F05B71";
+    } else {
+      color = "#4DBA6D";
+    }
     return (
       <div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
@@ -95,13 +49,34 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
           <DKPortletSummary background="#4DBA6D" title="Overall Improvement">
             <div style={{ color: "black" }} className="kt-widget17__items">
               <div style={{ textAlign: "center" }} className="kt-widget17__item">
-                <Line data={data} options={options} />
+                <div className="mb-3 ">
+                  <span style={{ fontSize: "1.3rem", color: color, fontWeight: 600 }} className="pull-left">
+                    {this.props.data.total97Score.toFixed(2)}
+                  </span>
+                  <span style={{ fontSize: "1.3rem", color: color, fontWeight: 600 }} className="pull-right">
+                    {this.props.data.total98Score.toFixed(2)}
+                  </span>
+                </div>
+                {this.props.data.total98Score > this.props.data.total97Score && (
+                  <img style={{ width: "45%" }} src={upward} />
+                )}
+                {this.props.data.total98Score < this.props.data.total97Score && (
+                  <img style={{ width: "45%" }} src={downward} />
+                )}
+                <div className="mb-3 ">
+                  <span style={{ fontWeight: 600 }} className="pull-left">
+                    1397
+                  </span>
+                  <span style={{ fontWeight: 600 }} className="pull-right">
+                    1398
+                  </span>
+                </div>
               </div>
             </div>
             <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
               <div className="kt-widget17__item">
                 <span style={{ fontSize: "1.5rem", marginTop: "2%", fontWeight: 500 }}>Overall Improvement</span>{" "}
-                <h3 style={{ fontSize: "1.3rem", color: "#4DBA6D" }}>{this.props.data.overallImprovement}%</h3>
+                <h3 style={{ fontSize: "1.3rem", color: color }}>{this.props.data.overallImprovement}%</h3>
               </div>
             </div>
           </DKPortletSummary>
