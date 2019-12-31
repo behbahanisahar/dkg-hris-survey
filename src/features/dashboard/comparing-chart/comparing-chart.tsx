@@ -101,6 +101,14 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
           this.props.lang === "fa" ? "مقایسه امتیاز شما با سایر رهبران واحد" : "Comparing your results with the others"
         }
       >
+        <div>
+          <div className={this.props.lang === "fa" ? "text-align-right" : "text-align-left"}>
+            {" "}
+            {this.props.lang === "fa"
+              ? "	در نمودارهای زیر نتایج خودارزیابی افراد لحاظ نشده است. "
+              : "The results of self-assessment are not included in the following chart."}{" "}
+          </div>
+        </div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && <Line options={options} height={100} data={this.state.data} />}
       </DKPortlet>

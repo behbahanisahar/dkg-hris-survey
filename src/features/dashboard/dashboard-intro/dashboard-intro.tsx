@@ -13,6 +13,7 @@ import UkIcon from "../../../assets/img/en.png";
 import IRIcon from "../../../assets/img/fa.png";
 import "./dashboard-intro.css";
 import { getDashboardIntroTextFa, getDashboardIntroTextEn } from "./dashboard-intro-text";
+import { HeataMapLegend } from "../../aggregate-dashboard/heatmap/heatmap-legend";
 
 let allitems: any[] = [];
 export default class DashboardIntroPage extends React.Component<IDashboardIntroProps, IDashboardIntroState> {
@@ -61,15 +62,34 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
     );
 
     return (
-      <div className="rtl survey-intro">
+      <div className=" survey-intro">
         <div>
           <div className={this.state.lang === "fa" ? "mb-1 text-right" : "mb-1 text-left"}>
             <img className="mx-2 pointer" alt="en" src={UkIcon} onClick={(ev: any) => this.onChangeLang("en")}></img>
             <img className="mx-2 pointer" alt="fa" src={IRIcon} onClick={(ev: any) => this.onChangeLang("fa")}></img>
           </div>
-          <DKPortlet hasHeader={false}>
-            {this.state.lang === "fa" && <p dangerouslySetInnerHTML={{ __html: getDashboardIntroTextFa() }}></p>}
+          <DKPortlet className={this.state.lang === "fa" ? " text-left" : "text-right"} hasHeader={false}>
+            {this.state.lang === "fa" && (
+              <div>
+                <p dangerouslySetInnerHTML={{ __html: getDashboardIntroTextFa() }}></p>
+              </div>
+            )}
             {this.state.lang === "en" && <p dangerouslySetInnerHTML={{ __html: getDashboardIntroTextEn() }}></p>}
+            <HeataMapLegend />
+            <br />
+            {this.state.lang === "fa" && (
+              <p>
+                در این صفحه شما می توانید گزارش ارزیابی 360 درجه خود و سایر مدیران و سرپرستان زیرمجموعه خود را (در صورت
+                وجود) ببینید. با کلیک بر روی نام فرد مورد نظر، به صفحه گزارش هدایت خواهید شد{" "}
+              </p>
+            )}
+            {this.state.lang === "en" && (
+              <p>
+                In this page, you can see your 360-degree report and also the report of your subordinate
+                managers/supervisors (if applicable). You will be directed the report page by clicking on the
+                individuals’ names.
+              </p>
+            )}
           </DKPortlet>
         </div>
         {this.state.showSpinner && <DKSpinner />}

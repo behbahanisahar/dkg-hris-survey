@@ -49,21 +49,24 @@ class CompetencySummaryClass extends React.Component {
   }
   yearSelect() {
     return (
-      <Select
-        margin="dense"
-        placeholder="انتخاب سال"
-        value={this.state.yearID}
-        fullWidth={true}
-        onChange={event => this.handleChangeDropdown("year", event)}
-        inputProps={{
-          name: "year",
-          id: "demo-controlled-open-select",
-        }}
-        IconComponent={KeyboardArrowDown}
-        variant="outlined"
-      >
-        {this.renderDropDown(this.state.years)}
-      </Select>
+      <div>
+        <label>انتخاب سال</label>
+        <Select
+          margin="dense"
+          placeholder="انتخاب سال"
+          value={this.state.yearID}
+          fullWidth={true}
+          onChange={event => this.handleChangeDropdown("year", event)}
+          inputProps={{
+            name: "year",
+            id: "demo-controlled-open-select",
+          }}
+          IconComponent={KeyboardArrowDown}
+          variant="outlined"
+        >
+          {this.renderDropDown(this.state.years)}
+        </Select>
+      </div>
     );
   }
 
@@ -159,6 +162,11 @@ class CompetencySummaryClass extends React.Component {
         title={this.props.lang === "fa" ? "شایستگی‌ها" : "Competency Summary"}
       >
         <div className="dropdown mb-5" style={{ width: "15%" }}></div>
+        <div className={this.props.lang === "fa" ? "text-align-right" : "text-align-left"}>
+          {this.props.lang === "fa"
+            ? `	برای مشاهده جزییات هر شایستگی بر روی نمودار آن کلیک کنید. `
+            : "By clicking on each competencies, you will see the details about it."}{" "}
+        </div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <HighchartsReact callback={this.afterChartCreated} highcharts={Highcharts} options={options} />
