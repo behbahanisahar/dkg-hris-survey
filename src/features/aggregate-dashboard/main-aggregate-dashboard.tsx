@@ -318,7 +318,12 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
 
     if (feildName == "depLevel") {
       if (event.nativeEvent.target.outerText === "All") {
-        subDepTypes = this.state.subDepTypes;
+        subDepTypes = [
+          {
+            key: "All",
+            text: "All",
+          },
+        ]; //this.state.subDepTypes;
       } else {
         subDepTypes = subDepTypes.filter(el => el.parent === event.nativeEvent.target.outerText || el.parent === "All");
       }
