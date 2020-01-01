@@ -85,6 +85,7 @@ export default class CompetencyAvgComparison extends React.Component {
         yAxes: [
           {
             ticks: {
+              fontFamily: "Poppins",
               beginAtZero: false,
               stepSize: 0.5,
               min: 1,
@@ -97,7 +98,7 @@ export default class CompetencyAvgComparison extends React.Component {
             ticks: {
               beginAtZero: false,
               stepSize: 0.5,
-
+              fontFamily: "Poppins",
               min: 1,
               max: 5,
             },
@@ -118,7 +119,7 @@ export default class CompetencyAvgComparison extends React.Component {
             dataLebel: this.state.data.averageValue,
             label: {
               enabled: true,
-              content: this.state.data.averageValue,
+              content: `DK average: ${this.state.data.averageValue}`,
               backgroundColor: "#ED145A",
             },
             borderColor: "#ED145A",
