@@ -56,7 +56,7 @@ class ClevelParticipation extends React.Component<AggregateReportProps, IState> 
             <thead className="dk-brand-grey">
               <tr>
                 <th>CXO </th>
-                <th> Participation Rate</th>
+                <th>Participation Rate</th>
               </tr>
             </thead>
             <tbody>{this.onRenderTable()}</tbody>
@@ -80,7 +80,7 @@ class ClevelParticipation extends React.Component<AggregateReportProps, IState> 
         return (
           <tr className={n.isTotal ? "footer" : ""} key={index}>
             <td align="center">{n.title}</td>
-            <td align="center">{n.rate.toFixed(2)}</td>
+            <td align="center">{n.rate.toFixed(2)} %</td>
           </tr>
         );
       });

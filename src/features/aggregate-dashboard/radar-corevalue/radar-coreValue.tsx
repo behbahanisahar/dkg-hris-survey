@@ -87,17 +87,13 @@ export default class RadarCoreValue extends React.Component<AggregateReportProps
       plugins: {
         datalabels: {
           display: false,
-          // anchor: "end",
           clamp: false,
           color: "#404244",
           font: {
-            family: "Poppins",
             size: 12,
             weight: 500,
           },
           align: "start",
-          // offset: 40,
-          // padding: 10,
         },
       },
       scale: {
@@ -108,19 +104,6 @@ export default class RadarCoreValue extends React.Component<AggregateReportProps
           min: 0,
           max: 5,
           stepSize: 1,
-        },
-        scaleLabel: { fontFamily: "Poppins" },
-        labels: {
-          fontFamily: "Poppins",
-        },
-      },
-
-      legend: {
-        labels: {
-          fontFamily: "Poppins",
-        },
-        pointLabels: {
-          fontFamily: "Poppins",
         },
       },
     };

@@ -4,6 +4,7 @@ import { Bar } from "react-chartjs-2";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
+import { defaults } from "react-chartjs-2";
 
 export default class CompetencyAvgComparison extends React.Component {
   constructor(props) {
@@ -80,12 +81,13 @@ export default class CompetencyAvgComparison extends React.Component {
     this.getData(this.props);
   }
   render() {
+    defaults.global.defaultFontFamily = "Poppins";
+
     var options = {
       scales: {
         yAxes: [
           {
             ticks: {
-              fontFamily: "Poppins",
               beginAtZero: false,
               stepSize: 0.5,
               min: 1,
@@ -98,7 +100,6 @@ export default class CompetencyAvgComparison extends React.Component {
             ticks: {
               beginAtZero: false,
               stepSize: 0.5,
-              fontFamily: "Poppins",
               min: 1,
               max: 5,
             },
@@ -123,7 +124,7 @@ export default class CompetencyAvgComparison extends React.Component {
               backgroundColor: "#ED145A",
             },
             borderColor: "#ED145A",
-            borderWidth: 3,
+            borderWidth: 2,
           },
         ],
         drawTime: "afterDraw", // (default)
