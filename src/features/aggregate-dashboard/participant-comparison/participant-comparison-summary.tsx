@@ -48,20 +48,20 @@ export default class ParticipantComparisonSummary extends React.Component<IProps
       <div>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <DKPortletSummary background="#06BDCD" title="Number Of Assessors">
+          <DKPortletSummary background="#06BDCD" title="Response Statistics">
             <div style={{ color: "black", height: "160px" }} className="kt-widget17__items">
               <div className="kt-widget17__item">
                 <span className="kt-widget17__icon">
                   <DKSVGIcon iconName="Star" width="28px" height="28px" color="blue"></DKSVGIcon>
                 </span>
-                <span className="kt-widget17__subtitle">{this.props.data?.completed}</span>
+                <span className="kt-widget17__subtitle stat-value">{this.props.data?.completed}</span>
                 <span className="kt-widget17__desc">Completed</span>
               </div>
               <div className="kt-widget17__item">
                 <span className="kt-widget17__icon">
                   <DKSVGIcon iconName="Half-star" width="28px" height="28px" color="blue"></DKSVGIcon>
                 </span>
-                <span className="kt-widget17__subtitle">{this.props.data?.uncompleted}</span>
+                <span className="kt-widget17__subtitle stat-value">{this.props.data?.uncompleted}</span>
                 <span className="kt-widget17__desc">Uncompleted</span>
               </div>
               <div className="kt-widget17__item">
@@ -69,7 +69,7 @@ export default class ParticipantComparisonSummary extends React.Component<IProps
                   <DKSVGIcon iconName="User" width="28x" height="28px" color="blue"></DKSVGIcon>
                   <DKSVGIcon iconName="Chat-checking" width="30px" height="40px" color="blue"></DKSVGIcon>
                 </span>
-                <span className="kt-widget17__subtitle">{this.props.data?.totalNominated}</span>
+                <span className="kt-widget17__subtitle stat-value">{this.props.data?.totalNominated}</span>
                 <span className="kt-widget17__desc">Total Nominated</span>
               </div>
             </div>
@@ -78,14 +78,14 @@ export default class ParticipantComparisonSummary extends React.Component<IProps
                 <span className="kt-widget17__icon">
                   <DKSVGIcon iconName="Sale1" width="28px" height="28px" color="blue"></DKSVGIcon>
                 </span>
-                <span className="kt-widget17__subtitle">{this.props.data?.participationRate}</span>
+                <span className="kt-widget17__subtitle stat-value">{this.props.data?.participationRate}</span>
                 <span className="kt-widget17__desc">Participation Rate</span>
               </div>
               <div className="kt-widget17__item">
                 <span className="kt-widget17__icon">
                   <DKSVGIcon iconName="Group" width="28px" height="28px" color="blue"></DKSVGIcon>
                 </span>
-                <span className="kt-widget17__subtitle">{this.props.data.numberOfAsseses}</span>
+                <span className="kt-widget17__subtitle stat-value ">{this.props.data.numberOfAsseses}</span>
                 <span className="kt-widget17__desc">Number of Assessees</span>
               </div>
             </div>

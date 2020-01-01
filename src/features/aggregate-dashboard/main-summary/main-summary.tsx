@@ -1,12 +1,12 @@
+import { Grid } from "@material-ui/core";
 import * as React from "react";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { statistics } from "../../../entities/aggregate-report/statistics";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { AggregateReportProps } from "../aggregate-report-props";
-
-import ParticipantComparisonSummary from "../participant-comparison/participant-comparison-summary";
-import { Grid } from "@material-ui/core";
 import OverallImprovement from "../overall-improvement/overall-improvement";
+import ParticipantComparisonSummary from "../participant-comparison/participant-comparison-summary";
+import "./main-summary.less";
 
 interface IState {
   data: statistics;

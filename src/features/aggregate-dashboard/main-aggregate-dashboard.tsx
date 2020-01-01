@@ -138,7 +138,6 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                             )}
                             {this.state.dashboardInfo.user?.avatarUrl === undefined && (
                               <span className="dashboard-img">
-                                {" "}
                                 {this.state.dashboardInfo.user?.avatarTextPlaceholder}
                               </span>
                             )}
@@ -149,7 +148,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                             <div className="head">
                               <p className="kt-widget__username">{this.state.dashboardInfo.user?.spLatinFullName}</p>
                             </div>
-                            <div className="sub-head">{this.state.dashboardInfo.user?.emailAddress}</div>
+                            {/* <div className="sub-head">{this.state.dashboardInfo.user?.emailAddress}</div> */}
                             <a className="viewReport" href="#">
                               view report
                             </a>
@@ -164,7 +163,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                       <div>
                         <Grid container>
                           <Grid item xs={3} sm={3}>
-                            <span className="kt-widget17__desc mb-2">Department</span>
+                            <span className="kt-widget17__desc mt-2">Department</span>
                           </Grid>
                           <Grid item xs={8} sm={8}>
                             <Select
@@ -186,7 +185,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                         </Grid>
                         <Grid container>
                           <Grid item xs={3} sm={3}>
-                            <span className="kt-widget17__desc mb-2">Sub Dept</span>
+                            <span className="kt-widget17__desc mt-2">Sub Dept</span>
                           </Grid>
                           <Grid item xs={8} sm={8}>
                             <Select
@@ -209,7 +208,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
 
                         <Grid container>
                           <Grid item xs={3} sm={3}>
-                            <span className="kt-widget17__desc mb-2">Level</span>
+                            <span className="kt-widget17__desc mt-2">Level</span>
                           </Grid>
                           <Grid item xs={8} sm={8}>
                             <Select
@@ -231,11 +230,11 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                         </Grid>
                         <button
                           type="button"
-                          className="btn btn-sm btn-bold btn-brand-hover mb-2"
+                          className="btn btn-outline-secondary btn-sm mt-2"
                           onClick={event => this.onApplyFilters()}
                         >
-                          <DKSVGIcon iconName="Search" width="24px" height="24px" color="red" />
-                          {"Apply Filters "}
+                          <DKSVGIcon iconName="Search" width="20px" height="20px" color="red" />
+                          <span className="dk-brand-text-red  mr-3">Apply Filters</span>
                         </button>
                       </div>
                     </div>
@@ -251,7 +250,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                 />
               </Grid>
             </Grid>
-            {this.state.selectedReportProps.level == "All" && (
+            {this.state.selectedReportProps.level === "All" && this.state.selectedReportProps.depLevel === "All" && (
               <Grid container spacing={3} className="mt-4">
                 <Grid item xs={6} sm={3}>
                   <ClevelParticipation
