@@ -27,7 +27,9 @@ export default class RadarCoreValue extends React.Component<AggregateReportProps
   }
 
   public async componentWillReceiveProps(nextProps: AggregateReportProps) {
-    this.getData(nextProps);
+    if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {
+      this.getData(nextProps);
+    }
   }
 
   public async getData(props: AggregateReportProps) {

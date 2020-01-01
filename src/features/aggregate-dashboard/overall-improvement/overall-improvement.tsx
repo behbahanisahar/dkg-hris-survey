@@ -1,5 +1,5 @@
 import * as React from "react";
-import upward from "../../../assets/img/line-chart.svg";
+import upward from "../../../assets/img/line-chart-grey.svg";
 import downward from "../../../assets/img/loss.svg";
 import { DKPortletSummary } from "../../../core/components/portlet/summary-portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
@@ -38,45 +38,43 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
   }
 
   public render() {
-    let color = "";
-    if (this.props.data.total98Score < this.props.data.total97Score) {
-      color = "#F05B71";
-    } else {
-      color = "#4DBA6D";
-    }
+    // let color = "";
+    // if (this.props.data.total98Score < this.props.data.total97Score) {
+    //   color = "#F05B71";
+    // } else {
+    //   color = "#4DBA6D";
+    // }
     return (
       <>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <DKPortletSummary background="#4DBA6D" title="Overall Improvement">
-            <div style={{ color: "black" }} className="kt-widget17__items overall">
+          <DKPortletSummary background="#77787B" title="Overall Improvement">
+            <div style={{ color: "black", height: "165px" }} className="kt-widget17__items overall">
               <div style={{ textAlign: "center" }} className="kt-widget17__item">
                 <div className="pb-5 mb-3 ">
                   <div className="pull-left mr-3">
                     <span className="year">1397</span>
-                    <span className="value" style={{ color: color }}>
-                      {this.props.data.total97Score.toFixed(2)}
-                    </span>
+                    <span className="kt-widget17__subtitle">{this.props.data.total97Score.toFixed(2)}</span>
                   </div>
                   <div className="pull-right ml-3">
                     <span className="year">1398</span>
-                    <span style={{ fontSize: "1.3rem", color: color, fontWeight: 600 }}>
-                      {this.props.data.total98Score.toFixed(2)}
-                    </span>
+                    <span className="kt-widget17__subtitle">{this.props.data.total98Score.toFixed(2)}</span>
                   </div>
                 </div>
                 {this.props.data.total98Score > this.props.data.total97Score && (
-                  <img style={{ width: "35%" }} src={upward} />
+                  <img style={{ width: "30%" }} src={upward} />
                 )}
                 {this.props.data.total98Score < this.props.data.total97Score && (
-                  <img style={{ width: "35%" }} src={downward} />
+                  <img style={{ width: "30%" }} src={downward} />
                 )}
               </div>
             </div>
             <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
-              <div className="kt-widget17__item">
-                <span style={{ fontSize: "1.5rem", marginTop: "2%", fontWeight: 500 }}>Overall Improvement</span>{" "}
-                <h3 style={{ fontSize: "1.3rem", color: color }}>{this.props.data.overallImprovement}%</h3>
+              <div className="kt-widget17__item" style={{ height: "147px" }}>
+                <span className="kt-widget17__desc">Overall Improvement</span>{" "}
+                <span className="kt-widget17__subtitle" style={{ fontSize: "1.8rem" }}>
+                  {this.props.data.overallImprovement}%
+                </span>
               </div>
             </div>
           </DKPortletSummary>

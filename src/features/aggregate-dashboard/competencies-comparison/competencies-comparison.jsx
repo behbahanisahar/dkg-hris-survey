@@ -21,7 +21,9 @@ class CompetencyCompetency extends React.Component {
     };
   }
   async componentWillReceiveProps(nextProps) {
-    this.getData(nextProps);
+    if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {
+      this.getData(nextProps);
+    }
   }
   async getData(props) {
     this.setState(current => ({
