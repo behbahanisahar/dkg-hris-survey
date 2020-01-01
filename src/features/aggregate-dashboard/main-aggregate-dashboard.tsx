@@ -22,6 +22,7 @@ interface IProps {
   match: any;
 }
 interface IState {
+  selectedReportProps: AggregateReportProps;
   reportProps: AggregateReportProps;
   isFetching: boolean;
   reportType: number;
@@ -39,6 +40,12 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
     super(props);
     this.AggregateServices = new AggregateServices();
     this.state = {
+      selectedReportProps: {
+        level: "",
+        viewAs: "",
+        depLevel: "",
+        subDepLevel: "",
+      },
       reportProps: {
         level: "",
         viewAs: "",
@@ -86,6 +93,12 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             subDepLevel: response.subDepartments[0]?.text,
             viewAs: username,
           },
+          selectedReportProps: {
+            level: response.levels[0]?.text,
+            depLevel: response.departments[0]?.text,
+            subDepLevel: response.subDepartments[0]?.text,
+            viewAs: username,
+          },
           departmentTypes: response.departments,
           subDepTypes: response.subDepartments,
           levelTypes: response.levels,
@@ -108,7 +121,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             </Grid>
             <Grid container spacing={3} className="mt-4">
               <Grid item xs={3} sm={3}>
-                {/* <DashboardSummary viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} /> */}
+                {/* <DashboardSummary viewAs={this.state.selectedReportProps.viewAs} level={this.state.selectedReportProps.level} /> */}
                 <DKPortletSummary background="#F05B71" title=" 360̊  Feedback Aggregate Report">
                   <div style={{ color: "black" }} className="kt-widget17__items">
                     <div className="kt-widget17__item">
@@ -200,7 +213,11 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                             {this.renderDropDown(this.state.levelTypes)}
                           </Select>
                         )}
-                        <button type="button" className="btn btn-sm btn-bold btn-brand-hover mb-2">
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-bold btn-brand-hover mb-2"
+                          onClick={event => this.onApplyFilters()}
+                        >
                           <DKSVGIcon iconName="Search" width="24px" height="24px" color="red" />
                           {"Apply Filters "}
                         </button>
@@ -212,43 +229,43 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
               <Grid item xs={9} sm={9}>
                 <MainSummary
                   viewAs={this.state.reportProps.viewAs}
-                  level={this.state.reportProps.level}
-                  subDepLevel={this.state.reportProps.subDepLevel}
-                  depLevel={this.state.reportProps.depLevel}
+                  level={this.state.selectedReportProps.level}
+                  subDepLevel={this.state.selectedReportProps.subDepLevel}
+                  depLevel={this.state.selectedReportProps.depLevel}
                 />
               </Grid>
             </Grid>
-            {this.state.reportProps.level == "All" && (
+            {this.state.selectedReportProps.level == "All" && (
               <Grid container spacing={3} className="mt-4">
                 <Grid item xs={6} sm={3}>
                   <ClevelParticipation
                     viewAs={this.state.reportProps.viewAs}
-                    level={this.state.reportProps.level}
-                    subDepLevel={this.state.reportProps.subDepLevel}
-                    depLevel={this.state.reportProps.depLevel}
+                    level={this.state.selectedReportProps.level}
+                    subDepLevel={this.state.selectedReportProps.subDepLevel}
+                    depLevel={this.state.selectedReportProps.depLevel}
                   />
                 </Grid>
                 <Grid item xs={9} sm={5}>
                   <CompetencyAvgComparison
                     viewAs={this.state.reportProps.viewAs}
-                    level={this.state.reportProps.level}
+                    level={this.state.selectedReportProps.level}
                   />
                 </Grid>
                 <Grid item xs={6} sm={4}>
                   <CompetencyAvgRate
                     viewAs={this.state.reportProps.viewAs}
-                    level={this.state.reportProps.level}
-                    subDepLevel={this.state.reportProps.subDepLevel}
-                    depLevel={this.state.reportProps.depLevel}
+                    level={this.state.selectedReportProps.level}
+                    subDepLevel={this.state.selectedReportProps.subDepLevel}
+                    depLevel={this.state.selectedReportProps.depLevel}
                   />
                 </Grid>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={12}>
                     <TotalLeaders
                       viewAs={this.state.reportProps.viewAs}
-                      level={this.state.reportProps.level}
-                      subDepLevel={this.state.reportProps.subDepLevel}
-                      depLevel={this.state.reportProps.depLevel}
+                      level={this.state.selectedReportProps.level}
+                      subDepLevel={this.state.selectedReportProps.subDepLevel}
+                      depLevel={this.state.selectedReportProps.depLevel}
                     />
                   </Grid>
                 </Grid>
@@ -258,34 +275,34 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
               <Grid item xs={6} sm={8}>
                 <CompetencyCompetency
                   viewAs={this.state.reportProps.viewAs}
-                  level={this.state.reportProps.level}
-                  subDepLevel={this.state.reportProps.subDepLevel}
-                  depLevel={this.state.reportProps.depLevel}
+                  level={this.state.selectedReportProps.level}
+                  subDepLevel={this.state.selectedReportProps.subDepLevel}
+                  depLevel={this.state.selectedReportProps.depLevel}
                 />
               </Grid>
               <Grid item xs={6} sm={4}>
                 <RadarCoreValue
                   viewAs={this.state.reportProps.viewAs}
-                  level={this.state.reportProps.level}
-                  subDepLevel={this.state.reportProps.subDepLevel}
-                  depLevel={this.state.reportProps.depLevel}
+                  level={this.state.selectedReportProps.level}
+                  subDepLevel={this.state.selectedReportProps.subDepLevel}
+                  depLevel={this.state.selectedReportProps.depLevel}
                 />
               </Grid>
             </Grid>
 
             <MainQuestionComparison
               viewAs={this.state.reportProps.viewAs}
-              level={this.state.reportProps.level}
-              subDepLevel={this.state.reportProps.subDepLevel}
-              depLevel={this.state.reportProps.depLevel}
+              level={this.state.selectedReportProps.level}
+              subDepLevel={this.state.selectedReportProps.subDepLevel}
+              depLevel={this.state.selectedReportProps.depLevel}
             />
 
             <Grid container spacing={3} className="mt-4">
               <HeatMap
                 viewAs={this.state.reportProps.viewAs}
-                level={this.state.reportProps.level}
-                subDepLevel={this.state.reportProps.subDepLevel}
-                depLevel={this.state.reportProps.depLevel}
+                level={this.state.selectedReportProps.level}
+                subDepLevel={this.state.selectedReportProps.subDepLevel}
+                depLevel={this.state.selectedReportProps.depLevel}
               />
             </Grid>
           </>
@@ -295,26 +312,54 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   }
 
   private onChangeFields = (feildName: string, event: any): void => {
+    let subDepTypes: DropDownModel[] = [];
+
     if (feildName == "depLevel") {
       if (event.nativeEvent.target.outerText === "All") {
-        this.state.reportProps.subDepLevel === "All";
+        subDepTypes = this.state.subDepTypes.filter(el => el.text === "All");
       } else {
-        const subDepTypes = this.state.subDepTypes.filter(
-          el => el.parent === event.nativeEvent.target.outerText || "All",
+        subDepTypes = this.state.subDepTypes.filter(
+          el => el.parent === event.nativeEvent.target.outerText || el.parent === "All",
         );
       }
+      this.setState(prevState => {
+        return {
+          ...prevState,
+
+          reportProps: {
+            ...prevState.reportProps,
+            [feildName]: event.nativeEvent.target.outerText,
+          },
+          subDepTypes,
+        };
+      });
+    } else {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+
+          reportProps: {
+            ...prevState.reportProps,
+            [feildName]: event.nativeEvent.target.outerText,
+          },
+        };
+      });
     }
+  };
+  private onApplyFilters = () => {
+    console.log(this.state.reportProps);
+    const selectedReportProps: AggregateReportProps = {
+      level: this.state.reportProps.level,
+      subDepLevel: this.state.reportProps.subDepLevel,
+      depLevel: this.state.reportProps.depLevel,
+      viewAs: this.state.reportProps.viewAs,
+    };
+    this.setState(current => ({
+      ...current,
+      selectedReportProps,
+    }));
 
-    this.setState(prevState => {
-      return {
-        ...prevState,
-
-        reportProps: {
-          ...prevState.reportProps,
-          [feildName]: event.nativeEvent.target.outerText,
-        },
-      };
-    });
+    console.log(this.state.selectedReportProps);
   };
 
   public renderDropDown = (items: any[]): JSX.Element[] => {

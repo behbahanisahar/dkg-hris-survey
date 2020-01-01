@@ -26,7 +26,9 @@ class AggregateServices extends ServiceBase {
   }
   public async getStatistics(props: AggregateReportProps): Promise<statistics> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get(`survey/aggregate/statistics/${props.level}?viewAs=${props.viewAs}`);
+      const items: any = await this.get(
+        `survey/aggregate/statistics/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+      );
       return Promise.resolve(items.data);
     }
 

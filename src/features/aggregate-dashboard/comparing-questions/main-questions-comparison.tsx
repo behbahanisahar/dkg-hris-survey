@@ -32,7 +32,9 @@ export default class MainQuestionComparison extends React.Component<AggregateRep
   }
 
   public async componentWillReceiveProps(nextProps: AggregateReportProps) {
-    this.getData(nextProps);
+    if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {
+      this.getData(nextProps);
+    }
   }
 
   public async getData(props: AggregateReportProps) {
