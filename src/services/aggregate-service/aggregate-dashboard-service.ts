@@ -37,7 +37,9 @@ class AggregateServices extends ServiceBase {
 
   public async getParticipationRate(props: AggregateReportProps): Promise<ParticipationRate[]> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get(`survey/aggregate/participationrate/${props.level}?viewAs=${props.viewAs}`);
+      const items: any = await this.get(
+        `survey/aggregate/participationrate/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+      );
       return Promise.resolve(items.data);
     }
 
@@ -46,7 +48,9 @@ class AggregateServices extends ServiceBase {
 
   public async getComparisonCompetency(props: AggregateReportProps): Promise<ComparisonCompetency> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get(`survey/aggregate/competencies/chart/${props.level}?viewAs=${props.viewAs}`);
+      const items: any = await this.get(
+        `survey/aggregate/competencies/chart/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+      );
       return Promise.resolve(items.data);
     }
 
@@ -55,7 +59,9 @@ class AggregateServices extends ServiceBase {
 
   public async getComparisonQuestions(props: AggregateReportProps): Promise<ComparisonQuestions> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get(`survey/aggregate/questions/${props.level}?viewAs=${props.viewAs}`);
+      const items: any = await this.get(
+        `survey/aggregate/questions/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+      );
       return Promise.resolve(items.data);
     }
 
@@ -63,7 +69,9 @@ class AggregateServices extends ServiceBase {
   }
   public async getHeatmap(props: AggregateReportProps): Promise<Heatmap[]> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get(`survey/aggregate/heatmap/${props.level}?viewAs=${props.viewAs}`);
+      const items: any = await this.get(
+        `survey/aggregate/heatmap/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+      );
       return Promise.resolve(items.data);
     }
 
@@ -71,7 +79,9 @@ class AggregateServices extends ServiceBase {
   }
   public async getRadarCoreValues(props: AggregateReportProps): Promise<RadarCoreValues> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get(`survey/aggregate/values/chart/${props.level}?viewAs=${props.viewAs}`);
+      const items: any = await this.get(
+        `survey/aggregate/values/chart/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+      );
       return Promise.resolve(items.data);
     }
 
@@ -79,7 +89,9 @@ class AggregateServices extends ServiceBase {
   }
   public async getAverageCompetency(props: AggregateReportProps): Promise<AverageCompetency> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get(`survey/aggregate/overall/comparison/${props.level}?viewAs=${props.viewAs}`);
+      const items: any = await this.get(
+        `survey/aggregate/overall/comparison/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+      );
       return Promise.resolve(items.data);
     }
 
@@ -88,15 +100,20 @@ class AggregateServices extends ServiceBase {
 
   public async getNumberOfLeaders(props: AggregateReportProps): Promise<NumberOfLeaders[]> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get(`survey/aggregate/numberOfLeaders/${props.level}?viewAs=${props.viewAs}`);
+      const items: any = await this.get(
+        `survey/aggregate/numberOfLeaders/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+      );
       return Promise.resolve(items.data);
     }
 
     return Promise.resolve(MockAggregateData.MockNumberOfLeaders);
   }
+
   public async getCompetencyAverageRate(props: AggregateReportProps): Promise<CompetencyAvg[]> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get(`survey/aggregate/competencies/table/${props.level}?viewAs=${props.viewAs}`);
+      const items: any = await this.get(
+        `survey/aggregate/competencies/table/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+      );
       return Promise.resolve(items.data);
     }
 

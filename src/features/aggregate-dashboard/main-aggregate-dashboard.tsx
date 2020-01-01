@@ -346,6 +346,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       });
     }
   };
+
   private onApplyFilters = () => {
     console.log(this.state.reportProps);
     const selectedReportProps: AggregateReportProps = {
