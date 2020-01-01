@@ -295,29 +295,20 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   }
 
   private onChangeFields = (feildName: string, event: any): void => {
-    var reportTitle = "";
-    switch (event.nativeEvent.target.outerText) {
-      case "All": {
-        reportTitle = "All Leaders";
-        break;
-      }
-      case "Clevel": {
-        reportTitle = "C-levels";
-        break;
-      }
-      default: {
-        reportTitle = `${event.nativeEvent.target.outerText} Group Departments`;
-        break;
+    if (feildName == "depLevel") {
+      if (event.nativeEvent.target.outerText === "All") {
+        this.state.reportProps.subDepLevel === "All";
+      } else {
+        const subDepTypes = this.state.subDepTypes.filter(
+          el => el.parent === event.nativeEvent.target.outerText || "All",
+        );
       }
     }
 
     this.setState(prevState => {
       return {
         ...prevState,
-        dashboardInfo: {
-          ...prevState.dashboardInfo,
-          title: reportTitle,
-        },
+
         reportProps: {
           ...prevState.reportProps,
           [feildName]: event.nativeEvent.target.outerText,
