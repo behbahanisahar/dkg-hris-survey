@@ -162,59 +162,73 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                   <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
                     <div className="kt-widget17__item">
                       <div>
-                        <span className="kt-widget17__desc mb-2">Report Types</span>{" "}
-                        {this.state.dashboardInfo.departments.length > 1 && (
-                          <Select
-                            margin="dense"
-                            className="mb-2"
-                            dir="ltr"
-                            value={this.state.reportProps.depLevel}
-                            fullWidth={true}
-                            onChange={event => this.onChangeFields("depLevel", event)}
-                            inputProps={{
-                              name: "Department",
-                              id: "demo-controlled-open-select",
-                            }}
-                            variant="outlined"
-                          >
-                            {this.renderDropDown(this.state.departmentTypes)}
-                          </Select>
-                        )}
-                        {this.state.dashboardInfo.subDepartments.length > 1 && (
-                          <Select
-                            margin="dense"
-                            className="mb-2"
-                            dir="ltr"
-                            value={this.state.reportProps.subDepLevel}
-                            fullWidth={true}
-                            onChange={event => this.onChangeFields("subDepLevel", event)}
-                            inputProps={{
-                              name: "SubDepartment",
-                              id: "demo-controlled-open-select",
-                            }}
-                            variant="outlined"
-                          >
-                            {this.renderDropDown(this.state.subDepTypes)}
-                          </Select>
-                        )}
-                        <br />
-                        {this.state.dashboardInfo.levels.length > 1 && (
-                          <Select
-                            margin="dense"
-                            dir="ltr"
-                            className="mb-2"
-                            value={this.state.reportProps.level}
-                            fullWidth={true}
-                            onChange={event => this.onChangeFields("level", event)}
-                            inputProps={{
-                              name: "Level",
-                              id: "demo-controlled-open-select",
-                            }}
-                            variant="outlined"
-                          >
-                            {this.renderDropDown(this.state.levelTypes)}
-                          </Select>
-                        )}
+                        <Grid container>
+                          <Grid item xs={3} sm={3}>
+                            <span className="kt-widget17__desc mb-2">Department</span>
+                          </Grid>
+                          <Grid item xs={8} sm={8}>
+                            <Select
+                              margin="dense"
+                              className="mb-2"
+                              dir="ltr"
+                              value={this.state.reportProps.depLevel}
+                              fullWidth={true}
+                              onChange={event => this.onChangeFields("depLevel", event)}
+                              inputProps={{
+                                name: "Department",
+                                id: "demo-controlled-open-select",
+                              }}
+                              variant="outlined"
+                            >
+                              {this.renderDropDown(this.state.departmentTypes)}
+                            </Select>
+                          </Grid>
+                        </Grid>
+                        <Grid container>
+                          <Grid item xs={3} sm={3}>
+                            <span className="kt-widget17__desc mb-2">Sub Dept</span>
+                          </Grid>
+                          <Grid item xs={8} sm={8}>
+                            <Select
+                              margin="dense"
+                              className="mb-2"
+                              dir="ltr"
+                              value={this.state.reportProps.subDepLevel}
+                              fullWidth={true}
+                              onChange={event => this.onChangeFields("subDepLevel", event)}
+                              inputProps={{
+                                name: "SubDepartment",
+                                id: "demo-controlled-open-select",
+                              }}
+                              variant="outlined"
+                            >
+                              {this.renderDropDown(this.state.subDepTypes)}
+                            </Select>
+                          </Grid>
+                        </Grid>
+
+                        <Grid container>
+                          <Grid item xs={3} sm={3}>
+                            <span className="kt-widget17__desc mb-2">Level</span>
+                          </Grid>
+                          <Grid item xs={8} sm={8}>
+                            <Select
+                              margin="dense"
+                              dir="ltr"
+                              className="mb-2"
+                              value={this.state.reportProps.level}
+                              fullWidth={true}
+                              onChange={event => this.onChangeFields("level", event)}
+                              inputProps={{
+                                name: "Level",
+                                id: "demo-controlled-open-select",
+                              }}
+                              variant="outlined"
+                            >
+                              {this.renderDropDown(this.state.levelTypes)}
+                            </Select>
+                          </Grid>
+                        </Grid>
                         <button
                           type="button"
                           className="btn btn-sm btn-bold btn-brand-hover mb-2"
@@ -251,6 +265,8 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                   <CompetencyAvgComparison
                     viewAs={this.state.reportProps.viewAs}
                     level={this.state.selectedReportProps.level}
+                    subDepLevel={this.state.selectedReportProps.subDepLevel}
+                    depLevel={this.state.selectedReportProps.depLevel}
                   />
                 </Grid>
                 <Grid item xs={6} sm={4}>

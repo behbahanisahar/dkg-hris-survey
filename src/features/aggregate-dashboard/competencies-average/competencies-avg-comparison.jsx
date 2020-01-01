@@ -25,6 +25,7 @@ export default class CompetencyAvgComparison extends React.Component {
     }
   }
   async getData(props) {
+    console.log(props);
     this.setState(current => ({
       ...current,
       isFetching: true,
