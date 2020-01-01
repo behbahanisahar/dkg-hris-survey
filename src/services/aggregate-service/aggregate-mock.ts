@@ -4751,14 +4751,22 @@ export default class MockAggregateData {
   };
 
   public static MockDashboardInfo: DashboardInfo = {
-    dropdownValues: [
-      {
-        key: "Clevel",
-        text: "Clevel",
-      },
+    departments: [
       {
         key: "All",
         text: "All",
+      },
+      {
+        key: "COO",
+        text: "COO",
+      },
+      {
+        key: "CFO",
+        text: "CFO",
+      },
+      {
+        key: "CMO",
+        text: "CMO",
       },
       {
         key: "CCO",
@@ -4769,22 +4777,6 @@ export default class MockAggregateData {
         text: "CEO",
       },
       {
-        key: "CFO",
-        text: "CFO",
-      },
-      {
-        key: "CHRO",
-        text: "CHRO",
-      },
-      {
-        key: "CMO",
-        text: "CMO",
-      },
-      {
-        key: "COO",
-        text: "COO",
-      },
-      {
         key: "CTO",
         text: "CTO",
       },
@@ -4793,28 +4785,67 @@ export default class MockAggregateData {
         text: "Fidibo",
       },
       {
-        key: "DigiPay",
-        text: "DigiPay",
+        key: "CHRO",
+        text: "CHRO",
+      },
+      {
+        key: "Digipay",
+        text: "Digipay",
       },
     ],
-    title: "test/test/test",
+    subDepartments: [
+      {
+        key: "All",
+        text: "All",
+        parent: "All",
+      },
+      {
+        key: "CMO",
+        text: "CMO",
+        parent: "CMO",
+      },
+      {
+        key: "Digipay",
+        text: "Digipay",
+        parent: "Digipay",
+      },
+    ],
+    levels: [
+      {
+        key: "All",
+        text: "All",
+      },
+      {
+        key: "SM",
+        text: "SM",
+      },
+      {
+        key: "M",
+        text: "M",
+      },
+    ],
     user: {
-      title: "حمید محمدی",
-      perssonelCode: "1000",
-      fatherName: "ولی اله",
-      nationalId: "0064388573",
-      birthDate: "1979-07-03",
-      strBirthDate: "1358/4/12",
-      emailAddress: "h.mohammadi@digikala.com",
-      cLevel: "CEO",
-      department: "Managing Directors",
-      socialSecurityJob: "مدیرعامل",
-      dateOfEmployment: "1391/11/30",
-      reportedPost: "Cofounder and Chief Executive Officer",
-      spLatinFullName: "Hamid Mohammadi",
-      itemId: 3544,
-      avatarTextPlaceholder: "HM",
+      title: "محسن مکرمی",
+      perssonelCode: "6022",
+      fatherName: "رمضان",
+      nationalId: "0073190667",
+      birthDate: "1980-09-19",
+      strBirthDate: "1359/6/28",
+      emailAddress: "m.mokremi@digikala.com",
+      cLevel: "CHRO",
+      department: "HR",
+      socialSecurityJob: "معاون منابع انسانی",
+      dateOfEmployment: "1397/08/01",
+      reportedPost: "CHRO",
+      spLatinFullName: "Mohsen Mokremi",
+      itemId: 68,
+      avatarUrl: "https://aura.digikala.com/hris/Lists/UserInfo/Attachments/68/avatar.jpg",
+      avatarTextPlaceholder: "MM",
+      directManagerTitle: "سعید محمدی",
+      directManagerUsername: "i:0#.w|digikala\\s.mohammadi",
     },
+
+    nominationId: 453,
   };
   public static MockNumberOfLeaders: NumberOfLeaders[] = [
     {

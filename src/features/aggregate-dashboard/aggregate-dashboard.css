@@ -17,3 +17,13 @@
   color: white;
   font-weight: 600;
 }
+
+.viewReport:visited,
+.viewReport {
+  color: #f27581 !important;
+  font-weight: 600;
+}
+.viewReport:hover {
+  color: #f27581 !important;
+  text-decoration: underline !important;
+}

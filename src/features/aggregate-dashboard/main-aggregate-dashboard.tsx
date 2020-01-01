@@ -17,6 +17,7 @@ import TotalLeaders from "./number-of-leaders/num-of-leaders";
 import CompetencyAvgRate from "./competency-avg-rate/competency-avg-rate";
 import "./aggregate-dashboard.css";
 import MainQuestionComparison from "./comparing-questions/main-questions-comparison";
+import DKSVGIcon from "../../core/components/svg-icon/svg-icon";
 interface IProps {
   match: any;
 }
@@ -24,9 +25,13 @@ interface IState {
   reportProps: AggregateReportProps;
   isFetching: boolean;
   reportType: number;
-  reportTypeText: string;
+  departmentText: string;
+  subDepText: string;
+  levelText: string;
   dashboardInfo: DashboardInfo;
-  reportTypes: DropDownModel[];
+  departmentTypes: DropDownModel[];
+  subDepTypes: DropDownModel[];
+  levelTypes: DropDownModel[];
 }
 export default class MainAggregateDashboard extends React.Component<IProps, IState> {
   private AggregateServices: AggregateServices;
@@ -37,16 +42,23 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       reportProps: {
         level: "",
         viewAs: "",
+        depLevel: "",
+        subDepLevel: "",
       },
       isFetching: true,
       reportType: 1,
-      reportTypes: [],
-      reportTypeText: "All",
+      departmentTypes: [],
+      subDepTypes: [],
+      levelTypes: [],
+      departmentText: "All",
+      subDepText: "All",
+      levelText: "All",
       dashboardInfo: {
-        dropdownValues: [],
-        title: "",
-        userClevel: "",
+        departments: [],
+        subDepartments: [],
+        levels: [],
         user: {},
+        nominationId: 0,
       },
     };
   }
@@ -69,11 +81,17 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
           isFetching: false,
           dashboardInfo: response,
           reportProps: {
-            level: response.dropdownValues[0]?.text,
+            level: response.levels[0]?.text,
+            depLevel: response.departments[0]?.text,
+            subDepLevel: response.subDepartments[0]?.text,
             viewAs: username,
           },
-          reportTypes: response.dropdownValues,
-          reportTypeText: response.dropdownValues[0]?.text,
+          departmentTypes: response.departments,
+          subDepTypes: response.subDepartments,
+          levelTypes: response.levels,
+          departmentText: response.departments[0]?.text,
+          subDepText: response.subDepartments[0]?.text,
+          levelText: response.levels[0]?.text,
         };
       });
     });
@@ -92,7 +110,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
               <Grid item xs={3} sm={3}>
                 {/* <DashboardSummary viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} /> */}
                 <DKPortletSummary background="#F05B71" title=" 360̊  Feedback Aggregate Report">
-                  <div style={{ color: "black", display: "none" }} className="kt-widget17__items">
+                  <div style={{ color: "black" }} className="kt-widget17__items">
                     <div className="kt-widget17__item">
                       <Grid container>
                         <Grid item xs={3} sm={3}>
@@ -117,52 +135,98 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                               <p className="kt-widget__username">{this.state.dashboardInfo.user?.spLatinFullName}</p>
                             </div>
                             <div className="sub-head">{this.state.dashboardInfo.user?.emailAddress}</div>
+                            <a className="viewReport" href="#">
+                              view report
+                            </a>
                           </div>
                         </Grid>
                       </Grid>
                     </div>
                   </div>
+
                   <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
-                    <div className="kt-widget17__item" style={{ height: "80px" }}>
-                      <span>Level Of Leadership</span>
-                      <h3 style={{ color: "#F27581", fontWeight: 600 }}>{this.state.dashboardInfo.title}</h3>
-                    </div>
-                  </div>
-                  {this.state.dashboardInfo.dropdownValues.length > 1 && (
-                    <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
-                      <div className="kt-widget17__item">
-                        <div>
-                          <span className="mb-2" style={{ fontSize: "1.5rem", marginTop: "2%", fontWeight: 500 }}>
-                            Report Types
-                          </span>
+                    <div className="kt-widget17__item">
+                      <div>
+                        <span className="kt-widget17__desc mb-2">Report Types</span>{" "}
+                        {this.state.dashboardInfo.departments.length > 1 && (
                           <Select
                             margin="dense"
+                            className="mb-2"
                             dir="ltr"
-                            value={this.state.reportProps.level}
+                            value={this.state.reportProps.depLevel}
                             fullWidth={true}
-                            onChange={event => this.onChangeFields(event)}
+                            onChange={event => this.onChangeFields("depLevel", event)}
                             inputProps={{
-                              name: "ReportType",
+                              name: "Department",
                               id: "demo-controlled-open-select",
                             }}
                             variant="outlined"
                           >
-                            {this.renderDropDown(this.state.reportTypes)}
+                            {this.renderDropDown(this.state.departmentTypes)}
                           </Select>
-                        </div>
+                        )}
+                        {this.state.dashboardInfo.subDepartments.length > 1 && (
+                          <Select
+                            margin="dense"
+                            className="mb-2"
+                            dir="ltr"
+                            value={this.state.reportProps.subDepLevel}
+                            fullWidth={true}
+                            onChange={event => this.onChangeFields("subDepLevel", event)}
+                            inputProps={{
+                              name: "SubDepartment",
+                              id: "demo-controlled-open-select",
+                            }}
+                            variant="outlined"
+                          >
+                            {this.renderDropDown(this.state.subDepTypes)}
+                          </Select>
+                        )}
+                        <br />
+                        {this.state.dashboardInfo.levels.length > 1 && (
+                          <Select
+                            margin="dense"
+                            dir="ltr"
+                            className="mb-2"
+                            value={this.state.reportProps.level}
+                            fullWidth={true}
+                            onChange={event => this.onChangeFields("level", event)}
+                            inputProps={{
+                              name: "Level",
+                              id: "demo-controlled-open-select",
+                            }}
+                            variant="outlined"
+                          >
+                            {this.renderDropDown(this.state.levelTypes)}
+                          </Select>
+                        )}
+                        <button type="button" className="btn btn-sm btn-bold btn-brand-hover mb-2">
+                          <DKSVGIcon iconName="Search" width="24px" height="24px" color="red" />
+                          {"Apply Filters "}
+                        </button>
                       </div>
                     </div>
-                  )}
+                  </div>
                 </DKPortletSummary>
               </Grid>
               <Grid item xs={9} sm={9}>
-                <MainSummary viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+                <MainSummary
+                  viewAs={this.state.reportProps.viewAs}
+                  level={this.state.reportProps.level}
+                  subDepLevel={this.state.reportProps.subDepLevel}
+                  depLevel={this.state.reportProps.depLevel}
+                />
               </Grid>
             </Grid>
             {this.state.reportProps.level == "All" && (
               <Grid container spacing={3} className="mt-4">
                 <Grid item xs={6} sm={3}>
-                  <ClevelParticipation viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+                  <ClevelParticipation
+                    viewAs={this.state.reportProps.viewAs}
+                    level={this.state.reportProps.level}
+                    subDepLevel={this.state.reportProps.subDepLevel}
+                    depLevel={this.state.reportProps.depLevel}
+                  />
                 </Grid>
                 <Grid item xs={9} sm={5}>
                   <CompetencyAvgComparison
@@ -171,28 +235,58 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                   />
                 </Grid>
                 <Grid item xs={6} sm={4}>
-                  <CompetencyAvgRate viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+                  <CompetencyAvgRate
+                    viewAs={this.state.reportProps.viewAs}
+                    level={this.state.reportProps.level}
+                    subDepLevel={this.state.reportProps.subDepLevel}
+                    depLevel={this.state.reportProps.depLevel}
+                  />
                 </Grid>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={12}>
-                    <TotalLeaders viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+                    <TotalLeaders
+                      viewAs={this.state.reportProps.viewAs}
+                      level={this.state.reportProps.level}
+                      subDepLevel={this.state.reportProps.subDepLevel}
+                      depLevel={this.state.reportProps.depLevel}
+                    />
                   </Grid>
                 </Grid>
               </Grid>
             )}
             <Grid container spacing={3} className="mt-4">
               <Grid item xs={6} sm={8}>
-                <CompetencyCompetency viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+                <CompetencyCompetency
+                  viewAs={this.state.reportProps.viewAs}
+                  level={this.state.reportProps.level}
+                  subDepLevel={this.state.reportProps.subDepLevel}
+                  depLevel={this.state.reportProps.depLevel}
+                />
               </Grid>
               <Grid item xs={6} sm={4}>
-                <RadarCoreValue viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+                <RadarCoreValue
+                  viewAs={this.state.reportProps.viewAs}
+                  level={this.state.reportProps.level}
+                  subDepLevel={this.state.reportProps.subDepLevel}
+                  depLevel={this.state.reportProps.depLevel}
+                />
               </Grid>
             </Grid>
 
-            <MainQuestionComparison viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+            <MainQuestionComparison
+              viewAs={this.state.reportProps.viewAs}
+              level={this.state.reportProps.level}
+              subDepLevel={this.state.reportProps.subDepLevel}
+              depLevel={this.state.reportProps.depLevel}
+            />
 
             <Grid container spacing={3} className="mt-4">
-              <HeatMap viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} />
+              <HeatMap
+                viewAs={this.state.reportProps.viewAs}
+                level={this.state.reportProps.level}
+                subDepLevel={this.state.reportProps.subDepLevel}
+                depLevel={this.state.reportProps.depLevel}
+              />
             </Grid>
           </>
         )}
@@ -200,7 +294,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
     );
   }
 
-  private onChangeFields = (event: any): void => {
+  private onChangeFields = (feildName: string, event: any): void => {
     var reportTitle = "";
     switch (event.nativeEvent.target.outerText) {
       case "All": {
@@ -226,7 +320,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         },
         reportProps: {
           ...prevState.reportProps,
-          level: event.nativeEvent.target.outerText,
+          [feildName]: event.nativeEvent.target.outerText,
         },
       };
     });

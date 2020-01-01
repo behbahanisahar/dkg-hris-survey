@@ -56,4 +56,6 @@ export default interface UserInfoItem {
   degree?: string;
   fieldOfStudy?: string;
   collegeOrUniversity?: string;
+  directManagerTitle?: string;
+  directManagerUsername?: string;
 }

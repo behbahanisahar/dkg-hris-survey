@@ -3,10 +3,10 @@ import { DKSpinner } from "../../../core/components/spinner/spinner";
 import { statistics } from "../../../entities/aggregate-report/statistics";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
 import { AggregateReportProps } from "../aggregate-report-props";
-import TotalParticipant from "../total-participant/total-participant";
-import OverallImprovement from "../overall-improvement/overall-improvement";
+
 import ParticipantComparisonSummary from "../participant-comparison/participant-comparison-summary";
 import { Grid } from "@material-ui/core";
+import OverallImprovement from "../overall-improvement/overall-improvement";
 
 interface IState {
   data: statistics;
@@ -62,14 +62,25 @@ export default class MainSummary extends React.Component<AggregateReportProps, I
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <Grid container spacing={3}>
-            <Grid item xs={4} sm={4}>
+            {/* <Grid item xs={4} sm={4}>
               <TotalParticipant data={this.state.data} viewAs={this.props.viewAs} level={this.props.level} />
-            </Grid>
-            <Grid item xs={4} sm={4}>
+            </Grid> */}
+            {/* <Grid item xs={4} sm={4}>
               <OverallImprovement data={this.state.data} viewAs={this.props.viewAs} level={this.props.level} />
+            </Grid> */}
+            <Grid item xs={8} sm={8}>
+              <ParticipantComparisonSummary
+                data={this.state.data}
+                viewAs={this.props.viewAs}
+                level={this.props.level}
+                subDepLevel={this.props.subDepLevel}
+                depLevel={this.props.depLevel}
+              />
             </Grid>
             <Grid item xs={4} sm={4}>
-              <ParticipantComparisonSummary
+              <OverallImprovement
+                subDepLevel={this.props.subDepLevel}
+                depLevel={this.props.depLevel}
                 data={this.state.data}
                 viewAs={this.props.viewAs}
                 level={this.props.level}

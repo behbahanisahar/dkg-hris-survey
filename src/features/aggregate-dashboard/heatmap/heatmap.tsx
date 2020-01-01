@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableRow, Tooltip } from "@material-ui/core";
+import { Table, TableBody, TableCell, TableRow, Tooltip, TableHead, TableContainer } from "@material-ui/core";
 import * as React from "react";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
@@ -65,14 +65,14 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
       <DKPortlet title="Heatmap">
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <>
+          <div style={{ width: "100%" }}>
             <HeataMapLegend></HeataMapLegend>
-
-            <Table className="heatmap-table table mt-3 table-sm">
-              <thead className="dk-brand-grey">
-                <tr>
-                  <th className="none-thead" style={{ backgroundColor: "#fff!important" }}>
-                    {/* {this.state.data?.length >= 40 && (
+            <TableContainer style={{ maxHeight: "400px" }}>
+              <Table className="heatmap-table table mt-3 table-sm">
+                <TableHead style={{ position: "sticky" }} className=" dk-brand-grey">
+                  <tr>
+                    <th className="heatmap-header none-thead" style={{ backgroundColor: "#fff!important" }}>
+                      {/* {this.state.data?.length >= 40 && (
                       <button
                         className="btn btn-sm btn-bold btn-brand-hover"
                         onClick={(e: any) => {
@@ -84,39 +84,44 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                         {this.state.buttonText}
                       </button>
                     )} */}
-                    <Tooltip title="Sort By Rank" aria-label="sort" arrow>
-                      <Sort
-                        style={{ color: "black", cursor: "pointer" }}
-                        onClick={(event: any) => this.onChangeSorting()}
+                      <Tooltip title="Sort By Rank" aria-label="sort" arrow>
+                        <Sort
+                          style={{ color: "black", cursor: "pointer" }}
+                          onClick={(event: any) => this.onChangeSorting()}
+                        />
+                      </Tooltip>
+                    </th>
+
+                    <th
+                      colSpan={1}
+                      className="heatmap-header  none-thead"
+                      style={{ backgroundColor: "#fff!important" }}
+                    >
+                      <input
+                        value={this.state.filterName}
+                        onChange={this.onFilterTable}
+                        placeholder="Search...    "
+                        className="form-control input-search"
                       />
-                    </Tooltip>
-                  </th>
+                    </th>
+                    <th className="heatmap-header">Customer Centric</th>
+                    <th className="heatmap-header">Builder approach and Result oriented</th>
+                    <th className="heatmap-header">Drive for Excellence</th>
+                    <th className="heatmap-header">Teamwork</th>
+                    <th className="heatmap-header">Decision Making</th>
+                    <th className="heatmap-header">Managing People</th>
+                    <th className="heatmap-header">Developing Vision & Strategy</th>
+                    <th className="heatmap-header">Business Acumen</th>
+                    <th className="heatmap-header">Average Rate</th>
+                    <th className="heatmap-header">#Assessors</th>
+                    <th className="heatmap-header"></th>
+                  </tr>
+                </TableHead>
 
-                  <th colSpan={1} className="none-thead" style={{ backgroundColor: "#fff!important" }}>
-                    <input
-                      value={this.state.filterName}
-                      onChange={this.onFilterTable}
-                      placeholder="Search...    "
-                      className="form-control input-search"
-                    />
-                  </th>
-                  <th>Customer Centric</th>
-                  <th>Builder approach and Result oriented</th>
-                  <th>Drive for Excellence</th>
-                  <th>Teamwork</th>
-                  <th>Decision Making</th>
-                  <th>Managing People</th>
-                  <th>Developing Vision & Strategy</th>
-                  <th>Business Acumen</th>
-                  <th>Average Rate</th>
-                  <th>#Assessors</th>
-                  <th></th>
-                </tr>
-              </thead>
-
-              <TableBody>{this.onRenderTable()}</TableBody>
-            </Table>
-          </>
+                <TableBody>{this.onRenderTable()}</TableBody>
+              </Table>
+            </TableContainer>
+          </div>
         )}
       </DKPortlet>
     );

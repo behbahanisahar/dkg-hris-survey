@@ -65,6 +65,8 @@ export default class MainQuestionComparison extends React.Component<AggregateRep
                 <QuestionComparison
                   viewAs={this.props.viewAs}
                   level={this.props.level}
+                  subDepLevel={this.props.subDepLevel}
+                  depLevel={this.props.depLevel}
                   comparingType="top"
                   data={this.state.data}
                 />
@@ -74,6 +76,8 @@ export default class MainQuestionComparison extends React.Component<AggregateRep
               <DKPortlet title="Bottom5 / Improvement Areas">
                 <QuestionComparison
                   viewAs={this.props.viewAs}
+                  subDepLevel={this.props.subDepLevel}
+                  depLevel={this.props.depLevel}
                   level={this.props.level}
                   comparingType="bottom"
                   data={this.state.data}
