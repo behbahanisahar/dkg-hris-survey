@@ -10,6 +10,7 @@ import { HeataMapLegend } from "./heatmap-legend";
 import "./heatmap.css";
 import { HeataImprovement } from "./heatmap-improvement";
 import Sort from "@material-ui/icons/Sort";
+import DKSVGIcon from "../../../core/components/svg-icon/svg-icon";
 
 let allitems: any[] = [];
 
@@ -137,8 +138,17 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
             <>
               {this.state.data.length > 40 && this.state.showAll === false && index == 21 && (
                 <tr className="showmore">
-                  <td className="text-center p-0" colSpan={13}>
-                    <section className="seeMore">
+                  <td
+                    className="text-center p-0"
+                    onClick={(e: any) => {
+                      this.onShowItem();
+                      e.preventDefault();
+                      return false;
+                    }}
+                    colSpan={13}
+                  >
+                    <DKSVGIcon iconName="Arrows-v" width="24" height="24" color="red"></DKSVGIcon>
+                    {/* <section className="seeMore">
                       <span
                         onClick={(e: any) => {
                           this.onShowItem();
@@ -148,7 +158,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                       >
                         Show all
                       </span>
-                    </section>
+                    </section> */}
                   </td>
                 </tr>
               )}
@@ -288,7 +298,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
   /*************************************************************************** */
   private onFilterTable = (event: any) => {
     this.setState({
-      filterName: event.target.value,
+      filterName: event.target.value?.toLowerCase(),
     });
 
     this.filterBox();

@@ -7,6 +7,7 @@
 .summary-height {
   height: 390px !important;
 }
+
 .kt-iconbox--animate-slower:after {
   bottom: 40% !important;
 }
@@ -20,4 +21,7 @@
 }
 .kt-portlet__head {
   z-index: 2 !important;
+}
+.kt-widget17 .kt-widget17__stats .kt-widget17__items .kt-widget17__item {
+  cursor: default;
 }

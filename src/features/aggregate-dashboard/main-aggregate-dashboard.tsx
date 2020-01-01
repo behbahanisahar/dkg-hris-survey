@@ -44,7 +44,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       reportTypeText: "All",
       dashboardInfo: {
         dropdownValues: [],
-        title: "",
+        title: "Clevel",
         userClevel: "",
         user: {},
       },
@@ -92,7 +92,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
               <Grid item xs={3} sm={3}>
                 {/* <DashboardSummary viewAs={this.state.reportProps.viewAs} level={this.state.reportProps.level} /> */}
                 <DKPortletSummary background="#F05B71" title=" 360̊  Feedback Aggregate Report">
-                  <div style={{ color: "black", display: "none" }} className="kt-widget17__items">
+                  <div style={{ color: "black" }} className="kt-widget17__items">
                     <div className="kt-widget17__item">
                       <Grid container>
                         <Grid item xs={3} sm={3}>
@@ -123,7 +123,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                     </div>
                   </div>
                   <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
-                    <div className="kt-widget17__item" style={{ height: "80px" }}>
+                    <div className="kt-widget17__item" style={{ height: "120px" }}>
                       <span>Level Of Leadership</span>
                       <h3 style={{ color: "#F27581", fontWeight: 600 }}>{this.state.dashboardInfo.title}</h3>
                     </div>
@@ -208,7 +208,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         break;
       }
       case "Clevel": {
-        reportTitle = "C-levels";
+        reportTitle = "Clevel";
         break;
       }
       default: {

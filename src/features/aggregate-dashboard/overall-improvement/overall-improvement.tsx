@@ -66,10 +66,10 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
                   </div>
                 </div>
                 {this.props.data.total98Score > this.props.data.total97Score && (
-                  <img style={{ width: "40%" }} src={upward} />
+                  <img style={{ width: "35%" }} src={upward} />
                 )}
                 {this.props.data.total98Score < this.props.data.total97Score && (
-                  <img style={{ width: "40%" }} src={downward} />
+                  <img style={{ width: "35%" }} src={downward} />
                 )}
               </div>
             </div>
