@@ -320,29 +320,19 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       if (event.nativeEvent.target.outerText === "All") {
         subDepTypes = this.state.subDepTypes;
       } else {
-        this.setState(prevState => {
-          if (prevState.subDepTypes) {
-            subDepTypes = prevState.subDepTypes
-              ? subDepTypes.filter(el => el.parent === event.nativeEvent.target.outerText || el.parent === "All")
-              : subDepTypes;
-          }
-          return {
-            ...prevState,
-            subDepTypes,
-          };
-        });
+        subDepTypes = subDepTypes.filter(el => el.parent === event.nativeEvent.target.outerText || el.parent === "All");
       }
-      // this.setState(prevState => {
-      //   return {
-      //     ...prevState,
+      this.setState(prevState => {
+        return {
+          ...prevState,
 
-      //     reportProps: {
-      //       ...prevState.reportProps,
-      //       [feildName]: event.nativeEvent.target.outerText,
-      //     },
-      //     subDepTypes,
-      //   };
-      // });
+          reportProps: {
+            ...prevState.reportProps,
+            [feildName]: event.nativeEvent.target.outerText,
+          },
+          subDepTypes,
+        };
+      });
     } else {
       this.setState(prevState => {
         return {
