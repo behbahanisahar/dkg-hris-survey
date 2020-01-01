@@ -122,7 +122,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
               <Grid item xs={3} sm={3}></Grid>
             </Grid>
             <Grid container spacing={3} className="mt-4">
-              <Grid item xs={3} sm={3}>
+              <Grid item xs={4} sm={4}>
                 {/* <DashboardSummary viewAs={this.state.selectedReportProps.viewAs} level={this.state.selectedReportProps.level} /> */}
                 <DKPortletSummary background="#F05B71" title=" 360̊  Feedback Aggregate Report">
                   <div style={{ color: "black" }} className="kt-widget17__items">
@@ -228,7 +228,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                   </div>
                 </DKPortletSummary>
               </Grid>
-              <Grid item xs={9} sm={9}>
+              <Grid item xs={8} sm={8}>
                 <MainSummary
                   viewAs={this.state.reportProps.viewAs}
                   level={this.state.selectedReportProps.level}
