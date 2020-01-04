@@ -204,6 +204,7 @@ export default class MockAggregateData {
   public static MockHeat: Heatmap[] = [
     {
       rank: 0,
+      department: "COO",
       nominationId: 397,
       title: "Ahmad Mohammadi Tamanaei",
       category1: 4.57575757575758,
@@ -221,6 +222,7 @@ export default class MockAggregateData {
     {
       rank: 1,
       nominationId: 348,
+      department: "COO",
       title: "Amin Nargesi",
       category1: 4.74358974358974,
       category2: 4.79487179487179,
@@ -237,6 +239,7 @@ export default class MockAggregateData {
     {
       rank: 2,
       nominationId: 385,
+      department: "COO",
       title: "Kunasellaan Kathigesan",
       category1: 4.59459459459459,
       category2: 4.65333333333333,
@@ -269,6 +272,7 @@ export default class MockAggregateData {
     {
       rank: 4,
       nominationId: 347,
+      department: "COO",
       title: "Ali Reza Jamshidi",
       category1: 4.7027027027027,
       category2: 4.61538461538462,
@@ -287,6 +291,7 @@ export default class MockAggregateData {
       nominationId: 490,
       title: "Mohammad Taghi Zarin Sadaf",
       category1: 4.6,
+      department: "COO",
       category2: 4.58974358974359,
       category3: 4.66666666666667,
       category4: 4.475,
@@ -303,6 +308,7 @@ export default class MockAggregateData {
       nominationId: 370,
       title: "Morteza Pazoki",
       category1: 4.6875,
+      department: "CCO",
       category2: 4.58333333333333,
       category3: 4.1875,
       category4: 4.48275862068965,

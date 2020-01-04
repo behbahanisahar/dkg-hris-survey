@@ -102,6 +102,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                       className="form-control input-search"
                     />
                   </th>
+                  <th className="heatmap-header  none-thead"></th>
                   <th className="heatmap-header">Customer Centric</th>
                   <th className="heatmap-header">Builder approach and Result oriented</th>
                   <th className="heatmap-header">Drive for Excellence</th>
@@ -170,6 +171,9 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                   <a target="_blank" className="title-link" href={"#/dashboard/" + n.nominationId}>
                     {n.title}
                   </a>
+                </td>
+                <td>
+                  <span>{n?.department}</span>
                 </td>
                 <td style={{ width: "8%" }} className={this.averageClass(n.category1, false)} align="center">
                   {n.category1.toFixed(2)}

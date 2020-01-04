@@ -1,6 +1,7 @@
 export default interface Heatmap {
   rank: number;
   title: string;
+  department?: string;
   category1: number;
   category2: number;
   category3: number;

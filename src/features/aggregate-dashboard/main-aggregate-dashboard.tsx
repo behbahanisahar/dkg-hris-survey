@@ -161,7 +161,9 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                               <i className="la la-crosshairs"></i> Report
                             </a> */}
                             <img src={ReportIcon} />
-                            <a className="viewReport">view Report</a>
+                            <a href={"#/dashboard/" + this.state.dashboardInfo.nominationId} className="viewReport">
+                              view Report
+                            </a>
                           </div>
                         </Grid>
                       </Grid>
