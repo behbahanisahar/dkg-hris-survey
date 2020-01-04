@@ -119,9 +119,6 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         {this.state.isFetching === false && (
           <>
             <Grid container spacing={3} className="mt-4">
-              <Grid item xs={3} sm={3}></Grid>
-            </Grid>
-            <Grid container spacing={3} className="mt-4">
               <Grid item xs={4} sm={4}>
                 {/* <DashboardSummary viewAs={this.state.selectedReportProps.viewAs} level={this.state.selectedReportProps.level} /> */}
                 <DKPortletSummary background="#F05B71" title=" 360̊  Feedback Aggregate Report">
@@ -149,8 +146,8 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                               <p className="kt-widget__username">{this.state.dashboardInfo.user?.spLatinFullName}</p>
                             </div>
                             {/* <div className="sub-head">{this.state.dashboardInfo.user?.emailAddress}</div> */}
-                            <a className="viewReport" href="#">
-                              view report
+                            <a type="button" className="btn btn-brand btn-pill">
+                              <i className="la la-crosshairs"></i> Report
                             </a>
                           </div>
                         </Grid>
