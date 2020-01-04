@@ -22,8 +22,15 @@
 .viewReport {
   color: #f27581 !important;
   font-weight: 600;
+  cursor: pointer;
 }
 .viewReport:hover {
   color: #f27581 !important;
   text-decoration: underline !important;
+  cursor: pointer;
+}
+.alert-secondary {
+  color: #75757c;
+  background-color: #edecec !important;
+  border-color: #f7f7fb;
 }

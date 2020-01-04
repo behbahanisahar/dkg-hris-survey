@@ -18,6 +18,7 @@ import CompetencyAvgRate from "./competency-avg-rate/competency-avg-rate";
 import "./aggregate-dashboard.css";
 import MainQuestionComparison from "./comparing-questions/main-questions-comparison";
 import DKSVGIcon from "../../core/components/svg-icon/svg-icon";
+import ReportIcon from "../../assets/img/research.png";
 interface IProps {
   match: any;
 }
@@ -118,6 +119,16 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <>
+            <div className="alert alert-secondary">
+              <div className="alert-icon">
+                {" "}
+                <DKSVGIcon iconName="Info-circle" width="28px" height="28px"></DKSVGIcon>
+              </div>
+              <div className="alert-text">
+                This report is confidential and it is only shared with the assessee and his/her managers with the
+                intention of supporting the individual on performing the development programs.
+              </div>
+            </div>
             <Grid container spacing={3} className="mt-4">
               <Grid item xs={4} sm={4}>
                 {/* <DashboardSummary viewAs={this.state.selectedReportProps.viewAs} level={this.state.selectedReportProps.level} /> */}
@@ -146,9 +157,11 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                               <p className="kt-widget__username">{this.state.dashboardInfo.user?.spLatinFullName}</p>
                             </div>
                             {/* <div className="sub-head">{this.state.dashboardInfo.user?.emailAddress}</div> */}
-                            <a type="button" className="btn btn-brand btn-pill">
+                            {/* <a type="button" className="btn btn-brand btn-pill">
                               <i className="la la-crosshairs"></i> Report
-                            </a>
+                            </a> */}
+                            <img src={ReportIcon} />
+                            <a className="viewReport">view Report</a>
                           </div>
                         </Grid>
                       </Grid>

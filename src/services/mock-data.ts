@@ -813,7 +813,7 @@ export default class MockData {
 
   public static ReportSummary: any = {
     itemId: 513,
-    hasAccess: false,
+    hasAccess: true,
   };
   public static ReportIntro: any = {
     users: [
@@ -826,10 +826,10 @@ export default class MockData {
           department: "Digikala Next",
 
           spLatinFullName: "Amir Salehi Talaghani",
-          ItemId: 7513,
-          AvatarUrl: null,
-          AvatarTextPlaceholder: "AS",
-          Attachments: null,
+          itemId: 7513,
+          avatarUrl: null,
+          avatarTextPlaceholder: "AS",
+          attachments: null,
         },
         nominationId: 645,
         category: "Self //TODO",
@@ -843,10 +843,10 @@ export default class MockData {
           department: "Digikala Next",
 
           spLatinFullName: "Amir Salehi Talaghani",
-          ItemId: 7513,
-          AvatarUrl: null,
-          AvatarTextPlaceholder: "AS",
-          Attachments: null,
+          itemId: 7513,
+          avatarUrl: null,
+          avatarTextPlaceholder: "AS",
+          attachments: null,
         },
         nominationId: 645,
         category: "Self //TODO",

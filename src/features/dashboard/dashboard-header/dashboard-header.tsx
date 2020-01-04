@@ -53,16 +53,16 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
             <div className="kt-widget__top">
               <div className="kt-widget__media kt-media avatar mx-3">
                 {this.state.userInfo.user?.avatarUrl === undefined && (
-                  <span className="gradient">{this.state.userInfo.user.avatarTextPlaceholder}</span>
+                  <span className="gradient">{this.state.userInfo.user?.avatarTextPlaceholder}</span>
                 )}
-                {this.state.userInfo.user.avatarUrl !== undefined && (
-                  <img alt={this.state.userInfo.user.title} src={this.state.userInfo.user.avatarUrl}></img>
+                {this.state.userInfo.user?.avatarUrl !== undefined && (
+                  <img alt={this.state.userInfo.user?.title} src={this.state.userInfo.user?.avatarUrl}></img>
                 )}
               </div>
 
               <div className="kt-widget__content mt-3">
                 <div className="kt-widget__head">
-                  <span className="kt-widget__username">{this.state.userInfo.user.spLatinFullName}</span>
+                  <span className="kt-widget__username">{this.state.userInfo.user?.spLatinFullName}</span>
                 </div>
 
                 <div
@@ -72,9 +72,9 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
                       : "kt-widget__subhead text-align-left"
                   }
                 >
-                  <span>{this.state.userInfo.user.cLevel} | </span>
-                  <span>{this.state.userInfo.user.department} | </span>
-                  <span>{this.state.userInfo.user.reportedPost}</span>
+                  <span>{this.state.userInfo.user?.cLevel} | </span>
+                  <span>{this.state.userInfo.user?.department} | </span>
+                  <span>{this.state.userInfo.user?.reportedPost}</span>
                 </div>
               </div>
             </div>

@@ -52,7 +52,13 @@ class RatersTable extends React.Component<IProps, IState> {
   public render() {
     return (
       <DKPortlet title={this.props.lang === "fa" ? "دسته‌بندی ارزیابان" : "Rater Categories"}>
-        <div className={this.props.lang === "fa" ? "text-align-right" : "text-align-left"}>
+        <div
+          className={
+            this.props.lang === "fa "
+              ? "text-align-left alert alert-secondary"
+              : "text-align-right alert alert-secondary"
+          }
+        >
           {" "}
           {this.props.lang === "fa"
             ? " ارزیابان شما که این گزارش بر اساس نظرات آنها تهیه شده شامل این گروه ها می باشند:"
