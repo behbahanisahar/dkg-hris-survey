@@ -80,7 +80,7 @@ class ClevelParticipation extends React.Component<AggregateReportProps, IState> 
         return (
           <tr className={n.isTotal ? "footer" : ""} key={index}>
             <td align="center">{n.title}</td>
-            <td align="center">{n.rate.toFixed(2)} %</td>
+            <td align="center">{n.rate} %</td>
           </tr>
         );
       });

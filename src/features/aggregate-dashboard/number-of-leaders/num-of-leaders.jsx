@@ -52,7 +52,8 @@ class TotalLeaders extends React.Component {
                 point = this.point,
                 value = point.value;
 
-              return value && point.parent ? key + ": " + value : key;
+              // return value && point.parent ? key + ": " + value : key;
+              return value && point.parent ? value : key;
             },
           },
         },

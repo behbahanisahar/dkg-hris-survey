@@ -49,8 +49,8 @@ class CompetencySummaryClass extends React.Component {
   }
   yearSelect() {
     return (
-      <div>
-        <label>انتخاب سال</label>
+      <div style={{ display: "inline-flex", width: "150px" }}>
+        <span className="kt-widget17__desc mt-2 w-100">انتخاب سال</span>
         <Select
           margin="dense"
           placeholder="انتخاب سال"
@@ -161,8 +161,13 @@ class CompetencySummaryClass extends React.Component {
         headerToolbar={this.yearSelect()}
         title={this.props.lang === "fa" ? "شایستگی‌ها" : "Competency Summary"}
       >
-        <div className="dropdown mb-5" style={{ width: "15%" }}></div>
-        <div className={this.props.lang === "fa" ? "text-align-right" : "text-align-left"}>
+        <div
+          className={
+            this.props.lang === "fa"
+              ? "text-align-right alert alert-secondary"
+              : "text-align-left alert alert-secondary"
+          }
+        >
           {this.props.lang === "fa"
             ? `	برای مشاهده جزییات هر شایستگی بر روی نمودار آن کلیک کنید. `
             : "By clicking on each competencies, you will see the details about it."}{" "}

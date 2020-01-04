@@ -102,7 +102,13 @@ export default class DKValueRadarChart extends React.Component<IProps, IState> {
         }
       >
         <div>
-          <div className={this.props.lang === "fa" ? "text-align-right" : "text-align-left"}>
+          <div
+            className={
+              this.props.lang === "fa"
+                ? "text-align-right alert alert-secondary"
+                : "text-align-left alert alert-secondary"
+            }
+          >
             {" "}
             {this.props.lang === "fa"
               ? "	در نمودارهای زیر نتایج خودارزیابی افراد لحاظ نشده است. "
