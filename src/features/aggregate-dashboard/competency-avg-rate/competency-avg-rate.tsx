@@ -3,7 +3,7 @@ import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import CompetencyAvg from "../../../entities/aggregate-report/competency-avg";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
-import { NoContentEnglish } from "../../nominationForm/components/no-content/no-content-english";
+import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import { AggregateReportProps } from "../aggregate-report-props";
 
 interface IState {
@@ -76,7 +76,7 @@ export default class CompetencyAvgRate extends React.Component<AggregateReportPr
       return (
         <tr>
           <td align="center" colSpan={12}>
-            <NoContentEnglish />
+            <NoContent language="en" showPicture={false} />
           </td>
         </tr>
       );

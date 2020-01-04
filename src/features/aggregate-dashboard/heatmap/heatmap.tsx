@@ -5,7 +5,7 @@ import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import DKSVGIcon from "../../../core/components/svg-icon/svg-icon";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
-import { NoContentEnglish } from "../../nominationForm/components/no-content/no-content-english";
+import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import { AggregateReportProps } from "../aggregate-report-props";
 import Heatmap from "./../../../entities/aggregate-report/heatmap";
 import { HeataImprovement } from "./heatmap-improvement";
@@ -128,7 +128,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
       return (
         <tr>
           <td align="center" colSpan={12}>
-            <NoContentEnglish />
+            <NoContent language="en" showPicture={false} />
           </td>
         </tr>
       );
