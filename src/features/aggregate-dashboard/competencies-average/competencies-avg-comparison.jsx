@@ -119,8 +119,9 @@ export default class CompetencyAvgComparison extends React.Component {
             value: this.state.data.averageValue,
             dataLebel: this.state.data.averageValue,
             label: {
+              position: "right",
               enabled: true,
-              content: `DK average: ${this.state.data.averageValue}`,
+              content: `DK Average: ${this.state.data.averageValue}`,
               backgroundColor: "#ED145A",
             },
             borderColor: "#ED145A",
