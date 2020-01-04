@@ -1,4 +1,3 @@
-import { Table, TableBody } from "@material-ui/core";
 import * as React from "react";
 import ComparisonQuestions from "../../../entities/aggregate-report/comparison-questions";
 import QuestionDetail from "../../../entities/aggregate-report/question-detail";
@@ -24,7 +23,7 @@ export default class QuestionComparison extends React.Component<AggregateReportP
   public render() {
     return (
       <>
-        <Table className="table table-questions table-bordered">
+        <table className="table table-questions table-bordered">
           <thead className={this.props.comparingType === "top" ? "top" : "bottom"}>
             <tr>
               <th>Rank</th>
@@ -33,8 +32,8 @@ export default class QuestionComparison extends React.Component<AggregateReportP
               <th>Average Rating</th>
             </tr>
           </thead>
-          <TableBody>{this.onRenderTable()}</TableBody>
-        </Table>
+          <tbody>{this.onRenderTable()}</tbody>
+        </table>
       </>
     );
   }
@@ -49,8 +48,8 @@ export default class QuestionComparison extends React.Component<AggregateReportP
     if (Questions.length === 0) {
       return (
         <tr>
-          <td align="center" colSpan={3} className="emptyRowLog">
-            <NoContent></NoContent>
+          <td align="center" colSpan={4} className="emptyRowLog">
+            <NoContent language="en" showPicture={false}></NoContent>
           </td>
         </tr>
       );
