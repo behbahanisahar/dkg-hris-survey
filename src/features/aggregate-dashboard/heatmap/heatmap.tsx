@@ -5,7 +5,6 @@ import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import DKSVGIcon from "../../../core/components/svg-icon/svg-icon";
 import AggregateServices from "../../../services/aggregate-service/aggregate-dashboard-service";
-import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import { AggregateReportProps } from "../aggregate-report-props";
 import Heatmap from "./../../../entities/aggregate-report/heatmap";
 import { HeataImprovement } from "./heatmap-improvement";
@@ -128,7 +127,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
       return (
         <tr>
           <td align="center" colSpan={12}>
-            <NoContent language="en" showPicture={false} />
+            <NoContentEnglish />
           </td>
         </tr>
       );
@@ -170,10 +169,10 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                 <td align="left">
                   <a target="_blank" className="title-link" href={"#/dashboard/" + n.nominationId}>
                     {n.title}
+                    <span style={{ display: "block", fontSize: "10px", color: "#77787B", fontStyle: "italic" }}>
+                      {n?.department}
+                    </span>
                   </a>
-                </td>
-                <td>
-                  <span>{n?.department}</span>
                 </td>
                 <td style={{ width: "8%" }} className={this.averageClass(n.category1, false)} align="center">
                   {n.category1.toFixed(2)}
