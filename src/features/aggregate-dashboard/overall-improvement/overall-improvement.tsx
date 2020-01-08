@@ -38,17 +38,11 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
   }
 
   public render() {
-    // let color = "";
-    // if (this.props.data.total98Score < this.props.data.total97Score) {
-    //   color = "#F05B71";
-    // } else {
-    //   color = "#4DBA6D";
-    // }
     return (
       <>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <DKPortletSummary background="#77787B" title="Overall Improvement">
+          <DKPortletSummary background="#77787B" title="Year-by-Year Change">
             <div style={{ color: "black", height: "165px" }} className="kt-widget17__items overall">
               <div style={{ textAlign: "center" }} className="kt-widget17__item">
                 <div className="pb-5 mb-3 ">
