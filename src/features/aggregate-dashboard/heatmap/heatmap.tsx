@@ -10,6 +10,7 @@ import Heatmap from "./../../../entities/aggregate-report/heatmap";
 import { HeataImprovement } from "./heatmap-improvement";
 import { HeataMapLegend } from "./heatmap-legend";
 import "./heatmap.css";
+import { NoContent } from "../../nominationForm/components/no-content/no-content";
 
 let allitems: any[] = [];
 
@@ -92,7 +93,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                       />
                     </Tooltip>
                   </th>
-
+                  <th className="heatmap-header  none-thead"></th>
                   <th colSpan={1} className="heatmap-header  none-thead" style={{ backgroundColor: "#fff!important" }}>
                     <input
                       value={this.state.filterName}
@@ -101,7 +102,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                       className="form-control input-search"
                     />
                   </th>
-                  <th className="heatmap-header  none-thead"></th>
+
                   <th className="heatmap-header">Customer Centric</th>
                   <th className="heatmap-header">Builder approach and Result oriented</th>
                   <th className="heatmap-header">Drive for Excellence</th>
@@ -127,7 +128,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
       return (
         <tr>
           <td align="center" colSpan={12}>
-            <NoContentEnglish />
+            <NoContent language="en" showPicture={false} />
           </td>
         </tr>
       );
@@ -166,12 +167,12 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                 <td style={{ width: "1%" }} align="center">
                   {n.rank + 1 ?? 0}
                 </td>
+                <td>
+                  <span style={{ fontSize: "10px", fontStyle: "italic" }}>{n?.department}</span>
+                </td>
                 <td align="left">
                   <a target="_blank" className="title-link" href={"#/dashboard/" + n.nominationId}>
                     {n.title}
-                    <span style={{ display: "block", fontSize: "10px", color: "#77787B", fontStyle: "italic" }}>
-                      {n?.department}
-                    </span>
                   </a>
                 </td>
                 <td style={{ width: "8%" }} className={this.averageClass(n.category1, false)} align="center">
