@@ -1,19 +1,19 @@
 import { TableCell, TableHead, TablePagination, TableRow } from "@material-ui/core";
 import { MDBTable, MDBTableBody } from "mdbreact";
 import React from "react";
+import UkIcon from "../../../assets/img/en.png";
+import IRIcon from "../../../assets/img/fa.png";
 import { DKPortlet } from "../../../core/components/portlet/portlet";
 import { DKSpinner } from "../../../core/components/spinner/spinner";
 import DKSVGIcon from "../../../core/components/svg-icon/svg-icon";
 import IReportUsers from "../../../entities/reports/report-intro-users";
 import ReportServices from "../../../services/report-services";
+import { HeataMapLegend } from "../../aggregate-dashboard/heatmap/heatmap-legend";
 import { NoContent } from "../../nominationForm/components/no-content/no-content";
 import IDashboardIntroProps from "./dashboard-intro-props";
 import IDashboardIntroState from "./dashboard-intro-state";
-import UkIcon from "../../../assets/img/en.png";
-import IRIcon from "../../../assets/img/fa.png";
+import { getDashboardIntroTextEn, getDashboardIntroTextFa } from "./dashboard-intro-text";
 import "./dashboard-intro.css";
-import { getDashboardIntroTextFa, getDashboardIntroTextEn } from "./dashboard-intro-text";
-import { HeataMapLegend } from "../../aggregate-dashboard/heatmap/heatmap-legend";
 
 let allitems: any[] = [];
 export default class DashboardIntroPage extends React.Component<IDashboardIntroProps, IDashboardIntroState> {

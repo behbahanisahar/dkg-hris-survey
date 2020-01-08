@@ -119,14 +119,14 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <>
-            <div className="alert alert-secondary">
-              <div className="alert-icon">
-                {" "}
-                <DKSVGIcon iconName="Info-circle" width="28px" height="28px"></DKSVGIcon>
+            <div className="alert alert-elevate alert-light">
+              <div className="alert-icon p-0 pl-2">
+                <DKSVGIcon iconName="Info-circle" color="red" width="24px" height="24px"></DKSVGIcon>
               </div>
               <div className="alert-text">
-                This report is confidential and it is only shared with the assessee and his/her managers with the
-                intention of supporting the individual on performing the development programs.
+                This report is <b className="dk-brand-text-red">confidential</b> and it is only shared with the assessee
+                and his/her managers with the intention of supporting the individual on performing the development
+                programs.
               </div>
             </div>
             <Grid container spacing={3} className="mt-4">

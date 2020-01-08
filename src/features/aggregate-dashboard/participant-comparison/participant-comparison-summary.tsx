@@ -67,7 +67,7 @@ export default class ParticipantComparisonSummary extends React.Component<IProps
               <div className="kt-widget17__item">
                 <span className="kt-widget17__icon">
                   <DKSVGIcon iconName="User" width="28x" height="28px" color="blue"></DKSVGIcon>
-                  <DKSVGIcon iconName="Chat-checking" width="30px" height="40px" color="blue"></DKSVGIcon>
+                  <DKSVGIcon iconName="Chat-checking" width="16px" height="16px" color="blue"></DKSVGIcon>
                 </span>
                 <span className="kt-widget17__subtitle stat-value">{this.props.data?.totalNominated}</span>
                 <span className="kt-widget17__desc">Total Nominated</span>

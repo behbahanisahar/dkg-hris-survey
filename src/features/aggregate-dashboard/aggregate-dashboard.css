@@ -29,8 +29,3 @@
   text-decoration: underline !important;
   cursor: pointer;
 }
-.alert-secondary {
-  color: #75757c;
-  background-color: #edecec !important;
-  border-color: #f7f7fb;
-}
