@@ -50,7 +50,7 @@ class CompetencySummaryClass extends React.Component {
   yearSelect() {
     return (
       <div style={{ display: "inline-flex", width: "150px" }}>
-        <span className="kt-widget17__desc mt-2 w-100">انتخاب سال</span>
+        <span className="kt-widget17__desc mt-2 w-100">{this.props.lang === "fa" ? "انتخاب سال" : "Year"}</span>
         <Select
           margin="dense"
           placeholder="انتخاب سال"

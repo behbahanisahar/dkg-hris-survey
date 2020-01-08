@@ -156,13 +156,13 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                             <div className="head">
                               <p className="kt-widget__username">{this.state.dashboardInfo.user?.spLatinFullName}</p>
                             </div>
-                            {/* <div className="sub-head">{this.state.dashboardInfo.user?.emailAddress}</div> */}
-                            {/* <a type="button" className="btn btn-brand btn-pill">
-                              <i className="la la-crosshairs"></i> Report
-                            </a> */}
-                            <img src={ReportIcon} />
-                            <a href={"#/dashboard/" + this.state.dashboardInfo.nominationId} className="viewReport">
-                              view Report
+                            <img src={ReportIcon} className="mr-2" width="20" height="20" />
+                            <a
+                              href={"#/dashboard/" + this.state.dashboardInfo.nominationId}
+                              target="_blank"
+                              className="viewReport"
+                            >
+                              My Report
                             </a>
                           </div>
                         </Grid>
