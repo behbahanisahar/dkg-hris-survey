@@ -127,7 +127,7 @@ export default class DashboardIntroPage extends React.Component<IDashboardIntroP
   }
 
   private onRenderRows = () => {
-    console.log(this.state.items);
+  
     if (this.state.items.users?.length === 0) {
       return (
         <TableRow>

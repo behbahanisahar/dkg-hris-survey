@@ -9,6 +9,7 @@ import "chartjs-plugin-datalabels";
 import { defaults } from "react-chartjs-2";
 import { Link } from "react-router-dom";
 import "./competency-category-detail.css";
+import { HeataMapLegend } from "../../aggregate-dashboard/heatmap/heatmap-legend";
 
 interface IProps {
   name?: string;
@@ -145,6 +146,10 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
             </div>
           </div>
         )}
+        <div className="legend">
+          <HeataMapLegend />
+        </div>
+
         <DKPortlet noborder={true} title={this.state.data.categoryTitle}>
           <HorizontalBar height={40} options={options} data={this.state.reportData} />
         </DKPortlet>

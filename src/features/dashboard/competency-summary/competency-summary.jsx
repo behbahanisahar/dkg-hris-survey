@@ -181,6 +181,7 @@ class CompetencySummaryClass extends React.Component {
   }
   afterChartCreated(chart) {
     this.internalChart = chart;
+
     if (this.state.isFetching === false && this.internalChart.series.length >= 2) {
       this.internalChart.series[2].data.forEach(element => {
         element.graphic.translate(6, 0);

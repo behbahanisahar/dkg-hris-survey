@@ -13,7 +13,7 @@ import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 class CompetencyCompetency extends React.Component {
   constructor(props) {
     super(props);
-
+    this.afterChartCreated = this.afterChartCreated.bind(this);
     this.AggregateServices = new AggregateServices();
     this.state = {
       isFetching: true,
@@ -31,14 +31,10 @@ class CompetencyCompetency extends React.Component {
       isFetching: true,
     }));
     await this.AggregateServices.getComparisonCompetency(props).then(response =>
-      this.setState(prevState => {
-        return {
-          ...prevState,
-
-          isFetching: false,
-          reportData: response,
-        };
-      }),
+      this.setState(state => ({
+        isFetching: false,
+        reportData: response,
+      })),
     );
   }
   async componentDidMount() {
@@ -130,10 +126,24 @@ class CompetencyCompetency extends React.Component {
     return (
       <DKPortlet title="Competencies Average Rates Comparison">
         <div className="dropdown mb-5" style={{ width: "15%" }}></div>
-
-        <HighchartsReact callback={this.afterChartCreated} highcharts={Highcharts} options={options} />
+        {this.state.isFetching === true && <DKSpinner></DKSpinner>}
+        {this.state.isFetching === false && (
+          <HighchartsReact callback={this.afterChartCreated} highcharts={Highcharts} options={options} />
+        )}
       </DKPortlet>
     );
+  }
+  afterChartCreated(chart) {
+    this.internalChart = chart;
+
+    if (this.state.isFetching === false && this.internalChart.series.length >= 2) {
+      this.internalChart.series[2].data.forEach(element => {
+        element.graphic.translate(6.5, 0);
+      });
+      this.internalChart.series[3].data.forEach(element => {
+        element.graphic.translate(-5.5, 0);
+      });
+    }
   }
 }
 

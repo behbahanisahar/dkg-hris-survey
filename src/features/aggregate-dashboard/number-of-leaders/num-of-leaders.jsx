@@ -42,7 +42,6 @@ class TotalLeaders extends React.Component {
     this.getData(this.props);
   }
   render() {
-    console.log(this.state.data);
     const options = {
       plotOptions: {
         treemap: {

@@ -26,9 +26,6 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
         NominationHistory: this.props.NominationHistory,
       };
     });
-    console.log("props", this.props.NominationHistory);
-
-    console.log("aa", this.state.NominationHistory);
   }
 
   public render() {
@@ -58,8 +55,6 @@ class HistoryTable extends React.Component<IHistoryTableProps, IHistoryTableStat
   };
 
   private onRenderHistoryRows = (tableName: string) => {
-    console.log(this.state.NominationHistory);
-
     const Subordinates = this.state.NominationHistory.filter(el => el.field === "Subordinate");
     const Peer = this.state.NominationHistory.filter(el => el.field === "Peer");
     const Other = this.state.NominationHistory.filter(el => el.field === "Other");

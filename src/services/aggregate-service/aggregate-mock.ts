@@ -54,35 +54,35 @@ export default class MockAggregateData {
         color: "#19BFD3",
         data: [
           {
-            y: 4.3,
+            y: 0,
             query: "1",
           },
           {
-            y: 4.3,
+            y: 0,
             query: "2",
           },
           {
-            y: 4,
+            y: 0,
             query: "3",
           },
           {
-            y: 3.7,
+            y: 0,
             query: "4",
           },
           {
-            y: 3.8,
+            y: 0,
             query: "5",
           },
           {
-            y: 4.3,
+            y: 0,
             query: "6",
           },
           {
-            y: 3.7,
+            y: 0,
             query: "7",
           },
           {
-            y: 4.3,
+            y: 0,
             query: "8",
           },
         ],
@@ -94,31 +94,70 @@ export default class MockAggregateData {
         color: "#EF394E",
         data: [
           {
-            y: 4.3,
+            y: 0,
             query: "1",
           },
           {
-            y: 4.3,
+            y: 0,
             query: "2",
           },
           {
-            y: 4.4,
+            y: 0,
             query: "3",
           },
           {
-            y: 4.2,
+            y: 0,
             query: "4",
           },
           {
-            y: 4.2,
+            y: 0,
             query: "5",
           },
           {
-            y: 4,
+            y: 0,
             query: "6",
           },
           {
-            y: 4.3,
+            y: 0,
+            query: "7",
+          },
+          {
+            y: 0,
+            query: "8",
+          },
+        ],
+        lineWidth: 3,
+      },
+      {
+        type: "spline",
+        name: "Self 97",
+        data: [
+          {
+            y: 3,
+            query: "1",
+          },
+          {
+            y: 4,
+            query: "2",
+          },
+          {
+            y: 3.5,
+            query: "3",
+          },
+          {
+            y: 5,
+            query: "4",
+          },
+          {
+            y: 4,
+            query: "5",
+          },
+          {
+            y: 4.2,
+            query: "6",
+          },
+          {
+            y: 3.8,
             query: "7",
           },
           {
@@ -126,7 +165,58 @@ export default class MockAggregateData {
             query: "8",
           },
         ],
-        lineWidth: 3,
+        lineWidth: 0,
+        marker: {
+          lineWidth: 2,
+          lineColor: "#56C7DA",
+          fillColor: "#FFF",
+          symbol: "square",
+        },
+      },
+      {
+        type: "spline",
+        name: "Raters 97",
+        data: [
+          {
+            y: 4,
+            query: "1",
+          },
+          {
+            y: 3.5,
+            query: "2",
+          },
+          {
+            y: 5,
+            query: "3",
+          },
+          {
+            y: 4,
+            query: "4",
+          },
+          {
+            y: 4.2,
+            query: "5",
+          },
+          {
+            y: 3.8,
+            query: "6",
+          },
+          {
+            y: 4.1,
+            query: "7",
+          },
+          {
+            y: 3,
+            query: "8",
+          },
+        ],
+        lineWidth: 0,
+        marker: {
+          lineWidth: 2,
+          lineColor: "#F05662",
+          fillColor: "#FFF",
+          symbol: "square",
+        },
       },
     ],
   };

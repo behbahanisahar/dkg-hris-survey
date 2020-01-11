@@ -34,8 +34,10 @@ interface IState {
   departmentTypes: DropDownModel[];
   subDepTypes: DropDownModel[];
   levelTypes: DropDownModel[];
+  intialSubDept: DropDownModel[];
 }
 let subDeps: DropDownModel[] = [];
+
 export default class MainAggregateDashboard extends React.Component<IProps, IState> {
   private AggregateServices: AggregateServices;
   public constructor(props: any) {
@@ -59,6 +61,12 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       departmentTypes: [],
       subDepTypes: [],
       levelTypes: [],
+      intialSubDept: [
+        {
+          key: "All",
+          text: "All",
+        },
+      ],
       departmentText: "All",
       subDepText: "All",
       levelText: "All",
@@ -213,7 +221,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                               }}
                               variant="outlined"
                             >
-                              {this.renderDropDown(this.state.subDepTypes)}
+                              {this.renderDropDown(this.state.intialSubDept)}
                             </Select>
                           </Grid>
                         </Grid>
@@ -353,6 +361,12 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         ]; //this.state.subDepTypes;
       } else {
         subDepTypes = subDepTypes.filter(el => el.parent === event.nativeEvent.target.outerText || el.parent === "All");
+        this.setState(prevstate => {
+          return {
+            ...prevstate,
+            intialSubDept: subDepTypes,
+          };
+        });
       }
       this.setState(prevState => {
         return {
@@ -362,7 +376,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             ...prevState.reportProps,
             [feildName]: event.nativeEvent.target.outerText,
           },
-          subDepTypes,
+          intialSubDept: subDepTypes,
         };
       });
     } else {
@@ -380,7 +394,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   };
 
   private onApplyFilters = () => {
-    console.log(this.state.reportProps);
+   
     const selectedReportProps: AggregateReportProps = {
       level: this.state.reportProps.level,
       subDepLevel: this.state.reportProps.subDepLevel,
@@ -392,7 +406,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       selectedReportProps,
     }));
 
-    console.log(this.state.selectedReportProps);
+   
   };
 
   public renderDropDown = (items: any[]): JSX.Element[] => {

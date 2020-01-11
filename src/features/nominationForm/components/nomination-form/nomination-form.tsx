@@ -108,7 +108,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
   }
 
   public async componentDidMount() {
-    console.log("Form");
+  
 
     document.title = "Nomination Form";
     const itemId = this.props.itemId;
@@ -116,7 +116,7 @@ export default class Nomination extends React.Component<ISurveyProps, ISurveySta
     // const NominationData: NominationData = await this.ListService.getNominationData(Number(itemId));
     const NominationData: INominationData = this.props.NominationData;
     const NominationHistory: IHistory[] = await this.ListService.getNominationHistory(Number(itemId));
-    console.log(NominationHistory);
+  
     let activeStep: number = 0;
     switch (NominationData.status) {
       case "LineManagerApproval": {

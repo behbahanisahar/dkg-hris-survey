@@ -84,6 +84,11 @@ const routes: RouteTypes[] = [
     path: "/DKDashboard/:username",
     component: MainAggregateDashboard,
   },
+  // {
+  //   exact: false,
+  //   path: "/DKDashboard/:anonymous",
+  //   component: MainAggregateDashboard,
+  // },
   {
     exact: true,
     path: "/DKDashboard",

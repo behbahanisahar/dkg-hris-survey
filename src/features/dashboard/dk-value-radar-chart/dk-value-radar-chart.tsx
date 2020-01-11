@@ -86,6 +86,18 @@ export default class ComparingChart extends React.Component<IProps, IState> {
 
   public render() {
     const options = {
+      plugins: {
+        datalabels: {
+          display: false,
+          clamp: false,
+          color: "#404244",
+          font: {
+            size: 12,
+            weight: 500,
+          },
+          align: "start",
+        },
+      },
       scale: {
         reverse: false,
         ticks: {
