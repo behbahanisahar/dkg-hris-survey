@@ -64,12 +64,6 @@ export default class MainSummary extends React.Component<AggregateReportProps, I
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <Grid container spacing={3}>
-            {/* <Grid item xs={4} sm={4}>
-              <TotalParticipant data={this.state.data} viewAs={this.props.viewAs} level={this.props.level} />
-            </Grid> */}
-            {/* <Grid item xs={4} sm={4}>
-              <OverallImprovement data={this.state.data} viewAs={this.props.viewAs} level={this.props.level} />
-            </Grid> */}
             <Grid item xs={8} sm={8}>
               <ParticipantComparisonSummary
                 data={this.state.data}

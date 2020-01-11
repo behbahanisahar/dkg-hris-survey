@@ -1,24 +1,23 @@
 import { Grid, MenuItem, Select } from "@material-ui/core";
 import * as React from "react";
+import ReportIcon from "../../assets/img/research.png";
 import { DKPortletSummary } from "../../core/components/portlet/summary-portlet";
 import { DKSpinner } from "../../core/components/spinner/spinner";
+import DKSVGIcon from "../../core/components/svg-icon/svg-icon";
 import DashboardInfo from "../../entities/aggregate-report/dashboard-info";
 import AggregateServices from "../../services/aggregate-service/aggregate-dashboard-service";
 import DropDownModel from "./../../entities/dropdown";
+import "./aggregate-dashboard.css";
 import { AggregateReportProps } from "./aggregate-report-props";
 import ClevelParticipation from "./clevel-participation/clevel-participation";
+import MainQuestionComparison from "./comparing-questions/main-questions-comparison";
 import CompetencyAvgComparison from "./competencies-average/competencies-avg-comparison";
 import CompetencyCompetency from "./competencies-comparison/competencies-comparison";
+import CompetencyAvgRate from "./competency-avg-rate/competency-avg-rate";
 import HeatMap from "./heatmap/heatmap";
 import MainSummary from "./main-summary/main-summary";
-import RadarCoreValue from "./radar-corevalue/radar-coreValue";
-import "./aggregate-dashboard.css";
 import TotalLeaders from "./number-of-leaders/num-of-leaders";
-import CompetencyAvgRate from "./competency-avg-rate/competency-avg-rate";
-import "./aggregate-dashboard.css";
-import MainQuestionComparison from "./comparing-questions/main-questions-comparison";
-import DKSVGIcon from "../../core/components/svg-icon/svg-icon";
-import ReportIcon from "../../assets/img/research.png";
+import RadarCoreValue from "./radar-corevalue/radar-coreValue";
 interface IProps {
   match: any;
 }
@@ -119,6 +118,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       });
     });
     subDeps = this.state.subDepTypes;
+    this.setFilter("depLevel", this.state.departmentText);
   }
 
   public render() {
@@ -139,7 +139,6 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             </div>
             <Grid container spacing={3} className="mt-4">
               <Grid item xs={4} sm={4}>
-                {/* <DashboardSummary viewAs={this.state.selectedReportProps.viewAs} level={this.state.selectedReportProps.level} /> */}
                 <DKPortletSummary background="#F05B71" title=" 360̊  Feedback Aggregate Report">
                   <div style={{ color: "black" }} className="kt-widget17__items">
                     <div className="kt-widget17__item">
@@ -349,52 +348,10 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   }
 
   private onChangeFields = (feildName: string, event: any): void => {
-    let subDepTypes: DropDownModel[] = subDeps;
-
-    if (feildName == "depLevel") {
-      if (event.nativeEvent.target.outerText === "All") {
-        subDepTypes = [
-          {
-            key: "All",
-            text: "All",
-          },
-        ]; //this.state.subDepTypes;
-      } else {
-        subDepTypes = subDepTypes.filter(el => el.parent === event.nativeEvent.target.outerText || el.parent === "All");
-        this.setState(prevstate => {
-          return {
-            ...prevstate,
-            intialSubDept: subDepTypes,
-          };
-        });
-      }
-      this.setState(prevState => {
-        return {
-          ...prevState,
-
-          reportProps: {
-            ...prevState.reportProps,
-            [feildName]: event.nativeEvent.target.outerText,
-          },
-          intialSubDept: subDepTypes,
-        };
-      });
-    } else {
-      this.setState(prevState => {
-        return {
-          ...prevState,
-
-          reportProps: {
-            ...prevState.reportProps,
-            [feildName]: event.nativeEvent.target.outerText,
-          },
-        };
-      });
-    }
+    this.setFilter(feildName, event.nativeEvent.target.outerText);
   };
 
   private onApplyFilters = () => {
-   
     const selectedReportProps: AggregateReportProps = {
       level: this.state.reportProps.level,
       subDepLevel: this.state.reportProps.subDepLevel,
@@ -405,8 +362,6 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       ...current,
       selectedReportProps,
     }));
-
-   
   };
 
   public renderDropDown = (items: any[]): JSX.Element[] => {
@@ -418,4 +373,40 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
       );
     });
   };
+
+  private setFilter(feildName: string, selectedDepartment: string) {
+    let subDepTypes: DropDownModel[] = subDeps;
+    if (feildName == "depLevel") {
+      if (selectedDepartment === "All") {
+        subDepTypes = [
+          {
+            key: "All",
+            text: "All",
+          },
+        ];
+      } else {
+        subDepTypes = subDepTypes.filter(el => el.parent === selectedDepartment || el.parent === "All");
+      }
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          reportProps: {
+            ...prevState.reportProps,
+            [feildName]: selectedDepartment,
+          },
+          intialSubDept: subDepTypes,
+        };
+      });
+    } else {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          reportProps: {
+            ...prevState.reportProps,
+            [feildName]: selectedDepartment,
+          },
+        };
+      });
+    }
+  }
 }

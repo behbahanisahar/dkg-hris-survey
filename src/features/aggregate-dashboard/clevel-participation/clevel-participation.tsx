@@ -71,7 +71,7 @@ class ClevelParticipation extends React.Component<AggregateReportProps, IState> 
       return (
         <tr>
           <td align="center" colSpan={3} className="emptyRowLog">
-            <NoContent></NoContent>
+            <NoContent language="en" showPicture={false}></NoContent>
           </td>
         </tr>
       );

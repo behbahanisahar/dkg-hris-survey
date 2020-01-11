@@ -110,6 +110,7 @@ export default class CompetencyAvgComparison extends React.Component {
         display: false,
       },
       annotation: {
+        // baraye neshun dadan avg line dar bar chart
         annotations: [
           {
             type: "line",

@@ -53,13 +53,8 @@ export default class CompetencyAvgRate extends React.Component<AggregateReportPr
           <div>
             <table className="table table-striped table-hover table-sm table-bordered">
               <thead className="dk-brand-grey">
-                {/* <tr>
-                  <th className="none-thead" style={{ backgroundColor: "#fff!important" }}></th>
-                  <th colSpan={2}>Average Rating</th>
-                </tr> */}
                 <tr>
-                  {/* <th className="none-thead" style={{ backgroundColor: "#fff!important" }}></th> */}
-                  <th>Title</th>
+                  <th>Competency</th>
                   <th>1397</th>
                   <th>1398</th>
                 </tr>
@@ -83,10 +78,10 @@ export default class CompetencyAvgRate extends React.Component<AggregateReportPr
     } else {
       return this.state.data?.map((n: CompetencyAvg, index: any) => {
         return (
-          <tr className={n.isTotal ? "footer" : ""} key={index}>
-            <td align="left">{n.title}</td>
-            <td align="center">{n.average97.toFixed(2)}</td>
-            <td align="center">{n.average98.toFixed(2)}</td>
+          <tr className={n?.isTotal ? "footer" : ""} key={index}>
+            <td align="left">{n?.title}</td>
+            <td align="center">{n?.average97.toFixed(2)}</td>
+            <td align="center">{n?.average98.toFixed(2)}</td>
           </tr>
         );
       });

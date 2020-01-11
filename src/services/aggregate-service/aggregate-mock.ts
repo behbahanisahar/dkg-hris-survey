@@ -4947,17 +4947,17 @@ export default class MockAggregateData {
     {
       id: "COO",
       name: "COO",
-      color: "#02bcd5",
+      color: "#BFBFBF",
     },
     {
       name: "COO",
       parent: "COO",
-      value: 112,
+      value: 110,
     },
     {
       id: "CFO",
       name: "CFO",
-      color: "#8bc24b",
+      color: "#616161",
     },
     {
       name: "CFO",
@@ -4967,27 +4967,27 @@ export default class MockAggregateData {
     {
       id: "CMO",
       name: "CMO",
-      color: "#ffc208",
+      color: "#222c31",
     },
     {
       name: "CMO",
       parent: "CMO",
-      value: 15,
+      value: 16,
     },
     {
       id: "CCO",
       name: "CCO",
-      color: "#f34336",
+      color: "#292A2B",
     },
     {
       name: "CCO",
       parent: "CCO",
-      value: 40,
+      value: 39,
     },
     {
       id: "CEO",
       name: "CEO",
-      color: "#9c26b0",
+      color: "#D9D9D9",
     },
     {
       name: "CEO",
@@ -4997,17 +4997,17 @@ export default class MockAggregateData {
     {
       id: "CTO",
       name: "CTO",
-      color: "#e75112",
+      color: "#7f8798",
     },
     {
       name: "CTO",
       parent: "CTO",
-      value: 32,
+      value: 33,
     },
     {
       id: "Fidibo",
       name: "Fidibo",
-      color: "#1c456f",
+      color: "#212121",
     },
     {
       name: "Fidibo",
@@ -5017,17 +5017,17 @@ export default class MockAggregateData {
     {
       id: "CHRO",
       name: "CHRO",
-      color: "#0078d7",
+      color: "#607D8B",
     },
     {
       name: "CHRO",
       parent: "CHRO",
-      value: 26,
+      value: 27,
     },
     {
       id: "Digipay",
       name: "Digipay",
-      color: "#339933",
+      color: "#f6f8f9",
     },
     {
       name: "Digipay",
