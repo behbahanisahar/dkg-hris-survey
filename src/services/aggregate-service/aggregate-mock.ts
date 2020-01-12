@@ -4848,77 +4848,77 @@ export default class MockAggregateData {
 
   public static MockDashboardInfo: DashboardInfo = {
     departments: [
-      {
-        key: "All",
-        text: "All",
-      },
-      {
-        key: "COO",
-        text: "COO",
-      },
-      {
-        key: "CFO",
-        text: "CFO",
-      },
-      {
-        key: "CMO",
-        text: "CMO",
-      },
-      {
-        key: "CCO",
-        text: "CCO",
-      },
-      {
-        key: "CEO",
-        text: "CEO",
-      },
-      {
-        key: "CTO",
-        text: "CTO",
-      },
-      {
-        key: "Fidibo",
-        text: "Fidibo",
-      },
-      {
-        key: "CHRO",
-        text: "CHRO",
-      },
+      // {
+      //   key: "All",
+      //   text: "All",
+      // },
+      // {
+      //   key: "COO",
+      //   text: "COO",
+      // },
+      // {
+      //   key: "CFO",
+      //   text: "CFO",
+      // },
+      // {
+      //   key: "CMO",
+      //   text: "CMO",
+      // },
+      // {
+      //   key: "CCO",
+      //   text: "CCO",
+      // },
+      // {
+      //   key: "CEO",
+      //   text: "CEO",
+      // },
+      // {
+      //   key: "CTO",
+      //   text: "CTO",
+      // },
+      // {
+      //   key: "Fidibo",
+      //   text: "Fidibo",
+      // },
+      // {
+      //   key: "CHRO",
+      //   text: "CHRO",
+      // },
       {
         key: "Digipay",
         text: "Digipay",
       },
     ],
     subDepartments: [
-      {
-        key: "All",
-        text: "All",
-        parent: "All",
-      },
-      {
-        key: "CMO",
-        text: "CMO",
-        parent: "CMO",
-      },
-      {
-        key: "Digipay",
-        text: "Digipay",
-        parent: "Digipay",
-      },
+      // {
+      //   key: "All",
+      //   text: "All",
+      //   parent: "All",
+      // },
+      // {
+      //   key: "CMO",
+      //   text: "CMO",
+      //   parent: "CMO",
+      // },
+      // {
+      //   key: "Digipay",
+      //   text: "Digipay",
+      //   parent: "Digipay",
+      // },
     ],
     levels: [
-      {
-        key: "All",
-        text: "All",
-      },
-      {
-        key: "SM",
-        text: "SM",
-      },
-      {
-        key: "M",
-        text: "M",
-      },
+      // {
+      //   key: "All",
+      //   text: "All",
+      // },
+      // {
+      //   key: "SM",
+      //   text: "SM",
+      // },
+      // {
+      //   key: "M",
+      //   text: "M",
+      // },
     ],
     user: {
       title: "محسن مکرمی",
@@ -4947,7 +4947,7 @@ export default class MockAggregateData {
     {
       id: "COO",
       name: "COO",
-      color: "#BFBFBF",
+      color: "#EF394E",
     },
     {
       name: "COO",
@@ -4957,7 +4957,7 @@ export default class MockAggregateData {
     {
       id: "CFO",
       name: "CFO",
-      color: "#616161",
+      color: "#56C7DA",
     },
     {
       name: "CFO",
@@ -4967,7 +4967,7 @@ export default class MockAggregateData {
     {
       id: "CMO",
       name: "CMO",
-      color: "#222c31",
+      color: "#F37A8A",
     },
     {
       name: "CMO",
@@ -4977,7 +4977,7 @@ export default class MockAggregateData {
     {
       id: "CCO",
       name: "CCO",
-      color: "#292A2B",
+      color: "#19BFD3",
     },
     {
       name: "CCO",
@@ -4987,7 +4987,7 @@ export default class MockAggregateData {
     {
       id: "CEO",
       name: "CEO",
-      color: "#D9D9D9",
+      color: "#87D3E1",
     },
     {
       name: "CEO",
@@ -4997,7 +4997,7 @@ export default class MockAggregateData {
     {
       id: "CTO",
       name: "CTO",
-      color: "#7f8798",
+      color: "#636466",
     },
     {
       name: "CTO",
@@ -5007,7 +5007,7 @@ export default class MockAggregateData {
     {
       id: "Fidibo",
       name: "Fidibo",
-      color: "#212121",
+      color: "#DEDFE0",
     },
     {
       name: "Fidibo",
@@ -5017,7 +5017,7 @@ export default class MockAggregateData {
     {
       id: "CHRO",
       name: "CHRO",
-      color: "#607D8B",
+      color: "#F05662",
     },
     {
       name: "CHRO",
@@ -5027,7 +5027,7 @@ export default class MockAggregateData {
     {
       id: "Digipay",
       name: "Digipay",
-      color: "#f6f8f9",
+      color: "#77787B",
     },
     {
       name: "Digipay",

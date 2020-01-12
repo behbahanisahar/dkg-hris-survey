@@ -89,6 +89,12 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   public async getInfoData() {
     let username = this.props.match != undefined ? this.props.match.params.username : "";
     if (username == null) username = "";
+    const AllData: DropDownModel[] = [
+      {
+        key: "All",
+        text: "All",
+      },
+    ];
 
     await this.AggregateServices.getInfo(username).then(response => {
       this.setState(prevState => {
@@ -110,7 +116,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
           },
           departmentTypes: response.departments,
           subDepTypes: response.subDepartments,
-          levelTypes: response.levels,
+          levelTypes: this.state.levelTypes.length === 0 ? AllData : response.levels,
           departmentText: response.departments[0]?.text,
           subDepText: response.subDepartments[0]?.text,
           levelText: response.levels[0]?.text,
@@ -220,7 +226,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                               }}
                               variant="outlined"
                             >
-                              {this.renderDropDown(this.state.intialSubDept)}
+                              {this.renderDropDown(this.state.subDepTypes)}
                             </Select>
                           </Grid>
                         </Grid>
@@ -377,7 +383,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   private setFilter(feildName: string, selectedDepartment: string) {
     let subDepTypes: DropDownModel[] = subDeps;
     if (feildName == "depLevel") {
-      if (selectedDepartment === "All") {
+      if (selectedDepartment === "All" || this.state.subDepTypes.length === 0) {
         subDepTypes = [
           {
             key: "All",
@@ -392,9 +398,10 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
           ...prevState,
           reportProps: {
             ...prevState.reportProps,
+            subDepLevel: "All", //subDepTypes[0]?.text,
             [feildName]: selectedDepartment,
           },
-          intialSubDept: subDepTypes,
+          subDepTypes,
         };
       });
     } else {
