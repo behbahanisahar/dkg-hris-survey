@@ -89,12 +89,6 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   public async getInfoData() {
     let username = this.props.match != undefined ? this.props.match.params.username : "";
     if (username == null) username = "";
-    const AllData: DropDownModel[] = [
-      {
-        key: "All",
-        text: "All",
-      },
-    ];
 
     await this.AggregateServices.getInfo(username).then(response => {
       this.setState(prevState => {
@@ -103,9 +97,9 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
           isFetching: false,
           dashboardInfo: response,
           reportProps: {
-            level: response.levels[0]?.text,
+            level: response.levels.length === 0 ? "All" : response.levels[0]?.text,
             depLevel: response.departments[0]?.text,
-            subDepLevel: response.subDepartments[0]?.text,
+            subDepLevel: response.subDepartments.length === 0 ? "All" : response.subDepartments[0]?.text,
             viewAs: username,
           },
           selectedReportProps: {
@@ -116,7 +110,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
           },
           departmentTypes: response.departments,
           subDepTypes: response.subDepartments,
-          levelTypes: this.state.levelTypes.length === 0 ? AllData : response.levels,
+          levelTypes: response.levels,
           departmentText: response.departments[0]?.text,
           subDepText: response.subDepartments[0]?.text,
           levelText: response.levels[0]?.text,
