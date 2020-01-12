@@ -48,11 +48,11 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
                 <div className="pb-5 mb-3 ">
                   <div className="pull-left mr-3">
                     <span className="year">1397</span>
-                    <span className="kt-widget17__subtitle stat-value">{this.props.data.total97Score.toFixed(2)}</span>
+                    <span className="kt-widget17__subtitle stat-value">{this.props.data.total97Score?.toFixed(2)}</span>
                   </div>
                   <div className="pull-right ml-3">
                     <span className="year">1398</span>
-                    <span className="kt-widget17__subtitle stat-value">{this.props.data.total98Score.toFixed(2)}</span>
+                    <span className="kt-widget17__subtitle stat-value">{this.props.data.total98Score?.toFixed(2)}</span>
                   </div>
                 </div>
                 {this.props.data.total98Score > this.props.data.total97Score && (
@@ -65,7 +65,7 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
             </div>
             <div style={{ color: "black", textAlign: "center" }} className="kt-widget17__items">
               <div className="kt-widget17__item" style={{ height: "147px" }}>
-                <span className="kt-widget17__subtitle stat-value" style={{ fontSize: "2.8rem" }}>
+                <span className="kt-widget17__subtitle stat-value pt-3" style={{ fontSize: "2.8rem" }}>
                   {this.props.data.overallImprovement}%
                 </span>
                 <span className="kt-widget17__desc">Overall Improvement</span>{" "}
