@@ -89,7 +89,12 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   public async getInfoData() {
     let username = this.props.match != undefined ? this.props.match.params.username : "";
     if (username == null) username = "";
-
+    const AllLevel = [
+      {
+        key: "All",
+        text: "All",
+      },
+    ];
     await this.AggregateServices.getInfo(username).then(response => {
       this.setState(prevState => {
         return {
@@ -103,14 +108,14 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
             viewAs: username,
           },
           selectedReportProps: {
-            level: response.levels[0]?.text,
+            level: response.levels.length === 0 ? "All" : response.levels[0]?.text,
             depLevel: response.departments[0]?.text,
-            subDepLevel: response.subDepartments[0]?.text,
+            subDepLevel: response.subDepartments.length === 0 ? "All" : response.subDepartments[0]?.text,
             viewAs: username,
           },
           departmentTypes: response.departments,
           subDepTypes: response.subDepartments,
-          levelTypes: response.levels,
+          levelTypes: response.levels.length === 0 ? AllLevel : response.levels,
           departmentText: response.departments[0]?.text,
           subDepText: response.subDepartments[0]?.text,
           levelText: response.levels[0]?.text,
@@ -392,7 +397,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
           ...prevState,
           reportProps: {
             ...prevState.reportProps,
-            subDepLevel: "All", //subDepTypes[0]?.text,
+            // subDepLevel: "All", //subDepTypes[0]?.text,
             [feildName]: selectedDepartment,
           },
           subDepTypes,

@@ -55,7 +55,7 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
                     <span className="kt-widget17__subtitle stat-value">{this.props.data.total98Score?.toFixed(2)}</span>
                   </div>
                 </div>
-                {this.props.data.total98Score > this.props.data.total97Score && (
+                {this.props.data.total98Score >= this.props.data.total97Score && (
                   <img style={{ width: "30%" }} src={upward} />
                 )}
                 {this.props.data.total98Score < this.props.data.total97Score && (

@@ -4848,77 +4848,35 @@ export default class MockAggregateData {
 
   public static MockDashboardInfo: DashboardInfo = {
     departments: [
-      // {
-      //   key: "All",
-      //   text: "All",
-      // },
-      // {
-      //   key: "COO",
-      //   text: "COO",
-      // },
-      // {
-      //   key: "CFO",
-      //   text: "CFO",
-      // },
-      // {
-      //   key: "CMO",
-      //   text: "CMO",
-      // },
-      // {
-      //   key: "CCO",
-      //   text: "CCO",
-      // },
-      // {
-      //   key: "CEO",
-      //   text: "CEO",
-      // },
-      // {
-      //   key: "CTO",
-      //   text: "CTO",
-      // },
-      // {
-      //   key: "Fidibo",
-      //   text: "Fidibo",
-      // },
-      // {
-      //   key: "CHRO",
-      //   text: "CHRO",
-      // },
       {
-        key: "Digipay",
-        text: "Digipay",
+        key: "CCO",
+        text: "CCO",
       },
     ],
     subDepartments: [
-      // {
-      //   key: "All",
-      //   text: "All",
-      //   parent: "All",
-      // },
-      // {
-      //   key: "CMO",
-      //   text: "CMO",
-      //   parent: "CMO",
-      // },
-      // {
-      //   key: "Digipay",
-      //   text: "Digipay",
-      //   parent: "Digipay",
-      // },
+      {
+        key: "Commercial",
+        text: "Commercial",
+        parent: "CCO",
+      },
     ],
     levels: [
-      // {
-      //   key: "All",
-      //   text: "All",
-      // },
-      // {
-      //   key: "SM",
-      //   text: "SM",
-      // },
-      // {
-      //   key: "M",
-      //   text: "M",
-      // },
+      {
+        key: "All",
+        text: "All",
+      },
+      {
+        key: "Managerial Level",
+        text: "Managerial Level",
+      },
+      {
+        key: "Other",
+        text: "Other",
+      },
+      {
+        key: "C-Level",
+        text: "C-Level",
+      },
     ],
     user: {
       title: "محسن مکرمی",
