@@ -80,8 +80,8 @@ export default class CompetencyAvgRate extends React.Component<AggregateReportPr
         return (
           <tr className={n?.isTotal ? "footer" : ""} key={index}>
             <td align="left">{n?.title}</td>
-            <td align="center">{n?.average97.toFixed(2)}</td>
-            <td align="center">{n?.average98.toFixed(2)}</td>
+            <td align="center">{n?.average97?.toFixed(2)}</td>
+            <td align="center">{n?.average98?.toFixed(2)}</td>
           </tr>
         );
       });

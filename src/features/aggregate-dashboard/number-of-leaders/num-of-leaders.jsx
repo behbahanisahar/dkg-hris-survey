@@ -105,7 +105,7 @@ class TotalLeaders extends React.Component {
     };
 
     return (
-      <DKPortlet title="Number of Leaders">
+      <DKPortlet title="# Assessed Leaders">
         <HighchartsReact style={{ height: "600px" }} highcharts={Highcharts} options={options} />
       </DKPortlet>
     );

@@ -42,7 +42,7 @@ export default class OverallImprovement extends React.Component<IProps & Aggrega
       <>
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
-          <DKPortletSummary background="#77787B" title="Year-by-Year Change">
+          <DKPortletSummary background="#77787B" title="YoY Comparison">
             <div style={{ color: "black", height: "165px" }} className="kt-widget17__items overall">
               <div style={{ textAlign: "center" }} className="kt-widget17__item">
                 <div className="pb-5 mb-3 ">

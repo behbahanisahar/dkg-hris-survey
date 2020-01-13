@@ -74,18 +74,6 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
               <thead style={{ position: "sticky" }} className=" dk-brand-grey">
                 <tr>
                   <th className="heatmap-header none-thead" style={{ backgroundColor: "#fff!important" }}>
-                    {/* {this.state.data?.length >= 40 && (
-                      <button
-                        className="btn btn-sm btn-bold btn-brand-hover"
-                        onClick={(e: any) => {
-                          this.onShowItem();
-                          e.preventDefault();
-                          return false;
-                        }}
-                      >
-                        {this.state.buttonText}
-                      </button>
-                    )} */}
                     <Tooltip title="Sort By Rank" aria-label="sort" arrow>
                       <Sort
                         style={{ color: "black", cursor: "pointer" }}
@@ -103,17 +91,17 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                     />
                   </th>
 
-                  <th className="heatmap-header">Customer Centric</th>
-                  <th className="heatmap-header">Builder approach and Result oriented</th>
-                  <th className="heatmap-header">Drive for Excellence</th>
                   <th className="heatmap-header">Teamwork</th>
-                  <th className="heatmap-header">Decision Making</th>
-                  <th className="heatmap-header">Managing People</th>
-                  <th className="heatmap-header">Developing Vision & Strategy</th>
+                  <th className="heatmap-header">Customer Centric</th>
+                  <th className="heatmap-header">Builder approach & Result oriented</th>
+                  <th className="heatmap-header">Drive for Excellence</th>
+                  <th className="heatmap-header">Managing & Developing People</th>
+                  <th className="heatmap-header">Inspire a Shared Vision</th>
                   <th className="heatmap-header">Business Acumen</th>
+                  <th className="heatmap-header">Decision Making</th>
                   <th className="heatmap-header">Average Rate</th>
                   <th className="heatmap-header">#Assessors</th>
-                  <th className="heatmap-header"></th>
+                  <th className="heatmap-header">YoY Comparison</th>
                 </tr>
               </thead>
               <tbody>{this.onRenderTable()}</tbody>
