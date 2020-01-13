@@ -152,13 +152,13 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                 </tr>
               )}
               <tr key={index} className={this.ChangeTrClass(index)}>
-                <td style={{ width: "1%" }} align="center">
+                <td style={{ width: "2%" }} align="center">
                   {n.rank + 1 ?? 0}
                 </td>
-                <td>
+                <td style={{ width: "2%" }}>
                   <span style={{ fontSize: "10px", fontStyle: "italic" }}>{n?.department}</span>
                 </td>
-                <td align="left">
+                <td style={{ width: "12%" }} align="left">
                   <a target="_blank" className="title-link" href={"#/dashboard/" + n.nominationId}>
                     {n.title}
                   </a>
