@@ -79,8 +79,8 @@ class RatersTable extends React.Component<IProps, IState> {
               ) : (
                 <tr>
                   <th>Rater Group</th>
-                  <th># NominatedRater </th>
-                  <th># Completed</th>
+                  <th>#Assessment Forms</th>
+                  <th>#Completed Forms</th>
                 </tr>
               )}
             </thead>
