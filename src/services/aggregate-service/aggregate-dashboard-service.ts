@@ -18,25 +18,41 @@ class AggregateServices extends ServiceBase {
   }
   public async getInfo(username: string): Promise<DashboardInfo> {
     if (process.env.NODE_ENV === "production") {
-      let items: DashboardInfo;
-      items = await this.get("survey/aggregate/info?viewAs=" + username)
+      const query = username == null || username === "" ? "" : "?viewAs=" + username;
+
+      let data: DashboardInfo;
+      data = await this.get("survey/aggregate/info" + query)
         .then(response => {
-          return response.data;
+          return {
+            departments: response.data.departments,
+            subDepartments: response.data.subDepartments,
+            levels: response.data.levels,
+            user: response.data.user,
+            nominationId: response.data.nominationId,
+            statusCode: response.data.statusCode,
+          } as DashboardInfo;
         })
         .catch(error => {
           return {
+            departments: [],
+            subDepartments: [],
+            levels: [],
+            user: {},
+            nominationId: 0,
             statusCode: error.response.status,
           };
         });
-      return Promise.resolve(items);
+
+      return Promise.resolve(data);
     }
 
     return Promise.resolve(MockAggregateData.MockDashboardInfo);
   }
   public async getStatistics(props: AggregateReportProps): Promise<statistics> {
     if (process.env.NODE_ENV === "production") {
+      const query = props.viewAs == null || props.viewAs === "" ? "" : "?viewAs=" + props.viewAs;
       const items: any = await this.get(
-        `survey/aggregate/statistics/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+        `survey/aggregate/statistics/${props.depLevel}/${props.subDepLevel}/${props.level}${query}`,
       );
       return Promise.resolve(items.data);
     }
@@ -46,8 +62,9 @@ class AggregateServices extends ServiceBase {
 
   public async getParticipationRate(props: AggregateReportProps): Promise<ParticipationRate[]> {
     if (process.env.NODE_ENV === "production") {
+      const query = props.viewAs == null || props.viewAs === "" ? "" : "?viewAs=" + props.viewAs;
       const items: any = await this.get(
-        `survey/aggregate/participationrate/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+        `survey/aggregate/participationrate/${props.depLevel}/${props.subDepLevel}/${props.level}${query}`,
       );
       return Promise.resolve(items.data);
     }
@@ -57,8 +74,10 @@ class AggregateServices extends ServiceBase {
 
   public async getComparisonCompetency(props: AggregateReportProps): Promise<ComparisonCompetency> {
     if (process.env.NODE_ENV === "production") {
+      const query = props.viewAs == null || props.viewAs === "" ? "" : "?viewAs=" + props.viewAs;
+
       const items: any = await this.get(
-        `survey/aggregate/competencies/chart/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+        `survey/aggregate/competencies/chart/${props.depLevel}/${props.subDepLevel}/${props.level}${query}`,
       );
       return Promise.resolve(items.data);
     }
@@ -68,8 +87,10 @@ class AggregateServices extends ServiceBase {
 
   public async getComparisonQuestions(props: AggregateReportProps): Promise<ComparisonQuestions> {
     if (process.env.NODE_ENV === "production") {
+      const query = props.viewAs == null || props.viewAs === "" ? "" : "?viewAs=" + props.viewAs;
+
       const items: any = await this.get(
-        `survey/aggregate/questions/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+        `survey/aggregate/questions/${props.depLevel}/${props.subDepLevel}/${props.level}${query}`,
       );
       return Promise.resolve(items.data);
     }
@@ -78,8 +99,10 @@ class AggregateServices extends ServiceBase {
   }
   public async getHeatmap(props: AggregateReportProps): Promise<Heatmap[]> {
     if (process.env.NODE_ENV === "production") {
+      const query = props.viewAs == null || props.viewAs === "" ? "" : "?viewAs=" + props.viewAs;
+
       const items: any = await this.get(
-        `survey/aggregate/heatmap/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+        `survey/aggregate/heatmap/${props.depLevel}/${props.subDepLevel}/${props.level}${query}`,
       );
       return Promise.resolve(items.data);
     }
@@ -88,8 +111,10 @@ class AggregateServices extends ServiceBase {
   }
   public async getRadarCoreValues(props: AggregateReportProps): Promise<RadarCoreValues> {
     if (process.env.NODE_ENV === "production") {
+      const query = props.viewAs == null || props.viewAs === "" ? "" : "?viewAs=" + props.viewAs;
+
       const items: any = await this.get(
-        `survey/aggregate/values/chart/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+        `survey/aggregate/values/chart/${props.depLevel}/${props.subDepLevel}/${props.level}${query}`,
       );
       return Promise.resolve(items.data);
     }
@@ -98,8 +123,10 @@ class AggregateServices extends ServiceBase {
   }
   public async getAverageCompetency(props: AggregateReportProps): Promise<AverageCompetency> {
     if (process.env.NODE_ENV === "production") {
+      const query = props.viewAs == null || props.viewAs === "" ? "" : "?viewAs=" + props.viewAs;
+
       const items: any = await this.get(
-        `survey/aggregate/overall/comparison/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+        `survey/aggregate/overall/comparison/${props.depLevel}/${props.subDepLevel}/${props.level}${query}`,
       );
       return Promise.resolve(items.data);
     }
@@ -109,8 +136,10 @@ class AggregateServices extends ServiceBase {
 
   public async getNumberOfLeaders(props: AggregateReportProps): Promise<NumberOfLeaders[]> {
     if (process.env.NODE_ENV === "production") {
+      const query = props.viewAs == null || props.viewAs === "" ? "" : "?viewAs=" + props.viewAs;
+
       const items: any = await this.get(
-        `survey/aggregate/numberOfLeaders/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+        `survey/aggregate/numberOfLeaders/${props.depLevel}/${props.subDepLevel}/${props.level}${query}`,
       );
       return Promise.resolve(items.data);
     }
@@ -120,8 +149,10 @@ class AggregateServices extends ServiceBase {
 
   public async getCompetencyAverageRate(props: AggregateReportProps): Promise<CompetencyAvg[]> {
     if (process.env.NODE_ENV === "production") {
+      const query = props.viewAs == null || props.viewAs === "" ? "" : "?viewAs=" + props.viewAs;
+
       const items: any = await this.get(
-        `survey/aggregate/competencies/table/${props.depLevel}/${props.subDepLevel}/${props.level}?viewAs=${props.viewAs}`,
+        `survey/aggregate/competencies/table/${props.depLevel}/${props.subDepLevel}/${props.level}${query}`,
       );
       return Promise.resolve(items.data);
     }
