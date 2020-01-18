@@ -59,7 +59,6 @@ class RatersTable extends React.Component<IProps, IState> {
               : "text-align-right alert alert-secondary"
           }
         >
-          {" "}
           {this.props.lang === "fa"
             ? " ارزیابان شما که این گزارش بر اساس نظرات آنها تهیه شده شامل این گروه ها می باشند:"
             : "Your feedback report is based on evaluations gathered from the following rater categories:"}{" "}
