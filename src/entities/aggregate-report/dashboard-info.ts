@@ -10,4 +10,5 @@ export default interface DashboardInfo {
   levels: DropDownModel[];
   user?: UserInfoItem;
   nominationId?: number;
+  statusCode?: number;
 }

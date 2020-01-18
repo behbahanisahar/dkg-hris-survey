@@ -18,8 +18,17 @@ class AggregateServices extends ServiceBase {
   }
   public async getInfo(username: string): Promise<DashboardInfo> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("survey/aggregate/info?viewAs=" + username);
-      return Promise.resolve(items.data);
+      let items: DashboardInfo;
+      items = await this.get("survey/aggregate/info?viewAs=" + username)
+        .then(response => {
+          return response.data;
+        })
+        .catch(error => {
+          return {
+            statusCode: error.response.status,
+          };
+        });
+      return Promise.resolve(items);
     }
 
     return Promise.resolve(MockAggregateData.MockDashboardInfo);
