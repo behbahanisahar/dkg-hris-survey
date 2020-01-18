@@ -159,7 +159,7 @@ export default class HeatMap extends React.Component<AggregateReportProps, IStat
                   <span style={{ fontSize: "10px", fontStyle: "italic" }}>{n?.department}</span>
                 </td>
                 <td style={{ width: "12%" }} align="left">
-                  <a target="_blank" className="title-link" href={"#/dashboard/" + n.nominationId}>
+                  <a target="_blank" title="view report" className="title-link" href={"#/dashboard/" + n.nominationId}>
                     {n.title}
                   </a>
                 </td>

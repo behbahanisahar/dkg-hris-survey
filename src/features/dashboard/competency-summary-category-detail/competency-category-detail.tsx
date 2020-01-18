@@ -205,13 +205,13 @@ class CompetencyCategoryComponent extends React.Component<IProps, IState> {
     };
     return this.state.data.questionsData.map((n: QuestionData, index: any) => {
       let avgClassName: string = "";
-      if (n.average <= 2) {
+      if (n.average > 1 && n.average <= 2) {
         avgClassName = "average1";
       } else if (n.average > 2 && n.average <= 3) {
         avgClassName = "average2";
       } else if (n.average > 3 && n.average <= 4) {
         avgClassName = "average3";
-      } else if (n.average > 4 && n.average <= 4.5) {
+      } else if (n.average > 4 && n.average <= 4.54) {
         avgClassName = "average4";
       } else if (n.average > 4.5 && n.average <= 5) {
         avgClassName = "average5";
