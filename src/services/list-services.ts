@@ -53,7 +53,6 @@ class ListServices extends ServiceBase {
   public async getNominationData(itemId: number): Promise<NominationData> {
     if (process.env.NODE_ENV === "production") {
       let data: NominationData;
-
       data = await this.get("survey/nomination?itemId=" + itemId + "")
         .then(response => {
           return {

@@ -134,10 +134,10 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <>
-            {this.state.dashboardInfo.statusCode !== 200 && (
-              <Authentication status={this.state.dashboardInfo.statusCode || 401} />
+            {this.state.dashboardInfo.statusCode === 403 && (
+              <Authentication status={this.state.dashboardInfo.statusCode || 403} />
             )}
-            {this.state.dashboardInfo.statusCode === 200 && (
+            {this.state.dashboardInfo.statusCode !== 403 && (
               <>
                 <div className="alert alert-elevate alert-light">
                   <div className="alert-icon p-0 pl-2">
