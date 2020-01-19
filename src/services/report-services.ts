@@ -95,9 +95,11 @@ class ReportServices extends ServiceBase {
     return Promise.resolve(MockData.ReportSummary);
   }
   /*************************************************************** */
-  public async getReportAuthentication(itemId: number): Promise<any> {
+  public async getReportAuthentication(itemId?: number): Promise<any> {
     if (process.env.NODE_ENV === "production") {
-      const items: any = await this.get("survey/report?itemid=" + itemId);
+      let query = "";
+      if (itemId != null && itemId != 0) query = "?itemid=" + itemId;
+      const items: any = await this.get("survey/report" + query);
       return Promise.resolve(items.data);
     }
 

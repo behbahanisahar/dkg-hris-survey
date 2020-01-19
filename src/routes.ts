@@ -1,11 +1,11 @@
-import CompetencyCategoryComponent from "./features/dashboard/competency-summary-category-detail/competency-category-detail";
+import MainAggregateDashboard from "./features/dashboard/aggregate-dashboard/main-aggregate-dashboard";
+import Dashboard from "./features/dashboard/dashboard";
+import CompetencyCategoryComponent from "./features/dashboard/indivisual-dashboard/competency-summary-category-detail/competency-category-detail";
+import IndividualDashboard from "./features/dashboard/indivisual-dashboard/individual-dashboard/individual-dashboard";
 import MainNomination from "./features/nominationForm/components/main-nomination/main-nomination";
 import NominationIntroPage from "./features/nominationForm/components/nomination-Intro/nomination-intro";
-import MainDashboard from "./features/dashboard/main-dashboard/main-dashboard";
 import FormSurvey from "./features/survey-form/components/main-form/survey-form";
 import SurveyIntroPage from "./features/survey-form/components/survey-intro/survey-intro";
-import DashboardIntroPage from "./features/dashboard/dashboard-intro/dashboard-intro";
-import MainAggregateDashboard from "./features/aggregate-dashboard/main-aggregate-dashboard";
 
 export interface RouteTypes {
   exact: boolean;
@@ -45,18 +45,18 @@ const routes: RouteTypes[] = [
   },
   {
     exact: true,
-    path: "/dashboard/intro",
-    component: DashboardIntroPage,
+    path: "/dashboard",
+    component: Dashboard,
   },
   {
-    exact: false,
-    path: "/dashboard/intro/:username",
-    component: DashboardIntroPage,
-  },
-  {
-    exact: false,
+    exact: true,
     path: "/dashboard/:itemId",
-    component: MainDashboard,
+    component: IndividualDashboard,
+  },
+  {
+    exact: true,
+    path: "/dashboard/viewas/:username",
+    component: Dashboard,
   },
   {
     exact: true,

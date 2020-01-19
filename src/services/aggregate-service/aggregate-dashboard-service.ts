@@ -8,7 +8,7 @@ import Heatmap from "./../../entities/aggregate-report/heatmap";
 import RadarCoreValues from "../../entities/aggregate-report/core-calues-radar";
 import AverageCompetency from "../../entities/aggregate-report/average-competency";
 import DashboardInfo from "../../entities/aggregate-report/dashboard-info";
-import { AggregateReportProps } from "../../features/aggregate-dashboard/aggregate-report-props";
+import { AggregateReportProps } from "../../features/dashboard/aggregate-dashboard/aggregate-report-props";
 import NumberOfLeaders from "../../entities/aggregate-report/leader-number";
 import CompetencyAvg from "../../entities/aggregate-report/competency-avg";
 
@@ -24,6 +24,7 @@ class AggregateServices extends ServiceBase {
       data = await this.get("survey/aggregate/info" + query)
         .then(response => {
           return {
+            hasAccessTo: response.data.hasAccessTo,
             departments: response.data.departments,
             subDepartments: response.data.subDepartments,
             levels: response.data.levels,
@@ -34,6 +35,7 @@ class AggregateServices extends ServiceBase {
         })
         .catch(error => {
           return {
+            hasAccessTo: [],
             departments: [],
             subDepartments: [],
             levels: [],

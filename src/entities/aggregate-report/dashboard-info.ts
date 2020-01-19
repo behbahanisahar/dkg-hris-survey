@@ -11,4 +11,5 @@ export default interface DashboardInfo {
   user?: UserInfoItem;
   nominationId?: number;
   statusCode?: number;
+  hasAccessTo: string[];
 }
