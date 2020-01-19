@@ -12,6 +12,7 @@ import DKValueRadarChart from "../dk-value-radar-chart/dk-value-radar-chart";
 import IndexReport from "../index/index";
 import RatersTable from "../raters-table/raters-table";
 import "./individual-dashboard.css";
+import DKSVGIcon from "../../../../core/components/svg-icon/svg-icon";
 
 interface IProps {
   username?: string;
@@ -65,6 +66,29 @@ export default class IndividualDashboard extends React.Component<IProps, IState>
           <div>
             {this.state.hasAccess && (
               <div className={this.state.lang === "fa" ? "rtl" : "ltr"}>
+                {this.state.lang === "en" && (
+                  <div className="alert alert-elevate alert-light">
+                    <div className="alert-icon p-0 pl-2">
+                      <DKSVGIcon iconName="Info-circle" color="red" width="24px" height="24px"></DKSVGIcon>
+                    </div>
+                    <div className="alert-text">
+                      This report is <b className="dk-brand-text-red">confidential</b> and it is only shared with the
+                      assessee and his/her managers with the intention of supporting the individual on performing the
+                      development programs.
+                    </div>
+                  </div>
+                )}
+                {this.state.lang === "fa" && (
+                  <div className="alert alert-elevate alert-light">
+                    <div className="alert-icon p-0 pl-2">
+                      <DKSVGIcon iconName="Info-circle" color="red" width="24px" height="24px"></DKSVGIcon>
+                    </div>
+                    <div className="alert-text">
+                      این گزارش <b className="dk-brand-text-red">محرمانه</b> می باشد و فقط ارزیابی شونده و مدیران وی با
+                      هدف حمایت از اجرای برنامه های توسعه ای مرتبط، در جریان آن قرار خواهند گرفت.
+                    </div>
+                  </div>
+                )}
                 <div className={this.state.lang === "fa" ? "mb-1 text-right" : "mb-1 text-left"}>
                   <img
                     className="mx-2 pointer"
@@ -81,7 +105,7 @@ export default class IndividualDashboard extends React.Component<IProps, IState>
                 </div>
                 <div>
                   <DashboardHeader lang={this.state.lang} itemId={this.state.itemId} />
-                  <Grid container spacing={3} className="mt-4">
+                  <Grid container spacing={3} className="mt-2">
                     <Grid item xs={4}>
                       <RatersTable lang={this.state.lang} itemId={this.state.itemId} />
                     </Grid>

@@ -66,12 +66,18 @@ export default class Dashboard extends React.Component<IProps, IState> {
             )}
             {this.state.dashboardInfo.statusCode !== 403 && (
               <>
-                {this.state.dashboardInfo.hasAccessTo.length > 1 && (
-                  <MainAggregateDashboard dashboardInfo={this.state.dashboardInfo} />
+                {(this.state.dashboardInfo.hasAccessTo.length > 1 ||
+                  (this.state.dashboardInfo.nominationId === undefined &&
+                    this.state.dashboardInfo.hasAccessTo.length === 1)) && (
+                  <MainAggregateDashboard
+                    username={this.props.match?.params?.username}
+                    dashboardInfo={this.state.dashboardInfo}
+                  />
                 )}
-                {this.state.dashboardInfo.hasAccessTo.length <= 1 && (
-                  <IndividualDashboard itemId={this.state.dashboardInfo.nominationId} />
-                )}
+                {this.state.dashboardInfo.hasAccessTo.length <= 1 &&
+                  this.state.dashboardInfo.nominationId !== undefined && (
+                    <IndividualDashboard itemId={this.state.dashboardInfo.nominationId} />
+                  )}
               </>
             )}
           </>

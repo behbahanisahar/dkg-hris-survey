@@ -49,7 +49,7 @@ export default class DashboardHeader extends React.Component<IProps, IState> {
     return (
       <>
         {this.state.isFetched && (
-          <div className="kt-widget kt-widget--user-profile-3 pt-5">
+          <div className="kt-widget kt-widget--user-profile-3 pt-1">
             <div className="kt-widget__top">
               <div className="kt-widget__media kt-media avatar mx-3">
                 {this.state.userInfo.user?.avatarUrl === undefined && (
