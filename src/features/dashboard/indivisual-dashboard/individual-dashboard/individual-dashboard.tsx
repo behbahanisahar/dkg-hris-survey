@@ -80,11 +80,11 @@ export default class IndividualDashboard extends React.Component<IProps, IState>
                 )}
                 {this.state.lang === "fa" && (
                   <div className="alert alert-elevate alert-light">
-                    <div className="alert-icon p-0 pl-2">
+                    <div className="alert-icon p-0 px-2">
                       <DKSVGIcon iconName="Info-circle" color="red" width="24px" height="24px"></DKSVGIcon>
                     </div>
                     <div className="alert-text">
-                      این گزارش <b className="dk-brand-text-red">محرمانه</b> می باشد و فقط ارزیابی شونده و مدیران وی با
+                      این گزارش <b className="dk-brand-text-red">محرمانه</b> می باشد، فقط ارزیابی شونده و مدیران وی با
                       هدف حمایت از اجرای برنامه های توسعه ای مرتبط، در جریان آن قرار خواهند گرفت.
                     </div>
                   </div>
