@@ -79,7 +79,6 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   }
 
   public async componentWillReceiveProps() {
-    console.log(this.props.dashboardInfo);
     await this.getInfoData();
   }
 
@@ -92,7 +91,6 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
         text: "All",
       },
     ];
-    console.log(this.props.dashboardInfo);
 
     this.setState({
       isFetching: false,
@@ -123,7 +121,7 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
     });
 
     subDeps = this.props.dashboardInfo.subDepartments;
-    this.setFilter("depLevel", this.state.departmentText);
+    this.setFilter("depLevel", this.props.dashboardInfo.departments[0]?.text);
   }
 
   public render() {
@@ -393,8 +391,6 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
   };
 
   private setFilter(feildName: string, selectedDepartment: string) {
-    debugger;
-    console.log(feildName);
     let subDepTypes: DropDownModel[] = subDeps;
     if (feildName == "depLevel") {
       if (selectedDepartment === "All" || subDepTypes.length === 0) {

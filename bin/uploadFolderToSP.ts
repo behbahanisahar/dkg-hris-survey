@@ -88,7 +88,14 @@ const uploadFolderToSP = async (sourceGlob: string, targetBasePath: string, envi
   });
 
   for (const f of files) {
-    if (f.indexOf("eot") > 0 || f.indexOf("woff") > 0 || f.indexOf("ttf") > 0 || f.indexOf("svg") > 0) continue;
+    if (
+      f.indexOf("eot") > 0 ||
+      f.indexOf("woff") > 0 ||
+      f.indexOf("ttf") > 0 ||
+      f.indexOf("svg") > 0 ||
+      f.indexOf("map") > 0
+    )
+      continue;
     console.log(`${environment}: ${f}`);
     const fileData = await fs.readAsync(f, "buffer");
 
