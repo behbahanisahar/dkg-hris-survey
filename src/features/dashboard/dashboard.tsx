@@ -57,7 +57,7 @@ export default class Dashboard extends React.Component<IProps, IState> {
 
   public render() {
     return (
-      <div className="ltr">
+      <div className="">
         {this.state.isFetching === true && <DKSpinner></DKSpinner>}
         {this.state.isFetching === false && (
           <>

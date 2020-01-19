@@ -283,44 +283,46 @@ export default class MainAggregateDashboard extends React.Component<IProps, ISta
                     />
                   </Grid>
                 </Grid>
-                {this.state.selectedReportProps.level === "All" && this.state.selectedReportProps.depLevel === "All" && (
-                  <Grid container spacing={3} className="mt-4">
-                    <Grid item xs={6} sm={3}>
-                      <ClevelParticipation
-                        viewAs={this.state.reportProps.viewAs}
-                        level={this.state.selectedReportProps.level}
-                        subDepLevel={this.state.selectedReportProps.subDepLevel}
-                        depLevel={this.state.selectedReportProps.depLevel}
-                      />
-                    </Grid>
-                    <Grid item xs={9} sm={5}>
-                      <CompetencyAvgComparison
-                        viewAs={this.state.reportProps.viewAs}
-                        level={this.state.selectedReportProps.level}
-                        subDepLevel={this.state.selectedReportProps.subDepLevel}
-                        depLevel={this.state.selectedReportProps.depLevel}
-                      />
-                    </Grid>
-                    <Grid item xs={6} sm={4}>
-                      <CompetencyAvgRate
-                        viewAs={this.state.reportProps.viewAs}
-                        level={this.state.selectedReportProps.level}
-                        subDepLevel={this.state.selectedReportProps.subDepLevel}
-                        depLevel={this.state.selectedReportProps.depLevel}
-                      />
-                    </Grid>
-                    <Grid container spacing={3}>
-                      <Grid item xs={12} sm={12}>
-                        <TotalLeaders
+                {this.state.departmentTypes?.length > 5 &&
+                  this.state.selectedReportProps.level === "All" &&
+                  this.state.selectedReportProps.depLevel === "All" && (
+                    <Grid container spacing={3} className="mt-4">
+                      <Grid item xs={6} sm={3}>
+                        <ClevelParticipation
                           viewAs={this.state.reportProps.viewAs}
                           level={this.state.selectedReportProps.level}
                           subDepLevel={this.state.selectedReportProps.subDepLevel}
                           depLevel={this.state.selectedReportProps.depLevel}
                         />
                       </Grid>
+                      <Grid item xs={9} sm={5}>
+                        <CompetencyAvgComparison
+                          viewAs={this.state.reportProps.viewAs}
+                          level={this.state.selectedReportProps.level}
+                          subDepLevel={this.state.selectedReportProps.subDepLevel}
+                          depLevel={this.state.selectedReportProps.depLevel}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={4}>
+                        <CompetencyAvgRate
+                          viewAs={this.state.reportProps.viewAs}
+                          level={this.state.selectedReportProps.level}
+                          subDepLevel={this.state.selectedReportProps.subDepLevel}
+                          depLevel={this.state.selectedReportProps.depLevel}
+                        />
+                      </Grid>
+                      <Grid container spacing={3}>
+                        <Grid item xs={12} sm={12}>
+                          <TotalLeaders
+                            viewAs={this.state.reportProps.viewAs}
+                            level={this.state.selectedReportProps.level}
+                            subDepLevel={this.state.selectedReportProps.subDepLevel}
+                            depLevel={this.state.selectedReportProps.depLevel}
+                          />
+                        </Grid>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                )}
+                  )}
                 <Grid container spacing={3} className="mt-4">
                   <Grid item xs={6} sm={8}>
                     <CompetencyCompetency

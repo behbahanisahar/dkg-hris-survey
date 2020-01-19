@@ -16,7 +16,7 @@ const routes: RouteTypes[] = [
   {
     exact: true,
     path: "/",
-    component: SurveyIntroPage,
+    component: Dashboard,
   },
   {
     exact: true,
